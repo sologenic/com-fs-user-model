@@ -1,0 +1,85 @@
+syntax = "proto3";
+
+package account;
+
+option go_package = "github.com/sologenic/com-fs-account-model;account";
+
+import "sologenic/com-fs-utils-lib/models/metadata/metadata.proto";
+import "sologenic/com-fs-utils-lib/models/audit/audit.proto";
+
+message AccountDetails {
+    string AccountID = 1; // email address used for firebase authentication
+    string FirstName = 2; 
+    string LastName = 3;
+    string Address = 4;
+    string Avatar = 5;
+    string Alias = 6; // "Nickname"
+    string Description = 7;
+    UserStatus Status = 8;
+    repeated Wallet Wallets = 9;
+    repeated Social Socials = 10;
+    Language Language = 11;
+    string ExternalUserID = 12; // UUID for the external user identifier in the KYC provider
+    string OrganizationID = 13; // UUID
+}
+
+message Account {
+    AccountDetails Account = 1;
+    metadata.MetaData MetaData = 2;
+    audit.Audit Audit = 3;
+} 
+
+message AccountID {
+    string AccountID = 1;
+    optional metadata.Network Network = 2; 
+}
+
+message Accounts {
+    repeated Account Accounts = 1;
+    optional int32 Offset = 2; // If there is more data, this is the offset to pass to the next call
+}
+
+// Admin has no use for Socials, therefore will only be used for User
+message Social {
+    string URL = 1;
+    SocialType Type = 2;
+}
+
+message Wallet {
+    string Address = 1;
+    string Alias = 2;
+    WalletType Type = 3;
+}
+
+enum UserStatus {
+    NOT_USED_USERSTATUS = 0;
+    ACTIVE = 1;
+    ADMIN_DEACTIVATED = 2; 
+}
+
+enum WalletType {
+    NOT_USED_WALLETTYPE = 0;
+    TFSA = 1;
+    RRSP = 2;
+    STANDARD = 3;
+}
+
+enum SocialType {
+    NOT_USED_SOCIALTYPE = 0;
+    WEBSITE = 1;
+    GITHUB = 2;
+    REDDIT = 3;
+    DISCORD = 4;
+    TWITTER = 5;
+    FACEBOOK = 6;
+    TELEGRAM = 7;
+    INSTAGRAM = 8;
+    LINKEDIN = 9;
+}
+
+message Language {
+    string AccountID = 1;
+    string Language = 2;
+    bool UserConfigured = 3;
+    string Network = 4;
+}
