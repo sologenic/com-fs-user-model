@@ -39,7 +39,6 @@ message Accounts {
     optional int32 Offset = 2; // If there is more data, this is the offset to pass to the next call
 }
 
-// Admin has no use for Socials, therefore will only be used for User
 message Social {
     string URL = 1;
     SocialType Type = 2;
