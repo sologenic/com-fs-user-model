@@ -40,7 +40,8 @@ export interface Filter {
     /** Page limit */
     Limit?: number | undefined;
     Network?: Network | undefined;
-    OrganizationID?: string | undefined;
+    /** We want to limit the accounts to a specific organization, therefore this field is required */
+    OrganizationID: string;
 }
 export interface Order {
     Field: Field;

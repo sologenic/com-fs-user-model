@@ -509,7 +509,6 @@ func (x *Accounts) GetOffset() int32 {
 	return 0
 }
 
-// Admin has no use for Socials, therefore will only be used for User
 type Social struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache

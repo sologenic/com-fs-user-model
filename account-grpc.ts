@@ -119,8 +119,11 @@ export interface Filter {
     | undefined;
   /** Page limit */
   Limit?: number | undefined;
-  Network?: Network | undefined;
-  OrganizationID?: string | undefined;
+  Network?:
+    | Network
+    | undefined;
+  /** We want to limit the accounts to a specific organization, therefore this field is required */
+  OrganizationID: string;
 }
 
 export interface Order {
@@ -208,7 +211,7 @@ function createBaseFilter(): Filter {
     Offset: undefined,
     Limit: undefined,
     Network: undefined,
-    OrganizationID: undefined,
+    OrganizationID: "",
   };
 }
 
@@ -229,7 +232,7 @@ export const Filter = {
     if (message.Network !== undefined) {
       writer.uint32(40).int32(message.Network);
     }
-    if (message.OrganizationID !== undefined) {
+    if (message.OrganizationID !== "") {
       writer.uint32(50).string(message.OrganizationID);
     }
     return writer;
@@ -302,7 +305,7 @@ export const Filter = {
       Offset: isSet(object.Offset) ? globalThis.Number(object.Offset) : undefined,
       Limit: isSet(object.Limit) ? globalThis.Number(object.Limit) : undefined,
       Network: isSet(object.Network) ? networkFromJSON(object.Network) : undefined,
-      OrganizationID: isSet(object.OrganizationID) ? globalThis.String(object.OrganizationID) : undefined,
+      OrganizationID: isSet(object.OrganizationID) ? globalThis.String(object.OrganizationID) : "",
     };
   },
 
@@ -323,7 +326,7 @@ export const Filter = {
     if (message.Network !== undefined) {
       obj.Network = networkToJSON(message.Network);
     }
-    if (message.OrganizationID !== undefined) {
+    if (message.OrganizationID !== "") {
       obj.OrganizationID = message.OrganizationID;
     }
     return obj;
@@ -339,7 +342,7 @@ export const Filter = {
     message.Offset = object.Offset ?? undefined;
     message.Limit = object.Limit ?? undefined;
     message.Network = object.Network ?? undefined;
-    message.OrganizationID = object.OrganizationID ?? undefined;
+    message.OrganizationID = object.OrganizationID ?? "";
     return message;
   },
 };

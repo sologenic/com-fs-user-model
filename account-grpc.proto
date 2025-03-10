@@ -32,7 +32,7 @@ message Filter {
     optional int32 Offset = 3; // Page offset
     optional int32 Limit = 4; // Page limit
     optional metadata.Network Network = 5; 
-    optional string OrganizationID = 6;
+    string OrganizationID = 6; // We want to limit the accounts to a specific organization, therefore this field is required
 }
 
 message Order {

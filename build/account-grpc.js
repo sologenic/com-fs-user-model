@@ -143,7 +143,7 @@ function createBaseFilter() {
         Offset: undefined,
         Limit: undefined,
         Network: undefined,
-        OrganizationID: undefined,
+        OrganizationID: "",
     };
 }
 export const Filter = {
@@ -163,7 +163,7 @@ export const Filter = {
         if (message.Network !== undefined) {
             writer.uint32(40).int32(message.Network);
         }
-        if (message.OrganizationID !== undefined) {
+        if (message.OrganizationID !== "") {
             writer.uint32(50).string(message.OrganizationID);
         }
         return writer;
@@ -228,7 +228,7 @@ export const Filter = {
             Offset: isSet(object.Offset) ? globalThis.Number(object.Offset) : undefined,
             Limit: isSet(object.Limit) ? globalThis.Number(object.Limit) : undefined,
             Network: isSet(object.Network) ? networkFromJSON(object.Network) : undefined,
-            OrganizationID: isSet(object.OrganizationID) ? globalThis.String(object.OrganizationID) : undefined,
+            OrganizationID: isSet(object.OrganizationID) ? globalThis.String(object.OrganizationID) : "",
         };
     },
     toJSON(message) {
@@ -249,7 +249,7 @@ export const Filter = {
         if (message.Network !== undefined) {
             obj.Network = networkToJSON(message.Network);
         }
-        if (message.OrganizationID !== undefined) {
+        if (message.OrganizationID !== "") {
             obj.OrganizationID = message.OrganizationID;
         }
         return obj;
@@ -265,7 +265,7 @@ export const Filter = {
         message.Offset = (_b = object.Offset) !== null && _b !== void 0 ? _b : undefined;
         message.Limit = (_c = object.Limit) !== null && _c !== void 0 ? _c : undefined;
         message.Network = (_d = object.Network) !== null && _d !== void 0 ? _d : undefined;
-        message.OrganizationID = (_e = object.OrganizationID) !== null && _e !== void 0 ? _e : undefined;
+        message.OrganizationID = (_e = object.OrganizationID) !== null && _e !== void 0 ? _e : "";
         return message;
     },
 };

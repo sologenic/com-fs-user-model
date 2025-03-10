@@ -220,7 +220,6 @@ export interface Accounts {
   Offset?: number | undefined;
 }
 
-/** Admin has no use for Socials, therefore will only be used for User */
 export interface Social {
   URL: string;
   Type: SocialType;
