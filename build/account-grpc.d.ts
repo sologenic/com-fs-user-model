@@ -277,7 +277,6 @@ export declare const AccountServiceService: {
         readonly responseSerialize: (value: AccountID) => Buffer;
         readonly responseDeserialize: (value: Buffer) => AccountID;
     };
-    /** Role and status related functionality */
     readonly setStatus: {
         readonly path: "/account.AccountService/SetStatus";
         readonly requestStream: false;
@@ -303,7 +302,6 @@ export interface AccountServiceServer extends UntypedServiceImplementation {
     getByExternalUserId: handleUnaryCall<ExternalUserID, Account>;
     getAll: handleUnaryCall<Filter, Accounts>;
     upsert: handleUnaryCall<Account, AccountID>;
-    /** Role and status related functionality */
     setStatus: handleUnaryCall<SetStatusMessage, Empty>;
     /** Audit */
     listAudit: handleUnaryCall<AuditFilter, Accounts>;
@@ -321,7 +319,6 @@ export interface AccountServiceClient extends Client {
     upsert(request: Account, callback: (error: ServiceError | null, response: AccountID) => void): ClientUnaryCall;
     upsert(request: Account, metadata: Metadata, callback: (error: ServiceError | null, response: AccountID) => void): ClientUnaryCall;
     upsert(request: Account, metadata: Metadata, options: Partial<CallOptions>, callback: (error: ServiceError | null, response: AccountID) => void): ClientUnaryCall;
-    /** Role and status related functionality */
     setStatus(request: SetStatusMessage, callback: (error: ServiceError | null, response: Empty) => void): ClientUnaryCall;
     setStatus(request: SetStatusMessage, metadata: Metadata, callback: (error: ServiceError | null, response: Empty) => void): ClientUnaryCall;
     setStatus(request: SetStatusMessage, metadata: Metadata, options: Partial<CallOptions>, callback: (error: ServiceError | null, response: Empty) => void): ClientUnaryCall;

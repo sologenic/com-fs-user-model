@@ -36,7 +36,6 @@ type AccountServiceClient interface {
 	GetByExternalUserID(ctx context.Context, in *ExternalUserID, opts ...grpc.CallOption) (*Account, error)
 	GetAll(ctx context.Context, in *Filter, opts ...grpc.CallOption) (*Accounts, error)
 	Upsert(ctx context.Context, in *Account, opts ...grpc.CallOption) (*AccountID, error)
-	// Role and status related functionality
 	SetStatus(ctx context.Context, in *SetStatusMessage, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	// Audit
 	ListAudit(ctx context.Context, in *AuditFilter, opts ...grpc.CallOption) (*Accounts, error)
@@ -112,7 +111,6 @@ type AccountServiceServer interface {
 	GetByExternalUserID(context.Context, *ExternalUserID) (*Account, error)
 	GetAll(context.Context, *Filter) (*Accounts, error)
 	Upsert(context.Context, *Account) (*AccountID, error)
-	// Role and status related functionality
 	SetStatus(context.Context, *SetStatusMessage) (*emptypb.Empty, error)
 	// Audit
 	ListAudit(context.Context, *AuditFilter) (*Accounts, error)

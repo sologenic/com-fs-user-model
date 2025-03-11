@@ -25,7 +25,7 @@ message AccountDetails {
     Employment Employment = 14;
 }
 
-// TODO: to be verified once we have more information
+// TODO: to be verified when more information is available
 message Employment {
     string EmployerName = 1;
     string JobTitle = 2;

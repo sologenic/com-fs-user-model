@@ -14,8 +14,6 @@ service AccountService {
     rpc GetByExternalUserID (ExternalUserID) returns (Account) {}
     rpc GetAll(Filter) returns (Accounts) {}
     rpc Upsert (Account) returns (AccountID) {}
-
-    // Role and status related functionality
     rpc SetStatus (SetStatusMessage) returns (google.protobuf.Empty) {}
 
     // Audit

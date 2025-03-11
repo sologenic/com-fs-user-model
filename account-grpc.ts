@@ -704,7 +704,6 @@ export const AccountServiceService = {
     responseSerialize: (value: AccountID) => Buffer.from(AccountID.encode(value).finish()),
     responseDeserialize: (value: Buffer) => AccountID.decode(value),
   },
-  /** Role and status related functionality */
   setStatus: {
     path: "/account.AccountService/SetStatus",
     requestStream: false,
@@ -731,7 +730,6 @@ export interface AccountServiceServer extends UntypedServiceImplementation {
   getByExternalUserId: handleUnaryCall<ExternalUserID, Account>;
   getAll: handleUnaryCall<Filter, Accounts>;
   upsert: handleUnaryCall<Account, AccountID>;
-  /** Role and status related functionality */
   setStatus: handleUnaryCall<SetStatusMessage, Empty>;
   /** Audit */
   listAudit: handleUnaryCall<AuditFilter, Accounts>;
@@ -789,7 +787,6 @@ export interface AccountServiceClient extends Client {
     options: Partial<CallOptions>,
     callback: (error: ServiceError | null, response: AccountID) => void,
   ): ClientUnaryCall;
-  /** Role and status related functionality */
   setStatus(
     request: SetStatusMessage,
     callback: (error: ServiceError | null, response: Empty) => void,

@@ -464,7 +464,7 @@ func (x *AccountDetails) GetEmployment() *Employment {
 	return nil
 }
 
-// TODO: to be verified once we have more information
+// TODO: to be verified when more information is available
 type Employment struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache

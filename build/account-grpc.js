@@ -598,7 +598,6 @@ export const AccountServiceService = {
         responseSerialize: (value) => Buffer.from(AccountID.encode(value).finish()),
         responseDeserialize: (value) => AccountID.decode(value),
     },
-    /** Role and status related functionality */
     setStatus: {
         path: "/account.AccountService/SetStatus",
         requestStream: false,

@@ -325,7 +325,7 @@ export interface AccountDetails {
   Employment: Employment | undefined;
 }
 
-/** TODO: to be verified once we have more information */
+/** TODO: to be verified when more information is available */
 export interface Employment {
   EmployerName: string;
   JobTitle: string;
