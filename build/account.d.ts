@@ -112,6 +112,7 @@ export interface Account {
 }
 export interface AccountID {
     AccountID: string;
+    OrganizationID: string;
     Network?: Network | undefined;
 }
 export interface Social {
@@ -1080,16 +1081,20 @@ export declare const AccountID: {
     toJSON(message: AccountID): unknown;
     create<I extends {
         AccountID?: string | undefined;
+        OrganizationID?: string | undefined;
         Network?: Network | undefined;
     } & {
         AccountID?: string | undefined;
+        OrganizationID?: string | undefined;
         Network?: Network | undefined;
     } & { [K in Exclude<keyof I, keyof AccountID>]: never; }>(base?: I | undefined): AccountID;
     fromPartial<I_1 extends {
         AccountID?: string | undefined;
+        OrganizationID?: string | undefined;
         Network?: Network | undefined;
     } & {
         AccountID?: string | undefined;
+        OrganizationID?: string | undefined;
         Network?: Network | undefined;
     } & { [K_1 in Exclude<keyof I_1, keyof AccountID>]: never; }>(object: I_1): AccountID;
 };

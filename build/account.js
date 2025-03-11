@@ -1010,15 +1010,18 @@ export const Account = {
     },
 };
 function createBaseAccountID() {
-    return { AccountID: "", Network: undefined };
+    return { AccountID: "", OrganizationID: "", Network: undefined };
 }
 export const AccountID = {
     encode(message, writer = _m0.Writer.create()) {
         if (message.AccountID !== "") {
             writer.uint32(10).string(message.AccountID);
         }
+        if (message.OrganizationID !== "") {
+            writer.uint32(18).string(message.OrganizationID);
+        }
         if (message.Network !== undefined) {
-            writer.uint32(16).int32(message.Network);
+            writer.uint32(24).int32(message.Network);
         }
         return writer;
     },
@@ -1036,7 +1039,13 @@ export const AccountID = {
                     message.AccountID = reader.string();
                     continue;
                 case 2:
-                    if (tag !== 16) {
+                    if (tag !== 18) {
+                        break;
+                    }
+                    message.OrganizationID = reader.string();
+                    continue;
+                case 3:
+                    if (tag !== 24) {
                         break;
                     }
                     message.Network = reader.int32();
@@ -1052,6 +1061,7 @@ export const AccountID = {
     fromJSON(object) {
         return {
             AccountID: isSet(object.AccountID) ? globalThis.String(object.AccountID) : "",
+            OrganizationID: isSet(object.OrganizationID) ? globalThis.String(object.OrganizationID) : "",
             Network: isSet(object.Network) ? networkFromJSON(object.Network) : undefined,
         };
     },
@@ -1059,6 +1069,9 @@ export const AccountID = {
         const obj = {};
         if (message.AccountID !== "") {
             obj.AccountID = message.AccountID;
+        }
+        if (message.OrganizationID !== "") {
+            obj.OrganizationID = message.OrganizationID;
         }
         if (message.Network !== undefined) {
             obj.Network = networkToJSON(message.Network);
@@ -1069,10 +1082,11 @@ export const AccountID = {
         return AccountID.fromPartial(base !== null && base !== void 0 ? base : {});
     },
     fromPartial(object) {
-        var _a, _b;
+        var _a, _b, _c;
         const message = createBaseAccountID();
         message.AccountID = (_a = object.AccountID) !== null && _a !== void 0 ? _a : "";
-        message.Network = (_b = object.Network) !== null && _b !== void 0 ? _b : undefined;
+        message.OrganizationID = (_b = object.OrganizationID) !== null && _b !== void 0 ? _b : "";
+        message.Network = (_c = object.Network) !== null && _c !== void 0 ? _c : undefined;
         return message;
     },
 };

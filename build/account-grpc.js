@@ -63,21 +63,24 @@ export const KYCApplicationID = {
     },
 };
 function createBaseSetStatusMessage() {
-    return { AccountID: "", Status: 0, Network: undefined, Audit: undefined };
+    return { AccountID: "", OrganizationID: "", Status: 0, Network: undefined, Audit: undefined };
 }
 export const SetStatusMessage = {
     encode(message, writer = _m0.Writer.create()) {
         if (message.AccountID !== "") {
             writer.uint32(10).string(message.AccountID);
         }
+        if (message.OrganizationID !== "") {
+            writer.uint32(18).string(message.OrganizationID);
+        }
         if (message.Status !== 0) {
-            writer.uint32(16).int32(message.Status);
+            writer.uint32(24).int32(message.Status);
         }
         if (message.Network !== undefined) {
-            writer.uint32(24).int32(message.Network);
+            writer.uint32(32).int32(message.Network);
         }
         if (message.Audit !== undefined) {
-            Audit.encode(message.Audit, writer.uint32(34).fork()).ldelim();
+            Audit.encode(message.Audit, writer.uint32(42).fork()).ldelim();
         }
         return writer;
     },
@@ -95,19 +98,25 @@ export const SetStatusMessage = {
                     message.AccountID = reader.string();
                     continue;
                 case 2:
-                    if (tag !== 16) {
+                    if (tag !== 18) {
                         break;
                     }
-                    message.Status = reader.int32();
+                    message.OrganizationID = reader.string();
                     continue;
                 case 3:
                     if (tag !== 24) {
                         break;
                     }
-                    message.Network = reader.int32();
+                    message.Status = reader.int32();
                     continue;
                 case 4:
-                    if (tag !== 34) {
+                    if (tag !== 32) {
+                        break;
+                    }
+                    message.Network = reader.int32();
+                    continue;
+                case 5:
+                    if (tag !== 42) {
                         break;
                     }
                     message.Audit = Audit.decode(reader, reader.uint32());
@@ -123,6 +132,7 @@ export const SetStatusMessage = {
     fromJSON(object) {
         return {
             AccountID: isSet(object.AccountID) ? globalThis.String(object.AccountID) : "",
+            OrganizationID: isSet(object.OrganizationID) ? globalThis.String(object.OrganizationID) : "",
             Status: isSet(object.Status) ? userStatusFromJSON(object.Status) : 0,
             Network: isSet(object.Network) ? networkFromJSON(object.Network) : undefined,
             Audit: isSet(object.Audit) ? Audit.fromJSON(object.Audit) : undefined,
@@ -132,6 +142,9 @@ export const SetStatusMessage = {
         const obj = {};
         if (message.AccountID !== "") {
             obj.AccountID = message.AccountID;
+        }
+        if (message.OrganizationID !== "") {
+            obj.OrganizationID = message.OrganizationID;
         }
         if (message.Status !== 0) {
             obj.Status = userStatusToJSON(message.Status);
@@ -148,11 +161,12 @@ export const SetStatusMessage = {
         return SetStatusMessage.fromPartial(base !== null && base !== void 0 ? base : {});
     },
     fromPartial(object) {
-        var _a, _b, _c;
+        var _a, _b, _c, _d;
         const message = createBaseSetStatusMessage();
         message.AccountID = (_a = object.AccountID) !== null && _a !== void 0 ? _a : "";
-        message.Status = (_b = object.Status) !== null && _b !== void 0 ? _b : 0;
-        message.Network = (_c = object.Network) !== null && _c !== void 0 ? _c : undefined;
+        message.OrganizationID = (_b = object.OrganizationID) !== null && _b !== void 0 ? _b : "";
+        message.Status = (_c = object.Status) !== null && _c !== void 0 ? _c : 0;
+        message.Network = (_d = object.Network) !== null && _d !== void 0 ? _d : undefined;
         message.Audit = (object.Audit !== undefined && object.Audit !== null) ? Audit.fromPartial(object.Audit) : undefined;
         return message;
     },

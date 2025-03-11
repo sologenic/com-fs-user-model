@@ -368,6 +368,7 @@ export interface Account {
 
 export interface AccountID {
   AccountID: string;
+  OrganizationID: string;
   Network?: Network | undefined;
 }
 
@@ -1174,7 +1175,7 @@ export const Account = {
 };
 
 function createBaseAccountID(): AccountID {
-  return { AccountID: "", Network: undefined };
+  return { AccountID: "", OrganizationID: "", Network: undefined };
 }
 
 export const AccountID = {
@@ -1182,8 +1183,11 @@ export const AccountID = {
     if (message.AccountID !== "") {
       writer.uint32(10).string(message.AccountID);
     }
+    if (message.OrganizationID !== "") {
+      writer.uint32(18).string(message.OrganizationID);
+    }
     if (message.Network !== undefined) {
-      writer.uint32(16).int32(message.Network);
+      writer.uint32(24).int32(message.Network);
     }
     return writer;
   },
@@ -1203,7 +1207,14 @@ export const AccountID = {
           message.AccountID = reader.string();
           continue;
         case 2:
-          if (tag !== 16) {
+          if (tag !== 18) {
+            break;
+          }
+
+          message.OrganizationID = reader.string();
+          continue;
+        case 3:
+          if (tag !== 24) {
             break;
           }
 
@@ -1221,6 +1232,7 @@ export const AccountID = {
   fromJSON(object: any): AccountID {
     return {
       AccountID: isSet(object.AccountID) ? globalThis.String(object.AccountID) : "",
+      OrganizationID: isSet(object.OrganizationID) ? globalThis.String(object.OrganizationID) : "",
       Network: isSet(object.Network) ? networkFromJSON(object.Network) : undefined,
     };
   },
@@ -1229,6 +1241,9 @@ export const AccountID = {
     const obj: any = {};
     if (message.AccountID !== "") {
       obj.AccountID = message.AccountID;
+    }
+    if (message.OrganizationID !== "") {
+      obj.OrganizationID = message.OrganizationID;
     }
     if (message.Network !== undefined) {
       obj.Network = networkToJSON(message.Network);
@@ -1242,6 +1257,7 @@ export const AccountID = {
   fromPartial<I extends Exact<DeepPartial<AccountID>, I>>(object: I): AccountID {
     const message = createBaseAccountID();
     message.AccountID = object.AccountID ?? "";
+    message.OrganizationID = object.OrganizationID ?? "";
     message.Network = object.Network ?? undefined;
     return message;
   },

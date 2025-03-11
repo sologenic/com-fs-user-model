@@ -32,6 +32,7 @@ export interface KYCApplicationID {
 
 export interface SetStatusMessage {
   AccountID: string;
+  OrganizationID: string;
   Status: UserStatus;
   Network?: Network | undefined;
   Audit: Audit | undefined;
@@ -95,7 +96,7 @@ export const KYCApplicationID = {
 };
 
 function createBaseSetStatusMessage(): SetStatusMessage {
-  return { AccountID: "", Status: 0, Network: undefined, Audit: undefined };
+  return { AccountID: "", OrganizationID: "", Status: 0, Network: undefined, Audit: undefined };
 }
 
 export const SetStatusMessage = {
@@ -103,14 +104,17 @@ export const SetStatusMessage = {
     if (message.AccountID !== "") {
       writer.uint32(10).string(message.AccountID);
     }
+    if (message.OrganizationID !== "") {
+      writer.uint32(18).string(message.OrganizationID);
+    }
     if (message.Status !== 0) {
-      writer.uint32(16).int32(message.Status);
+      writer.uint32(24).int32(message.Status);
     }
     if (message.Network !== undefined) {
-      writer.uint32(24).int32(message.Network);
+      writer.uint32(32).int32(message.Network);
     }
     if (message.Audit !== undefined) {
-      Audit.encode(message.Audit, writer.uint32(34).fork()).ldelim();
+      Audit.encode(message.Audit, writer.uint32(42).fork()).ldelim();
     }
     return writer;
   },
@@ -130,21 +134,28 @@ export const SetStatusMessage = {
           message.AccountID = reader.string();
           continue;
         case 2:
-          if (tag !== 16) {
+          if (tag !== 18) {
             break;
           }
 
-          message.Status = reader.int32() as any;
+          message.OrganizationID = reader.string();
           continue;
         case 3:
           if (tag !== 24) {
             break;
           }
 
-          message.Network = reader.int32() as any;
+          message.Status = reader.int32() as any;
           continue;
         case 4:
-          if (tag !== 34) {
+          if (tag !== 32) {
+            break;
+          }
+
+          message.Network = reader.int32() as any;
+          continue;
+        case 5:
+          if (tag !== 42) {
             break;
           }
 
@@ -162,6 +173,7 @@ export const SetStatusMessage = {
   fromJSON(object: any): SetStatusMessage {
     return {
       AccountID: isSet(object.AccountID) ? globalThis.String(object.AccountID) : "",
+      OrganizationID: isSet(object.OrganizationID) ? globalThis.String(object.OrganizationID) : "",
       Status: isSet(object.Status) ? userStatusFromJSON(object.Status) : 0,
       Network: isSet(object.Network) ? networkFromJSON(object.Network) : undefined,
       Audit: isSet(object.Audit) ? Audit.fromJSON(object.Audit) : undefined,
@@ -172,6 +184,9 @@ export const SetStatusMessage = {
     const obj: any = {};
     if (message.AccountID !== "") {
       obj.AccountID = message.AccountID;
+    }
+    if (message.OrganizationID !== "") {
+      obj.OrganizationID = message.OrganizationID;
     }
     if (message.Status !== 0) {
       obj.Status = userStatusToJSON(message.Status);
@@ -191,6 +206,7 @@ export const SetStatusMessage = {
   fromPartial<I extends Exact<DeepPartial<SetStatusMessage>, I>>(object: I): SetStatusMessage {
     const message = createBaseSetStatusMessage();
     message.AccountID = object.AccountID ?? "";
+    message.OrganizationID = object.OrganizationID ?? "";
     message.Status = object.Status ?? 0;
     message.Network = object.Network ?? undefined;
     message.Audit = (object.Audit !== undefined && object.Audit !== null) ? Audit.fromPartial(object.Audit) : undefined;

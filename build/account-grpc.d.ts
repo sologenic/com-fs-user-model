@@ -13,6 +13,7 @@ export interface KYCApplicationID {
 }
 export interface SetStatusMessage {
     AccountID: string;
+    OrganizationID: string;
     Status: UserStatus;
     Network?: Network | undefined;
     Audit: Audit | undefined;
@@ -40,6 +41,7 @@ export declare const SetStatusMessage: {
     toJSON(message: SetStatusMessage): unknown;
     create<I extends {
         AccountID?: string | undefined;
+        OrganizationID?: string | undefined;
         Status?: UserStatus | undefined;
         Network?: Network | undefined;
         Audit?: {
@@ -49,6 +51,7 @@ export declare const SetStatusMessage: {
         } | undefined;
     } & {
         AccountID?: string | undefined;
+        OrganizationID?: string | undefined;
         Status?: UserStatus | undefined;
         Network?: Network | undefined;
         Audit?: ({
@@ -63,6 +66,7 @@ export declare const SetStatusMessage: {
     } & { [K_1 in Exclude<keyof I, keyof SetStatusMessage>]: never; }>(base?: I | undefined): SetStatusMessage;
     fromPartial<I_1 extends {
         AccountID?: string | undefined;
+        OrganizationID?: string | undefined;
         Status?: UserStatus | undefined;
         Network?: Network | undefined;
         Audit?: {
@@ -72,6 +76,7 @@ export declare const SetStatusMessage: {
         } | undefined;
     } & {
         AccountID?: string | undefined;
+        OrganizationID?: string | undefined;
         Status?: UserStatus | undefined;
         Network?: Network | undefined;
         Audit?: ({

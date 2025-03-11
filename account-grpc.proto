@@ -22,7 +22,8 @@ message KYCApplicationID {
 
 message SetStatusMessage {
     string AccountID = 1;
-    UserStatus Status = 2;
-    optional metadata.Network Network = 3;
-    audit.Audit Audit = 4;
+    string OrganizationID = 2;
+    UserStatus Status = 3;
+    optional metadata.Network Network = 4;
+    audit.Audit Audit = 5;
 }

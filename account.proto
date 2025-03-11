@@ -81,7 +81,8 @@ message Account {
 
 message AccountID {
     string AccountID = 1;
-    optional metadata.Network Network = 2; 
+    string OrganizationID = 2;
+    optional metadata.Network Network = 3; 
 }
 
 message Social {
