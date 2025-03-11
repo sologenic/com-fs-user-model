@@ -26,7 +26,7 @@ import { Network, networkFromJSON, networkToJSON } from "./sologenic/com-fs-util
 export const protobufPackage = "account";
 
 export interface KYCApplicationID {
-  /** UUID for the external user identifier in the KYC provider (called "externalUserID" in sumsub) */
+  /** UUID for the external user identifier in the KYC provider (called "externalUserId" in sumsub) */
   KYCApplicationID: string;
 }
 
@@ -209,8 +209,8 @@ export const AccountServiceService = {
     responseSerialize: (value: Account) => Buffer.from(Account.encode(value).finish()),
     responseDeserialize: (value: Buffer) => Account.decode(value),
   },
-  geyByKycApplicationId: {
-    path: "/account.AccountService/GeyByKYCApplicationID",
+  getByKycApplicationId: {
+    path: "/account.AccountService/GetByKYCApplicationID",
     requestStream: false,
     responseStream: false,
     requestSerialize: (value: KYCApplicationID) => Buffer.from(KYCApplicationID.encode(value).finish()),
@@ -240,7 +240,7 @@ export const AccountServiceService = {
 
 export interface AccountServiceServer extends UntypedServiceImplementation {
   get: handleUnaryCall<AccountID, Account>;
-  geyByKycApplicationId: handleUnaryCall<KYCApplicationID, Account>;
+  getByKycApplicationId: handleUnaryCall<KYCApplicationID, Account>;
   upsert: handleUnaryCall<Account, AccountID>;
   setStatus: handleUnaryCall<SetStatusMessage, Empty>;
 }
@@ -258,16 +258,16 @@ export interface AccountServiceClient extends Client {
     options: Partial<CallOptions>,
     callback: (error: ServiceError | null, response: Account) => void,
   ): ClientUnaryCall;
-  geyByKycApplicationId(
+  getByKycApplicationId(
     request: KYCApplicationID,
     callback: (error: ServiceError | null, response: Account) => void,
   ): ClientUnaryCall;
-  geyByKycApplicationId(
+  getByKycApplicationId(
     request: KYCApplicationID,
     metadata: Metadata,
     callback: (error: ServiceError | null, response: Account) => void,
   ): ClientUnaryCall;
-  geyByKycApplicationId(
+  getByKycApplicationId(
     request: KYCApplicationID,
     metadata: Metadata,
     options: Partial<CallOptions>,

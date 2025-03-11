@@ -167,8 +167,8 @@ export const AccountServiceService = {
         responseSerialize: (value) => Buffer.from(Account.encode(value).finish()),
         responseDeserialize: (value) => Account.decode(value),
     },
-    geyByKycApplicationId: {
-        path: "/account.AccountService/GeyByKYCApplicationID",
+    getByKycApplicationId: {
+        path: "/account.AccountService/GetByKYCApplicationID",
         requestStream: false,
         responseStream: false,
         requestSerialize: (value) => Buffer.from(KYCApplicationID.encode(value).finish()),

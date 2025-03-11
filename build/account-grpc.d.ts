@@ -8,7 +8,7 @@ import { Audit } from "./sologenic/com-fs-utils-lib/models/audit/audit";
 import { Network } from "./sologenic/com-fs-utils-lib/models/metadata/metadata";
 export declare const protobufPackage = "account";
 export interface KYCApplicationID {
-    /** UUID for the external user identifier in the KYC provider (called "externalUserID" in sumsub) */
+    /** UUID for the external user identifier in the KYC provider (called "externalUserId" in sumsub) */
     KYCApplicationID: string;
 }
 export interface SetStatusMessage {
@@ -96,8 +96,8 @@ export declare const AccountServiceService: {
         readonly responseSerialize: (value: Account) => Buffer;
         readonly responseDeserialize: (value: Buffer) => Account;
     };
-    readonly geyByKycApplicationId: {
-        readonly path: "/account.AccountService/GeyByKYCApplicationID";
+    readonly getByKycApplicationId: {
+        readonly path: "/account.AccountService/GetByKYCApplicationID";
         readonly requestStream: false;
         readonly responseStream: false;
         readonly requestSerialize: (value: KYCApplicationID) => Buffer;
@@ -126,7 +126,7 @@ export declare const AccountServiceService: {
 };
 export interface AccountServiceServer extends UntypedServiceImplementation {
     get: handleUnaryCall<AccountID, Account>;
-    geyByKycApplicationId: handleUnaryCall<KYCApplicationID, Account>;
+    getByKycApplicationId: handleUnaryCall<KYCApplicationID, Account>;
     upsert: handleUnaryCall<Account, AccountID>;
     setStatus: handleUnaryCall<SetStatusMessage, Empty>;
 }
@@ -134,9 +134,9 @@ export interface AccountServiceClient extends Client {
     get(request: AccountID, callback: (error: ServiceError | null, response: Account) => void): ClientUnaryCall;
     get(request: AccountID, metadata: Metadata, callback: (error: ServiceError | null, response: Account) => void): ClientUnaryCall;
     get(request: AccountID, metadata: Metadata, options: Partial<CallOptions>, callback: (error: ServiceError | null, response: Account) => void): ClientUnaryCall;
-    geyByKycApplicationId(request: KYCApplicationID, callback: (error: ServiceError | null, response: Account) => void): ClientUnaryCall;
-    geyByKycApplicationId(request: KYCApplicationID, metadata: Metadata, callback: (error: ServiceError | null, response: Account) => void): ClientUnaryCall;
-    geyByKycApplicationId(request: KYCApplicationID, metadata: Metadata, options: Partial<CallOptions>, callback: (error: ServiceError | null, response: Account) => void): ClientUnaryCall;
+    getByKycApplicationId(request: KYCApplicationID, callback: (error: ServiceError | null, response: Account) => void): ClientUnaryCall;
+    getByKycApplicationId(request: KYCApplicationID, metadata: Metadata, callback: (error: ServiceError | null, response: Account) => void): ClientUnaryCall;
+    getByKycApplicationId(request: KYCApplicationID, metadata: Metadata, options: Partial<CallOptions>, callback: (error: ServiceError | null, response: Account) => void): ClientUnaryCall;
     upsert(request: Account, callback: (error: ServiceError | null, response: AccountID) => void): ClientUnaryCall;
     upsert(request: Account, metadata: Metadata, callback: (error: ServiceError | null, response: AccountID) => void): ClientUnaryCall;
     upsert(request: Account, metadata: Metadata, options: Partial<CallOptions>, callback: (error: ServiceError | null, response: AccountID) => void): ClientUnaryCall;

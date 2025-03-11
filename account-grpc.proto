@@ -11,13 +11,13 @@ import "account.proto";
 
 service AccountService {
     rpc Get (AccountID) returns (Account) {}
-    rpc GeyByKYCApplicationID (KYCApplicationID) returns (Account) {}
+    rpc GetByKYCApplicationID (KYCApplicationID) returns (Account) {}
     rpc Upsert (Account) returns (AccountID) {}
     rpc SetStatus (SetStatusMessage) returns (google.protobuf.Empty) {}
 }
 
 message KYCApplicationID {
-    string KYCApplicationID = 1; // UUID for the external user identifier in the KYC provider (called "externalUserID" in sumsub)
+    string KYCApplicationID = 1; // UUID for the external user identifier in the KYC provider (called "externalUserId" in sumsub)
 }
 
 message SetStatusMessage {
