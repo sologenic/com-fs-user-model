@@ -84,11 +84,6 @@ message AccountID {
     optional metadata.Network Network = 2; 
 }
 
-message Accounts {
-    repeated Account Accounts = 1;
-    optional int32 Offset = 2; // If there is more data, this is the offset to pass to the next call
-}
-
 message Social {
     string URL = 1;
     SocialType Type = 2;

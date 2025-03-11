@@ -22,10 +22,8 @@ const _ = grpc.SupportPackageIsVersion7
 const (
 	AccountService_Get_FullMethodName                 = "/account.AccountService/Get"
 	AccountService_GetByExternalUserID_FullMethodName = "/account.AccountService/GetByExternalUserID"
-	AccountService_GetAll_FullMethodName              = "/account.AccountService/GetAll"
 	AccountService_Upsert_FullMethodName              = "/account.AccountService/Upsert"
 	AccountService_SetStatus_FullMethodName           = "/account.AccountService/SetStatus"
-	AccountService_ListAudit_FullMethodName           = "/account.AccountService/ListAudit"
 )
 
 // AccountServiceClient is the client API for AccountService service.
@@ -34,11 +32,8 @@ const (
 type AccountServiceClient interface {
 	Get(ctx context.Context, in *AccountID, opts ...grpc.CallOption) (*Account, error)
 	GetByExternalUserID(ctx context.Context, in *ExternalUserID, opts ...grpc.CallOption) (*Account, error)
-	GetAll(ctx context.Context, in *Filter, opts ...grpc.CallOption) (*Accounts, error)
 	Upsert(ctx context.Context, in *Account, opts ...grpc.CallOption) (*AccountID, error)
 	SetStatus(ctx context.Context, in *SetStatusMessage, opts ...grpc.CallOption) (*emptypb.Empty, error)
-	// Audit
-	ListAudit(ctx context.Context, in *AuditFilter, opts ...grpc.CallOption) (*Accounts, error)
 }
 
 type accountServiceClient struct {
@@ -67,15 +62,6 @@ func (c *accountServiceClient) GetByExternalUserID(ctx context.Context, in *Exte
 	return out, nil
 }
 
-func (c *accountServiceClient) GetAll(ctx context.Context, in *Filter, opts ...grpc.CallOption) (*Accounts, error) {
-	out := new(Accounts)
-	err := c.cc.Invoke(ctx, AccountService_GetAll_FullMethodName, in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 func (c *accountServiceClient) Upsert(ctx context.Context, in *Account, opts ...grpc.CallOption) (*AccountID, error) {
 	out := new(AccountID)
 	err := c.cc.Invoke(ctx, AccountService_Upsert_FullMethodName, in, out, opts...)
@@ -94,26 +80,14 @@ func (c *accountServiceClient) SetStatus(ctx context.Context, in *SetStatusMessa
 	return out, nil
 }
 
-func (c *accountServiceClient) ListAudit(ctx context.Context, in *AuditFilter, opts ...grpc.CallOption) (*Accounts, error) {
-	out := new(Accounts)
-	err := c.cc.Invoke(ctx, AccountService_ListAudit_FullMethodName, in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 // AccountServiceServer is the server API for AccountService service.
 // All implementations should embed UnimplementedAccountServiceServer
 // for forward compatibility
 type AccountServiceServer interface {
 	Get(context.Context, *AccountID) (*Account, error)
 	GetByExternalUserID(context.Context, *ExternalUserID) (*Account, error)
-	GetAll(context.Context, *Filter) (*Accounts, error)
 	Upsert(context.Context, *Account) (*AccountID, error)
 	SetStatus(context.Context, *SetStatusMessage) (*emptypb.Empty, error)
-	// Audit
-	ListAudit(context.Context, *AuditFilter) (*Accounts, error)
 }
 
 // UnimplementedAccountServiceServer should be embedded to have forward compatible implementations.
@@ -126,17 +100,11 @@ func (UnimplementedAccountServiceServer) Get(context.Context, *AccountID) (*Acco
 func (UnimplementedAccountServiceServer) GetByExternalUserID(context.Context, *ExternalUserID) (*Account, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetByExternalUserID not implemented")
 }
-func (UnimplementedAccountServiceServer) GetAll(context.Context, *Filter) (*Accounts, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetAll not implemented")
-}
 func (UnimplementedAccountServiceServer) Upsert(context.Context, *Account) (*AccountID, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Upsert not implemented")
 }
 func (UnimplementedAccountServiceServer) SetStatus(context.Context, *SetStatusMessage) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SetStatus not implemented")
-}
-func (UnimplementedAccountServiceServer) ListAudit(context.Context, *AuditFilter) (*Accounts, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ListAudit not implemented")
 }
 
 // UnsafeAccountServiceServer may be embedded to opt out of forward compatibility for this service.
@@ -186,24 +154,6 @@ func _AccountService_GetByExternalUserID_Handler(srv interface{}, ctx context.Co
 	return interceptor(ctx, in, info, handler)
 }
 
-func _AccountService_GetAll_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(Filter)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(AccountServiceServer).GetAll(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: AccountService_GetAll_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AccountServiceServer).GetAll(ctx, req.(*Filter))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 func _AccountService_Upsert_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(Account)
 	if err := dec(in); err != nil {
@@ -240,24 +190,6 @@ func _AccountService_SetStatus_Handler(srv interface{}, ctx context.Context, dec
 	return interceptor(ctx, in, info, handler)
 }
 
-func _AccountService_ListAudit_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(AuditFilter)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(AccountServiceServer).ListAudit(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: AccountService_ListAudit_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AccountServiceServer).ListAudit(ctx, req.(*AuditFilter))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 // AccountService_ServiceDesc is the grpc.ServiceDesc for AccountService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -274,20 +206,12 @@ var AccountService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _AccountService_GetByExternalUserID_Handler,
 		},
 		{
-			MethodName: "GetAll",
-			Handler:    _AccountService_GetAll_Handler,
-		},
-		{
 			MethodName: "Upsert",
 			Handler:    _AccountService_Upsert_Handler,
 		},
 		{
 			MethodName: "SetStatus",
 			Handler:    _AccountService_SetStatus_Handler,
-		},
-		{
-			MethodName: "ListAudit",
-			Handler:    _AccountService_ListAudit_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

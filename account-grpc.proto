@@ -12,45 +12,12 @@ import "account.proto";
 service AccountService {
     rpc Get (AccountID) returns (Account) {}
     rpc GetByExternalUserID (ExternalUserID) returns (Account) {}
-    rpc GetAll(Filter) returns (Accounts) {}
     rpc Upsert (Account) returns (AccountID) {}
     rpc SetStatus (SetStatusMessage) returns (google.protobuf.Empty) {}
-
-    // Audit
-    rpc ListAudit (AuditFilter) returns (Accounts) {}
 }
 
 message ExternalUserID {
     string ExternalUserID = 1; // UUID for the external user identifier in the KYC provider
-}
-
-message Filter {
-    repeated string AccountIDs = 1;
-    optional Order Order = 2;
-    optional int32 Offset = 3; // Page offset
-    optional int32 Limit = 4; // Page limit
-    optional metadata.Network Network = 5; 
-    string OrganizationID = 6; // We want to limit the accounts to a specific organization, therefore this field is required
-}
-
-message Order {
-    Field Field = 1;
-    OrderDirection Direction = 2;
-}
-
-// Field names are in the correct casing for direct usage in the queries, 
-// prepended with the F_ representening the ENUM name (due to code generation 
-// limitations: The set scope in C by the grpc code generator causes issues 
-// with field names which are used already in other variable name)
-enum Field {
-    F_AccountID = 0;
-    F_CreatedAt = 1;
-    F_Alias = 2;
-}
-
-enum OrderDirection {
-    ASC = 0;
-    DESC = 1;
 }
 
 message SetStatusMessage {
@@ -58,13 +25,4 @@ message SetStatusMessage {
     UserStatus Status = 2;
     optional metadata.Network Network = 3;
     audit.Audit Audit = 4;
-}
-
-message AuditFilter {
-    optional string AccountID = 1; 
-    optional string ChangedBy = 2;
-    optional metadata.Network Network = 3; 
-    optional string OrganizationID = 4;
-    optional int32 Limit = 5;
-    optional int32 Offset = 6;
 }

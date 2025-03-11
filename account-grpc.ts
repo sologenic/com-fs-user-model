@@ -18,117 +18,16 @@ import {
   type UntypedServiceImplementation,
 } from "@grpc/grpc-js";
 import _m0 from "protobufjs/minimal";
-import { Account, AccountID, Accounts, UserStatus, userStatusFromJSON, userStatusToJSON } from "./account";
+import { Account, AccountID, UserStatus, userStatusFromJSON, userStatusToJSON } from "./account";
 import { Empty } from "./google/protobuf/empty";
 import { Audit } from "./sologenic/com-fs-utils-lib/models/audit/audit";
 import { Network, networkFromJSON, networkToJSON } from "./sologenic/com-fs-utils-lib/models/metadata/metadata";
 
 export const protobufPackage = "account";
 
-/**
- * Field names are in the correct casing for direct usage in the queries,
- * prepended with the F_ representening the ENUM name (due to code generation
- * limitations: The set scope in C by the grpc code generator causes issues
- * with field names which are used already in other variable name)
- */
-export enum Field {
-  F_AccountID = 0,
-  F_CreatedAt = 1,
-  F_Alias = 2,
-  UNRECOGNIZED = -1,
-}
-
-export function fieldFromJSON(object: any): Field {
-  switch (object) {
-    case 0:
-    case "F_AccountID":
-      return Field.F_AccountID;
-    case 1:
-    case "F_CreatedAt":
-      return Field.F_CreatedAt;
-    case 2:
-    case "F_Alias":
-      return Field.F_Alias;
-    case -1:
-    case "UNRECOGNIZED":
-    default:
-      return Field.UNRECOGNIZED;
-  }
-}
-
-export function fieldToJSON(object: Field): string {
-  switch (object) {
-    case Field.F_AccountID:
-      return "F_AccountID";
-    case Field.F_CreatedAt:
-      return "F_CreatedAt";
-    case Field.F_Alias:
-      return "F_Alias";
-    case Field.UNRECOGNIZED:
-    default:
-      return "UNRECOGNIZED";
-  }
-}
-
-export enum OrderDirection {
-  ASC = 0,
-  DESC = 1,
-  UNRECOGNIZED = -1,
-}
-
-export function orderDirectionFromJSON(object: any): OrderDirection {
-  switch (object) {
-    case 0:
-    case "ASC":
-      return OrderDirection.ASC;
-    case 1:
-    case "DESC":
-      return OrderDirection.DESC;
-    case -1:
-    case "UNRECOGNIZED":
-    default:
-      return OrderDirection.UNRECOGNIZED;
-  }
-}
-
-export function orderDirectionToJSON(object: OrderDirection): string {
-  switch (object) {
-    case OrderDirection.ASC:
-      return "ASC";
-    case OrderDirection.DESC:
-      return "DESC";
-    case OrderDirection.UNRECOGNIZED:
-    default:
-      return "UNRECOGNIZED";
-  }
-}
-
 export interface ExternalUserID {
   /** UUID for the external user identifier in the KYC provider */
   ExternalUserID: string;
-}
-
-export interface Filter {
-  AccountIDs: string[];
-  Order?:
-    | Order
-    | undefined;
-  /** Page offset */
-  Offset?:
-    | number
-    | undefined;
-  /** Page limit */
-  Limit?: number | undefined;
-  Network?:
-    | Network
-    | undefined;
-  /** We want to limit the accounts to a specific organization, therefore this field is required */
-  OrganizationID: string;
-}
-
-export interface Order {
-  Field: Field;
-  Direction: OrderDirection;
 }
 
 export interface SetStatusMessage {
@@ -136,15 +35,6 @@ export interface SetStatusMessage {
   Status: UserStatus;
   Network?: Network | undefined;
   Audit: Audit | undefined;
-}
-
-export interface AuditFilter {
-  AccountID?: string | undefined;
-  ChangedBy?: string | undefined;
-  Network?: Network | undefined;
-  OrganizationID?: string | undefined;
-  Limit?: number | undefined;
-  Offset?: number | undefined;
 }
 
 function createBaseExternalUserID(): ExternalUserID {
@@ -200,223 +90,6 @@ export const ExternalUserID = {
   fromPartial<I extends Exact<DeepPartial<ExternalUserID>, I>>(object: I): ExternalUserID {
     const message = createBaseExternalUserID();
     message.ExternalUserID = object.ExternalUserID ?? "";
-    return message;
-  },
-};
-
-function createBaseFilter(): Filter {
-  return {
-    AccountIDs: [],
-    Order: undefined,
-    Offset: undefined,
-    Limit: undefined,
-    Network: undefined,
-    OrganizationID: "",
-  };
-}
-
-export const Filter = {
-  encode(message: Filter, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    for (const v of message.AccountIDs) {
-      writer.uint32(10).string(v!);
-    }
-    if (message.Order !== undefined) {
-      Order.encode(message.Order, writer.uint32(18).fork()).ldelim();
-    }
-    if (message.Offset !== undefined) {
-      writer.uint32(24).int32(message.Offset);
-    }
-    if (message.Limit !== undefined) {
-      writer.uint32(32).int32(message.Limit);
-    }
-    if (message.Network !== undefined) {
-      writer.uint32(40).int32(message.Network);
-    }
-    if (message.OrganizationID !== "") {
-      writer.uint32(50).string(message.OrganizationID);
-    }
-    return writer;
-  },
-
-  decode(input: _m0.Reader | Uint8Array, length?: number): Filter {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseFilter();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1:
-          if (tag !== 10) {
-            break;
-          }
-
-          message.AccountIDs.push(reader.string());
-          continue;
-        case 2:
-          if (tag !== 18) {
-            break;
-          }
-
-          message.Order = Order.decode(reader, reader.uint32());
-          continue;
-        case 3:
-          if (tag !== 24) {
-            break;
-          }
-
-          message.Offset = reader.int32();
-          continue;
-        case 4:
-          if (tag !== 32) {
-            break;
-          }
-
-          message.Limit = reader.int32();
-          continue;
-        case 5:
-          if (tag !== 40) {
-            break;
-          }
-
-          message.Network = reader.int32() as any;
-          continue;
-        case 6:
-          if (tag !== 50) {
-            break;
-          }
-
-          message.OrganizationID = reader.string();
-          continue;
-      }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
-      }
-      reader.skipType(tag & 7);
-    }
-    return message;
-  },
-
-  fromJSON(object: any): Filter {
-    return {
-      AccountIDs: globalThis.Array.isArray(object?.AccountIDs)
-        ? object.AccountIDs.map((e: any) => globalThis.String(e))
-        : [],
-      Order: isSet(object.Order) ? Order.fromJSON(object.Order) : undefined,
-      Offset: isSet(object.Offset) ? globalThis.Number(object.Offset) : undefined,
-      Limit: isSet(object.Limit) ? globalThis.Number(object.Limit) : undefined,
-      Network: isSet(object.Network) ? networkFromJSON(object.Network) : undefined,
-      OrganizationID: isSet(object.OrganizationID) ? globalThis.String(object.OrganizationID) : "",
-    };
-  },
-
-  toJSON(message: Filter): unknown {
-    const obj: any = {};
-    if (message.AccountIDs?.length) {
-      obj.AccountIDs = message.AccountIDs;
-    }
-    if (message.Order !== undefined) {
-      obj.Order = Order.toJSON(message.Order);
-    }
-    if (message.Offset !== undefined) {
-      obj.Offset = Math.round(message.Offset);
-    }
-    if (message.Limit !== undefined) {
-      obj.Limit = Math.round(message.Limit);
-    }
-    if (message.Network !== undefined) {
-      obj.Network = networkToJSON(message.Network);
-    }
-    if (message.OrganizationID !== "") {
-      obj.OrganizationID = message.OrganizationID;
-    }
-    return obj;
-  },
-
-  create<I extends Exact<DeepPartial<Filter>, I>>(base?: I): Filter {
-    return Filter.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<Filter>, I>>(object: I): Filter {
-    const message = createBaseFilter();
-    message.AccountIDs = object.AccountIDs?.map((e) => e) || [];
-    message.Order = (object.Order !== undefined && object.Order !== null) ? Order.fromPartial(object.Order) : undefined;
-    message.Offset = object.Offset ?? undefined;
-    message.Limit = object.Limit ?? undefined;
-    message.Network = object.Network ?? undefined;
-    message.OrganizationID = object.OrganizationID ?? "";
-    return message;
-  },
-};
-
-function createBaseOrder(): Order {
-  return { Field: 0, Direction: 0 };
-}
-
-export const Order = {
-  encode(message: Order, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.Field !== 0) {
-      writer.uint32(8).int32(message.Field);
-    }
-    if (message.Direction !== 0) {
-      writer.uint32(16).int32(message.Direction);
-    }
-    return writer;
-  },
-
-  decode(input: _m0.Reader | Uint8Array, length?: number): Order {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseOrder();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1:
-          if (tag !== 8) {
-            break;
-          }
-
-          message.Field = reader.int32() as any;
-          continue;
-        case 2:
-          if (tag !== 16) {
-            break;
-          }
-
-          message.Direction = reader.int32() as any;
-          continue;
-      }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
-      }
-      reader.skipType(tag & 7);
-    }
-    return message;
-  },
-
-  fromJSON(object: any): Order {
-    return {
-      Field: isSet(object.Field) ? fieldFromJSON(object.Field) : 0,
-      Direction: isSet(object.Direction) ? orderDirectionFromJSON(object.Direction) : 0,
-    };
-  },
-
-  toJSON(message: Order): unknown {
-    const obj: any = {};
-    if (message.Field !== 0) {
-      obj.Field = fieldToJSON(message.Field);
-    }
-    if (message.Direction !== 0) {
-      obj.Direction = orderDirectionToJSON(message.Direction);
-    }
-    return obj;
-  },
-
-  create<I extends Exact<DeepPartial<Order>, I>>(base?: I): Order {
-    return Order.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<Order>, I>>(object: I): Order {
-    const message = createBaseOrder();
-    message.Field = object.Field ?? 0;
-    message.Direction = object.Direction ?? 0;
     return message;
   },
 };
@@ -525,147 +198,6 @@ export const SetStatusMessage = {
   },
 };
 
-function createBaseAuditFilter(): AuditFilter {
-  return {
-    AccountID: undefined,
-    ChangedBy: undefined,
-    Network: undefined,
-    OrganizationID: undefined,
-    Limit: undefined,
-    Offset: undefined,
-  };
-}
-
-export const AuditFilter = {
-  encode(message: AuditFilter, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.AccountID !== undefined) {
-      writer.uint32(10).string(message.AccountID);
-    }
-    if (message.ChangedBy !== undefined) {
-      writer.uint32(18).string(message.ChangedBy);
-    }
-    if (message.Network !== undefined) {
-      writer.uint32(24).int32(message.Network);
-    }
-    if (message.OrganizationID !== undefined) {
-      writer.uint32(34).string(message.OrganizationID);
-    }
-    if (message.Limit !== undefined) {
-      writer.uint32(40).int32(message.Limit);
-    }
-    if (message.Offset !== undefined) {
-      writer.uint32(48).int32(message.Offset);
-    }
-    return writer;
-  },
-
-  decode(input: _m0.Reader | Uint8Array, length?: number): AuditFilter {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseAuditFilter();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1:
-          if (tag !== 10) {
-            break;
-          }
-
-          message.AccountID = reader.string();
-          continue;
-        case 2:
-          if (tag !== 18) {
-            break;
-          }
-
-          message.ChangedBy = reader.string();
-          continue;
-        case 3:
-          if (tag !== 24) {
-            break;
-          }
-
-          message.Network = reader.int32() as any;
-          continue;
-        case 4:
-          if (tag !== 34) {
-            break;
-          }
-
-          message.OrganizationID = reader.string();
-          continue;
-        case 5:
-          if (tag !== 40) {
-            break;
-          }
-
-          message.Limit = reader.int32();
-          continue;
-        case 6:
-          if (tag !== 48) {
-            break;
-          }
-
-          message.Offset = reader.int32();
-          continue;
-      }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
-      }
-      reader.skipType(tag & 7);
-    }
-    return message;
-  },
-
-  fromJSON(object: any): AuditFilter {
-    return {
-      AccountID: isSet(object.AccountID) ? globalThis.String(object.AccountID) : undefined,
-      ChangedBy: isSet(object.ChangedBy) ? globalThis.String(object.ChangedBy) : undefined,
-      Network: isSet(object.Network) ? networkFromJSON(object.Network) : undefined,
-      OrganizationID: isSet(object.OrganizationID) ? globalThis.String(object.OrganizationID) : undefined,
-      Limit: isSet(object.Limit) ? globalThis.Number(object.Limit) : undefined,
-      Offset: isSet(object.Offset) ? globalThis.Number(object.Offset) : undefined,
-    };
-  },
-
-  toJSON(message: AuditFilter): unknown {
-    const obj: any = {};
-    if (message.AccountID !== undefined) {
-      obj.AccountID = message.AccountID;
-    }
-    if (message.ChangedBy !== undefined) {
-      obj.ChangedBy = message.ChangedBy;
-    }
-    if (message.Network !== undefined) {
-      obj.Network = networkToJSON(message.Network);
-    }
-    if (message.OrganizationID !== undefined) {
-      obj.OrganizationID = message.OrganizationID;
-    }
-    if (message.Limit !== undefined) {
-      obj.Limit = Math.round(message.Limit);
-    }
-    if (message.Offset !== undefined) {
-      obj.Offset = Math.round(message.Offset);
-    }
-    return obj;
-  },
-
-  create<I extends Exact<DeepPartial<AuditFilter>, I>>(base?: I): AuditFilter {
-    return AuditFilter.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<AuditFilter>, I>>(object: I): AuditFilter {
-    const message = createBaseAuditFilter();
-    message.AccountID = object.AccountID ?? undefined;
-    message.ChangedBy = object.ChangedBy ?? undefined;
-    message.Network = object.Network ?? undefined;
-    message.OrganizationID = object.OrganizationID ?? undefined;
-    message.Limit = object.Limit ?? undefined;
-    message.Offset = object.Offset ?? undefined;
-    return message;
-  },
-};
-
 export type AccountServiceService = typeof AccountServiceService;
 export const AccountServiceService = {
   get: {
@@ -686,15 +218,6 @@ export const AccountServiceService = {
     responseSerialize: (value: Account) => Buffer.from(Account.encode(value).finish()),
     responseDeserialize: (value: Buffer) => Account.decode(value),
   },
-  getAll: {
-    path: "/account.AccountService/GetAll",
-    requestStream: false,
-    responseStream: false,
-    requestSerialize: (value: Filter) => Buffer.from(Filter.encode(value).finish()),
-    requestDeserialize: (value: Buffer) => Filter.decode(value),
-    responseSerialize: (value: Accounts) => Buffer.from(Accounts.encode(value).finish()),
-    responseDeserialize: (value: Buffer) => Accounts.decode(value),
-  },
   upsert: {
     path: "/account.AccountService/Upsert",
     requestStream: false,
@@ -713,26 +236,13 @@ export const AccountServiceService = {
     responseSerialize: (value: Empty) => Buffer.from(Empty.encode(value).finish()),
     responseDeserialize: (value: Buffer) => Empty.decode(value),
   },
-  /** Audit */
-  listAudit: {
-    path: "/account.AccountService/ListAudit",
-    requestStream: false,
-    responseStream: false,
-    requestSerialize: (value: AuditFilter) => Buffer.from(AuditFilter.encode(value).finish()),
-    requestDeserialize: (value: Buffer) => AuditFilter.decode(value),
-    responseSerialize: (value: Accounts) => Buffer.from(Accounts.encode(value).finish()),
-    responseDeserialize: (value: Buffer) => Accounts.decode(value),
-  },
 } as const;
 
 export interface AccountServiceServer extends UntypedServiceImplementation {
   get: handleUnaryCall<AccountID, Account>;
   getByExternalUserId: handleUnaryCall<ExternalUserID, Account>;
-  getAll: handleUnaryCall<Filter, Accounts>;
   upsert: handleUnaryCall<Account, AccountID>;
   setStatus: handleUnaryCall<SetStatusMessage, Empty>;
-  /** Audit */
-  listAudit: handleUnaryCall<AuditFilter, Accounts>;
 }
 
 export interface AccountServiceClient extends Client {
@@ -763,18 +273,6 @@ export interface AccountServiceClient extends Client {
     options: Partial<CallOptions>,
     callback: (error: ServiceError | null, response: Account) => void,
   ): ClientUnaryCall;
-  getAll(request: Filter, callback: (error: ServiceError | null, response: Accounts) => void): ClientUnaryCall;
-  getAll(
-    request: Filter,
-    metadata: Metadata,
-    callback: (error: ServiceError | null, response: Accounts) => void,
-  ): ClientUnaryCall;
-  getAll(
-    request: Filter,
-    metadata: Metadata,
-    options: Partial<CallOptions>,
-    callback: (error: ServiceError | null, response: Accounts) => void,
-  ): ClientUnaryCall;
   upsert(request: Account, callback: (error: ServiceError | null, response: AccountID) => void): ClientUnaryCall;
   upsert(
     request: Account,
@@ -801,19 +299,6 @@ export interface AccountServiceClient extends Client {
     metadata: Metadata,
     options: Partial<CallOptions>,
     callback: (error: ServiceError | null, response: Empty) => void,
-  ): ClientUnaryCall;
-  /** Audit */
-  listAudit(request: AuditFilter, callback: (error: ServiceError | null, response: Accounts) => void): ClientUnaryCall;
-  listAudit(
-    request: AuditFilter,
-    metadata: Metadata,
-    callback: (error: ServiceError | null, response: Accounts) => void,
-  ): ClientUnaryCall;
-  listAudit(
-    request: AuditFilter,
-    metadata: Metadata,
-    options: Partial<CallOptions>,
-    callback: (error: ServiceError | null, response: Accounts) => void,
   ): ClientUnaryCall;
 }
 

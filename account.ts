@@ -371,12 +371,6 @@ export interface AccountID {
   Network?: Network | undefined;
 }
 
-export interface Accounts {
-  Accounts: Account[];
-  /** If there is more data, this is the offset to pass to the next call */
-  Offset?: number | undefined;
-}
-
 export interface Social {
   URL: string;
   Type: SocialType;
@@ -1249,80 +1243,6 @@ export const AccountID = {
     const message = createBaseAccountID();
     message.AccountID = object.AccountID ?? "";
     message.Network = object.Network ?? undefined;
-    return message;
-  },
-};
-
-function createBaseAccounts(): Accounts {
-  return { Accounts: [], Offset: undefined };
-}
-
-export const Accounts = {
-  encode(message: Accounts, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    for (const v of message.Accounts) {
-      Account.encode(v!, writer.uint32(10).fork()).ldelim();
-    }
-    if (message.Offset !== undefined) {
-      writer.uint32(16).int32(message.Offset);
-    }
-    return writer;
-  },
-
-  decode(input: _m0.Reader | Uint8Array, length?: number): Accounts {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseAccounts();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1:
-          if (tag !== 10) {
-            break;
-          }
-
-          message.Accounts.push(Account.decode(reader, reader.uint32()));
-          continue;
-        case 2:
-          if (tag !== 16) {
-            break;
-          }
-
-          message.Offset = reader.int32();
-          continue;
-      }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
-      }
-      reader.skipType(tag & 7);
-    }
-    return message;
-  },
-
-  fromJSON(object: any): Accounts {
-    return {
-      Accounts: globalThis.Array.isArray(object?.Accounts) ? object.Accounts.map((e: any) => Account.fromJSON(e)) : [],
-      Offset: isSet(object.Offset) ? globalThis.Number(object.Offset) : undefined,
-    };
-  },
-
-  toJSON(message: Accounts): unknown {
-    const obj: any = {};
-    if (message.Accounts?.length) {
-      obj.Accounts = message.Accounts.map((e) => Account.toJSON(e));
-    }
-    if (message.Offset !== undefined) {
-      obj.Offset = Math.round(message.Offset);
-    }
-    return obj;
-  },
-
-  create<I extends Exact<DeepPartial<Accounts>, I>>(base?: I): Accounts {
-    return Accounts.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<Accounts>, I>>(object: I): Accounts {
-    const message = createBaseAccounts();
-    message.Accounts = object.Accounts?.map((e) => Account.fromPartial(e)) || [];
-    message.Offset = object.Offset ?? undefined;
     return message;
   },
 };
