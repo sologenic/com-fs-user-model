@@ -11,20 +11,20 @@ import { Empty } from "./google/protobuf/empty";
 import { Audit } from "./sologenic/com-fs-utils-lib/models/audit/audit";
 import { networkFromJSON, networkToJSON } from "./sologenic/com-fs-utils-lib/models/metadata/metadata";
 export const protobufPackage = "account";
-function createBaseExternalUserID() {
-    return { ExternalUserID: "" };
+function createBaseKYCApplicationID() {
+    return { KYCApplicationID: "" };
 }
-export const ExternalUserID = {
+export const KYCApplicationID = {
     encode(message, writer = _m0.Writer.create()) {
-        if (message.ExternalUserID !== "") {
-            writer.uint32(10).string(message.ExternalUserID);
+        if (message.KYCApplicationID !== "") {
+            writer.uint32(10).string(message.KYCApplicationID);
         }
         return writer;
     },
     decode(input, length) {
         const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
         let end = length === undefined ? reader.len : reader.pos + length;
-        const message = createBaseExternalUserID();
+        const message = createBaseKYCApplicationID();
         while (reader.pos < end) {
             const tag = reader.uint32();
             switch (tag >>> 3) {
@@ -32,7 +32,7 @@ export const ExternalUserID = {
                     if (tag !== 10) {
                         break;
                     }
-                    message.ExternalUserID = reader.string();
+                    message.KYCApplicationID = reader.string();
                     continue;
             }
             if ((tag & 7) === 4 || tag === 0) {
@@ -43,22 +43,22 @@ export const ExternalUserID = {
         return message;
     },
     fromJSON(object) {
-        return { ExternalUserID: isSet(object.ExternalUserID) ? globalThis.String(object.ExternalUserID) : "" };
+        return { KYCApplicationID: isSet(object.KYCApplicationID) ? globalThis.String(object.KYCApplicationID) : "" };
     },
     toJSON(message) {
         const obj = {};
-        if (message.ExternalUserID !== "") {
-            obj.ExternalUserID = message.ExternalUserID;
+        if (message.KYCApplicationID !== "") {
+            obj.KYCApplicationID = message.KYCApplicationID;
         }
         return obj;
     },
     create(base) {
-        return ExternalUserID.fromPartial(base !== null && base !== void 0 ? base : {});
+        return KYCApplicationID.fromPartial(base !== null && base !== void 0 ? base : {});
     },
     fromPartial(object) {
         var _a;
-        const message = createBaseExternalUserID();
-        message.ExternalUserID = (_a = object.ExternalUserID) !== null && _a !== void 0 ? _a : "";
+        const message = createBaseKYCApplicationID();
+        message.KYCApplicationID = (_a = object.KYCApplicationID) !== null && _a !== void 0 ? _a : "";
         return message;
     },
 };
@@ -167,12 +167,12 @@ export const AccountServiceService = {
         responseSerialize: (value) => Buffer.from(Account.encode(value).finish()),
         responseDeserialize: (value) => Account.decode(value),
     },
-    getByExternalUserId: {
-        path: "/account.AccountService/GetByExternalUserID",
+    geyByKycApplicationId: {
+        path: "/account.AccountService/GeyByKYCApplicationID",
         requestStream: false,
         responseStream: false,
-        requestSerialize: (value) => Buffer.from(ExternalUserID.encode(value).finish()),
-        requestDeserialize: (value) => ExternalUserID.decode(value),
+        requestSerialize: (value) => Buffer.from(KYCApplicationID.encode(value).finish()),
+        requestDeserialize: (value) => KYCApplicationID.decode(value),
         responseSerialize: (value) => Buffer.from(Account.encode(value).finish()),
         responseDeserialize: (value) => Account.decode(value),
     },

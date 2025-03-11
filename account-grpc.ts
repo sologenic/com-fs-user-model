@@ -25,9 +25,9 @@ import { Network, networkFromJSON, networkToJSON } from "./sologenic/com-fs-util
 
 export const protobufPackage = "account";
 
-export interface ExternalUserID {
-  /** UUID for the external user identifier in the KYC provider */
-  ExternalUserID: string;
+export interface KYCApplicationID {
+  /** UUID for the external user identifier in the KYC provider (called "externalUserID" in sumsub) */
+  KYCApplicationID: string;
 }
 
 export interface SetStatusMessage {
@@ -37,22 +37,22 @@ export interface SetStatusMessage {
   Audit: Audit | undefined;
 }
 
-function createBaseExternalUserID(): ExternalUserID {
-  return { ExternalUserID: "" };
+function createBaseKYCApplicationID(): KYCApplicationID {
+  return { KYCApplicationID: "" };
 }
 
-export const ExternalUserID = {
-  encode(message: ExternalUserID, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.ExternalUserID !== "") {
-      writer.uint32(10).string(message.ExternalUserID);
+export const KYCApplicationID = {
+  encode(message: KYCApplicationID, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.KYCApplicationID !== "") {
+      writer.uint32(10).string(message.KYCApplicationID);
     }
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): ExternalUserID {
+  decode(input: _m0.Reader | Uint8Array, length?: number): KYCApplicationID {
     const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseExternalUserID();
+    const message = createBaseKYCApplicationID();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -61,7 +61,7 @@ export const ExternalUserID = {
             break;
           }
 
-          message.ExternalUserID = reader.string();
+          message.KYCApplicationID = reader.string();
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -72,24 +72,24 @@ export const ExternalUserID = {
     return message;
   },
 
-  fromJSON(object: any): ExternalUserID {
-    return { ExternalUserID: isSet(object.ExternalUserID) ? globalThis.String(object.ExternalUserID) : "" };
+  fromJSON(object: any): KYCApplicationID {
+    return { KYCApplicationID: isSet(object.KYCApplicationID) ? globalThis.String(object.KYCApplicationID) : "" };
   },
 
-  toJSON(message: ExternalUserID): unknown {
+  toJSON(message: KYCApplicationID): unknown {
     const obj: any = {};
-    if (message.ExternalUserID !== "") {
-      obj.ExternalUserID = message.ExternalUserID;
+    if (message.KYCApplicationID !== "") {
+      obj.KYCApplicationID = message.KYCApplicationID;
     }
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<ExternalUserID>, I>>(base?: I): ExternalUserID {
-    return ExternalUserID.fromPartial(base ?? ({} as any));
+  create<I extends Exact<DeepPartial<KYCApplicationID>, I>>(base?: I): KYCApplicationID {
+    return KYCApplicationID.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<ExternalUserID>, I>>(object: I): ExternalUserID {
-    const message = createBaseExternalUserID();
-    message.ExternalUserID = object.ExternalUserID ?? "";
+  fromPartial<I extends Exact<DeepPartial<KYCApplicationID>, I>>(object: I): KYCApplicationID {
+    const message = createBaseKYCApplicationID();
+    message.KYCApplicationID = object.KYCApplicationID ?? "";
     return message;
   },
 };
@@ -209,12 +209,12 @@ export const AccountServiceService = {
     responseSerialize: (value: Account) => Buffer.from(Account.encode(value).finish()),
     responseDeserialize: (value: Buffer) => Account.decode(value),
   },
-  getByExternalUserId: {
-    path: "/account.AccountService/GetByExternalUserID",
+  geyByKycApplicationId: {
+    path: "/account.AccountService/GeyByKYCApplicationID",
     requestStream: false,
     responseStream: false,
-    requestSerialize: (value: ExternalUserID) => Buffer.from(ExternalUserID.encode(value).finish()),
-    requestDeserialize: (value: Buffer) => ExternalUserID.decode(value),
+    requestSerialize: (value: KYCApplicationID) => Buffer.from(KYCApplicationID.encode(value).finish()),
+    requestDeserialize: (value: Buffer) => KYCApplicationID.decode(value),
     responseSerialize: (value: Account) => Buffer.from(Account.encode(value).finish()),
     responseDeserialize: (value: Buffer) => Account.decode(value),
   },
@@ -240,7 +240,7 @@ export const AccountServiceService = {
 
 export interface AccountServiceServer extends UntypedServiceImplementation {
   get: handleUnaryCall<AccountID, Account>;
-  getByExternalUserId: handleUnaryCall<ExternalUserID, Account>;
+  geyByKycApplicationId: handleUnaryCall<KYCApplicationID, Account>;
   upsert: handleUnaryCall<Account, AccountID>;
   setStatus: handleUnaryCall<SetStatusMessage, Empty>;
 }
@@ -258,17 +258,17 @@ export interface AccountServiceClient extends Client {
     options: Partial<CallOptions>,
     callback: (error: ServiceError | null, response: Account) => void,
   ): ClientUnaryCall;
-  getByExternalUserId(
-    request: ExternalUserID,
+  geyByKycApplicationId(
+    request: KYCApplicationID,
     callback: (error: ServiceError | null, response: Account) => void,
   ): ClientUnaryCall;
-  getByExternalUserId(
-    request: ExternalUserID,
+  geyByKycApplicationId(
+    request: KYCApplicationID,
     metadata: Metadata,
     callback: (error: ServiceError | null, response: Account) => void,
   ): ClientUnaryCall;
-  getByExternalUserId(
-    request: ExternalUserID,
+  geyByKycApplicationId(
+    request: KYCApplicationID,
     metadata: Metadata,
     options: Partial<CallOptions>,
     callback: (error: ServiceError | null, response: Account) => void,

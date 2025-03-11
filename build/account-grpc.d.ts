@@ -7,9 +7,9 @@ import { Empty } from "./google/protobuf/empty";
 import { Audit } from "./sologenic/com-fs-utils-lib/models/audit/audit";
 import { Network } from "./sologenic/com-fs-utils-lib/models/metadata/metadata";
 export declare const protobufPackage = "account";
-export interface ExternalUserID {
-    /** UUID for the external user identifier in the KYC provider */
-    ExternalUserID: string;
+export interface KYCApplicationID {
+    /** UUID for the external user identifier in the KYC provider (called "externalUserID" in sumsub) */
+    KYCApplicationID: string;
 }
 export interface SetStatusMessage {
     AccountID: string;
@@ -17,21 +17,21 @@ export interface SetStatusMessage {
     Network?: Network | undefined;
     Audit: Audit | undefined;
 }
-export declare const ExternalUserID: {
-    encode(message: ExternalUserID, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): ExternalUserID;
-    fromJSON(object: any): ExternalUserID;
-    toJSON(message: ExternalUserID): unknown;
+export declare const KYCApplicationID: {
+    encode(message: KYCApplicationID, writer?: _m0.Writer): _m0.Writer;
+    decode(input: _m0.Reader | Uint8Array, length?: number): KYCApplicationID;
+    fromJSON(object: any): KYCApplicationID;
+    toJSON(message: KYCApplicationID): unknown;
     create<I extends {
-        ExternalUserID?: string | undefined;
+        KYCApplicationID?: string | undefined;
     } & {
-        ExternalUserID?: string | undefined;
-    } & { [K in Exclude<keyof I, "ExternalUserID">]: never; }>(base?: I | undefined): ExternalUserID;
+        KYCApplicationID?: string | undefined;
+    } & { [K in Exclude<keyof I, "KYCApplicationID">]: never; }>(base?: I | undefined): KYCApplicationID;
     fromPartial<I_1 extends {
-        ExternalUserID?: string | undefined;
+        KYCApplicationID?: string | undefined;
     } & {
-        ExternalUserID?: string | undefined;
-    } & { [K_1 in Exclude<keyof I_1, "ExternalUserID">]: never; }>(object: I_1): ExternalUserID;
+        KYCApplicationID?: string | undefined;
+    } & { [K_1 in Exclude<keyof I_1, "KYCApplicationID">]: never; }>(object: I_1): KYCApplicationID;
 };
 export declare const SetStatusMessage: {
     encode(message: SetStatusMessage, writer?: _m0.Writer): _m0.Writer;
@@ -96,12 +96,12 @@ export declare const AccountServiceService: {
         readonly responseSerialize: (value: Account) => Buffer;
         readonly responseDeserialize: (value: Buffer) => Account;
     };
-    readonly getByExternalUserId: {
-        readonly path: "/account.AccountService/GetByExternalUserID";
+    readonly geyByKycApplicationId: {
+        readonly path: "/account.AccountService/GeyByKYCApplicationID";
         readonly requestStream: false;
         readonly responseStream: false;
-        readonly requestSerialize: (value: ExternalUserID) => Buffer;
-        readonly requestDeserialize: (value: Buffer) => ExternalUserID;
+        readonly requestSerialize: (value: KYCApplicationID) => Buffer;
+        readonly requestDeserialize: (value: Buffer) => KYCApplicationID;
         readonly responseSerialize: (value: Account) => Buffer;
         readonly responseDeserialize: (value: Buffer) => Account;
     };
@@ -126,7 +126,7 @@ export declare const AccountServiceService: {
 };
 export interface AccountServiceServer extends UntypedServiceImplementation {
     get: handleUnaryCall<AccountID, Account>;
-    getByExternalUserId: handleUnaryCall<ExternalUserID, Account>;
+    geyByKycApplicationId: handleUnaryCall<KYCApplicationID, Account>;
     upsert: handleUnaryCall<Account, AccountID>;
     setStatus: handleUnaryCall<SetStatusMessage, Empty>;
 }
@@ -134,9 +134,9 @@ export interface AccountServiceClient extends Client {
     get(request: AccountID, callback: (error: ServiceError | null, response: Account) => void): ClientUnaryCall;
     get(request: AccountID, metadata: Metadata, callback: (error: ServiceError | null, response: Account) => void): ClientUnaryCall;
     get(request: AccountID, metadata: Metadata, options: Partial<CallOptions>, callback: (error: ServiceError | null, response: Account) => void): ClientUnaryCall;
-    getByExternalUserId(request: ExternalUserID, callback: (error: ServiceError | null, response: Account) => void): ClientUnaryCall;
-    getByExternalUserId(request: ExternalUserID, metadata: Metadata, callback: (error: ServiceError | null, response: Account) => void): ClientUnaryCall;
-    getByExternalUserId(request: ExternalUserID, metadata: Metadata, options: Partial<CallOptions>, callback: (error: ServiceError | null, response: Account) => void): ClientUnaryCall;
+    geyByKycApplicationId(request: KYCApplicationID, callback: (error: ServiceError | null, response: Account) => void): ClientUnaryCall;
+    geyByKycApplicationId(request: KYCApplicationID, metadata: Metadata, callback: (error: ServiceError | null, response: Account) => void): ClientUnaryCall;
+    geyByKycApplicationId(request: KYCApplicationID, metadata: Metadata, options: Partial<CallOptions>, callback: (error: ServiceError | null, response: Account) => void): ClientUnaryCall;
     upsert(request: Account, callback: (error: ServiceError | null, response: AccountID) => void): ClientUnaryCall;
     upsert(request: Account, metadata: Metadata, callback: (error: ServiceError | null, response: AccountID) => void): ClientUnaryCall;
     upsert(request: Account, metadata: Metadata, options: Partial<CallOptions>, callback: (error: ServiceError | null, response: AccountID) => void): ClientUnaryCall;

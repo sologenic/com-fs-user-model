@@ -20,10 +20,10 @@ import (
 const _ = grpc.SupportPackageIsVersion7
 
 const (
-	AccountService_Get_FullMethodName                 = "/account.AccountService/Get"
-	AccountService_GetByExternalUserID_FullMethodName = "/account.AccountService/GetByExternalUserID"
-	AccountService_Upsert_FullMethodName              = "/account.AccountService/Upsert"
-	AccountService_SetStatus_FullMethodName           = "/account.AccountService/SetStatus"
+	AccountService_Get_FullMethodName                   = "/account.AccountService/Get"
+	AccountService_GeyByKYCApplicationID_FullMethodName = "/account.AccountService/GeyByKYCApplicationID"
+	AccountService_Upsert_FullMethodName                = "/account.AccountService/Upsert"
+	AccountService_SetStatus_FullMethodName             = "/account.AccountService/SetStatus"
 )
 
 // AccountServiceClient is the client API for AccountService service.
@@ -31,7 +31,7 @@ const (
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type AccountServiceClient interface {
 	Get(ctx context.Context, in *AccountID, opts ...grpc.CallOption) (*Account, error)
-	GetByExternalUserID(ctx context.Context, in *ExternalUserID, opts ...grpc.CallOption) (*Account, error)
+	GeyByKYCApplicationID(ctx context.Context, in *KYCApplicationID, opts ...grpc.CallOption) (*Account, error)
 	Upsert(ctx context.Context, in *Account, opts ...grpc.CallOption) (*AccountID, error)
 	SetStatus(ctx context.Context, in *SetStatusMessage, opts ...grpc.CallOption) (*emptypb.Empty, error)
 }
@@ -53,9 +53,9 @@ func (c *accountServiceClient) Get(ctx context.Context, in *AccountID, opts ...g
 	return out, nil
 }
 
-func (c *accountServiceClient) GetByExternalUserID(ctx context.Context, in *ExternalUserID, opts ...grpc.CallOption) (*Account, error) {
+func (c *accountServiceClient) GeyByKYCApplicationID(ctx context.Context, in *KYCApplicationID, opts ...grpc.CallOption) (*Account, error) {
 	out := new(Account)
-	err := c.cc.Invoke(ctx, AccountService_GetByExternalUserID_FullMethodName, in, out, opts...)
+	err := c.cc.Invoke(ctx, AccountService_GeyByKYCApplicationID_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -85,7 +85,7 @@ func (c *accountServiceClient) SetStatus(ctx context.Context, in *SetStatusMessa
 // for forward compatibility
 type AccountServiceServer interface {
 	Get(context.Context, *AccountID) (*Account, error)
-	GetByExternalUserID(context.Context, *ExternalUserID) (*Account, error)
+	GeyByKYCApplicationID(context.Context, *KYCApplicationID) (*Account, error)
 	Upsert(context.Context, *Account) (*AccountID, error)
 	SetStatus(context.Context, *SetStatusMessage) (*emptypb.Empty, error)
 }
@@ -97,8 +97,8 @@ type UnimplementedAccountServiceServer struct {
 func (UnimplementedAccountServiceServer) Get(context.Context, *AccountID) (*Account, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Get not implemented")
 }
-func (UnimplementedAccountServiceServer) GetByExternalUserID(context.Context, *ExternalUserID) (*Account, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetByExternalUserID not implemented")
+func (UnimplementedAccountServiceServer) GeyByKYCApplicationID(context.Context, *KYCApplicationID) (*Account, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GeyByKYCApplicationID not implemented")
 }
 func (UnimplementedAccountServiceServer) Upsert(context.Context, *Account) (*AccountID, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Upsert not implemented")
@@ -136,20 +136,20 @@ func _AccountService_Get_Handler(srv interface{}, ctx context.Context, dec func(
 	return interceptor(ctx, in, info, handler)
 }
 
-func _AccountService_GetByExternalUserID_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ExternalUserID)
+func _AccountService_GeyByKYCApplicationID_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(KYCApplicationID)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(AccountServiceServer).GetByExternalUserID(ctx, in)
+		return srv.(AccountServiceServer).GeyByKYCApplicationID(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: AccountService_GetByExternalUserID_FullMethodName,
+		FullMethod: AccountService_GeyByKYCApplicationID_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AccountServiceServer).GetByExternalUserID(ctx, req.(*ExternalUserID))
+		return srv.(AccountServiceServer).GeyByKYCApplicationID(ctx, req.(*KYCApplicationID))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -202,8 +202,8 @@ var AccountService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _AccountService_Get_Handler,
 		},
 		{
-			MethodName: "GetByExternalUserID",
-			Handler:    _AccountService_GetByExternalUserID_Handler,
+			MethodName: "GeyByKYCApplicationID",
+			Handler:    _AccountService_GeyByKYCApplicationID_Handler,
 		},
 		{
 			MethodName: "Upsert",
