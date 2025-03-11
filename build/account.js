@@ -8,6 +8,7 @@ import _m0 from "protobufjs/minimal";
 import { Timestamp } from "./google/protobuf/timestamp";
 import { Audit } from "./sologenic/com-fs-utils-lib/models/audit/audit";
 import { MetaData, networkFromJSON, networkToJSON, } from "./sologenic/com-fs-utils-lib/models/metadata/metadata";
+import { roleFromJSON, roleToJSON } from "./sologenic/com-fs-utils-lib/models/role/role";
 export const protobufPackage = "account";
 export var EmploymentType;
 (function (EmploymentType) {
@@ -300,6 +301,7 @@ function createBaseAccountDetails() {
         ExternalUserID: "",
         OrganizationID: "",
         Employment: undefined,
+        Role: 0,
     };
 }
 export const AccountDetails = {
@@ -345,6 +347,9 @@ export const AccountDetails = {
         }
         if (message.Employment !== undefined) {
             Employment.encode(message.Employment, writer.uint32(114).fork()).ldelim();
+        }
+        if (message.Role !== 0) {
+            writer.uint32(120).int32(message.Role);
         }
         return writer;
     },
@@ -439,6 +444,12 @@ export const AccountDetails = {
                     }
                     message.Employment = Employment.decode(reader, reader.uint32());
                     continue;
+                case 15:
+                    if (tag !== 120) {
+                        break;
+                    }
+                    message.Role = reader.int32();
+                    continue;
             }
             if ((tag & 7) === 4 || tag === 0) {
                 break;
@@ -463,6 +474,7 @@ export const AccountDetails = {
             ExternalUserID: isSet(object.ExternalUserID) ? globalThis.String(object.ExternalUserID) : "",
             OrganizationID: isSet(object.OrganizationID) ? globalThis.String(object.OrganizationID) : "",
             Employment: isSet(object.Employment) ? Employment.fromJSON(object.Employment) : undefined,
+            Role: isSet(object.Role) ? roleFromJSON(object.Role) : 0,
         };
     },
     toJSON(message) {
@@ -510,13 +522,16 @@ export const AccountDetails = {
         if (message.Employment !== undefined) {
             obj.Employment = Employment.toJSON(message.Employment);
         }
+        if (message.Role !== 0) {
+            obj.Role = roleToJSON(message.Role);
+        }
         return obj;
     },
     create(base) {
         return AccountDetails.fromPartial(base !== null && base !== void 0 ? base : {});
     },
     fromPartial(object) {
-        var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m;
+        var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o;
         const message = createBaseAccountDetails();
         message.AccountID = (_a = object.AccountID) !== null && _a !== void 0 ? _a : "";
         message.FirstName = (_b = object.FirstName) !== null && _b !== void 0 ? _b : "";
@@ -536,6 +551,7 @@ export const AccountDetails = {
         message.Employment = (object.Employment !== undefined && object.Employment !== null)
             ? Employment.fromPartial(object.Employment)
             : undefined;
+        message.Role = (_o = object.Role) !== null && _o !== void 0 ? _o : 0;
         return message;
     },
 };

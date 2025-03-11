@@ -14,6 +14,7 @@ import {
   networkFromJSON,
   networkToJSON,
 } from "./sologenic/com-fs-utils-lib/models/metadata/metadata";
+import { Role, roleFromJSON, roleToJSON } from "./sologenic/com-fs-utils-lib/models/role/role";
 
 export const protobufPackage = "account";
 
@@ -322,7 +323,11 @@ export interface AccountDetails {
   ExternalUserID: string;
   /** UUID */
   OrganizationID: string;
-  Employment: Employment | undefined;
+  Employment:
+    | Employment
+    | undefined;
+  /** A retail user will always have a role of "NORMAL_USER" */
+  Role: Role;
 }
 
 /** TODO: to be verified when more information is available */
@@ -406,6 +411,7 @@ function createBaseAccountDetails(): AccountDetails {
     ExternalUserID: "",
     OrganizationID: "",
     Employment: undefined,
+    Role: 0,
   };
 }
 
@@ -452,6 +458,9 @@ export const AccountDetails = {
     }
     if (message.Employment !== undefined) {
       Employment.encode(message.Employment, writer.uint32(114).fork()).ldelim();
+    }
+    if (message.Role !== 0) {
+      writer.uint32(120).int32(message.Role);
     }
     return writer;
   },
@@ -561,6 +570,13 @@ export const AccountDetails = {
 
           message.Employment = Employment.decode(reader, reader.uint32());
           continue;
+        case 15:
+          if (tag !== 120) {
+            break;
+          }
+
+          message.Role = reader.int32() as any;
+          continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -586,6 +602,7 @@ export const AccountDetails = {
       ExternalUserID: isSet(object.ExternalUserID) ? globalThis.String(object.ExternalUserID) : "",
       OrganizationID: isSet(object.OrganizationID) ? globalThis.String(object.OrganizationID) : "",
       Employment: isSet(object.Employment) ? Employment.fromJSON(object.Employment) : undefined,
+      Role: isSet(object.Role) ? roleFromJSON(object.Role) : 0,
     };
   },
 
@@ -633,6 +650,9 @@ export const AccountDetails = {
     if (message.Employment !== undefined) {
       obj.Employment = Employment.toJSON(message.Employment);
     }
+    if (message.Role !== 0) {
+      obj.Role = roleToJSON(message.Role);
+    }
     return obj;
   },
 
@@ -659,6 +679,7 @@ export const AccountDetails = {
     message.Employment = (object.Employment !== undefined && object.Employment !== null)
       ? Employment.fromPartial(object.Employment)
       : undefined;
+    message.Role = object.Role ?? 0;
     return message;
   },
 };

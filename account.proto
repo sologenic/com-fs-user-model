@@ -7,6 +7,7 @@ option go_package = "github.com/sologenic/com-fs-account-model;account";
 import "google/protobuf/timestamp.proto";
 import "sologenic/com-fs-utils-lib/models/metadata/metadata.proto";
 import "sologenic/com-fs-utils-lib/models/audit/audit.proto";
+import "sologenic/com-fs-utils-lib/models/role/role.proto";
 
 message AccountDetails {
     string AccountID = 1; // email address used for firebase authentication
@@ -23,6 +24,7 @@ message AccountDetails {
     string ExternalUserID = 12; // UUID for the external user identifier in the KYC provider
     string OrganizationID = 13; // UUID
     Employment Employment = 14;
+    role.Role Role = 15; // A retail user will always have a role of "NORMAL_USER"
 }
 
 // TODO: to be verified when more information is available

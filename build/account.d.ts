@@ -1,6 +1,7 @@
 import _m0 from "protobufjs/minimal";
 import { Audit } from "./sologenic/com-fs-utils-lib/models/audit/audit";
 import { MetaData, Network } from "./sologenic/com-fs-utils-lib/models/metadata/metadata";
+import { Role } from "./sologenic/com-fs-utils-lib/models/role/role";
 export declare const protobufPackage = "account";
 export declare enum EmploymentType {
     NOT_USED_EMPLOYMENTTYPE = 0,
@@ -76,6 +77,8 @@ export interface AccountDetails {
     /** UUID */
     OrganizationID: string;
     Employment: Employment | undefined;
+    /** A retail user will always have a role of "NORMAL_USER" */
+    Role: Role;
 }
 /** TODO: to be verified when more information is available */
 export interface Employment {
@@ -183,6 +186,7 @@ export declare const AccountDetails: {
             IsVerified?: boolean | undefined;
             VerifiedAt?: string | undefined;
         } | undefined;
+        Role?: Role | undefined;
     } & {
         AccountID?: string | undefined;
         FirstName?: string | undefined;
@@ -285,6 +289,7 @@ export declare const AccountDetails: {
             IsVerified?: boolean | undefined;
             VerifiedAt?: string | undefined;
         } & { [K_7 in Exclude<keyof I["Employment"], keyof Employment>]: never; }) | undefined;
+        Role?: Role | undefined;
     } & { [K_8 in Exclude<keyof I, keyof AccountDetails>]: never; }>(base?: I | undefined): AccountDetails;
     fromPartial<I_1 extends {
         AccountID?: string | undefined;
@@ -333,6 +338,7 @@ export declare const AccountDetails: {
             IsVerified?: boolean | undefined;
             VerifiedAt?: string | undefined;
         } | undefined;
+        Role?: Role | undefined;
     } & {
         AccountID?: string | undefined;
         FirstName?: string | undefined;
@@ -435,6 +441,7 @@ export declare const AccountDetails: {
             IsVerified?: boolean | undefined;
             VerifiedAt?: string | undefined;
         } & { [K_16 in Exclude<keyof I_1["Employment"], keyof Employment>]: never; }) | undefined;
+        Role?: Role | undefined;
     } & { [K_17 in Exclude<keyof I_1, keyof AccountDetails>]: never; }>(object: I_1): AccountDetails;
 };
 export declare const Employment: {
@@ -648,6 +655,7 @@ export declare const Account: {
                 IsVerified?: boolean | undefined;
                 VerifiedAt?: string | undefined;
             } | undefined;
+            Role?: Role | undefined;
         } | undefined;
         MetaData?: {
             Network?: Network | undefined;
@@ -708,6 +716,7 @@ export declare const Account: {
                 IsVerified?: boolean | undefined;
                 VerifiedAt?: string | undefined;
             } | undefined;
+            Role?: Role | undefined;
         } & {
             AccountID?: string | undefined;
             FirstName?: string | undefined;
@@ -810,6 +819,7 @@ export declare const Account: {
                 IsVerified?: boolean | undefined;
                 VerifiedAt?: string | undefined;
             } & { [K_7 in Exclude<keyof I["Account"]["Employment"], keyof Employment>]: never; }) | undefined;
+            Role?: Role | undefined;
         } & { [K_8 in Exclude<keyof I["Account"], keyof AccountDetails>]: never; }) | undefined;
         MetaData?: ({
             Network?: Network | undefined;
@@ -880,6 +890,7 @@ export declare const Account: {
                 IsVerified?: boolean | undefined;
                 VerifiedAt?: string | undefined;
             } | undefined;
+            Role?: Role | undefined;
         } | undefined;
         MetaData?: {
             Network?: Network | undefined;
@@ -940,6 +951,7 @@ export declare const Account: {
                 IsVerified?: boolean | undefined;
                 VerifiedAt?: string | undefined;
             } | undefined;
+            Role?: Role | undefined;
         } & {
             AccountID?: string | undefined;
             FirstName?: string | undefined;
@@ -1042,6 +1054,7 @@ export declare const Account: {
                 IsVerified?: boolean | undefined;
                 VerifiedAt?: string | undefined;
             } & { [K_19 in Exclude<keyof I_1["Account"]["Employment"], keyof Employment>]: never; }) | undefined;
+            Role?: Role | undefined;
         } & { [K_20 in Exclude<keyof I_1["Account"], keyof AccountDetails>]: never; }) | undefined;
         MetaData?: ({
             Network?: Network | undefined;
@@ -1139,6 +1152,7 @@ export declare const Accounts: {
                     IsVerified?: boolean | undefined;
                     VerifiedAt?: string | undefined;
                 } | undefined;
+                Role?: Role | undefined;
             } | undefined;
             MetaData?: {
                 Network?: Network | undefined;
@@ -1202,6 +1216,7 @@ export declare const Accounts: {
                     IsVerified?: boolean | undefined;
                     VerifiedAt?: string | undefined;
                 } | undefined;
+                Role?: Role | undefined;
             } | undefined;
             MetaData?: {
                 Network?: Network | undefined;
@@ -1262,6 +1277,7 @@ export declare const Accounts: {
                     IsVerified?: boolean | undefined;
                     VerifiedAt?: string | undefined;
                 } | undefined;
+                Role?: Role | undefined;
             } | undefined;
             MetaData?: {
                 Network?: Network | undefined;
@@ -1322,6 +1338,7 @@ export declare const Accounts: {
                     IsVerified?: boolean | undefined;
                     VerifiedAt?: string | undefined;
                 } | undefined;
+                Role?: Role | undefined;
             } & {
                 AccountID?: string | undefined;
                 FirstName?: string | undefined;
@@ -1424,6 +1441,7 @@ export declare const Accounts: {
                     IsVerified?: boolean | undefined;
                     VerifiedAt?: string | undefined;
                 } & { [K_7 in Exclude<keyof I["Accounts"][number]["Account"]["Employment"], keyof Employment>]: never; }) | undefined;
+                Role?: Role | undefined;
             } & { [K_8 in Exclude<keyof I["Accounts"][number]["Account"], keyof AccountDetails>]: never; }) | undefined;
             MetaData?: ({
                 Network?: Network | undefined;
@@ -1493,6 +1511,7 @@ export declare const Accounts: {
                     IsVerified?: boolean | undefined;
                     VerifiedAt?: string | undefined;
                 } | undefined;
+                Role?: Role | undefined;
             } | undefined;
             MetaData?: {
                 Network?: Network | undefined;
@@ -1557,6 +1576,7 @@ export declare const Accounts: {
                     IsVerified?: boolean | undefined;
                     VerifiedAt?: string | undefined;
                 } | undefined;
+                Role?: Role | undefined;
             } | undefined;
             MetaData?: {
                 Network?: Network | undefined;
@@ -1620,6 +1640,7 @@ export declare const Accounts: {
                     IsVerified?: boolean | undefined;
                     VerifiedAt?: string | undefined;
                 } | undefined;
+                Role?: Role | undefined;
             } | undefined;
             MetaData?: {
                 Network?: Network | undefined;
@@ -1680,6 +1701,7 @@ export declare const Accounts: {
                     IsVerified?: boolean | undefined;
                     VerifiedAt?: string | undefined;
                 } | undefined;
+                Role?: Role | undefined;
             } | undefined;
             MetaData?: {
                 Network?: Network | undefined;
@@ -1740,6 +1762,7 @@ export declare const Accounts: {
                     IsVerified?: boolean | undefined;
                     VerifiedAt?: string | undefined;
                 } | undefined;
+                Role?: Role | undefined;
             } & {
                 AccountID?: string | undefined;
                 FirstName?: string | undefined;
@@ -1842,6 +1865,7 @@ export declare const Accounts: {
                     IsVerified?: boolean | undefined;
                     VerifiedAt?: string | undefined;
                 } & { [K_21 in Exclude<keyof I_1["Accounts"][number]["Account"]["Employment"], keyof Employment>]: never; }) | undefined;
+                Role?: Role | undefined;
             } & { [K_22 in Exclude<keyof I_1["Accounts"][number]["Account"], keyof AccountDetails>]: never; }) | undefined;
             MetaData?: ({
                 Network?: Network | undefined;
@@ -1911,6 +1935,7 @@ export declare const Accounts: {
                     IsVerified?: boolean | undefined;
                     VerifiedAt?: string | undefined;
                 } | undefined;
+                Role?: Role | undefined;
             } | undefined;
             MetaData?: {
                 Network?: Network | undefined;
