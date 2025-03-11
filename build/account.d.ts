@@ -2,6 +2,29 @@ import _m0 from "protobufjs/minimal";
 import { Audit } from "./sologenic/com-fs-utils-lib/models/audit/audit";
 import { MetaData, Network } from "./sologenic/com-fs-utils-lib/models/metadata/metadata";
 export declare const protobufPackage = "account";
+export declare enum EmploymentType {
+    NOT_USED_EMPLOYMENTTYPE = 0,
+    FULL_TIME = 1,
+    PART_TIME = 2,
+    CONTRACT = 3,
+    FREELANCE = 4,
+    SELF_EMPLOYED = 5,
+    INTERNSHIP = 6,
+    UNRECOGNIZED = -1
+}
+export declare function employmentTypeFromJSON(object: any): EmploymentType;
+export declare function employmentTypeToJSON(object: EmploymentType): string;
+export declare enum IncomeFrequency {
+    NOT_USED_INCOMEFREQUENCY = 0,
+    HOURLY = 1,
+    WEEKLY = 2,
+    BI_WEEKLY = 3,
+    MONTHLY = 4,
+    ANNUALLY = 5,
+    UNRECOGNIZED = -1
+}
+export declare function incomeFrequencyFromJSON(object: any): IncomeFrequency;
+export declare function incomeFrequencyToJSON(object: IncomeFrequency): string;
 export declare enum UserStatus {
     NOT_USED_USERSTATUS = 0,
     ACTIVE = 1,
@@ -52,6 +75,32 @@ export interface AccountDetails {
     ExternalUserID: string;
     /** UUID */
     OrganizationID: string;
+    Employment: Employment | undefined;
+}
+/** TODO: to be verified once we have more information */
+export interface Employment {
+    EmployerName: string;
+    JobTitle: string;
+    StartDate: Date | undefined;
+    /** Empty if still employed */
+    EndDate: Date | undefined;
+    Type: EmploymentType;
+    Industry?: string | undefined;
+    Income: Income | undefined;
+    Contact: EmployerContact | undefined;
+    IsVerified: boolean;
+    VerifiedAt: string;
+}
+export interface Income {
+    Amount: number;
+    Currency: string;
+    Frequency: IncomeFrequency;
+}
+export interface EmployerContact {
+    Name: string;
+    Email: string;
+    Phone: string;
+    Address: string;
 }
 export interface Account {
     Account: AccountDetails | undefined;
@@ -113,6 +162,27 @@ export declare const AccountDetails: {
         } | undefined;
         ExternalUserID?: string | undefined;
         OrganizationID?: string | undefined;
+        Employment?: {
+            EmployerName?: string | undefined;
+            JobTitle?: string | undefined;
+            StartDate?: Date | undefined;
+            EndDate?: Date | undefined;
+            Type?: EmploymentType | undefined;
+            Industry?: string | undefined;
+            Income?: {
+                Amount?: number | undefined;
+                Currency?: string | undefined;
+                Frequency?: IncomeFrequency | undefined;
+            } | undefined;
+            Contact?: {
+                Name?: string | undefined;
+                Email?: string | undefined;
+                Phone?: string | undefined;
+                Address?: string | undefined;
+            } | undefined;
+            IsVerified?: boolean | undefined;
+            VerifiedAt?: string | undefined;
+        } | undefined;
     } & {
         AccountID?: string | undefined;
         FirstName?: string | undefined;
@@ -165,7 +235,57 @@ export declare const AccountDetails: {
         } & { [K_4 in Exclude<keyof I["Language"], keyof Language>]: never; }) | undefined;
         ExternalUserID?: string | undefined;
         OrganizationID?: string | undefined;
-    } & { [K_5 in Exclude<keyof I, keyof AccountDetails>]: never; }>(base?: I | undefined): AccountDetails;
+        Employment?: ({
+            EmployerName?: string | undefined;
+            JobTitle?: string | undefined;
+            StartDate?: Date | undefined;
+            EndDate?: Date | undefined;
+            Type?: EmploymentType | undefined;
+            Industry?: string | undefined;
+            Income?: {
+                Amount?: number | undefined;
+                Currency?: string | undefined;
+                Frequency?: IncomeFrequency | undefined;
+            } | undefined;
+            Contact?: {
+                Name?: string | undefined;
+                Email?: string | undefined;
+                Phone?: string | undefined;
+                Address?: string | undefined;
+            } | undefined;
+            IsVerified?: boolean | undefined;
+            VerifiedAt?: string | undefined;
+        } & {
+            EmployerName?: string | undefined;
+            JobTitle?: string | undefined;
+            StartDate?: Date | undefined;
+            EndDate?: Date | undefined;
+            Type?: EmploymentType | undefined;
+            Industry?: string | undefined;
+            Income?: ({
+                Amount?: number | undefined;
+                Currency?: string | undefined;
+                Frequency?: IncomeFrequency | undefined;
+            } & {
+                Amount?: number | undefined;
+                Currency?: string | undefined;
+                Frequency?: IncomeFrequency | undefined;
+            } & { [K_5 in Exclude<keyof I["Employment"]["Income"], keyof Income>]: never; }) | undefined;
+            Contact?: ({
+                Name?: string | undefined;
+                Email?: string | undefined;
+                Phone?: string | undefined;
+                Address?: string | undefined;
+            } & {
+                Name?: string | undefined;
+                Email?: string | undefined;
+                Phone?: string | undefined;
+                Address?: string | undefined;
+            } & { [K_6 in Exclude<keyof I["Employment"]["Contact"], keyof EmployerContact>]: never; }) | undefined;
+            IsVerified?: boolean | undefined;
+            VerifiedAt?: string | undefined;
+        } & { [K_7 in Exclude<keyof I["Employment"], keyof Employment>]: never; }) | undefined;
+    } & { [K_8 in Exclude<keyof I, keyof AccountDetails>]: never; }>(base?: I | undefined): AccountDetails;
     fromPartial<I_1 extends {
         AccountID?: string | undefined;
         FirstName?: string | undefined;
@@ -192,6 +312,27 @@ export declare const AccountDetails: {
         } | undefined;
         ExternalUserID?: string | undefined;
         OrganizationID?: string | undefined;
+        Employment?: {
+            EmployerName?: string | undefined;
+            JobTitle?: string | undefined;
+            StartDate?: Date | undefined;
+            EndDate?: Date | undefined;
+            Type?: EmploymentType | undefined;
+            Industry?: string | undefined;
+            Income?: {
+                Amount?: number | undefined;
+                Currency?: string | undefined;
+                Frequency?: IncomeFrequency | undefined;
+            } | undefined;
+            Contact?: {
+                Name?: string | undefined;
+                Email?: string | undefined;
+                Phone?: string | undefined;
+                Address?: string | undefined;
+            } | undefined;
+            IsVerified?: boolean | undefined;
+            VerifiedAt?: string | undefined;
+        } | undefined;
     } & {
         AccountID?: string | undefined;
         FirstName?: string | undefined;
@@ -213,7 +354,7 @@ export declare const AccountDetails: {
             Address?: string | undefined;
             Alias?: string | undefined;
             Type?: WalletType | undefined;
-        } & { [K_6 in Exclude<keyof I_1["Wallets"][number], keyof Wallet>]: never; })[] & { [K_7 in Exclude<keyof I_1["Wallets"], keyof {
+        } & { [K_9 in Exclude<keyof I_1["Wallets"][number], keyof Wallet>]: never; })[] & { [K_10 in Exclude<keyof I_1["Wallets"], keyof {
             Address?: string | undefined;
             Alias?: string | undefined;
             Type?: WalletType | undefined;
@@ -227,7 +368,7 @@ export declare const AccountDetails: {
         } & {
             URL?: string | undefined;
             Type?: SocialType | undefined;
-        } & { [K_8 in Exclude<keyof I_1["Socials"][number], keyof Social>]: never; })[] & { [K_9 in Exclude<keyof I_1["Socials"], keyof {
+        } & { [K_11 in Exclude<keyof I_1["Socials"][number], keyof Social>]: never; })[] & { [K_12 in Exclude<keyof I_1["Socials"], keyof {
             URL?: string | undefined;
             Type?: SocialType | undefined;
         }[]>]: never; }) | undefined;
@@ -241,10 +382,218 @@ export declare const AccountDetails: {
             Language?: string | undefined;
             UserConfigured?: boolean | undefined;
             Network?: string | undefined;
-        } & { [K_10 in Exclude<keyof I_1["Language"], keyof Language>]: never; }) | undefined;
+        } & { [K_13 in Exclude<keyof I_1["Language"], keyof Language>]: never; }) | undefined;
         ExternalUserID?: string | undefined;
         OrganizationID?: string | undefined;
-    } & { [K_11 in Exclude<keyof I_1, keyof AccountDetails>]: never; }>(object: I_1): AccountDetails;
+        Employment?: ({
+            EmployerName?: string | undefined;
+            JobTitle?: string | undefined;
+            StartDate?: Date | undefined;
+            EndDate?: Date | undefined;
+            Type?: EmploymentType | undefined;
+            Industry?: string | undefined;
+            Income?: {
+                Amount?: number | undefined;
+                Currency?: string | undefined;
+                Frequency?: IncomeFrequency | undefined;
+            } | undefined;
+            Contact?: {
+                Name?: string | undefined;
+                Email?: string | undefined;
+                Phone?: string | undefined;
+                Address?: string | undefined;
+            } | undefined;
+            IsVerified?: boolean | undefined;
+            VerifiedAt?: string | undefined;
+        } & {
+            EmployerName?: string | undefined;
+            JobTitle?: string | undefined;
+            StartDate?: Date | undefined;
+            EndDate?: Date | undefined;
+            Type?: EmploymentType | undefined;
+            Industry?: string | undefined;
+            Income?: ({
+                Amount?: number | undefined;
+                Currency?: string | undefined;
+                Frequency?: IncomeFrequency | undefined;
+            } & {
+                Amount?: number | undefined;
+                Currency?: string | undefined;
+                Frequency?: IncomeFrequency | undefined;
+            } & { [K_14 in Exclude<keyof I_1["Employment"]["Income"], keyof Income>]: never; }) | undefined;
+            Contact?: ({
+                Name?: string | undefined;
+                Email?: string | undefined;
+                Phone?: string | undefined;
+                Address?: string | undefined;
+            } & {
+                Name?: string | undefined;
+                Email?: string | undefined;
+                Phone?: string | undefined;
+                Address?: string | undefined;
+            } & { [K_15 in Exclude<keyof I_1["Employment"]["Contact"], keyof EmployerContact>]: never; }) | undefined;
+            IsVerified?: boolean | undefined;
+            VerifiedAt?: string | undefined;
+        } & { [K_16 in Exclude<keyof I_1["Employment"], keyof Employment>]: never; }) | undefined;
+    } & { [K_17 in Exclude<keyof I_1, keyof AccountDetails>]: never; }>(object: I_1): AccountDetails;
+};
+export declare const Employment: {
+    encode(message: Employment, writer?: _m0.Writer): _m0.Writer;
+    decode(input: _m0.Reader | Uint8Array, length?: number): Employment;
+    fromJSON(object: any): Employment;
+    toJSON(message: Employment): unknown;
+    create<I extends {
+        EmployerName?: string | undefined;
+        JobTitle?: string | undefined;
+        StartDate?: Date | undefined;
+        EndDate?: Date | undefined;
+        Type?: EmploymentType | undefined;
+        Industry?: string | undefined;
+        Income?: {
+            Amount?: number | undefined;
+            Currency?: string | undefined;
+            Frequency?: IncomeFrequency | undefined;
+        } | undefined;
+        Contact?: {
+            Name?: string | undefined;
+            Email?: string | undefined;
+            Phone?: string | undefined;
+            Address?: string | undefined;
+        } | undefined;
+        IsVerified?: boolean | undefined;
+        VerifiedAt?: string | undefined;
+    } & {
+        EmployerName?: string | undefined;
+        JobTitle?: string | undefined;
+        StartDate?: Date | undefined;
+        EndDate?: Date | undefined;
+        Type?: EmploymentType | undefined;
+        Industry?: string | undefined;
+        Income?: ({
+            Amount?: number | undefined;
+            Currency?: string | undefined;
+            Frequency?: IncomeFrequency | undefined;
+        } & {
+            Amount?: number | undefined;
+            Currency?: string | undefined;
+            Frequency?: IncomeFrequency | undefined;
+        } & { [K in Exclude<keyof I["Income"], keyof Income>]: never; }) | undefined;
+        Contact?: ({
+            Name?: string | undefined;
+            Email?: string | undefined;
+            Phone?: string | undefined;
+            Address?: string | undefined;
+        } & {
+            Name?: string | undefined;
+            Email?: string | undefined;
+            Phone?: string | undefined;
+            Address?: string | undefined;
+        } & { [K_1 in Exclude<keyof I["Contact"], keyof EmployerContact>]: never; }) | undefined;
+        IsVerified?: boolean | undefined;
+        VerifiedAt?: string | undefined;
+    } & { [K_2 in Exclude<keyof I, keyof Employment>]: never; }>(base?: I | undefined): Employment;
+    fromPartial<I_1 extends {
+        EmployerName?: string | undefined;
+        JobTitle?: string | undefined;
+        StartDate?: Date | undefined;
+        EndDate?: Date | undefined;
+        Type?: EmploymentType | undefined;
+        Industry?: string | undefined;
+        Income?: {
+            Amount?: number | undefined;
+            Currency?: string | undefined;
+            Frequency?: IncomeFrequency | undefined;
+        } | undefined;
+        Contact?: {
+            Name?: string | undefined;
+            Email?: string | undefined;
+            Phone?: string | undefined;
+            Address?: string | undefined;
+        } | undefined;
+        IsVerified?: boolean | undefined;
+        VerifiedAt?: string | undefined;
+    } & {
+        EmployerName?: string | undefined;
+        JobTitle?: string | undefined;
+        StartDate?: Date | undefined;
+        EndDate?: Date | undefined;
+        Type?: EmploymentType | undefined;
+        Industry?: string | undefined;
+        Income?: ({
+            Amount?: number | undefined;
+            Currency?: string | undefined;
+            Frequency?: IncomeFrequency | undefined;
+        } & {
+            Amount?: number | undefined;
+            Currency?: string | undefined;
+            Frequency?: IncomeFrequency | undefined;
+        } & { [K_3 in Exclude<keyof I_1["Income"], keyof Income>]: never; }) | undefined;
+        Contact?: ({
+            Name?: string | undefined;
+            Email?: string | undefined;
+            Phone?: string | undefined;
+            Address?: string | undefined;
+        } & {
+            Name?: string | undefined;
+            Email?: string | undefined;
+            Phone?: string | undefined;
+            Address?: string | undefined;
+        } & { [K_4 in Exclude<keyof I_1["Contact"], keyof EmployerContact>]: never; }) | undefined;
+        IsVerified?: boolean | undefined;
+        VerifiedAt?: string | undefined;
+    } & { [K_5 in Exclude<keyof I_1, keyof Employment>]: never; }>(object: I_1): Employment;
+};
+export declare const Income: {
+    encode(message: Income, writer?: _m0.Writer): _m0.Writer;
+    decode(input: _m0.Reader | Uint8Array, length?: number): Income;
+    fromJSON(object: any): Income;
+    toJSON(message: Income): unknown;
+    create<I extends {
+        Amount?: number | undefined;
+        Currency?: string | undefined;
+        Frequency?: IncomeFrequency | undefined;
+    } & {
+        Amount?: number | undefined;
+        Currency?: string | undefined;
+        Frequency?: IncomeFrequency | undefined;
+    } & { [K in Exclude<keyof I, keyof Income>]: never; }>(base?: I | undefined): Income;
+    fromPartial<I_1 extends {
+        Amount?: number | undefined;
+        Currency?: string | undefined;
+        Frequency?: IncomeFrequency | undefined;
+    } & {
+        Amount?: number | undefined;
+        Currency?: string | undefined;
+        Frequency?: IncomeFrequency | undefined;
+    } & { [K_1 in Exclude<keyof I_1, keyof Income>]: never; }>(object: I_1): Income;
+};
+export declare const EmployerContact: {
+    encode(message: EmployerContact, writer?: _m0.Writer): _m0.Writer;
+    decode(input: _m0.Reader | Uint8Array, length?: number): EmployerContact;
+    fromJSON(object: any): EmployerContact;
+    toJSON(message: EmployerContact): unknown;
+    create<I extends {
+        Name?: string | undefined;
+        Email?: string | undefined;
+        Phone?: string | undefined;
+        Address?: string | undefined;
+    } & {
+        Name?: string | undefined;
+        Email?: string | undefined;
+        Phone?: string | undefined;
+        Address?: string | undefined;
+    } & { [K in Exclude<keyof I, keyof EmployerContact>]: never; }>(base?: I | undefined): EmployerContact;
+    fromPartial<I_1 extends {
+        Name?: string | undefined;
+        Email?: string | undefined;
+        Phone?: string | undefined;
+        Address?: string | undefined;
+    } & {
+        Name?: string | undefined;
+        Email?: string | undefined;
+        Phone?: string | undefined;
+        Address?: string | undefined;
+    } & { [K_1 in Exclude<keyof I_1, keyof EmployerContact>]: never; }>(object: I_1): EmployerContact;
 };
 export declare const Account: {
     encode(message: Account, writer?: _m0.Writer): _m0.Writer;
@@ -278,6 +627,27 @@ export declare const Account: {
             } | undefined;
             ExternalUserID?: string | undefined;
             OrganizationID?: string | undefined;
+            Employment?: {
+                EmployerName?: string | undefined;
+                JobTitle?: string | undefined;
+                StartDate?: Date | undefined;
+                EndDate?: Date | undefined;
+                Type?: EmploymentType | undefined;
+                Industry?: string | undefined;
+                Income?: {
+                    Amount?: number | undefined;
+                    Currency?: string | undefined;
+                    Frequency?: IncomeFrequency | undefined;
+                } | undefined;
+                Contact?: {
+                    Name?: string | undefined;
+                    Email?: string | undefined;
+                    Phone?: string | undefined;
+                    Address?: string | undefined;
+                } | undefined;
+                IsVerified?: boolean | undefined;
+                VerifiedAt?: string | undefined;
+            } | undefined;
         } | undefined;
         MetaData?: {
             Network?: Network | undefined;
@@ -317,6 +687,27 @@ export declare const Account: {
             } | undefined;
             ExternalUserID?: string | undefined;
             OrganizationID?: string | undefined;
+            Employment?: {
+                EmployerName?: string | undefined;
+                JobTitle?: string | undefined;
+                StartDate?: Date | undefined;
+                EndDate?: Date | undefined;
+                Type?: EmploymentType | undefined;
+                Industry?: string | undefined;
+                Income?: {
+                    Amount?: number | undefined;
+                    Currency?: string | undefined;
+                    Frequency?: IncomeFrequency | undefined;
+                } | undefined;
+                Contact?: {
+                    Name?: string | undefined;
+                    Email?: string | undefined;
+                    Phone?: string | undefined;
+                    Address?: string | undefined;
+                } | undefined;
+                IsVerified?: boolean | undefined;
+                VerifiedAt?: string | undefined;
+            } | undefined;
         } & {
             AccountID?: string | undefined;
             FirstName?: string | undefined;
@@ -369,7 +760,57 @@ export declare const Account: {
             } & { [K_4 in Exclude<keyof I["Account"]["Language"], keyof Language>]: never; }) | undefined;
             ExternalUserID?: string | undefined;
             OrganizationID?: string | undefined;
-        } & { [K_5 in Exclude<keyof I["Account"], keyof AccountDetails>]: never; }) | undefined;
+            Employment?: ({
+                EmployerName?: string | undefined;
+                JobTitle?: string | undefined;
+                StartDate?: Date | undefined;
+                EndDate?: Date | undefined;
+                Type?: EmploymentType | undefined;
+                Industry?: string | undefined;
+                Income?: {
+                    Amount?: number | undefined;
+                    Currency?: string | undefined;
+                    Frequency?: IncomeFrequency | undefined;
+                } | undefined;
+                Contact?: {
+                    Name?: string | undefined;
+                    Email?: string | undefined;
+                    Phone?: string | undefined;
+                    Address?: string | undefined;
+                } | undefined;
+                IsVerified?: boolean | undefined;
+                VerifiedAt?: string | undefined;
+            } & {
+                EmployerName?: string | undefined;
+                JobTitle?: string | undefined;
+                StartDate?: Date | undefined;
+                EndDate?: Date | undefined;
+                Type?: EmploymentType | undefined;
+                Industry?: string | undefined;
+                Income?: ({
+                    Amount?: number | undefined;
+                    Currency?: string | undefined;
+                    Frequency?: IncomeFrequency | undefined;
+                } & {
+                    Amount?: number | undefined;
+                    Currency?: string | undefined;
+                    Frequency?: IncomeFrequency | undefined;
+                } & { [K_5 in Exclude<keyof I["Account"]["Employment"]["Income"], keyof Income>]: never; }) | undefined;
+                Contact?: ({
+                    Name?: string | undefined;
+                    Email?: string | undefined;
+                    Phone?: string | undefined;
+                    Address?: string | undefined;
+                } & {
+                    Name?: string | undefined;
+                    Email?: string | undefined;
+                    Phone?: string | undefined;
+                    Address?: string | undefined;
+                } & { [K_6 in Exclude<keyof I["Account"]["Employment"]["Contact"], keyof EmployerContact>]: never; }) | undefined;
+                IsVerified?: boolean | undefined;
+                VerifiedAt?: string | undefined;
+            } & { [K_7 in Exclude<keyof I["Account"]["Employment"], keyof Employment>]: never; }) | undefined;
+        } & { [K_8 in Exclude<keyof I["Account"], keyof AccountDetails>]: never; }) | undefined;
         MetaData?: ({
             Network?: Network | undefined;
             UpdatedAt?: Date | undefined;
@@ -380,7 +821,7 @@ export declare const Account: {
             UpdatedAt?: Date | undefined;
             CreatedAt?: Date | undefined;
             UpdatedByAccount?: string | undefined;
-        } & { [K_6 in Exclude<keyof I["MetaData"], keyof MetaData>]: never; }) | undefined;
+        } & { [K_9 in Exclude<keyof I["MetaData"], keyof MetaData>]: never; }) | undefined;
         Audit?: ({
             ChangedBy?: string | undefined;
             ChangedAt?: Date | undefined;
@@ -389,8 +830,8 @@ export declare const Account: {
             ChangedBy?: string | undefined;
             ChangedAt?: Date | undefined;
             Reason?: string | undefined;
-        } & { [K_7 in Exclude<keyof I["Audit"], keyof Audit>]: never; }) | undefined;
-    } & { [K_8 in Exclude<keyof I, keyof Account>]: never; }>(base?: I | undefined): Account;
+        } & { [K_10 in Exclude<keyof I["Audit"], keyof Audit>]: never; }) | undefined;
+    } & { [K_11 in Exclude<keyof I, keyof Account>]: never; }>(base?: I | undefined): Account;
     fromPartial<I_1 extends {
         Account?: {
             AccountID?: string | undefined;
@@ -418,6 +859,27 @@ export declare const Account: {
             } | undefined;
             ExternalUserID?: string | undefined;
             OrganizationID?: string | undefined;
+            Employment?: {
+                EmployerName?: string | undefined;
+                JobTitle?: string | undefined;
+                StartDate?: Date | undefined;
+                EndDate?: Date | undefined;
+                Type?: EmploymentType | undefined;
+                Industry?: string | undefined;
+                Income?: {
+                    Amount?: number | undefined;
+                    Currency?: string | undefined;
+                    Frequency?: IncomeFrequency | undefined;
+                } | undefined;
+                Contact?: {
+                    Name?: string | undefined;
+                    Email?: string | undefined;
+                    Phone?: string | undefined;
+                    Address?: string | undefined;
+                } | undefined;
+                IsVerified?: boolean | undefined;
+                VerifiedAt?: string | undefined;
+            } | undefined;
         } | undefined;
         MetaData?: {
             Network?: Network | undefined;
@@ -457,6 +919,27 @@ export declare const Account: {
             } | undefined;
             ExternalUserID?: string | undefined;
             OrganizationID?: string | undefined;
+            Employment?: {
+                EmployerName?: string | undefined;
+                JobTitle?: string | undefined;
+                StartDate?: Date | undefined;
+                EndDate?: Date | undefined;
+                Type?: EmploymentType | undefined;
+                Industry?: string | undefined;
+                Income?: {
+                    Amount?: number | undefined;
+                    Currency?: string | undefined;
+                    Frequency?: IncomeFrequency | undefined;
+                } | undefined;
+                Contact?: {
+                    Name?: string | undefined;
+                    Email?: string | undefined;
+                    Phone?: string | undefined;
+                    Address?: string | undefined;
+                } | undefined;
+                IsVerified?: boolean | undefined;
+                VerifiedAt?: string | undefined;
+            } | undefined;
         } & {
             AccountID?: string | undefined;
             FirstName?: string | undefined;
@@ -478,7 +961,7 @@ export declare const Account: {
                 Address?: string | undefined;
                 Alias?: string | undefined;
                 Type?: WalletType | undefined;
-            } & { [K_9 in Exclude<keyof I_1["Account"]["Wallets"][number], keyof Wallet>]: never; })[] & { [K_10 in Exclude<keyof I_1["Account"]["Wallets"], keyof {
+            } & { [K_12 in Exclude<keyof I_1["Account"]["Wallets"][number], keyof Wallet>]: never; })[] & { [K_13 in Exclude<keyof I_1["Account"]["Wallets"], keyof {
                 Address?: string | undefined;
                 Alias?: string | undefined;
                 Type?: WalletType | undefined;
@@ -492,7 +975,7 @@ export declare const Account: {
             } & {
                 URL?: string | undefined;
                 Type?: SocialType | undefined;
-            } & { [K_11 in Exclude<keyof I_1["Account"]["Socials"][number], keyof Social>]: never; })[] & { [K_12 in Exclude<keyof I_1["Account"]["Socials"], keyof {
+            } & { [K_14 in Exclude<keyof I_1["Account"]["Socials"][number], keyof Social>]: never; })[] & { [K_15 in Exclude<keyof I_1["Account"]["Socials"], keyof {
                 URL?: string | undefined;
                 Type?: SocialType | undefined;
             }[]>]: never; }) | undefined;
@@ -506,10 +989,60 @@ export declare const Account: {
                 Language?: string | undefined;
                 UserConfigured?: boolean | undefined;
                 Network?: string | undefined;
-            } & { [K_13 in Exclude<keyof I_1["Account"]["Language"], keyof Language>]: never; }) | undefined;
+            } & { [K_16 in Exclude<keyof I_1["Account"]["Language"], keyof Language>]: never; }) | undefined;
             ExternalUserID?: string | undefined;
             OrganizationID?: string | undefined;
-        } & { [K_14 in Exclude<keyof I_1["Account"], keyof AccountDetails>]: never; }) | undefined;
+            Employment?: ({
+                EmployerName?: string | undefined;
+                JobTitle?: string | undefined;
+                StartDate?: Date | undefined;
+                EndDate?: Date | undefined;
+                Type?: EmploymentType | undefined;
+                Industry?: string | undefined;
+                Income?: {
+                    Amount?: number | undefined;
+                    Currency?: string | undefined;
+                    Frequency?: IncomeFrequency | undefined;
+                } | undefined;
+                Contact?: {
+                    Name?: string | undefined;
+                    Email?: string | undefined;
+                    Phone?: string | undefined;
+                    Address?: string | undefined;
+                } | undefined;
+                IsVerified?: boolean | undefined;
+                VerifiedAt?: string | undefined;
+            } & {
+                EmployerName?: string | undefined;
+                JobTitle?: string | undefined;
+                StartDate?: Date | undefined;
+                EndDate?: Date | undefined;
+                Type?: EmploymentType | undefined;
+                Industry?: string | undefined;
+                Income?: ({
+                    Amount?: number | undefined;
+                    Currency?: string | undefined;
+                    Frequency?: IncomeFrequency | undefined;
+                } & {
+                    Amount?: number | undefined;
+                    Currency?: string | undefined;
+                    Frequency?: IncomeFrequency | undefined;
+                } & { [K_17 in Exclude<keyof I_1["Account"]["Employment"]["Income"], keyof Income>]: never; }) | undefined;
+                Contact?: ({
+                    Name?: string | undefined;
+                    Email?: string | undefined;
+                    Phone?: string | undefined;
+                    Address?: string | undefined;
+                } & {
+                    Name?: string | undefined;
+                    Email?: string | undefined;
+                    Phone?: string | undefined;
+                    Address?: string | undefined;
+                } & { [K_18 in Exclude<keyof I_1["Account"]["Employment"]["Contact"], keyof EmployerContact>]: never; }) | undefined;
+                IsVerified?: boolean | undefined;
+                VerifiedAt?: string | undefined;
+            } & { [K_19 in Exclude<keyof I_1["Account"]["Employment"], keyof Employment>]: never; }) | undefined;
+        } & { [K_20 in Exclude<keyof I_1["Account"], keyof AccountDetails>]: never; }) | undefined;
         MetaData?: ({
             Network?: Network | undefined;
             UpdatedAt?: Date | undefined;
@@ -520,7 +1053,7 @@ export declare const Account: {
             UpdatedAt?: Date | undefined;
             CreatedAt?: Date | undefined;
             UpdatedByAccount?: string | undefined;
-        } & { [K_15 in Exclude<keyof I_1["MetaData"], keyof MetaData>]: never; }) | undefined;
+        } & { [K_21 in Exclude<keyof I_1["MetaData"], keyof MetaData>]: never; }) | undefined;
         Audit?: ({
             ChangedBy?: string | undefined;
             ChangedAt?: Date | undefined;
@@ -529,8 +1062,8 @@ export declare const Account: {
             ChangedBy?: string | undefined;
             ChangedAt?: Date | undefined;
             Reason?: string | undefined;
-        } & { [K_16 in Exclude<keyof I_1["Audit"], keyof Audit>]: never; }) | undefined;
-    } & { [K_17 in Exclude<keyof I_1, keyof Account>]: never; }>(object: I_1): Account;
+        } & { [K_22 in Exclude<keyof I_1["Audit"], keyof Audit>]: never; }) | undefined;
+    } & { [K_23 in Exclude<keyof I_1, keyof Account>]: never; }>(object: I_1): Account;
 };
 export declare const AccountID: {
     encode(message: AccountID, writer?: _m0.Writer): _m0.Writer;
@@ -585,6 +1118,27 @@ export declare const Accounts: {
                 } | undefined;
                 ExternalUserID?: string | undefined;
                 OrganizationID?: string | undefined;
+                Employment?: {
+                    EmployerName?: string | undefined;
+                    JobTitle?: string | undefined;
+                    StartDate?: Date | undefined;
+                    EndDate?: Date | undefined;
+                    Type?: EmploymentType | undefined;
+                    Industry?: string | undefined;
+                    Income?: {
+                        Amount?: number | undefined;
+                        Currency?: string | undefined;
+                        Frequency?: IncomeFrequency | undefined;
+                    } | undefined;
+                    Contact?: {
+                        Name?: string | undefined;
+                        Email?: string | undefined;
+                        Phone?: string | undefined;
+                        Address?: string | undefined;
+                    } | undefined;
+                    IsVerified?: boolean | undefined;
+                    VerifiedAt?: string | undefined;
+                } | undefined;
             } | undefined;
             MetaData?: {
                 Network?: Network | undefined;
@@ -627,6 +1181,27 @@ export declare const Accounts: {
                 } | undefined;
                 ExternalUserID?: string | undefined;
                 OrganizationID?: string | undefined;
+                Employment?: {
+                    EmployerName?: string | undefined;
+                    JobTitle?: string | undefined;
+                    StartDate?: Date | undefined;
+                    EndDate?: Date | undefined;
+                    Type?: EmploymentType | undefined;
+                    Industry?: string | undefined;
+                    Income?: {
+                        Amount?: number | undefined;
+                        Currency?: string | undefined;
+                        Frequency?: IncomeFrequency | undefined;
+                    } | undefined;
+                    Contact?: {
+                        Name?: string | undefined;
+                        Email?: string | undefined;
+                        Phone?: string | undefined;
+                        Address?: string | undefined;
+                    } | undefined;
+                    IsVerified?: boolean | undefined;
+                    VerifiedAt?: string | undefined;
+                } | undefined;
             } | undefined;
             MetaData?: {
                 Network?: Network | undefined;
@@ -666,6 +1241,27 @@ export declare const Accounts: {
                 } | undefined;
                 ExternalUserID?: string | undefined;
                 OrganizationID?: string | undefined;
+                Employment?: {
+                    EmployerName?: string | undefined;
+                    JobTitle?: string | undefined;
+                    StartDate?: Date | undefined;
+                    EndDate?: Date | undefined;
+                    Type?: EmploymentType | undefined;
+                    Industry?: string | undefined;
+                    Income?: {
+                        Amount?: number | undefined;
+                        Currency?: string | undefined;
+                        Frequency?: IncomeFrequency | undefined;
+                    } | undefined;
+                    Contact?: {
+                        Name?: string | undefined;
+                        Email?: string | undefined;
+                        Phone?: string | undefined;
+                        Address?: string | undefined;
+                    } | undefined;
+                    IsVerified?: boolean | undefined;
+                    VerifiedAt?: string | undefined;
+                } | undefined;
             } | undefined;
             MetaData?: {
                 Network?: Network | undefined;
@@ -705,6 +1301,27 @@ export declare const Accounts: {
                 } | undefined;
                 ExternalUserID?: string | undefined;
                 OrganizationID?: string | undefined;
+                Employment?: {
+                    EmployerName?: string | undefined;
+                    JobTitle?: string | undefined;
+                    StartDate?: Date | undefined;
+                    EndDate?: Date | undefined;
+                    Type?: EmploymentType | undefined;
+                    Industry?: string | undefined;
+                    Income?: {
+                        Amount?: number | undefined;
+                        Currency?: string | undefined;
+                        Frequency?: IncomeFrequency | undefined;
+                    } | undefined;
+                    Contact?: {
+                        Name?: string | undefined;
+                        Email?: string | undefined;
+                        Phone?: string | undefined;
+                        Address?: string | undefined;
+                    } | undefined;
+                    IsVerified?: boolean | undefined;
+                    VerifiedAt?: string | undefined;
+                } | undefined;
             } & {
                 AccountID?: string | undefined;
                 FirstName?: string | undefined;
@@ -757,7 +1374,57 @@ export declare const Accounts: {
                 } & { [K_4 in Exclude<keyof I["Accounts"][number]["Account"]["Language"], keyof Language>]: never; }) | undefined;
                 ExternalUserID?: string | undefined;
                 OrganizationID?: string | undefined;
-            } & { [K_5 in Exclude<keyof I["Accounts"][number]["Account"], keyof AccountDetails>]: never; }) | undefined;
+                Employment?: ({
+                    EmployerName?: string | undefined;
+                    JobTitle?: string | undefined;
+                    StartDate?: Date | undefined;
+                    EndDate?: Date | undefined;
+                    Type?: EmploymentType | undefined;
+                    Industry?: string | undefined;
+                    Income?: {
+                        Amount?: number | undefined;
+                        Currency?: string | undefined;
+                        Frequency?: IncomeFrequency | undefined;
+                    } | undefined;
+                    Contact?: {
+                        Name?: string | undefined;
+                        Email?: string | undefined;
+                        Phone?: string | undefined;
+                        Address?: string | undefined;
+                    } | undefined;
+                    IsVerified?: boolean | undefined;
+                    VerifiedAt?: string | undefined;
+                } & {
+                    EmployerName?: string | undefined;
+                    JobTitle?: string | undefined;
+                    StartDate?: Date | undefined;
+                    EndDate?: Date | undefined;
+                    Type?: EmploymentType | undefined;
+                    Industry?: string | undefined;
+                    Income?: ({
+                        Amount?: number | undefined;
+                        Currency?: string | undefined;
+                        Frequency?: IncomeFrequency | undefined;
+                    } & {
+                        Amount?: number | undefined;
+                        Currency?: string | undefined;
+                        Frequency?: IncomeFrequency | undefined;
+                    } & { [K_5 in Exclude<keyof I["Accounts"][number]["Account"]["Employment"]["Income"], keyof Income>]: never; }) | undefined;
+                    Contact?: ({
+                        Name?: string | undefined;
+                        Email?: string | undefined;
+                        Phone?: string | undefined;
+                        Address?: string | undefined;
+                    } & {
+                        Name?: string | undefined;
+                        Email?: string | undefined;
+                        Phone?: string | undefined;
+                        Address?: string | undefined;
+                    } & { [K_6 in Exclude<keyof I["Accounts"][number]["Account"]["Employment"]["Contact"], keyof EmployerContact>]: never; }) | undefined;
+                    IsVerified?: boolean | undefined;
+                    VerifiedAt?: string | undefined;
+                } & { [K_7 in Exclude<keyof I["Accounts"][number]["Account"]["Employment"], keyof Employment>]: never; }) | undefined;
+            } & { [K_8 in Exclude<keyof I["Accounts"][number]["Account"], keyof AccountDetails>]: never; }) | undefined;
             MetaData?: ({
                 Network?: Network | undefined;
                 UpdatedAt?: Date | undefined;
@@ -768,7 +1435,7 @@ export declare const Accounts: {
                 UpdatedAt?: Date | undefined;
                 CreatedAt?: Date | undefined;
                 UpdatedByAccount?: string | undefined;
-            } & { [K_6 in Exclude<keyof I["Accounts"][number]["MetaData"], keyof MetaData>]: never; }) | undefined;
+            } & { [K_9 in Exclude<keyof I["Accounts"][number]["MetaData"], keyof MetaData>]: never; }) | undefined;
             Audit?: ({
                 ChangedBy?: string | undefined;
                 ChangedAt?: Date | undefined;
@@ -777,8 +1444,8 @@ export declare const Accounts: {
                 ChangedBy?: string | undefined;
                 ChangedAt?: Date | undefined;
                 Reason?: string | undefined;
-            } & { [K_7 in Exclude<keyof I["Accounts"][number]["Audit"], keyof Audit>]: never; }) | undefined;
-        } & { [K_8 in Exclude<keyof I["Accounts"][number], keyof Account>]: never; })[] & { [K_9 in Exclude<keyof I["Accounts"], keyof {
+            } & { [K_10 in Exclude<keyof I["Accounts"][number]["Audit"], keyof Audit>]: never; }) | undefined;
+        } & { [K_11 in Exclude<keyof I["Accounts"][number], keyof Account>]: never; })[] & { [K_12 in Exclude<keyof I["Accounts"], keyof {
             Account?: {
                 AccountID?: string | undefined;
                 FirstName?: string | undefined;
@@ -805,6 +1472,27 @@ export declare const Accounts: {
                 } | undefined;
                 ExternalUserID?: string | undefined;
                 OrganizationID?: string | undefined;
+                Employment?: {
+                    EmployerName?: string | undefined;
+                    JobTitle?: string | undefined;
+                    StartDate?: Date | undefined;
+                    EndDate?: Date | undefined;
+                    Type?: EmploymentType | undefined;
+                    Industry?: string | undefined;
+                    Income?: {
+                        Amount?: number | undefined;
+                        Currency?: string | undefined;
+                        Frequency?: IncomeFrequency | undefined;
+                    } | undefined;
+                    Contact?: {
+                        Name?: string | undefined;
+                        Email?: string | undefined;
+                        Phone?: string | undefined;
+                        Address?: string | undefined;
+                    } | undefined;
+                    IsVerified?: boolean | undefined;
+                    VerifiedAt?: string | undefined;
+                } | undefined;
             } | undefined;
             MetaData?: {
                 Network?: Network | undefined;
@@ -819,7 +1507,7 @@ export declare const Accounts: {
             } | undefined;
         }[]>]: never; }) | undefined;
         Offset?: number | undefined;
-    } & { [K_10 in Exclude<keyof I, keyof Accounts>]: never; }>(base?: I | undefined): Accounts;
+    } & { [K_13 in Exclude<keyof I, keyof Accounts>]: never; }>(base?: I | undefined): Accounts;
     fromPartial<I_1 extends {
         Accounts?: {
             Account?: {
@@ -848,6 +1536,27 @@ export declare const Accounts: {
                 } | undefined;
                 ExternalUserID?: string | undefined;
                 OrganizationID?: string | undefined;
+                Employment?: {
+                    EmployerName?: string | undefined;
+                    JobTitle?: string | undefined;
+                    StartDate?: Date | undefined;
+                    EndDate?: Date | undefined;
+                    Type?: EmploymentType | undefined;
+                    Industry?: string | undefined;
+                    Income?: {
+                        Amount?: number | undefined;
+                        Currency?: string | undefined;
+                        Frequency?: IncomeFrequency | undefined;
+                    } | undefined;
+                    Contact?: {
+                        Name?: string | undefined;
+                        Email?: string | undefined;
+                        Phone?: string | undefined;
+                        Address?: string | undefined;
+                    } | undefined;
+                    IsVerified?: boolean | undefined;
+                    VerifiedAt?: string | undefined;
+                } | undefined;
             } | undefined;
             MetaData?: {
                 Network?: Network | undefined;
@@ -890,6 +1599,27 @@ export declare const Accounts: {
                 } | undefined;
                 ExternalUserID?: string | undefined;
                 OrganizationID?: string | undefined;
+                Employment?: {
+                    EmployerName?: string | undefined;
+                    JobTitle?: string | undefined;
+                    StartDate?: Date | undefined;
+                    EndDate?: Date | undefined;
+                    Type?: EmploymentType | undefined;
+                    Industry?: string | undefined;
+                    Income?: {
+                        Amount?: number | undefined;
+                        Currency?: string | undefined;
+                        Frequency?: IncomeFrequency | undefined;
+                    } | undefined;
+                    Contact?: {
+                        Name?: string | undefined;
+                        Email?: string | undefined;
+                        Phone?: string | undefined;
+                        Address?: string | undefined;
+                    } | undefined;
+                    IsVerified?: boolean | undefined;
+                    VerifiedAt?: string | undefined;
+                } | undefined;
             } | undefined;
             MetaData?: {
                 Network?: Network | undefined;
@@ -929,6 +1659,27 @@ export declare const Accounts: {
                 } | undefined;
                 ExternalUserID?: string | undefined;
                 OrganizationID?: string | undefined;
+                Employment?: {
+                    EmployerName?: string | undefined;
+                    JobTitle?: string | undefined;
+                    StartDate?: Date | undefined;
+                    EndDate?: Date | undefined;
+                    Type?: EmploymentType | undefined;
+                    Industry?: string | undefined;
+                    Income?: {
+                        Amount?: number | undefined;
+                        Currency?: string | undefined;
+                        Frequency?: IncomeFrequency | undefined;
+                    } | undefined;
+                    Contact?: {
+                        Name?: string | undefined;
+                        Email?: string | undefined;
+                        Phone?: string | undefined;
+                        Address?: string | undefined;
+                    } | undefined;
+                    IsVerified?: boolean | undefined;
+                    VerifiedAt?: string | undefined;
+                } | undefined;
             } | undefined;
             MetaData?: {
                 Network?: Network | undefined;
@@ -968,6 +1719,27 @@ export declare const Accounts: {
                 } | undefined;
                 ExternalUserID?: string | undefined;
                 OrganizationID?: string | undefined;
+                Employment?: {
+                    EmployerName?: string | undefined;
+                    JobTitle?: string | undefined;
+                    StartDate?: Date | undefined;
+                    EndDate?: Date | undefined;
+                    Type?: EmploymentType | undefined;
+                    Industry?: string | undefined;
+                    Income?: {
+                        Amount?: number | undefined;
+                        Currency?: string | undefined;
+                        Frequency?: IncomeFrequency | undefined;
+                    } | undefined;
+                    Contact?: {
+                        Name?: string | undefined;
+                        Email?: string | undefined;
+                        Phone?: string | undefined;
+                        Address?: string | undefined;
+                    } | undefined;
+                    IsVerified?: boolean | undefined;
+                    VerifiedAt?: string | undefined;
+                } | undefined;
             } & {
                 AccountID?: string | undefined;
                 FirstName?: string | undefined;
@@ -989,7 +1761,7 @@ export declare const Accounts: {
                     Address?: string | undefined;
                     Alias?: string | undefined;
                     Type?: WalletType | undefined;
-                } & { [K_11 in Exclude<keyof I_1["Accounts"][number]["Account"]["Wallets"][number], keyof Wallet>]: never; })[] & { [K_12 in Exclude<keyof I_1["Accounts"][number]["Account"]["Wallets"], keyof {
+                } & { [K_14 in Exclude<keyof I_1["Accounts"][number]["Account"]["Wallets"][number], keyof Wallet>]: never; })[] & { [K_15 in Exclude<keyof I_1["Accounts"][number]["Account"]["Wallets"], keyof {
                     Address?: string | undefined;
                     Alias?: string | undefined;
                     Type?: WalletType | undefined;
@@ -1003,7 +1775,7 @@ export declare const Accounts: {
                 } & {
                     URL?: string | undefined;
                     Type?: SocialType | undefined;
-                } & { [K_13 in Exclude<keyof I_1["Accounts"][number]["Account"]["Socials"][number], keyof Social>]: never; })[] & { [K_14 in Exclude<keyof I_1["Accounts"][number]["Account"]["Socials"], keyof {
+                } & { [K_16 in Exclude<keyof I_1["Accounts"][number]["Account"]["Socials"][number], keyof Social>]: never; })[] & { [K_17 in Exclude<keyof I_1["Accounts"][number]["Account"]["Socials"], keyof {
                     URL?: string | undefined;
                     Type?: SocialType | undefined;
                 }[]>]: never; }) | undefined;
@@ -1017,10 +1789,60 @@ export declare const Accounts: {
                     Language?: string | undefined;
                     UserConfigured?: boolean | undefined;
                     Network?: string | undefined;
-                } & { [K_15 in Exclude<keyof I_1["Accounts"][number]["Account"]["Language"], keyof Language>]: never; }) | undefined;
+                } & { [K_18 in Exclude<keyof I_1["Accounts"][number]["Account"]["Language"], keyof Language>]: never; }) | undefined;
                 ExternalUserID?: string | undefined;
                 OrganizationID?: string | undefined;
-            } & { [K_16 in Exclude<keyof I_1["Accounts"][number]["Account"], keyof AccountDetails>]: never; }) | undefined;
+                Employment?: ({
+                    EmployerName?: string | undefined;
+                    JobTitle?: string | undefined;
+                    StartDate?: Date | undefined;
+                    EndDate?: Date | undefined;
+                    Type?: EmploymentType | undefined;
+                    Industry?: string | undefined;
+                    Income?: {
+                        Amount?: number | undefined;
+                        Currency?: string | undefined;
+                        Frequency?: IncomeFrequency | undefined;
+                    } | undefined;
+                    Contact?: {
+                        Name?: string | undefined;
+                        Email?: string | undefined;
+                        Phone?: string | undefined;
+                        Address?: string | undefined;
+                    } | undefined;
+                    IsVerified?: boolean | undefined;
+                    VerifiedAt?: string | undefined;
+                } & {
+                    EmployerName?: string | undefined;
+                    JobTitle?: string | undefined;
+                    StartDate?: Date | undefined;
+                    EndDate?: Date | undefined;
+                    Type?: EmploymentType | undefined;
+                    Industry?: string | undefined;
+                    Income?: ({
+                        Amount?: number | undefined;
+                        Currency?: string | undefined;
+                        Frequency?: IncomeFrequency | undefined;
+                    } & {
+                        Amount?: number | undefined;
+                        Currency?: string | undefined;
+                        Frequency?: IncomeFrequency | undefined;
+                    } & { [K_19 in Exclude<keyof I_1["Accounts"][number]["Account"]["Employment"]["Income"], keyof Income>]: never; }) | undefined;
+                    Contact?: ({
+                        Name?: string | undefined;
+                        Email?: string | undefined;
+                        Phone?: string | undefined;
+                        Address?: string | undefined;
+                    } & {
+                        Name?: string | undefined;
+                        Email?: string | undefined;
+                        Phone?: string | undefined;
+                        Address?: string | undefined;
+                    } & { [K_20 in Exclude<keyof I_1["Accounts"][number]["Account"]["Employment"]["Contact"], keyof EmployerContact>]: never; }) | undefined;
+                    IsVerified?: boolean | undefined;
+                    VerifiedAt?: string | undefined;
+                } & { [K_21 in Exclude<keyof I_1["Accounts"][number]["Account"]["Employment"], keyof Employment>]: never; }) | undefined;
+            } & { [K_22 in Exclude<keyof I_1["Accounts"][number]["Account"], keyof AccountDetails>]: never; }) | undefined;
             MetaData?: ({
                 Network?: Network | undefined;
                 UpdatedAt?: Date | undefined;
@@ -1031,7 +1853,7 @@ export declare const Accounts: {
                 UpdatedAt?: Date | undefined;
                 CreatedAt?: Date | undefined;
                 UpdatedByAccount?: string | undefined;
-            } & { [K_17 in Exclude<keyof I_1["Accounts"][number]["MetaData"], keyof MetaData>]: never; }) | undefined;
+            } & { [K_23 in Exclude<keyof I_1["Accounts"][number]["MetaData"], keyof MetaData>]: never; }) | undefined;
             Audit?: ({
                 ChangedBy?: string | undefined;
                 ChangedAt?: Date | undefined;
@@ -1040,8 +1862,8 @@ export declare const Accounts: {
                 ChangedBy?: string | undefined;
                 ChangedAt?: Date | undefined;
                 Reason?: string | undefined;
-            } & { [K_18 in Exclude<keyof I_1["Accounts"][number]["Audit"], keyof Audit>]: never; }) | undefined;
-        } & { [K_19 in Exclude<keyof I_1["Accounts"][number], keyof Account>]: never; })[] & { [K_20 in Exclude<keyof I_1["Accounts"], keyof {
+            } & { [K_24 in Exclude<keyof I_1["Accounts"][number]["Audit"], keyof Audit>]: never; }) | undefined;
+        } & { [K_25 in Exclude<keyof I_1["Accounts"][number], keyof Account>]: never; })[] & { [K_26 in Exclude<keyof I_1["Accounts"], keyof {
             Account?: {
                 AccountID?: string | undefined;
                 FirstName?: string | undefined;
@@ -1068,6 +1890,27 @@ export declare const Accounts: {
                 } | undefined;
                 ExternalUserID?: string | undefined;
                 OrganizationID?: string | undefined;
+                Employment?: {
+                    EmployerName?: string | undefined;
+                    JobTitle?: string | undefined;
+                    StartDate?: Date | undefined;
+                    EndDate?: Date | undefined;
+                    Type?: EmploymentType | undefined;
+                    Industry?: string | undefined;
+                    Income?: {
+                        Amount?: number | undefined;
+                        Currency?: string | undefined;
+                        Frequency?: IncomeFrequency | undefined;
+                    } | undefined;
+                    Contact?: {
+                        Name?: string | undefined;
+                        Email?: string | undefined;
+                        Phone?: string | undefined;
+                        Address?: string | undefined;
+                    } | undefined;
+                    IsVerified?: boolean | undefined;
+                    VerifiedAt?: string | undefined;
+                } | undefined;
             } | undefined;
             MetaData?: {
                 Network?: Network | undefined;
@@ -1082,7 +1925,7 @@ export declare const Accounts: {
             } | undefined;
         }[]>]: never; }) | undefined;
         Offset?: number | undefined;
-    } & { [K_21 in Exclude<keyof I_1, keyof Accounts>]: never; }>(object: I_1): Accounts;
+    } & { [K_27 in Exclude<keyof I_1, keyof Accounts>]: never; }>(object: I_1): Accounts;
 };
 export declare const Social: {
     encode(message: Social, writer?: _m0.Writer): _m0.Writer;
