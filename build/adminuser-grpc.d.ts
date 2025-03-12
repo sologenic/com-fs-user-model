@@ -6,10 +6,6 @@ import { Empty } from "./google/protobuf/empty";
 import { Network } from "./sologenic/com-fs-utils-lib/models/metadata/metadata";
 import { SetStatusMessage, User, UserID, UserList } from "./user";
 export declare const protobufPackage = "user";
-export interface KYCApplicationID {
-    /** UUID for the external user identifier in the KYC provider (called "externalUserId" in sumsub) */
-    KYCApplicationID: string;
-}
 export interface AuditFilter {
     UserID?: string | undefined;
     ChangedBy?: string | undefined;
@@ -18,22 +14,6 @@ export interface AuditFilter {
     Limit?: number | undefined;
     Offset?: number | undefined;
 }
-export declare const KYCApplicationID: {
-    encode(message: KYCApplicationID, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): KYCApplicationID;
-    fromJSON(object: any): KYCApplicationID;
-    toJSON(message: KYCApplicationID): unknown;
-    create<I extends {
-        KYCApplicationID?: string | undefined;
-    } & {
-        KYCApplicationID?: string | undefined;
-    } & { [K in Exclude<keyof I, "KYCApplicationID">]: never; }>(base?: I | undefined): KYCApplicationID;
-    fromPartial<I_1 extends {
-        KYCApplicationID?: string | undefined;
-    } & {
-        KYCApplicationID?: string | undefined;
-    } & { [K_1 in Exclude<keyof I_1, "KYCApplicationID">]: never; }>(object: I_1): KYCApplicationID;
-};
 export declare const AuditFilter: {
     encode(message: AuditFilter, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): AuditFilter;
@@ -81,15 +61,6 @@ export declare const AdminUserServiceService: {
         readonly responseSerialize: (value: User) => Buffer;
         readonly responseDeserialize: (value: Buffer) => User;
     };
-    readonly getByKycApplicationId: {
-        readonly path: "/user.AdminUserService/GetByKYCApplicationID";
-        readonly requestStream: false;
-        readonly responseStream: false;
-        readonly requestSerialize: (value: KYCApplicationID) => Buffer;
-        readonly requestDeserialize: (value: Buffer) => KYCApplicationID;
-        readonly responseSerialize: (value: User) => Buffer;
-        readonly responseDeserialize: (value: Buffer) => User;
-    };
     readonly list: {
         readonly path: "/user.AdminUserService/List";
         readonly requestStream: false;
@@ -129,7 +100,6 @@ export declare const AdminUserServiceService: {
 };
 export interface AdminUserServiceServer extends UntypedServiceImplementation {
     get: handleUnaryCall<UserID, User>;
-    getByKycApplicationId: handleUnaryCall<KYCApplicationID, User>;
     list: handleUnaryCall<Empty, UserList>;
     update: handleUnaryCall<User, UserID>;
     setStatus: handleUnaryCall<SetStatusMessage, Empty>;
@@ -139,9 +109,6 @@ export interface AdminUserServiceClient extends Client {
     get(request: UserID, callback: (error: ServiceError | null, response: User) => void): ClientUnaryCall;
     get(request: UserID, metadata: Metadata, callback: (error: ServiceError | null, response: User) => void): ClientUnaryCall;
     get(request: UserID, metadata: Metadata, options: Partial<CallOptions>, callback: (error: ServiceError | null, response: User) => void): ClientUnaryCall;
-    getByKycApplicationId(request: KYCApplicationID, callback: (error: ServiceError | null, response: User) => void): ClientUnaryCall;
-    getByKycApplicationId(request: KYCApplicationID, metadata: Metadata, callback: (error: ServiceError | null, response: User) => void): ClientUnaryCall;
-    getByKycApplicationId(request: KYCApplicationID, metadata: Metadata, options: Partial<CallOptions>, callback: (error: ServiceError | null, response: User) => void): ClientUnaryCall;
     list(request: Empty, callback: (error: ServiceError | null, response: UserList) => void): ClientUnaryCall;
     list(request: Empty, metadata: Metadata, callback: (error: ServiceError | null, response: UserList) => void): ClientUnaryCall;
     list(request: Empty, metadata: Metadata, options: Partial<CallOptions>, callback: (error: ServiceError | null, response: UserList) => void): ClientUnaryCall;

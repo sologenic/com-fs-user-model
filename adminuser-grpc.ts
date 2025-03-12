@@ -24,11 +24,6 @@ import { SetStatusMessage, User, UserID, UserList } from "./user";
 
 export const protobufPackage = "user";
 
-export interface KYCApplicationID {
-  /** UUID for the external user identifier in the KYC provider (called "externalUserId" in sumsub) */
-  KYCApplicationID: string;
-}
-
 export interface AuditFilter {
   UserID?: string | undefined;
   ChangedBy?: string | undefined;
@@ -37,63 +32,6 @@ export interface AuditFilter {
   Limit?: number | undefined;
   Offset?: number | undefined;
 }
-
-function createBaseKYCApplicationID(): KYCApplicationID {
-  return { KYCApplicationID: "" };
-}
-
-export const KYCApplicationID = {
-  encode(message: KYCApplicationID, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.KYCApplicationID !== "") {
-      writer.uint32(10).string(message.KYCApplicationID);
-    }
-    return writer;
-  },
-
-  decode(input: _m0.Reader | Uint8Array, length?: number): KYCApplicationID {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseKYCApplicationID();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1:
-          if (tag !== 10) {
-            break;
-          }
-
-          message.KYCApplicationID = reader.string();
-          continue;
-      }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
-      }
-      reader.skipType(tag & 7);
-    }
-    return message;
-  },
-
-  fromJSON(object: any): KYCApplicationID {
-    return { KYCApplicationID: isSet(object.KYCApplicationID) ? globalThis.String(object.KYCApplicationID) : "" };
-  },
-
-  toJSON(message: KYCApplicationID): unknown {
-    const obj: any = {};
-    if (message.KYCApplicationID !== "") {
-      obj.KYCApplicationID = message.KYCApplicationID;
-    }
-    return obj;
-  },
-
-  create<I extends Exact<DeepPartial<KYCApplicationID>, I>>(base?: I): KYCApplicationID {
-    return KYCApplicationID.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<KYCApplicationID>, I>>(object: I): KYCApplicationID {
-    const message = createBaseKYCApplicationID();
-    message.KYCApplicationID = object.KYCApplicationID ?? "";
-    return message;
-  },
-};
 
 function createBaseAuditFilter(): AuditFilter {
   return {
@@ -247,15 +185,6 @@ export const AdminUserServiceService = {
     responseSerialize: (value: User) => Buffer.from(User.encode(value).finish()),
     responseDeserialize: (value: Buffer) => User.decode(value),
   },
-  getByKycApplicationId: {
-    path: "/user.AdminUserService/GetByKYCApplicationID",
-    requestStream: false,
-    responseStream: false,
-    requestSerialize: (value: KYCApplicationID) => Buffer.from(KYCApplicationID.encode(value).finish()),
-    requestDeserialize: (value: Buffer) => KYCApplicationID.decode(value),
-    responseSerialize: (value: User) => Buffer.from(User.encode(value).finish()),
-    responseDeserialize: (value: Buffer) => User.decode(value),
-  },
   list: {
     path: "/user.AdminUserService/List",
     requestStream: false,
@@ -296,7 +225,6 @@ export const AdminUserServiceService = {
 
 export interface AdminUserServiceServer extends UntypedServiceImplementation {
   get: handleUnaryCall<UserID, User>;
-  getByKycApplicationId: handleUnaryCall<KYCApplicationID, User>;
   list: handleUnaryCall<Empty, UserList>;
   update: handleUnaryCall<User, UserID>;
   setStatus: handleUnaryCall<SetStatusMessage, Empty>;
@@ -312,21 +240,6 @@ export interface AdminUserServiceClient extends Client {
   ): ClientUnaryCall;
   get(
     request: UserID,
-    metadata: Metadata,
-    options: Partial<CallOptions>,
-    callback: (error: ServiceError | null, response: User) => void,
-  ): ClientUnaryCall;
-  getByKycApplicationId(
-    request: KYCApplicationID,
-    callback: (error: ServiceError | null, response: User) => void,
-  ): ClientUnaryCall;
-  getByKycApplicationId(
-    request: KYCApplicationID,
-    metadata: Metadata,
-    callback: (error: ServiceError | null, response: User) => void,
-  ): ClientUnaryCall;
-  getByKycApplicationId(
-    request: KYCApplicationID,
     metadata: Metadata,
     options: Partial<CallOptions>,
     callback: (error: ServiceError | null, response: User) => void,

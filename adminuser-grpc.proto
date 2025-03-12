@@ -10,15 +10,10 @@ import "user.proto";
 
 service AdminUserService {
     rpc Get (UserID) returns (User) {}
-    rpc GetByKYCApplicationID (KYCApplicationID) returns (User) {}
     rpc List (google.protobuf.Empty) returns (UserList) {}
     rpc Update (User) returns (UserID) {}
     rpc SetStatus (SetStatusMessage) returns (google.protobuf.Empty) {}
     rpc ListAudit (AuditFilter) returns (UserList) {}
-}
-
-message KYCApplicationID {
-    string KYCApplicationID = 1; // UUID for the external user identifier in the KYC provider (called "externalUserId" in sumsub)
 }
 
 message AuditFilter {

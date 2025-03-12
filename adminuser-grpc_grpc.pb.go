@@ -20,12 +20,11 @@ import (
 const _ = grpc.SupportPackageIsVersion7
 
 const (
-	AdminUserService_Get_FullMethodName                   = "/user.AdminUserService/Get"
-	AdminUserService_GetByKYCApplicationID_FullMethodName = "/user.AdminUserService/GetByKYCApplicationID"
-	AdminUserService_List_FullMethodName                  = "/user.AdminUserService/List"
-	AdminUserService_Update_FullMethodName                = "/user.AdminUserService/Update"
-	AdminUserService_SetStatus_FullMethodName             = "/user.AdminUserService/SetStatus"
-	AdminUserService_ListAudit_FullMethodName             = "/user.AdminUserService/ListAudit"
+	AdminUserService_Get_FullMethodName       = "/user.AdminUserService/Get"
+	AdminUserService_List_FullMethodName      = "/user.AdminUserService/List"
+	AdminUserService_Update_FullMethodName    = "/user.AdminUserService/Update"
+	AdminUserService_SetStatus_FullMethodName = "/user.AdminUserService/SetStatus"
+	AdminUserService_ListAudit_FullMethodName = "/user.AdminUserService/ListAudit"
 )
 
 // AdminUserServiceClient is the client API for AdminUserService service.
@@ -33,7 +32,6 @@ const (
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type AdminUserServiceClient interface {
 	Get(ctx context.Context, in *UserID, opts ...grpc.CallOption) (*User, error)
-	GetByKYCApplicationID(ctx context.Context, in *KYCApplicationID, opts ...grpc.CallOption) (*User, error)
 	List(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*UserList, error)
 	Update(ctx context.Context, in *User, opts ...grpc.CallOption) (*UserID, error)
 	SetStatus(ctx context.Context, in *SetStatusMessage, opts ...grpc.CallOption) (*emptypb.Empty, error)
@@ -51,15 +49,6 @@ func NewAdminUserServiceClient(cc grpc.ClientConnInterface) AdminUserServiceClie
 func (c *adminUserServiceClient) Get(ctx context.Context, in *UserID, opts ...grpc.CallOption) (*User, error) {
 	out := new(User)
 	err := c.cc.Invoke(ctx, AdminUserService_Get_FullMethodName, in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *adminUserServiceClient) GetByKYCApplicationID(ctx context.Context, in *KYCApplicationID, opts ...grpc.CallOption) (*User, error) {
-	out := new(User)
-	err := c.cc.Invoke(ctx, AdminUserService_GetByKYCApplicationID_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -107,7 +96,6 @@ func (c *adminUserServiceClient) ListAudit(ctx context.Context, in *AuditFilter,
 // for forward compatibility
 type AdminUserServiceServer interface {
 	Get(context.Context, *UserID) (*User, error)
-	GetByKYCApplicationID(context.Context, *KYCApplicationID) (*User, error)
 	List(context.Context, *emptypb.Empty) (*UserList, error)
 	Update(context.Context, *User) (*UserID, error)
 	SetStatus(context.Context, *SetStatusMessage) (*emptypb.Empty, error)
@@ -120,9 +108,6 @@ type UnimplementedAdminUserServiceServer struct {
 
 func (UnimplementedAdminUserServiceServer) Get(context.Context, *UserID) (*User, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Get not implemented")
-}
-func (UnimplementedAdminUserServiceServer) GetByKYCApplicationID(context.Context, *KYCApplicationID) (*User, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetByKYCApplicationID not implemented")
 }
 func (UnimplementedAdminUserServiceServer) List(context.Context, *emptypb.Empty) (*UserList, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method List not implemented")
@@ -162,24 +147,6 @@ func _AdminUserService_Get_Handler(srv interface{}, ctx context.Context, dec fun
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(AdminUserServiceServer).Get(ctx, req.(*UserID))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _AdminUserService_GetByKYCApplicationID_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(KYCApplicationID)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(AdminUserServiceServer).GetByKYCApplicationID(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: AdminUserService_GetByKYCApplicationID_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AdminUserServiceServer).GetByKYCApplicationID(ctx, req.(*KYCApplicationID))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -266,10 +233,6 @@ var AdminUserService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "Get",
 			Handler:    _AdminUserService_Get_Handler,
-		},
-		{
-			MethodName: "GetByKYCApplicationID",
-			Handler:    _AdminUserService_GetByKYCApplicationID_Handler,
 		},
 		{
 			MethodName: "List",
