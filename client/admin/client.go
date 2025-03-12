@@ -9,7 +9,7 @@ The config:
 
 Service fails (with panic) to initialize if the environment variable is not set.
 */
-package client
+package admin
 
 import (
 	"context"
