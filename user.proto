@@ -1,0 +1,143 @@
+syntax = "proto3";
+
+package user;
+
+option go_package = "github.com/sologenic/com-fs-user-model;user";
+
+import "google/protobuf/timestamp.proto";
+import "sologenic/com-fs-utils-lib/models/metadata/metadata.proto";
+import "sologenic/com-fs-utils-lib/models/audit/audit.proto";
+import "sologenic/com-fs-utils-lib/models/role/role.proto";
+
+message UserDetails {
+    string UserID = 1; // email address used for firebase authentication
+    string FirstName = 2; 
+    string LastName = 3;
+    string Address = 4;
+    string Avatar = 5;
+    string Alias = 6; // "Nickname"
+    string Description = 7;
+    UserStatus Status = 8;
+    repeated Wallet Wallets = 9;
+    repeated Social Socials = 10;
+    Language Language = 11;
+    string ExternalUserID = 12; // UUID for the external user identifier in the KYC provider
+    string OrganizationID = 13; // UUID
+    Employment Employment = 14;
+    role.Role Role = 15; // A retail user will always have a role of "NORMAL_USER"
+}
+
+// TODO: to be verified when more information is available
+message Employment {
+    string EmployerName = 1;
+    string JobTitle = 2;
+    google.protobuf.Timestamp StartDate = 3; 
+    google.protobuf.Timestamp EndDate = 4; // Empty if still employed
+    EmploymentType Type = 5;
+    optional string Industry = 6;
+    Income Income = 7;
+    EmployerContact Contact = 8;
+    bool IsVerified = 9;
+    string VerifiedAt = 10;
+}
+
+message Income {
+    float Amount = 1;
+    string Currency = 2;
+    IncomeFrequency Frequency = 3;
+}
+
+message EmployerContact {
+    string Name = 1;
+    string Email = 2;
+    string Phone = 3;
+    string Address = 4;
+}
+
+enum EmploymentType {
+    NOT_USED_EMPLOYMENTTYPE = 0;
+    FULL_TIME = 1;
+    PART_TIME = 2;
+    CONTRACT = 3;
+    FREELANCE = 4;
+    SELF_EMPLOYED = 5;
+    INTERNSHIP = 6;
+}
+
+enum IncomeFrequency {
+    NOT_USED_INCOMEFREQUENCY = 0;
+    HOURLY = 1;
+    WEEKLY = 2;
+    BI_WEEKLY = 3;
+    MONTHLY = 4;
+    ANNUALLY = 5;
+}
+
+message User {
+    UserDetails User = 1;
+    metadata.MetaData MetaData = 2;
+    audit.Audit Audit = 3;
+} 
+
+message UserID {
+    string UserID = 1;
+    string OrganizationID = 2;
+    optional metadata.Network Network = 3; 
+}
+
+message Social {
+    string URL = 1;
+    SocialType Type = 2;
+}
+
+message Wallet {
+    string Address = 1;
+    string Alias = 2;
+    WalletType Type = 3;
+}
+
+enum UserStatus {
+    NOT_USED_USERSTATUS = 0;
+    ACTIVE = 1;
+    ADMIN_DEACTIVATED = 2; 
+}
+
+enum WalletType {
+    NOT_USED_WALLETTYPE = 0;
+    TFSA = 1;
+    RRSP = 2;
+    STANDARD = 3;
+}
+
+enum SocialType {
+    NOT_USED_SOCIALTYPE = 0;
+    WEBSITE = 1;
+    GITHUB = 2;
+    REDDIT = 3;
+    DISCORD = 4;
+    TWITTER = 5;
+    FACEBOOK = 6;
+    TELEGRAM = 7;
+    INSTAGRAM = 8;
+    LINKEDIN = 9;
+}
+
+message Language {
+    string UserID = 1;
+    string Language = 2;
+    bool UserConfigured = 3;
+    string Network = 4;
+}
+
+message UserList {
+    repeated User Users = 1;
+    int32 Total = 2;
+}
+
+message SetStatusMessage {
+    string UserID = 1;
+    string OrganizationID = 2;
+    UserStatus Status = 3;
+    optional metadata.Network Network = 4;
+    audit.Audit Audit = 5;
+}

@@ -1,0 +1,31 @@
+syntax = "proto3";
+
+package user;
+
+option go_package = "github.com/sologenic/com-fs-user-model;user";
+
+import "google/protobuf/empty.proto";
+import "sologenic/com-fs-utils-lib/models/metadata/metadata.proto";
+import "user.proto";
+
+service AdminUserService {
+    rpc Get (UserID) returns (User) {}
+    rpc GetByKYCApplicationID (KYCApplicationID) returns (User) {}
+    rpc List (google.protobuf.Empty) returns (UserList) {}
+    rpc Update (User) returns (UserID) {}
+    rpc SetStatus (SetStatusMessage) returns (google.protobuf.Empty) {}
+    rpc ListAudit (AuditFilter) returns (UserList) {}
+}
+
+message KYCApplicationID {
+    string KYCApplicationID = 1; // UUID for the external user identifier in the KYC provider (called "externalUserId" in sumsub)
+}
+
+message AuditFilter {
+    optional string UserID = 1; 
+    optional string ChangedBy = 2;
+    optional metadata.Network Network = 3; 
+    optional string OrganizationID = 4;
+    optional int32 Limit = 5;
+    optional int32 Offset = 6;
+}
