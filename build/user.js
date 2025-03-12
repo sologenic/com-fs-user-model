@@ -2,14 +2,14 @@
 // versions:
 //   protoc-gen-ts_proto  v1.181.2
 //   protoc               v5.29.1
-// source: account.proto
+// source: user.proto
 /* eslint-disable */
 import _m0 from "protobufjs/minimal";
 import { Timestamp } from "./google/protobuf/timestamp";
 import { Audit } from "./sologenic/com-fs-utils-lib/models/audit/audit";
 import { MetaData, networkFromJSON, networkToJSON, } from "./sologenic/com-fs-utils-lib/models/metadata/metadata";
 import { roleFromJSON, roleToJSON } from "./sologenic/com-fs-utils-lib/models/role/role";
-export const protobufPackage = "account";
+export const protobufPackage = "user";
 export var EmploymentType;
 (function (EmploymentType) {
     EmploymentType[EmploymentType["NOT_USED_EMPLOYMENTTYPE"] = 0] = "NOT_USED_EMPLOYMENTTYPE";
@@ -285,9 +285,9 @@ export function socialTypeToJSON(object) {
             return "UNRECOGNIZED";
     }
 }
-function createBaseAccountDetails() {
+function createBaseUserDetails() {
     return {
-        AccountID: "",
+        UserID: "",
         FirstName: "",
         LastName: "",
         Address: "",
@@ -304,10 +304,10 @@ function createBaseAccountDetails() {
         Role: 0,
     };
 }
-export const AccountDetails = {
+export const UserDetails = {
     encode(message, writer = _m0.Writer.create()) {
-        if (message.AccountID !== "") {
-            writer.uint32(10).string(message.AccountID);
+        if (message.UserID !== "") {
+            writer.uint32(10).string(message.UserID);
         }
         if (message.FirstName !== "") {
             writer.uint32(18).string(message.FirstName);
@@ -356,7 +356,7 @@ export const AccountDetails = {
     decode(input, length) {
         const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
         let end = length === undefined ? reader.len : reader.pos + length;
-        const message = createBaseAccountDetails();
+        const message = createBaseUserDetails();
         while (reader.pos < end) {
             const tag = reader.uint32();
             switch (tag >>> 3) {
@@ -364,7 +364,7 @@ export const AccountDetails = {
                     if (tag !== 10) {
                         break;
                     }
-                    message.AccountID = reader.string();
+                    message.UserID = reader.string();
                     continue;
                 case 2:
                     if (tag !== 18) {
@@ -460,7 +460,7 @@ export const AccountDetails = {
     },
     fromJSON(object) {
         return {
-            AccountID: isSet(object.AccountID) ? globalThis.String(object.AccountID) : "",
+            UserID: isSet(object.UserID) ? globalThis.String(object.UserID) : "",
             FirstName: isSet(object.FirstName) ? globalThis.String(object.FirstName) : "",
             LastName: isSet(object.LastName) ? globalThis.String(object.LastName) : "",
             Address: isSet(object.Address) ? globalThis.String(object.Address) : "",
@@ -480,8 +480,8 @@ export const AccountDetails = {
     toJSON(message) {
         var _a, _b;
         const obj = {};
-        if (message.AccountID !== "") {
-            obj.AccountID = message.AccountID;
+        if (message.UserID !== "") {
+            obj.UserID = message.UserID;
         }
         if (message.FirstName !== "") {
             obj.FirstName = message.FirstName;
@@ -528,12 +528,12 @@ export const AccountDetails = {
         return obj;
     },
     create(base) {
-        return AccountDetails.fromPartial(base !== null && base !== void 0 ? base : {});
+        return UserDetails.fromPartial(base !== null && base !== void 0 ? base : {});
     },
     fromPartial(object) {
         var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o;
-        const message = createBaseAccountDetails();
-        message.AccountID = (_a = object.AccountID) !== null && _a !== void 0 ? _a : "";
+        const message = createBaseUserDetails();
+        message.UserID = (_a = object.UserID) !== null && _a !== void 0 ? _a : "";
         message.FirstName = (_b = object.FirstName) !== null && _b !== void 0 ? _b : "";
         message.LastName = (_c = object.LastName) !== null && _c !== void 0 ? _c : "";
         message.Address = (_d = object.Address) !== null && _d !== void 0 ? _d : "";
@@ -925,13 +925,13 @@ export const EmployerContact = {
         return message;
     },
 };
-function createBaseAccount() {
-    return { Account: undefined, MetaData: undefined, Audit: undefined };
+function createBaseUser() {
+    return { User: undefined, MetaData: undefined, Audit: undefined };
 }
-export const Account = {
+export const User = {
     encode(message, writer = _m0.Writer.create()) {
-        if (message.Account !== undefined) {
-            AccountDetails.encode(message.Account, writer.uint32(10).fork()).ldelim();
+        if (message.User !== undefined) {
+            UserDetails.encode(message.User, writer.uint32(10).fork()).ldelim();
         }
         if (message.MetaData !== undefined) {
             MetaData.encode(message.MetaData, writer.uint32(18).fork()).ldelim();
@@ -944,7 +944,7 @@ export const Account = {
     decode(input, length) {
         const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
         let end = length === undefined ? reader.len : reader.pos + length;
-        const message = createBaseAccount();
+        const message = createBaseUser();
         while (reader.pos < end) {
             const tag = reader.uint32();
             switch (tag >>> 3) {
@@ -952,7 +952,7 @@ export const Account = {
                     if (tag !== 10) {
                         break;
                     }
-                    message.Account = AccountDetails.decode(reader, reader.uint32());
+                    message.User = UserDetails.decode(reader, reader.uint32());
                     continue;
                 case 2:
                     if (tag !== 18) {
@@ -976,15 +976,15 @@ export const Account = {
     },
     fromJSON(object) {
         return {
-            Account: isSet(object.Account) ? AccountDetails.fromJSON(object.Account) : undefined,
+            User: isSet(object.User) ? UserDetails.fromJSON(object.User) : undefined,
             MetaData: isSet(object.MetaData) ? MetaData.fromJSON(object.MetaData) : undefined,
             Audit: isSet(object.Audit) ? Audit.fromJSON(object.Audit) : undefined,
         };
     },
     toJSON(message) {
         const obj = {};
-        if (message.Account !== undefined) {
-            obj.Account = AccountDetails.toJSON(message.Account);
+        if (message.User !== undefined) {
+            obj.User = UserDetails.toJSON(message.User);
         }
         if (message.MetaData !== undefined) {
             obj.MetaData = MetaData.toJSON(message.MetaData);
@@ -995,12 +995,12 @@ export const Account = {
         return obj;
     },
     create(base) {
-        return Account.fromPartial(base !== null && base !== void 0 ? base : {});
+        return User.fromPartial(base !== null && base !== void 0 ? base : {});
     },
     fromPartial(object) {
-        const message = createBaseAccount();
-        message.Account = (object.Account !== undefined && object.Account !== null)
-            ? AccountDetails.fromPartial(object.Account)
+        const message = createBaseUser();
+        message.User = (object.User !== undefined && object.User !== null)
+            ? UserDetails.fromPartial(object.User)
             : undefined;
         message.MetaData = (object.MetaData !== undefined && object.MetaData !== null)
             ? MetaData.fromPartial(object.MetaData)
@@ -1009,13 +1009,13 @@ export const Account = {
         return message;
     },
 };
-function createBaseAccountID() {
-    return { AccountID: "", OrganizationID: "", Network: undefined };
+function createBaseUserID() {
+    return { UserID: "", OrganizationID: "", Network: undefined };
 }
-export const AccountID = {
+export const UserID = {
     encode(message, writer = _m0.Writer.create()) {
-        if (message.AccountID !== "") {
-            writer.uint32(10).string(message.AccountID);
+        if (message.UserID !== "") {
+            writer.uint32(10).string(message.UserID);
         }
         if (message.OrganizationID !== "") {
             writer.uint32(18).string(message.OrganizationID);
@@ -1028,7 +1028,7 @@ export const AccountID = {
     decode(input, length) {
         const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
         let end = length === undefined ? reader.len : reader.pos + length;
-        const message = createBaseAccountID();
+        const message = createBaseUserID();
         while (reader.pos < end) {
             const tag = reader.uint32();
             switch (tag >>> 3) {
@@ -1036,7 +1036,7 @@ export const AccountID = {
                     if (tag !== 10) {
                         break;
                     }
-                    message.AccountID = reader.string();
+                    message.UserID = reader.string();
                     continue;
                 case 2:
                     if (tag !== 18) {
@@ -1060,15 +1060,15 @@ export const AccountID = {
     },
     fromJSON(object) {
         return {
-            AccountID: isSet(object.AccountID) ? globalThis.String(object.AccountID) : "",
+            UserID: isSet(object.UserID) ? globalThis.String(object.UserID) : "",
             OrganizationID: isSet(object.OrganizationID) ? globalThis.String(object.OrganizationID) : "",
             Network: isSet(object.Network) ? networkFromJSON(object.Network) : undefined,
         };
     },
     toJSON(message) {
         const obj = {};
-        if (message.AccountID !== "") {
-            obj.AccountID = message.AccountID;
+        if (message.UserID !== "") {
+            obj.UserID = message.UserID;
         }
         if (message.OrganizationID !== "") {
             obj.OrganizationID = message.OrganizationID;
@@ -1079,12 +1079,12 @@ export const AccountID = {
         return obj;
     },
     create(base) {
-        return AccountID.fromPartial(base !== null && base !== void 0 ? base : {});
+        return UserID.fromPartial(base !== null && base !== void 0 ? base : {});
     },
     fromPartial(object) {
         var _a, _b, _c;
-        const message = createBaseAccountID();
-        message.AccountID = (_a = object.AccountID) !== null && _a !== void 0 ? _a : "";
+        const message = createBaseUserID();
+        message.UserID = (_a = object.UserID) !== null && _a !== void 0 ? _a : "";
         message.OrganizationID = (_b = object.OrganizationID) !== null && _b !== void 0 ? _b : "";
         message.Network = (_c = object.Network) !== null && _c !== void 0 ? _c : undefined;
         return message;
@@ -1239,12 +1239,12 @@ export const Wallet = {
     },
 };
 function createBaseLanguage() {
-    return { AccountID: "", Language: "", UserConfigured: false, Network: "" };
+    return { UserID: "", Language: "", UserConfigured: false, Network: "" };
 }
 export const Language = {
     encode(message, writer = _m0.Writer.create()) {
-        if (message.AccountID !== "") {
-            writer.uint32(10).string(message.AccountID);
+        if (message.UserID !== "") {
+            writer.uint32(10).string(message.UserID);
         }
         if (message.Language !== "") {
             writer.uint32(18).string(message.Language);
@@ -1268,7 +1268,7 @@ export const Language = {
                     if (tag !== 10) {
                         break;
                     }
-                    message.AccountID = reader.string();
+                    message.UserID = reader.string();
                     continue;
                 case 2:
                     if (tag !== 18) {
@@ -1298,7 +1298,7 @@ export const Language = {
     },
     fromJSON(object) {
         return {
-            AccountID: isSet(object.AccountID) ? globalThis.String(object.AccountID) : "",
+            UserID: isSet(object.UserID) ? globalThis.String(object.UserID) : "",
             Language: isSet(object.Language) ? globalThis.String(object.Language) : "",
             UserConfigured: isSet(object.UserConfigured) ? globalThis.Boolean(object.UserConfigured) : false,
             Network: isSet(object.Network) ? globalThis.String(object.Network) : "",
@@ -1306,8 +1306,8 @@ export const Language = {
     },
     toJSON(message) {
         const obj = {};
-        if (message.AccountID !== "") {
-            obj.AccountID = message.AccountID;
+        if (message.UserID !== "") {
+            obj.UserID = message.UserID;
         }
         if (message.Language !== "") {
             obj.Language = message.Language;
@@ -1326,10 +1326,187 @@ export const Language = {
     fromPartial(object) {
         var _a, _b, _c, _d;
         const message = createBaseLanguage();
-        message.AccountID = (_a = object.AccountID) !== null && _a !== void 0 ? _a : "";
+        message.UserID = (_a = object.UserID) !== null && _a !== void 0 ? _a : "";
         message.Language = (_b = object.Language) !== null && _b !== void 0 ? _b : "";
         message.UserConfigured = (_c = object.UserConfigured) !== null && _c !== void 0 ? _c : false;
         message.Network = (_d = object.Network) !== null && _d !== void 0 ? _d : "";
+        return message;
+    },
+};
+function createBaseUserList() {
+    return { Users: [], Total: 0 };
+}
+export const UserList = {
+    encode(message, writer = _m0.Writer.create()) {
+        for (const v of message.Users) {
+            User.encode(v, writer.uint32(10).fork()).ldelim();
+        }
+        if (message.Total !== 0) {
+            writer.uint32(16).int32(message.Total);
+        }
+        return writer;
+    },
+    decode(input, length) {
+        const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+        let end = length === undefined ? reader.len : reader.pos + length;
+        const message = createBaseUserList();
+        while (reader.pos < end) {
+            const tag = reader.uint32();
+            switch (tag >>> 3) {
+                case 1:
+                    if (tag !== 10) {
+                        break;
+                    }
+                    message.Users.push(User.decode(reader, reader.uint32()));
+                    continue;
+                case 2:
+                    if (tag !== 16) {
+                        break;
+                    }
+                    message.Total = reader.int32();
+                    continue;
+            }
+            if ((tag & 7) === 4 || tag === 0) {
+                break;
+            }
+            reader.skipType(tag & 7);
+        }
+        return message;
+    },
+    fromJSON(object) {
+        return {
+            Users: globalThis.Array.isArray(object === null || object === void 0 ? void 0 : object.Users) ? object.Users.map((e) => User.fromJSON(e)) : [],
+            Total: isSet(object.Total) ? globalThis.Number(object.Total) : 0,
+        };
+    },
+    toJSON(message) {
+        var _a;
+        const obj = {};
+        if ((_a = message.Users) === null || _a === void 0 ? void 0 : _a.length) {
+            obj.Users = message.Users.map((e) => User.toJSON(e));
+        }
+        if (message.Total !== 0) {
+            obj.Total = Math.round(message.Total);
+        }
+        return obj;
+    },
+    create(base) {
+        return UserList.fromPartial(base !== null && base !== void 0 ? base : {});
+    },
+    fromPartial(object) {
+        var _a, _b;
+        const message = createBaseUserList();
+        message.Users = ((_a = object.Users) === null || _a === void 0 ? void 0 : _a.map((e) => User.fromPartial(e))) || [];
+        message.Total = (_b = object.Total) !== null && _b !== void 0 ? _b : 0;
+        return message;
+    },
+};
+function createBaseSetStatusMessage() {
+    return { UserID: "", OrganizationID: "", Status: 0, Network: undefined, Audit: undefined };
+}
+export const SetStatusMessage = {
+    encode(message, writer = _m0.Writer.create()) {
+        if (message.UserID !== "") {
+            writer.uint32(10).string(message.UserID);
+        }
+        if (message.OrganizationID !== "") {
+            writer.uint32(18).string(message.OrganizationID);
+        }
+        if (message.Status !== 0) {
+            writer.uint32(24).int32(message.Status);
+        }
+        if (message.Network !== undefined) {
+            writer.uint32(32).int32(message.Network);
+        }
+        if (message.Audit !== undefined) {
+            Audit.encode(message.Audit, writer.uint32(42).fork()).ldelim();
+        }
+        return writer;
+    },
+    decode(input, length) {
+        const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+        let end = length === undefined ? reader.len : reader.pos + length;
+        const message = createBaseSetStatusMessage();
+        while (reader.pos < end) {
+            const tag = reader.uint32();
+            switch (tag >>> 3) {
+                case 1:
+                    if (tag !== 10) {
+                        break;
+                    }
+                    message.UserID = reader.string();
+                    continue;
+                case 2:
+                    if (tag !== 18) {
+                        break;
+                    }
+                    message.OrganizationID = reader.string();
+                    continue;
+                case 3:
+                    if (tag !== 24) {
+                        break;
+                    }
+                    message.Status = reader.int32();
+                    continue;
+                case 4:
+                    if (tag !== 32) {
+                        break;
+                    }
+                    message.Network = reader.int32();
+                    continue;
+                case 5:
+                    if (tag !== 42) {
+                        break;
+                    }
+                    message.Audit = Audit.decode(reader, reader.uint32());
+                    continue;
+            }
+            if ((tag & 7) === 4 || tag === 0) {
+                break;
+            }
+            reader.skipType(tag & 7);
+        }
+        return message;
+    },
+    fromJSON(object) {
+        return {
+            UserID: isSet(object.UserID) ? globalThis.String(object.UserID) : "",
+            OrganizationID: isSet(object.OrganizationID) ? globalThis.String(object.OrganizationID) : "",
+            Status: isSet(object.Status) ? userStatusFromJSON(object.Status) : 0,
+            Network: isSet(object.Network) ? networkFromJSON(object.Network) : undefined,
+            Audit: isSet(object.Audit) ? Audit.fromJSON(object.Audit) : undefined,
+        };
+    },
+    toJSON(message) {
+        const obj = {};
+        if (message.UserID !== "") {
+            obj.UserID = message.UserID;
+        }
+        if (message.OrganizationID !== "") {
+            obj.OrganizationID = message.OrganizationID;
+        }
+        if (message.Status !== 0) {
+            obj.Status = userStatusToJSON(message.Status);
+        }
+        if (message.Network !== undefined) {
+            obj.Network = networkToJSON(message.Network);
+        }
+        if (message.Audit !== undefined) {
+            obj.Audit = Audit.toJSON(message.Audit);
+        }
+        return obj;
+    },
+    create(base) {
+        return SetStatusMessage.fromPartial(base !== null && base !== void 0 ? base : {});
+    },
+    fromPartial(object) {
+        var _a, _b, _c, _d;
+        const message = createBaseSetStatusMessage();
+        message.UserID = (_a = object.UserID) !== null && _a !== void 0 ? _a : "";
+        message.OrganizationID = (_b = object.OrganizationID) !== null && _b !== void 0 ? _b : "";
+        message.Status = (_c = object.Status) !== null && _c !== void 0 ? _c : 0;
+        message.Network = (_d = object.Network) !== null && _d !== void 0 ? _d : undefined;
+        message.Audit = (object.Audit !== undefined && object.Audit !== null) ? Audit.fromPartial(object.Audit) : undefined;
         return message;
     },
 };

@@ -2,7 +2,7 @@
 // versions:
 //   protoc-gen-ts_proto  v1.181.2
 //   protoc               v5.29.1
-// source: account.proto
+// source: user.proto
 
 /* eslint-disable */
 import _m0 from "protobufjs/minimal";
@@ -16,7 +16,7 @@ import {
 } from "./sologenic/com-fs-utils-lib/models/metadata/metadata";
 import { Role, roleFromJSON, roleToJSON } from "./sologenic/com-fs-utils-lib/models/role/role";
 
-export const protobufPackage = "account";
+export const protobufPackage = "user";
 
 export enum EmploymentType {
   NOT_USED_EMPLOYMENTTYPE = 0,
@@ -303,9 +303,9 @@ export function socialTypeToJSON(object: SocialType): string {
   }
 }
 
-export interface AccountDetails {
+export interface UserDetails {
   /** email address used for firebase authentication */
-  AccountID: string;
+  UserID: string;
   FirstName: string;
   LastName: string;
   Address: string;
@@ -360,14 +360,14 @@ export interface EmployerContact {
   Address: string;
 }
 
-export interface Account {
-  Account: AccountDetails | undefined;
+export interface User {
+  User: UserDetails | undefined;
   MetaData: MetaData | undefined;
   Audit: Audit | undefined;
 }
 
-export interface AccountID {
-  AccountID: string;
+export interface UserID {
+  UserID: string;
   OrganizationID: string;
   Network?: Network | undefined;
 }
@@ -384,15 +384,28 @@ export interface Wallet {
 }
 
 export interface Language {
-  AccountID: string;
+  UserID: string;
   Language: string;
   UserConfigured: boolean;
   Network: string;
 }
 
-function createBaseAccountDetails(): AccountDetails {
+export interface UserList {
+  Users: User[];
+  Total: number;
+}
+
+export interface SetStatusMessage {
+  UserID: string;
+  OrganizationID: string;
+  Status: UserStatus;
+  Network?: Network | undefined;
+  Audit: Audit | undefined;
+}
+
+function createBaseUserDetails(): UserDetails {
   return {
-    AccountID: "",
+    UserID: "",
     FirstName: "",
     LastName: "",
     Address: "",
@@ -410,10 +423,10 @@ function createBaseAccountDetails(): AccountDetails {
   };
 }
 
-export const AccountDetails = {
-  encode(message: AccountDetails, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.AccountID !== "") {
-      writer.uint32(10).string(message.AccountID);
+export const UserDetails = {
+  encode(message: UserDetails, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.UserID !== "") {
+      writer.uint32(10).string(message.UserID);
     }
     if (message.FirstName !== "") {
       writer.uint32(18).string(message.FirstName);
@@ -460,10 +473,10 @@ export const AccountDetails = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): AccountDetails {
+  decode(input: _m0.Reader | Uint8Array, length?: number): UserDetails {
     const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseAccountDetails();
+    const message = createBaseUserDetails();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -472,7 +485,7 @@ export const AccountDetails = {
             break;
           }
 
-          message.AccountID = reader.string();
+          message.UserID = reader.string();
           continue;
         case 2:
           if (tag !== 18) {
@@ -581,9 +594,9 @@ export const AccountDetails = {
     return message;
   },
 
-  fromJSON(object: any): AccountDetails {
+  fromJSON(object: any): UserDetails {
     return {
-      AccountID: isSet(object.AccountID) ? globalThis.String(object.AccountID) : "",
+      UserID: isSet(object.UserID) ? globalThis.String(object.UserID) : "",
       FirstName: isSet(object.FirstName) ? globalThis.String(object.FirstName) : "",
       LastName: isSet(object.LastName) ? globalThis.String(object.LastName) : "",
       Address: isSet(object.Address) ? globalThis.String(object.Address) : "",
@@ -601,10 +614,10 @@ export const AccountDetails = {
     };
   },
 
-  toJSON(message: AccountDetails): unknown {
+  toJSON(message: UserDetails): unknown {
     const obj: any = {};
-    if (message.AccountID !== "") {
-      obj.AccountID = message.AccountID;
+    if (message.UserID !== "") {
+      obj.UserID = message.UserID;
     }
     if (message.FirstName !== "") {
       obj.FirstName = message.FirstName;
@@ -651,12 +664,12 @@ export const AccountDetails = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<AccountDetails>, I>>(base?: I): AccountDetails {
-    return AccountDetails.fromPartial(base ?? ({} as any));
+  create<I extends Exact<DeepPartial<UserDetails>, I>>(base?: I): UserDetails {
+    return UserDetails.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<AccountDetails>, I>>(object: I): AccountDetails {
-    const message = createBaseAccountDetails();
-    message.AccountID = object.AccountID ?? "";
+  fromPartial<I extends Exact<DeepPartial<UserDetails>, I>>(object: I): UserDetails {
+    const message = createBaseUserDetails();
+    message.UserID = object.UserID ?? "";
     message.FirstName = object.FirstName ?? "";
     message.LastName = object.LastName ?? "";
     message.Address = object.Address ?? "";
@@ -1081,14 +1094,14 @@ export const EmployerContact = {
   },
 };
 
-function createBaseAccount(): Account {
-  return { Account: undefined, MetaData: undefined, Audit: undefined };
+function createBaseUser(): User {
+  return { User: undefined, MetaData: undefined, Audit: undefined };
 }
 
-export const Account = {
-  encode(message: Account, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.Account !== undefined) {
-      AccountDetails.encode(message.Account, writer.uint32(10).fork()).ldelim();
+export const User = {
+  encode(message: User, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.User !== undefined) {
+      UserDetails.encode(message.User, writer.uint32(10).fork()).ldelim();
     }
     if (message.MetaData !== undefined) {
       MetaData.encode(message.MetaData, writer.uint32(18).fork()).ldelim();
@@ -1099,10 +1112,10 @@ export const Account = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): Account {
+  decode(input: _m0.Reader | Uint8Array, length?: number): User {
     const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseAccount();
+    const message = createBaseUser();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -1111,7 +1124,7 @@ export const Account = {
             break;
           }
 
-          message.Account = AccountDetails.decode(reader, reader.uint32());
+          message.User = UserDetails.decode(reader, reader.uint32());
           continue;
         case 2:
           if (tag !== 18) {
@@ -1136,18 +1149,18 @@ export const Account = {
     return message;
   },
 
-  fromJSON(object: any): Account {
+  fromJSON(object: any): User {
     return {
-      Account: isSet(object.Account) ? AccountDetails.fromJSON(object.Account) : undefined,
+      User: isSet(object.User) ? UserDetails.fromJSON(object.User) : undefined,
       MetaData: isSet(object.MetaData) ? MetaData.fromJSON(object.MetaData) : undefined,
       Audit: isSet(object.Audit) ? Audit.fromJSON(object.Audit) : undefined,
     };
   },
 
-  toJSON(message: Account): unknown {
+  toJSON(message: User): unknown {
     const obj: any = {};
-    if (message.Account !== undefined) {
-      obj.Account = AccountDetails.toJSON(message.Account);
+    if (message.User !== undefined) {
+      obj.User = UserDetails.toJSON(message.User);
     }
     if (message.MetaData !== undefined) {
       obj.MetaData = MetaData.toJSON(message.MetaData);
@@ -1158,13 +1171,13 @@ export const Account = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<Account>, I>>(base?: I): Account {
-    return Account.fromPartial(base ?? ({} as any));
+  create<I extends Exact<DeepPartial<User>, I>>(base?: I): User {
+    return User.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<Account>, I>>(object: I): Account {
-    const message = createBaseAccount();
-    message.Account = (object.Account !== undefined && object.Account !== null)
-      ? AccountDetails.fromPartial(object.Account)
+  fromPartial<I extends Exact<DeepPartial<User>, I>>(object: I): User {
+    const message = createBaseUser();
+    message.User = (object.User !== undefined && object.User !== null)
+      ? UserDetails.fromPartial(object.User)
       : undefined;
     message.MetaData = (object.MetaData !== undefined && object.MetaData !== null)
       ? MetaData.fromPartial(object.MetaData)
@@ -1174,14 +1187,14 @@ export const Account = {
   },
 };
 
-function createBaseAccountID(): AccountID {
-  return { AccountID: "", OrganizationID: "", Network: undefined };
+function createBaseUserID(): UserID {
+  return { UserID: "", OrganizationID: "", Network: undefined };
 }
 
-export const AccountID = {
-  encode(message: AccountID, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.AccountID !== "") {
-      writer.uint32(10).string(message.AccountID);
+export const UserID = {
+  encode(message: UserID, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.UserID !== "") {
+      writer.uint32(10).string(message.UserID);
     }
     if (message.OrganizationID !== "") {
       writer.uint32(18).string(message.OrganizationID);
@@ -1192,10 +1205,10 @@ export const AccountID = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): AccountID {
+  decode(input: _m0.Reader | Uint8Array, length?: number): UserID {
     const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseAccountID();
+    const message = createBaseUserID();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -1204,7 +1217,7 @@ export const AccountID = {
             break;
           }
 
-          message.AccountID = reader.string();
+          message.UserID = reader.string();
           continue;
         case 2:
           if (tag !== 18) {
@@ -1229,18 +1242,18 @@ export const AccountID = {
     return message;
   },
 
-  fromJSON(object: any): AccountID {
+  fromJSON(object: any): UserID {
     return {
-      AccountID: isSet(object.AccountID) ? globalThis.String(object.AccountID) : "",
+      UserID: isSet(object.UserID) ? globalThis.String(object.UserID) : "",
       OrganizationID: isSet(object.OrganizationID) ? globalThis.String(object.OrganizationID) : "",
       Network: isSet(object.Network) ? networkFromJSON(object.Network) : undefined,
     };
   },
 
-  toJSON(message: AccountID): unknown {
+  toJSON(message: UserID): unknown {
     const obj: any = {};
-    if (message.AccountID !== "") {
-      obj.AccountID = message.AccountID;
+    if (message.UserID !== "") {
+      obj.UserID = message.UserID;
     }
     if (message.OrganizationID !== "") {
       obj.OrganizationID = message.OrganizationID;
@@ -1251,12 +1264,12 @@ export const AccountID = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<AccountID>, I>>(base?: I): AccountID {
-    return AccountID.fromPartial(base ?? ({} as any));
+  create<I extends Exact<DeepPartial<UserID>, I>>(base?: I): UserID {
+    return UserID.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<AccountID>, I>>(object: I): AccountID {
-    const message = createBaseAccountID();
-    message.AccountID = object.AccountID ?? "";
+  fromPartial<I extends Exact<DeepPartial<UserID>, I>>(object: I): UserID {
+    const message = createBaseUserID();
+    message.UserID = object.UserID ?? "";
     message.OrganizationID = object.OrganizationID ?? "";
     message.Network = object.Network ?? undefined;
     return message;
@@ -1427,13 +1440,13 @@ export const Wallet = {
 };
 
 function createBaseLanguage(): Language {
-  return { AccountID: "", Language: "", UserConfigured: false, Network: "" };
+  return { UserID: "", Language: "", UserConfigured: false, Network: "" };
 }
 
 export const Language = {
   encode(message: Language, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.AccountID !== "") {
-      writer.uint32(10).string(message.AccountID);
+    if (message.UserID !== "") {
+      writer.uint32(10).string(message.UserID);
     }
     if (message.Language !== "") {
       writer.uint32(18).string(message.Language);
@@ -1459,7 +1472,7 @@ export const Language = {
             break;
           }
 
-          message.AccountID = reader.string();
+          message.UserID = reader.string();
           continue;
         case 2:
           if (tag !== 18) {
@@ -1493,7 +1506,7 @@ export const Language = {
 
   fromJSON(object: any): Language {
     return {
-      AccountID: isSet(object.AccountID) ? globalThis.String(object.AccountID) : "",
+      UserID: isSet(object.UserID) ? globalThis.String(object.UserID) : "",
       Language: isSet(object.Language) ? globalThis.String(object.Language) : "",
       UserConfigured: isSet(object.UserConfigured) ? globalThis.Boolean(object.UserConfigured) : false,
       Network: isSet(object.Network) ? globalThis.String(object.Network) : "",
@@ -1502,8 +1515,8 @@ export const Language = {
 
   toJSON(message: Language): unknown {
     const obj: any = {};
-    if (message.AccountID !== "") {
-      obj.AccountID = message.AccountID;
+    if (message.UserID !== "") {
+      obj.UserID = message.UserID;
     }
     if (message.Language !== "") {
       obj.Language = message.Language;
@@ -1522,10 +1535,203 @@ export const Language = {
   },
   fromPartial<I extends Exact<DeepPartial<Language>, I>>(object: I): Language {
     const message = createBaseLanguage();
-    message.AccountID = object.AccountID ?? "";
+    message.UserID = object.UserID ?? "";
     message.Language = object.Language ?? "";
     message.UserConfigured = object.UserConfigured ?? false;
     message.Network = object.Network ?? "";
+    return message;
+  },
+};
+
+function createBaseUserList(): UserList {
+  return { Users: [], Total: 0 };
+}
+
+export const UserList = {
+  encode(message: UserList, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    for (const v of message.Users) {
+      User.encode(v!, writer.uint32(10).fork()).ldelim();
+    }
+    if (message.Total !== 0) {
+      writer.uint32(16).int32(message.Total);
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): UserList {
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseUserList();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          if (tag !== 10) {
+            break;
+          }
+
+          message.Users.push(User.decode(reader, reader.uint32()));
+          continue;
+        case 2:
+          if (tag !== 16) {
+            break;
+          }
+
+          message.Total = reader.int32();
+          continue;
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): UserList {
+    return {
+      Users: globalThis.Array.isArray(object?.Users) ? object.Users.map((e: any) => User.fromJSON(e)) : [],
+      Total: isSet(object.Total) ? globalThis.Number(object.Total) : 0,
+    };
+  },
+
+  toJSON(message: UserList): unknown {
+    const obj: any = {};
+    if (message.Users?.length) {
+      obj.Users = message.Users.map((e) => User.toJSON(e));
+    }
+    if (message.Total !== 0) {
+      obj.Total = Math.round(message.Total);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<UserList>, I>>(base?: I): UserList {
+    return UserList.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<UserList>, I>>(object: I): UserList {
+    const message = createBaseUserList();
+    message.Users = object.Users?.map((e) => User.fromPartial(e)) || [];
+    message.Total = object.Total ?? 0;
+    return message;
+  },
+};
+
+function createBaseSetStatusMessage(): SetStatusMessage {
+  return { UserID: "", OrganizationID: "", Status: 0, Network: undefined, Audit: undefined };
+}
+
+export const SetStatusMessage = {
+  encode(message: SetStatusMessage, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.UserID !== "") {
+      writer.uint32(10).string(message.UserID);
+    }
+    if (message.OrganizationID !== "") {
+      writer.uint32(18).string(message.OrganizationID);
+    }
+    if (message.Status !== 0) {
+      writer.uint32(24).int32(message.Status);
+    }
+    if (message.Network !== undefined) {
+      writer.uint32(32).int32(message.Network);
+    }
+    if (message.Audit !== undefined) {
+      Audit.encode(message.Audit, writer.uint32(42).fork()).ldelim();
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): SetStatusMessage {
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseSetStatusMessage();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          if (tag !== 10) {
+            break;
+          }
+
+          message.UserID = reader.string();
+          continue;
+        case 2:
+          if (tag !== 18) {
+            break;
+          }
+
+          message.OrganizationID = reader.string();
+          continue;
+        case 3:
+          if (tag !== 24) {
+            break;
+          }
+
+          message.Status = reader.int32() as any;
+          continue;
+        case 4:
+          if (tag !== 32) {
+            break;
+          }
+
+          message.Network = reader.int32() as any;
+          continue;
+        case 5:
+          if (tag !== 42) {
+            break;
+          }
+
+          message.Audit = Audit.decode(reader, reader.uint32());
+          continue;
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): SetStatusMessage {
+    return {
+      UserID: isSet(object.UserID) ? globalThis.String(object.UserID) : "",
+      OrganizationID: isSet(object.OrganizationID) ? globalThis.String(object.OrganizationID) : "",
+      Status: isSet(object.Status) ? userStatusFromJSON(object.Status) : 0,
+      Network: isSet(object.Network) ? networkFromJSON(object.Network) : undefined,
+      Audit: isSet(object.Audit) ? Audit.fromJSON(object.Audit) : undefined,
+    };
+  },
+
+  toJSON(message: SetStatusMessage): unknown {
+    const obj: any = {};
+    if (message.UserID !== "") {
+      obj.UserID = message.UserID;
+    }
+    if (message.OrganizationID !== "") {
+      obj.OrganizationID = message.OrganizationID;
+    }
+    if (message.Status !== 0) {
+      obj.Status = userStatusToJSON(message.Status);
+    }
+    if (message.Network !== undefined) {
+      obj.Network = networkToJSON(message.Network);
+    }
+    if (message.Audit !== undefined) {
+      obj.Audit = Audit.toJSON(message.Audit);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<SetStatusMessage>, I>>(base?: I): SetStatusMessage {
+    return SetStatusMessage.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<SetStatusMessage>, I>>(object: I): SetStatusMessage {
+    const message = createBaseSetStatusMessage();
+    message.UserID = object.UserID ?? "";
+    message.OrganizationID = object.OrganizationID ?? "";
+    message.Status = object.Status ?? 0;
+    message.Network = object.Network ?? undefined;
+    message.Audit = (object.Audit !== undefined && object.Audit !== null) ? Audit.fromPartial(object.Audit) : undefined;
     return message;
   },
 };

@@ -1,6 +1,6 @@
 /*
-The account_store middleware package provides:
-- Initialization of the account_store service client
+The user_store middleware package provides:
+- Initialization of the user_store service client
 
 The config:
 - Parses the config as provided to the app
@@ -14,16 +14,16 @@ package client
 import (
 	"context"
 
-	grpcdef "github.com/sologenic/com-fs-account-model"
+	grpcdef "github.com/sologenic/com-fs-user-model"
 	grpcclient "github.com/sologenic/com-fs-utils-lib/go/grpc-client"
 )
 
 const (
-	endpoint = "ACCOUNT_STORE"
+	endpoint = "USER_STORE"
 )
 
 var (
-	client     grpcdef.AccountServiceClient
+	client     grpcdef.AdminUserServiceClient
 	grpcClient *grpcclient.GRPCClient
 )
 
@@ -35,10 +35,10 @@ localhost => No port is not local
 */
 func initClient() {
 	grpcClient = grpcclient.InitClient(endpoint)
-	client = grpcdef.NewAccountServiceClient(grpcClient.Conn)
+	client = grpcdef.NewAdminUserServiceClient(grpcClient.Conn)
 }
 
-func Client() grpcdef.AccountServiceClient {
+func Client() grpcdef.AdminUserServiceClient {
 	if client == nil {
 		initClient()
 	}

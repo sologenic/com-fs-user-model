@@ -1,8 +1,8 @@
 {
-  "name": "com-fs-account-model",
+  "name": "com-fs-user-model",
   "version": "1.1.0",
-  "description": "Full stack model for Admin Account",
-  "main": "build/account.js",
+  "description": "Full stack model for Admin User",
+  "main": "build/user.js",
   "scripts": {
     "build": "rm -rf ./build && npx tsc -p tsconfig.json"  
   },

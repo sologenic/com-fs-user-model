@@ -1,4 +1,4 @@
-module github.com/sologenic/com-fs-account-model
+module github.com/sologenic/com-fs-user-model
 
 go 1.23.6
 

@@ -1,16 +1,16 @@
 syntax = "proto3";
 
-package account;
+package user;
 
-option go_package = "github.com/sologenic/com-fs-account-model;account";
+option go_package = "github.com/sologenic/com-fs-user-model;user";
 
 import "google/protobuf/timestamp.proto";
 import "sologenic/com-fs-utils-lib/models/metadata/metadata.proto";
 import "sologenic/com-fs-utils-lib/models/audit/audit.proto";
 import "sologenic/com-fs-utils-lib/models/role/role.proto";
 
-message AccountDetails {
-    string AccountID = 1; // email address used for firebase authentication
+message UserDetails {
+    string UserID = 1; // email address used for firebase authentication
     string FirstName = 2; 
     string LastName = 3;
     string Address = 4;
@@ -73,14 +73,14 @@ enum IncomeFrequency {
     ANNUALLY = 5;
 }
 
-message Account {
-    AccountDetails Account = 1;
+message User {
+    UserDetails User = 1;
     metadata.MetaData MetaData = 2;
     audit.Audit Audit = 3;
 } 
 
-message AccountID {
-    string AccountID = 1;
+message UserID {
+    string UserID = 1;
     string OrganizationID = 2;
     optional metadata.Network Network = 3; 
 }
@@ -123,8 +123,21 @@ enum SocialType {
 }
 
 message Language {
-    string AccountID = 1;
+    string UserID = 1;
     string Language = 2;
     bool UserConfigured = 3;
     string Network = 4;
+}
+
+message UserList {
+    repeated User Users = 1;
+    int32 Total = 2;
+}
+
+message SetStatusMessage {
+    string UserID = 1;
+    string OrganizationID = 2;
+    UserStatus Status = 3;
+    optional metadata.Network Network = 4;
+    audit.Audit Audit = 5;
 }
