@@ -6,6 +6,13 @@ import { Empty } from "./google/protobuf/empty";
 import { Network } from "./sologenic/com-fs-utils-lib/models/metadata/metadata";
 import { SetStatusMessage, User, UserID, UserList } from "./user";
 export declare const protobufPackage = "user";
+export interface Filter {
+    UserIDs: string[];
+    Network?: Network | undefined;
+    OrganizationID?: string | undefined;
+    Offset?: number | undefined;
+    Limit?: number | undefined;
+}
 export interface AuditFilter {
     UserID?: string | undefined;
     ChangedBy?: string | undefined;
@@ -14,6 +21,38 @@ export interface AuditFilter {
     Limit?: number | undefined;
     Offset?: number | undefined;
 }
+export declare const Filter: {
+    encode(message: Filter, writer?: _m0.Writer): _m0.Writer;
+    decode(input: _m0.Reader | Uint8Array, length?: number): Filter;
+    fromJSON(object: any): Filter;
+    toJSON(message: Filter): unknown;
+    create<I extends {
+        UserIDs?: string[] | undefined;
+        Network?: Network | undefined;
+        OrganizationID?: string | undefined;
+        Offset?: number | undefined;
+        Limit?: number | undefined;
+    } & {
+        UserIDs?: (string[] & string[] & { [K in Exclude<keyof I["UserIDs"], keyof string[]>]: never; }) | undefined;
+        Network?: Network | undefined;
+        OrganizationID?: string | undefined;
+        Offset?: number | undefined;
+        Limit?: number | undefined;
+    } & { [K_1 in Exclude<keyof I, keyof Filter>]: never; }>(base?: I | undefined): Filter;
+    fromPartial<I_1 extends {
+        UserIDs?: string[] | undefined;
+        Network?: Network | undefined;
+        OrganizationID?: string | undefined;
+        Offset?: number | undefined;
+        Limit?: number | undefined;
+    } & {
+        UserIDs?: (string[] & string[] & { [K_2 in Exclude<keyof I_1["UserIDs"], keyof string[]>]: never; }) | undefined;
+        Network?: Network | undefined;
+        OrganizationID?: string | undefined;
+        Offset?: number | undefined;
+        Limit?: number | undefined;
+    } & { [K_3 in Exclude<keyof I_1, keyof Filter>]: never; }>(object: I_1): Filter;
+};
 export declare const AuditFilter: {
     encode(message: AuditFilter, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): AuditFilter;
@@ -65,8 +104,8 @@ export declare const AdminUserServiceService: {
         readonly path: "/user.AdminUserService/List";
         readonly requestStream: false;
         readonly responseStream: false;
-        readonly requestSerialize: (value: Empty) => Buffer;
-        readonly requestDeserialize: (value: Buffer) => Empty;
+        readonly requestSerialize: (value: Filter) => Buffer;
+        readonly requestDeserialize: (value: Buffer) => Filter;
         readonly responseSerialize: (value: UserList) => Buffer;
         readonly responseDeserialize: (value: Buffer) => UserList;
     };
@@ -100,7 +139,7 @@ export declare const AdminUserServiceService: {
 };
 export interface AdminUserServiceServer extends UntypedServiceImplementation {
     get: handleUnaryCall<UserID, User>;
-    list: handleUnaryCall<Empty, UserList>;
+    list: handleUnaryCall<Filter, UserList>;
     update: handleUnaryCall<User, UserID>;
     setStatus: handleUnaryCall<SetStatusMessage, Empty>;
     listAudit: handleUnaryCall<AuditFilter, UserList>;
@@ -109,9 +148,9 @@ export interface AdminUserServiceClient extends Client {
     get(request: UserID, callback: (error: ServiceError | null, response: User) => void): ClientUnaryCall;
     get(request: UserID, metadata: Metadata, callback: (error: ServiceError | null, response: User) => void): ClientUnaryCall;
     get(request: UserID, metadata: Metadata, options: Partial<CallOptions>, callback: (error: ServiceError | null, response: User) => void): ClientUnaryCall;
-    list(request: Empty, callback: (error: ServiceError | null, response: UserList) => void): ClientUnaryCall;
-    list(request: Empty, metadata: Metadata, callback: (error: ServiceError | null, response: UserList) => void): ClientUnaryCall;
-    list(request: Empty, metadata: Metadata, options: Partial<CallOptions>, callback: (error: ServiceError | null, response: UserList) => void): ClientUnaryCall;
+    list(request: Filter, callback: (error: ServiceError | null, response: UserList) => void): ClientUnaryCall;
+    list(request: Filter, metadata: Metadata, callback: (error: ServiceError | null, response: UserList) => void): ClientUnaryCall;
+    list(request: Filter, metadata: Metadata, options: Partial<CallOptions>, callback: (error: ServiceError | null, response: UserList) => void): ClientUnaryCall;
     update(request: User, callback: (error: ServiceError | null, response: UserID) => void): ClientUnaryCall;
     update(request: User, metadata: Metadata, callback: (error: ServiceError | null, response: UserID) => void): ClientUnaryCall;
     update(request: User, metadata: Metadata, options: Partial<CallOptions>, callback: (error: ServiceError | null, response: UserID) => void): ClientUnaryCall;
