@@ -22,7 +22,7 @@ message KYCApplicationID {
 }
 
 message AuditFilter {
-    optional string AccountID = 1; 
+    optional string UserID = 1; 
     optional string ChangedBy = 2;
     optional metadata.Network Network = 3; 
     optional string OrganizationID = 4;

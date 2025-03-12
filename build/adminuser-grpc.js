@@ -63,7 +63,7 @@ export const KYCApplicationID = {
 };
 function createBaseAuditFilter() {
     return {
-        AccountID: undefined,
+        UserID: undefined,
         ChangedBy: undefined,
         Network: undefined,
         OrganizationID: undefined,
@@ -73,8 +73,8 @@ function createBaseAuditFilter() {
 }
 export const AuditFilter = {
     encode(message, writer = _m0.Writer.create()) {
-        if (message.AccountID !== undefined) {
-            writer.uint32(10).string(message.AccountID);
+        if (message.UserID !== undefined) {
+            writer.uint32(10).string(message.UserID);
         }
         if (message.ChangedBy !== undefined) {
             writer.uint32(18).string(message.ChangedBy);
@@ -104,7 +104,7 @@ export const AuditFilter = {
                     if (tag !== 10) {
                         break;
                     }
-                    message.AccountID = reader.string();
+                    message.UserID = reader.string();
                     continue;
                 case 2:
                     if (tag !== 18) {
@@ -146,7 +146,7 @@ export const AuditFilter = {
     },
     fromJSON(object) {
         return {
-            AccountID: isSet(object.AccountID) ? globalThis.String(object.AccountID) : undefined,
+            UserID: isSet(object.UserID) ? globalThis.String(object.UserID) : undefined,
             ChangedBy: isSet(object.ChangedBy) ? globalThis.String(object.ChangedBy) : undefined,
             Network: isSet(object.Network) ? networkFromJSON(object.Network) : undefined,
             OrganizationID: isSet(object.OrganizationID) ? globalThis.String(object.OrganizationID) : undefined,
@@ -156,8 +156,8 @@ export const AuditFilter = {
     },
     toJSON(message) {
         const obj = {};
-        if (message.AccountID !== undefined) {
-            obj.AccountID = message.AccountID;
+        if (message.UserID !== undefined) {
+            obj.UserID = message.UserID;
         }
         if (message.ChangedBy !== undefined) {
             obj.ChangedBy = message.ChangedBy;
@@ -182,7 +182,7 @@ export const AuditFilter = {
     fromPartial(object) {
         var _a, _b, _c, _d, _e, _f;
         const message = createBaseAuditFilter();
-        message.AccountID = (_a = object.AccountID) !== null && _a !== void 0 ? _a : undefined;
+        message.UserID = (_a = object.UserID) !== null && _a !== void 0 ? _a : undefined;
         message.ChangedBy = (_b = object.ChangedBy) !== null && _b !== void 0 ? _b : undefined;
         message.Network = (_c = object.Network) !== null && _c !== void 0 ? _c : undefined;
         message.OrganizationID = (_d = object.OrganizationID) !== null && _d !== void 0 ? _d : undefined;

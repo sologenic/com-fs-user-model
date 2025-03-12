@@ -11,7 +11,7 @@ export interface KYCApplicationID {
     KYCApplicationID: string;
 }
 export interface AuditFilter {
-    AccountID?: string | undefined;
+    UserID?: string | undefined;
     ChangedBy?: string | undefined;
     Network?: Network | undefined;
     OrganizationID?: string | undefined;
@@ -40,14 +40,14 @@ export declare const AuditFilter: {
     fromJSON(object: any): AuditFilter;
     toJSON(message: AuditFilter): unknown;
     create<I extends {
-        AccountID?: string | undefined;
+        UserID?: string | undefined;
         ChangedBy?: string | undefined;
         Network?: Network | undefined;
         OrganizationID?: string | undefined;
         Limit?: number | undefined;
         Offset?: number | undefined;
     } & {
-        AccountID?: string | undefined;
+        UserID?: string | undefined;
         ChangedBy?: string | undefined;
         Network?: Network | undefined;
         OrganizationID?: string | undefined;
@@ -55,14 +55,14 @@ export declare const AuditFilter: {
         Offset?: number | undefined;
     } & { [K in Exclude<keyof I, keyof AuditFilter>]: never; }>(base?: I | undefined): AuditFilter;
     fromPartial<I_1 extends {
-        AccountID?: string | undefined;
+        UserID?: string | undefined;
         ChangedBy?: string | undefined;
         Network?: Network | undefined;
         OrganizationID?: string | undefined;
         Limit?: number | undefined;
         Offset?: number | undefined;
     } & {
-        AccountID?: string | undefined;
+        UserID?: string | undefined;
         ChangedBy?: string | undefined;
         Network?: Network | undefined;
         OrganizationID?: string | undefined;
