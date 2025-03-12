@@ -23,7 +23,7 @@ const (
 )
 
 var (
-	client     grpcdef.AdminUserServiceClient
+	client     grpcdef.UserServiceClient
 	grpcClient *grpcclient.GRPCClient
 )
 
@@ -35,10 +35,10 @@ localhost => No port is not local
 */
 func initClient() {
 	grpcClient = grpcclient.InitClient(endpoint)
-	client = grpcdef.NewAdminUserServiceClient(grpcClient.Conn)
+	client = grpcdef.NewUserServiceClient(grpcClient.Conn)
 }
 
-func Client() grpcdef.AdminUserServiceClient {
+func Client() grpcdef.UserServiceClient {
 	if client == nil {
 		initClient()
 	}
