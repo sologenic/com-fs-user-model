@@ -132,7 +132,7 @@ export interface Language {
 }
 export interface UserList {
     Users: User[];
-    Total: number;
+    Offset?: number | undefined;
 }
 export interface SetStatusMessage {
     UserID: string;
@@ -1249,7 +1249,7 @@ export declare const UserList: {
                 Reason?: string | undefined;
             } | undefined;
         }[] | undefined;
-        Total?: number | undefined;
+        Offset?: number | undefined;
     } & {
         Users?: ({
             User?: {
@@ -1608,7 +1608,7 @@ export declare const UserList: {
                 Reason?: string | undefined;
             } | undefined;
         }[]>]: never; }) | undefined;
-        Total?: number | undefined;
+        Offset?: number | undefined;
     } & { [K_13 in Exclude<keyof I, keyof UserList>]: never; }>(base?: I | undefined): UserList;
     fromPartial<I_1 extends {
         Users?: {
@@ -1673,7 +1673,7 @@ export declare const UserList: {
                 Reason?: string | undefined;
             } | undefined;
         }[] | undefined;
-        Total?: number | undefined;
+        Offset?: number | undefined;
     } & {
         Users?: ({
             User?: {
@@ -2032,7 +2032,7 @@ export declare const UserList: {
                 Reason?: string | undefined;
             } | undefined;
         }[]>]: never; }) | undefined;
-        Total?: number | undefined;
+        Offset?: number | undefined;
     } & { [K_27 in Exclude<keyof I_1, keyof UserList>]: never; }>(object: I_1): UserList;
 };
 export declare const SetStatusMessage: {

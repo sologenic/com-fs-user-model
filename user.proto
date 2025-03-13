@@ -131,7 +131,7 @@ message Language {
 
 message UserList {
     repeated User Users = 1;
-    int32 Total = 2;
+    optional int32 Offset = 2;
 }
 
 message SetStatusMessage {

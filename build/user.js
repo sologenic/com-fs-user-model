@@ -1334,15 +1334,15 @@ export const Language = {
     },
 };
 function createBaseUserList() {
-    return { Users: [], Total: 0 };
+    return { Users: [], Offset: undefined };
 }
 export const UserList = {
     encode(message, writer = _m0.Writer.create()) {
         for (const v of message.Users) {
             User.encode(v, writer.uint32(10).fork()).ldelim();
         }
-        if (message.Total !== 0) {
-            writer.uint32(16).int32(message.Total);
+        if (message.Offset !== undefined) {
+            writer.uint32(16).int32(message.Offset);
         }
         return writer;
     },
@@ -1363,7 +1363,7 @@ export const UserList = {
                     if (tag !== 16) {
                         break;
                     }
-                    message.Total = reader.int32();
+                    message.Offset = reader.int32();
                     continue;
             }
             if ((tag & 7) === 4 || tag === 0) {
@@ -1376,7 +1376,7 @@ export const UserList = {
     fromJSON(object) {
         return {
             Users: globalThis.Array.isArray(object === null || object === void 0 ? void 0 : object.Users) ? object.Users.map((e) => User.fromJSON(e)) : [],
-            Total: isSet(object.Total) ? globalThis.Number(object.Total) : 0,
+            Offset: isSet(object.Offset) ? globalThis.Number(object.Offset) : undefined,
         };
     },
     toJSON(message) {
@@ -1385,8 +1385,8 @@ export const UserList = {
         if ((_a = message.Users) === null || _a === void 0 ? void 0 : _a.length) {
             obj.Users = message.Users.map((e) => User.toJSON(e));
         }
-        if (message.Total !== 0) {
-            obj.Total = Math.round(message.Total);
+        if (message.Offset !== undefined) {
+            obj.Offset = Math.round(message.Offset);
         }
         return obj;
     },
@@ -1397,7 +1397,7 @@ export const UserList = {
         var _a, _b;
         const message = createBaseUserList();
         message.Users = ((_a = object.Users) === null || _a === void 0 ? void 0 : _a.map((e) => User.fromPartial(e))) || [];
-        message.Total = (_b = object.Total) !== null && _b !== void 0 ? _b : 0;
+        message.Offset = (_b = object.Offset) !== null && _b !== void 0 ? _b : undefined;
         return message;
     },
 };

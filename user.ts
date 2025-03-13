@@ -392,7 +392,7 @@ export interface Language {
 
 export interface UserList {
   Users: User[];
-  Total: number;
+  Offset?: number | undefined;
 }
 
 export interface SetStatusMessage {
@@ -1544,7 +1544,7 @@ export const Language = {
 };
 
 function createBaseUserList(): UserList {
-  return { Users: [], Total: 0 };
+  return { Users: [], Offset: undefined };
 }
 
 export const UserList = {
@@ -1552,8 +1552,8 @@ export const UserList = {
     for (const v of message.Users) {
       User.encode(v!, writer.uint32(10).fork()).ldelim();
     }
-    if (message.Total !== 0) {
-      writer.uint32(16).int32(message.Total);
+    if (message.Offset !== undefined) {
+      writer.uint32(16).int32(message.Offset);
     }
     return writer;
   },
@@ -1577,7 +1577,7 @@ export const UserList = {
             break;
           }
 
-          message.Total = reader.int32();
+          message.Offset = reader.int32();
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -1591,7 +1591,7 @@ export const UserList = {
   fromJSON(object: any): UserList {
     return {
       Users: globalThis.Array.isArray(object?.Users) ? object.Users.map((e: any) => User.fromJSON(e)) : [],
-      Total: isSet(object.Total) ? globalThis.Number(object.Total) : 0,
+      Offset: isSet(object.Offset) ? globalThis.Number(object.Offset) : undefined,
     };
   },
 
@@ -1600,8 +1600,8 @@ export const UserList = {
     if (message.Users?.length) {
       obj.Users = message.Users.map((e) => User.toJSON(e));
     }
-    if (message.Total !== 0) {
-      obj.Total = Math.round(message.Total);
+    if (message.Offset !== undefined) {
+      obj.Offset = Math.round(message.Offset);
     }
     return obj;
   },
@@ -1612,7 +1612,7 @@ export const UserList = {
   fromPartial<I extends Exact<DeepPartial<UserList>, I>>(object: I): UserList {
     const message = createBaseUserList();
     message.Users = object.Users?.map((e) => User.fromPartial(e)) || [];
-    message.Total = object.Total ?? 0;
+    message.Offset = object.Offset ?? undefined;
     return message;
   },
 };
