@@ -23,7 +23,7 @@ message UserDetails {
     Language Language = 11;
     string ExternalUserID = 12; // UUID for the external user identifier in the KYC provider
     string OrganizationID = 13; // UUID
-    Employment Employment = 14;
+    optional Employment Employment = 14;
     role.Role Role = 15; // A retail user will always have a role of "NORMAL_USER"
 }
 

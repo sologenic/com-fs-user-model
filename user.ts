@@ -323,7 +323,7 @@ export interface UserDetails {
   ExternalUserID: string;
   /** UUID */
   OrganizationID: string;
-  Employment:
+  Employment?:
     | Employment
     | undefined;
   /** A retail user will always have a role of "NORMAL_USER" */
