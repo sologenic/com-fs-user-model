@@ -9,7 +9,7 @@ export declare const protobufPackage = "user";
 export interface Filter {
     UserIDs: string[];
     Network?: Network | undefined;
-    OrganizationID?: string | undefined;
+    OrganizationID: string;
     Offset?: number | undefined;
     Limit?: number | undefined;
 }

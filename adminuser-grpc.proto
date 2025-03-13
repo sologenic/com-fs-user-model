@@ -19,7 +19,7 @@ service AdminUserService {
 message Filter {
     repeated string UserIDs = 1;
     optional metadata.Network Network = 2; 
-    optional string OrganizationID = 3;
+    string OrganizationID = 3;
     optional int32 Offset = 4;
     optional int32 Limit = 5;
 }
