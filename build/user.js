@@ -1401,10 +1401,10 @@ export const UserList = {
         return message;
     },
 };
-function createBaseSetStatusMessage() {
+function createBaseStatusMessage() {
     return { UserID: "", OrganizationID: "", Status: 0, Network: undefined, Audit: undefined };
 }
-export const SetStatusMessage = {
+export const StatusMessage = {
     encode(message, writer = _m0.Writer.create()) {
         if (message.UserID !== "") {
             writer.uint32(10).string(message.UserID);
@@ -1426,7 +1426,7 @@ export const SetStatusMessage = {
     decode(input, length) {
         const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
         let end = length === undefined ? reader.len : reader.pos + length;
-        const message = createBaseSetStatusMessage();
+        const message = createBaseStatusMessage();
         while (reader.pos < end) {
             const tag = reader.uint32();
             switch (tag >>> 3) {
@@ -1497,11 +1497,11 @@ export const SetStatusMessage = {
         return obj;
     },
     create(base) {
-        return SetStatusMessage.fromPartial(base !== null && base !== void 0 ? base : {});
+        return StatusMessage.fromPartial(base !== null && base !== void 0 ? base : {});
     },
     fromPartial(object) {
         var _a, _b, _c, _d;
-        const message = createBaseSetStatusMessage();
+        const message = createBaseStatusMessage();
         message.UserID = (_a = object.UserID) !== null && _a !== void 0 ? _a : "";
         message.OrganizationID = (_b = object.OrganizationID) !== null && _b !== void 0 ? _b : "";
         message.Status = (_c = object.Status) !== null && _c !== void 0 ? _c : 0;

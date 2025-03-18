@@ -6,7 +6,7 @@
 /* eslint-disable */
 import { makeGenericClientConstructor, } from "@grpc/grpc-js";
 import { Empty } from "./google/protobuf/empty";
-import { SetStatusMessage, User, UserID } from "./user";
+import { StatusMessage, User, UserID } from "./user";
 export const protobufPackage = "user";
 export const UserServiceService = {
     get: {
@@ -31,8 +31,8 @@ export const UserServiceService = {
         path: "/user.UserService/SetStatus",
         requestStream: false,
         responseStream: false,
-        requestSerialize: (value) => Buffer.from(SetStatusMessage.encode(value).finish()),
-        requestDeserialize: (value) => SetStatusMessage.decode(value),
+        requestSerialize: (value) => Buffer.from(StatusMessage.encode(value).finish()),
+        requestDeserialize: (value) => StatusMessage.decode(value),
         responseSerialize: (value) => Buffer.from(Empty.encode(value).finish()),
         responseDeserialize: (value) => Empty.decode(value),
     },

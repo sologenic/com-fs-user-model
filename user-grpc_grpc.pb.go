@@ -31,7 +31,7 @@ const (
 type UserServiceClient interface {
 	Get(ctx context.Context, in *UserID, opts ...grpc.CallOption) (*User, error)
 	Upsert(ctx context.Context, in *User, opts ...grpc.CallOption) (*UserID, error)
-	SetStatus(ctx context.Context, in *SetStatusMessage, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	SetStatus(ctx context.Context, in *StatusMessage, opts ...grpc.CallOption) (*emptypb.Empty, error)
 }
 
 type userServiceClient struct {
@@ -60,7 +60,7 @@ func (c *userServiceClient) Upsert(ctx context.Context, in *User, opts ...grpc.C
 	return out, nil
 }
 
-func (c *userServiceClient) SetStatus(ctx context.Context, in *SetStatusMessage, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+func (c *userServiceClient) SetStatus(ctx context.Context, in *StatusMessage, opts ...grpc.CallOption) (*emptypb.Empty, error) {
 	out := new(emptypb.Empty)
 	err := c.cc.Invoke(ctx, UserService_SetStatus_FullMethodName, in, out, opts...)
 	if err != nil {
@@ -75,7 +75,7 @@ func (c *userServiceClient) SetStatus(ctx context.Context, in *SetStatusMessage,
 type UserServiceServer interface {
 	Get(context.Context, *UserID) (*User, error)
 	Upsert(context.Context, *User) (*UserID, error)
-	SetStatus(context.Context, *SetStatusMessage) (*emptypb.Empty, error)
+	SetStatus(context.Context, *StatusMessage) (*emptypb.Empty, error)
 }
 
 // UnimplementedUserServiceServer should be embedded to have forward compatible implementations.
@@ -88,7 +88,7 @@ func (UnimplementedUserServiceServer) Get(context.Context, *UserID) (*User, erro
 func (UnimplementedUserServiceServer) Upsert(context.Context, *User) (*UserID, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Upsert not implemented")
 }
-func (UnimplementedUserServiceServer) SetStatus(context.Context, *SetStatusMessage) (*emptypb.Empty, error) {
+func (UnimplementedUserServiceServer) SetStatus(context.Context, *StatusMessage) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SetStatus not implemented")
 }
 
@@ -140,7 +140,7 @@ func _UserService_Upsert_Handler(srv interface{}, ctx context.Context, dec func(
 }
 
 func _UserService_SetStatus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(SetStatusMessage)
+	in := new(StatusMessage)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -152,7 +152,7 @@ func _UserService_SetStatus_Handler(srv interface{}, ctx context.Context, dec fu
 		FullMethod: UserService_SetStatus_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(UserServiceServer).SetStatus(ctx, req.(*SetStatusMessage))
+		return srv.(UserServiceServer).SetStatus(ctx, req.(*StatusMessage))
 	}
 	return interceptor(ctx, in, info, handler)
 }

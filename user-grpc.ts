@@ -18,7 +18,7 @@ import {
   type UntypedServiceImplementation,
 } from "@grpc/grpc-js";
 import { Empty } from "./google/protobuf/empty";
-import { SetStatusMessage, User, UserID } from "./user";
+import { StatusMessage, User, UserID } from "./user";
 
 export const protobufPackage = "user";
 
@@ -46,8 +46,8 @@ export const UserServiceService = {
     path: "/user.UserService/SetStatus",
     requestStream: false,
     responseStream: false,
-    requestSerialize: (value: SetStatusMessage) => Buffer.from(SetStatusMessage.encode(value).finish()),
-    requestDeserialize: (value: Buffer) => SetStatusMessage.decode(value),
+    requestSerialize: (value: StatusMessage) => Buffer.from(StatusMessage.encode(value).finish()),
+    requestDeserialize: (value: Buffer) => StatusMessage.decode(value),
     responseSerialize: (value: Empty) => Buffer.from(Empty.encode(value).finish()),
     responseDeserialize: (value: Buffer) => Empty.decode(value),
   },
@@ -56,7 +56,7 @@ export const UserServiceService = {
 export interface UserServiceServer extends UntypedServiceImplementation {
   get: handleUnaryCall<UserID, User>;
   upsert: handleUnaryCall<User, UserID>;
-  setStatus: handleUnaryCall<SetStatusMessage, Empty>;
+  setStatus: handleUnaryCall<StatusMessage, Empty>;
 }
 
 export interface UserServiceClient extends Client {
@@ -84,17 +84,14 @@ export interface UserServiceClient extends Client {
     options: Partial<CallOptions>,
     callback: (error: ServiceError | null, response: UserID) => void,
   ): ClientUnaryCall;
+  setStatus(request: StatusMessage, callback: (error: ServiceError | null, response: Empty) => void): ClientUnaryCall;
   setStatus(
-    request: SetStatusMessage,
-    callback: (error: ServiceError | null, response: Empty) => void,
-  ): ClientUnaryCall;
-  setStatus(
-    request: SetStatusMessage,
+    request: StatusMessage,
     metadata: Metadata,
     callback: (error: ServiceError | null, response: Empty) => void,
   ): ClientUnaryCall;
   setStatus(
-    request: SetStatusMessage,
+    request: StatusMessage,
     metadata: Metadata,
     options: Partial<CallOptions>,
     callback: (error: ServiceError | null, response: Empty) => void,

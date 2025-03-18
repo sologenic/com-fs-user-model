@@ -4,7 +4,7 @@ import { type CallOptions, ChannelCredentials, Client, type ClientOptions, type 
 import _m0 from "protobufjs/minimal";
 import { Empty } from "./google/protobuf/empty";
 import { Network } from "./sologenic/com-fs-utils-lib/models/metadata/metadata";
-import { SetStatusMessage, User, UserID, UserList } from "./user";
+import { StatusMessage, User, UserID, UserList } from "./user";
 export declare const protobufPackage = "user";
 export interface Filter {
     UserIDs: string[];
@@ -122,8 +122,8 @@ export declare const AdminUserServiceService: {
         readonly path: "/user.AdminUserService/SetStatus";
         readonly requestStream: false;
         readonly responseStream: false;
-        readonly requestSerialize: (value: SetStatusMessage) => Buffer;
-        readonly requestDeserialize: (value: Buffer) => SetStatusMessage;
+        readonly requestSerialize: (value: StatusMessage) => Buffer;
+        readonly requestDeserialize: (value: Buffer) => StatusMessage;
         readonly responseSerialize: (value: Empty) => Buffer;
         readonly responseDeserialize: (value: Buffer) => Empty;
     };
@@ -141,7 +141,7 @@ export interface AdminUserServiceServer extends UntypedServiceImplementation {
     get: handleUnaryCall<UserID, User>;
     list: handleUnaryCall<Filter, UserList>;
     update: handleUnaryCall<User, UserID>;
-    setStatus: handleUnaryCall<SetStatusMessage, Empty>;
+    setStatus: handleUnaryCall<StatusMessage, Empty>;
     listAudit: handleUnaryCall<AuditFilter, UserList>;
 }
 export interface AdminUserServiceClient extends Client {
@@ -154,9 +154,9 @@ export interface AdminUserServiceClient extends Client {
     update(request: User, callback: (error: ServiceError | null, response: UserID) => void): ClientUnaryCall;
     update(request: User, metadata: Metadata, callback: (error: ServiceError | null, response: UserID) => void): ClientUnaryCall;
     update(request: User, metadata: Metadata, options: Partial<CallOptions>, callback: (error: ServiceError | null, response: UserID) => void): ClientUnaryCall;
-    setStatus(request: SetStatusMessage, callback: (error: ServiceError | null, response: Empty) => void): ClientUnaryCall;
-    setStatus(request: SetStatusMessage, metadata: Metadata, callback: (error: ServiceError | null, response: Empty) => void): ClientUnaryCall;
-    setStatus(request: SetStatusMessage, metadata: Metadata, options: Partial<CallOptions>, callback: (error: ServiceError | null, response: Empty) => void): ClientUnaryCall;
+    setStatus(request: StatusMessage, callback: (error: ServiceError | null, response: Empty) => void): ClientUnaryCall;
+    setStatus(request: StatusMessage, metadata: Metadata, callback: (error: ServiceError | null, response: Empty) => void): ClientUnaryCall;
+    setStatus(request: StatusMessage, metadata: Metadata, options: Partial<CallOptions>, callback: (error: ServiceError | null, response: Empty) => void): ClientUnaryCall;
     listAudit(request: AuditFilter, callback: (error: ServiceError | null, response: UserList) => void): ClientUnaryCall;
     listAudit(request: AuditFilter, metadata: Metadata, callback: (error: ServiceError | null, response: UserList) => void): ClientUnaryCall;
     listAudit(request: AuditFilter, metadata: Metadata, options: Partial<CallOptions>, callback: (error: ServiceError | null, response: UserList) => void): ClientUnaryCall;

@@ -10,5 +10,5 @@ import "user.proto";
 service UserService {
     rpc Get (UserID) returns (User) {}
     rpc Upsert (User) returns (UserID) {}
-    rpc SetStatus (SetStatusMessage) returns (google.protobuf.Empty) {}
+    rpc SetStatus (StatusMessage) returns (google.protobuf.Empty) {}
 }

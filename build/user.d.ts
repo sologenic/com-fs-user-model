@@ -134,7 +134,7 @@ export interface UserList {
     Users: User[];
     Offset?: number | undefined;
 }
-export interface SetStatusMessage {
+export interface StatusMessage {
     UserID: string;
     OrganizationID: string;
     Status: UserStatus;
@@ -2035,11 +2035,11 @@ export declare const UserList: {
         Offset?: number | undefined;
     } & { [K_27 in Exclude<keyof I_1, keyof UserList>]: never; }>(object: I_1): UserList;
 };
-export declare const SetStatusMessage: {
-    encode(message: SetStatusMessage, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): SetStatusMessage;
-    fromJSON(object: any): SetStatusMessage;
-    toJSON(message: SetStatusMessage): unknown;
+export declare const StatusMessage: {
+    encode(message: StatusMessage, writer?: _m0.Writer): _m0.Writer;
+    decode(input: _m0.Reader | Uint8Array, length?: number): StatusMessage;
+    fromJSON(object: any): StatusMessage;
+    toJSON(message: StatusMessage): unknown;
     create<I extends {
         UserID?: string | undefined;
         OrganizationID?: string | undefined;
@@ -2064,7 +2064,7 @@ export declare const SetStatusMessage: {
             ChangedAt?: Date | undefined;
             Reason?: string | undefined;
         } & { [K in Exclude<keyof I["Audit"], keyof Audit>]: never; }) | undefined;
-    } & { [K_1 in Exclude<keyof I, keyof SetStatusMessage>]: never; }>(base?: I | undefined): SetStatusMessage;
+    } & { [K_1 in Exclude<keyof I, keyof StatusMessage>]: never; }>(base?: I | undefined): StatusMessage;
     fromPartial<I_1 extends {
         UserID?: string | undefined;
         OrganizationID?: string | undefined;
@@ -2089,7 +2089,7 @@ export declare const SetStatusMessage: {
             ChangedAt?: Date | undefined;
             Reason?: string | undefined;
         } & { [K_2 in Exclude<keyof I_1["Audit"], keyof Audit>]: never; }) | undefined;
-    } & { [K_3 in Exclude<keyof I_1, keyof SetStatusMessage>]: never; }>(object: I_1): SetStatusMessage;
+    } & { [K_3 in Exclude<keyof I_1, keyof StatusMessage>]: never; }>(object: I_1): StatusMessage;
 };
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 export type DeepPartial<T> = T extends Builtin ? T : T extends globalThis.Array<infer U> ? globalThis.Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? {

@@ -34,7 +34,7 @@ type AdminUserServiceClient interface {
 	Get(ctx context.Context, in *UserID, opts ...grpc.CallOption) (*User, error)
 	List(ctx context.Context, in *Filter, opts ...grpc.CallOption) (*UserList, error)
 	Update(ctx context.Context, in *User, opts ...grpc.CallOption) (*UserID, error)
-	SetStatus(ctx context.Context, in *SetStatusMessage, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	SetStatus(ctx context.Context, in *StatusMessage, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	ListAudit(ctx context.Context, in *AuditFilter, opts ...grpc.CallOption) (*UserList, error)
 }
 
@@ -73,7 +73,7 @@ func (c *adminUserServiceClient) Update(ctx context.Context, in *User, opts ...g
 	return out, nil
 }
 
-func (c *adminUserServiceClient) SetStatus(ctx context.Context, in *SetStatusMessage, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+func (c *adminUserServiceClient) SetStatus(ctx context.Context, in *StatusMessage, opts ...grpc.CallOption) (*emptypb.Empty, error) {
 	out := new(emptypb.Empty)
 	err := c.cc.Invoke(ctx, AdminUserService_SetStatus_FullMethodName, in, out, opts...)
 	if err != nil {
@@ -98,7 +98,7 @@ type AdminUserServiceServer interface {
 	Get(context.Context, *UserID) (*User, error)
 	List(context.Context, *Filter) (*UserList, error)
 	Update(context.Context, *User) (*UserID, error)
-	SetStatus(context.Context, *SetStatusMessage) (*emptypb.Empty, error)
+	SetStatus(context.Context, *StatusMessage) (*emptypb.Empty, error)
 	ListAudit(context.Context, *AuditFilter) (*UserList, error)
 }
 
@@ -115,7 +115,7 @@ func (UnimplementedAdminUserServiceServer) List(context.Context, *Filter) (*User
 func (UnimplementedAdminUserServiceServer) Update(context.Context, *User) (*UserID, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Update not implemented")
 }
-func (UnimplementedAdminUserServiceServer) SetStatus(context.Context, *SetStatusMessage) (*emptypb.Empty, error) {
+func (UnimplementedAdminUserServiceServer) SetStatus(context.Context, *StatusMessage) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SetStatus not implemented")
 }
 func (UnimplementedAdminUserServiceServer) ListAudit(context.Context, *AuditFilter) (*UserList, error) {
@@ -188,7 +188,7 @@ func _AdminUserService_Update_Handler(srv interface{}, ctx context.Context, dec 
 }
 
 func _AdminUserService_SetStatus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(SetStatusMessage)
+	in := new(StatusMessage)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -200,7 +200,7 @@ func _AdminUserService_SetStatus_Handler(srv interface{}, ctx context.Context, d
 		FullMethod: AdminUserService_SetStatus_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AdminUserServiceServer).SetStatus(ctx, req.(*SetStatusMessage))
+		return srv.(AdminUserServiceServer).SetStatus(ctx, req.(*StatusMessage))
 	}
 	return interceptor(ctx, in, info, handler)
 }

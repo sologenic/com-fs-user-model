@@ -395,7 +395,7 @@ export interface UserList {
   Offset?: number | undefined;
 }
 
-export interface SetStatusMessage {
+export interface StatusMessage {
   UserID: string;
   OrganizationID: string;
   Status: UserStatus;
@@ -1617,12 +1617,12 @@ export const UserList = {
   },
 };
 
-function createBaseSetStatusMessage(): SetStatusMessage {
+function createBaseStatusMessage(): StatusMessage {
   return { UserID: "", OrganizationID: "", Status: 0, Network: undefined, Audit: undefined };
 }
 
-export const SetStatusMessage = {
-  encode(message: SetStatusMessage, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+export const StatusMessage = {
+  encode(message: StatusMessage, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.UserID !== "") {
       writer.uint32(10).string(message.UserID);
     }
@@ -1641,10 +1641,10 @@ export const SetStatusMessage = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): SetStatusMessage {
+  decode(input: _m0.Reader | Uint8Array, length?: number): StatusMessage {
     const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseSetStatusMessage();
+    const message = createBaseStatusMessage();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -1692,7 +1692,7 @@ export const SetStatusMessage = {
     return message;
   },
 
-  fromJSON(object: any): SetStatusMessage {
+  fromJSON(object: any): StatusMessage {
     return {
       UserID: isSet(object.UserID) ? globalThis.String(object.UserID) : "",
       OrganizationID: isSet(object.OrganizationID) ? globalThis.String(object.OrganizationID) : "",
@@ -1702,7 +1702,7 @@ export const SetStatusMessage = {
     };
   },
 
-  toJSON(message: SetStatusMessage): unknown {
+  toJSON(message: StatusMessage): unknown {
     const obj: any = {};
     if (message.UserID !== "") {
       obj.UserID = message.UserID;
@@ -1722,11 +1722,11 @@ export const SetStatusMessage = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<SetStatusMessage>, I>>(base?: I): SetStatusMessage {
-    return SetStatusMessage.fromPartial(base ?? ({} as any));
+  create<I extends Exact<DeepPartial<StatusMessage>, I>>(base?: I): StatusMessage {
+    return StatusMessage.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<SetStatusMessage>, I>>(object: I): SetStatusMessage {
-    const message = createBaseSetStatusMessage();
+  fromPartial<I extends Exact<DeepPartial<StatusMessage>, I>>(object: I): StatusMessage {
+    const message = createBaseStatusMessage();
     message.UserID = object.UserID ?? "";
     message.OrganizationID = object.OrganizationID ?? "";
     message.Status = object.Status ?? 0;

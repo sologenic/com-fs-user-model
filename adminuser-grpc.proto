@@ -12,7 +12,7 @@ service AdminUserService {
     rpc Get (UserID) returns (User) {}
     rpc List (Filter) returns (UserList) {}
     rpc Update (User) returns (UserID) {}
-    rpc SetStatus (SetStatusMessage) returns (google.protobuf.Empty) {}
+    rpc SetStatus (StatusMessage) returns (google.protobuf.Empty) {}
     rpc ListAudit (AuditFilter) returns (UserList) {}
 }
 

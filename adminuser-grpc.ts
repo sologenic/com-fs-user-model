@@ -20,7 +20,7 @@ import {
 import _m0 from "protobufjs/minimal";
 import { Empty } from "./google/protobuf/empty";
 import { Network, networkFromJSON, networkToJSON } from "./sologenic/com-fs-utils-lib/models/metadata/metadata";
-import { SetStatusMessage, User, UserID, UserList } from "./user";
+import { StatusMessage, User, UserID, UserList } from "./user";
 
 export const protobufPackage = "user";
 
@@ -334,8 +334,8 @@ export const AdminUserServiceService = {
     path: "/user.AdminUserService/SetStatus",
     requestStream: false,
     responseStream: false,
-    requestSerialize: (value: SetStatusMessage) => Buffer.from(SetStatusMessage.encode(value).finish()),
-    requestDeserialize: (value: Buffer) => SetStatusMessage.decode(value),
+    requestSerialize: (value: StatusMessage) => Buffer.from(StatusMessage.encode(value).finish()),
+    requestDeserialize: (value: Buffer) => StatusMessage.decode(value),
     responseSerialize: (value: Empty) => Buffer.from(Empty.encode(value).finish()),
     responseDeserialize: (value: Buffer) => Empty.decode(value),
   },
@@ -354,7 +354,7 @@ export interface AdminUserServiceServer extends UntypedServiceImplementation {
   get: handleUnaryCall<UserID, User>;
   list: handleUnaryCall<Filter, UserList>;
   update: handleUnaryCall<User, UserID>;
-  setStatus: handleUnaryCall<SetStatusMessage, Empty>;
+  setStatus: handleUnaryCall<StatusMessage, Empty>;
   listAudit: handleUnaryCall<AuditFilter, UserList>;
 }
 
@@ -395,17 +395,14 @@ export interface AdminUserServiceClient extends Client {
     options: Partial<CallOptions>,
     callback: (error: ServiceError | null, response: UserID) => void,
   ): ClientUnaryCall;
+  setStatus(request: StatusMessage, callback: (error: ServiceError | null, response: Empty) => void): ClientUnaryCall;
   setStatus(
-    request: SetStatusMessage,
-    callback: (error: ServiceError | null, response: Empty) => void,
-  ): ClientUnaryCall;
-  setStatus(
-    request: SetStatusMessage,
+    request: StatusMessage,
     metadata: Metadata,
     callback: (error: ServiceError | null, response: Empty) => void,
   ): ClientUnaryCall;
   setStatus(
-    request: SetStatusMessage,
+    request: StatusMessage,
     metadata: Metadata,
     options: Partial<CallOptions>,
     callback: (error: ServiceError | null, response: Empty) => void,

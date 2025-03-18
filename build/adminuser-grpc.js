@@ -8,7 +8,7 @@ import { makeGenericClientConstructor, } from "@grpc/grpc-js";
 import _m0 from "protobufjs/minimal";
 import { Empty } from "./google/protobuf/empty";
 import { networkFromJSON, networkToJSON } from "./sologenic/com-fs-utils-lib/models/metadata/metadata";
-import { SetStatusMessage, User, UserID, UserList } from "./user";
+import { StatusMessage, User, UserID, UserList } from "./user";
 export const protobufPackage = "user";
 function createBaseFilter() {
     return { UserIDs: [], Network: undefined, OrganizationID: "", Offset: undefined, Limit: undefined };
@@ -282,8 +282,8 @@ export const AdminUserServiceService = {
         path: "/user.AdminUserService/SetStatus",
         requestStream: false,
         responseStream: false,
-        requestSerialize: (value) => Buffer.from(SetStatusMessage.encode(value).finish()),
-        requestDeserialize: (value) => SetStatusMessage.decode(value),
+        requestSerialize: (value) => Buffer.from(StatusMessage.encode(value).finish()),
+        requestDeserialize: (value) => StatusMessage.decode(value),
         responseSerialize: (value) => Buffer.from(Empty.encode(value).finish()),
         responseDeserialize: (value) => Empty.decode(value),
     },

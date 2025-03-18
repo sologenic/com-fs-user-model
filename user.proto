@@ -134,7 +134,7 @@ message UserList {
     optional int32 Offset = 2;
 }
 
-message SetStatusMessage {
+message StatusMessage {
     string UserID = 1;
     string OrganizationID = 2;
     UserStatus Status = 3;
