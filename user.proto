@@ -126,7 +126,6 @@ message Language {
     string UserID = 1;
     string Language = 2;
     bool UserConfigured = 3;
-    string Network = 4;
 }
 
 message UserList {

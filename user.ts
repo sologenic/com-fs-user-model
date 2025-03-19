@@ -387,7 +387,6 @@ export interface Language {
   UserID: string;
   Language: string;
   UserConfigured: boolean;
-  Network: string;
 }
 
 export interface UserList {
@@ -1440,7 +1439,7 @@ export const Wallet = {
 };
 
 function createBaseLanguage(): Language {
-  return { UserID: "", Language: "", UserConfigured: false, Network: "" };
+  return { UserID: "", Language: "", UserConfigured: false };
 }
 
 export const Language = {
@@ -1453,9 +1452,6 @@ export const Language = {
     }
     if (message.UserConfigured !== false) {
       writer.uint32(24).bool(message.UserConfigured);
-    }
-    if (message.Network !== "") {
-      writer.uint32(34).string(message.Network);
     }
     return writer;
   },
@@ -1488,13 +1484,6 @@ export const Language = {
 
           message.UserConfigured = reader.bool();
           continue;
-        case 4:
-          if (tag !== 34) {
-            break;
-          }
-
-          message.Network = reader.string();
-          continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -1509,7 +1498,6 @@ export const Language = {
       UserID: isSet(object.UserID) ? globalThis.String(object.UserID) : "",
       Language: isSet(object.Language) ? globalThis.String(object.Language) : "",
       UserConfigured: isSet(object.UserConfigured) ? globalThis.Boolean(object.UserConfigured) : false,
-      Network: isSet(object.Network) ? globalThis.String(object.Network) : "",
     };
   },
 
@@ -1524,9 +1512,6 @@ export const Language = {
     if (message.UserConfigured !== false) {
       obj.UserConfigured = message.UserConfigured;
     }
-    if (message.Network !== "") {
-      obj.Network = message.Network;
-    }
     return obj;
   },
 
@@ -1538,7 +1523,6 @@ export const Language = {
     message.UserID = object.UserID ?? "";
     message.Language = object.Language ?? "";
     message.UserConfigured = object.UserConfigured ?? false;
-    message.Network = object.Network ?? "";
     return message;
   },
 };

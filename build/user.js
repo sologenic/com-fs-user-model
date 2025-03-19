@@ -1239,7 +1239,7 @@ export const Wallet = {
     },
 };
 function createBaseLanguage() {
-    return { UserID: "", Language: "", UserConfigured: false, Network: "" };
+    return { UserID: "", Language: "", UserConfigured: false };
 }
 export const Language = {
     encode(message, writer = _m0.Writer.create()) {
@@ -1251,9 +1251,6 @@ export const Language = {
         }
         if (message.UserConfigured !== false) {
             writer.uint32(24).bool(message.UserConfigured);
-        }
-        if (message.Network !== "") {
-            writer.uint32(34).string(message.Network);
         }
         return writer;
     },
@@ -1282,12 +1279,6 @@ export const Language = {
                     }
                     message.UserConfigured = reader.bool();
                     continue;
-                case 4:
-                    if (tag !== 34) {
-                        break;
-                    }
-                    message.Network = reader.string();
-                    continue;
             }
             if ((tag & 7) === 4 || tag === 0) {
                 break;
@@ -1301,7 +1292,6 @@ export const Language = {
             UserID: isSet(object.UserID) ? globalThis.String(object.UserID) : "",
             Language: isSet(object.Language) ? globalThis.String(object.Language) : "",
             UserConfigured: isSet(object.UserConfigured) ? globalThis.Boolean(object.UserConfigured) : false,
-            Network: isSet(object.Network) ? globalThis.String(object.Network) : "",
         };
     },
     toJSON(message) {
@@ -1315,21 +1305,17 @@ export const Language = {
         if (message.UserConfigured !== false) {
             obj.UserConfigured = message.UserConfigured;
         }
-        if (message.Network !== "") {
-            obj.Network = message.Network;
-        }
         return obj;
     },
     create(base) {
         return Language.fromPartial(base !== null && base !== void 0 ? base : {});
     },
     fromPartial(object) {
-        var _a, _b, _c, _d;
+        var _a, _b, _c;
         const message = createBaseLanguage();
         message.UserID = (_a = object.UserID) !== null && _a !== void 0 ? _a : "";
         message.Language = (_b = object.Language) !== null && _b !== void 0 ? _b : "";
         message.UserConfigured = (_c = object.UserConfigured) !== null && _c !== void 0 ? _c : false;
-        message.Network = (_d = object.Network) !== null && _d !== void 0 ? _d : "";
         return message;
     },
 };

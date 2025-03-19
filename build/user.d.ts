@@ -128,7 +128,6 @@ export interface Language {
     UserID: string;
     Language: string;
     UserConfigured: boolean;
-    Network: string;
 }
 export interface UserList {
     Users: User[];
@@ -168,7 +167,6 @@ export declare const UserDetails: {
             UserID?: string | undefined;
             Language?: string | undefined;
             UserConfigured?: boolean | undefined;
-            Network?: string | undefined;
         } | undefined;
         ExternalUserID?: string | undefined;
         OrganizationID?: string | undefined;
@@ -237,12 +235,10 @@ export declare const UserDetails: {
             UserID?: string | undefined;
             Language?: string | undefined;
             UserConfigured?: boolean | undefined;
-            Network?: string | undefined;
         } & {
             UserID?: string | undefined;
             Language?: string | undefined;
             UserConfigured?: boolean | undefined;
-            Network?: string | undefined;
         } & { [K_4 in Exclude<keyof I["Language"], keyof Language>]: never; }) | undefined;
         ExternalUserID?: string | undefined;
         OrganizationID?: string | undefined;
@@ -320,7 +316,6 @@ export declare const UserDetails: {
             UserID?: string | undefined;
             Language?: string | undefined;
             UserConfigured?: boolean | undefined;
-            Network?: string | undefined;
         } | undefined;
         ExternalUserID?: string | undefined;
         OrganizationID?: string | undefined;
@@ -389,12 +384,10 @@ export declare const UserDetails: {
             UserID?: string | undefined;
             Language?: string | undefined;
             UserConfigured?: boolean | undefined;
-            Network?: string | undefined;
         } & {
             UserID?: string | undefined;
             Language?: string | undefined;
             UserConfigured?: boolean | undefined;
-            Network?: string | undefined;
         } & { [K_13 in Exclude<keyof I_1["Language"], keyof Language>]: never; }) | undefined;
         ExternalUserID?: string | undefined;
         OrganizationID?: string | undefined;
@@ -637,7 +630,6 @@ export declare const User: {
                 UserID?: string | undefined;
                 Language?: string | undefined;
                 UserConfigured?: boolean | undefined;
-                Network?: string | undefined;
             } | undefined;
             ExternalUserID?: string | undefined;
             OrganizationID?: string | undefined;
@@ -698,7 +690,6 @@ export declare const User: {
                 UserID?: string | undefined;
                 Language?: string | undefined;
                 UserConfigured?: boolean | undefined;
-                Network?: string | undefined;
             } | undefined;
             ExternalUserID?: string | undefined;
             OrganizationID?: string | undefined;
@@ -767,12 +758,10 @@ export declare const User: {
                 UserID?: string | undefined;
                 Language?: string | undefined;
                 UserConfigured?: boolean | undefined;
-                Network?: string | undefined;
             } & {
                 UserID?: string | undefined;
                 Language?: string | undefined;
                 UserConfigured?: boolean | undefined;
-                Network?: string | undefined;
             } & { [K_4 in Exclude<keyof I["User"]["Language"], keyof Language>]: never; }) | undefined;
             ExternalUserID?: string | undefined;
             OrganizationID?: string | undefined;
@@ -872,7 +861,6 @@ export declare const User: {
                 UserID?: string | undefined;
                 Language?: string | undefined;
                 UserConfigured?: boolean | undefined;
-                Network?: string | undefined;
             } | undefined;
             ExternalUserID?: string | undefined;
             OrganizationID?: string | undefined;
@@ -933,7 +921,6 @@ export declare const User: {
                 UserID?: string | undefined;
                 Language?: string | undefined;
                 UserConfigured?: boolean | undefined;
-                Network?: string | undefined;
             } | undefined;
             ExternalUserID?: string | undefined;
             OrganizationID?: string | undefined;
@@ -1002,12 +989,10 @@ export declare const User: {
                 UserID?: string | undefined;
                 Language?: string | undefined;
                 UserConfigured?: boolean | undefined;
-                Network?: string | undefined;
             } & {
                 UserID?: string | undefined;
                 Language?: string | undefined;
                 UserConfigured?: boolean | undefined;
-                Network?: string | undefined;
             } & { [K_16 in Exclude<keyof I_1["User"]["Language"], keyof Language>]: never; }) | undefined;
             ExternalUserID?: string | undefined;
             OrganizationID?: string | undefined;
@@ -1162,23 +1147,19 @@ export declare const Language: {
         UserID?: string | undefined;
         Language?: string | undefined;
         UserConfigured?: boolean | undefined;
-        Network?: string | undefined;
     } & {
         UserID?: string | undefined;
         Language?: string | undefined;
         UserConfigured?: boolean | undefined;
-        Network?: string | undefined;
     } & { [K in Exclude<keyof I, keyof Language>]: never; }>(base?: I | undefined): Language;
     fromPartial<I_1 extends {
         UserID?: string | undefined;
         Language?: string | undefined;
         UserConfigured?: boolean | undefined;
-        Network?: string | undefined;
     } & {
         UserID?: string | undefined;
         Language?: string | undefined;
         UserConfigured?: boolean | undefined;
-        Network?: string | undefined;
     } & { [K_1 in Exclude<keyof I_1, keyof Language>]: never; }>(object: I_1): Language;
 };
 export declare const UserList: {
@@ -1210,7 +1191,6 @@ export declare const UserList: {
                     UserID?: string | undefined;
                     Language?: string | undefined;
                     UserConfigured?: boolean | undefined;
-                    Network?: string | undefined;
                 } | undefined;
                 ExternalUserID?: string | undefined;
                 OrganizationID?: string | undefined;
@@ -1274,7 +1254,6 @@ export declare const UserList: {
                     UserID?: string | undefined;
                     Language?: string | undefined;
                     UserConfigured?: boolean | undefined;
-                    Network?: string | undefined;
                 } | undefined;
                 ExternalUserID?: string | undefined;
                 OrganizationID?: string | undefined;
@@ -1335,7 +1314,6 @@ export declare const UserList: {
                     UserID?: string | undefined;
                     Language?: string | undefined;
                     UserConfigured?: boolean | undefined;
-                    Network?: string | undefined;
                 } | undefined;
                 ExternalUserID?: string | undefined;
                 OrganizationID?: string | undefined;
@@ -1396,7 +1374,6 @@ export declare const UserList: {
                     UserID?: string | undefined;
                     Language?: string | undefined;
                     UserConfigured?: boolean | undefined;
-                    Network?: string | undefined;
                 } | undefined;
                 ExternalUserID?: string | undefined;
                 OrganizationID?: string | undefined;
@@ -1465,12 +1442,10 @@ export declare const UserList: {
                     UserID?: string | undefined;
                     Language?: string | undefined;
                     UserConfigured?: boolean | undefined;
-                    Network?: string | undefined;
                 } & {
                     UserID?: string | undefined;
                     Language?: string | undefined;
                     UserConfigured?: boolean | undefined;
-                    Network?: string | undefined;
                 } & { [K_4 in Exclude<keyof I["Users"][number]["User"]["Language"], keyof Language>]: never; }) | undefined;
                 ExternalUserID?: string | undefined;
                 OrganizationID?: string | undefined;
@@ -1569,7 +1544,6 @@ export declare const UserList: {
                     UserID?: string | undefined;
                     Language?: string | undefined;
                     UserConfigured?: boolean | undefined;
-                    Network?: string | undefined;
                 } | undefined;
                 ExternalUserID?: string | undefined;
                 OrganizationID?: string | undefined;
@@ -1634,7 +1608,6 @@ export declare const UserList: {
                     UserID?: string | undefined;
                     Language?: string | undefined;
                     UserConfigured?: boolean | undefined;
-                    Network?: string | undefined;
                 } | undefined;
                 ExternalUserID?: string | undefined;
                 OrganizationID?: string | undefined;
@@ -1698,7 +1671,6 @@ export declare const UserList: {
                     UserID?: string | undefined;
                     Language?: string | undefined;
                     UserConfigured?: boolean | undefined;
-                    Network?: string | undefined;
                 } | undefined;
                 ExternalUserID?: string | undefined;
                 OrganizationID?: string | undefined;
@@ -1759,7 +1731,6 @@ export declare const UserList: {
                     UserID?: string | undefined;
                     Language?: string | undefined;
                     UserConfigured?: boolean | undefined;
-                    Network?: string | undefined;
                 } | undefined;
                 ExternalUserID?: string | undefined;
                 OrganizationID?: string | undefined;
@@ -1820,7 +1791,6 @@ export declare const UserList: {
                     UserID?: string | undefined;
                     Language?: string | undefined;
                     UserConfigured?: boolean | undefined;
-                    Network?: string | undefined;
                 } | undefined;
                 ExternalUserID?: string | undefined;
                 OrganizationID?: string | undefined;
@@ -1889,12 +1859,10 @@ export declare const UserList: {
                     UserID?: string | undefined;
                     Language?: string | undefined;
                     UserConfigured?: boolean | undefined;
-                    Network?: string | undefined;
                 } & {
                     UserID?: string | undefined;
                     Language?: string | undefined;
                     UserConfigured?: boolean | undefined;
-                    Network?: string | undefined;
                 } & { [K_18 in Exclude<keyof I_1["Users"][number]["User"]["Language"], keyof Language>]: never; }) | undefined;
                 ExternalUserID?: string | undefined;
                 OrganizationID?: string | undefined;
@@ -1993,7 +1961,6 @@ export declare const UserList: {
                     UserID?: string | undefined;
                     Language?: string | undefined;
                     UserConfigured?: boolean | undefined;
-                    Network?: string | undefined;
                 } | undefined;
                 ExternalUserID?: string | undefined;
                 OrganizationID?: string | undefined;
