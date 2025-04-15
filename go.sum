@@ -71,6 +71,8 @@ github.com/sologenic/com-fs-utils-lib/models/audit v0.0.0-20250131210530-7306ae3
 github.com/sologenic/com-fs-utils-lib/models/audit v0.0.0-20250131210530-7306ae3e5762/go.mod h1:aesYC9CUzVQ4JUHZwpLYx0yeNK1Sl37vzLKmDKQiyoY=
 github.com/sologenic/com-fs-utils-lib/models/metadata v0.0.0-20250131210530-7306ae3e5762 h1:dyuyT9aUHEy9wMONeSJELIuA8VnMkWlGIOJQQO3guak=
 github.com/sologenic/com-fs-utils-lib/models/metadata v0.0.0-20250131210530-7306ae3e5762/go.mod h1:ftOGlExX3C/AN24/N3j3+rHo4C7ehxfHNGpimuWv7IQ=
+github.com/sologenic/com-fs-utils-lib/models/role v0.0.0-20250411234808-20ee098868aa h1:5nEXM6VZDBqrMjm9RDneCEnWypI/2iJVJsXS6gfO+1g=
+github.com/sologenic/com-fs-utils-lib/models/role v0.0.0-20250411234808-20ee098868aa/go.mod h1:EzYV8QKfACoaaPwBFXY6R95AOORkV3TXxw8k1m26o+w=
 github.com/stretchr/objx v0.1.0/go.mod h1:HFkY916IF+rwdDfMAkV7OtwuqBVzrE8GR6GFx+wExME=
 github.com/stretchr/objx v0.4.0/go.mod h1:YvHI0jy2hoMjB+UWwv71VJQ9isScKT/TqJzVSSt89Yw=
 github.com/stretchr/objx v0.5.0/go.mod h1:Yh+to48EsGEfYuaHDzXPcE3xhTkx73EhmCGUpEOglKo=

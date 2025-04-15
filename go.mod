@@ -6,6 +6,7 @@ require (
 	github.com/sologenic/com-fs-utils-lib/go/grpc-client v0.0.0-20241114183617-e622df0f57e8
 	github.com/sologenic/com-fs-utils-lib/models/audit v0.0.0-20250131210530-7306ae3e5762
 	github.com/sologenic/com-fs-utils-lib/models/metadata v0.0.0-20250131210530-7306ae3e5762
+	github.com/sologenic/com-fs-utils-lib/models/role v0.0.0-20250411234808-20ee098868aa
 	google.golang.org/grpc v1.58.3
 	google.golang.org/protobuf v1.35.2
 )

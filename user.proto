@@ -8,6 +8,7 @@ import "google/protobuf/timestamp.proto";
 import "sologenic/com-fs-utils-lib/models/metadata/metadata.proto";
 import "sologenic/com-fs-utils-lib/models/audit/audit.proto";
 import "sologenic/com-fs-utils-lib/models/role/role.proto";
+import "sologenic/com-fs-trade-profile-model/tradeprofile.proto";
 
 message UserDetails {
     string UserID = 1; // email address used for firebase authentication
@@ -25,6 +26,7 @@ message UserDetails {
     string OrganizationID = 13; // UUID
     optional Employment Employment = 14;
     role.Role Role = 15; // A retail user will always have a role of "NORMAL_USER"
+    tradeprofile.TradeProfileDetails TradeProfile = 16; // Trade profile details
 }
 
 // TODO: to be verified when more information is available
