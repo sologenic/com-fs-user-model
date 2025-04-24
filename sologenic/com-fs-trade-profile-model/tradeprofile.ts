@@ -61,7 +61,7 @@ export function lockableFieldToJSON(object: LockableField): string {
 export interface DefaultTradeProfile {
   DefaultValues: TradeProfileDetails | undefined;
   ControlMetadata: TradeProfileControlMetadata | undefined;
-  OrganizationID: string;
+  OrganizationID?: string | undefined;
   MetaData: MetaData | undefined;
   Audit: Audit | undefined;
 }
@@ -138,7 +138,7 @@ function createBaseDefaultTradeProfile(): DefaultTradeProfile {
   return {
     DefaultValues: undefined,
     ControlMetadata: undefined,
-    OrganizationID: "",
+    OrganizationID: undefined,
     MetaData: undefined,
     Audit: undefined,
   };
@@ -152,7 +152,7 @@ export const DefaultTradeProfile = {
     if (message.ControlMetadata !== undefined) {
       TradeProfileControlMetadata.encode(message.ControlMetadata, writer.uint32(18).fork()).ldelim();
     }
-    if (message.OrganizationID !== "") {
+    if (message.OrganizationID !== undefined) {
       writer.uint32(26).string(message.OrganizationID);
     }
     if (message.MetaData !== undefined) {
@@ -221,7 +221,7 @@ export const DefaultTradeProfile = {
       ControlMetadata: isSet(object.ControlMetadata)
         ? TradeProfileControlMetadata.fromJSON(object.ControlMetadata)
         : undefined,
-      OrganizationID: isSet(object.OrganizationID) ? globalThis.String(object.OrganizationID) : "",
+      OrganizationID: isSet(object.OrganizationID) ? globalThis.String(object.OrganizationID) : undefined,
       MetaData: isSet(object.MetaData) ? MetaData.fromJSON(object.MetaData) : undefined,
       Audit: isSet(object.Audit) ? Audit.fromJSON(object.Audit) : undefined,
     };
@@ -235,7 +235,7 @@ export const DefaultTradeProfile = {
     if (message.ControlMetadata !== undefined) {
       obj.ControlMetadata = TradeProfileControlMetadata.toJSON(message.ControlMetadata);
     }
-    if (message.OrganizationID !== "") {
+    if (message.OrganizationID !== undefined) {
       obj.OrganizationID = message.OrganizationID;
     }
     if (message.MetaData !== undefined) {
@@ -258,7 +258,7 @@ export const DefaultTradeProfile = {
     message.ControlMetadata = (object.ControlMetadata !== undefined && object.ControlMetadata !== null)
       ? TradeProfileControlMetadata.fromPartial(object.ControlMetadata)
       : undefined;
-    message.OrganizationID = object.OrganizationID ?? "";
+    message.OrganizationID = object.OrganizationID ?? undefined;
     message.MetaData = (object.MetaData !== undefined && object.MetaData !== null)
       ? MetaData.fromPartial(object.MetaData)
       : undefined;

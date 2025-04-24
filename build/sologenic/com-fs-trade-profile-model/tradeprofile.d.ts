@@ -16,7 +16,7 @@ export declare function lockableFieldToJSON(object: LockableField): string;
 export interface DefaultTradeProfile {
     DefaultValues: TradeProfileDetails | undefined;
     ControlMetadata: TradeProfileControlMetadata | undefined;
-    OrganizationID: string;
+    OrganizationID?: string | undefined;
     MetaData: MetaData | undefined;
     Audit: Audit | undefined;
 }

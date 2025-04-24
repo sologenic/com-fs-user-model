@@ -3,7 +3,7 @@ module github.com/sologenic/com-fs-user-model
 go 1.23.6
 
 require (
-	github.com/sologenic/com-fs-trade-profile-model v0.0.0-20250414191452-c7ab2373da0f // TODO: Update when PR to main branch is merged
+	github.com/sologenic/com-fs-trade-profile-model v0.0.0-20250424191632-4cc930ca3d75
 	github.com/sologenic/com-fs-utils-lib/go/grpc-client v0.0.0-20250131210530-7306ae3e5762
 	github.com/sologenic/com-fs-utils-lib/models/audit v0.0.0-20250314155456-e14d49a8b728
 	github.com/sologenic/com-fs-utils-lib/models/metadata v0.0.0-20250314155456-e14d49a8b728
