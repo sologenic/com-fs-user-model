@@ -981,61 +981,6 @@ func (x *Wallet) GetType() WalletType {
 	return WalletType_NOT_USED_WALLETTYPE
 }
 
-type Language struct {
-	state         protoimpl.MessageState
-	sizeCache     protoimpl.SizeCache
-	unknownFields protoimpl.UnknownFields
-
-	Language       string `protobuf:"bytes,1,opt,name=Language,proto3" json:"Language,omitempty"`
-	UserConfigured bool   `protobuf:"varint,2,opt,name=UserConfigured,proto3" json:"UserConfigured,omitempty"`
-}
-
-func (x *Language) Reset() {
-	*x = Language{}
-	if protoimpl.UnsafeEnabled {
-		mi := &file_user_proto_msgTypes[8]
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		ms.StoreMessageInfo(mi)
-	}
-}
-
-func (x *Language) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*Language) ProtoMessage() {}
-
-func (x *Language) ProtoReflect() protoreflect.Message {
-	mi := &file_user_proto_msgTypes[8]
-	if protoimpl.UnsafeEnabled && x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use Language.ProtoReflect.Descriptor instead.
-func (*Language) Descriptor() ([]byte, []int) {
-	return file_user_proto_rawDescGZIP(), []int{8}
-}
-
-func (x *Language) GetLanguage() string {
-	if x != nil {
-		return x.Language
-	}
-	return ""
-}
-
-func (x *Language) GetUserConfigured() bool {
-	if x != nil {
-		return x.UserConfigured
-	}
-	return false
-}
-
 type UserList struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -1048,7 +993,7 @@ type UserList struct {
 func (x *UserList) Reset() {
 	*x = UserList{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_user_proto_msgTypes[9]
+		mi := &file_user_proto_msgTypes[8]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1061,7 +1006,7 @@ func (x *UserList) String() string {
 func (*UserList) ProtoMessage() {}
 
 func (x *UserList) ProtoReflect() protoreflect.Message {
-	mi := &file_user_proto_msgTypes[9]
+	mi := &file_user_proto_msgTypes[8]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1074,7 +1019,7 @@ func (x *UserList) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UserList.ProtoReflect.Descriptor instead.
 func (*UserList) Descriptor() ([]byte, []int) {
-	return file_user_proto_rawDescGZIP(), []int{9}
+	return file_user_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *UserList) GetUsers() []*User {
@@ -1106,7 +1051,7 @@ type StatusMessage struct {
 func (x *StatusMessage) Reset() {
 	*x = StatusMessage{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_user_proto_msgTypes[10]
+		mi := &file_user_proto_msgTypes[9]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1119,7 +1064,7 @@ func (x *StatusMessage) String() string {
 func (*StatusMessage) ProtoMessage() {}
 
 func (x *StatusMessage) ProtoReflect() protoreflect.Message {
-	mi := &file_user_proto_msgTypes[10]
+	mi := &file_user_proto_msgTypes[9]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1132,7 +1077,7 @@ func (x *StatusMessage) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StatusMessage.ProtoReflect.Descriptor instead.
 func (*StatusMessage) Descriptor() ([]byte, []int) {
-	return file_user_proto_rawDescGZIP(), []int{10}
+	return file_user_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *StatusMessage) GetUserID() string {
@@ -1300,12 +1245,7 @@ var file_user_proto_rawDesc = []byte{
 	0x0a, 0x05, 0x41, 0x6c, 0x69, 0x61, 0x73, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x05, 0x41,
 	0x6c, 0x69, 0x61, 0x73, 0x12, 0x24, 0x0a, 0x04, 0x54, 0x79, 0x70, 0x65, 0x18, 0x03, 0x20, 0x01,
 	0x28, 0x0e, 0x32, 0x10, 0x2e, 0x75, 0x73, 0x65, 0x72, 0x2e, 0x57, 0x61, 0x6c, 0x6c, 0x65, 0x74,
-	0x54, 0x79, 0x70, 0x65, 0x52, 0x04, 0x54, 0x79, 0x70, 0x65, 0x22, 0x4e, 0x0a, 0x08, 0x4c, 0x61,
-	0x6e, 0x67, 0x75, 0x61, 0x67, 0x65, 0x12, 0x1a, 0x0a, 0x08, 0x4c, 0x61, 0x6e, 0x67, 0x75, 0x61,
-	0x67, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x08, 0x4c, 0x61, 0x6e, 0x67, 0x75, 0x61,
-	0x67, 0x65, 0x12, 0x26, 0x0a, 0x0e, 0x55, 0x73, 0x65, 0x72, 0x43, 0x6f, 0x6e, 0x66, 0x69, 0x67,
-	0x75, 0x72, 0x65, 0x64, 0x18, 0x02, 0x20, 0x01, 0x28, 0x08, 0x52, 0x0e, 0x55, 0x73, 0x65, 0x72,
-	0x43, 0x6f, 0x6e, 0x66, 0x69, 0x67, 0x75, 0x72, 0x65, 0x64, 0x22, 0x54, 0x0a, 0x08, 0x55, 0x73,
+	0x54, 0x79, 0x70, 0x65, 0x52, 0x04, 0x54, 0x79, 0x70, 0x65, 0x22, 0x54, 0x0a, 0x08, 0x55, 0x73,
 	0x65, 0x72, 0x4c, 0x69, 0x73, 0x74, 0x12, 0x20, 0x0a, 0x05, 0x55, 0x73, 0x65, 0x72, 0x73, 0x18,
 	0x01, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x0a, 0x2e, 0x75, 0x73, 0x65, 0x72, 0x2e, 0x55, 0x73, 0x65,
 	0x72, 0x52, 0x05, 0x55, 0x73, 0x65, 0x72, 0x73, 0x12, 0x1b, 0x0a, 0x06, 0x4f, 0x66, 0x66, 0x73,
@@ -1379,7 +1319,7 @@ func file_user_proto_rawDescGZIP() []byte {
 }
 
 var file_user_proto_enumTypes = make([]protoimpl.EnumInfo, 5)
-var file_user_proto_msgTypes = make([]protoimpl.MessageInfo, 11)
+var file_user_proto_msgTypes = make([]protoimpl.MessageInfo, 10)
 var file_user_proto_goTypes = []interface{}{
 	(EmploymentType)(0),       // 0: user.EmploymentType
 	(IncomeFrequency)(0),      // 1: user.IncomeFrequency
@@ -1394,41 +1334,40 @@ var file_user_proto_goTypes = []interface{}{
 	(*UserID)(nil),            // 10: user.UserID
 	(*Social)(nil),            // 11: user.Social
 	(*Wallet)(nil),            // 12: user.Wallet
-	(*Language)(nil),          // 13: user.Language
-	(*UserList)(nil),          // 14: user.UserList
-	(*StatusMessage)(nil),     // 15: user.StatusMessage
-	(*language.Language)(nil), // 16: language.Language
-	(role.Role)(0),            // 17: role.Role
-	(*com_fs_trade_profile_model.TradeProfileDetails)(nil), // 18: tradeprofile.TradeProfileDetails
-	(*timestamppb.Timestamp)(nil),                          // 19: google.protobuf.Timestamp
-	(*metadata.MetaData)(nil),                              // 20: metadata.MetaData
-	(*audit.Audit)(nil),                                    // 21: audit.Audit
-	(metadata.Network)(0),                                  // 22: metadata.Network
+	(*UserList)(nil),          // 13: user.UserList
+	(*StatusMessage)(nil),     // 14: user.StatusMessage
+	(*language.Language)(nil), // 15: language.Language
+	(role.Role)(0),            // 16: role.Role
+	(*com_fs_trade_profile_model.TradeProfileDetails)(nil), // 17: tradeprofile.TradeProfileDetails
+	(*timestamppb.Timestamp)(nil),                          // 18: google.protobuf.Timestamp
+	(*metadata.MetaData)(nil),                              // 19: metadata.MetaData
+	(*audit.Audit)(nil),                                    // 20: audit.Audit
+	(metadata.Network)(0),                                  // 21: metadata.Network
 }
 var file_user_proto_depIdxs = []int32{
 	2,  // 0: user.UserDetails.Status:type_name -> user.UserStatus
 	12, // 1: user.UserDetails.Wallets:type_name -> user.Wallet
 	11, // 2: user.UserDetails.Socials:type_name -> user.Social
-	16, // 3: user.UserDetails.Language:type_name -> language.Language
+	15, // 3: user.UserDetails.Language:type_name -> language.Language
 	6,  // 4: user.UserDetails.Employment:type_name -> user.Employment
-	17, // 5: user.UserDetails.Role:type_name -> role.Role
-	18, // 6: user.UserDetails.TradeProfile:type_name -> tradeprofile.TradeProfileDetails
-	19, // 7: user.Employment.StartDate:type_name -> google.protobuf.Timestamp
-	19, // 8: user.Employment.EndDate:type_name -> google.protobuf.Timestamp
+	16, // 5: user.UserDetails.Role:type_name -> role.Role
+	17, // 6: user.UserDetails.TradeProfile:type_name -> tradeprofile.TradeProfileDetails
+	18, // 7: user.Employment.StartDate:type_name -> google.protobuf.Timestamp
+	18, // 8: user.Employment.EndDate:type_name -> google.protobuf.Timestamp
 	0,  // 9: user.Employment.Type:type_name -> user.EmploymentType
 	7,  // 10: user.Employment.Income:type_name -> user.Income
 	8,  // 11: user.Employment.Contact:type_name -> user.EmployerContact
 	1,  // 12: user.Income.Frequency:type_name -> user.IncomeFrequency
 	5,  // 13: user.User.User:type_name -> user.UserDetails
-	20, // 14: user.User.MetaData:type_name -> metadata.MetaData
-	21, // 15: user.User.Audit:type_name -> audit.Audit
-	22, // 16: user.UserID.Network:type_name -> metadata.Network
+	19, // 14: user.User.MetaData:type_name -> metadata.MetaData
+	20, // 15: user.User.Audit:type_name -> audit.Audit
+	21, // 16: user.UserID.Network:type_name -> metadata.Network
 	4,  // 17: user.Social.Type:type_name -> user.SocialType
 	3,  // 18: user.Wallet.Type:type_name -> user.WalletType
 	9,  // 19: user.UserList.Users:type_name -> user.User
 	2,  // 20: user.StatusMessage.Status:type_name -> user.UserStatus
-	22, // 21: user.StatusMessage.Network:type_name -> metadata.Network
-	21, // 22: user.StatusMessage.Audit:type_name -> audit.Audit
+	21, // 21: user.StatusMessage.Network:type_name -> metadata.Network
+	20, // 22: user.StatusMessage.Audit:type_name -> audit.Audit
 	23, // [23:23] is the sub-list for method output_type
 	23, // [23:23] is the sub-list for method input_type
 	23, // [23:23] is the sub-list for extension type_name
@@ -1539,18 +1478,6 @@ func file_user_proto_init() {
 			}
 		}
 		file_user_proto_msgTypes[8].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*Language); i {
-			case 0:
-				return &v.state
-			case 1:
-				return &v.sizeCache
-			case 2:
-				return &v.unknownFields
-			default:
-				return nil
-			}
-		}
-		file_user_proto_msgTypes[9].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*UserList); i {
 			case 0:
 				return &v.state
@@ -1562,7 +1489,7 @@ func file_user_proto_init() {
 				return nil
 			}
 		}
-		file_user_proto_msgTypes[10].Exporter = func(v interface{}, i int) interface{} {
+		file_user_proto_msgTypes[9].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*StatusMessage); i {
 			case 0:
 				return &v.state
@@ -1578,15 +1505,15 @@ func file_user_proto_init() {
 	file_user_proto_msgTypes[0].OneofWrappers = []interface{}{}
 	file_user_proto_msgTypes[1].OneofWrappers = []interface{}{}
 	file_user_proto_msgTypes[5].OneofWrappers = []interface{}{}
+	file_user_proto_msgTypes[8].OneofWrappers = []interface{}{}
 	file_user_proto_msgTypes[9].OneofWrappers = []interface{}{}
-	file_user_proto_msgTypes[10].OneofWrappers = []interface{}{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_user_proto_rawDesc,
 			NumEnums:      5,
-			NumMessages:   11,
+			NumMessages:   10,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

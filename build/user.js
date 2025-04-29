@@ -8,7 +8,7 @@ import _m0 from "protobufjs/minimal";
 import { Timestamp } from "./google/protobuf/timestamp";
 import { TradeProfileDetails } from "./sologenic/com-fs-trade-profile-model/tradeprofile";
 import { Audit } from "./sologenic/com-fs-utils-lib/models/audit/audit";
-import { Language as Language1 } from "./sologenic/com-fs-utils-lib/models/language/language";
+import { Language } from "./sologenic/com-fs-utils-lib/models/language/language";
 import { MetaData, networkFromJSON, networkToJSON, } from "./sologenic/com-fs-utils-lib/models/metadata/metadata";
 import { roleFromJSON, roleToJSON } from "./sologenic/com-fs-utils-lib/models/role/role";
 export const protobufPackage = "user";
@@ -340,7 +340,7 @@ export const UserDetails = {
             Social.encode(v, writer.uint32(82).fork()).ldelim();
         }
         if (message.Language !== undefined) {
-            Language1.encode(message.Language, writer.uint32(90).fork()).ldelim();
+            Language.encode(message.Language, writer.uint32(90).fork()).ldelim();
         }
         if (message.ExternalUserID !== "") {
             writer.uint32(98).string(message.ExternalUserID);
@@ -430,7 +430,7 @@ export const UserDetails = {
                     if (tag !== 90) {
                         break;
                     }
-                    message.Language = Language1.decode(reader, reader.uint32());
+                    message.Language = Language.decode(reader, reader.uint32());
                     continue;
                 case 12:
                     if (tag !== 98) {
@@ -482,7 +482,7 @@ export const UserDetails = {
             Status: isSet(object.Status) ? userStatusFromJSON(object.Status) : 0,
             Wallets: globalThis.Array.isArray(object === null || object === void 0 ? void 0 : object.Wallets) ? object.Wallets.map((e) => Wallet.fromJSON(e)) : [],
             Socials: globalThis.Array.isArray(object === null || object === void 0 ? void 0 : object.Socials) ? object.Socials.map((e) => Social.fromJSON(e)) : [],
-            Language: isSet(object.Language) ? Language1.fromJSON(object.Language) : undefined,
+            Language: isSet(object.Language) ? Language.fromJSON(object.Language) : undefined,
             ExternalUserID: isSet(object.ExternalUserID) ? globalThis.String(object.ExternalUserID) : "",
             OrganizationID: isSet(object.OrganizationID) ? globalThis.String(object.OrganizationID) : "",
             Employment: isSet(object.Employment) ? Employment.fromJSON(object.Employment) : undefined,
@@ -524,7 +524,7 @@ export const UserDetails = {
             obj.Socials = message.Socials.map((e) => Social.toJSON(e));
         }
         if (message.Language !== undefined) {
-            obj.Language = Language1.toJSON(message.Language);
+            obj.Language = Language.toJSON(message.Language);
         }
         if (message.ExternalUserID !== "") {
             obj.ExternalUserID = message.ExternalUserID;
@@ -560,7 +560,7 @@ export const UserDetails = {
         message.Wallets = ((_j = object.Wallets) === null || _j === void 0 ? void 0 : _j.map((e) => Wallet.fromPartial(e))) || [];
         message.Socials = ((_k = object.Socials) === null || _k === void 0 ? void 0 : _k.map((e) => Social.fromPartial(e))) || [];
         message.Language = (object.Language !== undefined && object.Language !== null)
-            ? Language1.fromPartial(object.Language)
+            ? Language.fromPartial(object.Language)
             : undefined;
         message.ExternalUserID = (_l = object.ExternalUserID) !== null && _l !== void 0 ? _l : "";
         message.OrganizationID = (_m = object.OrganizationID) !== null && _m !== void 0 ? _m : "";
@@ -1254,73 +1254,6 @@ export const Wallet = {
         message.Address = (_a = object.Address) !== null && _a !== void 0 ? _a : "";
         message.Alias = (_b = object.Alias) !== null && _b !== void 0 ? _b : "";
         message.Type = (_c = object.Type) !== null && _c !== void 0 ? _c : 0;
-        return message;
-    },
-};
-function createBaseLanguage() {
-    return { Language: "", UserConfigured: false };
-}
-export const Language = {
-    encode(message, writer = _m0.Writer.create()) {
-        if (message.Language !== "") {
-            writer.uint32(10).string(message.Language);
-        }
-        if (message.UserConfigured !== false) {
-            writer.uint32(16).bool(message.UserConfigured);
-        }
-        return writer;
-    },
-    decode(input, length) {
-        const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
-        let end = length === undefined ? reader.len : reader.pos + length;
-        const message = createBaseLanguage();
-        while (reader.pos < end) {
-            const tag = reader.uint32();
-            switch (tag >>> 3) {
-                case 1:
-                    if (tag !== 10) {
-                        break;
-                    }
-                    message.Language = reader.string();
-                    continue;
-                case 2:
-                    if (tag !== 16) {
-                        break;
-                    }
-                    message.UserConfigured = reader.bool();
-                    continue;
-            }
-            if ((tag & 7) === 4 || tag === 0) {
-                break;
-            }
-            reader.skipType(tag & 7);
-        }
-        return message;
-    },
-    fromJSON(object) {
-        return {
-            Language: isSet(object.Language) ? globalThis.String(object.Language) : "",
-            UserConfigured: isSet(object.UserConfigured) ? globalThis.Boolean(object.UserConfigured) : false,
-        };
-    },
-    toJSON(message) {
-        const obj = {};
-        if (message.Language !== "") {
-            obj.Language = message.Language;
-        }
-        if (message.UserConfigured !== false) {
-            obj.UserConfigured = message.UserConfigured;
-        }
-        return obj;
-    },
-    create(base) {
-        return Language.fromPartial(base !== null && base !== void 0 ? base : {});
-    },
-    fromPartial(object) {
-        var _a, _b;
-        const message = createBaseLanguage();
-        message.Language = (_a = object.Language) !== null && _a !== void 0 ? _a : "";
-        message.UserConfigured = (_b = object.UserConfigured) !== null && _b !== void 0 ? _b : false;
         return message;
     },
 };

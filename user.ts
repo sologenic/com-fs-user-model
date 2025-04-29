@@ -9,7 +9,7 @@ import _m0 from "protobufjs/minimal";
 import { Timestamp } from "./google/protobuf/timestamp";
 import { TradeProfileDetails } from "./sologenic/com-fs-trade-profile-model/tradeprofile";
 import { Audit } from "./sologenic/com-fs-utils-lib/models/audit/audit";
-import { Language as Language1 } from "./sologenic/com-fs-utils-lib/models/language/language";
+import { Language } from "./sologenic/com-fs-utils-lib/models/language/language";
 import {
   MetaData,
   Network,
@@ -319,7 +319,7 @@ export interface UserDetails {
   Wallets: Wallet[];
   Socials: Social[];
   Language:
-    | Language1
+    | Language
     | undefined;
   /** UUID for the external user identifier in the KYC provider */
   ExternalUserID: string;
@@ -385,11 +385,6 @@ export interface Wallet {
   Address: string;
   Alias: string;
   Type: WalletType;
-}
-
-export interface Language {
-  Language: string;
-  UserConfigured: boolean;
 }
 
 export interface UserList {
@@ -459,7 +454,7 @@ export const UserDetails = {
       Social.encode(v!, writer.uint32(82).fork()).ldelim();
     }
     if (message.Language !== undefined) {
-      Language1.encode(message.Language, writer.uint32(90).fork()).ldelim();
+      Language.encode(message.Language, writer.uint32(90).fork()).ldelim();
     }
     if (message.ExternalUserID !== "") {
       writer.uint32(98).string(message.ExternalUserID);
@@ -561,7 +556,7 @@ export const UserDetails = {
             break;
           }
 
-          message.Language = Language1.decode(reader, reader.uint32());
+          message.Language = Language.decode(reader, reader.uint32());
           continue;
         case 12:
           if (tag !== 98) {
@@ -619,7 +614,7 @@ export const UserDetails = {
       Status: isSet(object.Status) ? userStatusFromJSON(object.Status) : 0,
       Wallets: globalThis.Array.isArray(object?.Wallets) ? object.Wallets.map((e: any) => Wallet.fromJSON(e)) : [],
       Socials: globalThis.Array.isArray(object?.Socials) ? object.Socials.map((e: any) => Social.fromJSON(e)) : [],
-      Language: isSet(object.Language) ? Language1.fromJSON(object.Language) : undefined,
+      Language: isSet(object.Language) ? Language.fromJSON(object.Language) : undefined,
       ExternalUserID: isSet(object.ExternalUserID) ? globalThis.String(object.ExternalUserID) : "",
       OrganizationID: isSet(object.OrganizationID) ? globalThis.String(object.OrganizationID) : "",
       Employment: isSet(object.Employment) ? Employment.fromJSON(object.Employment) : undefined,
@@ -661,7 +656,7 @@ export const UserDetails = {
       obj.Socials = message.Socials.map((e) => Social.toJSON(e));
     }
     if (message.Language !== undefined) {
-      obj.Language = Language1.toJSON(message.Language);
+      obj.Language = Language.toJSON(message.Language);
     }
     if (message.ExternalUserID !== "") {
       obj.ExternalUserID = message.ExternalUserID;
@@ -697,7 +692,7 @@ export const UserDetails = {
     message.Wallets = object.Wallets?.map((e) => Wallet.fromPartial(e)) || [];
     message.Socials = object.Socials?.map((e) => Social.fromPartial(e)) || [];
     message.Language = (object.Language !== undefined && object.Language !== null)
-      ? Language1.fromPartial(object.Language)
+      ? Language.fromPartial(object.Language)
       : undefined;
     message.ExternalUserID = object.ExternalUserID ?? "";
     message.OrganizationID = object.OrganizationID ?? "";
@@ -1455,80 +1450,6 @@ export const Wallet = {
     message.Address = object.Address ?? "";
     message.Alias = object.Alias ?? "";
     message.Type = object.Type ?? 0;
-    return message;
-  },
-};
-
-function createBaseLanguage(): Language {
-  return { Language: "", UserConfigured: false };
-}
-
-export const Language = {
-  encode(message: Language, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.Language !== "") {
-      writer.uint32(10).string(message.Language);
-    }
-    if (message.UserConfigured !== false) {
-      writer.uint32(16).bool(message.UserConfigured);
-    }
-    return writer;
-  },
-
-  decode(input: _m0.Reader | Uint8Array, length?: number): Language {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseLanguage();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1:
-          if (tag !== 10) {
-            break;
-          }
-
-          message.Language = reader.string();
-          continue;
-        case 2:
-          if (tag !== 16) {
-            break;
-          }
-
-          message.UserConfigured = reader.bool();
-          continue;
-      }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
-      }
-      reader.skipType(tag & 7);
-    }
-    return message;
-  },
-
-  fromJSON(object: any): Language {
-    return {
-      Language: isSet(object.Language) ? globalThis.String(object.Language) : "",
-      UserConfigured: isSet(object.UserConfigured) ? globalThis.Boolean(object.UserConfigured) : false,
-    };
-  },
-
-  toJSON(message: Language): unknown {
-    const obj: any = {};
-    if (message.Language !== "") {
-      obj.Language = message.Language;
-    }
-    if (message.UserConfigured !== false) {
-      obj.UserConfigured = message.UserConfigured;
-    }
-    return obj;
-  },
-
-  create<I extends Exact<DeepPartial<Language>, I>>(base?: I): Language {
-    return Language.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<Language>, I>>(object: I): Language {
-    const message = createBaseLanguage();
-    message.Language = object.Language ?? "";
-    message.UserConfigured = object.UserConfigured ?? false;
     return message;
   },
 };

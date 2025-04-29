@@ -125,11 +125,6 @@ enum SocialType {
     LINKEDIN = 9;
 }
 
-message Language {
-    string Language = 1;
-    bool UserConfigured = 2;
-}
-
 message UserList {
     repeated User Users = 1;
     optional int32 Offset = 2;
