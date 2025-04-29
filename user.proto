@@ -9,6 +9,7 @@ import "sologenic/com-fs-utils-lib/models/metadata/metadata.proto";
 import "sologenic/com-fs-utils-lib/models/audit/audit.proto";
 import "sologenic/com-fs-utils-lib/models/role/role.proto";
 import "sologenic/com-fs-trade-profile-model/tradeprofile.proto";
+import "sologenic/com-fs-utils-lib/models/language/language.proto";
 
 message UserDetails {
     string UserID = 1; // email address used for firebase authentication
@@ -21,7 +22,7 @@ message UserDetails {
     UserStatus Status = 8;
     repeated Wallet Wallets = 9;
     repeated Social Socials = 10;
-    Language Language = 11;
+    language.Language Language = 11;
     string ExternalUserID = 12; // UUID for the external user identifier in the KYC provider
     string OrganizationID = 13; // UUID
     optional Employment Employment = 14;
@@ -125,9 +126,8 @@ enum SocialType {
 }
 
 message Language {
-    string UserID = 1;
-    string Language = 2;
-    bool UserConfigured = 3;
+    string Language = 1;
+    bool UserConfigured = 2;
 }
 
 message UserList {

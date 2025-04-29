@@ -58,8 +58,6 @@ github.com/prometheus/client_model v0.0.0-20190812154241-14fe0d1b01d4/go.mod h1:
 github.com/rs/xid v1.5.0/go.mod h1:trrq9SKmegXys3aeAKXMUTdJsYXVwGY3RLcfgqegfbg=
 github.com/rs/zerolog v1.33.0 h1:1cU2KZkvPxNyfgEmhHAz/1A9Bz+llsdYzklWFzgp0r8=
 github.com/rs/zerolog v1.33.0/go.mod h1:/7mN4D5sKwJLZQ2b/znpjC3/GQWY/xaDXUM0kKWRHss=
-github.com/sologenic/com-fs-trade-profile-model v0.0.0-20250414191452-c7ab2373da0f h1:MtTJbNYXXUCwIHbhrqY/juRDa758aMerRXbtTdvgrQw=
-github.com/sologenic/com-fs-trade-profile-model v0.0.0-20250414191452-c7ab2373da0f/go.mod h1:xUu8z+vOxRKxtJ9rvvPd9tH+z47SNZXJ26H02ZcD5Rc=
 github.com/sologenic/com-fs-trade-profile-model v0.0.0-20250424191632-4cc930ca3d75 h1:0T2Bc2gSu5KpKjxyJsigBjTihygA7dLd4+BNrh93tKU=
 github.com/sologenic/com-fs-trade-profile-model v0.0.0-20250424191632-4cc930ca3d75/go.mod h1:xUu8z+vOxRKxtJ9rvvPd9tH+z47SNZXJ26H02ZcD5Rc=
 github.com/sologenic/com-fs-utils-lib/go/grpc-client v0.0.0-20250131210530-7306ae3e5762 h1:T017vo3tyApAHcP6xHSQUY099YuWrzS/Gr4qfXyLnHo=
