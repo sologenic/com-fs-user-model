@@ -1,6 +1,6 @@
 module github.com/sologenic/com-fs-user-model
 
-go 1.23.6
+go 1.23.8
 
 require (
 	github.com/sologenic/com-fs-trade-profile-model v0.0.0-20250424191632-4cc930ca3d75

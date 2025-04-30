@@ -1,6 +1,7 @@
 import _m0 from "protobufjs/minimal";
 import { TradeProfileDetails } from "./sologenic/com-fs-trade-profile-model/tradeprofile";
 import { Audit } from "./sologenic/com-fs-utils-lib/models/audit/audit";
+import { Language } from "./sologenic/com-fs-utils-lib/models/language/language";
 import { MetaData, Network } from "./sologenic/com-fs-utils-lib/models/metadata/metadata";
 import { Role } from "./sologenic/com-fs-utils-lib/models/role/role";
 export declare const protobufPackage = "user";
@@ -127,11 +128,6 @@ export interface Wallet {
     Alias: string;
     Type: WalletType;
 }
-export interface Language {
-    UserID: string;
-    Language: string;
-    UserConfigured: boolean;
-}
 export interface UserList {
     Users: User[];
     Offset?: number | undefined;
@@ -167,7 +163,6 @@ export declare const UserDetails: {
             Type?: SocialType | undefined;
         }[] | undefined;
         Language?: {
-            UserID?: string | undefined;
             Language?: string | undefined;
             UserConfigured?: boolean | undefined;
         } | undefined;
@@ -256,11 +251,9 @@ export declare const UserDetails: {
             Type?: SocialType | undefined;
         }[]>]: never; }) | undefined;
         Language?: ({
-            UserID?: string | undefined;
             Language?: string | undefined;
             UserConfigured?: boolean | undefined;
         } & {
-            UserID?: string | undefined;
             Language?: string | undefined;
             UserConfigured?: boolean | undefined;
         } & { [K_4 in Exclude<keyof I["Language"], keyof Language>]: never; }) | undefined;
@@ -387,7 +380,6 @@ export declare const UserDetails: {
             Type?: SocialType | undefined;
         }[] | undefined;
         Language?: {
-            UserID?: string | undefined;
             Language?: string | undefined;
             UserConfigured?: boolean | undefined;
         } | undefined;
@@ -476,11 +468,9 @@ export declare const UserDetails: {
             Type?: SocialType | undefined;
         }[]>]: never; }) | undefined;
         Language?: ({
-            UserID?: string | undefined;
             Language?: string | undefined;
             UserConfigured?: boolean | undefined;
         } & {
-            UserID?: string | undefined;
             Language?: string | undefined;
             UserConfigured?: boolean | undefined;
         } & { [K_17 in Exclude<keyof I_1["Language"], keyof Language>]: never; }) | undefined;
@@ -772,7 +762,6 @@ export declare const User: {
                 Type?: SocialType | undefined;
             }[] | undefined;
             Language?: {
-                UserID?: string | undefined;
                 Language?: string | undefined;
                 UserConfigured?: boolean | undefined;
             } | undefined;
@@ -853,7 +842,6 @@ export declare const User: {
                 Type?: SocialType | undefined;
             }[] | undefined;
             Language?: {
-                UserID?: string | undefined;
                 Language?: string | undefined;
                 UserConfigured?: boolean | undefined;
             } | undefined;
@@ -942,11 +930,9 @@ export declare const User: {
                 Type?: SocialType | undefined;
             }[]>]: never; }) | undefined;
             Language?: ({
-                UserID?: string | undefined;
                 Language?: string | undefined;
                 UserConfigured?: boolean | undefined;
             } & {
-                UserID?: string | undefined;
                 Language?: string | undefined;
                 UserConfigured?: boolean | undefined;
             } & { [K_4 in Exclude<keyof I["User"]["Language"], keyof Language>]: never; }) | undefined;
@@ -1095,7 +1081,6 @@ export declare const User: {
                 Type?: SocialType | undefined;
             }[] | undefined;
             Language?: {
-                UserID?: string | undefined;
                 Language?: string | undefined;
                 UserConfigured?: boolean | undefined;
             } | undefined;
@@ -1176,7 +1161,6 @@ export declare const User: {
                 Type?: SocialType | undefined;
             }[] | undefined;
             Language?: {
-                UserID?: string | undefined;
                 Language?: string | undefined;
                 UserConfigured?: boolean | undefined;
             } | undefined;
@@ -1265,11 +1249,9 @@ export declare const User: {
                 Type?: SocialType | undefined;
             }[]>]: never; }) | undefined;
             Language?: ({
-                UserID?: string | undefined;
                 Language?: string | undefined;
                 UserConfigured?: boolean | undefined;
             } & {
-                UserID?: string | undefined;
                 Language?: string | undefined;
                 UserConfigured?: boolean | undefined;
             } & { [K_20 in Exclude<keyof I_1["User"]["Language"], keyof Language>]: never; }) | undefined;
@@ -1467,30 +1449,6 @@ export declare const Wallet: {
         Type?: WalletType | undefined;
     } & { [K_1 in Exclude<keyof I_1, keyof Wallet>]: never; }>(object: I_1): Wallet;
 };
-export declare const Language: {
-    encode(message: Language, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): Language;
-    fromJSON(object: any): Language;
-    toJSON(message: Language): unknown;
-    create<I extends {
-        UserID?: string | undefined;
-        Language?: string | undefined;
-        UserConfigured?: boolean | undefined;
-    } & {
-        UserID?: string | undefined;
-        Language?: string | undefined;
-        UserConfigured?: boolean | undefined;
-    } & { [K in Exclude<keyof I, keyof Language>]: never; }>(base?: I | undefined): Language;
-    fromPartial<I_1 extends {
-        UserID?: string | undefined;
-        Language?: string | undefined;
-        UserConfigured?: boolean | undefined;
-    } & {
-        UserID?: string | undefined;
-        Language?: string | undefined;
-        UserConfigured?: boolean | undefined;
-    } & { [K_1 in Exclude<keyof I_1, keyof Language>]: never; }>(object: I_1): Language;
-};
 export declare const UserList: {
     encode(message: UserList, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): UserList;
@@ -1517,7 +1475,6 @@ export declare const UserList: {
                     Type?: SocialType | undefined;
                 }[] | undefined;
                 Language?: {
-                    UserID?: string | undefined;
                     Language?: string | undefined;
                     UserConfigured?: boolean | undefined;
                 } | undefined;
@@ -1601,7 +1558,6 @@ export declare const UserList: {
                     Type?: SocialType | undefined;
                 }[] | undefined;
                 Language?: {
-                    UserID?: string | undefined;
                     Language?: string | undefined;
                     UserConfigured?: boolean | undefined;
                 } | undefined;
@@ -1682,7 +1638,6 @@ export declare const UserList: {
                     Type?: SocialType | undefined;
                 }[] | undefined;
                 Language?: {
-                    UserID?: string | undefined;
                     Language?: string | undefined;
                     UserConfigured?: boolean | undefined;
                 } | undefined;
@@ -1763,7 +1718,6 @@ export declare const UserList: {
                     Type?: SocialType | undefined;
                 }[] | undefined;
                 Language?: {
-                    UserID?: string | undefined;
                     Language?: string | undefined;
                     UserConfigured?: boolean | undefined;
                 } | undefined;
@@ -1852,11 +1806,9 @@ export declare const UserList: {
                     Type?: SocialType | undefined;
                 }[]>]: never; }) | undefined;
                 Language?: ({
-                    UserID?: string | undefined;
                     Language?: string | undefined;
                     UserConfigured?: boolean | undefined;
                 } & {
-                    UserID?: string | undefined;
                     Language?: string | undefined;
                     UserConfigured?: boolean | undefined;
                 } & { [K_4 in Exclude<keyof I["Users"][number]["User"]["Language"], keyof Language>]: never; }) | undefined;
@@ -2004,7 +1956,6 @@ export declare const UserList: {
                     Type?: SocialType | undefined;
                 }[] | undefined;
                 Language?: {
-                    UserID?: string | undefined;
                     Language?: string | undefined;
                     UserConfigured?: boolean | undefined;
                 } | undefined;
@@ -2089,7 +2040,6 @@ export declare const UserList: {
                     Type?: SocialType | undefined;
                 }[] | undefined;
                 Language?: {
-                    UserID?: string | undefined;
                     Language?: string | undefined;
                     UserConfigured?: boolean | undefined;
                 } | undefined;
@@ -2173,7 +2123,6 @@ export declare const UserList: {
                     Type?: SocialType | undefined;
                 }[] | undefined;
                 Language?: {
-                    UserID?: string | undefined;
                     Language?: string | undefined;
                     UserConfigured?: boolean | undefined;
                 } | undefined;
@@ -2254,7 +2203,6 @@ export declare const UserList: {
                     Type?: SocialType | undefined;
                 }[] | undefined;
                 Language?: {
-                    UserID?: string | undefined;
                     Language?: string | undefined;
                     UserConfigured?: boolean | undefined;
                 } | undefined;
@@ -2335,7 +2283,6 @@ export declare const UserList: {
                     Type?: SocialType | undefined;
                 }[] | undefined;
                 Language?: {
-                    UserID?: string | undefined;
                     Language?: string | undefined;
                     UserConfigured?: boolean | undefined;
                 } | undefined;
@@ -2424,11 +2371,9 @@ export declare const UserList: {
                     Type?: SocialType | undefined;
                 }[]>]: never; }) | undefined;
                 Language?: ({
-                    UserID?: string | undefined;
                     Language?: string | undefined;
                     UserConfigured?: boolean | undefined;
                 } & {
-                    UserID?: string | undefined;
                     Language?: string | undefined;
                     UserConfigured?: boolean | undefined;
                 } & { [K_22 in Exclude<keyof I_1["Users"][number]["User"]["Language"], keyof Language>]: never; }) | undefined;
@@ -2576,7 +2521,6 @@ export declare const UserList: {
                     Type?: SocialType | undefined;
                 }[] | undefined;
                 Language?: {
-                    UserID?: string | undefined;
                     Language?: string | undefined;
                     UserConfigured?: boolean | undefined;
                 } | undefined;
