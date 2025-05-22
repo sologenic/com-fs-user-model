@@ -187,7 +187,6 @@ function createBaseTradeProfileDetails() {
         SymbolGrossADVPercent: 0,
         PriceCheckDeviation: 0,
         DuplicateOrderLimit: 0,
-        Multiplier: 0,
     };
 }
 export const TradeProfileDetails = {
@@ -221,9 +220,6 @@ export const TradeProfileDetails = {
         }
         if (message.DuplicateOrderLimit !== 0) {
             writer.uint32(1632).int32(message.DuplicateOrderLimit);
-        }
-        if (message.Multiplier !== 0) {
-            writer.uint32(1641).double(message.Multiplier);
         }
         return writer;
     },
@@ -294,12 +290,6 @@ export const TradeProfileDetails = {
                     }
                     message.DuplicateOrderLimit = reader.int32();
                     continue;
-                case 205:
-                    if (tag !== 1641) {
-                        break;
-                    }
-                    message.Multiplier = reader.double();
-                    continue;
             }
             if ((tag & 7) === 4 || tag === 0) {
                 break;
@@ -330,7 +320,6 @@ export const TradeProfileDetails = {
             SymbolGrossADVPercent: isSet(object.SymbolGrossADVPercent) ? globalThis.Number(object.SymbolGrossADVPercent) : 0,
             PriceCheckDeviation: isSet(object.PriceCheckDeviation) ? globalThis.Number(object.PriceCheckDeviation) : 0,
             DuplicateOrderLimit: isSet(object.DuplicateOrderLimit) ? globalThis.Number(object.DuplicateOrderLimit) : 0,
-            Multiplier: isSet(object.Multiplier) ? globalThis.Number(object.Multiplier) : 0,
         };
     },
     toJSON(message) {
@@ -365,16 +354,13 @@ export const TradeProfileDetails = {
         if (message.DuplicateOrderLimit !== 0) {
             obj.DuplicateOrderLimit = Math.round(message.DuplicateOrderLimit);
         }
-        if (message.Multiplier !== 0) {
-            obj.Multiplier = message.Multiplier;
-        }
         return obj;
     },
     create(base) {
         return TradeProfileDetails.fromPartial(base !== null && base !== void 0 ? base : {});
     },
     fromPartial(object) {
-        var _a, _b, _c, _d, _e, _f, _g, _h;
+        var _a, _b, _c, _d, _e, _f, _g;
         const message = createBaseTradeProfileDetails();
         message.IsTradingEnabled = (_a = object.IsTradingEnabled) !== null && _a !== void 0 ? _a : false;
         message.IsOrderAcceptanceEnabled = (_b = object.IsOrderAcceptanceEnabled) !== null && _b !== void 0 ? _b : false;
@@ -393,7 +379,6 @@ export const TradeProfileDetails = {
         message.SymbolGrossADVPercent = (_e = object.SymbolGrossADVPercent) !== null && _e !== void 0 ? _e : 0;
         message.PriceCheckDeviation = (_f = object.PriceCheckDeviation) !== null && _f !== void 0 ? _f : 0;
         message.DuplicateOrderLimit = (_g = object.DuplicateOrderLimit) !== null && _g !== void 0 ? _g : 0;
-        message.Multiplier = (_h = object.Multiplier) !== null && _h !== void 0 ? _h : 0;
         return message;
     },
 };
@@ -407,7 +392,6 @@ function createBaseTradeProfileControlMetadata() {
         SymbolGrossADVConstraint: undefined,
         PriceCheckDeviationConstraint: undefined,
         DuplicateOrderConstraint: undefined,
-        MultiplierConstraint: undefined,
     };
 }
 export const TradeProfileControlMetadata = {
@@ -437,9 +421,6 @@ export const TradeProfileControlMetadata = {
         }
         if (message.DuplicateOrderConstraint !== undefined) {
             IntConstraint.encode(message.DuplicateOrderConstraint, writer.uint32(834).fork()).ldelim();
-        }
-        if (message.MultiplierConstraint !== undefined) {
-            DecimalConstraint.encode(message.MultiplierConstraint, writer.uint32(842).fork()).ldelim();
         }
         return writer;
     },
@@ -505,12 +486,6 @@ export const TradeProfileControlMetadata = {
                     }
                     message.DuplicateOrderConstraint = IntConstraint.decode(reader, reader.uint32());
                     continue;
-                case 105:
-                    if (tag !== 842) {
-                        break;
-                    }
-                    message.MultiplierConstraint = DecimalConstraint.decode(reader, reader.uint32());
-                    continue;
             }
             if ((tag & 7) === 4 || tag === 0) {
                 break;
@@ -545,9 +520,6 @@ export const TradeProfileControlMetadata = {
             DuplicateOrderConstraint: isSet(object.DuplicateOrderConstraint)
                 ? IntConstraint.fromJSON(object.DuplicateOrderConstraint)
                 : undefined,
-            MultiplierConstraint: isSet(object.MultiplierConstraint)
-                ? DecimalConstraint.fromJSON(object.MultiplierConstraint)
-                : undefined,
         };
     },
     toJSON(message) {
@@ -576,9 +548,6 @@ export const TradeProfileControlMetadata = {
         }
         if (message.DuplicateOrderConstraint !== undefined) {
             obj.DuplicateOrderConstraint = IntConstraint.toJSON(message.DuplicateOrderConstraint);
-        }
-        if (message.MultiplierConstraint !== undefined) {
-            obj.MultiplierConstraint = DecimalConstraint.toJSON(message.MultiplierConstraint);
         }
         return obj;
     },
@@ -611,9 +580,6 @@ export const TradeProfileControlMetadata = {
             (object.DuplicateOrderConstraint !== undefined && object.DuplicateOrderConstraint !== null)
                 ? IntConstraint.fromPartial(object.DuplicateOrderConstraint)
                 : undefined;
-        message.MultiplierConstraint = (object.MultiplierConstraint !== undefined && object.MultiplierConstraint !== null)
-            ? DecimalConstraint.fromPartial(object.MultiplierConstraint)
-            : undefined;
         return message;
     },
 };

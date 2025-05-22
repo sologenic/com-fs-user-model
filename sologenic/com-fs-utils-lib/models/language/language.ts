@@ -9,6 +9,51 @@ import _m0 from "protobufjs/minimal";
 
 export const protobufPackage = "language";
 
+export enum Lang {
+  LANG_NOT_USED = 0,
+  ENGLISH = 1,
+  SPANISH = 2,
+  KOREAN = 3,
+  UNRECOGNIZED = -1,
+}
+
+export function langFromJSON(object: any): Lang {
+  switch (object) {
+    case 0:
+    case "LANG_NOT_USED":
+      return Lang.LANG_NOT_USED;
+    case 1:
+    case "ENGLISH":
+      return Lang.ENGLISH;
+    case 2:
+    case "SPANISH":
+      return Lang.SPANISH;
+    case 3:
+    case "KOREAN":
+      return Lang.KOREAN;
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return Lang.UNRECOGNIZED;
+  }
+}
+
+export function langToJSON(object: Lang): string {
+  switch (object) {
+    case Lang.LANG_NOT_USED:
+      return "LANG_NOT_USED";
+    case Lang.ENGLISH:
+      return "ENGLISH";
+    case Lang.SPANISH:
+      return "SPANISH";
+    case Lang.KOREAN:
+      return "KOREAN";
+    case Lang.UNRECOGNIZED:
+    default:
+      return "UNRECOGNIZED";
+  }
+}
+
 export interface Language {
   Language: string;
   UserConfigured: boolean;

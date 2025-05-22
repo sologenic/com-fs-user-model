@@ -46,8 +46,6 @@ export interface TradeProfileDetails {
     PriceCheckDeviation: number;
     /** Duplicative order threshold - rejects repetitive orders of same type in same symbol */
     DuplicateOrderLimit: number;
-    /** Risk based multiplier */
-    Multiplier: number;
 }
 export interface TradeProfileControlMetadata {
     LockedFields: LockableField[];
@@ -60,7 +58,6 @@ export interface TradeProfileControlMetadata {
     SymbolGrossADVConstraint: DecimalConstraint | undefined;
     PriceCheckDeviationConstraint: DecimalConstraint | undefined;
     DuplicateOrderConstraint: IntConstraint | undefined;
-    MultiplierConstraint: DecimalConstraint | undefined;
 }
 export interface DropdownNumericValue {
     /** Numeric value (e.g. 1000) */
@@ -106,7 +103,6 @@ export declare const DefaultTradeProfile: {
             SymbolGrossADVPercent?: number | undefined;
             PriceCheckDeviation?: number | undefined;
             DuplicateOrderLimit?: number | undefined;
-            Multiplier?: number | undefined;
         } | undefined;
         ControlMetadata?: {
             LockedFields?: LockableField[] | undefined;
@@ -138,11 +134,6 @@ export declare const DefaultTradeProfile: {
                 Step?: number | undefined;
             } | undefined;
             DuplicateOrderConstraint?: {
-                MinValue?: number | undefined;
-                MaxValue?: number | undefined;
-                Step?: number | undefined;
-            } | undefined;
-            MultiplierConstraint?: {
                 MinValue?: number | undefined;
                 MaxValue?: number | undefined;
                 Step?: number | undefined;
@@ -181,7 +172,6 @@ export declare const DefaultTradeProfile: {
             SymbolGrossADVPercent?: number | undefined;
             PriceCheckDeviation?: number | undefined;
             DuplicateOrderLimit?: number | undefined;
-            Multiplier?: number | undefined;
         } & {
             IsTradingEnabled?: boolean | undefined;
             IsOrderAcceptanceEnabled?: boolean | undefined;
@@ -211,7 +201,6 @@ export declare const DefaultTradeProfile: {
             SymbolGrossADVPercent?: number | undefined;
             PriceCheckDeviation?: number | undefined;
             DuplicateOrderLimit?: number | undefined;
-            Multiplier?: number | undefined;
         } & { [K_3 in Exclude<keyof I["DefaultValues"], keyof TradeProfileDetails>]: never; }) | undefined;
         ControlMetadata?: ({
             LockedFields?: LockableField[] | undefined;
@@ -243,11 +232,6 @@ export declare const DefaultTradeProfile: {
                 Step?: number | undefined;
             } | undefined;
             DuplicateOrderConstraint?: {
-                MinValue?: number | undefined;
-                MaxValue?: number | undefined;
-                Step?: number | undefined;
-            } | undefined;
-            MultiplierConstraint?: {
                 MinValue?: number | undefined;
                 MaxValue?: number | undefined;
                 Step?: number | undefined;
@@ -329,16 +313,7 @@ export declare const DefaultTradeProfile: {
                 MaxValue?: number | undefined;
                 Step?: number | undefined;
             } & { [K_14 in Exclude<keyof I["ControlMetadata"]["DuplicateOrderConstraint"], keyof IntConstraint>]: never; }) | undefined;
-            MultiplierConstraint?: ({
-                MinValue?: number | undefined;
-                MaxValue?: number | undefined;
-                Step?: number | undefined;
-            } & {
-                MinValue?: number | undefined;
-                MaxValue?: number | undefined;
-                Step?: number | undefined;
-            } & { [K_15 in Exclude<keyof I["ControlMetadata"]["MultiplierConstraint"], keyof DecimalConstraint>]: never; }) | undefined;
-        } & { [K_16 in Exclude<keyof I["ControlMetadata"], keyof TradeProfileControlMetadata>]: never; }) | undefined;
+        } & { [K_15 in Exclude<keyof I["ControlMetadata"], keyof TradeProfileControlMetadata>]: never; }) | undefined;
         OrganizationID?: string | undefined;
         MetaData?: ({
             Network?: import("../com-fs-utils-lib/models/metadata/metadata").Network | undefined;
@@ -350,7 +325,7 @@ export declare const DefaultTradeProfile: {
             UpdatedAt?: Date | undefined;
             CreatedAt?: Date | undefined;
             UpdatedByAccount?: string | undefined;
-        } & { [K_17 in Exclude<keyof I["MetaData"], keyof MetaData>]: never; }) | undefined;
+        } & { [K_16 in Exclude<keyof I["MetaData"], keyof MetaData>]: never; }) | undefined;
         Audit?: ({
             ChangedBy?: string | undefined;
             ChangedAt?: Date | undefined;
@@ -359,8 +334,8 @@ export declare const DefaultTradeProfile: {
             ChangedBy?: string | undefined;
             ChangedAt?: Date | undefined;
             Reason?: string | undefined;
-        } & { [K_18 in Exclude<keyof I["Audit"], keyof Audit>]: never; }) | undefined;
-    } & { [K_19 in Exclude<keyof I, keyof DefaultTradeProfile>]: never; }>(base?: I | undefined): DefaultTradeProfile;
+        } & { [K_17 in Exclude<keyof I["Audit"], keyof Audit>]: never; }) | undefined;
+    } & { [K_18 in Exclude<keyof I, keyof DefaultTradeProfile>]: never; }>(base?: I | undefined): DefaultTradeProfile;
     fromPartial<I_1 extends {
         DefaultValues?: {
             IsTradingEnabled?: boolean | undefined;
@@ -382,7 +357,6 @@ export declare const DefaultTradeProfile: {
             SymbolGrossADVPercent?: number | undefined;
             PriceCheckDeviation?: number | undefined;
             DuplicateOrderLimit?: number | undefined;
-            Multiplier?: number | undefined;
         } | undefined;
         ControlMetadata?: {
             LockedFields?: LockableField[] | undefined;
@@ -414,11 +388,6 @@ export declare const DefaultTradeProfile: {
                 Step?: number | undefined;
             } | undefined;
             DuplicateOrderConstraint?: {
-                MinValue?: number | undefined;
-                MaxValue?: number | undefined;
-                Step?: number | undefined;
-            } | undefined;
-            MultiplierConstraint?: {
                 MinValue?: number | undefined;
                 MaxValue?: number | undefined;
                 Step?: number | undefined;
@@ -457,7 +426,6 @@ export declare const DefaultTradeProfile: {
             SymbolGrossADVPercent?: number | undefined;
             PriceCheckDeviation?: number | undefined;
             DuplicateOrderLimit?: number | undefined;
-            Multiplier?: number | undefined;
         } & {
             IsTradingEnabled?: boolean | undefined;
             IsOrderAcceptanceEnabled?: boolean | undefined;
@@ -468,27 +436,26 @@ export declare const DefaultTradeProfile: {
             } & {
                 Value?: number | undefined;
                 IsGreaterThan?: boolean | undefined;
-            } & { [K_20 in Exclude<keyof I_1["DefaultValues"]["AggregateNotionalLimit"], keyof DropdownNumericValue>]: never; }) | undefined;
+            } & { [K_19 in Exclude<keyof I_1["DefaultValues"]["AggregateNotionalLimit"], keyof DropdownNumericValue>]: never; }) | undefined;
             SingleOrderLimit?: ({
                 Value?: number | undefined;
                 IsGreaterThan?: boolean | undefined;
             } & {
                 Value?: number | undefined;
                 IsGreaterThan?: boolean | undefined;
-            } & { [K_21 in Exclude<keyof I_1["DefaultValues"]["SingleOrderLimit"], keyof DropdownNumericValue>]: never; }) | undefined;
+            } & { [K_20 in Exclude<keyof I_1["DefaultValues"]["SingleOrderLimit"], keyof DropdownNumericValue>]: never; }) | undefined;
             MaxOrderQuantity?: ({
                 Value?: number | undefined;
                 IsGreaterThan?: boolean | undefined;
             } & {
                 Value?: number | undefined;
                 IsGreaterThan?: boolean | undefined;
-            } & { [K_22 in Exclude<keyof I_1["DefaultValues"]["MaxOrderQuantity"], keyof DropdownNumericValue>]: never; }) | undefined;
+            } & { [K_21 in Exclude<keyof I_1["DefaultValues"]["MaxOrderQuantity"], keyof DropdownNumericValue>]: never; }) | undefined;
             AggressivePercentage?: number | undefined;
             SymbolGrossADVPercent?: number | undefined;
             PriceCheckDeviation?: number | undefined;
             DuplicateOrderLimit?: number | undefined;
-            Multiplier?: number | undefined;
-        } & { [K_23 in Exclude<keyof I_1["DefaultValues"], keyof TradeProfileDetails>]: never; }) | undefined;
+        } & { [K_22 in Exclude<keyof I_1["DefaultValues"], keyof TradeProfileDetails>]: never; }) | undefined;
         ControlMetadata?: ({
             LockedFields?: LockableField[] | undefined;
             AggregateNotionalLimitOptions?: {
@@ -523,13 +490,8 @@ export declare const DefaultTradeProfile: {
                 MaxValue?: number | undefined;
                 Step?: number | undefined;
             } | undefined;
-            MultiplierConstraint?: {
-                MinValue?: number | undefined;
-                MaxValue?: number | undefined;
-                Step?: number | undefined;
-            } | undefined;
         } & {
-            LockedFields?: (LockableField[] & LockableField[] & { [K_24 in Exclude<keyof I_1["ControlMetadata"]["LockedFields"], keyof LockableField[]>]: never; }) | undefined;
+            LockedFields?: (LockableField[] & LockableField[] & { [K_23 in Exclude<keyof I_1["ControlMetadata"]["LockedFields"], keyof LockableField[]>]: never; }) | undefined;
             AggregateNotionalLimitOptions?: ({
                 Value?: number | undefined;
                 IsGreaterThan?: boolean | undefined;
@@ -539,7 +501,7 @@ export declare const DefaultTradeProfile: {
             } & {
                 Value?: number | undefined;
                 IsGreaterThan?: boolean | undefined;
-            } & { [K_25 in Exclude<keyof I_1["ControlMetadata"]["AggregateNotionalLimitOptions"][number], keyof DropdownNumericValue>]: never; })[] & { [K_26 in Exclude<keyof I_1["ControlMetadata"]["AggregateNotionalLimitOptions"], keyof {
+            } & { [K_24 in Exclude<keyof I_1["ControlMetadata"]["AggregateNotionalLimitOptions"][number], keyof DropdownNumericValue>]: never; })[] & { [K_25 in Exclude<keyof I_1["ControlMetadata"]["AggregateNotionalLimitOptions"], keyof {
                 Value?: number | undefined;
                 IsGreaterThan?: boolean | undefined;
             }[]>]: never; }) | undefined;
@@ -552,7 +514,7 @@ export declare const DefaultTradeProfile: {
             } & {
                 Value?: number | undefined;
                 IsGreaterThan?: boolean | undefined;
-            } & { [K_27 in Exclude<keyof I_1["ControlMetadata"]["SingleOrderLimitOptions"][number], keyof DropdownNumericValue>]: never; })[] & { [K_28 in Exclude<keyof I_1["ControlMetadata"]["SingleOrderLimitOptions"], keyof {
+            } & { [K_26 in Exclude<keyof I_1["ControlMetadata"]["SingleOrderLimitOptions"][number], keyof DropdownNumericValue>]: never; })[] & { [K_27 in Exclude<keyof I_1["ControlMetadata"]["SingleOrderLimitOptions"], keyof {
                 Value?: number | undefined;
                 IsGreaterThan?: boolean | undefined;
             }[]>]: never; }) | undefined;
@@ -565,7 +527,7 @@ export declare const DefaultTradeProfile: {
             } & {
                 Value?: number | undefined;
                 IsGreaterThan?: boolean | undefined;
-            } & { [K_29 in Exclude<keyof I_1["ControlMetadata"]["MaxOrderQuantityOptions"][number], keyof DropdownNumericValue>]: never; })[] & { [K_30 in Exclude<keyof I_1["ControlMetadata"]["MaxOrderQuantityOptions"], keyof {
+            } & { [K_28 in Exclude<keyof I_1["ControlMetadata"]["MaxOrderQuantityOptions"][number], keyof DropdownNumericValue>]: never; })[] & { [K_29 in Exclude<keyof I_1["ControlMetadata"]["MaxOrderQuantityOptions"], keyof {
                 Value?: number | undefined;
                 IsGreaterThan?: boolean | undefined;
             }[]>]: never; }) | undefined;
@@ -577,7 +539,7 @@ export declare const DefaultTradeProfile: {
                 MinValue?: number | undefined;
                 MaxValue?: number | undefined;
                 Step?: number | undefined;
-            } & { [K_31 in Exclude<keyof I_1["ControlMetadata"]["AggressivePercentageConstraint"], keyof DecimalConstraint>]: never; }) | undefined;
+            } & { [K_30 in Exclude<keyof I_1["ControlMetadata"]["AggressivePercentageConstraint"], keyof DecimalConstraint>]: never; }) | undefined;
             SymbolGrossADVConstraint?: ({
                 MinValue?: number | undefined;
                 MaxValue?: number | undefined;
@@ -586,7 +548,7 @@ export declare const DefaultTradeProfile: {
                 MinValue?: number | undefined;
                 MaxValue?: number | undefined;
                 Step?: number | undefined;
-            } & { [K_32 in Exclude<keyof I_1["ControlMetadata"]["SymbolGrossADVConstraint"], keyof DecimalConstraint>]: never; }) | undefined;
+            } & { [K_31 in Exclude<keyof I_1["ControlMetadata"]["SymbolGrossADVConstraint"], keyof DecimalConstraint>]: never; }) | undefined;
             PriceCheckDeviationConstraint?: ({
                 MinValue?: number | undefined;
                 MaxValue?: number | undefined;
@@ -595,7 +557,7 @@ export declare const DefaultTradeProfile: {
                 MinValue?: number | undefined;
                 MaxValue?: number | undefined;
                 Step?: number | undefined;
-            } & { [K_33 in Exclude<keyof I_1["ControlMetadata"]["PriceCheckDeviationConstraint"], keyof DecimalConstraint>]: never; }) | undefined;
+            } & { [K_32 in Exclude<keyof I_1["ControlMetadata"]["PriceCheckDeviationConstraint"], keyof DecimalConstraint>]: never; }) | undefined;
             DuplicateOrderConstraint?: ({
                 MinValue?: number | undefined;
                 MaxValue?: number | undefined;
@@ -604,17 +566,8 @@ export declare const DefaultTradeProfile: {
                 MinValue?: number | undefined;
                 MaxValue?: number | undefined;
                 Step?: number | undefined;
-            } & { [K_34 in Exclude<keyof I_1["ControlMetadata"]["DuplicateOrderConstraint"], keyof IntConstraint>]: never; }) | undefined;
-            MultiplierConstraint?: ({
-                MinValue?: number | undefined;
-                MaxValue?: number | undefined;
-                Step?: number | undefined;
-            } & {
-                MinValue?: number | undefined;
-                MaxValue?: number | undefined;
-                Step?: number | undefined;
-            } & { [K_35 in Exclude<keyof I_1["ControlMetadata"]["MultiplierConstraint"], keyof DecimalConstraint>]: never; }) | undefined;
-        } & { [K_36 in Exclude<keyof I_1["ControlMetadata"], keyof TradeProfileControlMetadata>]: never; }) | undefined;
+            } & { [K_33 in Exclude<keyof I_1["ControlMetadata"]["DuplicateOrderConstraint"], keyof IntConstraint>]: never; }) | undefined;
+        } & { [K_34 in Exclude<keyof I_1["ControlMetadata"], keyof TradeProfileControlMetadata>]: never; }) | undefined;
         OrganizationID?: string | undefined;
         MetaData?: ({
             Network?: import("../com-fs-utils-lib/models/metadata/metadata").Network | undefined;
@@ -626,7 +579,7 @@ export declare const DefaultTradeProfile: {
             UpdatedAt?: Date | undefined;
             CreatedAt?: Date | undefined;
             UpdatedByAccount?: string | undefined;
-        } & { [K_37 in Exclude<keyof I_1["MetaData"], keyof MetaData>]: never; }) | undefined;
+        } & { [K_35 in Exclude<keyof I_1["MetaData"], keyof MetaData>]: never; }) | undefined;
         Audit?: ({
             ChangedBy?: string | undefined;
             ChangedAt?: Date | undefined;
@@ -635,8 +588,8 @@ export declare const DefaultTradeProfile: {
             ChangedBy?: string | undefined;
             ChangedAt?: Date | undefined;
             Reason?: string | undefined;
-        } & { [K_38 in Exclude<keyof I_1["Audit"], keyof Audit>]: never; }) | undefined;
-    } & { [K_39 in Exclude<keyof I_1, keyof DefaultTradeProfile>]: never; }>(object: I_1): DefaultTradeProfile;
+        } & { [K_36 in Exclude<keyof I_1["Audit"], keyof Audit>]: never; }) | undefined;
+    } & { [K_37 in Exclude<keyof I_1, keyof DefaultTradeProfile>]: never; }>(object: I_1): DefaultTradeProfile;
 };
 export declare const TradeProfileDetails: {
     encode(message: TradeProfileDetails, writer?: _m0.Writer): _m0.Writer;
@@ -663,7 +616,6 @@ export declare const TradeProfileDetails: {
         SymbolGrossADVPercent?: number | undefined;
         PriceCheckDeviation?: number | undefined;
         DuplicateOrderLimit?: number | undefined;
-        Multiplier?: number | undefined;
     } & {
         IsTradingEnabled?: boolean | undefined;
         IsOrderAcceptanceEnabled?: boolean | undefined;
@@ -693,7 +645,6 @@ export declare const TradeProfileDetails: {
         SymbolGrossADVPercent?: number | undefined;
         PriceCheckDeviation?: number | undefined;
         DuplicateOrderLimit?: number | undefined;
-        Multiplier?: number | undefined;
     } & { [K_3 in Exclude<keyof I, keyof TradeProfileDetails>]: never; }>(base?: I | undefined): TradeProfileDetails;
     fromPartial<I_1 extends {
         IsTradingEnabled?: boolean | undefined;
@@ -715,7 +666,6 @@ export declare const TradeProfileDetails: {
         SymbolGrossADVPercent?: number | undefined;
         PriceCheckDeviation?: number | undefined;
         DuplicateOrderLimit?: number | undefined;
-        Multiplier?: number | undefined;
     } & {
         IsTradingEnabled?: boolean | undefined;
         IsOrderAcceptanceEnabled?: boolean | undefined;
@@ -745,7 +695,6 @@ export declare const TradeProfileDetails: {
         SymbolGrossADVPercent?: number | undefined;
         PriceCheckDeviation?: number | undefined;
         DuplicateOrderLimit?: number | undefined;
-        Multiplier?: number | undefined;
     } & { [K_7 in Exclude<keyof I_1, keyof TradeProfileDetails>]: never; }>(object: I_1): TradeProfileDetails;
 };
 export declare const TradeProfileControlMetadata: {
@@ -783,11 +732,6 @@ export declare const TradeProfileControlMetadata: {
             Step?: number | undefined;
         } | undefined;
         DuplicateOrderConstraint?: {
-            MinValue?: number | undefined;
-            MaxValue?: number | undefined;
-            Step?: number | undefined;
-        } | undefined;
-        MultiplierConstraint?: {
             MinValue?: number | undefined;
             MaxValue?: number | undefined;
             Step?: number | undefined;
@@ -869,16 +813,7 @@ export declare const TradeProfileControlMetadata: {
             MaxValue?: number | undefined;
             Step?: number | undefined;
         } & { [K_10 in Exclude<keyof I["DuplicateOrderConstraint"], keyof IntConstraint>]: never; }) | undefined;
-        MultiplierConstraint?: ({
-            MinValue?: number | undefined;
-            MaxValue?: number | undefined;
-            Step?: number | undefined;
-        } & {
-            MinValue?: number | undefined;
-            MaxValue?: number | undefined;
-            Step?: number | undefined;
-        } & { [K_11 in Exclude<keyof I["MultiplierConstraint"], keyof DecimalConstraint>]: never; }) | undefined;
-    } & { [K_12 in Exclude<keyof I, keyof TradeProfileControlMetadata>]: never; }>(base?: I | undefined): TradeProfileControlMetadata;
+    } & { [K_11 in Exclude<keyof I, keyof TradeProfileControlMetadata>]: never; }>(base?: I | undefined): TradeProfileControlMetadata;
     fromPartial<I_1 extends {
         LockedFields?: LockableField[] | undefined;
         AggregateNotionalLimitOptions?: {
@@ -913,13 +848,8 @@ export declare const TradeProfileControlMetadata: {
             MaxValue?: number | undefined;
             Step?: number | undefined;
         } | undefined;
-        MultiplierConstraint?: {
-            MinValue?: number | undefined;
-            MaxValue?: number | undefined;
-            Step?: number | undefined;
-        } | undefined;
     } & {
-        LockedFields?: (LockableField[] & LockableField[] & { [K_13 in Exclude<keyof I_1["LockedFields"], keyof LockableField[]>]: never; }) | undefined;
+        LockedFields?: (LockableField[] & LockableField[] & { [K_12 in Exclude<keyof I_1["LockedFields"], keyof LockableField[]>]: never; }) | undefined;
         AggregateNotionalLimitOptions?: ({
             Value?: number | undefined;
             IsGreaterThan?: boolean | undefined;
@@ -929,7 +859,7 @@ export declare const TradeProfileControlMetadata: {
         } & {
             Value?: number | undefined;
             IsGreaterThan?: boolean | undefined;
-        } & { [K_14 in Exclude<keyof I_1["AggregateNotionalLimitOptions"][number], keyof DropdownNumericValue>]: never; })[] & { [K_15 in Exclude<keyof I_1["AggregateNotionalLimitOptions"], keyof {
+        } & { [K_13 in Exclude<keyof I_1["AggregateNotionalLimitOptions"][number], keyof DropdownNumericValue>]: never; })[] & { [K_14 in Exclude<keyof I_1["AggregateNotionalLimitOptions"], keyof {
             Value?: number | undefined;
             IsGreaterThan?: boolean | undefined;
         }[]>]: never; }) | undefined;
@@ -942,7 +872,7 @@ export declare const TradeProfileControlMetadata: {
         } & {
             Value?: number | undefined;
             IsGreaterThan?: boolean | undefined;
-        } & { [K_16 in Exclude<keyof I_1["SingleOrderLimitOptions"][number], keyof DropdownNumericValue>]: never; })[] & { [K_17 in Exclude<keyof I_1["SingleOrderLimitOptions"], keyof {
+        } & { [K_15 in Exclude<keyof I_1["SingleOrderLimitOptions"][number], keyof DropdownNumericValue>]: never; })[] & { [K_16 in Exclude<keyof I_1["SingleOrderLimitOptions"], keyof {
             Value?: number | undefined;
             IsGreaterThan?: boolean | undefined;
         }[]>]: never; }) | undefined;
@@ -955,7 +885,7 @@ export declare const TradeProfileControlMetadata: {
         } & {
             Value?: number | undefined;
             IsGreaterThan?: boolean | undefined;
-        } & { [K_18 in Exclude<keyof I_1["MaxOrderQuantityOptions"][number], keyof DropdownNumericValue>]: never; })[] & { [K_19 in Exclude<keyof I_1["MaxOrderQuantityOptions"], keyof {
+        } & { [K_17 in Exclude<keyof I_1["MaxOrderQuantityOptions"][number], keyof DropdownNumericValue>]: never; })[] & { [K_18 in Exclude<keyof I_1["MaxOrderQuantityOptions"], keyof {
             Value?: number | undefined;
             IsGreaterThan?: boolean | undefined;
         }[]>]: never; }) | undefined;
@@ -967,7 +897,7 @@ export declare const TradeProfileControlMetadata: {
             MinValue?: number | undefined;
             MaxValue?: number | undefined;
             Step?: number | undefined;
-        } & { [K_20 in Exclude<keyof I_1["AggressivePercentageConstraint"], keyof DecimalConstraint>]: never; }) | undefined;
+        } & { [K_19 in Exclude<keyof I_1["AggressivePercentageConstraint"], keyof DecimalConstraint>]: never; }) | undefined;
         SymbolGrossADVConstraint?: ({
             MinValue?: number | undefined;
             MaxValue?: number | undefined;
@@ -976,7 +906,7 @@ export declare const TradeProfileControlMetadata: {
             MinValue?: number | undefined;
             MaxValue?: number | undefined;
             Step?: number | undefined;
-        } & { [K_21 in Exclude<keyof I_1["SymbolGrossADVConstraint"], keyof DecimalConstraint>]: never; }) | undefined;
+        } & { [K_20 in Exclude<keyof I_1["SymbolGrossADVConstraint"], keyof DecimalConstraint>]: never; }) | undefined;
         PriceCheckDeviationConstraint?: ({
             MinValue?: number | undefined;
             MaxValue?: number | undefined;
@@ -985,7 +915,7 @@ export declare const TradeProfileControlMetadata: {
             MinValue?: number | undefined;
             MaxValue?: number | undefined;
             Step?: number | undefined;
-        } & { [K_22 in Exclude<keyof I_1["PriceCheckDeviationConstraint"], keyof DecimalConstraint>]: never; }) | undefined;
+        } & { [K_21 in Exclude<keyof I_1["PriceCheckDeviationConstraint"], keyof DecimalConstraint>]: never; }) | undefined;
         DuplicateOrderConstraint?: ({
             MinValue?: number | undefined;
             MaxValue?: number | undefined;
@@ -994,17 +924,8 @@ export declare const TradeProfileControlMetadata: {
             MinValue?: number | undefined;
             MaxValue?: number | undefined;
             Step?: number | undefined;
-        } & { [K_23 in Exclude<keyof I_1["DuplicateOrderConstraint"], keyof IntConstraint>]: never; }) | undefined;
-        MultiplierConstraint?: ({
-            MinValue?: number | undefined;
-            MaxValue?: number | undefined;
-            Step?: number | undefined;
-        } & {
-            MinValue?: number | undefined;
-            MaxValue?: number | undefined;
-            Step?: number | undefined;
-        } & { [K_24 in Exclude<keyof I_1["MultiplierConstraint"], keyof DecimalConstraint>]: never; }) | undefined;
-    } & { [K_25 in Exclude<keyof I_1, keyof TradeProfileControlMetadata>]: never; }>(object: I_1): TradeProfileControlMetadata;
+        } & { [K_22 in Exclude<keyof I_1["DuplicateOrderConstraint"], keyof IntConstraint>]: never; }) | undefined;
+    } & { [K_23 in Exclude<keyof I_1, keyof TradeProfileControlMetadata>]: never; }>(object: I_1): TradeProfileControlMetadata;
 };
 export declare const DropdownNumericValue: {
     encode(message: DropdownNumericValue, writer?: _m0.Writer): _m0.Writer;

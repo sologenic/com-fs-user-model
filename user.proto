@@ -8,8 +8,8 @@ import "google/protobuf/timestamp.proto";
 import "sologenic/com-fs-utils-lib/models/metadata/metadata.proto";
 import "sologenic/com-fs-utils-lib/models/audit/audit.proto";
 import "sologenic/com-fs-utils-lib/models/role/role.proto";
-import "sologenic/com-fs-trade-profile-model/tradeprofile.proto";
 import "sologenic/com-fs-utils-lib/models/language/language.proto";
+import "sologenic/com-fs-trade-profile-model/tradeprofile.proto";
 
 message UserDetails {
     string UserID = 1; // email address used for firebase authentication

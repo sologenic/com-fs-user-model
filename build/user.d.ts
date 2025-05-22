@@ -210,7 +210,6 @@ export declare const UserDetails: {
             SymbolGrossADVPercent?: number | undefined;
             PriceCheckDeviation?: number | undefined;
             DuplicateOrderLimit?: number | undefined;
-            Multiplier?: number | undefined;
         } | undefined;
     } & {
         UserID?: string | undefined;
@@ -331,7 +330,6 @@ export declare const UserDetails: {
             SymbolGrossADVPercent?: number | undefined;
             PriceCheckDeviation?: number | undefined;
             DuplicateOrderLimit?: number | undefined;
-            Multiplier?: number | undefined;
         } & {
             IsTradingEnabled?: boolean | undefined;
             IsOrderAcceptanceEnabled?: boolean | undefined;
@@ -361,7 +359,6 @@ export declare const UserDetails: {
             SymbolGrossADVPercent?: number | undefined;
             PriceCheckDeviation?: number | undefined;
             DuplicateOrderLimit?: number | undefined;
-            Multiplier?: number | undefined;
         } & { [K_11 in Exclude<keyof I["TradeProfile"], keyof TradeProfileDetails>]: never; }) | undefined;
     } & { [K_12 in Exclude<keyof I, keyof UserDetails>]: never; }>(base?: I | undefined): UserDetails;
     fromPartial<I_1 extends {
@@ -430,7 +427,6 @@ export declare const UserDetails: {
             SymbolGrossADVPercent?: number | undefined;
             PriceCheckDeviation?: number | undefined;
             DuplicateOrderLimit?: number | undefined;
-            Multiplier?: number | undefined;
         } | undefined;
     } & {
         UserID?: string | undefined;
@@ -551,7 +547,6 @@ export declare const UserDetails: {
             SymbolGrossADVPercent?: number | undefined;
             PriceCheckDeviation?: number | undefined;
             DuplicateOrderLimit?: number | undefined;
-            Multiplier?: number | undefined;
         } & {
             IsTradingEnabled?: boolean | undefined;
             IsOrderAcceptanceEnabled?: boolean | undefined;
@@ -581,7 +576,6 @@ export declare const UserDetails: {
             SymbolGrossADVPercent?: number | undefined;
             PriceCheckDeviation?: number | undefined;
             DuplicateOrderLimit?: number | undefined;
-            Multiplier?: number | undefined;
         } & { [K_24 in Exclude<keyof I_1["TradeProfile"], keyof TradeProfileDetails>]: never; }) | undefined;
     } & { [K_25 in Exclude<keyof I_1, keyof UserDetails>]: never; }>(object: I_1): UserDetails;
 };
@@ -815,7 +809,6 @@ export declare const User: {
                 SymbolGrossADVPercent?: number | undefined;
                 PriceCheckDeviation?: number | undefined;
                 DuplicateOrderLimit?: number | undefined;
-                Multiplier?: number | undefined;
             } | undefined;
         } | undefined;
         MetaData?: {
@@ -896,7 +889,6 @@ export declare const User: {
                 SymbolGrossADVPercent?: number | undefined;
                 PriceCheckDeviation?: number | undefined;
                 DuplicateOrderLimit?: number | undefined;
-                Multiplier?: number | undefined;
             } | undefined;
         } & {
             UserID?: string | undefined;
@@ -1017,7 +1009,6 @@ export declare const User: {
                 SymbolGrossADVPercent?: number | undefined;
                 PriceCheckDeviation?: number | undefined;
                 DuplicateOrderLimit?: number | undefined;
-                Multiplier?: number | undefined;
             } & {
                 IsTradingEnabled?: boolean | undefined;
                 IsOrderAcceptanceEnabled?: boolean | undefined;
@@ -1047,7 +1038,6 @@ export declare const User: {
                 SymbolGrossADVPercent?: number | undefined;
                 PriceCheckDeviation?: number | undefined;
                 DuplicateOrderLimit?: number | undefined;
-                Multiplier?: number | undefined;
             } & { [K_11 in Exclude<keyof I["User"]["TradeProfile"], keyof TradeProfileDetails>]: never; }) | undefined;
         } & { [K_12 in Exclude<keyof I["User"], keyof UserDetails>]: never; }) | undefined;
         MetaData?: ({
@@ -1138,7 +1128,6 @@ export declare const User: {
                 SymbolGrossADVPercent?: number | undefined;
                 PriceCheckDeviation?: number | undefined;
                 DuplicateOrderLimit?: number | undefined;
-                Multiplier?: number | undefined;
             } | undefined;
         } | undefined;
         MetaData?: {
@@ -1219,7 +1208,6 @@ export declare const User: {
                 SymbolGrossADVPercent?: number | undefined;
                 PriceCheckDeviation?: number | undefined;
                 DuplicateOrderLimit?: number | undefined;
-                Multiplier?: number | undefined;
             } | undefined;
         } & {
             UserID?: string | undefined;
@@ -1340,7 +1328,6 @@ export declare const User: {
                 SymbolGrossADVPercent?: number | undefined;
                 PriceCheckDeviation?: number | undefined;
                 DuplicateOrderLimit?: number | undefined;
-                Multiplier?: number | undefined;
             } & {
                 IsTradingEnabled?: boolean | undefined;
                 IsOrderAcceptanceEnabled?: boolean | undefined;
@@ -1370,7 +1357,6 @@ export declare const User: {
                 SymbolGrossADVPercent?: number | undefined;
                 PriceCheckDeviation?: number | undefined;
                 DuplicateOrderLimit?: number | undefined;
-                Multiplier?: number | undefined;
             } & { [K_27 in Exclude<keyof I_1["User"]["TradeProfile"], keyof TradeProfileDetails>]: never; }) | undefined;
         } & { [K_28 in Exclude<keyof I_1["User"], keyof UserDetails>]: never; }) | undefined;
         MetaData?: ({
@@ -1536,7 +1522,6 @@ export declare const UserList: {
                     SymbolGrossADVPercent?: number | undefined;
                     PriceCheckDeviation?: number | undefined;
                     DuplicateOrderLimit?: number | undefined;
-                    Multiplier?: number | undefined;
                 } | undefined;
             } | undefined;
             MetaData?: {
@@ -1620,7 +1605,6 @@ export declare const UserList: {
                     SymbolGrossADVPercent?: number | undefined;
                     PriceCheckDeviation?: number | undefined;
                     DuplicateOrderLimit?: number | undefined;
-                    Multiplier?: number | undefined;
                 } | undefined;
             } | undefined;
             MetaData?: {
@@ -1701,7 +1685,6 @@ export declare const UserList: {
                     SymbolGrossADVPercent?: number | undefined;
                     PriceCheckDeviation?: number | undefined;
                     DuplicateOrderLimit?: number | undefined;
-                    Multiplier?: number | undefined;
                 } | undefined;
             } | undefined;
             MetaData?: {
@@ -1782,7 +1765,6 @@ export declare const UserList: {
                     SymbolGrossADVPercent?: number | undefined;
                     PriceCheckDeviation?: number | undefined;
                     DuplicateOrderLimit?: number | undefined;
-                    Multiplier?: number | undefined;
                 } | undefined;
             } & {
                 UserID?: string | undefined;
@@ -1903,7 +1885,6 @@ export declare const UserList: {
                     SymbolGrossADVPercent?: number | undefined;
                     PriceCheckDeviation?: number | undefined;
                     DuplicateOrderLimit?: number | undefined;
-                    Multiplier?: number | undefined;
                 } & {
                     IsTradingEnabled?: boolean | undefined;
                     IsOrderAcceptanceEnabled?: boolean | undefined;
@@ -1933,7 +1914,6 @@ export declare const UserList: {
                     SymbolGrossADVPercent?: number | undefined;
                     PriceCheckDeviation?: number | undefined;
                     DuplicateOrderLimit?: number | undefined;
-                    Multiplier?: number | undefined;
                 } & { [K_11 in Exclude<keyof I["Users"][number]["User"]["TradeProfile"], keyof TradeProfileDetails>]: never; }) | undefined;
             } & { [K_12 in Exclude<keyof I["Users"][number]["User"], keyof UserDetails>]: never; }) | undefined;
             MetaData?: ({
@@ -2023,7 +2003,6 @@ export declare const UserList: {
                     SymbolGrossADVPercent?: number | undefined;
                     PriceCheckDeviation?: number | undefined;
                     DuplicateOrderLimit?: number | undefined;
-                    Multiplier?: number | undefined;
                 } | undefined;
             } | undefined;
             MetaData?: {
@@ -2108,7 +2087,6 @@ export declare const UserList: {
                     SymbolGrossADVPercent?: number | undefined;
                     PriceCheckDeviation?: number | undefined;
                     DuplicateOrderLimit?: number | undefined;
-                    Multiplier?: number | undefined;
                 } | undefined;
             } | undefined;
             MetaData?: {
@@ -2192,7 +2170,6 @@ export declare const UserList: {
                     SymbolGrossADVPercent?: number | undefined;
                     PriceCheckDeviation?: number | undefined;
                     DuplicateOrderLimit?: number | undefined;
-                    Multiplier?: number | undefined;
                 } | undefined;
             } | undefined;
             MetaData?: {
@@ -2273,7 +2250,6 @@ export declare const UserList: {
                     SymbolGrossADVPercent?: number | undefined;
                     PriceCheckDeviation?: number | undefined;
                     DuplicateOrderLimit?: number | undefined;
-                    Multiplier?: number | undefined;
                 } | undefined;
             } | undefined;
             MetaData?: {
@@ -2354,7 +2330,6 @@ export declare const UserList: {
                     SymbolGrossADVPercent?: number | undefined;
                     PriceCheckDeviation?: number | undefined;
                     DuplicateOrderLimit?: number | undefined;
-                    Multiplier?: number | undefined;
                 } | undefined;
             } & {
                 UserID?: string | undefined;
@@ -2475,7 +2450,6 @@ export declare const UserList: {
                     SymbolGrossADVPercent?: number | undefined;
                     PriceCheckDeviation?: number | undefined;
                     DuplicateOrderLimit?: number | undefined;
-                    Multiplier?: number | undefined;
                 } & {
                     IsTradingEnabled?: boolean | undefined;
                     IsOrderAcceptanceEnabled?: boolean | undefined;
@@ -2505,7 +2479,6 @@ export declare const UserList: {
                     SymbolGrossADVPercent?: number | undefined;
                     PriceCheckDeviation?: number | undefined;
                     DuplicateOrderLimit?: number | undefined;
-                    Multiplier?: number | undefined;
                 } & { [K_29 in Exclude<keyof I_1["Users"][number]["User"]["TradeProfile"], keyof TradeProfileDetails>]: never; }) | undefined;
             } & { [K_30 in Exclude<keyof I_1["Users"][number]["User"], keyof UserDetails>]: never; }) | undefined;
             MetaData?: ({
@@ -2595,7 +2568,6 @@ export declare const UserList: {
                     SymbolGrossADVPercent?: number | undefined;
                     PriceCheckDeviation?: number | undefined;
                     DuplicateOrderLimit?: number | undefined;
-                    Multiplier?: number | undefined;
                 } | undefined;
             } | undefined;
             MetaData?: {
