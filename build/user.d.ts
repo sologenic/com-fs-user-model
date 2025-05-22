@@ -163,7 +163,7 @@ export declare const UserDetails: {
             Type?: SocialType | undefined;
         }[] | undefined;
         Language?: {
-            Language?: string | undefined;
+            Language?: import("./sologenic/com-fs-utils-lib/models/language/language").Lang | undefined;
             UserConfigured?: boolean | undefined;
         } | undefined;
         ExternalUserID?: string | undefined;
@@ -251,10 +251,10 @@ export declare const UserDetails: {
             Type?: SocialType | undefined;
         }[]>]: never; }) | undefined;
         Language?: ({
-            Language?: string | undefined;
+            Language?: import("./sologenic/com-fs-utils-lib/models/language/language").Lang | undefined;
             UserConfigured?: boolean | undefined;
         } & {
-            Language?: string | undefined;
+            Language?: import("./sologenic/com-fs-utils-lib/models/language/language").Lang | undefined;
             UserConfigured?: boolean | undefined;
         } & { [K_4 in Exclude<keyof I["Language"], keyof Language>]: never; }) | undefined;
         ExternalUserID?: string | undefined;
@@ -380,7 +380,7 @@ export declare const UserDetails: {
             Type?: SocialType | undefined;
         }[] | undefined;
         Language?: {
-            Language?: string | undefined;
+            Language?: import("./sologenic/com-fs-utils-lib/models/language/language").Lang | undefined;
             UserConfigured?: boolean | undefined;
         } | undefined;
         ExternalUserID?: string | undefined;
@@ -468,10 +468,10 @@ export declare const UserDetails: {
             Type?: SocialType | undefined;
         }[]>]: never; }) | undefined;
         Language?: ({
-            Language?: string | undefined;
+            Language?: import("./sologenic/com-fs-utils-lib/models/language/language").Lang | undefined;
             UserConfigured?: boolean | undefined;
         } & {
-            Language?: string | undefined;
+            Language?: import("./sologenic/com-fs-utils-lib/models/language/language").Lang | undefined;
             UserConfigured?: boolean | undefined;
         } & { [K_17 in Exclude<keyof I_1["Language"], keyof Language>]: never; }) | undefined;
         ExternalUserID?: string | undefined;
@@ -762,7 +762,7 @@ export declare const User: {
                 Type?: SocialType | undefined;
             }[] | undefined;
             Language?: {
-                Language?: string | undefined;
+                Language?: import("./sologenic/com-fs-utils-lib/models/language/language").Lang | undefined;
                 UserConfigured?: boolean | undefined;
             } | undefined;
             ExternalUserID?: string | undefined;
@@ -842,7 +842,7 @@ export declare const User: {
                 Type?: SocialType | undefined;
             }[] | undefined;
             Language?: {
-                Language?: string | undefined;
+                Language?: import("./sologenic/com-fs-utils-lib/models/language/language").Lang | undefined;
                 UserConfigured?: boolean | undefined;
             } | undefined;
             ExternalUserID?: string | undefined;
@@ -930,10 +930,10 @@ export declare const User: {
                 Type?: SocialType | undefined;
             }[]>]: never; }) | undefined;
             Language?: ({
-                Language?: string | undefined;
+                Language?: import("./sologenic/com-fs-utils-lib/models/language/language").Lang | undefined;
                 UserConfigured?: boolean | undefined;
             } & {
-                Language?: string | undefined;
+                Language?: import("./sologenic/com-fs-utils-lib/models/language/language").Lang | undefined;
                 UserConfigured?: boolean | undefined;
             } & { [K_4 in Exclude<keyof I["User"]["Language"], keyof Language>]: never; }) | undefined;
             ExternalUserID?: string | undefined;
@@ -1081,7 +1081,7 @@ export declare const User: {
                 Type?: SocialType | undefined;
             }[] | undefined;
             Language?: {
-                Language?: string | undefined;
+                Language?: import("./sologenic/com-fs-utils-lib/models/language/language").Lang | undefined;
                 UserConfigured?: boolean | undefined;
             } | undefined;
             ExternalUserID?: string | undefined;
@@ -1161,7 +1161,7 @@ export declare const User: {
                 Type?: SocialType | undefined;
             }[] | undefined;
             Language?: {
-                Language?: string | undefined;
+                Language?: import("./sologenic/com-fs-utils-lib/models/language/language").Lang | undefined;
                 UserConfigured?: boolean | undefined;
             } | undefined;
             ExternalUserID?: string | undefined;
@@ -1249,10 +1249,10 @@ export declare const User: {
                 Type?: SocialType | undefined;
             }[]>]: never; }) | undefined;
             Language?: ({
-                Language?: string | undefined;
+                Language?: import("./sologenic/com-fs-utils-lib/models/language/language").Lang | undefined;
                 UserConfigured?: boolean | undefined;
             } & {
-                Language?: string | undefined;
+                Language?: import("./sologenic/com-fs-utils-lib/models/language/language").Lang | undefined;
                 UserConfigured?: boolean | undefined;
             } & { [K_20 in Exclude<keyof I_1["User"]["Language"], keyof Language>]: never; }) | undefined;
             ExternalUserID?: string | undefined;
@@ -1475,7 +1475,7 @@ export declare const UserList: {
                     Type?: SocialType | undefined;
                 }[] | undefined;
                 Language?: {
-                    Language?: string | undefined;
+                    Language?: import("./sologenic/com-fs-utils-lib/models/language/language").Lang | undefined;
                     UserConfigured?: boolean | undefined;
                 } | undefined;
                 ExternalUserID?: string | undefined;
@@ -1558,7 +1558,7 @@ export declare const UserList: {
                     Type?: SocialType | undefined;
                 }[] | undefined;
                 Language?: {
-                    Language?: string | undefined;
+                    Language?: import("./sologenic/com-fs-utils-lib/models/language/language").Lang | undefined;
                     UserConfigured?: boolean | undefined;
                 } | undefined;
                 ExternalUserID?: string | undefined;
@@ -1638,7 +1638,7 @@ export declare const UserList: {
                     Type?: SocialType | undefined;
                 }[] | undefined;
                 Language?: {
-                    Language?: string | undefined;
+                    Language?: import("./sologenic/com-fs-utils-lib/models/language/language").Lang | undefined;
                     UserConfigured?: boolean | undefined;
                 } | undefined;
                 ExternalUserID?: string | undefined;
@@ -1718,7 +1718,7 @@ export declare const UserList: {
                     Type?: SocialType | undefined;
                 }[] | undefined;
                 Language?: {
-                    Language?: string | undefined;
+                    Language?: import("./sologenic/com-fs-utils-lib/models/language/language").Lang | undefined;
                     UserConfigured?: boolean | undefined;
                 } | undefined;
                 ExternalUserID?: string | undefined;
@@ -1806,10 +1806,10 @@ export declare const UserList: {
                     Type?: SocialType | undefined;
                 }[]>]: never; }) | undefined;
                 Language?: ({
-                    Language?: string | undefined;
+                    Language?: import("./sologenic/com-fs-utils-lib/models/language/language").Lang | undefined;
                     UserConfigured?: boolean | undefined;
                 } & {
-                    Language?: string | undefined;
+                    Language?: import("./sologenic/com-fs-utils-lib/models/language/language").Lang | undefined;
                     UserConfigured?: boolean | undefined;
                 } & { [K_4 in Exclude<keyof I["Users"][number]["User"]["Language"], keyof Language>]: never; }) | undefined;
                 ExternalUserID?: string | undefined;
@@ -1956,7 +1956,7 @@ export declare const UserList: {
                     Type?: SocialType | undefined;
                 }[] | undefined;
                 Language?: {
-                    Language?: string | undefined;
+                    Language?: import("./sologenic/com-fs-utils-lib/models/language/language").Lang | undefined;
                     UserConfigured?: boolean | undefined;
                 } | undefined;
                 ExternalUserID?: string | undefined;
@@ -2040,7 +2040,7 @@ export declare const UserList: {
                     Type?: SocialType | undefined;
                 }[] | undefined;
                 Language?: {
-                    Language?: string | undefined;
+                    Language?: import("./sologenic/com-fs-utils-lib/models/language/language").Lang | undefined;
                     UserConfigured?: boolean | undefined;
                 } | undefined;
                 ExternalUserID?: string | undefined;
@@ -2123,7 +2123,7 @@ export declare const UserList: {
                     Type?: SocialType | undefined;
                 }[] | undefined;
                 Language?: {
-                    Language?: string | undefined;
+                    Language?: import("./sologenic/com-fs-utils-lib/models/language/language").Lang | undefined;
                     UserConfigured?: boolean | undefined;
                 } | undefined;
                 ExternalUserID?: string | undefined;
@@ -2203,7 +2203,7 @@ export declare const UserList: {
                     Type?: SocialType | undefined;
                 }[] | undefined;
                 Language?: {
-                    Language?: string | undefined;
+                    Language?: import("./sologenic/com-fs-utils-lib/models/language/language").Lang | undefined;
                     UserConfigured?: boolean | undefined;
                 } | undefined;
                 ExternalUserID?: string | undefined;
@@ -2283,7 +2283,7 @@ export declare const UserList: {
                     Type?: SocialType | undefined;
                 }[] | undefined;
                 Language?: {
-                    Language?: string | undefined;
+                    Language?: import("./sologenic/com-fs-utils-lib/models/language/language").Lang | undefined;
                     UserConfigured?: boolean | undefined;
                 } | undefined;
                 ExternalUserID?: string | undefined;
@@ -2371,10 +2371,10 @@ export declare const UserList: {
                     Type?: SocialType | undefined;
                 }[]>]: never; }) | undefined;
                 Language?: ({
-                    Language?: string | undefined;
+                    Language?: import("./sologenic/com-fs-utils-lib/models/language/language").Lang | undefined;
                     UserConfigured?: boolean | undefined;
                 } & {
-                    Language?: string | undefined;
+                    Language?: import("./sologenic/com-fs-utils-lib/models/language/language").Lang | undefined;
                     UserConfigured?: boolean | undefined;
                 } & { [K_22 in Exclude<keyof I_1["Users"][number]["User"]["Language"], keyof Language>]: never; }) | undefined;
                 ExternalUserID?: string | undefined;
@@ -2521,7 +2521,7 @@ export declare const UserList: {
                     Type?: SocialType | undefined;
                 }[] | undefined;
                 Language?: {
-                    Language?: string | undefined;
+                    Language?: import("./sologenic/com-fs-utils-lib/models/language/language").Lang | undefined;
                     UserConfigured?: boolean | undefined;
                 } | undefined;
                 ExternalUserID?: string | undefined;

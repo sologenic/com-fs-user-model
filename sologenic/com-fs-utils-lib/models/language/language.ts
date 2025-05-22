@@ -55,18 +55,18 @@ export function langToJSON(object: Lang): string {
 }
 
 export interface Language {
-  Language: string;
+  Language: Lang;
   UserConfigured: boolean;
 }
 
 function createBaseLanguage(): Language {
-  return { Language: "", UserConfigured: false };
+  return { Language: 0, UserConfigured: false };
 }
 
 export const Language = {
   encode(message: Language, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.Language !== "") {
-      writer.uint32(10).string(message.Language);
+    if (message.Language !== 0) {
+      writer.uint32(8).int32(message.Language);
     }
     if (message.UserConfigured !== false) {
       writer.uint32(16).bool(message.UserConfigured);
@@ -82,11 +82,11 @@ export const Language = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag !== 10) {
+          if (tag !== 8) {
             break;
           }
 
-          message.Language = reader.string();
+          message.Language = reader.int32() as any;
           continue;
         case 2:
           if (tag !== 16) {
@@ -106,15 +106,15 @@ export const Language = {
 
   fromJSON(object: any): Language {
     return {
-      Language: isSet(object.Language) ? globalThis.String(object.Language) : "",
+      Language: isSet(object.Language) ? langFromJSON(object.Language) : 0,
       UserConfigured: isSet(object.UserConfigured) ? globalThis.Boolean(object.UserConfigured) : false,
     };
   },
 
   toJSON(message: Language): unknown {
     const obj: any = {};
-    if (message.Language !== "") {
-      obj.Language = message.Language;
+    if (message.Language !== 0) {
+      obj.Language = langToJSON(message.Language);
     }
     if (message.UserConfigured !== false) {
       obj.UserConfigured = message.UserConfigured;
@@ -127,7 +127,7 @@ export const Language = {
   },
   fromPartial<I extends Exact<DeepPartial<Language>, I>>(object: I): Language {
     const message = createBaseLanguage();
-    message.Language = object.Language ?? "";
+    message.Language = object.Language ?? 0;
     message.UserConfigured = object.UserConfigured ?? false;
     return message;
   },
