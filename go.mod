@@ -6,7 +6,7 @@ require (
 	github.com/sologenic/com-fs-trade-profile-model v0.0.0-20250508212619-50d926f69ba6
 	github.com/sologenic/com-fs-utils-lib/go/grpc-client v0.0.0-20250314155456-e14d49a8b728
 	github.com/sologenic/com-fs-utils-lib/models/audit v0.0.0-20250314155456-e14d49a8b728
-	github.com/sologenic/com-fs-utils-lib/models/language v0.0.0-20250515230819-64335ed9d778
+	github.com/sologenic/com-fs-utils-lib/models/language v0.0.0-20250522224021-4abaa0626868
 	github.com/sologenic/com-fs-utils-lib/models/metadata v0.0.0-20250314155456-e14d49a8b728
 	github.com/sologenic/com-fs-utils-lib/models/role v0.0.0-20250411234808-20ee098868aa
 	google.golang.org/grpc v1.71.1
