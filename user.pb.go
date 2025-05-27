@@ -329,12 +329,13 @@ type UserDetails struct {
 	Status         UserStatus                                      `protobuf:"varint,8,opt,name=Status,proto3,enum=user.UserStatus" json:"Status,omitempty"`
 	Wallets        []*Wallet                                       `protobuf:"bytes,9,rep,name=Wallets,proto3" json:"Wallets,omitempty"`
 	Socials        []*Social                                       `protobuf:"bytes,10,rep,name=Socials,proto3" json:"Socials,omitempty"`
-	Language       *language.Language                              `protobuf:"bytes,11,opt,name=Language,proto3" json:"Language,omitempty"`
+	Language       language.Lang                                   `protobuf:"varint,11,opt,name=Language,proto3,enum=language.Lang" json:"Language,omitempty"`
 	ExternalUserID string                                          `protobuf:"bytes,12,opt,name=ExternalUserID,proto3" json:"ExternalUserID,omitempty"` // UUID for the external user identifier in the KYC provider
 	OrganizationID string                                          `protobuf:"bytes,13,opt,name=OrganizationID,proto3" json:"OrganizationID,omitempty"` // UUID
 	Employment     *Employment                                     `protobuf:"bytes,14,opt,name=Employment,proto3,oneof" json:"Employment,omitempty"`
 	Role           role.Role                                       `protobuf:"varint,15,opt,name=Role,proto3,enum=role.Role" json:"Role,omitempty"` // A retail user will always have a role of "NORMAL_USER"
 	TradeProfile   *com_fs_trade_profile_model.TradeProfileDetails `protobuf:"bytes,16,opt,name=TradeProfile,proto3" json:"TradeProfile,omitempty"` // Trade profile details
+	KycInquiries   []string                                        `protobuf:"bytes,17,rep,name=KycInquiries,proto3" json:"KycInquiries,omitempty"` // Array of inquiry ID's
 	unknownFields  protoimpl.UnknownFields
 	sizeCache      protoimpl.SizeCache
 }
@@ -439,11 +440,11 @@ func (x *UserDetails) GetSocials() []*Social {
 	return nil
 }
 
-func (x *UserDetails) GetLanguage() *language.Language {
+func (x *UserDetails) GetLanguage() language.Lang {
 	if x != nil {
 		return x.Language
 	}
-	return nil
+	return language.Lang(0)
 }
 
 func (x *UserDetails) GetExternalUserID() string {
@@ -477,6 +478,13 @@ func (x *UserDetails) GetRole() role.Role {
 func (x *UserDetails) GetTradeProfile() *com_fs_trade_profile_model.TradeProfileDetails {
 	if x != nil {
 		return x.TradeProfile
+	}
+	return nil
+}
+
+func (x *UserDetails) GetKycInquiries() []string {
+	if x != nil {
+		return x.KycInquiries
 	}
 	return nil
 }
@@ -1091,7 +1099,7 @@ var File_user_proto protoreflect.FileDescriptor
 const file_user_proto_rawDesc = "" +
 	"\n" +
 	"\n" +
-	"user.proto\x12\x04user\x1a\x1fgoogle/protobuf/timestamp.proto\x1a9sologenic/com-fs-utils-lib/models/metadata/metadata.proto\x1a3sologenic/com-fs-utils-lib/models/audit/audit.proto\x1a1sologenic/com-fs-utils-lib/models/role/role.proto\x1a9sologenic/com-fs-utils-lib/models/language/language.proto\x1a7sologenic/com-fs-trade-profile-model/tradeprofile.proto\"\xf0\x04\n" +
+	"user.proto\x12\x04user\x1a\x1fgoogle/protobuf/timestamp.proto\x1a9sologenic/com-fs-utils-lib/models/metadata/metadata.proto\x1a3sologenic/com-fs-utils-lib/models/audit/audit.proto\x1a1sologenic/com-fs-utils-lib/models/role/role.proto\x1a9sologenic/com-fs-utils-lib/models/language/language.proto\x1a7sologenic/com-fs-trade-profile-model/tradeprofile.proto\"\x90\x05\n" +
 	"\vUserDetails\x12\x16\n" +
 	"\x06UserID\x18\x01 \x01(\tR\x06UserID\x12\x1c\n" +
 	"\tFirstName\x18\x02 \x01(\tR\tFirstName\x12\x1a\n" +
@@ -1103,8 +1111,8 @@ const file_user_proto_rawDesc = "" +
 	"\x06Status\x18\b \x01(\x0e2\x10.user.UserStatusR\x06Status\x12&\n" +
 	"\aWallets\x18\t \x03(\v2\f.user.WalletR\aWallets\x12&\n" +
 	"\aSocials\x18\n" +
-	" \x03(\v2\f.user.SocialR\aSocials\x12.\n" +
-	"\bLanguage\x18\v \x01(\v2\x12.language.LanguageR\bLanguage\x12&\n" +
+	" \x03(\v2\f.user.SocialR\aSocials\x12*\n" +
+	"\bLanguage\x18\v \x01(\x0e2\x0e.language.LangR\bLanguage\x12&\n" +
 	"\x0eExternalUserID\x18\f \x01(\tR\x0eExternalUserID\x12&\n" +
 	"\x0eOrganizationID\x18\r \x01(\tR\x0eOrganizationID\x125\n" +
 	"\n" +
@@ -1112,7 +1120,8 @@ const file_user_proto_rawDesc = "" +
 	"Employment\x88\x01\x01\x12\x1e\n" +
 	"\x04Role\x18\x0f \x01(\x0e2\n" +
 	".role.RoleR\x04Role\x12E\n" +
-	"\fTradeProfile\x18\x10 \x01(\v2!.tradeprofile.TradeProfileDetailsR\fTradeProfileB\r\n" +
+	"\fTradeProfile\x18\x10 \x01(\v2!.tradeprofile.TradeProfileDetailsR\fTradeProfile\x12\"\n" +
+	"\fKycInquiries\x18\x11 \x03(\tR\fKycInquiriesB\r\n" +
 	"\v_Employment\"\xab\x03\n" +
 	"\n" +
 	"Employment\x12\"\n" +
@@ -1231,23 +1240,23 @@ func file_user_proto_rawDescGZIP() []byte {
 var file_user_proto_enumTypes = make([]protoimpl.EnumInfo, 5)
 var file_user_proto_msgTypes = make([]protoimpl.MessageInfo, 10)
 var file_user_proto_goTypes = []any{
-	(EmploymentType)(0),       // 0: user.EmploymentType
-	(IncomeFrequency)(0),      // 1: user.IncomeFrequency
-	(UserStatus)(0),           // 2: user.UserStatus
-	(WalletType)(0),           // 3: user.WalletType
-	(SocialType)(0),           // 4: user.SocialType
-	(*UserDetails)(nil),       // 5: user.UserDetails
-	(*Employment)(nil),        // 6: user.Employment
-	(*Income)(nil),            // 7: user.Income
-	(*EmployerContact)(nil),   // 8: user.EmployerContact
-	(*User)(nil),              // 9: user.User
-	(*UserID)(nil),            // 10: user.UserID
-	(*Social)(nil),            // 11: user.Social
-	(*Wallet)(nil),            // 12: user.Wallet
-	(*UserList)(nil),          // 13: user.UserList
-	(*StatusMessage)(nil),     // 14: user.StatusMessage
-	(*language.Language)(nil), // 15: language.Language
-	(role.Role)(0),            // 16: role.Role
+	(EmploymentType)(0),     // 0: user.EmploymentType
+	(IncomeFrequency)(0),    // 1: user.IncomeFrequency
+	(UserStatus)(0),         // 2: user.UserStatus
+	(WalletType)(0),         // 3: user.WalletType
+	(SocialType)(0),         // 4: user.SocialType
+	(*UserDetails)(nil),     // 5: user.UserDetails
+	(*Employment)(nil),      // 6: user.Employment
+	(*Income)(nil),          // 7: user.Income
+	(*EmployerContact)(nil), // 8: user.EmployerContact
+	(*User)(nil),            // 9: user.User
+	(*UserID)(nil),          // 10: user.UserID
+	(*Social)(nil),          // 11: user.Social
+	(*Wallet)(nil),          // 12: user.Wallet
+	(*UserList)(nil),        // 13: user.UserList
+	(*StatusMessage)(nil),   // 14: user.StatusMessage
+	(language.Lang)(0),      // 15: language.Lang
+	(role.Role)(0),          // 16: role.Role
 	(*com_fs_trade_profile_model.TradeProfileDetails)(nil), // 17: tradeprofile.TradeProfileDetails
 	(*timestamppb.Timestamp)(nil),                          // 18: google.protobuf.Timestamp
 	(*metadata.MetaData)(nil),                              // 19: metadata.MetaData
@@ -1258,7 +1267,7 @@ var file_user_proto_depIdxs = []int32{
 	2,  // 0: user.UserDetails.Status:type_name -> user.UserStatus
 	12, // 1: user.UserDetails.Wallets:type_name -> user.Wallet
 	11, // 2: user.UserDetails.Socials:type_name -> user.Social
-	15, // 3: user.UserDetails.Language:type_name -> language.Language
+	15, // 3: user.UserDetails.Language:type_name -> language.Lang
 	6,  // 4: user.UserDetails.Employment:type_name -> user.Employment
 	16, // 5: user.UserDetails.Role:type_name -> role.Role
 	17, // 6: user.UserDetails.TradeProfile:type_name -> tradeprofile.TradeProfileDetails

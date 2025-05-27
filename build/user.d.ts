@@ -1,7 +1,7 @@
 import _m0 from "protobufjs/minimal";
 import { TradeProfileDetails } from "./sologenic/com-fs-trade-profile-model/tradeprofile";
 import { Audit } from "./sologenic/com-fs-utils-lib/models/audit/audit";
-import { Language } from "./sologenic/com-fs-utils-lib/models/language/language";
+import { Lang } from "./sologenic/com-fs-utils-lib/models/language/language";
 import { MetaData, Network } from "./sologenic/com-fs-utils-lib/models/metadata/metadata";
 import { Role } from "./sologenic/com-fs-utils-lib/models/role/role";
 export declare const protobufPackage = "user";
@@ -73,7 +73,7 @@ export interface UserDetails {
     Status: UserStatus;
     Wallets: Wallet[];
     Socials: Social[];
-    Language: Language | undefined;
+    Language: Lang;
     /** UUID for the external user identifier in the KYC provider */
     ExternalUserID: string;
     /** UUID */
@@ -83,6 +83,8 @@ export interface UserDetails {
     Role: Role;
     /** Trade profile details */
     TradeProfile: TradeProfileDetails | undefined;
+    /** Array of inquiry ID's */
+    KycInquiries: string[];
 }
 /** TODO: to be verified when more information is available */
 export interface Employment {
@@ -162,10 +164,7 @@ export declare const UserDetails: {
             URL?: string | undefined;
             Type?: SocialType | undefined;
         }[] | undefined;
-        Language?: {
-            Language?: import("./sologenic/com-fs-utils-lib/models/language/language").Lang | undefined;
-            UserConfigured?: boolean | undefined;
-        } | undefined;
+        Language?: Lang | undefined;
         ExternalUserID?: string | undefined;
         OrganizationID?: string | undefined;
         Employment?: {
@@ -211,6 +210,7 @@ export declare const UserDetails: {
             PriceCheckDeviation?: number | undefined;
             DuplicateOrderLimit?: number | undefined;
         } | undefined;
+        KycInquiries?: string[] | undefined;
     } & {
         UserID?: string | undefined;
         FirstName?: string | undefined;
@@ -250,13 +250,7 @@ export declare const UserDetails: {
             URL?: string | undefined;
             Type?: SocialType | undefined;
         }[]>]: never; }) | undefined;
-        Language?: ({
-            Language?: import("./sologenic/com-fs-utils-lib/models/language/language").Lang | undefined;
-            UserConfigured?: boolean | undefined;
-        } & {
-            Language?: import("./sologenic/com-fs-utils-lib/models/language/language").Lang | undefined;
-            UserConfigured?: boolean | undefined;
-        } & { [K_4 in Exclude<keyof I["Language"], keyof Language>]: never; }) | undefined;
+        Language?: Lang | undefined;
         ExternalUserID?: string | undefined;
         OrganizationID?: string | undefined;
         Employment?: ({
@@ -294,7 +288,7 @@ export declare const UserDetails: {
                 Amount?: number | undefined;
                 Currency?: string | undefined;
                 Frequency?: IncomeFrequency | undefined;
-            } & { [K_5 in Exclude<keyof I["Employment"]["Income"], keyof Income>]: never; }) | undefined;
+            } & { [K_4 in Exclude<keyof I["Employment"]["Income"], keyof Income>]: never; }) | undefined;
             Contact?: ({
                 Name?: string | undefined;
                 Email?: string | undefined;
@@ -305,10 +299,10 @@ export declare const UserDetails: {
                 Email?: string | undefined;
                 Phone?: string | undefined;
                 Address?: string | undefined;
-            } & { [K_6 in Exclude<keyof I["Employment"]["Contact"], keyof EmployerContact>]: never; }) | undefined;
+            } & { [K_5 in Exclude<keyof I["Employment"]["Contact"], keyof EmployerContact>]: never; }) | undefined;
             IsVerified?: boolean | undefined;
             VerifiedAt?: string | undefined;
-        } & { [K_7 in Exclude<keyof I["Employment"], keyof Employment>]: never; }) | undefined;
+        } & { [K_6 in Exclude<keyof I["Employment"], keyof Employment>]: never; }) | undefined;
         Role?: Role | undefined;
         TradeProfile?: ({
             IsTradingEnabled?: boolean | undefined;
@@ -340,26 +334,27 @@ export declare const UserDetails: {
             } & {
                 Value?: number | undefined;
                 IsGreaterThan?: boolean | undefined;
-            } & { [K_8 in Exclude<keyof I["TradeProfile"]["AggregateNotionalLimit"], keyof import("./sologenic/com-fs-trade-profile-model/tradeprofile").DropdownNumericValue>]: never; }) | undefined;
+            } & { [K_7 in Exclude<keyof I["TradeProfile"]["AggregateNotionalLimit"], keyof import("./sologenic/com-fs-trade-profile-model/tradeprofile").DropdownNumericValue>]: never; }) | undefined;
             SingleOrderLimit?: ({
                 Value?: number | undefined;
                 IsGreaterThan?: boolean | undefined;
             } & {
                 Value?: number | undefined;
                 IsGreaterThan?: boolean | undefined;
-            } & { [K_9 in Exclude<keyof I["TradeProfile"]["SingleOrderLimit"], keyof import("./sologenic/com-fs-trade-profile-model/tradeprofile").DropdownNumericValue>]: never; }) | undefined;
+            } & { [K_8 in Exclude<keyof I["TradeProfile"]["SingleOrderLimit"], keyof import("./sologenic/com-fs-trade-profile-model/tradeprofile").DropdownNumericValue>]: never; }) | undefined;
             MaxOrderQuantity?: ({
                 Value?: number | undefined;
                 IsGreaterThan?: boolean | undefined;
             } & {
                 Value?: number | undefined;
                 IsGreaterThan?: boolean | undefined;
-            } & { [K_10 in Exclude<keyof I["TradeProfile"]["MaxOrderQuantity"], keyof import("./sologenic/com-fs-trade-profile-model/tradeprofile").DropdownNumericValue>]: never; }) | undefined;
+            } & { [K_9 in Exclude<keyof I["TradeProfile"]["MaxOrderQuantity"], keyof import("./sologenic/com-fs-trade-profile-model/tradeprofile").DropdownNumericValue>]: never; }) | undefined;
             AggressivePercentage?: number | undefined;
             SymbolGrossADVPercent?: number | undefined;
             PriceCheckDeviation?: number | undefined;
             DuplicateOrderLimit?: number | undefined;
-        } & { [K_11 in Exclude<keyof I["TradeProfile"], keyof TradeProfileDetails>]: never; }) | undefined;
+        } & { [K_10 in Exclude<keyof I["TradeProfile"], keyof TradeProfileDetails>]: never; }) | undefined;
+        KycInquiries?: (string[] & string[] & { [K_11 in Exclude<keyof I["KycInquiries"], keyof string[]>]: never; }) | undefined;
     } & { [K_12 in Exclude<keyof I, keyof UserDetails>]: never; }>(base?: I | undefined): UserDetails;
     fromPartial<I_1 extends {
         UserID?: string | undefined;
@@ -379,10 +374,7 @@ export declare const UserDetails: {
             URL?: string | undefined;
             Type?: SocialType | undefined;
         }[] | undefined;
-        Language?: {
-            Language?: import("./sologenic/com-fs-utils-lib/models/language/language").Lang | undefined;
-            UserConfigured?: boolean | undefined;
-        } | undefined;
+        Language?: Lang | undefined;
         ExternalUserID?: string | undefined;
         OrganizationID?: string | undefined;
         Employment?: {
@@ -428,6 +420,7 @@ export declare const UserDetails: {
             PriceCheckDeviation?: number | undefined;
             DuplicateOrderLimit?: number | undefined;
         } | undefined;
+        KycInquiries?: string[] | undefined;
     } & {
         UserID?: string | undefined;
         FirstName?: string | undefined;
@@ -467,13 +460,7 @@ export declare const UserDetails: {
             URL?: string | undefined;
             Type?: SocialType | undefined;
         }[]>]: never; }) | undefined;
-        Language?: ({
-            Language?: import("./sologenic/com-fs-utils-lib/models/language/language").Lang | undefined;
-            UserConfigured?: boolean | undefined;
-        } & {
-            Language?: import("./sologenic/com-fs-utils-lib/models/language/language").Lang | undefined;
-            UserConfigured?: boolean | undefined;
-        } & { [K_17 in Exclude<keyof I_1["Language"], keyof Language>]: never; }) | undefined;
+        Language?: Lang | undefined;
         ExternalUserID?: string | undefined;
         OrganizationID?: string | undefined;
         Employment?: ({
@@ -511,7 +498,7 @@ export declare const UserDetails: {
                 Amount?: number | undefined;
                 Currency?: string | undefined;
                 Frequency?: IncomeFrequency | undefined;
-            } & { [K_18 in Exclude<keyof I_1["Employment"]["Income"], keyof Income>]: never; }) | undefined;
+            } & { [K_17 in Exclude<keyof I_1["Employment"]["Income"], keyof Income>]: never; }) | undefined;
             Contact?: ({
                 Name?: string | undefined;
                 Email?: string | undefined;
@@ -522,10 +509,10 @@ export declare const UserDetails: {
                 Email?: string | undefined;
                 Phone?: string | undefined;
                 Address?: string | undefined;
-            } & { [K_19 in Exclude<keyof I_1["Employment"]["Contact"], keyof EmployerContact>]: never; }) | undefined;
+            } & { [K_18 in Exclude<keyof I_1["Employment"]["Contact"], keyof EmployerContact>]: never; }) | undefined;
             IsVerified?: boolean | undefined;
             VerifiedAt?: string | undefined;
-        } & { [K_20 in Exclude<keyof I_1["Employment"], keyof Employment>]: never; }) | undefined;
+        } & { [K_19 in Exclude<keyof I_1["Employment"], keyof Employment>]: never; }) | undefined;
         Role?: Role | undefined;
         TradeProfile?: ({
             IsTradingEnabled?: boolean | undefined;
@@ -557,26 +544,27 @@ export declare const UserDetails: {
             } & {
                 Value?: number | undefined;
                 IsGreaterThan?: boolean | undefined;
-            } & { [K_21 in Exclude<keyof I_1["TradeProfile"]["AggregateNotionalLimit"], keyof import("./sologenic/com-fs-trade-profile-model/tradeprofile").DropdownNumericValue>]: never; }) | undefined;
+            } & { [K_20 in Exclude<keyof I_1["TradeProfile"]["AggregateNotionalLimit"], keyof import("./sologenic/com-fs-trade-profile-model/tradeprofile").DropdownNumericValue>]: never; }) | undefined;
             SingleOrderLimit?: ({
                 Value?: number | undefined;
                 IsGreaterThan?: boolean | undefined;
             } & {
                 Value?: number | undefined;
                 IsGreaterThan?: boolean | undefined;
-            } & { [K_22 in Exclude<keyof I_1["TradeProfile"]["SingleOrderLimit"], keyof import("./sologenic/com-fs-trade-profile-model/tradeprofile").DropdownNumericValue>]: never; }) | undefined;
+            } & { [K_21 in Exclude<keyof I_1["TradeProfile"]["SingleOrderLimit"], keyof import("./sologenic/com-fs-trade-profile-model/tradeprofile").DropdownNumericValue>]: never; }) | undefined;
             MaxOrderQuantity?: ({
                 Value?: number | undefined;
                 IsGreaterThan?: boolean | undefined;
             } & {
                 Value?: number | undefined;
                 IsGreaterThan?: boolean | undefined;
-            } & { [K_23 in Exclude<keyof I_1["TradeProfile"]["MaxOrderQuantity"], keyof import("./sologenic/com-fs-trade-profile-model/tradeprofile").DropdownNumericValue>]: never; }) | undefined;
+            } & { [K_22 in Exclude<keyof I_1["TradeProfile"]["MaxOrderQuantity"], keyof import("./sologenic/com-fs-trade-profile-model/tradeprofile").DropdownNumericValue>]: never; }) | undefined;
             AggressivePercentage?: number | undefined;
             SymbolGrossADVPercent?: number | undefined;
             PriceCheckDeviation?: number | undefined;
             DuplicateOrderLimit?: number | undefined;
-        } & { [K_24 in Exclude<keyof I_1["TradeProfile"], keyof TradeProfileDetails>]: never; }) | undefined;
+        } & { [K_23 in Exclude<keyof I_1["TradeProfile"], keyof TradeProfileDetails>]: never; }) | undefined;
+        KycInquiries?: (string[] & string[] & { [K_24 in Exclude<keyof I_1["KycInquiries"], keyof string[]>]: never; }) | undefined;
     } & { [K_25 in Exclude<keyof I_1, keyof UserDetails>]: never; }>(object: I_1): UserDetails;
 };
 export declare const Employment: {
@@ -761,10 +749,7 @@ export declare const User: {
                 URL?: string | undefined;
                 Type?: SocialType | undefined;
             }[] | undefined;
-            Language?: {
-                Language?: import("./sologenic/com-fs-utils-lib/models/language/language").Lang | undefined;
-                UserConfigured?: boolean | undefined;
-            } | undefined;
+            Language?: Lang | undefined;
             ExternalUserID?: string | undefined;
             OrganizationID?: string | undefined;
             Employment?: {
@@ -810,6 +795,7 @@ export declare const User: {
                 PriceCheckDeviation?: number | undefined;
                 DuplicateOrderLimit?: number | undefined;
             } | undefined;
+            KycInquiries?: string[] | undefined;
         } | undefined;
         MetaData?: {
             Network?: Network | undefined;
@@ -841,10 +827,7 @@ export declare const User: {
                 URL?: string | undefined;
                 Type?: SocialType | undefined;
             }[] | undefined;
-            Language?: {
-                Language?: import("./sologenic/com-fs-utils-lib/models/language/language").Lang | undefined;
-                UserConfigured?: boolean | undefined;
-            } | undefined;
+            Language?: Lang | undefined;
             ExternalUserID?: string | undefined;
             OrganizationID?: string | undefined;
             Employment?: {
@@ -890,6 +873,7 @@ export declare const User: {
                 PriceCheckDeviation?: number | undefined;
                 DuplicateOrderLimit?: number | undefined;
             } | undefined;
+            KycInquiries?: string[] | undefined;
         } & {
             UserID?: string | undefined;
             FirstName?: string | undefined;
@@ -929,13 +913,7 @@ export declare const User: {
                 URL?: string | undefined;
                 Type?: SocialType | undefined;
             }[]>]: never; }) | undefined;
-            Language?: ({
-                Language?: import("./sologenic/com-fs-utils-lib/models/language/language").Lang | undefined;
-                UserConfigured?: boolean | undefined;
-            } & {
-                Language?: import("./sologenic/com-fs-utils-lib/models/language/language").Lang | undefined;
-                UserConfigured?: boolean | undefined;
-            } & { [K_4 in Exclude<keyof I["User"]["Language"], keyof Language>]: never; }) | undefined;
+            Language?: Lang | undefined;
             ExternalUserID?: string | undefined;
             OrganizationID?: string | undefined;
             Employment?: ({
@@ -973,7 +951,7 @@ export declare const User: {
                     Amount?: number | undefined;
                     Currency?: string | undefined;
                     Frequency?: IncomeFrequency | undefined;
-                } & { [K_5 in Exclude<keyof I["User"]["Employment"]["Income"], keyof Income>]: never; }) | undefined;
+                } & { [K_4 in Exclude<keyof I["User"]["Employment"]["Income"], keyof Income>]: never; }) | undefined;
                 Contact?: ({
                     Name?: string | undefined;
                     Email?: string | undefined;
@@ -984,10 +962,10 @@ export declare const User: {
                     Email?: string | undefined;
                     Phone?: string | undefined;
                     Address?: string | undefined;
-                } & { [K_6 in Exclude<keyof I["User"]["Employment"]["Contact"], keyof EmployerContact>]: never; }) | undefined;
+                } & { [K_5 in Exclude<keyof I["User"]["Employment"]["Contact"], keyof EmployerContact>]: never; }) | undefined;
                 IsVerified?: boolean | undefined;
                 VerifiedAt?: string | undefined;
-            } & { [K_7 in Exclude<keyof I["User"]["Employment"], keyof Employment>]: never; }) | undefined;
+            } & { [K_6 in Exclude<keyof I["User"]["Employment"], keyof Employment>]: never; }) | undefined;
             Role?: Role | undefined;
             TradeProfile?: ({
                 IsTradingEnabled?: boolean | undefined;
@@ -1019,26 +997,27 @@ export declare const User: {
                 } & {
                     Value?: number | undefined;
                     IsGreaterThan?: boolean | undefined;
-                } & { [K_8 in Exclude<keyof I["User"]["TradeProfile"]["AggregateNotionalLimit"], keyof import("./sologenic/com-fs-trade-profile-model/tradeprofile").DropdownNumericValue>]: never; }) | undefined;
+                } & { [K_7 in Exclude<keyof I["User"]["TradeProfile"]["AggregateNotionalLimit"], keyof import("./sologenic/com-fs-trade-profile-model/tradeprofile").DropdownNumericValue>]: never; }) | undefined;
                 SingleOrderLimit?: ({
                     Value?: number | undefined;
                     IsGreaterThan?: boolean | undefined;
                 } & {
                     Value?: number | undefined;
                     IsGreaterThan?: boolean | undefined;
-                } & { [K_9 in Exclude<keyof I["User"]["TradeProfile"]["SingleOrderLimit"], keyof import("./sologenic/com-fs-trade-profile-model/tradeprofile").DropdownNumericValue>]: never; }) | undefined;
+                } & { [K_8 in Exclude<keyof I["User"]["TradeProfile"]["SingleOrderLimit"], keyof import("./sologenic/com-fs-trade-profile-model/tradeprofile").DropdownNumericValue>]: never; }) | undefined;
                 MaxOrderQuantity?: ({
                     Value?: number | undefined;
                     IsGreaterThan?: boolean | undefined;
                 } & {
                     Value?: number | undefined;
                     IsGreaterThan?: boolean | undefined;
-                } & { [K_10 in Exclude<keyof I["User"]["TradeProfile"]["MaxOrderQuantity"], keyof import("./sologenic/com-fs-trade-profile-model/tradeprofile").DropdownNumericValue>]: never; }) | undefined;
+                } & { [K_9 in Exclude<keyof I["User"]["TradeProfile"]["MaxOrderQuantity"], keyof import("./sologenic/com-fs-trade-profile-model/tradeprofile").DropdownNumericValue>]: never; }) | undefined;
                 AggressivePercentage?: number | undefined;
                 SymbolGrossADVPercent?: number | undefined;
                 PriceCheckDeviation?: number | undefined;
                 DuplicateOrderLimit?: number | undefined;
-            } & { [K_11 in Exclude<keyof I["User"]["TradeProfile"], keyof TradeProfileDetails>]: never; }) | undefined;
+            } & { [K_10 in Exclude<keyof I["User"]["TradeProfile"], keyof TradeProfileDetails>]: never; }) | undefined;
+            KycInquiries?: (string[] & string[] & { [K_11 in Exclude<keyof I["User"]["KycInquiries"], keyof string[]>]: never; }) | undefined;
         } & { [K_12 in Exclude<keyof I["User"], keyof UserDetails>]: never; }) | undefined;
         MetaData?: ({
             Network?: Network | undefined;
@@ -1080,10 +1059,7 @@ export declare const User: {
                 URL?: string | undefined;
                 Type?: SocialType | undefined;
             }[] | undefined;
-            Language?: {
-                Language?: import("./sologenic/com-fs-utils-lib/models/language/language").Lang | undefined;
-                UserConfigured?: boolean | undefined;
-            } | undefined;
+            Language?: Lang | undefined;
             ExternalUserID?: string | undefined;
             OrganizationID?: string | undefined;
             Employment?: {
@@ -1129,6 +1105,7 @@ export declare const User: {
                 PriceCheckDeviation?: number | undefined;
                 DuplicateOrderLimit?: number | undefined;
             } | undefined;
+            KycInquiries?: string[] | undefined;
         } | undefined;
         MetaData?: {
             Network?: Network | undefined;
@@ -1160,10 +1137,7 @@ export declare const User: {
                 URL?: string | undefined;
                 Type?: SocialType | undefined;
             }[] | undefined;
-            Language?: {
-                Language?: import("./sologenic/com-fs-utils-lib/models/language/language").Lang | undefined;
-                UserConfigured?: boolean | undefined;
-            } | undefined;
+            Language?: Lang | undefined;
             ExternalUserID?: string | undefined;
             OrganizationID?: string | undefined;
             Employment?: {
@@ -1209,6 +1183,7 @@ export declare const User: {
                 PriceCheckDeviation?: number | undefined;
                 DuplicateOrderLimit?: number | undefined;
             } | undefined;
+            KycInquiries?: string[] | undefined;
         } & {
             UserID?: string | undefined;
             FirstName?: string | undefined;
@@ -1248,13 +1223,7 @@ export declare const User: {
                 URL?: string | undefined;
                 Type?: SocialType | undefined;
             }[]>]: never; }) | undefined;
-            Language?: ({
-                Language?: import("./sologenic/com-fs-utils-lib/models/language/language").Lang | undefined;
-                UserConfigured?: boolean | undefined;
-            } & {
-                Language?: import("./sologenic/com-fs-utils-lib/models/language/language").Lang | undefined;
-                UserConfigured?: boolean | undefined;
-            } & { [K_20 in Exclude<keyof I_1["User"]["Language"], keyof Language>]: never; }) | undefined;
+            Language?: Lang | undefined;
             ExternalUserID?: string | undefined;
             OrganizationID?: string | undefined;
             Employment?: ({
@@ -1292,7 +1261,7 @@ export declare const User: {
                     Amount?: number | undefined;
                     Currency?: string | undefined;
                     Frequency?: IncomeFrequency | undefined;
-                } & { [K_21 in Exclude<keyof I_1["User"]["Employment"]["Income"], keyof Income>]: never; }) | undefined;
+                } & { [K_20 in Exclude<keyof I_1["User"]["Employment"]["Income"], keyof Income>]: never; }) | undefined;
                 Contact?: ({
                     Name?: string | undefined;
                     Email?: string | undefined;
@@ -1303,10 +1272,10 @@ export declare const User: {
                     Email?: string | undefined;
                     Phone?: string | undefined;
                     Address?: string | undefined;
-                } & { [K_22 in Exclude<keyof I_1["User"]["Employment"]["Contact"], keyof EmployerContact>]: never; }) | undefined;
+                } & { [K_21 in Exclude<keyof I_1["User"]["Employment"]["Contact"], keyof EmployerContact>]: never; }) | undefined;
                 IsVerified?: boolean | undefined;
                 VerifiedAt?: string | undefined;
-            } & { [K_23 in Exclude<keyof I_1["User"]["Employment"], keyof Employment>]: never; }) | undefined;
+            } & { [K_22 in Exclude<keyof I_1["User"]["Employment"], keyof Employment>]: never; }) | undefined;
             Role?: Role | undefined;
             TradeProfile?: ({
                 IsTradingEnabled?: boolean | undefined;
@@ -1338,26 +1307,27 @@ export declare const User: {
                 } & {
                     Value?: number | undefined;
                     IsGreaterThan?: boolean | undefined;
-                } & { [K_24 in Exclude<keyof I_1["User"]["TradeProfile"]["AggregateNotionalLimit"], keyof import("./sologenic/com-fs-trade-profile-model/tradeprofile").DropdownNumericValue>]: never; }) | undefined;
+                } & { [K_23 in Exclude<keyof I_1["User"]["TradeProfile"]["AggregateNotionalLimit"], keyof import("./sologenic/com-fs-trade-profile-model/tradeprofile").DropdownNumericValue>]: never; }) | undefined;
                 SingleOrderLimit?: ({
                     Value?: number | undefined;
                     IsGreaterThan?: boolean | undefined;
                 } & {
                     Value?: number | undefined;
                     IsGreaterThan?: boolean | undefined;
-                } & { [K_25 in Exclude<keyof I_1["User"]["TradeProfile"]["SingleOrderLimit"], keyof import("./sologenic/com-fs-trade-profile-model/tradeprofile").DropdownNumericValue>]: never; }) | undefined;
+                } & { [K_24 in Exclude<keyof I_1["User"]["TradeProfile"]["SingleOrderLimit"], keyof import("./sologenic/com-fs-trade-profile-model/tradeprofile").DropdownNumericValue>]: never; }) | undefined;
                 MaxOrderQuantity?: ({
                     Value?: number | undefined;
                     IsGreaterThan?: boolean | undefined;
                 } & {
                     Value?: number | undefined;
                     IsGreaterThan?: boolean | undefined;
-                } & { [K_26 in Exclude<keyof I_1["User"]["TradeProfile"]["MaxOrderQuantity"], keyof import("./sologenic/com-fs-trade-profile-model/tradeprofile").DropdownNumericValue>]: never; }) | undefined;
+                } & { [K_25 in Exclude<keyof I_1["User"]["TradeProfile"]["MaxOrderQuantity"], keyof import("./sologenic/com-fs-trade-profile-model/tradeprofile").DropdownNumericValue>]: never; }) | undefined;
                 AggressivePercentage?: number | undefined;
                 SymbolGrossADVPercent?: number | undefined;
                 PriceCheckDeviation?: number | undefined;
                 DuplicateOrderLimit?: number | undefined;
-            } & { [K_27 in Exclude<keyof I_1["User"]["TradeProfile"], keyof TradeProfileDetails>]: never; }) | undefined;
+            } & { [K_26 in Exclude<keyof I_1["User"]["TradeProfile"], keyof TradeProfileDetails>]: never; }) | undefined;
+            KycInquiries?: (string[] & string[] & { [K_27 in Exclude<keyof I_1["User"]["KycInquiries"], keyof string[]>]: never; }) | undefined;
         } & { [K_28 in Exclude<keyof I_1["User"], keyof UserDetails>]: never; }) | undefined;
         MetaData?: ({
             Network?: Network | undefined;
@@ -1474,10 +1444,7 @@ export declare const UserList: {
                     URL?: string | undefined;
                     Type?: SocialType | undefined;
                 }[] | undefined;
-                Language?: {
-                    Language?: import("./sologenic/com-fs-utils-lib/models/language/language").Lang | undefined;
-                    UserConfigured?: boolean | undefined;
-                } | undefined;
+                Language?: Lang | undefined;
                 ExternalUserID?: string | undefined;
                 OrganizationID?: string | undefined;
                 Employment?: {
@@ -1523,6 +1490,7 @@ export declare const UserList: {
                     PriceCheckDeviation?: number | undefined;
                     DuplicateOrderLimit?: number | undefined;
                 } | undefined;
+                KycInquiries?: string[] | undefined;
             } | undefined;
             MetaData?: {
                 Network?: Network | undefined;
@@ -1557,10 +1525,7 @@ export declare const UserList: {
                     URL?: string | undefined;
                     Type?: SocialType | undefined;
                 }[] | undefined;
-                Language?: {
-                    Language?: import("./sologenic/com-fs-utils-lib/models/language/language").Lang | undefined;
-                    UserConfigured?: boolean | undefined;
-                } | undefined;
+                Language?: Lang | undefined;
                 ExternalUserID?: string | undefined;
                 OrganizationID?: string | undefined;
                 Employment?: {
@@ -1606,6 +1571,7 @@ export declare const UserList: {
                     PriceCheckDeviation?: number | undefined;
                     DuplicateOrderLimit?: number | undefined;
                 } | undefined;
+                KycInquiries?: string[] | undefined;
             } | undefined;
             MetaData?: {
                 Network?: Network | undefined;
@@ -1637,10 +1603,7 @@ export declare const UserList: {
                     URL?: string | undefined;
                     Type?: SocialType | undefined;
                 }[] | undefined;
-                Language?: {
-                    Language?: import("./sologenic/com-fs-utils-lib/models/language/language").Lang | undefined;
-                    UserConfigured?: boolean | undefined;
-                } | undefined;
+                Language?: Lang | undefined;
                 ExternalUserID?: string | undefined;
                 OrganizationID?: string | undefined;
                 Employment?: {
@@ -1686,6 +1649,7 @@ export declare const UserList: {
                     PriceCheckDeviation?: number | undefined;
                     DuplicateOrderLimit?: number | undefined;
                 } | undefined;
+                KycInquiries?: string[] | undefined;
             } | undefined;
             MetaData?: {
                 Network?: Network | undefined;
@@ -1717,10 +1681,7 @@ export declare const UserList: {
                     URL?: string | undefined;
                     Type?: SocialType | undefined;
                 }[] | undefined;
-                Language?: {
-                    Language?: import("./sologenic/com-fs-utils-lib/models/language/language").Lang | undefined;
-                    UserConfigured?: boolean | undefined;
-                } | undefined;
+                Language?: Lang | undefined;
                 ExternalUserID?: string | undefined;
                 OrganizationID?: string | undefined;
                 Employment?: {
@@ -1766,6 +1727,7 @@ export declare const UserList: {
                     PriceCheckDeviation?: number | undefined;
                     DuplicateOrderLimit?: number | undefined;
                 } | undefined;
+                KycInquiries?: string[] | undefined;
             } & {
                 UserID?: string | undefined;
                 FirstName?: string | undefined;
@@ -1805,13 +1767,7 @@ export declare const UserList: {
                     URL?: string | undefined;
                     Type?: SocialType | undefined;
                 }[]>]: never; }) | undefined;
-                Language?: ({
-                    Language?: import("./sologenic/com-fs-utils-lib/models/language/language").Lang | undefined;
-                    UserConfigured?: boolean | undefined;
-                } & {
-                    Language?: import("./sologenic/com-fs-utils-lib/models/language/language").Lang | undefined;
-                    UserConfigured?: boolean | undefined;
-                } & { [K_4 in Exclude<keyof I["Users"][number]["User"]["Language"], keyof Language>]: never; }) | undefined;
+                Language?: Lang | undefined;
                 ExternalUserID?: string | undefined;
                 OrganizationID?: string | undefined;
                 Employment?: ({
@@ -1849,7 +1805,7 @@ export declare const UserList: {
                         Amount?: number | undefined;
                         Currency?: string | undefined;
                         Frequency?: IncomeFrequency | undefined;
-                    } & { [K_5 in Exclude<keyof I["Users"][number]["User"]["Employment"]["Income"], keyof Income>]: never; }) | undefined;
+                    } & { [K_4 in Exclude<keyof I["Users"][number]["User"]["Employment"]["Income"], keyof Income>]: never; }) | undefined;
                     Contact?: ({
                         Name?: string | undefined;
                         Email?: string | undefined;
@@ -1860,10 +1816,10 @@ export declare const UserList: {
                         Email?: string | undefined;
                         Phone?: string | undefined;
                         Address?: string | undefined;
-                    } & { [K_6 in Exclude<keyof I["Users"][number]["User"]["Employment"]["Contact"], keyof EmployerContact>]: never; }) | undefined;
+                    } & { [K_5 in Exclude<keyof I["Users"][number]["User"]["Employment"]["Contact"], keyof EmployerContact>]: never; }) | undefined;
                     IsVerified?: boolean | undefined;
                     VerifiedAt?: string | undefined;
-                } & { [K_7 in Exclude<keyof I["Users"][number]["User"]["Employment"], keyof Employment>]: never; }) | undefined;
+                } & { [K_6 in Exclude<keyof I["Users"][number]["User"]["Employment"], keyof Employment>]: never; }) | undefined;
                 Role?: Role | undefined;
                 TradeProfile?: ({
                     IsTradingEnabled?: boolean | undefined;
@@ -1895,26 +1851,27 @@ export declare const UserList: {
                     } & {
                         Value?: number | undefined;
                         IsGreaterThan?: boolean | undefined;
-                    } & { [K_8 in Exclude<keyof I["Users"][number]["User"]["TradeProfile"]["AggregateNotionalLimit"], keyof import("./sologenic/com-fs-trade-profile-model/tradeprofile").DropdownNumericValue>]: never; }) | undefined;
+                    } & { [K_7 in Exclude<keyof I["Users"][number]["User"]["TradeProfile"]["AggregateNotionalLimit"], keyof import("./sologenic/com-fs-trade-profile-model/tradeprofile").DropdownNumericValue>]: never; }) | undefined;
                     SingleOrderLimit?: ({
                         Value?: number | undefined;
                         IsGreaterThan?: boolean | undefined;
                     } & {
                         Value?: number | undefined;
                         IsGreaterThan?: boolean | undefined;
-                    } & { [K_9 in Exclude<keyof I["Users"][number]["User"]["TradeProfile"]["SingleOrderLimit"], keyof import("./sologenic/com-fs-trade-profile-model/tradeprofile").DropdownNumericValue>]: never; }) | undefined;
+                    } & { [K_8 in Exclude<keyof I["Users"][number]["User"]["TradeProfile"]["SingleOrderLimit"], keyof import("./sologenic/com-fs-trade-profile-model/tradeprofile").DropdownNumericValue>]: never; }) | undefined;
                     MaxOrderQuantity?: ({
                         Value?: number | undefined;
                         IsGreaterThan?: boolean | undefined;
                     } & {
                         Value?: number | undefined;
                         IsGreaterThan?: boolean | undefined;
-                    } & { [K_10 in Exclude<keyof I["Users"][number]["User"]["TradeProfile"]["MaxOrderQuantity"], keyof import("./sologenic/com-fs-trade-profile-model/tradeprofile").DropdownNumericValue>]: never; }) | undefined;
+                    } & { [K_9 in Exclude<keyof I["Users"][number]["User"]["TradeProfile"]["MaxOrderQuantity"], keyof import("./sologenic/com-fs-trade-profile-model/tradeprofile").DropdownNumericValue>]: never; }) | undefined;
                     AggressivePercentage?: number | undefined;
                     SymbolGrossADVPercent?: number | undefined;
                     PriceCheckDeviation?: number | undefined;
                     DuplicateOrderLimit?: number | undefined;
-                } & { [K_11 in Exclude<keyof I["Users"][number]["User"]["TradeProfile"], keyof TradeProfileDetails>]: never; }) | undefined;
+                } & { [K_10 in Exclude<keyof I["Users"][number]["User"]["TradeProfile"], keyof TradeProfileDetails>]: never; }) | undefined;
+                KycInquiries?: (string[] & string[] & { [K_11 in Exclude<keyof I["Users"][number]["User"]["KycInquiries"], keyof string[]>]: never; }) | undefined;
             } & { [K_12 in Exclude<keyof I["Users"][number]["User"], keyof UserDetails>]: never; }) | undefined;
             MetaData?: ({
                 Network?: Network | undefined;
@@ -1955,10 +1912,7 @@ export declare const UserList: {
                     URL?: string | undefined;
                     Type?: SocialType | undefined;
                 }[] | undefined;
-                Language?: {
-                    Language?: import("./sologenic/com-fs-utils-lib/models/language/language").Lang | undefined;
-                    UserConfigured?: boolean | undefined;
-                } | undefined;
+                Language?: Lang | undefined;
                 ExternalUserID?: string | undefined;
                 OrganizationID?: string | undefined;
                 Employment?: {
@@ -2004,6 +1958,7 @@ export declare const UserList: {
                     PriceCheckDeviation?: number | undefined;
                     DuplicateOrderLimit?: number | undefined;
                 } | undefined;
+                KycInquiries?: string[] | undefined;
             } | undefined;
             MetaData?: {
                 Network?: Network | undefined;
@@ -2039,10 +1994,7 @@ export declare const UserList: {
                     URL?: string | undefined;
                     Type?: SocialType | undefined;
                 }[] | undefined;
-                Language?: {
-                    Language?: import("./sologenic/com-fs-utils-lib/models/language/language").Lang | undefined;
-                    UserConfigured?: boolean | undefined;
-                } | undefined;
+                Language?: Lang | undefined;
                 ExternalUserID?: string | undefined;
                 OrganizationID?: string | undefined;
                 Employment?: {
@@ -2088,6 +2040,7 @@ export declare const UserList: {
                     PriceCheckDeviation?: number | undefined;
                     DuplicateOrderLimit?: number | undefined;
                 } | undefined;
+                KycInquiries?: string[] | undefined;
             } | undefined;
             MetaData?: {
                 Network?: Network | undefined;
@@ -2122,10 +2075,7 @@ export declare const UserList: {
                     URL?: string | undefined;
                     Type?: SocialType | undefined;
                 }[] | undefined;
-                Language?: {
-                    Language?: import("./sologenic/com-fs-utils-lib/models/language/language").Lang | undefined;
-                    UserConfigured?: boolean | undefined;
-                } | undefined;
+                Language?: Lang | undefined;
                 ExternalUserID?: string | undefined;
                 OrganizationID?: string | undefined;
                 Employment?: {
@@ -2171,6 +2121,7 @@ export declare const UserList: {
                     PriceCheckDeviation?: number | undefined;
                     DuplicateOrderLimit?: number | undefined;
                 } | undefined;
+                KycInquiries?: string[] | undefined;
             } | undefined;
             MetaData?: {
                 Network?: Network | undefined;
@@ -2202,10 +2153,7 @@ export declare const UserList: {
                     URL?: string | undefined;
                     Type?: SocialType | undefined;
                 }[] | undefined;
-                Language?: {
-                    Language?: import("./sologenic/com-fs-utils-lib/models/language/language").Lang | undefined;
-                    UserConfigured?: boolean | undefined;
-                } | undefined;
+                Language?: Lang | undefined;
                 ExternalUserID?: string | undefined;
                 OrganizationID?: string | undefined;
                 Employment?: {
@@ -2251,6 +2199,7 @@ export declare const UserList: {
                     PriceCheckDeviation?: number | undefined;
                     DuplicateOrderLimit?: number | undefined;
                 } | undefined;
+                KycInquiries?: string[] | undefined;
             } | undefined;
             MetaData?: {
                 Network?: Network | undefined;
@@ -2282,10 +2231,7 @@ export declare const UserList: {
                     URL?: string | undefined;
                     Type?: SocialType | undefined;
                 }[] | undefined;
-                Language?: {
-                    Language?: import("./sologenic/com-fs-utils-lib/models/language/language").Lang | undefined;
-                    UserConfigured?: boolean | undefined;
-                } | undefined;
+                Language?: Lang | undefined;
                 ExternalUserID?: string | undefined;
                 OrganizationID?: string | undefined;
                 Employment?: {
@@ -2331,6 +2277,7 @@ export declare const UserList: {
                     PriceCheckDeviation?: number | undefined;
                     DuplicateOrderLimit?: number | undefined;
                 } | undefined;
+                KycInquiries?: string[] | undefined;
             } & {
                 UserID?: string | undefined;
                 FirstName?: string | undefined;
@@ -2370,13 +2317,7 @@ export declare const UserList: {
                     URL?: string | undefined;
                     Type?: SocialType | undefined;
                 }[]>]: never; }) | undefined;
-                Language?: ({
-                    Language?: import("./sologenic/com-fs-utils-lib/models/language/language").Lang | undefined;
-                    UserConfigured?: boolean | undefined;
-                } & {
-                    Language?: import("./sologenic/com-fs-utils-lib/models/language/language").Lang | undefined;
-                    UserConfigured?: boolean | undefined;
-                } & { [K_22 in Exclude<keyof I_1["Users"][number]["User"]["Language"], keyof Language>]: never; }) | undefined;
+                Language?: Lang | undefined;
                 ExternalUserID?: string | undefined;
                 OrganizationID?: string | undefined;
                 Employment?: ({
@@ -2414,7 +2355,7 @@ export declare const UserList: {
                         Amount?: number | undefined;
                         Currency?: string | undefined;
                         Frequency?: IncomeFrequency | undefined;
-                    } & { [K_23 in Exclude<keyof I_1["Users"][number]["User"]["Employment"]["Income"], keyof Income>]: never; }) | undefined;
+                    } & { [K_22 in Exclude<keyof I_1["Users"][number]["User"]["Employment"]["Income"], keyof Income>]: never; }) | undefined;
                     Contact?: ({
                         Name?: string | undefined;
                         Email?: string | undefined;
@@ -2425,10 +2366,10 @@ export declare const UserList: {
                         Email?: string | undefined;
                         Phone?: string | undefined;
                         Address?: string | undefined;
-                    } & { [K_24 in Exclude<keyof I_1["Users"][number]["User"]["Employment"]["Contact"], keyof EmployerContact>]: never; }) | undefined;
+                    } & { [K_23 in Exclude<keyof I_1["Users"][number]["User"]["Employment"]["Contact"], keyof EmployerContact>]: never; }) | undefined;
                     IsVerified?: boolean | undefined;
                     VerifiedAt?: string | undefined;
-                } & { [K_25 in Exclude<keyof I_1["Users"][number]["User"]["Employment"], keyof Employment>]: never; }) | undefined;
+                } & { [K_24 in Exclude<keyof I_1["Users"][number]["User"]["Employment"], keyof Employment>]: never; }) | undefined;
                 Role?: Role | undefined;
                 TradeProfile?: ({
                     IsTradingEnabled?: boolean | undefined;
@@ -2460,26 +2401,27 @@ export declare const UserList: {
                     } & {
                         Value?: number | undefined;
                         IsGreaterThan?: boolean | undefined;
-                    } & { [K_26 in Exclude<keyof I_1["Users"][number]["User"]["TradeProfile"]["AggregateNotionalLimit"], keyof import("./sologenic/com-fs-trade-profile-model/tradeprofile").DropdownNumericValue>]: never; }) | undefined;
+                    } & { [K_25 in Exclude<keyof I_1["Users"][number]["User"]["TradeProfile"]["AggregateNotionalLimit"], keyof import("./sologenic/com-fs-trade-profile-model/tradeprofile").DropdownNumericValue>]: never; }) | undefined;
                     SingleOrderLimit?: ({
                         Value?: number | undefined;
                         IsGreaterThan?: boolean | undefined;
                     } & {
                         Value?: number | undefined;
                         IsGreaterThan?: boolean | undefined;
-                    } & { [K_27 in Exclude<keyof I_1["Users"][number]["User"]["TradeProfile"]["SingleOrderLimit"], keyof import("./sologenic/com-fs-trade-profile-model/tradeprofile").DropdownNumericValue>]: never; }) | undefined;
+                    } & { [K_26 in Exclude<keyof I_1["Users"][number]["User"]["TradeProfile"]["SingleOrderLimit"], keyof import("./sologenic/com-fs-trade-profile-model/tradeprofile").DropdownNumericValue>]: never; }) | undefined;
                     MaxOrderQuantity?: ({
                         Value?: number | undefined;
                         IsGreaterThan?: boolean | undefined;
                     } & {
                         Value?: number | undefined;
                         IsGreaterThan?: boolean | undefined;
-                    } & { [K_28 in Exclude<keyof I_1["Users"][number]["User"]["TradeProfile"]["MaxOrderQuantity"], keyof import("./sologenic/com-fs-trade-profile-model/tradeprofile").DropdownNumericValue>]: never; }) | undefined;
+                    } & { [K_27 in Exclude<keyof I_1["Users"][number]["User"]["TradeProfile"]["MaxOrderQuantity"], keyof import("./sologenic/com-fs-trade-profile-model/tradeprofile").DropdownNumericValue>]: never; }) | undefined;
                     AggressivePercentage?: number | undefined;
                     SymbolGrossADVPercent?: number | undefined;
                     PriceCheckDeviation?: number | undefined;
                     DuplicateOrderLimit?: number | undefined;
-                } & { [K_29 in Exclude<keyof I_1["Users"][number]["User"]["TradeProfile"], keyof TradeProfileDetails>]: never; }) | undefined;
+                } & { [K_28 in Exclude<keyof I_1["Users"][number]["User"]["TradeProfile"], keyof TradeProfileDetails>]: never; }) | undefined;
+                KycInquiries?: (string[] & string[] & { [K_29 in Exclude<keyof I_1["Users"][number]["User"]["KycInquiries"], keyof string[]>]: never; }) | undefined;
             } & { [K_30 in Exclude<keyof I_1["Users"][number]["User"], keyof UserDetails>]: never; }) | undefined;
             MetaData?: ({
                 Network?: Network | undefined;
@@ -2520,10 +2462,7 @@ export declare const UserList: {
                     URL?: string | undefined;
                     Type?: SocialType | undefined;
                 }[] | undefined;
-                Language?: {
-                    Language?: import("./sologenic/com-fs-utils-lib/models/language/language").Lang | undefined;
-                    UserConfigured?: boolean | undefined;
-                } | undefined;
+                Language?: Lang | undefined;
                 ExternalUserID?: string | undefined;
                 OrganizationID?: string | undefined;
                 Employment?: {
@@ -2569,6 +2508,7 @@ export declare const UserList: {
                     PriceCheckDeviation?: number | undefined;
                     DuplicateOrderLimit?: number | undefined;
                 } | undefined;
+                KycInquiries?: string[] | undefined;
             } | undefined;
             MetaData?: {
                 Network?: Network | undefined;

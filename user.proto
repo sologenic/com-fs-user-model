@@ -22,12 +22,13 @@ message UserDetails {
     UserStatus Status = 8;
     repeated Wallet Wallets = 9;
     repeated Social Socials = 10;
-    language.Language Language = 11;
+    language.Lang Language = 11;
     string ExternalUserID = 12; // UUID for the external user identifier in the KYC provider
     string OrganizationID = 13; // UUID
     optional Employment Employment = 14;
     role.Role Role = 15; // A retail user will always have a role of "NORMAL_USER"
     tradeprofile.TradeProfileDetails TradeProfile = 16; // Trade profile details
+    repeated string KycInquiries = 17; // Array of inquiry ID's 
 }
 
 // TODO: to be verified when more information is available

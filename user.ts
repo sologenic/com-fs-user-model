@@ -9,7 +9,7 @@ import _m0 from "protobufjs/minimal";
 import { Timestamp } from "./google/protobuf/timestamp";
 import { TradeProfileDetails } from "./sologenic/com-fs-trade-profile-model/tradeprofile";
 import { Audit } from "./sologenic/com-fs-utils-lib/models/audit/audit";
-import { Language } from "./sologenic/com-fs-utils-lib/models/language/language";
+import { Lang, langFromJSON, langToJSON } from "./sologenic/com-fs-utils-lib/models/language/language";
 import {
   MetaData,
   Network,
@@ -318,9 +318,7 @@ export interface UserDetails {
   Status: UserStatus;
   Wallets: Wallet[];
   Socials: Social[];
-  Language:
-    | Language
-    | undefined;
+  Language: Lang;
   /** UUID for the external user identifier in the KYC provider */
   ExternalUserID: string;
   /** UUID */
@@ -331,7 +329,11 @@ export interface UserDetails {
   /** A retail user will always have a role of "NORMAL_USER" */
   Role: Role;
   /** Trade profile details */
-  TradeProfile: TradeProfileDetails | undefined;
+  TradeProfile:
+    | TradeProfileDetails
+    | undefined;
+  /** Array of inquiry ID's */
+  KycInquiries: string[];
 }
 
 /** TODO: to be verified when more information is available */
@@ -412,12 +414,13 @@ function createBaseUserDetails(): UserDetails {
     Status: 0,
     Wallets: [],
     Socials: [],
-    Language: undefined,
+    Language: 0,
     ExternalUserID: "",
     OrganizationID: "",
     Employment: undefined,
     Role: 0,
     TradeProfile: undefined,
+    KycInquiries: [],
   };
 }
 
@@ -453,8 +456,8 @@ export const UserDetails = {
     for (const v of message.Socials) {
       Social.encode(v!, writer.uint32(82).fork()).ldelim();
     }
-    if (message.Language !== undefined) {
-      Language.encode(message.Language, writer.uint32(90).fork()).ldelim();
+    if (message.Language !== 0) {
+      writer.uint32(88).int32(message.Language);
     }
     if (message.ExternalUserID !== "") {
       writer.uint32(98).string(message.ExternalUserID);
@@ -470,6 +473,9 @@ export const UserDetails = {
     }
     if (message.TradeProfile !== undefined) {
       TradeProfileDetails.encode(message.TradeProfile, writer.uint32(130).fork()).ldelim();
+    }
+    for (const v of message.KycInquiries) {
+      writer.uint32(138).string(v!);
     }
     return writer;
   },
@@ -552,11 +558,11 @@ export const UserDetails = {
           message.Socials.push(Social.decode(reader, reader.uint32()));
           continue;
         case 11:
-          if (tag !== 90) {
+          if (tag !== 88) {
             break;
           }
 
-          message.Language = Language.decode(reader, reader.uint32());
+          message.Language = reader.int32() as any;
           continue;
         case 12:
           if (tag !== 98) {
@@ -593,6 +599,13 @@ export const UserDetails = {
 
           message.TradeProfile = TradeProfileDetails.decode(reader, reader.uint32());
           continue;
+        case 17:
+          if (tag !== 138) {
+            break;
+          }
+
+          message.KycInquiries.push(reader.string());
+          continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -614,12 +627,15 @@ export const UserDetails = {
       Status: isSet(object.Status) ? userStatusFromJSON(object.Status) : 0,
       Wallets: globalThis.Array.isArray(object?.Wallets) ? object.Wallets.map((e: any) => Wallet.fromJSON(e)) : [],
       Socials: globalThis.Array.isArray(object?.Socials) ? object.Socials.map((e: any) => Social.fromJSON(e)) : [],
-      Language: isSet(object.Language) ? Language.fromJSON(object.Language) : undefined,
+      Language: isSet(object.Language) ? langFromJSON(object.Language) : 0,
       ExternalUserID: isSet(object.ExternalUserID) ? globalThis.String(object.ExternalUserID) : "",
       OrganizationID: isSet(object.OrganizationID) ? globalThis.String(object.OrganizationID) : "",
       Employment: isSet(object.Employment) ? Employment.fromJSON(object.Employment) : undefined,
       Role: isSet(object.Role) ? roleFromJSON(object.Role) : 0,
       TradeProfile: isSet(object.TradeProfile) ? TradeProfileDetails.fromJSON(object.TradeProfile) : undefined,
+      KycInquiries: globalThis.Array.isArray(object?.KycInquiries)
+        ? object.KycInquiries.map((e: any) => globalThis.String(e))
+        : [],
     };
   },
 
@@ -655,8 +671,8 @@ export const UserDetails = {
     if (message.Socials?.length) {
       obj.Socials = message.Socials.map((e) => Social.toJSON(e));
     }
-    if (message.Language !== undefined) {
-      obj.Language = Language.toJSON(message.Language);
+    if (message.Language !== 0) {
+      obj.Language = langToJSON(message.Language);
     }
     if (message.ExternalUserID !== "") {
       obj.ExternalUserID = message.ExternalUserID;
@@ -672,6 +688,9 @@ export const UserDetails = {
     }
     if (message.TradeProfile !== undefined) {
       obj.TradeProfile = TradeProfileDetails.toJSON(message.TradeProfile);
+    }
+    if (message.KycInquiries?.length) {
+      obj.KycInquiries = message.KycInquiries;
     }
     return obj;
   },
@@ -691,9 +710,7 @@ export const UserDetails = {
     message.Status = object.Status ?? 0;
     message.Wallets = object.Wallets?.map((e) => Wallet.fromPartial(e)) || [];
     message.Socials = object.Socials?.map((e) => Social.fromPartial(e)) || [];
-    message.Language = (object.Language !== undefined && object.Language !== null)
-      ? Language.fromPartial(object.Language)
-      : undefined;
+    message.Language = object.Language ?? 0;
     message.ExternalUserID = object.ExternalUserID ?? "";
     message.OrganizationID = object.OrganizationID ?? "";
     message.Employment = (object.Employment !== undefined && object.Employment !== null)
@@ -703,6 +720,7 @@ export const UserDetails = {
     message.TradeProfile = (object.TradeProfile !== undefined && object.TradeProfile !== null)
       ? TradeProfileDetails.fromPartial(object.TradeProfile)
       : undefined;
+    message.KycInquiries = object.KycInquiries?.map((e) => e) || [];
     return message;
   },
 };
