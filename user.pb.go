@@ -390,6 +390,7 @@ type UserKYCDetails struct {
 	CountryCode           string                 `protobuf:"bytes,9,opt,name=CountryCode,proto3" json:"CountryCode,omitempty"`
 	SocialSecurityNumber  string                 `protobuf:"bytes,10,opt,name=SocialSecurityNumber,proto3" json:"SocialSecurityNumber,omitempty"`
 	IdentificationNumbers []*IDNumber            `protobuf:"bytes,11,rep,name=IdentificationNumbers,proto3" json:"IdentificationNumbers,omitempty"`
+	InquiryID             string                 `protobuf:"bytes,12,opt,name=InquiryID,proto3" json:"InquiryID,omitempty"`
 	unknownFields         protoimpl.UnknownFields
 	sizeCache             protoimpl.SizeCache
 }
@@ -499,6 +500,13 @@ func (x *UserKYCDetails) GetIdentificationNumbers() []*IDNumber {
 		return x.IdentificationNumbers
 	}
 	return nil
+}
+
+func (x *UserKYCDetails) GetInquiryID() string {
+	if x != nil {
+		return x.InquiryID
+	}
+	return ""
 }
 
 type UserDetails struct {
@@ -1286,6 +1294,98 @@ func (x *StatusMessage) GetAudit() *audit.Audit {
 	return nil
 }
 
+type Filter struct {
+	state          protoimpl.MessageState `protogen:"open.v1"`
+	UserIDs        []string               `protobuf:"bytes,1,rep,name=UserIDs,proto3" json:"UserIDs,omitempty"`
+	Network        *metadata.Network      `protobuf:"varint,2,opt,name=Network,proto3,enum=metadata.Network,oneof" json:"Network,omitempty"`
+	OrganizationID string                 `protobuf:"bytes,3,opt,name=OrganizationID,proto3" json:"OrganizationID,omitempty"`
+	Offset         *int32                 `protobuf:"varint,4,opt,name=Offset,proto3,oneof" json:"Offset,omitempty"`
+	Limit          *int32                 `protobuf:"varint,5,opt,name=Limit,proto3,oneof" json:"Limit,omitempty"`
+	InquiryID      *string                `protobuf:"bytes,6,opt,name=InquiryID,proto3,oneof" json:"InquiryID,omitempty"`
+	Status         *UserStatus            `protobuf:"varint,7,opt,name=Status,proto3,enum=user.UserStatus,oneof" json:"Status,omitempty"`
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
+}
+
+func (x *Filter) Reset() {
+	*x = Filter{}
+	mi := &file_user_proto_msgTypes[12]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Filter) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Filter) ProtoMessage() {}
+
+func (x *Filter) ProtoReflect() protoreflect.Message {
+	mi := &file_user_proto_msgTypes[12]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Filter.ProtoReflect.Descriptor instead.
+func (*Filter) Descriptor() ([]byte, []int) {
+	return file_user_proto_rawDescGZIP(), []int{12}
+}
+
+func (x *Filter) GetUserIDs() []string {
+	if x != nil {
+		return x.UserIDs
+	}
+	return nil
+}
+
+func (x *Filter) GetNetwork() metadata.Network {
+	if x != nil && x.Network != nil {
+		return *x.Network
+	}
+	return metadata.Network(0)
+}
+
+func (x *Filter) GetOrganizationID() string {
+	if x != nil {
+		return x.OrganizationID
+	}
+	return ""
+}
+
+func (x *Filter) GetOffset() int32 {
+	if x != nil && x.Offset != nil {
+		return *x.Offset
+	}
+	return 0
+}
+
+func (x *Filter) GetLimit() int32 {
+	if x != nil && x.Limit != nil {
+		return *x.Limit
+	}
+	return 0
+}
+
+func (x *Filter) GetInquiryID() string {
+	if x != nil && x.InquiryID != nil {
+		return *x.InquiryID
+	}
+	return ""
+}
+
+func (x *Filter) GetStatus() UserStatus {
+	if x != nil && x.Status != nil {
+		return *x.Status
+	}
+	return UserStatus_NOT_USED_USERSTATUS
+}
+
 var File_user_proto protoreflect.FileDescriptor
 
 const file_user_proto_rawDesc = "" +
@@ -1295,7 +1395,7 @@ const file_user_proto_rawDesc = "" +
 	"\bIDNumber\x12&\n" +
 	"\x0eIssuingCountry\x18\x01 \x01(\tR\x0eIssuingCountry\x120\n" +
 	"\x13IdentificationClass\x18\x02 \x01(\tR\x13IdentificationClass\x122\n" +
-	"\x14IdentificationNumber\x18\x03 \x01(\tR\x14IdentificationNumber\"\xe0\x03\n" +
+	"\x14IdentificationNumber\x18\x03 \x01(\tR\x14IdentificationNumber\"\xfe\x03\n" +
 	"\x0eUserKYCDetails\x12\x1c\n" +
 	"\tBirthdate\x18\x01 \x01(\tR\tBirthdate\x12 \n" +
 	"\vPhoneNumber\x18\x02 \x01(\tR\vPhoneNumber\x12\"\n" +
@@ -1308,7 +1408,8 @@ const file_user_proto_rawDesc = "" +
 	"\vCountryCode\x18\t \x01(\tR\vCountryCode\x122\n" +
 	"\x14SocialSecurityNumber\x18\n" +
 	" \x01(\tR\x14SocialSecurityNumber\x12D\n" +
-	"\x15IdentificationNumbers\x18\v \x03(\v2\x0e.user.IDNumberR\x15IdentificationNumbers\"\xc6\x05\n" +
+	"\x15IdentificationNumbers\x18\v \x03(\v2\x0e.user.IDNumberR\x15IdentificationNumbers\x12\x1c\n" +
+	"\tInquiryID\x18\f \x01(\tR\tInquiryID\"\xc6\x05\n" +
 	"\vUserDetails\x12\x16\n" +
 	"\x06UserID\x18\x01 \x01(\tR\x06UserID\x12\x1c\n" +
 	"\tFirstName\x18\x02 \x01(\tR\tFirstName\x12\x1a\n" +
@@ -1391,7 +1492,22 @@ const file_user_proto_rawDesc = "" +
 	"\aNetwork\x18\x04 \x01(\x0e2\x11.metadata.NetworkH\x00R\aNetwork\x88\x01\x01\x12\"\n" +
 	"\x05Audit\x18\x05 \x01(\v2\f.audit.AuditR\x05AuditB\n" +
 	"\n" +
-	"\b_Network*\x8b\x01\n" +
+	"\b_Network\"\xc0\x02\n" +
+	"\x06Filter\x12\x18\n" +
+	"\aUserIDs\x18\x01 \x03(\tR\aUserIDs\x120\n" +
+	"\aNetwork\x18\x02 \x01(\x0e2\x11.metadata.NetworkH\x00R\aNetwork\x88\x01\x01\x12&\n" +
+	"\x0eOrganizationID\x18\x03 \x01(\tR\x0eOrganizationID\x12\x1b\n" +
+	"\x06Offset\x18\x04 \x01(\x05H\x01R\x06Offset\x88\x01\x01\x12\x19\n" +
+	"\x05Limit\x18\x05 \x01(\x05H\x02R\x05Limit\x88\x01\x01\x12!\n" +
+	"\tInquiryID\x18\x06 \x01(\tH\x03R\tInquiryID\x88\x01\x01\x12-\n" +
+	"\x06Status\x18\a \x01(\x0e2\x10.user.UserStatusH\x04R\x06Status\x88\x01\x01B\n" +
+	"\n" +
+	"\b_NetworkB\t\n" +
+	"\a_OffsetB\b\n" +
+	"\x06_LimitB\f\n" +
+	"\n" +
+	"_InquiryIDB\t\n" +
+	"\a_Status*\x8b\x01\n" +
 	"\x0eEmploymentType\x12\x1b\n" +
 	"\x17NOT_USED_EMPLOYMENTTYPE\x10\x00\x12\r\n" +
 	"\tFULL_TIME\x10\x01\x12\r\n" +
@@ -1450,7 +1566,7 @@ func file_user_proto_rawDescGZIP() []byte {
 }
 
 var file_user_proto_enumTypes = make([]protoimpl.EnumInfo, 5)
-var file_user_proto_msgTypes = make([]protoimpl.MessageInfo, 12)
+var file_user_proto_msgTypes = make([]protoimpl.MessageInfo, 13)
 var file_user_proto_goTypes = []any{
 	(EmploymentType)(0),     // 0: user.EmploymentType
 	(IncomeFrequency)(0),    // 1: user.IncomeFrequency
@@ -1469,45 +1585,48 @@ var file_user_proto_goTypes = []any{
 	(*Wallet)(nil),          // 14: user.Wallet
 	(*UserList)(nil),        // 15: user.UserList
 	(*StatusMessage)(nil),   // 16: user.StatusMessage
-	(language.Lang)(0),      // 17: language.Lang
-	(role.Role)(0),          // 18: role.Role
-	(*com_fs_trade_profile_model.TradeProfileDetails)(nil), // 19: tradeprofile.TradeProfileDetails
-	(*timestamppb.Timestamp)(nil),                          // 20: google.protobuf.Timestamp
-	(*metadata.MetaData)(nil),                              // 21: metadata.MetaData
-	(*audit.Audit)(nil),                                    // 22: audit.Audit
-	(metadata.Network)(0),                                  // 23: metadata.Network
+	(*Filter)(nil),          // 17: user.Filter
+	(language.Lang)(0),      // 18: language.Lang
+	(role.Role)(0),          // 19: role.Role
+	(*com_fs_trade_profile_model.TradeProfileDetails)(nil), // 20: tradeprofile.TradeProfileDetails
+	(*timestamppb.Timestamp)(nil),                          // 21: google.protobuf.Timestamp
+	(*metadata.MetaData)(nil),                              // 22: metadata.MetaData
+	(*audit.Audit)(nil),                                    // 23: audit.Audit
+	(metadata.Network)(0),                                  // 24: metadata.Network
 }
 var file_user_proto_depIdxs = []int32{
 	5,  // 0: user.UserKYCDetails.IdentificationNumbers:type_name -> user.IDNumber
 	2,  // 1: user.UserDetails.Status:type_name -> user.UserStatus
 	14, // 2: user.UserDetails.Wallets:type_name -> user.Wallet
 	13, // 3: user.UserDetails.Socials:type_name -> user.Social
-	17, // 4: user.UserDetails.Language:type_name -> language.Lang
+	18, // 4: user.UserDetails.Language:type_name -> language.Lang
 	8,  // 5: user.UserDetails.Employment:type_name -> user.Employment
-	18, // 6: user.UserDetails.Role:type_name -> role.Role
-	19, // 7: user.UserDetails.TradeProfile:type_name -> tradeprofile.TradeProfileDetails
+	19, // 6: user.UserDetails.Role:type_name -> role.Role
+	20, // 7: user.UserDetails.TradeProfile:type_name -> tradeprofile.TradeProfileDetails
 	6,  // 8: user.UserDetails.KYCDetails:type_name -> user.UserKYCDetails
-	20, // 9: user.Employment.StartDate:type_name -> google.protobuf.Timestamp
-	20, // 10: user.Employment.EndDate:type_name -> google.protobuf.Timestamp
+	21, // 9: user.Employment.StartDate:type_name -> google.protobuf.Timestamp
+	21, // 10: user.Employment.EndDate:type_name -> google.protobuf.Timestamp
 	0,  // 11: user.Employment.Type:type_name -> user.EmploymentType
 	9,  // 12: user.Employment.Income:type_name -> user.Income
 	10, // 13: user.Employment.Contact:type_name -> user.EmployerContact
 	1,  // 14: user.Income.Frequency:type_name -> user.IncomeFrequency
 	7,  // 15: user.User.User:type_name -> user.UserDetails
-	21, // 16: user.User.MetaData:type_name -> metadata.MetaData
-	22, // 17: user.User.Audit:type_name -> audit.Audit
-	23, // 18: user.UserID.Network:type_name -> metadata.Network
+	22, // 16: user.User.MetaData:type_name -> metadata.MetaData
+	23, // 17: user.User.Audit:type_name -> audit.Audit
+	24, // 18: user.UserID.Network:type_name -> metadata.Network
 	4,  // 19: user.Social.Type:type_name -> user.SocialType
 	3,  // 20: user.Wallet.Type:type_name -> user.WalletType
 	11, // 21: user.UserList.Users:type_name -> user.User
 	2,  // 22: user.StatusMessage.Status:type_name -> user.UserStatus
-	23, // 23: user.StatusMessage.Network:type_name -> metadata.Network
-	22, // 24: user.StatusMessage.Audit:type_name -> audit.Audit
-	25, // [25:25] is the sub-list for method output_type
-	25, // [25:25] is the sub-list for method input_type
-	25, // [25:25] is the sub-list for extension type_name
-	25, // [25:25] is the sub-list for extension extendee
-	0,  // [0:25] is the sub-list for field type_name
+	24, // 23: user.StatusMessage.Network:type_name -> metadata.Network
+	23, // 24: user.StatusMessage.Audit:type_name -> audit.Audit
+	24, // 25: user.Filter.Network:type_name -> metadata.Network
+	2,  // 26: user.Filter.Status:type_name -> user.UserStatus
+	27, // [27:27] is the sub-list for method output_type
+	27, // [27:27] is the sub-list for method input_type
+	27, // [27:27] is the sub-list for extension type_name
+	27, // [27:27] is the sub-list for extension extendee
+	0,  // [0:27] is the sub-list for field type_name
 }
 
 func init() { file_user_proto_init() }
@@ -1520,13 +1639,14 @@ func file_user_proto_init() {
 	file_user_proto_msgTypes[7].OneofWrappers = []any{}
 	file_user_proto_msgTypes[10].OneofWrappers = []any{}
 	file_user_proto_msgTypes[11].OneofWrappers = []any{}
+	file_user_proto_msgTypes[12].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_user_proto_rawDesc), len(file_user_proto_rawDesc)),
 			NumEnums:      5,
-			NumMessages:   12,
+			NumMessages:   13,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

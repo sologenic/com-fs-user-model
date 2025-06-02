@@ -4,15 +4,8 @@ import { type CallOptions, ChannelCredentials, Client, type ClientOptions, type 
 import _m0 from "protobufjs/minimal";
 import { Empty } from "./google/protobuf/empty";
 import { Network } from "./sologenic/com-fs-utils-lib/models/metadata/metadata";
-import { StatusMessage, User, UserID, UserList } from "./user";
+import { Filter, StatusMessage, User, UserID, UserList } from "./user";
 export declare const protobufPackage = "user";
-export interface Filter {
-    UserIDs: string[];
-    Network?: Network | undefined;
-    OrganizationID: string;
-    Offset?: number | undefined;
-    Limit?: number | undefined;
-}
 export interface AuditFilter {
     UserID?: string | undefined;
     ChangedBy?: string | undefined;
@@ -21,38 +14,6 @@ export interface AuditFilter {
     Limit?: number | undefined;
     Offset?: number | undefined;
 }
-export declare const Filter: {
-    encode(message: Filter, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): Filter;
-    fromJSON(object: any): Filter;
-    toJSON(message: Filter): unknown;
-    create<I extends {
-        UserIDs?: string[] | undefined;
-        Network?: Network | undefined;
-        OrganizationID?: string | undefined;
-        Offset?: number | undefined;
-        Limit?: number | undefined;
-    } & {
-        UserIDs?: (string[] & string[] & { [K in Exclude<keyof I["UserIDs"], keyof string[]>]: never; }) | undefined;
-        Network?: Network | undefined;
-        OrganizationID?: string | undefined;
-        Offset?: number | undefined;
-        Limit?: number | undefined;
-    } & { [K_1 in Exclude<keyof I, keyof Filter>]: never; }>(base?: I | undefined): Filter;
-    fromPartial<I_1 extends {
-        UserIDs?: string[] | undefined;
-        Network?: Network | undefined;
-        OrganizationID?: string | undefined;
-        Offset?: number | undefined;
-        Limit?: number | undefined;
-    } & {
-        UserIDs?: (string[] & string[] & { [K_2 in Exclude<keyof I_1["UserIDs"], keyof string[]>]: never; }) | undefined;
-        Network?: Network | undefined;
-        OrganizationID?: string | undefined;
-        Offset?: number | undefined;
-        Limit?: number | undefined;
-    } & { [K_3 in Exclude<keyof I_1, keyof Filter>]: never; }>(object: I_1): Filter;
-};
 export declare const AuditFilter: {
     encode(message: AuditFilter, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): AuditFilter;

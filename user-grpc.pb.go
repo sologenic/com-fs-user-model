@@ -26,29 +26,34 @@ var File_user_grpc_proto protoreflect.FileDescriptor
 const file_user_grpc_proto_rawDesc = "" +
 	"\n" +
 	"\x0fuser-grpc.proto\x12\x04user\x1a\x1bgoogle/protobuf/empty.proto\x1a\n" +
-	"user.proto2\x92\x01\n" +
+	"user.proto2\xba\x01\n" +
 	"\vUserService\x12!\n" +
 	"\x03Get\x12\f.user.UserID\x1a\n" +
-	".user.User\"\x00\x12$\n" +
+	".user.User\"\x00\x12&\n" +
+	"\x04List\x12\f.user.Filter\x1a\x0e.user.UserList\"\x00\x12$\n" +
 	"\x06Upsert\x12\n" +
 	".user.User\x1a\f.user.UserID\"\x00\x12:\n" +
 	"\tSetStatus\x12\x13.user.StatusMessage\x1a\x16.google.protobuf.Empty\"\x00B-Z+github.com/sologenic/com-fs-user-model;userb\x06proto3"
 
 var file_user_grpc_proto_goTypes = []any{
 	(*UserID)(nil),        // 0: user.UserID
-	(*User)(nil),          // 1: user.User
-	(*StatusMessage)(nil), // 2: user.StatusMessage
-	(*emptypb.Empty)(nil), // 3: google.protobuf.Empty
+	(*Filter)(nil),        // 1: user.Filter
+	(*User)(nil),          // 2: user.User
+	(*StatusMessage)(nil), // 3: user.StatusMessage
+	(*UserList)(nil),      // 4: user.UserList
+	(*emptypb.Empty)(nil), // 5: google.protobuf.Empty
 }
 var file_user_grpc_proto_depIdxs = []int32{
 	0, // 0: user.UserService.Get:input_type -> user.UserID
-	1, // 1: user.UserService.Upsert:input_type -> user.User
-	2, // 2: user.UserService.SetStatus:input_type -> user.StatusMessage
-	1, // 3: user.UserService.Get:output_type -> user.User
-	0, // 4: user.UserService.Upsert:output_type -> user.UserID
-	3, // 5: user.UserService.SetStatus:output_type -> google.protobuf.Empty
-	3, // [3:6] is the sub-list for method output_type
-	0, // [0:3] is the sub-list for method input_type
+	1, // 1: user.UserService.List:input_type -> user.Filter
+	2, // 2: user.UserService.Upsert:input_type -> user.User
+	3, // 3: user.UserService.SetStatus:input_type -> user.StatusMessage
+	2, // 4: user.UserService.Get:output_type -> user.User
+	4, // 5: user.UserService.List:output_type -> user.UserList
+	0, // 6: user.UserService.Upsert:output_type -> user.UserID
+	5, // 7: user.UserService.SetStatus:output_type -> google.protobuf.Empty
+	4, // [4:8] is the sub-list for method output_type
+	0, // [0:4] is the sub-list for method input_type
 	0, // [0:0] is the sub-list for extension type_name
 	0, // [0:0] is the sub-list for extension extendee
 	0, // [0:0] is the sub-list for field type_name

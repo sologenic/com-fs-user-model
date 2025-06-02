@@ -21,6 +21,7 @@ const _ = grpc.SupportPackageIsVersion9
 
 const (
 	UserService_Get_FullMethodName       = "/user.UserService/Get"
+	UserService_List_FullMethodName      = "/user.UserService/List"
 	UserService_Upsert_FullMethodName    = "/user.UserService/Upsert"
 	UserService_SetStatus_FullMethodName = "/user.UserService/SetStatus"
 )
@@ -30,6 +31,7 @@ const (
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type UserServiceClient interface {
 	Get(ctx context.Context, in *UserID, opts ...grpc.CallOption) (*User, error)
+	List(ctx context.Context, in *Filter, opts ...grpc.CallOption) (*UserList, error)
 	Upsert(ctx context.Context, in *User, opts ...grpc.CallOption) (*UserID, error)
 	SetStatus(ctx context.Context, in *StatusMessage, opts ...grpc.CallOption) (*emptypb.Empty, error)
 }
@@ -46,6 +48,16 @@ func (c *userServiceClient) Get(ctx context.Context, in *UserID, opts ...grpc.Ca
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(User)
 	err := c.cc.Invoke(ctx, UserService_Get_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userServiceClient) List(ctx context.Context, in *Filter, opts ...grpc.CallOption) (*UserList, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(UserList)
+	err := c.cc.Invoke(ctx, UserService_List_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -77,6 +89,7 @@ func (c *userServiceClient) SetStatus(ctx context.Context, in *StatusMessage, op
 // for forward compatibility.
 type UserServiceServer interface {
 	Get(context.Context, *UserID) (*User, error)
+	List(context.Context, *Filter) (*UserList, error)
 	Upsert(context.Context, *User) (*UserID, error)
 	SetStatus(context.Context, *StatusMessage) (*emptypb.Empty, error)
 }
@@ -90,6 +103,9 @@ type UnimplementedUserServiceServer struct{}
 
 func (UnimplementedUserServiceServer) Get(context.Context, *UserID) (*User, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Get not implemented")
+}
+func (UnimplementedUserServiceServer) List(context.Context, *Filter) (*UserList, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method List not implemented")
 }
 func (UnimplementedUserServiceServer) Upsert(context.Context, *User) (*UserID, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Upsert not implemented")
@@ -131,6 +147,24 @@ func _UserService_Get_Handler(srv interface{}, ctx context.Context, dec func(int
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(UserServiceServer).Get(ctx, req.(*UserID))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _UserService_List_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Filter)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServiceServer).List(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: UserService_List_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServiceServer).List(ctx, req.(*Filter))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -181,6 +215,10 @@ var UserService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "Get",
 			Handler:    _UserService_Get_Handler,
+		},
+		{
+			MethodName: "List",
+			Handler:    _UserService_List_Handler,
 		},
 		{
 			MethodName: "Upsert",

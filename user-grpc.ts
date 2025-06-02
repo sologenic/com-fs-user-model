@@ -18,7 +18,7 @@ import {
   type UntypedServiceImplementation,
 } from "@grpc/grpc-js";
 import { Empty } from "./google/protobuf/empty";
-import { StatusMessage, User, UserID } from "./user";
+import { Filter, StatusMessage, User, UserID, UserList } from "./user";
 
 export const protobufPackage = "user";
 
@@ -32,6 +32,15 @@ export const UserServiceService = {
     requestDeserialize: (value: Buffer) => UserID.decode(value),
     responseSerialize: (value: User) => Buffer.from(User.encode(value).finish()),
     responseDeserialize: (value: Buffer) => User.decode(value),
+  },
+  list: {
+    path: "/user.UserService/List",
+    requestStream: false,
+    responseStream: false,
+    requestSerialize: (value: Filter) => Buffer.from(Filter.encode(value).finish()),
+    requestDeserialize: (value: Buffer) => Filter.decode(value),
+    responseSerialize: (value: UserList) => Buffer.from(UserList.encode(value).finish()),
+    responseDeserialize: (value: Buffer) => UserList.decode(value),
   },
   upsert: {
     path: "/user.UserService/Upsert",
@@ -55,6 +64,7 @@ export const UserServiceService = {
 
 export interface UserServiceServer extends UntypedServiceImplementation {
   get: handleUnaryCall<UserID, User>;
+  list: handleUnaryCall<Filter, UserList>;
   upsert: handleUnaryCall<User, UserID>;
   setStatus: handleUnaryCall<StatusMessage, Empty>;
 }
@@ -71,6 +81,18 @@ export interface UserServiceClient extends Client {
     metadata: Metadata,
     options: Partial<CallOptions>,
     callback: (error: ServiceError | null, response: User) => void,
+  ): ClientUnaryCall;
+  list(request: Filter, callback: (error: ServiceError | null, response: UserList) => void): ClientUnaryCall;
+  list(
+    request: Filter,
+    metadata: Metadata,
+    callback: (error: ServiceError | null, response: UserList) => void,
+  ): ClientUnaryCall;
+  list(
+    request: Filter,
+    metadata: Metadata,
+    options: Partial<CallOptions>,
+    callback: (error: ServiceError | null, response: UserList) => void,
   ): ClientUnaryCall;
   upsert(request: User, callback: (error: ServiceError | null, response: UserID) => void): ClientUnaryCall;
   upsert(

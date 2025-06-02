@@ -2,7 +2,7 @@
 /// <reference types="node" />
 import { type CallOptions, ChannelCredentials, Client, type ClientOptions, type ClientUnaryCall, type handleUnaryCall, Metadata, type ServiceError, type UntypedServiceImplementation } from "@grpc/grpc-js";
 import { Empty } from "./google/protobuf/empty";
-import { StatusMessage, User, UserID } from "./user";
+import { Filter, StatusMessage, User, UserID, UserList } from "./user";
 export declare const protobufPackage = "user";
 export type UserServiceService = typeof UserServiceService;
 export declare const UserServiceService: {
@@ -14,6 +14,15 @@ export declare const UserServiceService: {
         readonly requestDeserialize: (value: Buffer) => UserID;
         readonly responseSerialize: (value: User) => Buffer;
         readonly responseDeserialize: (value: Buffer) => User;
+    };
+    readonly list: {
+        readonly path: "/user.UserService/List";
+        readonly requestStream: false;
+        readonly responseStream: false;
+        readonly requestSerialize: (value: Filter) => Buffer;
+        readonly requestDeserialize: (value: Buffer) => Filter;
+        readonly responseSerialize: (value: UserList) => Buffer;
+        readonly responseDeserialize: (value: Buffer) => UserList;
     };
     readonly upsert: {
         readonly path: "/user.UserService/Upsert";
@@ -36,6 +45,7 @@ export declare const UserServiceService: {
 };
 export interface UserServiceServer extends UntypedServiceImplementation {
     get: handleUnaryCall<UserID, User>;
+    list: handleUnaryCall<Filter, UserList>;
     upsert: handleUnaryCall<User, UserID>;
     setStatus: handleUnaryCall<StatusMessage, Empty>;
 }
@@ -43,6 +53,9 @@ export interface UserServiceClient extends Client {
     get(request: UserID, callback: (error: ServiceError | null, response: User) => void): ClientUnaryCall;
     get(request: UserID, metadata: Metadata, callback: (error: ServiceError | null, response: User) => void): ClientUnaryCall;
     get(request: UserID, metadata: Metadata, options: Partial<CallOptions>, callback: (error: ServiceError | null, response: User) => void): ClientUnaryCall;
+    list(request: Filter, callback: (error: ServiceError | null, response: UserList) => void): ClientUnaryCall;
+    list(request: Filter, metadata: Metadata, callback: (error: ServiceError | null, response: UserList) => void): ClientUnaryCall;
+    list(request: Filter, metadata: Metadata, options: Partial<CallOptions>, callback: (error: ServiceError | null, response: UserList) => void): ClientUnaryCall;
     upsert(request: User, callback: (error: ServiceError | null, response: UserID) => void): ClientUnaryCall;
     upsert(request: User, metadata: Metadata, callback: (error: ServiceError | null, response: UserID) => void): ClientUnaryCall;
     upsert(request: User, metadata: Metadata, options: Partial<CallOptions>, callback: (error: ServiceError | null, response: UserID) => void): ClientUnaryCall;

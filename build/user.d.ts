@@ -77,6 +77,7 @@ export interface UserKYCDetails {
     CountryCode: string;
     SocialSecurityNumber: string;
     IdentificationNumbers: IDNumber[];
+    InquiryID: string;
 }
 export interface UserDetails {
     /** email address used for firebase authentication */
@@ -160,6 +161,15 @@ export interface StatusMessage {
     Network?: Network | undefined;
     Audit: Audit | undefined;
 }
+export interface Filter {
+    UserIDs: string[];
+    Network?: Network | undefined;
+    OrganizationID: string;
+    Offset?: number | undefined;
+    Limit?: number | undefined;
+    InquiryID?: string | undefined;
+    Status?: UserStatus | undefined;
+}
 export declare const IDNumber: {
     encode(message: IDNumber, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): IDNumber;
@@ -205,6 +215,7 @@ export declare const UserKYCDetails: {
             IdentificationClass?: string | undefined;
             IdentificationNumber?: string | undefined;
         }[] | undefined;
+        InquiryID?: string | undefined;
     } & {
         Birthdate?: string | undefined;
         PhoneNumber?: string | undefined;
@@ -233,6 +244,7 @@ export declare const UserKYCDetails: {
             IdentificationClass?: string | undefined;
             IdentificationNumber?: string | undefined;
         }[]>]: never; }) | undefined;
+        InquiryID?: string | undefined;
     } & { [K_2 in Exclude<keyof I, keyof UserKYCDetails>]: never; }>(base?: I | undefined): UserKYCDetails;
     fromPartial<I_1 extends {
         Birthdate?: string | undefined;
@@ -250,6 +262,7 @@ export declare const UserKYCDetails: {
             IdentificationClass?: string | undefined;
             IdentificationNumber?: string | undefined;
         }[] | undefined;
+        InquiryID?: string | undefined;
     } & {
         Birthdate?: string | undefined;
         PhoneNumber?: string | undefined;
@@ -278,6 +291,7 @@ export declare const UserKYCDetails: {
             IdentificationClass?: string | undefined;
             IdentificationNumber?: string | undefined;
         }[]>]: never; }) | undefined;
+        InquiryID?: string | undefined;
     } & { [K_5 in Exclude<keyof I_1, keyof UserKYCDetails>]: never; }>(object: I_1): UserKYCDetails;
 };
 export declare const UserDetails: {
@@ -366,6 +380,7 @@ export declare const UserDetails: {
                 IdentificationClass?: string | undefined;
                 IdentificationNumber?: string | undefined;
             }[] | undefined;
+            InquiryID?: string | undefined;
         } | undefined;
     } & {
         UserID?: string | undefined;
@@ -527,6 +542,7 @@ export declare const UserDetails: {
                 IdentificationClass?: string | undefined;
                 IdentificationNumber?: string | undefined;
             }[] | undefined;
+            InquiryID?: string | undefined;
         } & {
             Birthdate?: string | undefined;
             PhoneNumber?: string | undefined;
@@ -555,6 +571,7 @@ export declare const UserDetails: {
                 IdentificationClass?: string | undefined;
                 IdentificationNumber?: string | undefined;
             }[]>]: never; }) | undefined;
+            InquiryID?: string | undefined;
         } & { [K_14 in Exclude<keyof I["KYCDetails"], keyof UserKYCDetails>]: never; }) | undefined;
     } & { [K_15 in Exclude<keyof I, keyof UserDetails>]: never; }>(base?: I | undefined): UserDetails;
     fromPartial<I_1 extends {
@@ -638,6 +655,7 @@ export declare const UserDetails: {
                 IdentificationClass?: string | undefined;
                 IdentificationNumber?: string | undefined;
             }[] | undefined;
+            InquiryID?: string | undefined;
         } | undefined;
     } & {
         UserID?: string | undefined;
@@ -799,6 +817,7 @@ export declare const UserDetails: {
                 IdentificationClass?: string | undefined;
                 IdentificationNumber?: string | undefined;
             }[] | undefined;
+            InquiryID?: string | undefined;
         } & {
             Birthdate?: string | undefined;
             PhoneNumber?: string | undefined;
@@ -827,6 +846,7 @@ export declare const UserDetails: {
                 IdentificationClass?: string | undefined;
                 IdentificationNumber?: string | undefined;
             }[]>]: never; }) | undefined;
+            InquiryID?: string | undefined;
         } & { [K_30 in Exclude<keyof I_1["KYCDetails"], keyof UserKYCDetails>]: never; }) | undefined;
     } & { [K_31 in Exclude<keyof I_1, keyof UserDetails>]: never; }>(object: I_1): UserDetails;
 };
@@ -1075,6 +1095,7 @@ export declare const User: {
                     IdentificationClass?: string | undefined;
                     IdentificationNumber?: string | undefined;
                 }[] | undefined;
+                InquiryID?: string | undefined;
             } | undefined;
         } | undefined;
         MetaData?: {
@@ -1170,6 +1191,7 @@ export declare const User: {
                     IdentificationClass?: string | undefined;
                     IdentificationNumber?: string | undefined;
                 }[] | undefined;
+                InquiryID?: string | undefined;
             } | undefined;
         } & {
             UserID?: string | undefined;
@@ -1331,6 +1353,7 @@ export declare const User: {
                     IdentificationClass?: string | undefined;
                     IdentificationNumber?: string | undefined;
                 }[] | undefined;
+                InquiryID?: string | undefined;
             } & {
                 Birthdate?: string | undefined;
                 PhoneNumber?: string | undefined;
@@ -1359,6 +1382,7 @@ export declare const User: {
                     IdentificationClass?: string | undefined;
                     IdentificationNumber?: string | undefined;
                 }[]>]: never; }) | undefined;
+                InquiryID?: string | undefined;
             } & { [K_14 in Exclude<keyof I["User"]["KYCDetails"], keyof UserKYCDetails>]: never; }) | undefined;
         } & { [K_15 in Exclude<keyof I["User"], keyof UserDetails>]: never; }) | undefined;
         MetaData?: ({
@@ -1464,6 +1488,7 @@ export declare const User: {
                     IdentificationClass?: string | undefined;
                     IdentificationNumber?: string | undefined;
                 }[] | undefined;
+                InquiryID?: string | undefined;
             } | undefined;
         } | undefined;
         MetaData?: {
@@ -1559,6 +1584,7 @@ export declare const User: {
                     IdentificationClass?: string | undefined;
                     IdentificationNumber?: string | undefined;
                 }[] | undefined;
+                InquiryID?: string | undefined;
             } | undefined;
         } & {
             UserID?: string | undefined;
@@ -1720,6 +1746,7 @@ export declare const User: {
                     IdentificationClass?: string | undefined;
                     IdentificationNumber?: string | undefined;
                 }[] | undefined;
+                InquiryID?: string | undefined;
             } & {
                 Birthdate?: string | undefined;
                 PhoneNumber?: string | undefined;
@@ -1748,6 +1775,7 @@ export declare const User: {
                     IdentificationClass?: string | undefined;
                     IdentificationNumber?: string | undefined;
                 }[]>]: never; }) | undefined;
+                InquiryID?: string | undefined;
             } & { [K_33 in Exclude<keyof I_1["User"]["KYCDetails"], keyof UserKYCDetails>]: never; }) | undefined;
         } & { [K_34 in Exclude<keyof I_1["User"], keyof UserDetails>]: never; }) | undefined;
         MetaData?: ({
@@ -1928,6 +1956,7 @@ export declare const UserList: {
                         IdentificationClass?: string | undefined;
                         IdentificationNumber?: string | undefined;
                     }[] | undefined;
+                    InquiryID?: string | undefined;
                 } | undefined;
             } | undefined;
             MetaData?: {
@@ -2026,6 +2055,7 @@ export declare const UserList: {
                         IdentificationClass?: string | undefined;
                         IdentificationNumber?: string | undefined;
                     }[] | undefined;
+                    InquiryID?: string | undefined;
                 } | undefined;
             } | undefined;
             MetaData?: {
@@ -2121,6 +2151,7 @@ export declare const UserList: {
                         IdentificationClass?: string | undefined;
                         IdentificationNumber?: string | undefined;
                     }[] | undefined;
+                    InquiryID?: string | undefined;
                 } | undefined;
             } | undefined;
             MetaData?: {
@@ -2216,6 +2247,7 @@ export declare const UserList: {
                         IdentificationClass?: string | undefined;
                         IdentificationNumber?: string | undefined;
                     }[] | undefined;
+                    InquiryID?: string | undefined;
                 } | undefined;
             } & {
                 UserID?: string | undefined;
@@ -2377,6 +2409,7 @@ export declare const UserList: {
                         IdentificationClass?: string | undefined;
                         IdentificationNumber?: string | undefined;
                     }[] | undefined;
+                    InquiryID?: string | undefined;
                 } & {
                     Birthdate?: string | undefined;
                     PhoneNumber?: string | undefined;
@@ -2405,6 +2438,7 @@ export declare const UserList: {
                         IdentificationClass?: string | undefined;
                         IdentificationNumber?: string | undefined;
                     }[]>]: never; }) | undefined;
+                    InquiryID?: string | undefined;
                 } & { [K_14 in Exclude<keyof I["Users"][number]["User"]["KYCDetails"], keyof UserKYCDetails>]: never; }) | undefined;
             } & { [K_15 in Exclude<keyof I["Users"][number]["User"], keyof UserDetails>]: never; }) | undefined;
             MetaData?: ({
@@ -2509,6 +2543,7 @@ export declare const UserList: {
                         IdentificationClass?: string | undefined;
                         IdentificationNumber?: string | undefined;
                     }[] | undefined;
+                    InquiryID?: string | undefined;
                 } | undefined;
             } | undefined;
             MetaData?: {
@@ -2608,6 +2643,7 @@ export declare const UserList: {
                         IdentificationClass?: string | undefined;
                         IdentificationNumber?: string | undefined;
                     }[] | undefined;
+                    InquiryID?: string | undefined;
                 } | undefined;
             } | undefined;
             MetaData?: {
@@ -2706,6 +2742,7 @@ export declare const UserList: {
                         IdentificationClass?: string | undefined;
                         IdentificationNumber?: string | undefined;
                     }[] | undefined;
+                    InquiryID?: string | undefined;
                 } | undefined;
             } | undefined;
             MetaData?: {
@@ -2801,6 +2838,7 @@ export declare const UserList: {
                         IdentificationClass?: string | undefined;
                         IdentificationNumber?: string | undefined;
                     }[] | undefined;
+                    InquiryID?: string | undefined;
                 } | undefined;
             } | undefined;
             MetaData?: {
@@ -2896,6 +2934,7 @@ export declare const UserList: {
                         IdentificationClass?: string | undefined;
                         IdentificationNumber?: string | undefined;
                     }[] | undefined;
+                    InquiryID?: string | undefined;
                 } | undefined;
             } & {
                 UserID?: string | undefined;
@@ -3057,6 +3096,7 @@ export declare const UserList: {
                         IdentificationClass?: string | undefined;
                         IdentificationNumber?: string | undefined;
                     }[] | undefined;
+                    InquiryID?: string | undefined;
                 } & {
                     Birthdate?: string | undefined;
                     PhoneNumber?: string | undefined;
@@ -3085,6 +3125,7 @@ export declare const UserList: {
                         IdentificationClass?: string | undefined;
                         IdentificationNumber?: string | undefined;
                     }[]>]: never; }) | undefined;
+                    InquiryID?: string | undefined;
                 } & { [K_35 in Exclude<keyof I_1["Users"][number]["User"]["KYCDetails"], keyof UserKYCDetails>]: never; }) | undefined;
             } & { [K_36 in Exclude<keyof I_1["Users"][number]["User"], keyof UserDetails>]: never; }) | undefined;
             MetaData?: ({
@@ -3189,6 +3230,7 @@ export declare const UserList: {
                         IdentificationClass?: string | undefined;
                         IdentificationNumber?: string | undefined;
                     }[] | undefined;
+                    InquiryID?: string | undefined;
                 } | undefined;
             } | undefined;
             MetaData?: {
@@ -3261,6 +3303,46 @@ export declare const StatusMessage: {
             Reason?: string | undefined;
         } & { [K_2 in Exclude<keyof I_1["Audit"], keyof Audit>]: never; }) | undefined;
     } & { [K_3 in Exclude<keyof I_1, keyof StatusMessage>]: never; }>(object: I_1): StatusMessage;
+};
+export declare const Filter: {
+    encode(message: Filter, writer?: _m0.Writer): _m0.Writer;
+    decode(input: _m0.Reader | Uint8Array, length?: number): Filter;
+    fromJSON(object: any): Filter;
+    toJSON(message: Filter): unknown;
+    create<I extends {
+        UserIDs?: string[] | undefined;
+        Network?: Network | undefined;
+        OrganizationID?: string | undefined;
+        Offset?: number | undefined;
+        Limit?: number | undefined;
+        InquiryID?: string | undefined;
+        Status?: UserStatus | undefined;
+    } & {
+        UserIDs?: (string[] & string[] & { [K in Exclude<keyof I["UserIDs"], keyof string[]>]: never; }) | undefined;
+        Network?: Network | undefined;
+        OrganizationID?: string | undefined;
+        Offset?: number | undefined;
+        Limit?: number | undefined;
+        InquiryID?: string | undefined;
+        Status?: UserStatus | undefined;
+    } & { [K_1 in Exclude<keyof I, keyof Filter>]: never; }>(base?: I | undefined): Filter;
+    fromPartial<I_1 extends {
+        UserIDs?: string[] | undefined;
+        Network?: Network | undefined;
+        OrganizationID?: string | undefined;
+        Offset?: number | undefined;
+        Limit?: number | undefined;
+        InquiryID?: string | undefined;
+        Status?: UserStatus | undefined;
+    } & {
+        UserIDs?: (string[] & string[] & { [K_2 in Exclude<keyof I_1["UserIDs"], keyof string[]>]: never; }) | undefined;
+        Network?: Network | undefined;
+        OrganizationID?: string | undefined;
+        Offset?: number | undefined;
+        Limit?: number | undefined;
+        InquiryID?: string | undefined;
+        Status?: UserStatus | undefined;
+    } & { [K_3 in Exclude<keyof I_1, keyof Filter>]: never; }>(object: I_1): Filter;
 };
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 export type DeepPartial<T> = T extends Builtin ? T : T extends globalThis.Array<infer U> ? globalThis.Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? {

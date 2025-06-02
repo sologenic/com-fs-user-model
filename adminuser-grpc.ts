@@ -20,17 +20,9 @@ import {
 import _m0 from "protobufjs/minimal";
 import { Empty } from "./google/protobuf/empty";
 import { Network, networkFromJSON, networkToJSON } from "./sologenic/com-fs-utils-lib/models/metadata/metadata";
-import { StatusMessage, User, UserID, UserList } from "./user";
+import { Filter, StatusMessage, User, UserID, UserList } from "./user";
 
 export const protobufPackage = "user";
-
-export interface Filter {
-  UserIDs: string[];
-  Network?: Network | undefined;
-  OrganizationID: string;
-  Offset?: number | undefined;
-  Limit?: number | undefined;
-}
 
 export interface AuditFilter {
   UserID?: string | undefined;
@@ -40,125 +32,6 @@ export interface AuditFilter {
   Limit?: number | undefined;
   Offset?: number | undefined;
 }
-
-function createBaseFilter(): Filter {
-  return { UserIDs: [], Network: undefined, OrganizationID: "", Offset: undefined, Limit: undefined };
-}
-
-export const Filter = {
-  encode(message: Filter, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    for (const v of message.UserIDs) {
-      writer.uint32(10).string(v!);
-    }
-    if (message.Network !== undefined) {
-      writer.uint32(16).int32(message.Network);
-    }
-    if (message.OrganizationID !== "") {
-      writer.uint32(26).string(message.OrganizationID);
-    }
-    if (message.Offset !== undefined) {
-      writer.uint32(32).int32(message.Offset);
-    }
-    if (message.Limit !== undefined) {
-      writer.uint32(40).int32(message.Limit);
-    }
-    return writer;
-  },
-
-  decode(input: _m0.Reader | Uint8Array, length?: number): Filter {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseFilter();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1:
-          if (tag !== 10) {
-            break;
-          }
-
-          message.UserIDs.push(reader.string());
-          continue;
-        case 2:
-          if (tag !== 16) {
-            break;
-          }
-
-          message.Network = reader.int32() as any;
-          continue;
-        case 3:
-          if (tag !== 26) {
-            break;
-          }
-
-          message.OrganizationID = reader.string();
-          continue;
-        case 4:
-          if (tag !== 32) {
-            break;
-          }
-
-          message.Offset = reader.int32();
-          continue;
-        case 5:
-          if (tag !== 40) {
-            break;
-          }
-
-          message.Limit = reader.int32();
-          continue;
-      }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
-      }
-      reader.skipType(tag & 7);
-    }
-    return message;
-  },
-
-  fromJSON(object: any): Filter {
-    return {
-      UserIDs: globalThis.Array.isArray(object?.UserIDs) ? object.UserIDs.map((e: any) => globalThis.String(e)) : [],
-      Network: isSet(object.Network) ? networkFromJSON(object.Network) : undefined,
-      OrganizationID: isSet(object.OrganizationID) ? globalThis.String(object.OrganizationID) : "",
-      Offset: isSet(object.Offset) ? globalThis.Number(object.Offset) : undefined,
-      Limit: isSet(object.Limit) ? globalThis.Number(object.Limit) : undefined,
-    };
-  },
-
-  toJSON(message: Filter): unknown {
-    const obj: any = {};
-    if (message.UserIDs?.length) {
-      obj.UserIDs = message.UserIDs;
-    }
-    if (message.Network !== undefined) {
-      obj.Network = networkToJSON(message.Network);
-    }
-    if (message.OrganizationID !== "") {
-      obj.OrganizationID = message.OrganizationID;
-    }
-    if (message.Offset !== undefined) {
-      obj.Offset = Math.round(message.Offset);
-    }
-    if (message.Limit !== undefined) {
-      obj.Limit = Math.round(message.Limit);
-    }
-    return obj;
-  },
-
-  create<I extends Exact<DeepPartial<Filter>, I>>(base?: I): Filter {
-    return Filter.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<Filter>, I>>(object: I): Filter {
-    const message = createBaseFilter();
-    message.UserIDs = object.UserIDs?.map((e) => e) || [];
-    message.Network = object.Network ?? undefined;
-    message.OrganizationID = object.OrganizationID ?? "";
-    message.Offset = object.Offset ?? undefined;
-    message.Limit = object.Limit ?? undefined;
-    return message;
-  },
-};
 
 function createBaseAuditFilter(): AuditFilter {
   return {

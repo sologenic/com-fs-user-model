@@ -381,6 +381,7 @@ function createBaseUserKYCDetails() {
         CountryCode: "",
         SocialSecurityNumber: "",
         IdentificationNumbers: [],
+        InquiryID: "",
     };
 }
 export const UserKYCDetails = {
@@ -417,6 +418,9 @@ export const UserKYCDetails = {
         }
         for (const v of message.IdentificationNumbers) {
             IDNumber.encode(v, writer.uint32(90).fork()).ldelim();
+        }
+        if (message.InquiryID !== "") {
+            writer.uint32(98).string(message.InquiryID);
         }
         return writer;
     },
@@ -493,6 +497,12 @@ export const UserKYCDetails = {
                     }
                     message.IdentificationNumbers.push(IDNumber.decode(reader, reader.uint32()));
                     continue;
+                case 12:
+                    if (tag !== 98) {
+                        break;
+                    }
+                    message.InquiryID = reader.string();
+                    continue;
             }
             if ((tag & 7) === 4 || tag === 0) {
                 break;
@@ -516,6 +526,7 @@ export const UserKYCDetails = {
             IdentificationNumbers: globalThis.Array.isArray(object === null || object === void 0 ? void 0 : object.IdentificationNumbers)
                 ? object.IdentificationNumbers.map((e) => IDNumber.fromJSON(e))
                 : [],
+            InquiryID: isSet(object.InquiryID) ? globalThis.String(object.InquiryID) : "",
         };
     },
     toJSON(message) {
@@ -554,13 +565,16 @@ export const UserKYCDetails = {
         if ((_a = message.IdentificationNumbers) === null || _a === void 0 ? void 0 : _a.length) {
             obj.IdentificationNumbers = message.IdentificationNumbers.map((e) => IDNumber.toJSON(e));
         }
+        if (message.InquiryID !== "") {
+            obj.InquiryID = message.InquiryID;
+        }
         return obj;
     },
     create(base) {
         return UserKYCDetails.fromPartial(base !== null && base !== void 0 ? base : {});
     },
     fromPartial(object) {
-        var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l;
+        var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m;
         const message = createBaseUserKYCDetails();
         message.Birthdate = (_a = object.Birthdate) !== null && _a !== void 0 ? _a : "";
         message.PhoneNumber = (_b = object.PhoneNumber) !== null && _b !== void 0 ? _b : "";
@@ -573,6 +587,7 @@ export const UserKYCDetails = {
         message.CountryCode = (_j = object.CountryCode) !== null && _j !== void 0 ? _j : "";
         message.SocialSecurityNumber = (_k = object.SocialSecurityNumber) !== null && _k !== void 0 ? _k : "";
         message.IdentificationNumbers = ((_l = object.IdentificationNumbers) === null || _l === void 0 ? void 0 : _l.map((e) => IDNumber.fromPartial(e))) || [];
+        message.InquiryID = (_m = object.InquiryID) !== null && _m !== void 0 ? _m : "";
         return message;
     },
 };
@@ -1752,6 +1767,152 @@ export const StatusMessage = {
         message.Status = (_c = object.Status) !== null && _c !== void 0 ? _c : 0;
         message.Network = (_d = object.Network) !== null && _d !== void 0 ? _d : undefined;
         message.Audit = (object.Audit !== undefined && object.Audit !== null) ? Audit.fromPartial(object.Audit) : undefined;
+        return message;
+    },
+};
+function createBaseFilter() {
+    return {
+        UserIDs: [],
+        Network: undefined,
+        OrganizationID: "",
+        Offset: undefined,
+        Limit: undefined,
+        InquiryID: undefined,
+        Status: undefined,
+    };
+}
+export const Filter = {
+    encode(message, writer = _m0.Writer.create()) {
+        for (const v of message.UserIDs) {
+            writer.uint32(10).string(v);
+        }
+        if (message.Network !== undefined) {
+            writer.uint32(16).int32(message.Network);
+        }
+        if (message.OrganizationID !== "") {
+            writer.uint32(26).string(message.OrganizationID);
+        }
+        if (message.Offset !== undefined) {
+            writer.uint32(32).int32(message.Offset);
+        }
+        if (message.Limit !== undefined) {
+            writer.uint32(40).int32(message.Limit);
+        }
+        if (message.InquiryID !== undefined) {
+            writer.uint32(50).string(message.InquiryID);
+        }
+        if (message.Status !== undefined) {
+            writer.uint32(56).int32(message.Status);
+        }
+        return writer;
+    },
+    decode(input, length) {
+        const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+        let end = length === undefined ? reader.len : reader.pos + length;
+        const message = createBaseFilter();
+        while (reader.pos < end) {
+            const tag = reader.uint32();
+            switch (tag >>> 3) {
+                case 1:
+                    if (tag !== 10) {
+                        break;
+                    }
+                    message.UserIDs.push(reader.string());
+                    continue;
+                case 2:
+                    if (tag !== 16) {
+                        break;
+                    }
+                    message.Network = reader.int32();
+                    continue;
+                case 3:
+                    if (tag !== 26) {
+                        break;
+                    }
+                    message.OrganizationID = reader.string();
+                    continue;
+                case 4:
+                    if (tag !== 32) {
+                        break;
+                    }
+                    message.Offset = reader.int32();
+                    continue;
+                case 5:
+                    if (tag !== 40) {
+                        break;
+                    }
+                    message.Limit = reader.int32();
+                    continue;
+                case 6:
+                    if (tag !== 50) {
+                        break;
+                    }
+                    message.InquiryID = reader.string();
+                    continue;
+                case 7:
+                    if (tag !== 56) {
+                        break;
+                    }
+                    message.Status = reader.int32();
+                    continue;
+            }
+            if ((tag & 7) === 4 || tag === 0) {
+                break;
+            }
+            reader.skipType(tag & 7);
+        }
+        return message;
+    },
+    fromJSON(object) {
+        return {
+            UserIDs: globalThis.Array.isArray(object === null || object === void 0 ? void 0 : object.UserIDs) ? object.UserIDs.map((e) => globalThis.String(e)) : [],
+            Network: isSet(object.Network) ? networkFromJSON(object.Network) : undefined,
+            OrganizationID: isSet(object.OrganizationID) ? globalThis.String(object.OrganizationID) : "",
+            Offset: isSet(object.Offset) ? globalThis.Number(object.Offset) : undefined,
+            Limit: isSet(object.Limit) ? globalThis.Number(object.Limit) : undefined,
+            InquiryID: isSet(object.InquiryID) ? globalThis.String(object.InquiryID) : undefined,
+            Status: isSet(object.Status) ? userStatusFromJSON(object.Status) : undefined,
+        };
+    },
+    toJSON(message) {
+        var _a;
+        const obj = {};
+        if ((_a = message.UserIDs) === null || _a === void 0 ? void 0 : _a.length) {
+            obj.UserIDs = message.UserIDs;
+        }
+        if (message.Network !== undefined) {
+            obj.Network = networkToJSON(message.Network);
+        }
+        if (message.OrganizationID !== "") {
+            obj.OrganizationID = message.OrganizationID;
+        }
+        if (message.Offset !== undefined) {
+            obj.Offset = Math.round(message.Offset);
+        }
+        if (message.Limit !== undefined) {
+            obj.Limit = Math.round(message.Limit);
+        }
+        if (message.InquiryID !== undefined) {
+            obj.InquiryID = message.InquiryID;
+        }
+        if (message.Status !== undefined) {
+            obj.Status = userStatusToJSON(message.Status);
+        }
+        return obj;
+    },
+    create(base) {
+        return Filter.fromPartial(base !== null && base !== void 0 ? base : {});
+    },
+    fromPartial(object) {
+        var _a, _b, _c, _d, _e, _f, _g;
+        const message = createBaseFilter();
+        message.UserIDs = ((_a = object.UserIDs) === null || _a === void 0 ? void 0 : _a.map((e) => e)) || [];
+        message.Network = (_b = object.Network) !== null && _b !== void 0 ? _b : undefined;
+        message.OrganizationID = (_c = object.OrganizationID) !== null && _c !== void 0 ? _c : "";
+        message.Offset = (_d = object.Offset) !== null && _d !== void 0 ? _d : undefined;
+        message.Limit = (_e = object.Limit) !== null && _e !== void 0 ? _e : undefined;
+        message.InquiryID = (_f = object.InquiryID) !== null && _f !== void 0 ? _f : undefined;
+        message.Status = (_g = object.Status) !== null && _g !== void 0 ? _g : undefined;
         return message;
     },
 };

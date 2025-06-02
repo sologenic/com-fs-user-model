@@ -323,6 +323,7 @@ export interface UserKYCDetails {
   CountryCode: string;
   SocialSecurityNumber: string;
   IdentificationNumbers: IDNumber[];
+  InquiryID: string;
 }
 
 export interface UserDetails {
@@ -421,6 +422,16 @@ export interface StatusMessage {
   Status: UserStatus;
   Network?: Network | undefined;
   Audit: Audit | undefined;
+}
+
+export interface Filter {
+  UserIDs: string[];
+  Network?: Network | undefined;
+  OrganizationID: string;
+  Offset?: number | undefined;
+  Limit?: number | undefined;
+  InquiryID?: string | undefined;
+  Status?: UserStatus | undefined;
 }
 
 function createBaseIDNumber(): IDNumber {
@@ -525,6 +536,7 @@ function createBaseUserKYCDetails(): UserKYCDetails {
     CountryCode: "",
     SocialSecurityNumber: "",
     IdentificationNumbers: [],
+    InquiryID: "",
   };
 }
 
@@ -562,6 +574,9 @@ export const UserKYCDetails = {
     }
     for (const v of message.IdentificationNumbers) {
       IDNumber.encode(v!, writer.uint32(90).fork()).ldelim();
+    }
+    if (message.InquiryID !== "") {
+      writer.uint32(98).string(message.InquiryID);
     }
     return writer;
   },
@@ -650,6 +665,13 @@ export const UserKYCDetails = {
 
           message.IdentificationNumbers.push(IDNumber.decode(reader, reader.uint32()));
           continue;
+        case 12:
+          if (tag !== 98) {
+            break;
+          }
+
+          message.InquiryID = reader.string();
+          continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -674,6 +696,7 @@ export const UserKYCDetails = {
       IdentificationNumbers: globalThis.Array.isArray(object?.IdentificationNumbers)
         ? object.IdentificationNumbers.map((e: any) => IDNumber.fromJSON(e))
         : [],
+      InquiryID: isSet(object.InquiryID) ? globalThis.String(object.InquiryID) : "",
     };
   },
 
@@ -712,6 +735,9 @@ export const UserKYCDetails = {
     if (message.IdentificationNumbers?.length) {
       obj.IdentificationNumbers = message.IdentificationNumbers.map((e) => IDNumber.toJSON(e));
     }
+    if (message.InquiryID !== "") {
+      obj.InquiryID = message.InquiryID;
+    }
     return obj;
   },
 
@@ -731,6 +757,7 @@ export const UserKYCDetails = {
     message.CountryCode = object.CountryCode ?? "";
     message.SocialSecurityNumber = object.SocialSecurityNumber ?? "";
     message.IdentificationNumbers = object.IdentificationNumbers?.map((e) => IDNumber.fromPartial(e)) || [];
+    message.InquiryID = object.InquiryID ?? "";
     return message;
   },
 };
@@ -2012,6 +2039,163 @@ export const StatusMessage = {
     message.Status = object.Status ?? 0;
     message.Network = object.Network ?? undefined;
     message.Audit = (object.Audit !== undefined && object.Audit !== null) ? Audit.fromPartial(object.Audit) : undefined;
+    return message;
+  },
+};
+
+function createBaseFilter(): Filter {
+  return {
+    UserIDs: [],
+    Network: undefined,
+    OrganizationID: "",
+    Offset: undefined,
+    Limit: undefined,
+    InquiryID: undefined,
+    Status: undefined,
+  };
+}
+
+export const Filter = {
+  encode(message: Filter, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    for (const v of message.UserIDs) {
+      writer.uint32(10).string(v!);
+    }
+    if (message.Network !== undefined) {
+      writer.uint32(16).int32(message.Network);
+    }
+    if (message.OrganizationID !== "") {
+      writer.uint32(26).string(message.OrganizationID);
+    }
+    if (message.Offset !== undefined) {
+      writer.uint32(32).int32(message.Offset);
+    }
+    if (message.Limit !== undefined) {
+      writer.uint32(40).int32(message.Limit);
+    }
+    if (message.InquiryID !== undefined) {
+      writer.uint32(50).string(message.InquiryID);
+    }
+    if (message.Status !== undefined) {
+      writer.uint32(56).int32(message.Status);
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): Filter {
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseFilter();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          if (tag !== 10) {
+            break;
+          }
+
+          message.UserIDs.push(reader.string());
+          continue;
+        case 2:
+          if (tag !== 16) {
+            break;
+          }
+
+          message.Network = reader.int32() as any;
+          continue;
+        case 3:
+          if (tag !== 26) {
+            break;
+          }
+
+          message.OrganizationID = reader.string();
+          continue;
+        case 4:
+          if (tag !== 32) {
+            break;
+          }
+
+          message.Offset = reader.int32();
+          continue;
+        case 5:
+          if (tag !== 40) {
+            break;
+          }
+
+          message.Limit = reader.int32();
+          continue;
+        case 6:
+          if (tag !== 50) {
+            break;
+          }
+
+          message.InquiryID = reader.string();
+          continue;
+        case 7:
+          if (tag !== 56) {
+            break;
+          }
+
+          message.Status = reader.int32() as any;
+          continue;
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): Filter {
+    return {
+      UserIDs: globalThis.Array.isArray(object?.UserIDs) ? object.UserIDs.map((e: any) => globalThis.String(e)) : [],
+      Network: isSet(object.Network) ? networkFromJSON(object.Network) : undefined,
+      OrganizationID: isSet(object.OrganizationID) ? globalThis.String(object.OrganizationID) : "",
+      Offset: isSet(object.Offset) ? globalThis.Number(object.Offset) : undefined,
+      Limit: isSet(object.Limit) ? globalThis.Number(object.Limit) : undefined,
+      InquiryID: isSet(object.InquiryID) ? globalThis.String(object.InquiryID) : undefined,
+      Status: isSet(object.Status) ? userStatusFromJSON(object.Status) : undefined,
+    };
+  },
+
+  toJSON(message: Filter): unknown {
+    const obj: any = {};
+    if (message.UserIDs?.length) {
+      obj.UserIDs = message.UserIDs;
+    }
+    if (message.Network !== undefined) {
+      obj.Network = networkToJSON(message.Network);
+    }
+    if (message.OrganizationID !== "") {
+      obj.OrganizationID = message.OrganizationID;
+    }
+    if (message.Offset !== undefined) {
+      obj.Offset = Math.round(message.Offset);
+    }
+    if (message.Limit !== undefined) {
+      obj.Limit = Math.round(message.Limit);
+    }
+    if (message.InquiryID !== undefined) {
+      obj.InquiryID = message.InquiryID;
+    }
+    if (message.Status !== undefined) {
+      obj.Status = userStatusToJSON(message.Status);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<Filter>, I>>(base?: I): Filter {
+    return Filter.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<Filter>, I>>(object: I): Filter {
+    const message = createBaseFilter();
+    message.UserIDs = object.UserIDs?.map((e) => e) || [];
+    message.Network = object.Network ?? undefined;
+    message.OrganizationID = object.OrganizationID ?? "";
+    message.Offset = object.Offset ?? undefined;
+    message.Limit = object.Limit ?? undefined;
+    message.InquiryID = object.InquiryID ?? undefined;
+    message.Status = object.Status ?? undefined;
     return message;
   },
 };

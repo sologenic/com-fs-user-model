@@ -23,82 +23,6 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-type Filter struct {
-	state          protoimpl.MessageState `protogen:"open.v1"`
-	UserIDs        []string               `protobuf:"bytes,1,rep,name=UserIDs,proto3" json:"UserIDs,omitempty"`
-	Network        *metadata.Network      `protobuf:"varint,2,opt,name=Network,proto3,enum=metadata.Network,oneof" json:"Network,omitempty"`
-	OrganizationID string                 `protobuf:"bytes,3,opt,name=OrganizationID,proto3" json:"OrganizationID,omitempty"`
-	Offset         *int32                 `protobuf:"varint,4,opt,name=Offset,proto3,oneof" json:"Offset,omitempty"`
-	Limit          *int32                 `protobuf:"varint,5,opt,name=Limit,proto3,oneof" json:"Limit,omitempty"`
-	unknownFields  protoimpl.UnknownFields
-	sizeCache      protoimpl.SizeCache
-}
-
-func (x *Filter) Reset() {
-	*x = Filter{}
-	mi := &file_adminuser_grpc_proto_msgTypes[0]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *Filter) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*Filter) ProtoMessage() {}
-
-func (x *Filter) ProtoReflect() protoreflect.Message {
-	mi := &file_adminuser_grpc_proto_msgTypes[0]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use Filter.ProtoReflect.Descriptor instead.
-func (*Filter) Descriptor() ([]byte, []int) {
-	return file_adminuser_grpc_proto_rawDescGZIP(), []int{0}
-}
-
-func (x *Filter) GetUserIDs() []string {
-	if x != nil {
-		return x.UserIDs
-	}
-	return nil
-}
-
-func (x *Filter) GetNetwork() metadata.Network {
-	if x != nil && x.Network != nil {
-		return *x.Network
-	}
-	return metadata.Network(0)
-}
-
-func (x *Filter) GetOrganizationID() string {
-	if x != nil {
-		return x.OrganizationID
-	}
-	return ""
-}
-
-func (x *Filter) GetOffset() int32 {
-	if x != nil && x.Offset != nil {
-		return *x.Offset
-	}
-	return 0
-}
-
-func (x *Filter) GetLimit() int32 {
-	if x != nil && x.Limit != nil {
-		return *x.Limit
-	}
-	return 0
-}
-
 type AuditFilter struct {
 	state          protoimpl.MessageState `protogen:"open.v1"`
 	UserID         *string                `protobuf:"bytes,1,opt,name=UserID,proto3,oneof" json:"UserID,omitempty"`
@@ -113,7 +37,7 @@ type AuditFilter struct {
 
 func (x *AuditFilter) Reset() {
 	*x = AuditFilter{}
-	mi := &file_adminuser_grpc_proto_msgTypes[1]
+	mi := &file_adminuser_grpc_proto_msgTypes[0]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -125,7 +49,7 @@ func (x *AuditFilter) String() string {
 func (*AuditFilter) ProtoMessage() {}
 
 func (x *AuditFilter) ProtoReflect() protoreflect.Message {
-	mi := &file_adminuser_grpc_proto_msgTypes[1]
+	mi := &file_adminuser_grpc_proto_msgTypes[0]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -138,7 +62,7 @@ func (x *AuditFilter) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AuditFilter.ProtoReflect.Descriptor instead.
 func (*AuditFilter) Descriptor() ([]byte, []int) {
-	return file_adminuser_grpc_proto_rawDescGZIP(), []int{1}
+	return file_adminuser_grpc_proto_rawDescGZIP(), []int{0}
 }
 
 func (x *AuditFilter) GetUserID() string {
@@ -188,17 +112,7 @@ var File_adminuser_grpc_proto protoreflect.FileDescriptor
 const file_adminuser_grpc_proto_rawDesc = "" +
 	"\n" +
 	"\x14adminuser-grpc.proto\x12\x04user\x1a\x1bgoogle/protobuf/empty.proto\x1a9sologenic/com-fs-utils-lib/models/metadata/metadata.proto\x1a\n" +
-	"user.proto\"\xd5\x01\n" +
-	"\x06Filter\x12\x18\n" +
-	"\aUserIDs\x18\x01 \x03(\tR\aUserIDs\x120\n" +
-	"\aNetwork\x18\x02 \x01(\x0e2\x11.metadata.NetworkH\x00R\aNetwork\x88\x01\x01\x12&\n" +
-	"\x0eOrganizationID\x18\x03 \x01(\tR\x0eOrganizationID\x12\x1b\n" +
-	"\x06Offset\x18\x04 \x01(\x05H\x01R\x06Offset\x88\x01\x01\x12\x19\n" +
-	"\x05Limit\x18\x05 \x01(\x05H\x02R\x05Limit\x88\x01\x01B\n" +
-	"\n" +
-	"\b_NetworkB\t\n" +
-	"\a_OffsetB\b\n" +
-	"\x06_Limit\"\xb1\x02\n" +
+	"user.proto\"\xb1\x02\n" +
 	"\vAuditFilter\x12\x1b\n" +
 	"\x06UserID\x18\x01 \x01(\tH\x00R\x06UserID\x88\x01\x01\x12!\n" +
 	"\tChangedBy\x18\x02 \x01(\tH\x01R\tChangedBy\x88\x01\x01\x120\n" +
@@ -235,35 +149,34 @@ func file_adminuser_grpc_proto_rawDescGZIP() []byte {
 	return file_adminuser_grpc_proto_rawDescData
 }
 
-var file_adminuser_grpc_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
+var file_adminuser_grpc_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
 var file_adminuser_grpc_proto_goTypes = []any{
-	(*Filter)(nil),        // 0: user.Filter
-	(*AuditFilter)(nil),   // 1: user.AuditFilter
-	(metadata.Network)(0), // 2: metadata.Network
-	(*UserID)(nil),        // 3: user.UserID
+	(*AuditFilter)(nil),   // 0: user.AuditFilter
+	(metadata.Network)(0), // 1: metadata.Network
+	(*UserID)(nil),        // 2: user.UserID
+	(*Filter)(nil),        // 3: user.Filter
 	(*User)(nil),          // 4: user.User
 	(*StatusMessage)(nil), // 5: user.StatusMessage
 	(*UserList)(nil),      // 6: user.UserList
 	(*emptypb.Empty)(nil), // 7: google.protobuf.Empty
 }
 var file_adminuser_grpc_proto_depIdxs = []int32{
-	2, // 0: user.Filter.Network:type_name -> metadata.Network
-	2, // 1: user.AuditFilter.Network:type_name -> metadata.Network
-	3, // 2: user.AdminUserService.Get:input_type -> user.UserID
-	0, // 3: user.AdminUserService.List:input_type -> user.Filter
-	4, // 4: user.AdminUserService.Update:input_type -> user.User
-	5, // 5: user.AdminUserService.SetStatus:input_type -> user.StatusMessage
-	1, // 6: user.AdminUserService.ListAudit:input_type -> user.AuditFilter
-	4, // 7: user.AdminUserService.Get:output_type -> user.User
-	6, // 8: user.AdminUserService.List:output_type -> user.UserList
-	3, // 9: user.AdminUserService.Update:output_type -> user.UserID
-	7, // 10: user.AdminUserService.SetStatus:output_type -> google.protobuf.Empty
-	6, // 11: user.AdminUserService.ListAudit:output_type -> user.UserList
-	7, // [7:12] is the sub-list for method output_type
-	2, // [2:7] is the sub-list for method input_type
-	2, // [2:2] is the sub-list for extension type_name
-	2, // [2:2] is the sub-list for extension extendee
-	0, // [0:2] is the sub-list for field type_name
+	1, // 0: user.AuditFilter.Network:type_name -> metadata.Network
+	2, // 1: user.AdminUserService.Get:input_type -> user.UserID
+	3, // 2: user.AdminUserService.List:input_type -> user.Filter
+	4, // 3: user.AdminUserService.Update:input_type -> user.User
+	5, // 4: user.AdminUserService.SetStatus:input_type -> user.StatusMessage
+	0, // 5: user.AdminUserService.ListAudit:input_type -> user.AuditFilter
+	4, // 6: user.AdminUserService.Get:output_type -> user.User
+	6, // 7: user.AdminUserService.List:output_type -> user.UserList
+	2, // 8: user.AdminUserService.Update:output_type -> user.UserID
+	7, // 9: user.AdminUserService.SetStatus:output_type -> google.protobuf.Empty
+	6, // 10: user.AdminUserService.ListAudit:output_type -> user.UserList
+	6, // [6:11] is the sub-list for method output_type
+	1, // [1:6] is the sub-list for method input_type
+	1, // [1:1] is the sub-list for extension type_name
+	1, // [1:1] is the sub-list for extension extendee
+	0, // [0:1] is the sub-list for field type_name
 }
 
 func init() { file_adminuser_grpc_proto_init() }
@@ -273,14 +186,13 @@ func file_adminuser_grpc_proto_init() {
 	}
 	file_user_proto_init()
 	file_adminuser_grpc_proto_msgTypes[0].OneofWrappers = []any{}
-	file_adminuser_grpc_proto_msgTypes[1].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_adminuser_grpc_proto_rawDesc), len(file_adminuser_grpc_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   2,
+			NumMessages:   1,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
