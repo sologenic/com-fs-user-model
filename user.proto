@@ -11,6 +11,30 @@ import "sologenic/com-fs-utils-lib/models/role/role.proto";
 import "sologenic/com-fs-utils-lib/models/language/language.proto";
 import "sologenic/com-fs-trade-profile-model/tradeprofile.proto";
 
+
+message IDNumber {
+    string IssuingCountry = 1;
+    string IdentificationClass = 2;
+    string IdentificationNumber = 3;
+
+}
+
+
+message UserKYCDetails {
+    string Birthdate = 1;
+    string PhoneNumber = 2;
+    string EmailAddress = 3;
+    string AddressStreet1 = 4;
+    string AddressStreet2 = 5;
+    string AddressCity = 6;
+    string AddressSubdivision = 7;
+    string AddressPostalCode = 8;
+    string CountryCode = 9;
+    string SocialSecurityNumber = 10;
+    repeated IDNumber IdentificationNumbers = 11;
+}
+
+
 message UserDetails {
     string UserID = 1; // email address used for firebase authentication
     string FirstName = 2; 
@@ -28,7 +52,9 @@ message UserDetails {
     optional Employment Employment = 14;
     role.Role Role = 15; // A retail user will always have a role of "NORMAL_USER"
     tradeprofile.TradeProfileDetails TradeProfile = 16; // Trade profile details
-    repeated string KycInquiries = 17; // Array of inquiry ID's 
+    repeated string KYCInquiries = 17; // Array of inquiry ID's 
+    UserKYCDetails KYCDetails = 18;
+    
 }
 
 // TODO: to be verified when more information is available

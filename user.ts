@@ -305,6 +305,26 @@ export function socialTypeToJSON(object: SocialType): string {
   }
 }
 
+export interface IDNumber {
+  IssuingCountry: string;
+  IdentificationClass: string;
+  IdentificationNumber: string;
+}
+
+export interface UserKYCDetails {
+  Birthdate: string;
+  PhoneNumber: string;
+  EmailAddress: string;
+  AddressStreet1: string;
+  AddressStreet2: string;
+  AddressCity: string;
+  AddressSubdivision: string;
+  AddressPostalCode: string;
+  CountryCode: string;
+  SocialSecurityNumber: string;
+  IdentificationNumbers: IDNumber[];
+}
+
 export interface UserDetails {
   /** email address used for firebase authentication */
   UserID: string;
@@ -333,7 +353,8 @@ export interface UserDetails {
     | TradeProfileDetails
     | undefined;
   /** Array of inquiry ID's */
-  KycInquiries: string[];
+  KYCInquiries: string[];
+  KYCDetails: UserKYCDetails | undefined;
 }
 
 /** TODO: to be verified when more information is available */
@@ -402,6 +423,318 @@ export interface StatusMessage {
   Audit: Audit | undefined;
 }
 
+function createBaseIDNumber(): IDNumber {
+  return { IssuingCountry: "", IdentificationClass: "", IdentificationNumber: "" };
+}
+
+export const IDNumber = {
+  encode(message: IDNumber, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.IssuingCountry !== "") {
+      writer.uint32(10).string(message.IssuingCountry);
+    }
+    if (message.IdentificationClass !== "") {
+      writer.uint32(18).string(message.IdentificationClass);
+    }
+    if (message.IdentificationNumber !== "") {
+      writer.uint32(26).string(message.IdentificationNumber);
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): IDNumber {
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseIDNumber();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          if (tag !== 10) {
+            break;
+          }
+
+          message.IssuingCountry = reader.string();
+          continue;
+        case 2:
+          if (tag !== 18) {
+            break;
+          }
+
+          message.IdentificationClass = reader.string();
+          continue;
+        case 3:
+          if (tag !== 26) {
+            break;
+          }
+
+          message.IdentificationNumber = reader.string();
+          continue;
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): IDNumber {
+    return {
+      IssuingCountry: isSet(object.IssuingCountry) ? globalThis.String(object.IssuingCountry) : "",
+      IdentificationClass: isSet(object.IdentificationClass) ? globalThis.String(object.IdentificationClass) : "",
+      IdentificationNumber: isSet(object.IdentificationNumber) ? globalThis.String(object.IdentificationNumber) : "",
+    };
+  },
+
+  toJSON(message: IDNumber): unknown {
+    const obj: any = {};
+    if (message.IssuingCountry !== "") {
+      obj.IssuingCountry = message.IssuingCountry;
+    }
+    if (message.IdentificationClass !== "") {
+      obj.IdentificationClass = message.IdentificationClass;
+    }
+    if (message.IdentificationNumber !== "") {
+      obj.IdentificationNumber = message.IdentificationNumber;
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<IDNumber>, I>>(base?: I): IDNumber {
+    return IDNumber.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<IDNumber>, I>>(object: I): IDNumber {
+    const message = createBaseIDNumber();
+    message.IssuingCountry = object.IssuingCountry ?? "";
+    message.IdentificationClass = object.IdentificationClass ?? "";
+    message.IdentificationNumber = object.IdentificationNumber ?? "";
+    return message;
+  },
+};
+
+function createBaseUserKYCDetails(): UserKYCDetails {
+  return {
+    Birthdate: "",
+    PhoneNumber: "",
+    EmailAddress: "",
+    AddressStreet1: "",
+    AddressStreet2: "",
+    AddressCity: "",
+    AddressSubdivision: "",
+    AddressPostalCode: "",
+    CountryCode: "",
+    SocialSecurityNumber: "",
+    IdentificationNumbers: [],
+  };
+}
+
+export const UserKYCDetails = {
+  encode(message: UserKYCDetails, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.Birthdate !== "") {
+      writer.uint32(10).string(message.Birthdate);
+    }
+    if (message.PhoneNumber !== "") {
+      writer.uint32(18).string(message.PhoneNumber);
+    }
+    if (message.EmailAddress !== "") {
+      writer.uint32(26).string(message.EmailAddress);
+    }
+    if (message.AddressStreet1 !== "") {
+      writer.uint32(34).string(message.AddressStreet1);
+    }
+    if (message.AddressStreet2 !== "") {
+      writer.uint32(42).string(message.AddressStreet2);
+    }
+    if (message.AddressCity !== "") {
+      writer.uint32(50).string(message.AddressCity);
+    }
+    if (message.AddressSubdivision !== "") {
+      writer.uint32(58).string(message.AddressSubdivision);
+    }
+    if (message.AddressPostalCode !== "") {
+      writer.uint32(66).string(message.AddressPostalCode);
+    }
+    if (message.CountryCode !== "") {
+      writer.uint32(74).string(message.CountryCode);
+    }
+    if (message.SocialSecurityNumber !== "") {
+      writer.uint32(82).string(message.SocialSecurityNumber);
+    }
+    for (const v of message.IdentificationNumbers) {
+      IDNumber.encode(v!, writer.uint32(90).fork()).ldelim();
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): UserKYCDetails {
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseUserKYCDetails();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          if (tag !== 10) {
+            break;
+          }
+
+          message.Birthdate = reader.string();
+          continue;
+        case 2:
+          if (tag !== 18) {
+            break;
+          }
+
+          message.PhoneNumber = reader.string();
+          continue;
+        case 3:
+          if (tag !== 26) {
+            break;
+          }
+
+          message.EmailAddress = reader.string();
+          continue;
+        case 4:
+          if (tag !== 34) {
+            break;
+          }
+
+          message.AddressStreet1 = reader.string();
+          continue;
+        case 5:
+          if (tag !== 42) {
+            break;
+          }
+
+          message.AddressStreet2 = reader.string();
+          continue;
+        case 6:
+          if (tag !== 50) {
+            break;
+          }
+
+          message.AddressCity = reader.string();
+          continue;
+        case 7:
+          if (tag !== 58) {
+            break;
+          }
+
+          message.AddressSubdivision = reader.string();
+          continue;
+        case 8:
+          if (tag !== 66) {
+            break;
+          }
+
+          message.AddressPostalCode = reader.string();
+          continue;
+        case 9:
+          if (tag !== 74) {
+            break;
+          }
+
+          message.CountryCode = reader.string();
+          continue;
+        case 10:
+          if (tag !== 82) {
+            break;
+          }
+
+          message.SocialSecurityNumber = reader.string();
+          continue;
+        case 11:
+          if (tag !== 90) {
+            break;
+          }
+
+          message.IdentificationNumbers.push(IDNumber.decode(reader, reader.uint32()));
+          continue;
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): UserKYCDetails {
+    return {
+      Birthdate: isSet(object.Birthdate) ? globalThis.String(object.Birthdate) : "",
+      PhoneNumber: isSet(object.PhoneNumber) ? globalThis.String(object.PhoneNumber) : "",
+      EmailAddress: isSet(object.EmailAddress) ? globalThis.String(object.EmailAddress) : "",
+      AddressStreet1: isSet(object.AddressStreet1) ? globalThis.String(object.AddressStreet1) : "",
+      AddressStreet2: isSet(object.AddressStreet2) ? globalThis.String(object.AddressStreet2) : "",
+      AddressCity: isSet(object.AddressCity) ? globalThis.String(object.AddressCity) : "",
+      AddressSubdivision: isSet(object.AddressSubdivision) ? globalThis.String(object.AddressSubdivision) : "",
+      AddressPostalCode: isSet(object.AddressPostalCode) ? globalThis.String(object.AddressPostalCode) : "",
+      CountryCode: isSet(object.CountryCode) ? globalThis.String(object.CountryCode) : "",
+      SocialSecurityNumber: isSet(object.SocialSecurityNumber) ? globalThis.String(object.SocialSecurityNumber) : "",
+      IdentificationNumbers: globalThis.Array.isArray(object?.IdentificationNumbers)
+        ? object.IdentificationNumbers.map((e: any) => IDNumber.fromJSON(e))
+        : [],
+    };
+  },
+
+  toJSON(message: UserKYCDetails): unknown {
+    const obj: any = {};
+    if (message.Birthdate !== "") {
+      obj.Birthdate = message.Birthdate;
+    }
+    if (message.PhoneNumber !== "") {
+      obj.PhoneNumber = message.PhoneNumber;
+    }
+    if (message.EmailAddress !== "") {
+      obj.EmailAddress = message.EmailAddress;
+    }
+    if (message.AddressStreet1 !== "") {
+      obj.AddressStreet1 = message.AddressStreet1;
+    }
+    if (message.AddressStreet2 !== "") {
+      obj.AddressStreet2 = message.AddressStreet2;
+    }
+    if (message.AddressCity !== "") {
+      obj.AddressCity = message.AddressCity;
+    }
+    if (message.AddressSubdivision !== "") {
+      obj.AddressSubdivision = message.AddressSubdivision;
+    }
+    if (message.AddressPostalCode !== "") {
+      obj.AddressPostalCode = message.AddressPostalCode;
+    }
+    if (message.CountryCode !== "") {
+      obj.CountryCode = message.CountryCode;
+    }
+    if (message.SocialSecurityNumber !== "") {
+      obj.SocialSecurityNumber = message.SocialSecurityNumber;
+    }
+    if (message.IdentificationNumbers?.length) {
+      obj.IdentificationNumbers = message.IdentificationNumbers.map((e) => IDNumber.toJSON(e));
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<UserKYCDetails>, I>>(base?: I): UserKYCDetails {
+    return UserKYCDetails.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<UserKYCDetails>, I>>(object: I): UserKYCDetails {
+    const message = createBaseUserKYCDetails();
+    message.Birthdate = object.Birthdate ?? "";
+    message.PhoneNumber = object.PhoneNumber ?? "";
+    message.EmailAddress = object.EmailAddress ?? "";
+    message.AddressStreet1 = object.AddressStreet1 ?? "";
+    message.AddressStreet2 = object.AddressStreet2 ?? "";
+    message.AddressCity = object.AddressCity ?? "";
+    message.AddressSubdivision = object.AddressSubdivision ?? "";
+    message.AddressPostalCode = object.AddressPostalCode ?? "";
+    message.CountryCode = object.CountryCode ?? "";
+    message.SocialSecurityNumber = object.SocialSecurityNumber ?? "";
+    message.IdentificationNumbers = object.IdentificationNumbers?.map((e) => IDNumber.fromPartial(e)) || [];
+    return message;
+  },
+};
+
 function createBaseUserDetails(): UserDetails {
   return {
     UserID: "",
@@ -420,7 +753,8 @@ function createBaseUserDetails(): UserDetails {
     Employment: undefined,
     Role: 0,
     TradeProfile: undefined,
-    KycInquiries: [],
+    KYCInquiries: [],
+    KYCDetails: undefined,
   };
 }
 
@@ -474,8 +808,11 @@ export const UserDetails = {
     if (message.TradeProfile !== undefined) {
       TradeProfileDetails.encode(message.TradeProfile, writer.uint32(130).fork()).ldelim();
     }
-    for (const v of message.KycInquiries) {
+    for (const v of message.KYCInquiries) {
       writer.uint32(138).string(v!);
+    }
+    if (message.KYCDetails !== undefined) {
+      UserKYCDetails.encode(message.KYCDetails, writer.uint32(146).fork()).ldelim();
     }
     return writer;
   },
@@ -604,7 +941,14 @@ export const UserDetails = {
             break;
           }
 
-          message.KycInquiries.push(reader.string());
+          message.KYCInquiries.push(reader.string());
+          continue;
+        case 18:
+          if (tag !== 146) {
+            break;
+          }
+
+          message.KYCDetails = UserKYCDetails.decode(reader, reader.uint32());
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -633,9 +977,10 @@ export const UserDetails = {
       Employment: isSet(object.Employment) ? Employment.fromJSON(object.Employment) : undefined,
       Role: isSet(object.Role) ? roleFromJSON(object.Role) : 0,
       TradeProfile: isSet(object.TradeProfile) ? TradeProfileDetails.fromJSON(object.TradeProfile) : undefined,
-      KycInquiries: globalThis.Array.isArray(object?.KycInquiries)
-        ? object.KycInquiries.map((e: any) => globalThis.String(e))
+      KYCInquiries: globalThis.Array.isArray(object?.KYCInquiries)
+        ? object.KYCInquiries.map((e: any) => globalThis.String(e))
         : [],
+      KYCDetails: isSet(object.KYCDetails) ? UserKYCDetails.fromJSON(object.KYCDetails) : undefined,
     };
   },
 
@@ -689,8 +1034,11 @@ export const UserDetails = {
     if (message.TradeProfile !== undefined) {
       obj.TradeProfile = TradeProfileDetails.toJSON(message.TradeProfile);
     }
-    if (message.KycInquiries?.length) {
-      obj.KycInquiries = message.KycInquiries;
+    if (message.KYCInquiries?.length) {
+      obj.KYCInquiries = message.KYCInquiries;
+    }
+    if (message.KYCDetails !== undefined) {
+      obj.KYCDetails = UserKYCDetails.toJSON(message.KYCDetails);
     }
     return obj;
   },
@@ -720,7 +1068,10 @@ export const UserDetails = {
     message.TradeProfile = (object.TradeProfile !== undefined && object.TradeProfile !== null)
       ? TradeProfileDetails.fromPartial(object.TradeProfile)
       : undefined;
-    message.KycInquiries = object.KycInquiries?.map((e) => e) || [];
+    message.KYCInquiries = object.KYCInquiries?.map((e) => e) || [];
+    message.KYCDetails = (object.KYCDetails !== undefined && object.KYCDetails !== null)
+      ? UserKYCDetails.fromPartial(object.KYCDetails)
+      : undefined;
     return message;
   },
 };

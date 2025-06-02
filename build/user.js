@@ -287,6 +287,295 @@ export function socialTypeToJSON(object) {
             return "UNRECOGNIZED";
     }
 }
+function createBaseIDNumber() {
+    return { IssuingCountry: "", IdentificationClass: "", IdentificationNumber: "" };
+}
+export const IDNumber = {
+    encode(message, writer = _m0.Writer.create()) {
+        if (message.IssuingCountry !== "") {
+            writer.uint32(10).string(message.IssuingCountry);
+        }
+        if (message.IdentificationClass !== "") {
+            writer.uint32(18).string(message.IdentificationClass);
+        }
+        if (message.IdentificationNumber !== "") {
+            writer.uint32(26).string(message.IdentificationNumber);
+        }
+        return writer;
+    },
+    decode(input, length) {
+        const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+        let end = length === undefined ? reader.len : reader.pos + length;
+        const message = createBaseIDNumber();
+        while (reader.pos < end) {
+            const tag = reader.uint32();
+            switch (tag >>> 3) {
+                case 1:
+                    if (tag !== 10) {
+                        break;
+                    }
+                    message.IssuingCountry = reader.string();
+                    continue;
+                case 2:
+                    if (tag !== 18) {
+                        break;
+                    }
+                    message.IdentificationClass = reader.string();
+                    continue;
+                case 3:
+                    if (tag !== 26) {
+                        break;
+                    }
+                    message.IdentificationNumber = reader.string();
+                    continue;
+            }
+            if ((tag & 7) === 4 || tag === 0) {
+                break;
+            }
+            reader.skipType(tag & 7);
+        }
+        return message;
+    },
+    fromJSON(object) {
+        return {
+            IssuingCountry: isSet(object.IssuingCountry) ? globalThis.String(object.IssuingCountry) : "",
+            IdentificationClass: isSet(object.IdentificationClass) ? globalThis.String(object.IdentificationClass) : "",
+            IdentificationNumber: isSet(object.IdentificationNumber) ? globalThis.String(object.IdentificationNumber) : "",
+        };
+    },
+    toJSON(message) {
+        const obj = {};
+        if (message.IssuingCountry !== "") {
+            obj.IssuingCountry = message.IssuingCountry;
+        }
+        if (message.IdentificationClass !== "") {
+            obj.IdentificationClass = message.IdentificationClass;
+        }
+        if (message.IdentificationNumber !== "") {
+            obj.IdentificationNumber = message.IdentificationNumber;
+        }
+        return obj;
+    },
+    create(base) {
+        return IDNumber.fromPartial(base !== null && base !== void 0 ? base : {});
+    },
+    fromPartial(object) {
+        var _a, _b, _c;
+        const message = createBaseIDNumber();
+        message.IssuingCountry = (_a = object.IssuingCountry) !== null && _a !== void 0 ? _a : "";
+        message.IdentificationClass = (_b = object.IdentificationClass) !== null && _b !== void 0 ? _b : "";
+        message.IdentificationNumber = (_c = object.IdentificationNumber) !== null && _c !== void 0 ? _c : "";
+        return message;
+    },
+};
+function createBaseUserKYCDetails() {
+    return {
+        Birthdate: "",
+        PhoneNumber: "",
+        EmailAddress: "",
+        AddressStreet1: "",
+        AddressStreet2: "",
+        AddressCity: "",
+        AddressSubdivision: "",
+        AddressPostalCode: "",
+        CountryCode: "",
+        SocialSecurityNumber: "",
+        IdentificationNumbers: [],
+    };
+}
+export const UserKYCDetails = {
+    encode(message, writer = _m0.Writer.create()) {
+        if (message.Birthdate !== "") {
+            writer.uint32(10).string(message.Birthdate);
+        }
+        if (message.PhoneNumber !== "") {
+            writer.uint32(18).string(message.PhoneNumber);
+        }
+        if (message.EmailAddress !== "") {
+            writer.uint32(26).string(message.EmailAddress);
+        }
+        if (message.AddressStreet1 !== "") {
+            writer.uint32(34).string(message.AddressStreet1);
+        }
+        if (message.AddressStreet2 !== "") {
+            writer.uint32(42).string(message.AddressStreet2);
+        }
+        if (message.AddressCity !== "") {
+            writer.uint32(50).string(message.AddressCity);
+        }
+        if (message.AddressSubdivision !== "") {
+            writer.uint32(58).string(message.AddressSubdivision);
+        }
+        if (message.AddressPostalCode !== "") {
+            writer.uint32(66).string(message.AddressPostalCode);
+        }
+        if (message.CountryCode !== "") {
+            writer.uint32(74).string(message.CountryCode);
+        }
+        if (message.SocialSecurityNumber !== "") {
+            writer.uint32(82).string(message.SocialSecurityNumber);
+        }
+        for (const v of message.IdentificationNumbers) {
+            IDNumber.encode(v, writer.uint32(90).fork()).ldelim();
+        }
+        return writer;
+    },
+    decode(input, length) {
+        const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+        let end = length === undefined ? reader.len : reader.pos + length;
+        const message = createBaseUserKYCDetails();
+        while (reader.pos < end) {
+            const tag = reader.uint32();
+            switch (tag >>> 3) {
+                case 1:
+                    if (tag !== 10) {
+                        break;
+                    }
+                    message.Birthdate = reader.string();
+                    continue;
+                case 2:
+                    if (tag !== 18) {
+                        break;
+                    }
+                    message.PhoneNumber = reader.string();
+                    continue;
+                case 3:
+                    if (tag !== 26) {
+                        break;
+                    }
+                    message.EmailAddress = reader.string();
+                    continue;
+                case 4:
+                    if (tag !== 34) {
+                        break;
+                    }
+                    message.AddressStreet1 = reader.string();
+                    continue;
+                case 5:
+                    if (tag !== 42) {
+                        break;
+                    }
+                    message.AddressStreet2 = reader.string();
+                    continue;
+                case 6:
+                    if (tag !== 50) {
+                        break;
+                    }
+                    message.AddressCity = reader.string();
+                    continue;
+                case 7:
+                    if (tag !== 58) {
+                        break;
+                    }
+                    message.AddressSubdivision = reader.string();
+                    continue;
+                case 8:
+                    if (tag !== 66) {
+                        break;
+                    }
+                    message.AddressPostalCode = reader.string();
+                    continue;
+                case 9:
+                    if (tag !== 74) {
+                        break;
+                    }
+                    message.CountryCode = reader.string();
+                    continue;
+                case 10:
+                    if (tag !== 82) {
+                        break;
+                    }
+                    message.SocialSecurityNumber = reader.string();
+                    continue;
+                case 11:
+                    if (tag !== 90) {
+                        break;
+                    }
+                    message.IdentificationNumbers.push(IDNumber.decode(reader, reader.uint32()));
+                    continue;
+            }
+            if ((tag & 7) === 4 || tag === 0) {
+                break;
+            }
+            reader.skipType(tag & 7);
+        }
+        return message;
+    },
+    fromJSON(object) {
+        return {
+            Birthdate: isSet(object.Birthdate) ? globalThis.String(object.Birthdate) : "",
+            PhoneNumber: isSet(object.PhoneNumber) ? globalThis.String(object.PhoneNumber) : "",
+            EmailAddress: isSet(object.EmailAddress) ? globalThis.String(object.EmailAddress) : "",
+            AddressStreet1: isSet(object.AddressStreet1) ? globalThis.String(object.AddressStreet1) : "",
+            AddressStreet2: isSet(object.AddressStreet2) ? globalThis.String(object.AddressStreet2) : "",
+            AddressCity: isSet(object.AddressCity) ? globalThis.String(object.AddressCity) : "",
+            AddressSubdivision: isSet(object.AddressSubdivision) ? globalThis.String(object.AddressSubdivision) : "",
+            AddressPostalCode: isSet(object.AddressPostalCode) ? globalThis.String(object.AddressPostalCode) : "",
+            CountryCode: isSet(object.CountryCode) ? globalThis.String(object.CountryCode) : "",
+            SocialSecurityNumber: isSet(object.SocialSecurityNumber) ? globalThis.String(object.SocialSecurityNumber) : "",
+            IdentificationNumbers: globalThis.Array.isArray(object === null || object === void 0 ? void 0 : object.IdentificationNumbers)
+                ? object.IdentificationNumbers.map((e) => IDNumber.fromJSON(e))
+                : [],
+        };
+    },
+    toJSON(message) {
+        var _a;
+        const obj = {};
+        if (message.Birthdate !== "") {
+            obj.Birthdate = message.Birthdate;
+        }
+        if (message.PhoneNumber !== "") {
+            obj.PhoneNumber = message.PhoneNumber;
+        }
+        if (message.EmailAddress !== "") {
+            obj.EmailAddress = message.EmailAddress;
+        }
+        if (message.AddressStreet1 !== "") {
+            obj.AddressStreet1 = message.AddressStreet1;
+        }
+        if (message.AddressStreet2 !== "") {
+            obj.AddressStreet2 = message.AddressStreet2;
+        }
+        if (message.AddressCity !== "") {
+            obj.AddressCity = message.AddressCity;
+        }
+        if (message.AddressSubdivision !== "") {
+            obj.AddressSubdivision = message.AddressSubdivision;
+        }
+        if (message.AddressPostalCode !== "") {
+            obj.AddressPostalCode = message.AddressPostalCode;
+        }
+        if (message.CountryCode !== "") {
+            obj.CountryCode = message.CountryCode;
+        }
+        if (message.SocialSecurityNumber !== "") {
+            obj.SocialSecurityNumber = message.SocialSecurityNumber;
+        }
+        if ((_a = message.IdentificationNumbers) === null || _a === void 0 ? void 0 : _a.length) {
+            obj.IdentificationNumbers = message.IdentificationNumbers.map((e) => IDNumber.toJSON(e));
+        }
+        return obj;
+    },
+    create(base) {
+        return UserKYCDetails.fromPartial(base !== null && base !== void 0 ? base : {});
+    },
+    fromPartial(object) {
+        var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l;
+        const message = createBaseUserKYCDetails();
+        message.Birthdate = (_a = object.Birthdate) !== null && _a !== void 0 ? _a : "";
+        message.PhoneNumber = (_b = object.PhoneNumber) !== null && _b !== void 0 ? _b : "";
+        message.EmailAddress = (_c = object.EmailAddress) !== null && _c !== void 0 ? _c : "";
+        message.AddressStreet1 = (_d = object.AddressStreet1) !== null && _d !== void 0 ? _d : "";
+        message.AddressStreet2 = (_e = object.AddressStreet2) !== null && _e !== void 0 ? _e : "";
+        message.AddressCity = (_f = object.AddressCity) !== null && _f !== void 0 ? _f : "";
+        message.AddressSubdivision = (_g = object.AddressSubdivision) !== null && _g !== void 0 ? _g : "";
+        message.AddressPostalCode = (_h = object.AddressPostalCode) !== null && _h !== void 0 ? _h : "";
+        message.CountryCode = (_j = object.CountryCode) !== null && _j !== void 0 ? _j : "";
+        message.SocialSecurityNumber = (_k = object.SocialSecurityNumber) !== null && _k !== void 0 ? _k : "";
+        message.IdentificationNumbers = ((_l = object.IdentificationNumbers) === null || _l === void 0 ? void 0 : _l.map((e) => IDNumber.fromPartial(e))) || [];
+        return message;
+    },
+};
 function createBaseUserDetails() {
     return {
         UserID: "",
@@ -305,7 +594,8 @@ function createBaseUserDetails() {
         Employment: undefined,
         Role: 0,
         TradeProfile: undefined,
-        KycInquiries: [],
+        KYCInquiries: [],
+        KYCDetails: undefined,
     };
 }
 export const UserDetails = {
@@ -358,8 +648,11 @@ export const UserDetails = {
         if (message.TradeProfile !== undefined) {
             TradeProfileDetails.encode(message.TradeProfile, writer.uint32(130).fork()).ldelim();
         }
-        for (const v of message.KycInquiries) {
+        for (const v of message.KYCInquiries) {
             writer.uint32(138).string(v);
+        }
+        if (message.KYCDetails !== undefined) {
+            UserKYCDetails.encode(message.KYCDetails, writer.uint32(146).fork()).ldelim();
         }
         return writer;
     },
@@ -470,7 +763,13 @@ export const UserDetails = {
                     if (tag !== 138) {
                         break;
                     }
-                    message.KycInquiries.push(reader.string());
+                    message.KYCInquiries.push(reader.string());
+                    continue;
+                case 18:
+                    if (tag !== 146) {
+                        break;
+                    }
+                    message.KYCDetails = UserKYCDetails.decode(reader, reader.uint32());
                     continue;
             }
             if ((tag & 7) === 4 || tag === 0) {
@@ -498,9 +797,10 @@ export const UserDetails = {
             Employment: isSet(object.Employment) ? Employment.fromJSON(object.Employment) : undefined,
             Role: isSet(object.Role) ? roleFromJSON(object.Role) : 0,
             TradeProfile: isSet(object.TradeProfile) ? TradeProfileDetails.fromJSON(object.TradeProfile) : undefined,
-            KycInquiries: globalThis.Array.isArray(object === null || object === void 0 ? void 0 : object.KycInquiries)
-                ? object.KycInquiries.map((e) => globalThis.String(e))
+            KYCInquiries: globalThis.Array.isArray(object === null || object === void 0 ? void 0 : object.KYCInquiries)
+                ? object.KYCInquiries.map((e) => globalThis.String(e))
                 : [],
+            KYCDetails: isSet(object.KYCDetails) ? UserKYCDetails.fromJSON(object.KYCDetails) : undefined,
         };
     },
     toJSON(message) {
@@ -554,8 +854,11 @@ export const UserDetails = {
         if (message.TradeProfile !== undefined) {
             obj.TradeProfile = TradeProfileDetails.toJSON(message.TradeProfile);
         }
-        if ((_c = message.KycInquiries) === null || _c === void 0 ? void 0 : _c.length) {
-            obj.KycInquiries = message.KycInquiries;
+        if ((_c = message.KYCInquiries) === null || _c === void 0 ? void 0 : _c.length) {
+            obj.KYCInquiries = message.KYCInquiries;
+        }
+        if (message.KYCDetails !== undefined) {
+            obj.KYCDetails = UserKYCDetails.toJSON(message.KYCDetails);
         }
         return obj;
     },
@@ -585,7 +888,10 @@ export const UserDetails = {
         message.TradeProfile = (object.TradeProfile !== undefined && object.TradeProfile !== null)
             ? TradeProfileDetails.fromPartial(object.TradeProfile)
             : undefined;
-        message.KycInquiries = ((_q = object.KycInquiries) === null || _q === void 0 ? void 0 : _q.map((e) => e)) || [];
+        message.KYCInquiries = ((_q = object.KYCInquiries) === null || _q === void 0 ? void 0 : _q.map((e) => e)) || [];
+        message.KYCDetails = (object.KYCDetails !== undefined && object.KYCDetails !== null)
+            ? UserKYCDetails.fromPartial(object.KYCDetails)
+            : undefined;
         return message;
     },
 };

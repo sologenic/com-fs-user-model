@@ -317,6 +317,190 @@ func (SocialType) EnumDescriptor() ([]byte, []int) {
 	return file_user_proto_rawDescGZIP(), []int{4}
 }
 
+type IDNumber struct {
+	state                protoimpl.MessageState `protogen:"open.v1"`
+	IssuingCountry       string                 `protobuf:"bytes,1,opt,name=IssuingCountry,proto3" json:"IssuingCountry,omitempty"`
+	IdentificationClass  string                 `protobuf:"bytes,2,opt,name=IdentificationClass,proto3" json:"IdentificationClass,omitempty"`
+	IdentificationNumber string                 `protobuf:"bytes,3,opt,name=IdentificationNumber,proto3" json:"IdentificationNumber,omitempty"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
+}
+
+func (x *IDNumber) Reset() {
+	*x = IDNumber{}
+	mi := &file_user_proto_msgTypes[0]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *IDNumber) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*IDNumber) ProtoMessage() {}
+
+func (x *IDNumber) ProtoReflect() protoreflect.Message {
+	mi := &file_user_proto_msgTypes[0]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use IDNumber.ProtoReflect.Descriptor instead.
+func (*IDNumber) Descriptor() ([]byte, []int) {
+	return file_user_proto_rawDescGZIP(), []int{0}
+}
+
+func (x *IDNumber) GetIssuingCountry() string {
+	if x != nil {
+		return x.IssuingCountry
+	}
+	return ""
+}
+
+func (x *IDNumber) GetIdentificationClass() string {
+	if x != nil {
+		return x.IdentificationClass
+	}
+	return ""
+}
+
+func (x *IDNumber) GetIdentificationNumber() string {
+	if x != nil {
+		return x.IdentificationNumber
+	}
+	return ""
+}
+
+type UserKYCDetails struct {
+	state                 protoimpl.MessageState `protogen:"open.v1"`
+	Birthdate             string                 `protobuf:"bytes,1,opt,name=Birthdate,proto3" json:"Birthdate,omitempty"`
+	PhoneNumber           string                 `protobuf:"bytes,2,opt,name=PhoneNumber,proto3" json:"PhoneNumber,omitempty"`
+	EmailAddress          string                 `protobuf:"bytes,3,opt,name=EmailAddress,proto3" json:"EmailAddress,omitempty"`
+	AddressStreet1        string                 `protobuf:"bytes,4,opt,name=AddressStreet1,proto3" json:"AddressStreet1,omitempty"`
+	AddressStreet2        string                 `protobuf:"bytes,5,opt,name=AddressStreet2,proto3" json:"AddressStreet2,omitempty"`
+	AddressCity           string                 `protobuf:"bytes,6,opt,name=AddressCity,proto3" json:"AddressCity,omitempty"`
+	AddressSubdivision    string                 `protobuf:"bytes,7,opt,name=AddressSubdivision,proto3" json:"AddressSubdivision,omitempty"`
+	AddressPostalCode     string                 `protobuf:"bytes,8,opt,name=AddressPostalCode,proto3" json:"AddressPostalCode,omitempty"`
+	CountryCode           string                 `protobuf:"bytes,9,opt,name=CountryCode,proto3" json:"CountryCode,omitempty"`
+	SocialSecurityNumber  string                 `protobuf:"bytes,10,opt,name=SocialSecurityNumber,proto3" json:"SocialSecurityNumber,omitempty"`
+	IdentificationNumbers []*IDNumber            `protobuf:"bytes,11,rep,name=IdentificationNumbers,proto3" json:"IdentificationNumbers,omitempty"`
+	unknownFields         protoimpl.UnknownFields
+	sizeCache             protoimpl.SizeCache
+}
+
+func (x *UserKYCDetails) Reset() {
+	*x = UserKYCDetails{}
+	mi := &file_user_proto_msgTypes[1]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UserKYCDetails) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UserKYCDetails) ProtoMessage() {}
+
+func (x *UserKYCDetails) ProtoReflect() protoreflect.Message {
+	mi := &file_user_proto_msgTypes[1]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UserKYCDetails.ProtoReflect.Descriptor instead.
+func (*UserKYCDetails) Descriptor() ([]byte, []int) {
+	return file_user_proto_rawDescGZIP(), []int{1}
+}
+
+func (x *UserKYCDetails) GetBirthdate() string {
+	if x != nil {
+		return x.Birthdate
+	}
+	return ""
+}
+
+func (x *UserKYCDetails) GetPhoneNumber() string {
+	if x != nil {
+		return x.PhoneNumber
+	}
+	return ""
+}
+
+func (x *UserKYCDetails) GetEmailAddress() string {
+	if x != nil {
+		return x.EmailAddress
+	}
+	return ""
+}
+
+func (x *UserKYCDetails) GetAddressStreet1() string {
+	if x != nil {
+		return x.AddressStreet1
+	}
+	return ""
+}
+
+func (x *UserKYCDetails) GetAddressStreet2() string {
+	if x != nil {
+		return x.AddressStreet2
+	}
+	return ""
+}
+
+func (x *UserKYCDetails) GetAddressCity() string {
+	if x != nil {
+		return x.AddressCity
+	}
+	return ""
+}
+
+func (x *UserKYCDetails) GetAddressSubdivision() string {
+	if x != nil {
+		return x.AddressSubdivision
+	}
+	return ""
+}
+
+func (x *UserKYCDetails) GetAddressPostalCode() string {
+	if x != nil {
+		return x.AddressPostalCode
+	}
+	return ""
+}
+
+func (x *UserKYCDetails) GetCountryCode() string {
+	if x != nil {
+		return x.CountryCode
+	}
+	return ""
+}
+
+func (x *UserKYCDetails) GetSocialSecurityNumber() string {
+	if x != nil {
+		return x.SocialSecurityNumber
+	}
+	return ""
+}
+
+func (x *UserKYCDetails) GetIdentificationNumbers() []*IDNumber {
+	if x != nil {
+		return x.IdentificationNumbers
+	}
+	return nil
+}
+
 type UserDetails struct {
 	state          protoimpl.MessageState                          `protogen:"open.v1"`
 	UserID         string                                          `protobuf:"bytes,1,opt,name=UserID,proto3" json:"UserID,omitempty"` // email address used for firebase authentication
@@ -335,14 +519,15 @@ type UserDetails struct {
 	Employment     *Employment                                     `protobuf:"bytes,14,opt,name=Employment,proto3,oneof" json:"Employment,omitempty"`
 	Role           role.Role                                       `protobuf:"varint,15,opt,name=Role,proto3,enum=role.Role" json:"Role,omitempty"` // A retail user will always have a role of "NORMAL_USER"
 	TradeProfile   *com_fs_trade_profile_model.TradeProfileDetails `protobuf:"bytes,16,opt,name=TradeProfile,proto3" json:"TradeProfile,omitempty"` // Trade profile details
-	KycInquiries   []string                                        `protobuf:"bytes,17,rep,name=KycInquiries,proto3" json:"KycInquiries,omitempty"` // Array of inquiry ID's
+	KYCInquiries   []string                                        `protobuf:"bytes,17,rep,name=KYCInquiries,proto3" json:"KYCInquiries,omitempty"` // Array of inquiry ID's
+	KYCDetails     *UserKYCDetails                                 `protobuf:"bytes,18,opt,name=KYCDetails,proto3" json:"KYCDetails,omitempty"`
 	unknownFields  protoimpl.UnknownFields
 	sizeCache      protoimpl.SizeCache
 }
 
 func (x *UserDetails) Reset() {
 	*x = UserDetails{}
-	mi := &file_user_proto_msgTypes[0]
+	mi := &file_user_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -354,7 +539,7 @@ func (x *UserDetails) String() string {
 func (*UserDetails) ProtoMessage() {}
 
 func (x *UserDetails) ProtoReflect() protoreflect.Message {
-	mi := &file_user_proto_msgTypes[0]
+	mi := &file_user_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -367,7 +552,7 @@ func (x *UserDetails) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UserDetails.ProtoReflect.Descriptor instead.
 func (*UserDetails) Descriptor() ([]byte, []int) {
-	return file_user_proto_rawDescGZIP(), []int{0}
+	return file_user_proto_rawDescGZIP(), []int{2}
 }
 
 func (x *UserDetails) GetUserID() string {
@@ -482,9 +667,16 @@ func (x *UserDetails) GetTradeProfile() *com_fs_trade_profile_model.TradeProfile
 	return nil
 }
 
-func (x *UserDetails) GetKycInquiries() []string {
+func (x *UserDetails) GetKYCInquiries() []string {
 	if x != nil {
-		return x.KycInquiries
+		return x.KYCInquiries
+	}
+	return nil
+}
+
+func (x *UserDetails) GetKYCDetails() *UserKYCDetails {
+	if x != nil {
+		return x.KYCDetails
 	}
 	return nil
 }
@@ -508,7 +700,7 @@ type Employment struct {
 
 func (x *Employment) Reset() {
 	*x = Employment{}
-	mi := &file_user_proto_msgTypes[1]
+	mi := &file_user_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -520,7 +712,7 @@ func (x *Employment) String() string {
 func (*Employment) ProtoMessage() {}
 
 func (x *Employment) ProtoReflect() protoreflect.Message {
-	mi := &file_user_proto_msgTypes[1]
+	mi := &file_user_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -533,7 +725,7 @@ func (x *Employment) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Employment.ProtoReflect.Descriptor instead.
 func (*Employment) Descriptor() ([]byte, []int) {
-	return file_user_proto_rawDescGZIP(), []int{1}
+	return file_user_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *Employment) GetEmployerName() string {
@@ -617,7 +809,7 @@ type Income struct {
 
 func (x *Income) Reset() {
 	*x = Income{}
-	mi := &file_user_proto_msgTypes[2]
+	mi := &file_user_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -629,7 +821,7 @@ func (x *Income) String() string {
 func (*Income) ProtoMessage() {}
 
 func (x *Income) ProtoReflect() protoreflect.Message {
-	mi := &file_user_proto_msgTypes[2]
+	mi := &file_user_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -642,7 +834,7 @@ func (x *Income) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Income.ProtoReflect.Descriptor instead.
 func (*Income) Descriptor() ([]byte, []int) {
-	return file_user_proto_rawDescGZIP(), []int{2}
+	return file_user_proto_rawDescGZIP(), []int{4}
 }
 
 func (x *Income) GetAmount() float32 {
@@ -678,7 +870,7 @@ type EmployerContact struct {
 
 func (x *EmployerContact) Reset() {
 	*x = EmployerContact{}
-	mi := &file_user_proto_msgTypes[3]
+	mi := &file_user_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -690,7 +882,7 @@ func (x *EmployerContact) String() string {
 func (*EmployerContact) ProtoMessage() {}
 
 func (x *EmployerContact) ProtoReflect() protoreflect.Message {
-	mi := &file_user_proto_msgTypes[3]
+	mi := &file_user_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -703,7 +895,7 @@ func (x *EmployerContact) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use EmployerContact.ProtoReflect.Descriptor instead.
 func (*EmployerContact) Descriptor() ([]byte, []int) {
-	return file_user_proto_rawDescGZIP(), []int{3}
+	return file_user_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *EmployerContact) GetName() string {
@@ -745,7 +937,7 @@ type User struct {
 
 func (x *User) Reset() {
 	*x = User{}
-	mi := &file_user_proto_msgTypes[4]
+	mi := &file_user_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -757,7 +949,7 @@ func (x *User) String() string {
 func (*User) ProtoMessage() {}
 
 func (x *User) ProtoReflect() protoreflect.Message {
-	mi := &file_user_proto_msgTypes[4]
+	mi := &file_user_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -770,7 +962,7 @@ func (x *User) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use User.ProtoReflect.Descriptor instead.
 func (*User) Descriptor() ([]byte, []int) {
-	return file_user_proto_rawDescGZIP(), []int{4}
+	return file_user_proto_rawDescGZIP(), []int{6}
 }
 
 func (x *User) GetUser() *UserDetails {
@@ -805,7 +997,7 @@ type UserID struct {
 
 func (x *UserID) Reset() {
 	*x = UserID{}
-	mi := &file_user_proto_msgTypes[5]
+	mi := &file_user_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -817,7 +1009,7 @@ func (x *UserID) String() string {
 func (*UserID) ProtoMessage() {}
 
 func (x *UserID) ProtoReflect() protoreflect.Message {
-	mi := &file_user_proto_msgTypes[5]
+	mi := &file_user_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -830,7 +1022,7 @@ func (x *UserID) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UserID.ProtoReflect.Descriptor instead.
 func (*UserID) Descriptor() ([]byte, []int) {
-	return file_user_proto_rawDescGZIP(), []int{5}
+	return file_user_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *UserID) GetUserID() string {
@@ -864,7 +1056,7 @@ type Social struct {
 
 func (x *Social) Reset() {
 	*x = Social{}
-	mi := &file_user_proto_msgTypes[6]
+	mi := &file_user_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -876,7 +1068,7 @@ func (x *Social) String() string {
 func (*Social) ProtoMessage() {}
 
 func (x *Social) ProtoReflect() protoreflect.Message {
-	mi := &file_user_proto_msgTypes[6]
+	mi := &file_user_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -889,7 +1081,7 @@ func (x *Social) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Social.ProtoReflect.Descriptor instead.
 func (*Social) Descriptor() ([]byte, []int) {
-	return file_user_proto_rawDescGZIP(), []int{6}
+	return file_user_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *Social) GetURL() string {
@@ -917,7 +1109,7 @@ type Wallet struct {
 
 func (x *Wallet) Reset() {
 	*x = Wallet{}
-	mi := &file_user_proto_msgTypes[7]
+	mi := &file_user_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -929,7 +1121,7 @@ func (x *Wallet) String() string {
 func (*Wallet) ProtoMessage() {}
 
 func (x *Wallet) ProtoReflect() protoreflect.Message {
-	mi := &file_user_proto_msgTypes[7]
+	mi := &file_user_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -942,7 +1134,7 @@ func (x *Wallet) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Wallet.ProtoReflect.Descriptor instead.
 func (*Wallet) Descriptor() ([]byte, []int) {
-	return file_user_proto_rawDescGZIP(), []int{7}
+	return file_user_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *Wallet) GetAddress() string {
@@ -976,7 +1168,7 @@ type UserList struct {
 
 func (x *UserList) Reset() {
 	*x = UserList{}
-	mi := &file_user_proto_msgTypes[8]
+	mi := &file_user_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -988,7 +1180,7 @@ func (x *UserList) String() string {
 func (*UserList) ProtoMessage() {}
 
 func (x *UserList) ProtoReflect() protoreflect.Message {
-	mi := &file_user_proto_msgTypes[8]
+	mi := &file_user_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1001,7 +1193,7 @@ func (x *UserList) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UserList.ProtoReflect.Descriptor instead.
 func (*UserList) Descriptor() ([]byte, []int) {
-	return file_user_proto_rawDescGZIP(), []int{8}
+	return file_user_proto_rawDescGZIP(), []int{10}
 }
 
 func (x *UserList) GetUsers() []*User {
@@ -1031,7 +1223,7 @@ type StatusMessage struct {
 
 func (x *StatusMessage) Reset() {
 	*x = StatusMessage{}
-	mi := &file_user_proto_msgTypes[9]
+	mi := &file_user_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1043,7 +1235,7 @@ func (x *StatusMessage) String() string {
 func (*StatusMessage) ProtoMessage() {}
 
 func (x *StatusMessage) ProtoReflect() protoreflect.Message {
-	mi := &file_user_proto_msgTypes[9]
+	mi := &file_user_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1056,7 +1248,7 @@ func (x *StatusMessage) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StatusMessage.ProtoReflect.Descriptor instead.
 func (*StatusMessage) Descriptor() ([]byte, []int) {
-	return file_user_proto_rawDescGZIP(), []int{9}
+	return file_user_proto_rawDescGZIP(), []int{11}
 }
 
 func (x *StatusMessage) GetUserID() string {
@@ -1099,7 +1291,24 @@ var File_user_proto protoreflect.FileDescriptor
 const file_user_proto_rawDesc = "" +
 	"\n" +
 	"\n" +
-	"user.proto\x12\x04user\x1a\x1fgoogle/protobuf/timestamp.proto\x1a9sologenic/com-fs-utils-lib/models/metadata/metadata.proto\x1a3sologenic/com-fs-utils-lib/models/audit/audit.proto\x1a1sologenic/com-fs-utils-lib/models/role/role.proto\x1a9sologenic/com-fs-utils-lib/models/language/language.proto\x1a7sologenic/com-fs-trade-profile-model/tradeprofile.proto\"\x90\x05\n" +
+	"user.proto\x12\x04user\x1a\x1fgoogle/protobuf/timestamp.proto\x1a9sologenic/com-fs-utils-lib/models/metadata/metadata.proto\x1a3sologenic/com-fs-utils-lib/models/audit/audit.proto\x1a1sologenic/com-fs-utils-lib/models/role/role.proto\x1a9sologenic/com-fs-utils-lib/models/language/language.proto\x1a7sologenic/com-fs-trade-profile-model/tradeprofile.proto\"\x98\x01\n" +
+	"\bIDNumber\x12&\n" +
+	"\x0eIssuingCountry\x18\x01 \x01(\tR\x0eIssuingCountry\x120\n" +
+	"\x13IdentificationClass\x18\x02 \x01(\tR\x13IdentificationClass\x122\n" +
+	"\x14IdentificationNumber\x18\x03 \x01(\tR\x14IdentificationNumber\"\xe0\x03\n" +
+	"\x0eUserKYCDetails\x12\x1c\n" +
+	"\tBirthdate\x18\x01 \x01(\tR\tBirthdate\x12 \n" +
+	"\vPhoneNumber\x18\x02 \x01(\tR\vPhoneNumber\x12\"\n" +
+	"\fEmailAddress\x18\x03 \x01(\tR\fEmailAddress\x12&\n" +
+	"\x0eAddressStreet1\x18\x04 \x01(\tR\x0eAddressStreet1\x12&\n" +
+	"\x0eAddressStreet2\x18\x05 \x01(\tR\x0eAddressStreet2\x12 \n" +
+	"\vAddressCity\x18\x06 \x01(\tR\vAddressCity\x12.\n" +
+	"\x12AddressSubdivision\x18\a \x01(\tR\x12AddressSubdivision\x12,\n" +
+	"\x11AddressPostalCode\x18\b \x01(\tR\x11AddressPostalCode\x12 \n" +
+	"\vCountryCode\x18\t \x01(\tR\vCountryCode\x122\n" +
+	"\x14SocialSecurityNumber\x18\n" +
+	" \x01(\tR\x14SocialSecurityNumber\x12D\n" +
+	"\x15IdentificationNumbers\x18\v \x03(\v2\x0e.user.IDNumberR\x15IdentificationNumbers\"\xc6\x05\n" +
 	"\vUserDetails\x12\x16\n" +
 	"\x06UserID\x18\x01 \x01(\tR\x06UserID\x12\x1c\n" +
 	"\tFirstName\x18\x02 \x01(\tR\tFirstName\x12\x1a\n" +
@@ -1121,7 +1330,10 @@ const file_user_proto_rawDesc = "" +
 	"\x04Role\x18\x0f \x01(\x0e2\n" +
 	".role.RoleR\x04Role\x12E\n" +
 	"\fTradeProfile\x18\x10 \x01(\v2!.tradeprofile.TradeProfileDetailsR\fTradeProfile\x12\"\n" +
-	"\fKycInquiries\x18\x11 \x03(\tR\fKycInquiriesB\r\n" +
+	"\fKYCInquiries\x18\x11 \x03(\tR\fKYCInquiries\x124\n" +
+	"\n" +
+	"KYCDetails\x18\x12 \x01(\v2\x14.user.UserKYCDetailsR\n" +
+	"KYCDetailsB\r\n" +
 	"\v_Employment\"\xab\x03\n" +
 	"\n" +
 	"Employment\x12\"\n" +
@@ -1238,60 +1450,64 @@ func file_user_proto_rawDescGZIP() []byte {
 }
 
 var file_user_proto_enumTypes = make([]protoimpl.EnumInfo, 5)
-var file_user_proto_msgTypes = make([]protoimpl.MessageInfo, 10)
+var file_user_proto_msgTypes = make([]protoimpl.MessageInfo, 12)
 var file_user_proto_goTypes = []any{
 	(EmploymentType)(0),     // 0: user.EmploymentType
 	(IncomeFrequency)(0),    // 1: user.IncomeFrequency
 	(UserStatus)(0),         // 2: user.UserStatus
 	(WalletType)(0),         // 3: user.WalletType
 	(SocialType)(0),         // 4: user.SocialType
-	(*UserDetails)(nil),     // 5: user.UserDetails
-	(*Employment)(nil),      // 6: user.Employment
-	(*Income)(nil),          // 7: user.Income
-	(*EmployerContact)(nil), // 8: user.EmployerContact
-	(*User)(nil),            // 9: user.User
-	(*UserID)(nil),          // 10: user.UserID
-	(*Social)(nil),          // 11: user.Social
-	(*Wallet)(nil),          // 12: user.Wallet
-	(*UserList)(nil),        // 13: user.UserList
-	(*StatusMessage)(nil),   // 14: user.StatusMessage
-	(language.Lang)(0),      // 15: language.Lang
-	(role.Role)(0),          // 16: role.Role
-	(*com_fs_trade_profile_model.TradeProfileDetails)(nil), // 17: tradeprofile.TradeProfileDetails
-	(*timestamppb.Timestamp)(nil),                          // 18: google.protobuf.Timestamp
-	(*metadata.MetaData)(nil),                              // 19: metadata.MetaData
-	(*audit.Audit)(nil),                                    // 20: audit.Audit
-	(metadata.Network)(0),                                  // 21: metadata.Network
+	(*IDNumber)(nil),        // 5: user.IDNumber
+	(*UserKYCDetails)(nil),  // 6: user.UserKYCDetails
+	(*UserDetails)(nil),     // 7: user.UserDetails
+	(*Employment)(nil),      // 8: user.Employment
+	(*Income)(nil),          // 9: user.Income
+	(*EmployerContact)(nil), // 10: user.EmployerContact
+	(*User)(nil),            // 11: user.User
+	(*UserID)(nil),          // 12: user.UserID
+	(*Social)(nil),          // 13: user.Social
+	(*Wallet)(nil),          // 14: user.Wallet
+	(*UserList)(nil),        // 15: user.UserList
+	(*StatusMessage)(nil),   // 16: user.StatusMessage
+	(language.Lang)(0),      // 17: language.Lang
+	(role.Role)(0),          // 18: role.Role
+	(*com_fs_trade_profile_model.TradeProfileDetails)(nil), // 19: tradeprofile.TradeProfileDetails
+	(*timestamppb.Timestamp)(nil),                          // 20: google.protobuf.Timestamp
+	(*metadata.MetaData)(nil),                              // 21: metadata.MetaData
+	(*audit.Audit)(nil),                                    // 22: audit.Audit
+	(metadata.Network)(0),                                  // 23: metadata.Network
 }
 var file_user_proto_depIdxs = []int32{
-	2,  // 0: user.UserDetails.Status:type_name -> user.UserStatus
-	12, // 1: user.UserDetails.Wallets:type_name -> user.Wallet
-	11, // 2: user.UserDetails.Socials:type_name -> user.Social
-	15, // 3: user.UserDetails.Language:type_name -> language.Lang
-	6,  // 4: user.UserDetails.Employment:type_name -> user.Employment
-	16, // 5: user.UserDetails.Role:type_name -> role.Role
-	17, // 6: user.UserDetails.TradeProfile:type_name -> tradeprofile.TradeProfileDetails
-	18, // 7: user.Employment.StartDate:type_name -> google.protobuf.Timestamp
-	18, // 8: user.Employment.EndDate:type_name -> google.protobuf.Timestamp
-	0,  // 9: user.Employment.Type:type_name -> user.EmploymentType
-	7,  // 10: user.Employment.Income:type_name -> user.Income
-	8,  // 11: user.Employment.Contact:type_name -> user.EmployerContact
-	1,  // 12: user.Income.Frequency:type_name -> user.IncomeFrequency
-	5,  // 13: user.User.User:type_name -> user.UserDetails
-	19, // 14: user.User.MetaData:type_name -> metadata.MetaData
-	20, // 15: user.User.Audit:type_name -> audit.Audit
-	21, // 16: user.UserID.Network:type_name -> metadata.Network
-	4,  // 17: user.Social.Type:type_name -> user.SocialType
-	3,  // 18: user.Wallet.Type:type_name -> user.WalletType
-	9,  // 19: user.UserList.Users:type_name -> user.User
-	2,  // 20: user.StatusMessage.Status:type_name -> user.UserStatus
-	21, // 21: user.StatusMessage.Network:type_name -> metadata.Network
-	20, // 22: user.StatusMessage.Audit:type_name -> audit.Audit
-	23, // [23:23] is the sub-list for method output_type
-	23, // [23:23] is the sub-list for method input_type
-	23, // [23:23] is the sub-list for extension type_name
-	23, // [23:23] is the sub-list for extension extendee
-	0,  // [0:23] is the sub-list for field type_name
+	5,  // 0: user.UserKYCDetails.IdentificationNumbers:type_name -> user.IDNumber
+	2,  // 1: user.UserDetails.Status:type_name -> user.UserStatus
+	14, // 2: user.UserDetails.Wallets:type_name -> user.Wallet
+	13, // 3: user.UserDetails.Socials:type_name -> user.Social
+	17, // 4: user.UserDetails.Language:type_name -> language.Lang
+	8,  // 5: user.UserDetails.Employment:type_name -> user.Employment
+	18, // 6: user.UserDetails.Role:type_name -> role.Role
+	19, // 7: user.UserDetails.TradeProfile:type_name -> tradeprofile.TradeProfileDetails
+	6,  // 8: user.UserDetails.KYCDetails:type_name -> user.UserKYCDetails
+	20, // 9: user.Employment.StartDate:type_name -> google.protobuf.Timestamp
+	20, // 10: user.Employment.EndDate:type_name -> google.protobuf.Timestamp
+	0,  // 11: user.Employment.Type:type_name -> user.EmploymentType
+	9,  // 12: user.Employment.Income:type_name -> user.Income
+	10, // 13: user.Employment.Contact:type_name -> user.EmployerContact
+	1,  // 14: user.Income.Frequency:type_name -> user.IncomeFrequency
+	7,  // 15: user.User.User:type_name -> user.UserDetails
+	21, // 16: user.User.MetaData:type_name -> metadata.MetaData
+	22, // 17: user.User.Audit:type_name -> audit.Audit
+	23, // 18: user.UserID.Network:type_name -> metadata.Network
+	4,  // 19: user.Social.Type:type_name -> user.SocialType
+	3,  // 20: user.Wallet.Type:type_name -> user.WalletType
+	11, // 21: user.UserList.Users:type_name -> user.User
+	2,  // 22: user.StatusMessage.Status:type_name -> user.UserStatus
+	23, // 23: user.StatusMessage.Network:type_name -> metadata.Network
+	22, // 24: user.StatusMessage.Audit:type_name -> audit.Audit
+	25, // [25:25] is the sub-list for method output_type
+	25, // [25:25] is the sub-list for method input_type
+	25, // [25:25] is the sub-list for extension type_name
+	25, // [25:25] is the sub-list for extension extendee
+	0,  // [0:25] is the sub-list for field type_name
 }
 
 func init() { file_user_proto_init() }
@@ -1299,18 +1515,18 @@ func file_user_proto_init() {
 	if File_user_proto != nil {
 		return
 	}
-	file_user_proto_msgTypes[0].OneofWrappers = []any{}
-	file_user_proto_msgTypes[1].OneofWrappers = []any{}
-	file_user_proto_msgTypes[5].OneofWrappers = []any{}
-	file_user_proto_msgTypes[8].OneofWrappers = []any{}
-	file_user_proto_msgTypes[9].OneofWrappers = []any{}
+	file_user_proto_msgTypes[2].OneofWrappers = []any{}
+	file_user_proto_msgTypes[3].OneofWrappers = []any{}
+	file_user_proto_msgTypes[7].OneofWrappers = []any{}
+	file_user_proto_msgTypes[10].OneofWrappers = []any{}
+	file_user_proto_msgTypes[11].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_user_proto_rawDesc), len(file_user_proto_rawDesc)),
 			NumEnums:      5,
-			NumMessages:   10,
+			NumMessages:   12,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
