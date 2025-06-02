@@ -378,21 +378,20 @@ func (x *IDNumber) GetIdentificationNumber() string {
 }
 
 type UserKYCDetails struct {
-	state                 protoimpl.MessageState `protogen:"open.v1"`
-	Birthdate             string                 `protobuf:"bytes,1,opt,name=Birthdate,proto3" json:"Birthdate,omitempty"`
-	PhoneNumber           string                 `protobuf:"bytes,2,opt,name=PhoneNumber,proto3" json:"PhoneNumber,omitempty"`
-	EmailAddress          string                 `protobuf:"bytes,3,opt,name=EmailAddress,proto3" json:"EmailAddress,omitempty"`
-	AddressStreet1        string                 `protobuf:"bytes,4,opt,name=AddressStreet1,proto3" json:"AddressStreet1,omitempty"`
-	AddressStreet2        string                 `protobuf:"bytes,5,opt,name=AddressStreet2,proto3" json:"AddressStreet2,omitempty"`
-	AddressCity           string                 `protobuf:"bytes,6,opt,name=AddressCity,proto3" json:"AddressCity,omitempty"`
-	AddressSubdivision    string                 `protobuf:"bytes,7,opt,name=AddressSubdivision,proto3" json:"AddressSubdivision,omitempty"`
-	AddressPostalCode     string                 `protobuf:"bytes,8,opt,name=AddressPostalCode,proto3" json:"AddressPostalCode,omitempty"`
-	CountryCode           string                 `protobuf:"bytes,9,opt,name=CountryCode,proto3" json:"CountryCode,omitempty"`
-	SocialSecurityNumber  string                 `protobuf:"bytes,10,opt,name=SocialSecurityNumber,proto3" json:"SocialSecurityNumber,omitempty"`
-	IdentificationNumbers []*IDNumber            `protobuf:"bytes,11,rep,name=IdentificationNumbers,proto3" json:"IdentificationNumbers,omitempty"`
-	InquiryID             string                 `protobuf:"bytes,12,opt,name=InquiryID,proto3" json:"InquiryID,omitempty"`
-	unknownFields         protoimpl.UnknownFields
-	sizeCache             protoimpl.SizeCache
+	state                protoimpl.MessageState `protogen:"open.v1"`
+	Birthdate            string                 `protobuf:"bytes,1,opt,name=Birthdate,proto3" json:"Birthdate,omitempty"`
+	PhoneNumber          string                 `protobuf:"bytes,2,opt,name=PhoneNumber,proto3" json:"PhoneNumber,omitempty"`
+	EmailAddress         string                 `protobuf:"bytes,3,opt,name=EmailAddress,proto3" json:"EmailAddress,omitempty"`
+	AddressStreet1       string                 `protobuf:"bytes,4,opt,name=AddressStreet1,proto3" json:"AddressStreet1,omitempty"`
+	AddressStreet2       string                 `protobuf:"bytes,5,opt,name=AddressStreet2,proto3" json:"AddressStreet2,omitempty"`
+	AddressCity          string                 `protobuf:"bytes,6,opt,name=AddressCity,proto3" json:"AddressCity,omitempty"`
+	AddressSubdivision   string                 `protobuf:"bytes,7,opt,name=AddressSubdivision,proto3" json:"AddressSubdivision,omitempty"`
+	AddressPostalCode    string                 `protobuf:"bytes,8,opt,name=AddressPostalCode,proto3" json:"AddressPostalCode,omitempty"`
+	CountryCode          string                 `protobuf:"bytes,9,opt,name=CountryCode,proto3" json:"CountryCode,omitempty"`
+	SocialSecurityNumber string                 `protobuf:"bytes,10,opt,name=SocialSecurityNumber,proto3" json:"SocialSecurityNumber,omitempty"`
+	IdentificationNumber string                 `protobuf:"bytes,11,opt,name=IdentificationNumber,proto3" json:"IdentificationNumber,omitempty"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *UserKYCDetails) Reset() {
@@ -495,16 +494,9 @@ func (x *UserKYCDetails) GetSocialSecurityNumber() string {
 	return ""
 }
 
-func (x *UserKYCDetails) GetIdentificationNumbers() []*IDNumber {
+func (x *UserKYCDetails) GetIdentificationNumber() string {
 	if x != nil {
-		return x.IdentificationNumbers
-	}
-	return nil
-}
-
-func (x *UserKYCDetails) GetInquiryID() string {
-	if x != nil {
-		return x.InquiryID
+		return x.IdentificationNumber
 	}
 	return ""
 }
@@ -1395,7 +1387,7 @@ const file_user_proto_rawDesc = "" +
 	"\bIDNumber\x12&\n" +
 	"\x0eIssuingCountry\x18\x01 \x01(\tR\x0eIssuingCountry\x120\n" +
 	"\x13IdentificationClass\x18\x02 \x01(\tR\x13IdentificationClass\x122\n" +
-	"\x14IdentificationNumber\x18\x03 \x01(\tR\x14IdentificationNumber\"\xfe\x03\n" +
+	"\x14IdentificationNumber\x18\x03 \x01(\tR\x14IdentificationNumber\"\xce\x03\n" +
 	"\x0eUserKYCDetails\x12\x1c\n" +
 	"\tBirthdate\x18\x01 \x01(\tR\tBirthdate\x12 \n" +
 	"\vPhoneNumber\x18\x02 \x01(\tR\vPhoneNumber\x12\"\n" +
@@ -1407,9 +1399,8 @@ const file_user_proto_rawDesc = "" +
 	"\x11AddressPostalCode\x18\b \x01(\tR\x11AddressPostalCode\x12 \n" +
 	"\vCountryCode\x18\t \x01(\tR\vCountryCode\x122\n" +
 	"\x14SocialSecurityNumber\x18\n" +
-	" \x01(\tR\x14SocialSecurityNumber\x12D\n" +
-	"\x15IdentificationNumbers\x18\v \x03(\v2\x0e.user.IDNumberR\x15IdentificationNumbers\x12\x1c\n" +
-	"\tInquiryID\x18\f \x01(\tR\tInquiryID\"\xc6\x05\n" +
+	" \x01(\tR\x14SocialSecurityNumber\x122\n" +
+	"\x14IdentificationNumber\x18\v \x01(\tR\x14IdentificationNumber\"\xc6\x05\n" +
 	"\vUserDetails\x12\x16\n" +
 	"\x06UserID\x18\x01 \x01(\tR\x06UserID\x12\x1c\n" +
 	"\tFirstName\x18\x02 \x01(\tR\tFirstName\x12\x1a\n" +
@@ -1595,38 +1586,37 @@ var file_user_proto_goTypes = []any{
 	(metadata.Network)(0),                                  // 24: metadata.Network
 }
 var file_user_proto_depIdxs = []int32{
-	5,  // 0: user.UserKYCDetails.IdentificationNumbers:type_name -> user.IDNumber
-	2,  // 1: user.UserDetails.Status:type_name -> user.UserStatus
-	14, // 2: user.UserDetails.Wallets:type_name -> user.Wallet
-	13, // 3: user.UserDetails.Socials:type_name -> user.Social
-	18, // 4: user.UserDetails.Language:type_name -> language.Lang
-	8,  // 5: user.UserDetails.Employment:type_name -> user.Employment
-	19, // 6: user.UserDetails.Role:type_name -> role.Role
-	20, // 7: user.UserDetails.TradeProfile:type_name -> tradeprofile.TradeProfileDetails
-	6,  // 8: user.UserDetails.KYCDetails:type_name -> user.UserKYCDetails
-	21, // 9: user.Employment.StartDate:type_name -> google.protobuf.Timestamp
-	21, // 10: user.Employment.EndDate:type_name -> google.protobuf.Timestamp
-	0,  // 11: user.Employment.Type:type_name -> user.EmploymentType
-	9,  // 12: user.Employment.Income:type_name -> user.Income
-	10, // 13: user.Employment.Contact:type_name -> user.EmployerContact
-	1,  // 14: user.Income.Frequency:type_name -> user.IncomeFrequency
-	7,  // 15: user.User.User:type_name -> user.UserDetails
-	22, // 16: user.User.MetaData:type_name -> metadata.MetaData
-	23, // 17: user.User.Audit:type_name -> audit.Audit
-	24, // 18: user.UserID.Network:type_name -> metadata.Network
-	4,  // 19: user.Social.Type:type_name -> user.SocialType
-	3,  // 20: user.Wallet.Type:type_name -> user.WalletType
-	11, // 21: user.UserList.Users:type_name -> user.User
-	2,  // 22: user.StatusMessage.Status:type_name -> user.UserStatus
-	24, // 23: user.StatusMessage.Network:type_name -> metadata.Network
-	23, // 24: user.StatusMessage.Audit:type_name -> audit.Audit
-	24, // 25: user.Filter.Network:type_name -> metadata.Network
-	2,  // 26: user.Filter.Status:type_name -> user.UserStatus
-	27, // [27:27] is the sub-list for method output_type
-	27, // [27:27] is the sub-list for method input_type
-	27, // [27:27] is the sub-list for extension type_name
-	27, // [27:27] is the sub-list for extension extendee
-	0,  // [0:27] is the sub-list for field type_name
+	2,  // 0: user.UserDetails.Status:type_name -> user.UserStatus
+	14, // 1: user.UserDetails.Wallets:type_name -> user.Wallet
+	13, // 2: user.UserDetails.Socials:type_name -> user.Social
+	18, // 3: user.UserDetails.Language:type_name -> language.Lang
+	8,  // 4: user.UserDetails.Employment:type_name -> user.Employment
+	19, // 5: user.UserDetails.Role:type_name -> role.Role
+	20, // 6: user.UserDetails.TradeProfile:type_name -> tradeprofile.TradeProfileDetails
+	6,  // 7: user.UserDetails.KYCDetails:type_name -> user.UserKYCDetails
+	21, // 8: user.Employment.StartDate:type_name -> google.protobuf.Timestamp
+	21, // 9: user.Employment.EndDate:type_name -> google.protobuf.Timestamp
+	0,  // 10: user.Employment.Type:type_name -> user.EmploymentType
+	9,  // 11: user.Employment.Income:type_name -> user.Income
+	10, // 12: user.Employment.Contact:type_name -> user.EmployerContact
+	1,  // 13: user.Income.Frequency:type_name -> user.IncomeFrequency
+	7,  // 14: user.User.User:type_name -> user.UserDetails
+	22, // 15: user.User.MetaData:type_name -> metadata.MetaData
+	23, // 16: user.User.Audit:type_name -> audit.Audit
+	24, // 17: user.UserID.Network:type_name -> metadata.Network
+	4,  // 18: user.Social.Type:type_name -> user.SocialType
+	3,  // 19: user.Wallet.Type:type_name -> user.WalletType
+	11, // 20: user.UserList.Users:type_name -> user.User
+	2,  // 21: user.StatusMessage.Status:type_name -> user.UserStatus
+	24, // 22: user.StatusMessage.Network:type_name -> metadata.Network
+	23, // 23: user.StatusMessage.Audit:type_name -> audit.Audit
+	24, // 24: user.Filter.Network:type_name -> metadata.Network
+	2,  // 25: user.Filter.Status:type_name -> user.UserStatus
+	26, // [26:26] is the sub-list for method output_type
+	26, // [26:26] is the sub-list for method input_type
+	26, // [26:26] is the sub-list for extension type_name
+	26, // [26:26] is the sub-list for extension extendee
+	0,  // [0:26] is the sub-list for field type_name
 }
 
 func init() { file_user_proto_init() }

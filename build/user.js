@@ -380,8 +380,7 @@ function createBaseUserKYCDetails() {
         AddressPostalCode: "",
         CountryCode: "",
         SocialSecurityNumber: "",
-        IdentificationNumbers: [],
-        InquiryID: "",
+        IdentificationNumber: "",
     };
 }
 export const UserKYCDetails = {
@@ -416,11 +415,8 @@ export const UserKYCDetails = {
         if (message.SocialSecurityNumber !== "") {
             writer.uint32(82).string(message.SocialSecurityNumber);
         }
-        for (const v of message.IdentificationNumbers) {
-            IDNumber.encode(v, writer.uint32(90).fork()).ldelim();
-        }
-        if (message.InquiryID !== "") {
-            writer.uint32(98).string(message.InquiryID);
+        if (message.IdentificationNumber !== "") {
+            writer.uint32(90).string(message.IdentificationNumber);
         }
         return writer;
     },
@@ -495,13 +491,7 @@ export const UserKYCDetails = {
                     if (tag !== 90) {
                         break;
                     }
-                    message.IdentificationNumbers.push(IDNumber.decode(reader, reader.uint32()));
-                    continue;
-                case 12:
-                    if (tag !== 98) {
-                        break;
-                    }
-                    message.InquiryID = reader.string();
+                    message.IdentificationNumber = reader.string();
                     continue;
             }
             if ((tag & 7) === 4 || tag === 0) {
@@ -523,14 +513,10 @@ export const UserKYCDetails = {
             AddressPostalCode: isSet(object.AddressPostalCode) ? globalThis.String(object.AddressPostalCode) : "",
             CountryCode: isSet(object.CountryCode) ? globalThis.String(object.CountryCode) : "",
             SocialSecurityNumber: isSet(object.SocialSecurityNumber) ? globalThis.String(object.SocialSecurityNumber) : "",
-            IdentificationNumbers: globalThis.Array.isArray(object === null || object === void 0 ? void 0 : object.IdentificationNumbers)
-                ? object.IdentificationNumbers.map((e) => IDNumber.fromJSON(e))
-                : [],
-            InquiryID: isSet(object.InquiryID) ? globalThis.String(object.InquiryID) : "",
+            IdentificationNumber: isSet(object.IdentificationNumber) ? globalThis.String(object.IdentificationNumber) : "",
         };
     },
     toJSON(message) {
-        var _a;
         const obj = {};
         if (message.Birthdate !== "") {
             obj.Birthdate = message.Birthdate;
@@ -562,11 +548,8 @@ export const UserKYCDetails = {
         if (message.SocialSecurityNumber !== "") {
             obj.SocialSecurityNumber = message.SocialSecurityNumber;
         }
-        if ((_a = message.IdentificationNumbers) === null || _a === void 0 ? void 0 : _a.length) {
-            obj.IdentificationNumbers = message.IdentificationNumbers.map((e) => IDNumber.toJSON(e));
-        }
-        if (message.InquiryID !== "") {
-            obj.InquiryID = message.InquiryID;
+        if (message.IdentificationNumber !== "") {
+            obj.IdentificationNumber = message.IdentificationNumber;
         }
         return obj;
     },
@@ -574,7 +557,7 @@ export const UserKYCDetails = {
         return UserKYCDetails.fromPartial(base !== null && base !== void 0 ? base : {});
     },
     fromPartial(object) {
-        var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m;
+        var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l;
         const message = createBaseUserKYCDetails();
         message.Birthdate = (_a = object.Birthdate) !== null && _a !== void 0 ? _a : "";
         message.PhoneNumber = (_b = object.PhoneNumber) !== null && _b !== void 0 ? _b : "";
@@ -586,8 +569,7 @@ export const UserKYCDetails = {
         message.AddressPostalCode = (_h = object.AddressPostalCode) !== null && _h !== void 0 ? _h : "";
         message.CountryCode = (_j = object.CountryCode) !== null && _j !== void 0 ? _j : "";
         message.SocialSecurityNumber = (_k = object.SocialSecurityNumber) !== null && _k !== void 0 ? _k : "";
-        message.IdentificationNumbers = ((_l = object.IdentificationNumbers) === null || _l === void 0 ? void 0 : _l.map((e) => IDNumber.fromPartial(e))) || [];
-        message.InquiryID = (_m = object.InquiryID) !== null && _m !== void 0 ? _m : "";
+        message.IdentificationNumber = (_l = object.IdentificationNumber) !== null && _l !== void 0 ? _l : "";
         return message;
     },
 };

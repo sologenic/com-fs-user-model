@@ -31,8 +31,7 @@ message UserKYCDetails {
     string AddressPostalCode = 8;
     string CountryCode = 9;
     string SocialSecurityNumber = 10;
-    repeated IDNumber IdentificationNumbers = 11;
-    string InquiryID = 12;
+    string IdentificationNumber = 11;
 }
 
 

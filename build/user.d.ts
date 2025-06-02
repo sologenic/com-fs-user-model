@@ -76,8 +76,7 @@ export interface UserKYCDetails {
     AddressPostalCode: string;
     CountryCode: string;
     SocialSecurityNumber: string;
-    IdentificationNumbers: IDNumber[];
-    InquiryID: string;
+    IdentificationNumber: string;
 }
 export interface UserDetails {
     /** email address used for firebase authentication */
@@ -210,12 +209,7 @@ export declare const UserKYCDetails: {
         AddressPostalCode?: string | undefined;
         CountryCode?: string | undefined;
         SocialSecurityNumber?: string | undefined;
-        IdentificationNumbers?: {
-            IssuingCountry?: string | undefined;
-            IdentificationClass?: string | undefined;
-            IdentificationNumber?: string | undefined;
-        }[] | undefined;
-        InquiryID?: string | undefined;
+        IdentificationNumber?: string | undefined;
     } & {
         Birthdate?: string | undefined;
         PhoneNumber?: string | undefined;
@@ -227,25 +221,8 @@ export declare const UserKYCDetails: {
         AddressPostalCode?: string | undefined;
         CountryCode?: string | undefined;
         SocialSecurityNumber?: string | undefined;
-        IdentificationNumbers?: ({
-            IssuingCountry?: string | undefined;
-            IdentificationClass?: string | undefined;
-            IdentificationNumber?: string | undefined;
-        }[] & ({
-            IssuingCountry?: string | undefined;
-            IdentificationClass?: string | undefined;
-            IdentificationNumber?: string | undefined;
-        } & {
-            IssuingCountry?: string | undefined;
-            IdentificationClass?: string | undefined;
-            IdentificationNumber?: string | undefined;
-        } & { [K in Exclude<keyof I["IdentificationNumbers"][number], keyof IDNumber>]: never; })[] & { [K_1 in Exclude<keyof I["IdentificationNumbers"], keyof {
-            IssuingCountry?: string | undefined;
-            IdentificationClass?: string | undefined;
-            IdentificationNumber?: string | undefined;
-        }[]>]: never; }) | undefined;
-        InquiryID?: string | undefined;
-    } & { [K_2 in Exclude<keyof I, keyof UserKYCDetails>]: never; }>(base?: I | undefined): UserKYCDetails;
+        IdentificationNumber?: string | undefined;
+    } & { [K in Exclude<keyof I, keyof UserKYCDetails>]: never; }>(base?: I | undefined): UserKYCDetails;
     fromPartial<I_1 extends {
         Birthdate?: string | undefined;
         PhoneNumber?: string | undefined;
@@ -257,12 +234,7 @@ export declare const UserKYCDetails: {
         AddressPostalCode?: string | undefined;
         CountryCode?: string | undefined;
         SocialSecurityNumber?: string | undefined;
-        IdentificationNumbers?: {
-            IssuingCountry?: string | undefined;
-            IdentificationClass?: string | undefined;
-            IdentificationNumber?: string | undefined;
-        }[] | undefined;
-        InquiryID?: string | undefined;
+        IdentificationNumber?: string | undefined;
     } & {
         Birthdate?: string | undefined;
         PhoneNumber?: string | undefined;
@@ -274,25 +246,8 @@ export declare const UserKYCDetails: {
         AddressPostalCode?: string | undefined;
         CountryCode?: string | undefined;
         SocialSecurityNumber?: string | undefined;
-        IdentificationNumbers?: ({
-            IssuingCountry?: string | undefined;
-            IdentificationClass?: string | undefined;
-            IdentificationNumber?: string | undefined;
-        }[] & ({
-            IssuingCountry?: string | undefined;
-            IdentificationClass?: string | undefined;
-            IdentificationNumber?: string | undefined;
-        } & {
-            IssuingCountry?: string | undefined;
-            IdentificationClass?: string | undefined;
-            IdentificationNumber?: string | undefined;
-        } & { [K_3 in Exclude<keyof I_1["IdentificationNumbers"][number], keyof IDNumber>]: never; })[] & { [K_4 in Exclude<keyof I_1["IdentificationNumbers"], keyof {
-            IssuingCountry?: string | undefined;
-            IdentificationClass?: string | undefined;
-            IdentificationNumber?: string | undefined;
-        }[]>]: never; }) | undefined;
-        InquiryID?: string | undefined;
-    } & { [K_5 in Exclude<keyof I_1, keyof UserKYCDetails>]: never; }>(object: I_1): UserKYCDetails;
+        IdentificationNumber?: string | undefined;
+    } & { [K_1 in Exclude<keyof I_1, keyof UserKYCDetails>]: never; }>(object: I_1): UserKYCDetails;
 };
 export declare const UserDetails: {
     encode(message: UserDetails, writer?: _m0.Writer): _m0.Writer;
@@ -375,12 +330,7 @@ export declare const UserDetails: {
             AddressPostalCode?: string | undefined;
             CountryCode?: string | undefined;
             SocialSecurityNumber?: string | undefined;
-            IdentificationNumbers?: {
-                IssuingCountry?: string | undefined;
-                IdentificationClass?: string | undefined;
-                IdentificationNumber?: string | undefined;
-            }[] | undefined;
-            InquiryID?: string | undefined;
+            IdentificationNumber?: string | undefined;
         } | undefined;
     } & {
         UserID?: string | undefined;
@@ -537,12 +487,7 @@ export declare const UserDetails: {
             AddressPostalCode?: string | undefined;
             CountryCode?: string | undefined;
             SocialSecurityNumber?: string | undefined;
-            IdentificationNumbers?: {
-                IssuingCountry?: string | undefined;
-                IdentificationClass?: string | undefined;
-                IdentificationNumber?: string | undefined;
-            }[] | undefined;
-            InquiryID?: string | undefined;
+            IdentificationNumber?: string | undefined;
         } & {
             Birthdate?: string | undefined;
             PhoneNumber?: string | undefined;
@@ -554,26 +499,9 @@ export declare const UserDetails: {
             AddressPostalCode?: string | undefined;
             CountryCode?: string | undefined;
             SocialSecurityNumber?: string | undefined;
-            IdentificationNumbers?: ({
-                IssuingCountry?: string | undefined;
-                IdentificationClass?: string | undefined;
-                IdentificationNumber?: string | undefined;
-            }[] & ({
-                IssuingCountry?: string | undefined;
-                IdentificationClass?: string | undefined;
-                IdentificationNumber?: string | undefined;
-            } & {
-                IssuingCountry?: string | undefined;
-                IdentificationClass?: string | undefined;
-                IdentificationNumber?: string | undefined;
-            } & { [K_12 in Exclude<keyof I["KYCDetails"]["IdentificationNumbers"][number], keyof IDNumber>]: never; })[] & { [K_13 in Exclude<keyof I["KYCDetails"]["IdentificationNumbers"], keyof {
-                IssuingCountry?: string | undefined;
-                IdentificationClass?: string | undefined;
-                IdentificationNumber?: string | undefined;
-            }[]>]: never; }) | undefined;
-            InquiryID?: string | undefined;
-        } & { [K_14 in Exclude<keyof I["KYCDetails"], keyof UserKYCDetails>]: never; }) | undefined;
-    } & { [K_15 in Exclude<keyof I, keyof UserDetails>]: never; }>(base?: I | undefined): UserDetails;
+            IdentificationNumber?: string | undefined;
+        } & { [K_12 in Exclude<keyof I["KYCDetails"], keyof UserKYCDetails>]: never; }) | undefined;
+    } & { [K_13 in Exclude<keyof I, keyof UserDetails>]: never; }>(base?: I | undefined): UserDetails;
     fromPartial<I_1 extends {
         UserID?: string | undefined;
         FirstName?: string | undefined;
@@ -650,12 +578,7 @@ export declare const UserDetails: {
             AddressPostalCode?: string | undefined;
             CountryCode?: string | undefined;
             SocialSecurityNumber?: string | undefined;
-            IdentificationNumbers?: {
-                IssuingCountry?: string | undefined;
-                IdentificationClass?: string | undefined;
-                IdentificationNumber?: string | undefined;
-            }[] | undefined;
-            InquiryID?: string | undefined;
+            IdentificationNumber?: string | undefined;
         } | undefined;
     } & {
         UserID?: string | undefined;
@@ -678,7 +601,7 @@ export declare const UserDetails: {
             Address?: string | undefined;
             Alias?: string | undefined;
             Type?: WalletType | undefined;
-        } & { [K_16 in Exclude<keyof I_1["Wallets"][number], keyof Wallet>]: never; })[] & { [K_17 in Exclude<keyof I_1["Wallets"], keyof {
+        } & { [K_14 in Exclude<keyof I_1["Wallets"][number], keyof Wallet>]: never; })[] & { [K_15 in Exclude<keyof I_1["Wallets"], keyof {
             Address?: string | undefined;
             Alias?: string | undefined;
             Type?: WalletType | undefined;
@@ -692,7 +615,7 @@ export declare const UserDetails: {
         } & {
             URL?: string | undefined;
             Type?: SocialType | undefined;
-        } & { [K_18 in Exclude<keyof I_1["Socials"][number], keyof Social>]: never; })[] & { [K_19 in Exclude<keyof I_1["Socials"], keyof {
+        } & { [K_16 in Exclude<keyof I_1["Socials"][number], keyof Social>]: never; })[] & { [K_17 in Exclude<keyof I_1["Socials"], keyof {
             URL?: string | undefined;
             Type?: SocialType | undefined;
         }[]>]: never; }) | undefined;
@@ -734,7 +657,7 @@ export declare const UserDetails: {
                 Amount?: number | undefined;
                 Currency?: string | undefined;
                 Frequency?: IncomeFrequency | undefined;
-            } & { [K_20 in Exclude<keyof I_1["Employment"]["Income"], keyof Income>]: never; }) | undefined;
+            } & { [K_18 in Exclude<keyof I_1["Employment"]["Income"], keyof Income>]: never; }) | undefined;
             Contact?: ({
                 Name?: string | undefined;
                 Email?: string | undefined;
@@ -745,10 +668,10 @@ export declare const UserDetails: {
                 Email?: string | undefined;
                 Phone?: string | undefined;
                 Address?: string | undefined;
-            } & { [K_21 in Exclude<keyof I_1["Employment"]["Contact"], keyof EmployerContact>]: never; }) | undefined;
+            } & { [K_19 in Exclude<keyof I_1["Employment"]["Contact"], keyof EmployerContact>]: never; }) | undefined;
             IsVerified?: boolean | undefined;
             VerifiedAt?: string | undefined;
-        } & { [K_22 in Exclude<keyof I_1["Employment"], keyof Employment>]: never; }) | undefined;
+        } & { [K_20 in Exclude<keyof I_1["Employment"], keyof Employment>]: never; }) | undefined;
         Role?: Role | undefined;
         TradeProfile?: ({
             IsTradingEnabled?: boolean | undefined;
@@ -780,27 +703,27 @@ export declare const UserDetails: {
             } & {
                 Value?: number | undefined;
                 IsGreaterThan?: boolean | undefined;
-            } & { [K_23 in Exclude<keyof I_1["TradeProfile"]["AggregateNotionalLimit"], keyof import("./sologenic/com-fs-trade-profile-model/tradeprofile").DropdownNumericValue>]: never; }) | undefined;
+            } & { [K_21 in Exclude<keyof I_1["TradeProfile"]["AggregateNotionalLimit"], keyof import("./sologenic/com-fs-trade-profile-model/tradeprofile").DropdownNumericValue>]: never; }) | undefined;
             SingleOrderLimit?: ({
                 Value?: number | undefined;
                 IsGreaterThan?: boolean | undefined;
             } & {
                 Value?: number | undefined;
                 IsGreaterThan?: boolean | undefined;
-            } & { [K_24 in Exclude<keyof I_1["TradeProfile"]["SingleOrderLimit"], keyof import("./sologenic/com-fs-trade-profile-model/tradeprofile").DropdownNumericValue>]: never; }) | undefined;
+            } & { [K_22 in Exclude<keyof I_1["TradeProfile"]["SingleOrderLimit"], keyof import("./sologenic/com-fs-trade-profile-model/tradeprofile").DropdownNumericValue>]: never; }) | undefined;
             MaxOrderQuantity?: ({
                 Value?: number | undefined;
                 IsGreaterThan?: boolean | undefined;
             } & {
                 Value?: number | undefined;
                 IsGreaterThan?: boolean | undefined;
-            } & { [K_25 in Exclude<keyof I_1["TradeProfile"]["MaxOrderQuantity"], keyof import("./sologenic/com-fs-trade-profile-model/tradeprofile").DropdownNumericValue>]: never; }) | undefined;
+            } & { [K_23 in Exclude<keyof I_1["TradeProfile"]["MaxOrderQuantity"], keyof import("./sologenic/com-fs-trade-profile-model/tradeprofile").DropdownNumericValue>]: never; }) | undefined;
             AggressivePercentage?: number | undefined;
             SymbolGrossADVPercent?: number | undefined;
             PriceCheckDeviation?: number | undefined;
             DuplicateOrderLimit?: number | undefined;
-        } & { [K_26 in Exclude<keyof I_1["TradeProfile"], keyof TradeProfileDetails>]: never; }) | undefined;
-        KYCInquiries?: (string[] & string[] & { [K_27 in Exclude<keyof I_1["KYCInquiries"], keyof string[]>]: never; }) | undefined;
+        } & { [K_24 in Exclude<keyof I_1["TradeProfile"], keyof TradeProfileDetails>]: never; }) | undefined;
+        KYCInquiries?: (string[] & string[] & { [K_25 in Exclude<keyof I_1["KYCInquiries"], keyof string[]>]: never; }) | undefined;
         KYCDetails?: ({
             Birthdate?: string | undefined;
             PhoneNumber?: string | undefined;
@@ -812,12 +735,7 @@ export declare const UserDetails: {
             AddressPostalCode?: string | undefined;
             CountryCode?: string | undefined;
             SocialSecurityNumber?: string | undefined;
-            IdentificationNumbers?: {
-                IssuingCountry?: string | undefined;
-                IdentificationClass?: string | undefined;
-                IdentificationNumber?: string | undefined;
-            }[] | undefined;
-            InquiryID?: string | undefined;
+            IdentificationNumber?: string | undefined;
         } & {
             Birthdate?: string | undefined;
             PhoneNumber?: string | undefined;
@@ -829,26 +747,9 @@ export declare const UserDetails: {
             AddressPostalCode?: string | undefined;
             CountryCode?: string | undefined;
             SocialSecurityNumber?: string | undefined;
-            IdentificationNumbers?: ({
-                IssuingCountry?: string | undefined;
-                IdentificationClass?: string | undefined;
-                IdentificationNumber?: string | undefined;
-            }[] & ({
-                IssuingCountry?: string | undefined;
-                IdentificationClass?: string | undefined;
-                IdentificationNumber?: string | undefined;
-            } & {
-                IssuingCountry?: string | undefined;
-                IdentificationClass?: string | undefined;
-                IdentificationNumber?: string | undefined;
-            } & { [K_28 in Exclude<keyof I_1["KYCDetails"]["IdentificationNumbers"][number], keyof IDNumber>]: never; })[] & { [K_29 in Exclude<keyof I_1["KYCDetails"]["IdentificationNumbers"], keyof {
-                IssuingCountry?: string | undefined;
-                IdentificationClass?: string | undefined;
-                IdentificationNumber?: string | undefined;
-            }[]>]: never; }) | undefined;
-            InquiryID?: string | undefined;
-        } & { [K_30 in Exclude<keyof I_1["KYCDetails"], keyof UserKYCDetails>]: never; }) | undefined;
-    } & { [K_31 in Exclude<keyof I_1, keyof UserDetails>]: never; }>(object: I_1): UserDetails;
+            IdentificationNumber?: string | undefined;
+        } & { [K_26 in Exclude<keyof I_1["KYCDetails"], keyof UserKYCDetails>]: never; }) | undefined;
+    } & { [K_27 in Exclude<keyof I_1, keyof UserDetails>]: never; }>(object: I_1): UserDetails;
 };
 export declare const Employment: {
     encode(message: Employment, writer?: _m0.Writer): _m0.Writer;
@@ -1090,12 +991,7 @@ export declare const User: {
                 AddressPostalCode?: string | undefined;
                 CountryCode?: string | undefined;
                 SocialSecurityNumber?: string | undefined;
-                IdentificationNumbers?: {
-                    IssuingCountry?: string | undefined;
-                    IdentificationClass?: string | undefined;
-                    IdentificationNumber?: string | undefined;
-                }[] | undefined;
-                InquiryID?: string | undefined;
+                IdentificationNumber?: string | undefined;
             } | undefined;
         } | undefined;
         MetaData?: {
@@ -1186,12 +1082,7 @@ export declare const User: {
                 AddressPostalCode?: string | undefined;
                 CountryCode?: string | undefined;
                 SocialSecurityNumber?: string | undefined;
-                IdentificationNumbers?: {
-                    IssuingCountry?: string | undefined;
-                    IdentificationClass?: string | undefined;
-                    IdentificationNumber?: string | undefined;
-                }[] | undefined;
-                InquiryID?: string | undefined;
+                IdentificationNumber?: string | undefined;
             } | undefined;
         } & {
             UserID?: string | undefined;
@@ -1348,12 +1239,7 @@ export declare const User: {
                 AddressPostalCode?: string | undefined;
                 CountryCode?: string | undefined;
                 SocialSecurityNumber?: string | undefined;
-                IdentificationNumbers?: {
-                    IssuingCountry?: string | undefined;
-                    IdentificationClass?: string | undefined;
-                    IdentificationNumber?: string | undefined;
-                }[] | undefined;
-                InquiryID?: string | undefined;
+                IdentificationNumber?: string | undefined;
             } & {
                 Birthdate?: string | undefined;
                 PhoneNumber?: string | undefined;
@@ -1365,26 +1251,9 @@ export declare const User: {
                 AddressPostalCode?: string | undefined;
                 CountryCode?: string | undefined;
                 SocialSecurityNumber?: string | undefined;
-                IdentificationNumbers?: ({
-                    IssuingCountry?: string | undefined;
-                    IdentificationClass?: string | undefined;
-                    IdentificationNumber?: string | undefined;
-                }[] & ({
-                    IssuingCountry?: string | undefined;
-                    IdentificationClass?: string | undefined;
-                    IdentificationNumber?: string | undefined;
-                } & {
-                    IssuingCountry?: string | undefined;
-                    IdentificationClass?: string | undefined;
-                    IdentificationNumber?: string | undefined;
-                } & { [K_12 in Exclude<keyof I["User"]["KYCDetails"]["IdentificationNumbers"][number], keyof IDNumber>]: never; })[] & { [K_13 in Exclude<keyof I["User"]["KYCDetails"]["IdentificationNumbers"], keyof {
-                    IssuingCountry?: string | undefined;
-                    IdentificationClass?: string | undefined;
-                    IdentificationNumber?: string | undefined;
-                }[]>]: never; }) | undefined;
-                InquiryID?: string | undefined;
-            } & { [K_14 in Exclude<keyof I["User"]["KYCDetails"], keyof UserKYCDetails>]: never; }) | undefined;
-        } & { [K_15 in Exclude<keyof I["User"], keyof UserDetails>]: never; }) | undefined;
+                IdentificationNumber?: string | undefined;
+            } & { [K_12 in Exclude<keyof I["User"]["KYCDetails"], keyof UserKYCDetails>]: never; }) | undefined;
+        } & { [K_13 in Exclude<keyof I["User"], keyof UserDetails>]: never; }) | undefined;
         MetaData?: ({
             Network?: Network | undefined;
             UpdatedAt?: Date | undefined;
@@ -1395,7 +1264,7 @@ export declare const User: {
             UpdatedAt?: Date | undefined;
             CreatedAt?: Date | undefined;
             UpdatedByAccount?: string | undefined;
-        } & { [K_16 in Exclude<keyof I["MetaData"], keyof MetaData>]: never; }) | undefined;
+        } & { [K_14 in Exclude<keyof I["MetaData"], keyof MetaData>]: never; }) | undefined;
         Audit?: ({
             ChangedBy?: string | undefined;
             ChangedAt?: Date | undefined;
@@ -1404,8 +1273,8 @@ export declare const User: {
             ChangedBy?: string | undefined;
             ChangedAt?: Date | undefined;
             Reason?: string | undefined;
-        } & { [K_17 in Exclude<keyof I["Audit"], keyof Audit>]: never; }) | undefined;
-    } & { [K_18 in Exclude<keyof I, keyof User>]: never; }>(base?: I | undefined): User;
+        } & { [K_15 in Exclude<keyof I["Audit"], keyof Audit>]: never; }) | undefined;
+    } & { [K_16 in Exclude<keyof I, keyof User>]: never; }>(base?: I | undefined): User;
     fromPartial<I_1 extends {
         User?: {
             UserID?: string | undefined;
@@ -1483,12 +1352,7 @@ export declare const User: {
                 AddressPostalCode?: string | undefined;
                 CountryCode?: string | undefined;
                 SocialSecurityNumber?: string | undefined;
-                IdentificationNumbers?: {
-                    IssuingCountry?: string | undefined;
-                    IdentificationClass?: string | undefined;
-                    IdentificationNumber?: string | undefined;
-                }[] | undefined;
-                InquiryID?: string | undefined;
+                IdentificationNumber?: string | undefined;
             } | undefined;
         } | undefined;
         MetaData?: {
@@ -1579,12 +1443,7 @@ export declare const User: {
                 AddressPostalCode?: string | undefined;
                 CountryCode?: string | undefined;
                 SocialSecurityNumber?: string | undefined;
-                IdentificationNumbers?: {
-                    IssuingCountry?: string | undefined;
-                    IdentificationClass?: string | undefined;
-                    IdentificationNumber?: string | undefined;
-                }[] | undefined;
-                InquiryID?: string | undefined;
+                IdentificationNumber?: string | undefined;
             } | undefined;
         } & {
             UserID?: string | undefined;
@@ -1607,7 +1466,7 @@ export declare const User: {
                 Address?: string | undefined;
                 Alias?: string | undefined;
                 Type?: WalletType | undefined;
-            } & { [K_19 in Exclude<keyof I_1["User"]["Wallets"][number], keyof Wallet>]: never; })[] & { [K_20 in Exclude<keyof I_1["User"]["Wallets"], keyof {
+            } & { [K_17 in Exclude<keyof I_1["User"]["Wallets"][number], keyof Wallet>]: never; })[] & { [K_18 in Exclude<keyof I_1["User"]["Wallets"], keyof {
                 Address?: string | undefined;
                 Alias?: string | undefined;
                 Type?: WalletType | undefined;
@@ -1621,7 +1480,7 @@ export declare const User: {
             } & {
                 URL?: string | undefined;
                 Type?: SocialType | undefined;
-            } & { [K_21 in Exclude<keyof I_1["User"]["Socials"][number], keyof Social>]: never; })[] & { [K_22 in Exclude<keyof I_1["User"]["Socials"], keyof {
+            } & { [K_19 in Exclude<keyof I_1["User"]["Socials"][number], keyof Social>]: never; })[] & { [K_20 in Exclude<keyof I_1["User"]["Socials"], keyof {
                 URL?: string | undefined;
                 Type?: SocialType | undefined;
             }[]>]: never; }) | undefined;
@@ -1663,7 +1522,7 @@ export declare const User: {
                     Amount?: number | undefined;
                     Currency?: string | undefined;
                     Frequency?: IncomeFrequency | undefined;
-                } & { [K_23 in Exclude<keyof I_1["User"]["Employment"]["Income"], keyof Income>]: never; }) | undefined;
+                } & { [K_21 in Exclude<keyof I_1["User"]["Employment"]["Income"], keyof Income>]: never; }) | undefined;
                 Contact?: ({
                     Name?: string | undefined;
                     Email?: string | undefined;
@@ -1674,10 +1533,10 @@ export declare const User: {
                     Email?: string | undefined;
                     Phone?: string | undefined;
                     Address?: string | undefined;
-                } & { [K_24 in Exclude<keyof I_1["User"]["Employment"]["Contact"], keyof EmployerContact>]: never; }) | undefined;
+                } & { [K_22 in Exclude<keyof I_1["User"]["Employment"]["Contact"], keyof EmployerContact>]: never; }) | undefined;
                 IsVerified?: boolean | undefined;
                 VerifiedAt?: string | undefined;
-            } & { [K_25 in Exclude<keyof I_1["User"]["Employment"], keyof Employment>]: never; }) | undefined;
+            } & { [K_23 in Exclude<keyof I_1["User"]["Employment"], keyof Employment>]: never; }) | undefined;
             Role?: Role | undefined;
             TradeProfile?: ({
                 IsTradingEnabled?: boolean | undefined;
@@ -1709,27 +1568,27 @@ export declare const User: {
                 } & {
                     Value?: number | undefined;
                     IsGreaterThan?: boolean | undefined;
-                } & { [K_26 in Exclude<keyof I_1["User"]["TradeProfile"]["AggregateNotionalLimit"], keyof import("./sologenic/com-fs-trade-profile-model/tradeprofile").DropdownNumericValue>]: never; }) | undefined;
+                } & { [K_24 in Exclude<keyof I_1["User"]["TradeProfile"]["AggregateNotionalLimit"], keyof import("./sologenic/com-fs-trade-profile-model/tradeprofile").DropdownNumericValue>]: never; }) | undefined;
                 SingleOrderLimit?: ({
                     Value?: number | undefined;
                     IsGreaterThan?: boolean | undefined;
                 } & {
                     Value?: number | undefined;
                     IsGreaterThan?: boolean | undefined;
-                } & { [K_27 in Exclude<keyof I_1["User"]["TradeProfile"]["SingleOrderLimit"], keyof import("./sologenic/com-fs-trade-profile-model/tradeprofile").DropdownNumericValue>]: never; }) | undefined;
+                } & { [K_25 in Exclude<keyof I_1["User"]["TradeProfile"]["SingleOrderLimit"], keyof import("./sologenic/com-fs-trade-profile-model/tradeprofile").DropdownNumericValue>]: never; }) | undefined;
                 MaxOrderQuantity?: ({
                     Value?: number | undefined;
                     IsGreaterThan?: boolean | undefined;
                 } & {
                     Value?: number | undefined;
                     IsGreaterThan?: boolean | undefined;
-                } & { [K_28 in Exclude<keyof I_1["User"]["TradeProfile"]["MaxOrderQuantity"], keyof import("./sologenic/com-fs-trade-profile-model/tradeprofile").DropdownNumericValue>]: never; }) | undefined;
+                } & { [K_26 in Exclude<keyof I_1["User"]["TradeProfile"]["MaxOrderQuantity"], keyof import("./sologenic/com-fs-trade-profile-model/tradeprofile").DropdownNumericValue>]: never; }) | undefined;
                 AggressivePercentage?: number | undefined;
                 SymbolGrossADVPercent?: number | undefined;
                 PriceCheckDeviation?: number | undefined;
                 DuplicateOrderLimit?: number | undefined;
-            } & { [K_29 in Exclude<keyof I_1["User"]["TradeProfile"], keyof TradeProfileDetails>]: never; }) | undefined;
-            KYCInquiries?: (string[] & string[] & { [K_30 in Exclude<keyof I_1["User"]["KYCInquiries"], keyof string[]>]: never; }) | undefined;
+            } & { [K_27 in Exclude<keyof I_1["User"]["TradeProfile"], keyof TradeProfileDetails>]: never; }) | undefined;
+            KYCInquiries?: (string[] & string[] & { [K_28 in Exclude<keyof I_1["User"]["KYCInquiries"], keyof string[]>]: never; }) | undefined;
             KYCDetails?: ({
                 Birthdate?: string | undefined;
                 PhoneNumber?: string | undefined;
@@ -1741,12 +1600,7 @@ export declare const User: {
                 AddressPostalCode?: string | undefined;
                 CountryCode?: string | undefined;
                 SocialSecurityNumber?: string | undefined;
-                IdentificationNumbers?: {
-                    IssuingCountry?: string | undefined;
-                    IdentificationClass?: string | undefined;
-                    IdentificationNumber?: string | undefined;
-                }[] | undefined;
-                InquiryID?: string | undefined;
+                IdentificationNumber?: string | undefined;
             } & {
                 Birthdate?: string | undefined;
                 PhoneNumber?: string | undefined;
@@ -1758,26 +1612,9 @@ export declare const User: {
                 AddressPostalCode?: string | undefined;
                 CountryCode?: string | undefined;
                 SocialSecurityNumber?: string | undefined;
-                IdentificationNumbers?: ({
-                    IssuingCountry?: string | undefined;
-                    IdentificationClass?: string | undefined;
-                    IdentificationNumber?: string | undefined;
-                }[] & ({
-                    IssuingCountry?: string | undefined;
-                    IdentificationClass?: string | undefined;
-                    IdentificationNumber?: string | undefined;
-                } & {
-                    IssuingCountry?: string | undefined;
-                    IdentificationClass?: string | undefined;
-                    IdentificationNumber?: string | undefined;
-                } & { [K_31 in Exclude<keyof I_1["User"]["KYCDetails"]["IdentificationNumbers"][number], keyof IDNumber>]: never; })[] & { [K_32 in Exclude<keyof I_1["User"]["KYCDetails"]["IdentificationNumbers"], keyof {
-                    IssuingCountry?: string | undefined;
-                    IdentificationClass?: string | undefined;
-                    IdentificationNumber?: string | undefined;
-                }[]>]: never; }) | undefined;
-                InquiryID?: string | undefined;
-            } & { [K_33 in Exclude<keyof I_1["User"]["KYCDetails"], keyof UserKYCDetails>]: never; }) | undefined;
-        } & { [K_34 in Exclude<keyof I_1["User"], keyof UserDetails>]: never; }) | undefined;
+                IdentificationNumber?: string | undefined;
+            } & { [K_29 in Exclude<keyof I_1["User"]["KYCDetails"], keyof UserKYCDetails>]: never; }) | undefined;
+        } & { [K_30 in Exclude<keyof I_1["User"], keyof UserDetails>]: never; }) | undefined;
         MetaData?: ({
             Network?: Network | undefined;
             UpdatedAt?: Date | undefined;
@@ -1788,7 +1625,7 @@ export declare const User: {
             UpdatedAt?: Date | undefined;
             CreatedAt?: Date | undefined;
             UpdatedByAccount?: string | undefined;
-        } & { [K_35 in Exclude<keyof I_1["MetaData"], keyof MetaData>]: never; }) | undefined;
+        } & { [K_31 in Exclude<keyof I_1["MetaData"], keyof MetaData>]: never; }) | undefined;
         Audit?: ({
             ChangedBy?: string | undefined;
             ChangedAt?: Date | undefined;
@@ -1797,8 +1634,8 @@ export declare const User: {
             ChangedBy?: string | undefined;
             ChangedAt?: Date | undefined;
             Reason?: string | undefined;
-        } & { [K_36 in Exclude<keyof I_1["Audit"], keyof Audit>]: never; }) | undefined;
-    } & { [K_37 in Exclude<keyof I_1, keyof User>]: never; }>(object: I_1): User;
+        } & { [K_32 in Exclude<keyof I_1["Audit"], keyof Audit>]: never; }) | undefined;
+    } & { [K_33 in Exclude<keyof I_1, keyof User>]: never; }>(object: I_1): User;
 };
 export declare const UserID: {
     encode(message: UserID, writer?: _m0.Writer): _m0.Writer;
@@ -1951,12 +1788,7 @@ export declare const UserList: {
                     AddressPostalCode?: string | undefined;
                     CountryCode?: string | undefined;
                     SocialSecurityNumber?: string | undefined;
-                    IdentificationNumbers?: {
-                        IssuingCountry?: string | undefined;
-                        IdentificationClass?: string | undefined;
-                        IdentificationNumber?: string | undefined;
-                    }[] | undefined;
-                    InquiryID?: string | undefined;
+                    IdentificationNumber?: string | undefined;
                 } | undefined;
             } | undefined;
             MetaData?: {
@@ -2050,12 +1882,7 @@ export declare const UserList: {
                     AddressPostalCode?: string | undefined;
                     CountryCode?: string | undefined;
                     SocialSecurityNumber?: string | undefined;
-                    IdentificationNumbers?: {
-                        IssuingCountry?: string | undefined;
-                        IdentificationClass?: string | undefined;
-                        IdentificationNumber?: string | undefined;
-                    }[] | undefined;
-                    InquiryID?: string | undefined;
+                    IdentificationNumber?: string | undefined;
                 } | undefined;
             } | undefined;
             MetaData?: {
@@ -2146,12 +1973,7 @@ export declare const UserList: {
                     AddressPostalCode?: string | undefined;
                     CountryCode?: string | undefined;
                     SocialSecurityNumber?: string | undefined;
-                    IdentificationNumbers?: {
-                        IssuingCountry?: string | undefined;
-                        IdentificationClass?: string | undefined;
-                        IdentificationNumber?: string | undefined;
-                    }[] | undefined;
-                    InquiryID?: string | undefined;
+                    IdentificationNumber?: string | undefined;
                 } | undefined;
             } | undefined;
             MetaData?: {
@@ -2242,12 +2064,7 @@ export declare const UserList: {
                     AddressPostalCode?: string | undefined;
                     CountryCode?: string | undefined;
                     SocialSecurityNumber?: string | undefined;
-                    IdentificationNumbers?: {
-                        IssuingCountry?: string | undefined;
-                        IdentificationClass?: string | undefined;
-                        IdentificationNumber?: string | undefined;
-                    }[] | undefined;
-                    InquiryID?: string | undefined;
+                    IdentificationNumber?: string | undefined;
                 } | undefined;
             } & {
                 UserID?: string | undefined;
@@ -2404,12 +2221,7 @@ export declare const UserList: {
                     AddressPostalCode?: string | undefined;
                     CountryCode?: string | undefined;
                     SocialSecurityNumber?: string | undefined;
-                    IdentificationNumbers?: {
-                        IssuingCountry?: string | undefined;
-                        IdentificationClass?: string | undefined;
-                        IdentificationNumber?: string | undefined;
-                    }[] | undefined;
-                    InquiryID?: string | undefined;
+                    IdentificationNumber?: string | undefined;
                 } & {
                     Birthdate?: string | undefined;
                     PhoneNumber?: string | undefined;
@@ -2421,26 +2233,9 @@ export declare const UserList: {
                     AddressPostalCode?: string | undefined;
                     CountryCode?: string | undefined;
                     SocialSecurityNumber?: string | undefined;
-                    IdentificationNumbers?: ({
-                        IssuingCountry?: string | undefined;
-                        IdentificationClass?: string | undefined;
-                        IdentificationNumber?: string | undefined;
-                    }[] & ({
-                        IssuingCountry?: string | undefined;
-                        IdentificationClass?: string | undefined;
-                        IdentificationNumber?: string | undefined;
-                    } & {
-                        IssuingCountry?: string | undefined;
-                        IdentificationClass?: string | undefined;
-                        IdentificationNumber?: string | undefined;
-                    } & { [K_12 in Exclude<keyof I["Users"][number]["User"]["KYCDetails"]["IdentificationNumbers"][number], keyof IDNumber>]: never; })[] & { [K_13 in Exclude<keyof I["Users"][number]["User"]["KYCDetails"]["IdentificationNumbers"], keyof {
-                        IssuingCountry?: string | undefined;
-                        IdentificationClass?: string | undefined;
-                        IdentificationNumber?: string | undefined;
-                    }[]>]: never; }) | undefined;
-                    InquiryID?: string | undefined;
-                } & { [K_14 in Exclude<keyof I["Users"][number]["User"]["KYCDetails"], keyof UserKYCDetails>]: never; }) | undefined;
-            } & { [K_15 in Exclude<keyof I["Users"][number]["User"], keyof UserDetails>]: never; }) | undefined;
+                    IdentificationNumber?: string | undefined;
+                } & { [K_12 in Exclude<keyof I["Users"][number]["User"]["KYCDetails"], keyof UserKYCDetails>]: never; }) | undefined;
+            } & { [K_13 in Exclude<keyof I["Users"][number]["User"], keyof UserDetails>]: never; }) | undefined;
             MetaData?: ({
                 Network?: Network | undefined;
                 UpdatedAt?: Date | undefined;
@@ -2451,7 +2246,7 @@ export declare const UserList: {
                 UpdatedAt?: Date | undefined;
                 CreatedAt?: Date | undefined;
                 UpdatedByAccount?: string | undefined;
-            } & { [K_16 in Exclude<keyof I["Users"][number]["MetaData"], keyof MetaData>]: never; }) | undefined;
+            } & { [K_14 in Exclude<keyof I["Users"][number]["MetaData"], keyof MetaData>]: never; }) | undefined;
             Audit?: ({
                 ChangedBy?: string | undefined;
                 ChangedAt?: Date | undefined;
@@ -2460,8 +2255,8 @@ export declare const UserList: {
                 ChangedBy?: string | undefined;
                 ChangedAt?: Date | undefined;
                 Reason?: string | undefined;
-            } & { [K_17 in Exclude<keyof I["Users"][number]["Audit"], keyof Audit>]: never; }) | undefined;
-        } & { [K_18 in Exclude<keyof I["Users"][number], keyof User>]: never; })[] & { [K_19 in Exclude<keyof I["Users"], keyof {
+            } & { [K_15 in Exclude<keyof I["Users"][number]["Audit"], keyof Audit>]: never; }) | undefined;
+        } & { [K_16 in Exclude<keyof I["Users"][number], keyof User>]: never; })[] & { [K_17 in Exclude<keyof I["Users"], keyof {
             User?: {
                 UserID?: string | undefined;
                 FirstName?: string | undefined;
@@ -2538,12 +2333,7 @@ export declare const UserList: {
                     AddressPostalCode?: string | undefined;
                     CountryCode?: string | undefined;
                     SocialSecurityNumber?: string | undefined;
-                    IdentificationNumbers?: {
-                        IssuingCountry?: string | undefined;
-                        IdentificationClass?: string | undefined;
-                        IdentificationNumber?: string | undefined;
-                    }[] | undefined;
-                    InquiryID?: string | undefined;
+                    IdentificationNumber?: string | undefined;
                 } | undefined;
             } | undefined;
             MetaData?: {
@@ -2559,7 +2349,7 @@ export declare const UserList: {
             } | undefined;
         }[]>]: never; }) | undefined;
         Offset?: number | undefined;
-    } & { [K_20 in Exclude<keyof I, keyof UserList>]: never; }>(base?: I | undefined): UserList;
+    } & { [K_18 in Exclude<keyof I, keyof UserList>]: never; }>(base?: I | undefined): UserList;
     fromPartial<I_1 extends {
         Users?: {
             User?: {
@@ -2638,12 +2428,7 @@ export declare const UserList: {
                     AddressPostalCode?: string | undefined;
                     CountryCode?: string | undefined;
                     SocialSecurityNumber?: string | undefined;
-                    IdentificationNumbers?: {
-                        IssuingCountry?: string | undefined;
-                        IdentificationClass?: string | undefined;
-                        IdentificationNumber?: string | undefined;
-                    }[] | undefined;
-                    InquiryID?: string | undefined;
+                    IdentificationNumber?: string | undefined;
                 } | undefined;
             } | undefined;
             MetaData?: {
@@ -2737,12 +2522,7 @@ export declare const UserList: {
                     AddressPostalCode?: string | undefined;
                     CountryCode?: string | undefined;
                     SocialSecurityNumber?: string | undefined;
-                    IdentificationNumbers?: {
-                        IssuingCountry?: string | undefined;
-                        IdentificationClass?: string | undefined;
-                        IdentificationNumber?: string | undefined;
-                    }[] | undefined;
-                    InquiryID?: string | undefined;
+                    IdentificationNumber?: string | undefined;
                 } | undefined;
             } | undefined;
             MetaData?: {
@@ -2833,12 +2613,7 @@ export declare const UserList: {
                     AddressPostalCode?: string | undefined;
                     CountryCode?: string | undefined;
                     SocialSecurityNumber?: string | undefined;
-                    IdentificationNumbers?: {
-                        IssuingCountry?: string | undefined;
-                        IdentificationClass?: string | undefined;
-                        IdentificationNumber?: string | undefined;
-                    }[] | undefined;
-                    InquiryID?: string | undefined;
+                    IdentificationNumber?: string | undefined;
                 } | undefined;
             } | undefined;
             MetaData?: {
@@ -2929,12 +2704,7 @@ export declare const UserList: {
                     AddressPostalCode?: string | undefined;
                     CountryCode?: string | undefined;
                     SocialSecurityNumber?: string | undefined;
-                    IdentificationNumbers?: {
-                        IssuingCountry?: string | undefined;
-                        IdentificationClass?: string | undefined;
-                        IdentificationNumber?: string | undefined;
-                    }[] | undefined;
-                    InquiryID?: string | undefined;
+                    IdentificationNumber?: string | undefined;
                 } | undefined;
             } & {
                 UserID?: string | undefined;
@@ -2957,7 +2727,7 @@ export declare const UserList: {
                     Address?: string | undefined;
                     Alias?: string | undefined;
                     Type?: WalletType | undefined;
-                } & { [K_21 in Exclude<keyof I_1["Users"][number]["User"]["Wallets"][number], keyof Wallet>]: never; })[] & { [K_22 in Exclude<keyof I_1["Users"][number]["User"]["Wallets"], keyof {
+                } & { [K_19 in Exclude<keyof I_1["Users"][number]["User"]["Wallets"][number], keyof Wallet>]: never; })[] & { [K_20 in Exclude<keyof I_1["Users"][number]["User"]["Wallets"], keyof {
                     Address?: string | undefined;
                     Alias?: string | undefined;
                     Type?: WalletType | undefined;
@@ -2971,7 +2741,7 @@ export declare const UserList: {
                 } & {
                     URL?: string | undefined;
                     Type?: SocialType | undefined;
-                } & { [K_23 in Exclude<keyof I_1["Users"][number]["User"]["Socials"][number], keyof Social>]: never; })[] & { [K_24 in Exclude<keyof I_1["Users"][number]["User"]["Socials"], keyof {
+                } & { [K_21 in Exclude<keyof I_1["Users"][number]["User"]["Socials"][number], keyof Social>]: never; })[] & { [K_22 in Exclude<keyof I_1["Users"][number]["User"]["Socials"], keyof {
                     URL?: string | undefined;
                     Type?: SocialType | undefined;
                 }[]>]: never; }) | undefined;
@@ -3013,7 +2783,7 @@ export declare const UserList: {
                         Amount?: number | undefined;
                         Currency?: string | undefined;
                         Frequency?: IncomeFrequency | undefined;
-                    } & { [K_25 in Exclude<keyof I_1["Users"][number]["User"]["Employment"]["Income"], keyof Income>]: never; }) | undefined;
+                    } & { [K_23 in Exclude<keyof I_1["Users"][number]["User"]["Employment"]["Income"], keyof Income>]: never; }) | undefined;
                     Contact?: ({
                         Name?: string | undefined;
                         Email?: string | undefined;
@@ -3024,10 +2794,10 @@ export declare const UserList: {
                         Email?: string | undefined;
                         Phone?: string | undefined;
                         Address?: string | undefined;
-                    } & { [K_26 in Exclude<keyof I_1["Users"][number]["User"]["Employment"]["Contact"], keyof EmployerContact>]: never; }) | undefined;
+                    } & { [K_24 in Exclude<keyof I_1["Users"][number]["User"]["Employment"]["Contact"], keyof EmployerContact>]: never; }) | undefined;
                     IsVerified?: boolean | undefined;
                     VerifiedAt?: string | undefined;
-                } & { [K_27 in Exclude<keyof I_1["Users"][number]["User"]["Employment"], keyof Employment>]: never; }) | undefined;
+                } & { [K_25 in Exclude<keyof I_1["Users"][number]["User"]["Employment"], keyof Employment>]: never; }) | undefined;
                 Role?: Role | undefined;
                 TradeProfile?: ({
                     IsTradingEnabled?: boolean | undefined;
@@ -3059,27 +2829,27 @@ export declare const UserList: {
                     } & {
                         Value?: number | undefined;
                         IsGreaterThan?: boolean | undefined;
-                    } & { [K_28 in Exclude<keyof I_1["Users"][number]["User"]["TradeProfile"]["AggregateNotionalLimit"], keyof import("./sologenic/com-fs-trade-profile-model/tradeprofile").DropdownNumericValue>]: never; }) | undefined;
+                    } & { [K_26 in Exclude<keyof I_1["Users"][number]["User"]["TradeProfile"]["AggregateNotionalLimit"], keyof import("./sologenic/com-fs-trade-profile-model/tradeprofile").DropdownNumericValue>]: never; }) | undefined;
                     SingleOrderLimit?: ({
                         Value?: number | undefined;
                         IsGreaterThan?: boolean | undefined;
                     } & {
                         Value?: number | undefined;
                         IsGreaterThan?: boolean | undefined;
-                    } & { [K_29 in Exclude<keyof I_1["Users"][number]["User"]["TradeProfile"]["SingleOrderLimit"], keyof import("./sologenic/com-fs-trade-profile-model/tradeprofile").DropdownNumericValue>]: never; }) | undefined;
+                    } & { [K_27 in Exclude<keyof I_1["Users"][number]["User"]["TradeProfile"]["SingleOrderLimit"], keyof import("./sologenic/com-fs-trade-profile-model/tradeprofile").DropdownNumericValue>]: never; }) | undefined;
                     MaxOrderQuantity?: ({
                         Value?: number | undefined;
                         IsGreaterThan?: boolean | undefined;
                     } & {
                         Value?: number | undefined;
                         IsGreaterThan?: boolean | undefined;
-                    } & { [K_30 in Exclude<keyof I_1["Users"][number]["User"]["TradeProfile"]["MaxOrderQuantity"], keyof import("./sologenic/com-fs-trade-profile-model/tradeprofile").DropdownNumericValue>]: never; }) | undefined;
+                    } & { [K_28 in Exclude<keyof I_1["Users"][number]["User"]["TradeProfile"]["MaxOrderQuantity"], keyof import("./sologenic/com-fs-trade-profile-model/tradeprofile").DropdownNumericValue>]: never; }) | undefined;
                     AggressivePercentage?: number | undefined;
                     SymbolGrossADVPercent?: number | undefined;
                     PriceCheckDeviation?: number | undefined;
                     DuplicateOrderLimit?: number | undefined;
-                } & { [K_31 in Exclude<keyof I_1["Users"][number]["User"]["TradeProfile"], keyof TradeProfileDetails>]: never; }) | undefined;
-                KYCInquiries?: (string[] & string[] & { [K_32 in Exclude<keyof I_1["Users"][number]["User"]["KYCInquiries"], keyof string[]>]: never; }) | undefined;
+                } & { [K_29 in Exclude<keyof I_1["Users"][number]["User"]["TradeProfile"], keyof TradeProfileDetails>]: never; }) | undefined;
+                KYCInquiries?: (string[] & string[] & { [K_30 in Exclude<keyof I_1["Users"][number]["User"]["KYCInquiries"], keyof string[]>]: never; }) | undefined;
                 KYCDetails?: ({
                     Birthdate?: string | undefined;
                     PhoneNumber?: string | undefined;
@@ -3091,12 +2861,7 @@ export declare const UserList: {
                     AddressPostalCode?: string | undefined;
                     CountryCode?: string | undefined;
                     SocialSecurityNumber?: string | undefined;
-                    IdentificationNumbers?: {
-                        IssuingCountry?: string | undefined;
-                        IdentificationClass?: string | undefined;
-                        IdentificationNumber?: string | undefined;
-                    }[] | undefined;
-                    InquiryID?: string | undefined;
+                    IdentificationNumber?: string | undefined;
                 } & {
                     Birthdate?: string | undefined;
                     PhoneNumber?: string | undefined;
@@ -3108,26 +2873,9 @@ export declare const UserList: {
                     AddressPostalCode?: string | undefined;
                     CountryCode?: string | undefined;
                     SocialSecurityNumber?: string | undefined;
-                    IdentificationNumbers?: ({
-                        IssuingCountry?: string | undefined;
-                        IdentificationClass?: string | undefined;
-                        IdentificationNumber?: string | undefined;
-                    }[] & ({
-                        IssuingCountry?: string | undefined;
-                        IdentificationClass?: string | undefined;
-                        IdentificationNumber?: string | undefined;
-                    } & {
-                        IssuingCountry?: string | undefined;
-                        IdentificationClass?: string | undefined;
-                        IdentificationNumber?: string | undefined;
-                    } & { [K_33 in Exclude<keyof I_1["Users"][number]["User"]["KYCDetails"]["IdentificationNumbers"][number], keyof IDNumber>]: never; })[] & { [K_34 in Exclude<keyof I_1["Users"][number]["User"]["KYCDetails"]["IdentificationNumbers"], keyof {
-                        IssuingCountry?: string | undefined;
-                        IdentificationClass?: string | undefined;
-                        IdentificationNumber?: string | undefined;
-                    }[]>]: never; }) | undefined;
-                    InquiryID?: string | undefined;
-                } & { [K_35 in Exclude<keyof I_1["Users"][number]["User"]["KYCDetails"], keyof UserKYCDetails>]: never; }) | undefined;
-            } & { [K_36 in Exclude<keyof I_1["Users"][number]["User"], keyof UserDetails>]: never; }) | undefined;
+                    IdentificationNumber?: string | undefined;
+                } & { [K_31 in Exclude<keyof I_1["Users"][number]["User"]["KYCDetails"], keyof UserKYCDetails>]: never; }) | undefined;
+            } & { [K_32 in Exclude<keyof I_1["Users"][number]["User"], keyof UserDetails>]: never; }) | undefined;
             MetaData?: ({
                 Network?: Network | undefined;
                 UpdatedAt?: Date | undefined;
@@ -3138,7 +2886,7 @@ export declare const UserList: {
                 UpdatedAt?: Date | undefined;
                 CreatedAt?: Date | undefined;
                 UpdatedByAccount?: string | undefined;
-            } & { [K_37 in Exclude<keyof I_1["Users"][number]["MetaData"], keyof MetaData>]: never; }) | undefined;
+            } & { [K_33 in Exclude<keyof I_1["Users"][number]["MetaData"], keyof MetaData>]: never; }) | undefined;
             Audit?: ({
                 ChangedBy?: string | undefined;
                 ChangedAt?: Date | undefined;
@@ -3147,8 +2895,8 @@ export declare const UserList: {
                 ChangedBy?: string | undefined;
                 ChangedAt?: Date | undefined;
                 Reason?: string | undefined;
-            } & { [K_38 in Exclude<keyof I_1["Users"][number]["Audit"], keyof Audit>]: never; }) | undefined;
-        } & { [K_39 in Exclude<keyof I_1["Users"][number], keyof User>]: never; })[] & { [K_40 in Exclude<keyof I_1["Users"], keyof {
+            } & { [K_34 in Exclude<keyof I_1["Users"][number]["Audit"], keyof Audit>]: never; }) | undefined;
+        } & { [K_35 in Exclude<keyof I_1["Users"][number], keyof User>]: never; })[] & { [K_36 in Exclude<keyof I_1["Users"], keyof {
             User?: {
                 UserID?: string | undefined;
                 FirstName?: string | undefined;
@@ -3225,12 +2973,7 @@ export declare const UserList: {
                     AddressPostalCode?: string | undefined;
                     CountryCode?: string | undefined;
                     SocialSecurityNumber?: string | undefined;
-                    IdentificationNumbers?: {
-                        IssuingCountry?: string | undefined;
-                        IdentificationClass?: string | undefined;
-                        IdentificationNumber?: string | undefined;
-                    }[] | undefined;
-                    InquiryID?: string | undefined;
+                    IdentificationNumber?: string | undefined;
                 } | undefined;
             } | undefined;
             MetaData?: {
@@ -3246,7 +2989,7 @@ export declare const UserList: {
             } | undefined;
         }[]>]: never; }) | undefined;
         Offset?: number | undefined;
-    } & { [K_41 in Exclude<keyof I_1, keyof UserList>]: never; }>(object: I_1): UserList;
+    } & { [K_37 in Exclude<keyof I_1, keyof UserList>]: never; }>(object: I_1): UserList;
 };
 export declare const StatusMessage: {
     encode(message: StatusMessage, writer?: _m0.Writer): _m0.Writer;

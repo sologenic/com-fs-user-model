@@ -322,8 +322,7 @@ export interface UserKYCDetails {
   AddressPostalCode: string;
   CountryCode: string;
   SocialSecurityNumber: string;
-  IdentificationNumbers: IDNumber[];
-  InquiryID: string;
+  IdentificationNumber: string;
 }
 
 export interface UserDetails {
@@ -535,8 +534,7 @@ function createBaseUserKYCDetails(): UserKYCDetails {
     AddressPostalCode: "",
     CountryCode: "",
     SocialSecurityNumber: "",
-    IdentificationNumbers: [],
-    InquiryID: "",
+    IdentificationNumber: "",
   };
 }
 
@@ -572,11 +570,8 @@ export const UserKYCDetails = {
     if (message.SocialSecurityNumber !== "") {
       writer.uint32(82).string(message.SocialSecurityNumber);
     }
-    for (const v of message.IdentificationNumbers) {
-      IDNumber.encode(v!, writer.uint32(90).fork()).ldelim();
-    }
-    if (message.InquiryID !== "") {
-      writer.uint32(98).string(message.InquiryID);
+    if (message.IdentificationNumber !== "") {
+      writer.uint32(90).string(message.IdentificationNumber);
     }
     return writer;
   },
@@ -663,14 +658,7 @@ export const UserKYCDetails = {
             break;
           }
 
-          message.IdentificationNumbers.push(IDNumber.decode(reader, reader.uint32()));
-          continue;
-        case 12:
-          if (tag !== 98) {
-            break;
-          }
-
-          message.InquiryID = reader.string();
+          message.IdentificationNumber = reader.string();
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -693,10 +681,7 @@ export const UserKYCDetails = {
       AddressPostalCode: isSet(object.AddressPostalCode) ? globalThis.String(object.AddressPostalCode) : "",
       CountryCode: isSet(object.CountryCode) ? globalThis.String(object.CountryCode) : "",
       SocialSecurityNumber: isSet(object.SocialSecurityNumber) ? globalThis.String(object.SocialSecurityNumber) : "",
-      IdentificationNumbers: globalThis.Array.isArray(object?.IdentificationNumbers)
-        ? object.IdentificationNumbers.map((e: any) => IDNumber.fromJSON(e))
-        : [],
-      InquiryID: isSet(object.InquiryID) ? globalThis.String(object.InquiryID) : "",
+      IdentificationNumber: isSet(object.IdentificationNumber) ? globalThis.String(object.IdentificationNumber) : "",
     };
   },
 
@@ -732,11 +717,8 @@ export const UserKYCDetails = {
     if (message.SocialSecurityNumber !== "") {
       obj.SocialSecurityNumber = message.SocialSecurityNumber;
     }
-    if (message.IdentificationNumbers?.length) {
-      obj.IdentificationNumbers = message.IdentificationNumbers.map((e) => IDNumber.toJSON(e));
-    }
-    if (message.InquiryID !== "") {
-      obj.InquiryID = message.InquiryID;
+    if (message.IdentificationNumber !== "") {
+      obj.IdentificationNumber = message.IdentificationNumber;
     }
     return obj;
   },
@@ -756,8 +738,7 @@ export const UserKYCDetails = {
     message.AddressPostalCode = object.AddressPostalCode ?? "";
     message.CountryCode = object.CountryCode ?? "";
     message.SocialSecurityNumber = object.SocialSecurityNumber ?? "";
-    message.IdentificationNumbers = object.IdentificationNumbers?.map((e) => IDNumber.fromPartial(e)) || [];
-    message.InquiryID = object.InquiryID ?? "";
+    message.IdentificationNumber = object.IdentificationNumber ?? "";
     return message;
   },
 };
