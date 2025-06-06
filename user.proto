@@ -10,15 +10,13 @@ import "sologenic/com-fs-utils-lib/models/audit/audit.proto";
 import "sologenic/com-fs-utils-lib/models/role/role.proto";
 import "sologenic/com-fs-utils-lib/models/language/language.proto";
 import "sologenic/com-fs-trade-profile-model/tradeprofile.proto";
-
+import "sologenic/com-fs-document-model/document.proto";
 
 message IDNumber {
     string IssuingCountry = 1;
     string IdentificationClass = 2;
     string IdentificationNumber = 3;
-
 }
-
 
 message UserKYCDetails {
     string Birthdate = 1;
@@ -33,7 +31,6 @@ message UserKYCDetails {
     string SocialSecurityNumber = 10;
     string IdentificationNumber = 11;
 }
-
 
 message UserDetails {
     string UserID = 1; // email address used for firebase authentication
@@ -52,9 +49,9 @@ message UserDetails {
     optional Employment Employment = 14;
     role.Role Role = 15; // A retail user will always have a role of "NORMAL_USER"
     tradeprofile.TradeProfileDetails TradeProfile = 16; // Trade profile details
-    repeated string KYCInquiries = 17; // Array of inquiry ID's 
+    repeated string KYCInquiries = 17; // Array of inquiry ID's
     UserKYCDetails KYCDetails = 18;
-    
+    document.UserDocumentCompliance UserDocumentCompliance = 19;
 }
 
 // TODO: to be verified when more information is available
