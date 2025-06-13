@@ -319,6 +319,7 @@ export declare const UserDetails: {
             SymbolGrossADVPercent?: number | undefined;
             PriceCheckDeviation?: number | undefined;
             DuplicateOrderLimit?: number | undefined;
+            RiskMultiplier?: number | undefined;
         } | undefined;
         KYCInquiries?: string[] | undefined;
         KYCDetails?: {
@@ -456,6 +457,7 @@ export declare const UserDetails: {
             SymbolGrossADVPercent?: number | undefined;
             PriceCheckDeviation?: number | undefined;
             DuplicateOrderLimit?: number | undefined;
+            RiskMultiplier?: number | undefined;
         } & {
             IsTradingEnabled?: boolean | undefined;
             IsOrderAcceptanceEnabled?: boolean | undefined;
@@ -485,6 +487,7 @@ export declare const UserDetails: {
             SymbolGrossADVPercent?: number | undefined;
             PriceCheckDeviation?: number | undefined;
             DuplicateOrderLimit?: number | undefined;
+            RiskMultiplier?: number | undefined;
         } & { [K_10 in Exclude<keyof I["TradeProfile"], keyof TradeProfileDetails>]: never; }) | undefined;
         KYCInquiries?: (string[] & string[] & { [K_11 in Exclude<keyof I["KYCInquiries"], keyof string[]>]: never; }) | undefined;
         KYCDetails?: ({
@@ -611,6 +614,7 @@ export declare const UserDetails: {
             SymbolGrossADVPercent?: number | undefined;
             PriceCheckDeviation?: number | undefined;
             DuplicateOrderLimit?: number | undefined;
+            RiskMultiplier?: number | undefined;
         } | undefined;
         KYCInquiries?: string[] | undefined;
         KYCDetails?: {
@@ -748,6 +752,7 @@ export declare const UserDetails: {
             SymbolGrossADVPercent?: number | undefined;
             PriceCheckDeviation?: number | undefined;
             DuplicateOrderLimit?: number | undefined;
+            RiskMultiplier?: number | undefined;
         } & {
             IsTradingEnabled?: boolean | undefined;
             IsOrderAcceptanceEnabled?: boolean | undefined;
@@ -777,6 +782,7 @@ export declare const UserDetails: {
             SymbolGrossADVPercent?: number | undefined;
             PriceCheckDeviation?: number | undefined;
             DuplicateOrderLimit?: number | undefined;
+            RiskMultiplier?: number | undefined;
         } & { [K_27 in Exclude<keyof I_1["TradeProfile"], keyof TradeProfileDetails>]: never; }) | undefined;
         KYCInquiries?: (string[] & string[] & { [K_28 in Exclude<keyof I_1["KYCInquiries"], keyof string[]>]: never; }) | undefined;
         KYCDetails?: ({
@@ -1068,6 +1074,7 @@ export declare const User: {
                 SymbolGrossADVPercent?: number | undefined;
                 PriceCheckDeviation?: number | undefined;
                 DuplicateOrderLimit?: number | undefined;
+                RiskMultiplier?: number | undefined;
             } | undefined;
             KYCInquiries?: string[] | undefined;
             KYCDetails?: {
@@ -1168,6 +1175,7 @@ export declare const User: {
                 SymbolGrossADVPercent?: number | undefined;
                 PriceCheckDeviation?: number | undefined;
                 DuplicateOrderLimit?: number | undefined;
+                RiskMultiplier?: number | undefined;
             } | undefined;
             KYCInquiries?: string[] | undefined;
             KYCDetails?: {
@@ -1305,6 +1313,7 @@ export declare const User: {
                 SymbolGrossADVPercent?: number | undefined;
                 PriceCheckDeviation?: number | undefined;
                 DuplicateOrderLimit?: number | undefined;
+                RiskMultiplier?: number | undefined;
             } & {
                 IsTradingEnabled?: boolean | undefined;
                 IsOrderAcceptanceEnabled?: boolean | undefined;
@@ -1334,6 +1343,7 @@ export declare const User: {
                 SymbolGrossADVPercent?: number | undefined;
                 PriceCheckDeviation?: number | undefined;
                 DuplicateOrderLimit?: number | undefined;
+                RiskMultiplier?: number | undefined;
             } & { [K_10 in Exclude<keyof I["User"]["TradeProfile"], keyof TradeProfileDetails>]: never; }) | undefined;
             KYCInquiries?: (string[] & string[] & { [K_11 in Exclude<keyof I["User"]["KYCInquiries"], keyof string[]>]: never; }) | undefined;
             KYCDetails?: ({
@@ -1482,6 +1492,7 @@ export declare const User: {
                 SymbolGrossADVPercent?: number | undefined;
                 PriceCheckDeviation?: number | undefined;
                 DuplicateOrderLimit?: number | undefined;
+                RiskMultiplier?: number | undefined;
             } | undefined;
             KYCInquiries?: string[] | undefined;
             KYCDetails?: {
@@ -1582,6 +1593,7 @@ export declare const User: {
                 SymbolGrossADVPercent?: number | undefined;
                 PriceCheckDeviation?: number | undefined;
                 DuplicateOrderLimit?: number | undefined;
+                RiskMultiplier?: number | undefined;
             } | undefined;
             KYCInquiries?: string[] | undefined;
             KYCDetails?: {
@@ -1719,6 +1731,7 @@ export declare const User: {
                 SymbolGrossADVPercent?: number | undefined;
                 PriceCheckDeviation?: number | undefined;
                 DuplicateOrderLimit?: number | undefined;
+                RiskMultiplier?: number | undefined;
             } & {
                 IsTradingEnabled?: boolean | undefined;
                 IsOrderAcceptanceEnabled?: boolean | undefined;
@@ -1748,6 +1761,7 @@ export declare const User: {
                 SymbolGrossADVPercent?: number | undefined;
                 PriceCheckDeviation?: number | undefined;
                 DuplicateOrderLimit?: number | undefined;
+                RiskMultiplier?: number | undefined;
             } & { [K_30 in Exclude<keyof I_1["User"]["TradeProfile"], keyof TradeProfileDetails>]: never; }) | undefined;
             KYCInquiries?: (string[] & string[] & { [K_31 in Exclude<keyof I_1["User"]["KYCInquiries"], keyof string[]>]: never; }) | undefined;
             KYCDetails?: ({
@@ -1971,6 +1985,7 @@ export declare const UserList: {
                     SymbolGrossADVPercent?: number | undefined;
                     PriceCheckDeviation?: number | undefined;
                     DuplicateOrderLimit?: number | undefined;
+                    RiskMultiplier?: number | undefined;
                 } | undefined;
                 KYCInquiries?: string[] | undefined;
                 KYCDetails?: {
@@ -2074,6 +2089,7 @@ export declare const UserList: {
                     SymbolGrossADVPercent?: number | undefined;
                     PriceCheckDeviation?: number | undefined;
                     DuplicateOrderLimit?: number | undefined;
+                    RiskMultiplier?: number | undefined;
                 } | undefined;
                 KYCInquiries?: string[] | undefined;
                 KYCDetails?: {
@@ -2174,6 +2190,7 @@ export declare const UserList: {
                     SymbolGrossADVPercent?: number | undefined;
                     PriceCheckDeviation?: number | undefined;
                     DuplicateOrderLimit?: number | undefined;
+                    RiskMultiplier?: number | undefined;
                 } | undefined;
                 KYCInquiries?: string[] | undefined;
                 KYCDetails?: {
@@ -2274,6 +2291,7 @@ export declare const UserList: {
                     SymbolGrossADVPercent?: number | undefined;
                     PriceCheckDeviation?: number | undefined;
                     DuplicateOrderLimit?: number | undefined;
+                    RiskMultiplier?: number | undefined;
                 } | undefined;
                 KYCInquiries?: string[] | undefined;
                 KYCDetails?: {
@@ -2411,6 +2429,7 @@ export declare const UserList: {
                     SymbolGrossADVPercent?: number | undefined;
                     PriceCheckDeviation?: number | undefined;
                     DuplicateOrderLimit?: number | undefined;
+                    RiskMultiplier?: number | undefined;
                 } & {
                     IsTradingEnabled?: boolean | undefined;
                     IsOrderAcceptanceEnabled?: boolean | undefined;
@@ -2440,6 +2459,7 @@ export declare const UserList: {
                     SymbolGrossADVPercent?: number | undefined;
                     PriceCheckDeviation?: number | undefined;
                     DuplicateOrderLimit?: number | undefined;
+                    RiskMultiplier?: number | undefined;
                 } & { [K_10 in Exclude<keyof I["Users"][number]["User"]["TradeProfile"], keyof TradeProfileDetails>]: never; }) | undefined;
                 KYCInquiries?: (string[] & string[] & { [K_11 in Exclude<keyof I["Users"][number]["User"]["KYCInquiries"], keyof string[]>]: never; }) | undefined;
                 KYCDetails?: ({
@@ -2587,6 +2607,7 @@ export declare const UserList: {
                     SymbolGrossADVPercent?: number | undefined;
                     PriceCheckDeviation?: number | undefined;
                     DuplicateOrderLimit?: number | undefined;
+                    RiskMultiplier?: number | undefined;
                 } | undefined;
                 KYCInquiries?: string[] | undefined;
                 KYCDetails?: {
@@ -2691,6 +2712,7 @@ export declare const UserList: {
                     SymbolGrossADVPercent?: number | undefined;
                     PriceCheckDeviation?: number | undefined;
                     DuplicateOrderLimit?: number | undefined;
+                    RiskMultiplier?: number | undefined;
                 } | undefined;
                 KYCInquiries?: string[] | undefined;
                 KYCDetails?: {
@@ -2794,6 +2816,7 @@ export declare const UserList: {
                     SymbolGrossADVPercent?: number | undefined;
                     PriceCheckDeviation?: number | undefined;
                     DuplicateOrderLimit?: number | undefined;
+                    RiskMultiplier?: number | undefined;
                 } | undefined;
                 KYCInquiries?: string[] | undefined;
                 KYCDetails?: {
@@ -2894,6 +2917,7 @@ export declare const UserList: {
                     SymbolGrossADVPercent?: number | undefined;
                     PriceCheckDeviation?: number | undefined;
                     DuplicateOrderLimit?: number | undefined;
+                    RiskMultiplier?: number | undefined;
                 } | undefined;
                 KYCInquiries?: string[] | undefined;
                 KYCDetails?: {
@@ -2994,6 +3018,7 @@ export declare const UserList: {
                     SymbolGrossADVPercent?: number | undefined;
                     PriceCheckDeviation?: number | undefined;
                     DuplicateOrderLimit?: number | undefined;
+                    RiskMultiplier?: number | undefined;
                 } | undefined;
                 KYCInquiries?: string[] | undefined;
                 KYCDetails?: {
@@ -3131,6 +3156,7 @@ export declare const UserList: {
                     SymbolGrossADVPercent?: number | undefined;
                     PriceCheckDeviation?: number | undefined;
                     DuplicateOrderLimit?: number | undefined;
+                    RiskMultiplier?: number | undefined;
                 } & {
                     IsTradingEnabled?: boolean | undefined;
                     IsOrderAcceptanceEnabled?: boolean | undefined;
@@ -3160,6 +3186,7 @@ export declare const UserList: {
                     SymbolGrossADVPercent?: number | undefined;
                     PriceCheckDeviation?: number | undefined;
                     DuplicateOrderLimit?: number | undefined;
+                    RiskMultiplier?: number | undefined;
                 } & { [K_32 in Exclude<keyof I_1["Users"][number]["User"]["TradeProfile"], keyof TradeProfileDetails>]: never; }) | undefined;
                 KYCInquiries?: (string[] & string[] & { [K_33 in Exclude<keyof I_1["Users"][number]["User"]["KYCInquiries"], keyof string[]>]: never; }) | undefined;
                 KYCDetails?: ({
@@ -3307,6 +3334,7 @@ export declare const UserList: {
                     SymbolGrossADVPercent?: number | undefined;
                     PriceCheckDeviation?: number | undefined;
                     DuplicateOrderLimit?: number | undefined;
+                    RiskMultiplier?: number | undefined;
                 } | undefined;
                 KYCInquiries?: string[] | undefined;
                 KYCDetails?: {
