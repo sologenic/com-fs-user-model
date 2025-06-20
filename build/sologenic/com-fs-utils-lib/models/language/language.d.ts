@@ -1,16 +1,7 @@
 import _m0 from "protobufjs/minimal";
 export declare const protobufPackage = "language";
-export declare enum Lang {
-    LANG_NOT_USED = 0,
-    ENGLISH = 1,
-    SPANISH = 2,
-    KOREAN = 3,
-    UNRECOGNIZED = -1
-}
-export declare function langFromJSON(object: any): Lang;
-export declare function langToJSON(object: Lang): string;
 export interface Language {
-    Language: Lang;
+    Language: string;
     UserConfigured: boolean;
 }
 export declare const Language: {
@@ -19,17 +10,17 @@ export declare const Language: {
     fromJSON(object: any): Language;
     toJSON(message: Language): unknown;
     create<I extends {
-        Language?: Lang | undefined;
+        Language?: string | undefined;
         UserConfigured?: boolean | undefined;
     } & {
-        Language?: Lang | undefined;
+        Language?: string | undefined;
         UserConfigured?: boolean | undefined;
     } & { [K in Exclude<keyof I, keyof Language>]: never; }>(base?: I | undefined): Language;
     fromPartial<I_1 extends {
-        Language?: Lang | undefined;
+        Language?: string | undefined;
         UserConfigured?: boolean | undefined;
     } & {
-        Language?: Lang | undefined;
+        Language?: string | undefined;
         UserConfigured?: boolean | undefined;
     } & { [K_1 in Exclude<keyof I_1, keyof Language>]: never; }>(object: I_1): Language;
 };

@@ -32,6 +32,16 @@ message UserKYCDetails {
     string IdentificationNumber = 11;
 }
 
+enum KYCStatus {
+  KYC_STATUS_UNSPECIFIED = 0; // Default value, should not be used
+  KYC_STATUS_PENDING = 1;     // Inquiry created but not completed
+  KYC_STATUS_IN_REVIEW = 2;   // Inquiry submitted but under manual review
+  KYC_STATUS_APPROVED = 3;    // Inquiry completed and approved
+  KYC_STATUS_REJECTED = 4;    // Inquiry completed and explicitly rejected
+  KYC_STATUS_FAILED = 5;      // Inquiry failed due to an error (e.g., document mismatch, bad image quality)
+  KYC_STATUS_EXPIRED = 6;     // Inquiry expired (e.g., not completed in time)
+}
+
 message UserDetails {
     string UserID = 1; // email address used for firebase authentication
     string FirstName = 2; 
@@ -52,6 +62,8 @@ message UserDetails {
     repeated string KYCInquiries = 17; // Array of inquiry ID's
     UserKYCDetails KYCDetails = 18;
     document.UserDocumentCompliance UserDocumentCompliance = 19;
+    KYCStatus KYCStatus = 20; // Status of KYC verification, e.g., PENDING, APPROVED, REJECTED
+
 }
 
 // TODO: to be verified when more information is available

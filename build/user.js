@@ -9,10 +9,78 @@ import { Timestamp } from "./google/protobuf/timestamp";
 import { UserDocumentCompliance } from "./sologenic/com-fs-document-model/document";
 import { TradeProfileDetails } from "./sologenic/com-fs-trade-profile-model/tradeprofile";
 import { Audit } from "./sologenic/com-fs-utils-lib/models/audit/audit";
-import { langFromJSON, langToJSON } from "./sologenic/com-fs-utils-lib/models/language/language";
+import { Language } from "./sologenic/com-fs-utils-lib/models/language/language";
 import { MetaData, networkFromJSON, networkToJSON, } from "./sologenic/com-fs-utils-lib/models/metadata/metadata";
 import { roleFromJSON, roleToJSON } from "./sologenic/com-fs-utils-lib/models/role/role";
 export const protobufPackage = "user";
+export var KYCStatus;
+(function (KYCStatus) {
+    /** KYC_STATUS_UNSPECIFIED - Default value, should not be used */
+    KYCStatus[KYCStatus["KYC_STATUS_UNSPECIFIED"] = 0] = "KYC_STATUS_UNSPECIFIED";
+    /** KYC_STATUS_PENDING - Inquiry created but not completed */
+    KYCStatus[KYCStatus["KYC_STATUS_PENDING"] = 1] = "KYC_STATUS_PENDING";
+    /** KYC_STATUS_IN_REVIEW - Inquiry submitted but under manual review */
+    KYCStatus[KYCStatus["KYC_STATUS_IN_REVIEW"] = 2] = "KYC_STATUS_IN_REVIEW";
+    /** KYC_STATUS_APPROVED - Inquiry completed and approved */
+    KYCStatus[KYCStatus["KYC_STATUS_APPROVED"] = 3] = "KYC_STATUS_APPROVED";
+    /** KYC_STATUS_REJECTED - Inquiry completed and explicitly rejected */
+    KYCStatus[KYCStatus["KYC_STATUS_REJECTED"] = 4] = "KYC_STATUS_REJECTED";
+    /** KYC_STATUS_FAILED - Inquiry failed due to an error (e.g., document mismatch, bad image quality) */
+    KYCStatus[KYCStatus["KYC_STATUS_FAILED"] = 5] = "KYC_STATUS_FAILED";
+    /** KYC_STATUS_EXPIRED - Inquiry expired (e.g., not completed in time) */
+    KYCStatus[KYCStatus["KYC_STATUS_EXPIRED"] = 6] = "KYC_STATUS_EXPIRED";
+    KYCStatus[KYCStatus["UNRECOGNIZED"] = -1] = "UNRECOGNIZED";
+})(KYCStatus || (KYCStatus = {}));
+export function kYCStatusFromJSON(object) {
+    switch (object) {
+        case 0:
+        case "KYC_STATUS_UNSPECIFIED":
+            return KYCStatus.KYC_STATUS_UNSPECIFIED;
+        case 1:
+        case "KYC_STATUS_PENDING":
+            return KYCStatus.KYC_STATUS_PENDING;
+        case 2:
+        case "KYC_STATUS_IN_REVIEW":
+            return KYCStatus.KYC_STATUS_IN_REVIEW;
+        case 3:
+        case "KYC_STATUS_APPROVED":
+            return KYCStatus.KYC_STATUS_APPROVED;
+        case 4:
+        case "KYC_STATUS_REJECTED":
+            return KYCStatus.KYC_STATUS_REJECTED;
+        case 5:
+        case "KYC_STATUS_FAILED":
+            return KYCStatus.KYC_STATUS_FAILED;
+        case 6:
+        case "KYC_STATUS_EXPIRED":
+            return KYCStatus.KYC_STATUS_EXPIRED;
+        case -1:
+        case "UNRECOGNIZED":
+        default:
+            return KYCStatus.UNRECOGNIZED;
+    }
+}
+export function kYCStatusToJSON(object) {
+    switch (object) {
+        case KYCStatus.KYC_STATUS_UNSPECIFIED:
+            return "KYC_STATUS_UNSPECIFIED";
+        case KYCStatus.KYC_STATUS_PENDING:
+            return "KYC_STATUS_PENDING";
+        case KYCStatus.KYC_STATUS_IN_REVIEW:
+            return "KYC_STATUS_IN_REVIEW";
+        case KYCStatus.KYC_STATUS_APPROVED:
+            return "KYC_STATUS_APPROVED";
+        case KYCStatus.KYC_STATUS_REJECTED:
+            return "KYC_STATUS_REJECTED";
+        case KYCStatus.KYC_STATUS_FAILED:
+            return "KYC_STATUS_FAILED";
+        case KYCStatus.KYC_STATUS_EXPIRED:
+            return "KYC_STATUS_EXPIRED";
+        case KYCStatus.UNRECOGNIZED:
+        default:
+            return "UNRECOGNIZED";
+    }
+}
 export var EmploymentType;
 (function (EmploymentType) {
     EmploymentType[EmploymentType["NOT_USED_EMPLOYMENTTYPE"] = 0] = "NOT_USED_EMPLOYMENTTYPE";
@@ -586,7 +654,7 @@ function createBaseUserDetails() {
         Status: 0,
         Wallets: [],
         Socials: [],
-        Language: 0,
+        Language: undefined,
         ExternalUserID: "",
         OrganizationID: "",
         Employment: undefined,
@@ -595,6 +663,7 @@ function createBaseUserDetails() {
         KYCInquiries: [],
         KYCDetails: undefined,
         UserDocumentCompliance: undefined,
+        KYCStatus: 0,
     };
 }
 export const UserDetails = {
@@ -629,8 +698,8 @@ export const UserDetails = {
         for (const v of message.Socials) {
             Social.encode(v, writer.uint32(82).fork()).ldelim();
         }
-        if (message.Language !== 0) {
-            writer.uint32(88).int32(message.Language);
+        if (message.Language !== undefined) {
+            Language.encode(message.Language, writer.uint32(90).fork()).ldelim();
         }
         if (message.ExternalUserID !== "") {
             writer.uint32(98).string(message.ExternalUserID);
@@ -655,6 +724,9 @@ export const UserDetails = {
         }
         if (message.UserDocumentCompliance !== undefined) {
             UserDocumentCompliance.encode(message.UserDocumentCompliance, writer.uint32(154).fork()).ldelim();
+        }
+        if (message.KYCStatus !== 0) {
+            writer.uint32(160).int32(message.KYCStatus);
         }
         return writer;
     },
@@ -726,10 +798,10 @@ export const UserDetails = {
                     message.Socials.push(Social.decode(reader, reader.uint32()));
                     continue;
                 case 11:
-                    if (tag !== 88) {
+                    if (tag !== 90) {
                         break;
                     }
-                    message.Language = reader.int32();
+                    message.Language = Language.decode(reader, reader.uint32());
                     continue;
                 case 12:
                     if (tag !== 98) {
@@ -779,6 +851,12 @@ export const UserDetails = {
                     }
                     message.UserDocumentCompliance = UserDocumentCompliance.decode(reader, reader.uint32());
                     continue;
+                case 20:
+                    if (tag !== 160) {
+                        break;
+                    }
+                    message.KYCStatus = reader.int32();
+                    continue;
             }
             if ((tag & 7) === 4 || tag === 0) {
                 break;
@@ -799,7 +877,7 @@ export const UserDetails = {
             Status: isSet(object.Status) ? userStatusFromJSON(object.Status) : 0,
             Wallets: globalThis.Array.isArray(object === null || object === void 0 ? void 0 : object.Wallets) ? object.Wallets.map((e) => Wallet.fromJSON(e)) : [],
             Socials: globalThis.Array.isArray(object === null || object === void 0 ? void 0 : object.Socials) ? object.Socials.map((e) => Social.fromJSON(e)) : [],
-            Language: isSet(object.Language) ? langFromJSON(object.Language) : 0,
+            Language: isSet(object.Language) ? Language.fromJSON(object.Language) : undefined,
             ExternalUserID: isSet(object.ExternalUserID) ? globalThis.String(object.ExternalUserID) : "",
             OrganizationID: isSet(object.OrganizationID) ? globalThis.String(object.OrganizationID) : "",
             Employment: isSet(object.Employment) ? Employment.fromJSON(object.Employment) : undefined,
@@ -812,6 +890,7 @@ export const UserDetails = {
             UserDocumentCompliance: isSet(object.UserDocumentCompliance)
                 ? UserDocumentCompliance.fromJSON(object.UserDocumentCompliance)
                 : undefined,
+            KYCStatus: isSet(object.KYCStatus) ? kYCStatusFromJSON(object.KYCStatus) : 0,
         };
     },
     toJSON(message) {
@@ -847,8 +926,8 @@ export const UserDetails = {
         if ((_b = message.Socials) === null || _b === void 0 ? void 0 : _b.length) {
             obj.Socials = message.Socials.map((e) => Social.toJSON(e));
         }
-        if (message.Language !== 0) {
-            obj.Language = langToJSON(message.Language);
+        if (message.Language !== undefined) {
+            obj.Language = Language.toJSON(message.Language);
         }
         if (message.ExternalUserID !== "") {
             obj.ExternalUserID = message.ExternalUserID;
@@ -874,6 +953,9 @@ export const UserDetails = {
         if (message.UserDocumentCompliance !== undefined) {
             obj.UserDocumentCompliance = UserDocumentCompliance.toJSON(message.UserDocumentCompliance);
         }
+        if (message.KYCStatus !== 0) {
+            obj.KYCStatus = kYCStatusToJSON(message.KYCStatus);
+        }
         return obj;
     },
     create(base) {
@@ -892,17 +974,19 @@ export const UserDetails = {
         message.Status = (_h = object.Status) !== null && _h !== void 0 ? _h : 0;
         message.Wallets = ((_j = object.Wallets) === null || _j === void 0 ? void 0 : _j.map((e) => Wallet.fromPartial(e))) || [];
         message.Socials = ((_k = object.Socials) === null || _k === void 0 ? void 0 : _k.map((e) => Social.fromPartial(e))) || [];
-        message.Language = (_l = object.Language) !== null && _l !== void 0 ? _l : 0;
-        message.ExternalUserID = (_m = object.ExternalUserID) !== null && _m !== void 0 ? _m : "";
-        message.OrganizationID = (_o = object.OrganizationID) !== null && _o !== void 0 ? _o : "";
+        message.Language = (object.Language !== undefined && object.Language !== null)
+            ? Language.fromPartial(object.Language)
+            : undefined;
+        message.ExternalUserID = (_l = object.ExternalUserID) !== null && _l !== void 0 ? _l : "";
+        message.OrganizationID = (_m = object.OrganizationID) !== null && _m !== void 0 ? _m : "";
         message.Employment = (object.Employment !== undefined && object.Employment !== null)
             ? Employment.fromPartial(object.Employment)
             : undefined;
-        message.Role = (_p = object.Role) !== null && _p !== void 0 ? _p : 0;
+        message.Role = (_o = object.Role) !== null && _o !== void 0 ? _o : 0;
         message.TradeProfile = (object.TradeProfile !== undefined && object.TradeProfile !== null)
             ? TradeProfileDetails.fromPartial(object.TradeProfile)
             : undefined;
-        message.KYCInquiries = ((_q = object.KYCInquiries) === null || _q === void 0 ? void 0 : _q.map((e) => e)) || [];
+        message.KYCInquiries = ((_p = object.KYCInquiries) === null || _p === void 0 ? void 0 : _p.map((e) => e)) || [];
         message.KYCDetails = (object.KYCDetails !== undefined && object.KYCDetails !== null)
             ? UserKYCDetails.fromPartial(object.KYCDetails)
             : undefined;
@@ -910,6 +994,7 @@ export const UserDetails = {
             (object.UserDocumentCompliance !== undefined && object.UserDocumentCompliance !== null)
                 ? UserDocumentCompliance.fromPartial(object.UserDocumentCompliance)
                 : undefined;
+        message.KYCStatus = (_q = object.KYCStatus) !== null && _q !== void 0 ? _q : 0;
         return message;
     },
 };
