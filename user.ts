@@ -10,7 +10,7 @@ import { Timestamp } from "./google/protobuf/timestamp";
 import { UserDocumentCompliance } from "./sologenic/com-fs-document-model/document";
 import { TradeProfileDetails } from "./sologenic/com-fs-trade-profile-model/tradeprofile";
 import { Audit } from "./sologenic/com-fs-utils-lib/models/audit/audit";
-import { Language } from "./sologenic/com-fs-utils-lib/models/language/language";
+import { Lang, langFromJSON, langToJSON } from "./sologenic/com-fs-utils-lib/models/language/language";
 import {
   MetaData,
   Network,
@@ -409,9 +409,7 @@ export interface UserDetails {
   Status: UserStatus;
   Wallets: Wallet[];
   Socials: Social[];
-  Language:
-    | Language
-    | undefined;
+  Language: Lang;
   /** UUID for the external user identifier in the KYC provider */
   ExternalUserID: string;
   /** UUID */
@@ -833,7 +831,7 @@ function createBaseUserDetails(): UserDetails {
     Status: 0,
     Wallets: [],
     Socials: [],
-    Language: undefined,
+    Language: 0,
     ExternalUserID: "",
     OrganizationID: "",
     Employment: undefined,
@@ -878,8 +876,8 @@ export const UserDetails = {
     for (const v of message.Socials) {
       Social.encode(v!, writer.uint32(82).fork()).ldelim();
     }
-    if (message.Language !== undefined) {
-      Language.encode(message.Language, writer.uint32(90).fork()).ldelim();
+    if (message.Language !== 0) {
+      writer.uint32(88).int32(message.Language);
     }
     if (message.ExternalUserID !== "") {
       writer.uint32(98).string(message.ExternalUserID);
@@ -989,11 +987,11 @@ export const UserDetails = {
           message.Socials.push(Social.decode(reader, reader.uint32()));
           continue;
         case 11:
-          if (tag !== 90) {
+          if (tag !== 88) {
             break;
           }
 
-          message.Language = Language.decode(reader, reader.uint32());
+          message.Language = reader.int32() as any;
           continue;
         case 12:
           if (tag !== 98) {
@@ -1079,7 +1077,7 @@ export const UserDetails = {
       Status: isSet(object.Status) ? userStatusFromJSON(object.Status) : 0,
       Wallets: globalThis.Array.isArray(object?.Wallets) ? object.Wallets.map((e: any) => Wallet.fromJSON(e)) : [],
       Socials: globalThis.Array.isArray(object?.Socials) ? object.Socials.map((e: any) => Social.fromJSON(e)) : [],
-      Language: isSet(object.Language) ? Language.fromJSON(object.Language) : undefined,
+      Language: isSet(object.Language) ? langFromJSON(object.Language) : 0,
       ExternalUserID: isSet(object.ExternalUserID) ? globalThis.String(object.ExternalUserID) : "",
       OrganizationID: isSet(object.OrganizationID) ? globalThis.String(object.OrganizationID) : "",
       Employment: isSet(object.Employment) ? Employment.fromJSON(object.Employment) : undefined,
@@ -1128,8 +1126,8 @@ export const UserDetails = {
     if (message.Socials?.length) {
       obj.Socials = message.Socials.map((e) => Social.toJSON(e));
     }
-    if (message.Language !== undefined) {
-      obj.Language = Language.toJSON(message.Language);
+    if (message.Language !== 0) {
+      obj.Language = langToJSON(message.Language);
     }
     if (message.ExternalUserID !== "") {
       obj.ExternalUserID = message.ExternalUserID;
@@ -1176,9 +1174,7 @@ export const UserDetails = {
     message.Status = object.Status ?? 0;
     message.Wallets = object.Wallets?.map((e) => Wallet.fromPartial(e)) || [];
     message.Socials = object.Socials?.map((e) => Social.fromPartial(e)) || [];
-    message.Language = (object.Language !== undefined && object.Language !== null)
-      ? Language.fromPartial(object.Language)
-      : undefined;
+    message.Language = object.Language ?? 0;
     message.ExternalUserID = object.ExternalUserID ?? "";
     message.OrganizationID = object.OrganizationID ?? "";
     message.Employment = (object.Employment !== undefined && object.Employment !== null)

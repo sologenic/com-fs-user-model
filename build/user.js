@@ -9,7 +9,7 @@ import { Timestamp } from "./google/protobuf/timestamp";
 import { UserDocumentCompliance } from "./sologenic/com-fs-document-model/document";
 import { TradeProfileDetails } from "./sologenic/com-fs-trade-profile-model/tradeprofile";
 import { Audit } from "./sologenic/com-fs-utils-lib/models/audit/audit";
-import { Language } from "./sologenic/com-fs-utils-lib/models/language/language";
+import { langFromJSON, langToJSON } from "./sologenic/com-fs-utils-lib/models/language/language";
 import { MetaData, networkFromJSON, networkToJSON, } from "./sologenic/com-fs-utils-lib/models/metadata/metadata";
 import { roleFromJSON, roleToJSON } from "./sologenic/com-fs-utils-lib/models/role/role";
 export const protobufPackage = "user";
@@ -654,7 +654,7 @@ function createBaseUserDetails() {
         Status: 0,
         Wallets: [],
         Socials: [],
-        Language: undefined,
+        Language: 0,
         ExternalUserID: "",
         OrganizationID: "",
         Employment: undefined,
@@ -698,8 +698,8 @@ export const UserDetails = {
         for (const v of message.Socials) {
             Social.encode(v, writer.uint32(82).fork()).ldelim();
         }
-        if (message.Language !== undefined) {
-            Language.encode(message.Language, writer.uint32(90).fork()).ldelim();
+        if (message.Language !== 0) {
+            writer.uint32(88).int32(message.Language);
         }
         if (message.ExternalUserID !== "") {
             writer.uint32(98).string(message.ExternalUserID);
@@ -798,10 +798,10 @@ export const UserDetails = {
                     message.Socials.push(Social.decode(reader, reader.uint32()));
                     continue;
                 case 11:
-                    if (tag !== 90) {
+                    if (tag !== 88) {
                         break;
                     }
-                    message.Language = Language.decode(reader, reader.uint32());
+                    message.Language = reader.int32();
                     continue;
                 case 12:
                     if (tag !== 98) {
@@ -877,7 +877,7 @@ export const UserDetails = {
             Status: isSet(object.Status) ? userStatusFromJSON(object.Status) : 0,
             Wallets: globalThis.Array.isArray(object === null || object === void 0 ? void 0 : object.Wallets) ? object.Wallets.map((e) => Wallet.fromJSON(e)) : [],
             Socials: globalThis.Array.isArray(object === null || object === void 0 ? void 0 : object.Socials) ? object.Socials.map((e) => Social.fromJSON(e)) : [],
-            Language: isSet(object.Language) ? Language.fromJSON(object.Language) : undefined,
+            Language: isSet(object.Language) ? langFromJSON(object.Language) : 0,
             ExternalUserID: isSet(object.ExternalUserID) ? globalThis.String(object.ExternalUserID) : "",
             OrganizationID: isSet(object.OrganizationID) ? globalThis.String(object.OrganizationID) : "",
             Employment: isSet(object.Employment) ? Employment.fromJSON(object.Employment) : undefined,
@@ -926,8 +926,8 @@ export const UserDetails = {
         if ((_b = message.Socials) === null || _b === void 0 ? void 0 : _b.length) {
             obj.Socials = message.Socials.map((e) => Social.toJSON(e));
         }
-        if (message.Language !== undefined) {
-            obj.Language = Language.toJSON(message.Language);
+        if (message.Language !== 0) {
+            obj.Language = langToJSON(message.Language);
         }
         if (message.ExternalUserID !== "") {
             obj.ExternalUserID = message.ExternalUserID;
@@ -962,7 +962,7 @@ export const UserDetails = {
         return UserDetails.fromPartial(base !== null && base !== void 0 ? base : {});
     },
     fromPartial(object) {
-        var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q;
+        var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q, _r;
         const message = createBaseUserDetails();
         message.UserID = (_a = object.UserID) !== null && _a !== void 0 ? _a : "";
         message.FirstName = (_b = object.FirstName) !== null && _b !== void 0 ? _b : "";
@@ -974,19 +974,17 @@ export const UserDetails = {
         message.Status = (_h = object.Status) !== null && _h !== void 0 ? _h : 0;
         message.Wallets = ((_j = object.Wallets) === null || _j === void 0 ? void 0 : _j.map((e) => Wallet.fromPartial(e))) || [];
         message.Socials = ((_k = object.Socials) === null || _k === void 0 ? void 0 : _k.map((e) => Social.fromPartial(e))) || [];
-        message.Language = (object.Language !== undefined && object.Language !== null)
-            ? Language.fromPartial(object.Language)
-            : undefined;
-        message.ExternalUserID = (_l = object.ExternalUserID) !== null && _l !== void 0 ? _l : "";
-        message.OrganizationID = (_m = object.OrganizationID) !== null && _m !== void 0 ? _m : "";
+        message.Language = (_l = object.Language) !== null && _l !== void 0 ? _l : 0;
+        message.ExternalUserID = (_m = object.ExternalUserID) !== null && _m !== void 0 ? _m : "";
+        message.OrganizationID = (_o = object.OrganizationID) !== null && _o !== void 0 ? _o : "";
         message.Employment = (object.Employment !== undefined && object.Employment !== null)
             ? Employment.fromPartial(object.Employment)
             : undefined;
-        message.Role = (_o = object.Role) !== null && _o !== void 0 ? _o : 0;
+        message.Role = (_p = object.Role) !== null && _p !== void 0 ? _p : 0;
         message.TradeProfile = (object.TradeProfile !== undefined && object.TradeProfile !== null)
             ? TradeProfileDetails.fromPartial(object.TradeProfile)
             : undefined;
-        message.KYCInquiries = ((_p = object.KYCInquiries) === null || _p === void 0 ? void 0 : _p.map((e) => e)) || [];
+        message.KYCInquiries = ((_q = object.KYCInquiries) === null || _q === void 0 ? void 0 : _q.map((e) => e)) || [];
         message.KYCDetails = (object.KYCDetails !== undefined && object.KYCDetails !== null)
             ? UserKYCDetails.fromPartial(object.KYCDetails)
             : undefined;
@@ -994,7 +992,7 @@ export const UserDetails = {
             (object.UserDocumentCompliance !== undefined && object.UserDocumentCompliance !== null)
                 ? UserDocumentCompliance.fromPartial(object.UserDocumentCompliance)
                 : undefined;
-        message.KYCStatus = (_q = object.KYCStatus) !== null && _q !== void 0 ? _q : 0;
+        message.KYCStatus = (_r = object.KYCStatus) !== null && _r !== void 0 ? _r : 0;
         return message;
     },
 };
