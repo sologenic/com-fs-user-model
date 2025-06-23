@@ -445,7 +445,7 @@ type UserKYCDetails struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
-
+	
 	Birthdate            string `protobuf:"bytes,1,opt,name=Birthdate,proto3" json:"Birthdate,omitempty"`
 	PhoneNumber          string `protobuf:"bytes,2,opt,name=PhoneNumber,proto3" json:"PhoneNumber,omitempty"`
 	EmailAddress         string `protobuf:"bytes,3,opt,name=EmailAddress,proto3" json:"EmailAddress,omitempty"`
@@ -457,6 +457,8 @@ type UserKYCDetails struct {
 	CountryCode          string `protobuf:"bytes,9,opt,name=CountryCode,proto3" json:"CountryCode,omitempty"`
 	SocialSecurityNumber string `protobuf:"bytes,10,opt,name=SocialSecurityNumber,proto3" json:"SocialSecurityNumber,omitempty"`
 	IdentificationNumber string `protobuf:"bytes,11,opt,name=IdentificationNumber,proto3" json:"IdentificationNumber,omitempty"`
+	FirstName 					 string `protobuf:"bytes,12,opt,name=FirstName,proto3" json:"FirstName,omitempty"` 
+	LastName              string `protobuf:"bytes,13,opt,name=LastName,proto3" json:"LastName,omitempty"`   
 }
 
 func (x *UserKYCDetails) Reset() {

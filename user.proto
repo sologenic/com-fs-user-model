@@ -30,6 +30,8 @@ message UserKYCDetails {
     string CountryCode = 9;
     string SocialSecurityNumber = 10;
     string IdentificationNumber = 11;
+    string FirstName = 12;
+    string LastName = 13;
 }
 
 enum KYCStatus {
