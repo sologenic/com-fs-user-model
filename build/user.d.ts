@@ -97,6 +97,8 @@ export interface UserKYCDetails {
     CountryCode: string;
     SocialSecurityNumber: string;
     IdentificationNumber: string;
+    FirstName: string;
+    LastName: string;
 }
 export interface UserDetails {
     /** email address used for firebase authentication */
@@ -233,6 +235,8 @@ export declare const UserKYCDetails: {
         CountryCode?: string | undefined;
         SocialSecurityNumber?: string | undefined;
         IdentificationNumber?: string | undefined;
+        FirstName?: string | undefined;
+        LastName?: string | undefined;
     } & {
         Birthdate?: string | undefined;
         PhoneNumber?: string | undefined;
@@ -245,6 +249,8 @@ export declare const UserKYCDetails: {
         CountryCode?: string | undefined;
         SocialSecurityNumber?: string | undefined;
         IdentificationNumber?: string | undefined;
+        FirstName?: string | undefined;
+        LastName?: string | undefined;
     } & { [K in Exclude<keyof I, keyof UserKYCDetails>]: never; }>(base?: I | undefined): UserKYCDetails;
     fromPartial<I_1 extends {
         Birthdate?: string | undefined;
@@ -258,6 +264,8 @@ export declare const UserKYCDetails: {
         CountryCode?: string | undefined;
         SocialSecurityNumber?: string | undefined;
         IdentificationNumber?: string | undefined;
+        FirstName?: string | undefined;
+        LastName?: string | undefined;
     } & {
         Birthdate?: string | undefined;
         PhoneNumber?: string | undefined;
@@ -270,6 +278,8 @@ export declare const UserKYCDetails: {
         CountryCode?: string | undefined;
         SocialSecurityNumber?: string | undefined;
         IdentificationNumber?: string | undefined;
+        FirstName?: string | undefined;
+        LastName?: string | undefined;
     } & { [K_1 in Exclude<keyof I_1, keyof UserKYCDetails>]: never; }>(object: I_1): UserKYCDetails;
 };
 export declare const UserDetails: {
@@ -355,6 +365,8 @@ export declare const UserDetails: {
             CountryCode?: string | undefined;
             SocialSecurityNumber?: string | undefined;
             IdentificationNumber?: string | undefined;
+            FirstName?: string | undefined;
+            LastName?: string | undefined;
         } | undefined;
         UserDocumentCompliance?: {
             SignedDocuments?: {
@@ -524,6 +536,8 @@ export declare const UserDetails: {
             CountryCode?: string | undefined;
             SocialSecurityNumber?: string | undefined;
             IdentificationNumber?: string | undefined;
+            FirstName?: string | undefined;
+            LastName?: string | undefined;
         } & {
             Birthdate?: string | undefined;
             PhoneNumber?: string | undefined;
@@ -536,6 +550,8 @@ export declare const UserDetails: {
             CountryCode?: string | undefined;
             SocialSecurityNumber?: string | undefined;
             IdentificationNumber?: string | undefined;
+            FirstName?: string | undefined;
+            LastName?: string | undefined;
         } & { [K_12 in Exclude<keyof I["KYCDetails"], keyof UserKYCDetails>]: never; }) | undefined;
         UserDocumentCompliance?: ({
             SignedDocuments?: {
@@ -652,6 +668,8 @@ export declare const UserDetails: {
             CountryCode?: string | undefined;
             SocialSecurityNumber?: string | undefined;
             IdentificationNumber?: string | undefined;
+            FirstName?: string | undefined;
+            LastName?: string | undefined;
         } | undefined;
         UserDocumentCompliance?: {
             SignedDocuments?: {
@@ -821,6 +839,8 @@ export declare const UserDetails: {
             CountryCode?: string | undefined;
             SocialSecurityNumber?: string | undefined;
             IdentificationNumber?: string | undefined;
+            FirstName?: string | undefined;
+            LastName?: string | undefined;
         } & {
             Birthdate?: string | undefined;
             PhoneNumber?: string | undefined;
@@ -833,6 +853,8 @@ export declare const UserDetails: {
             CountryCode?: string | undefined;
             SocialSecurityNumber?: string | undefined;
             IdentificationNumber?: string | undefined;
+            FirstName?: string | undefined;
+            LastName?: string | undefined;
         } & { [K_29 in Exclude<keyof I_1["KYCDetails"], keyof UserKYCDetails>]: never; }) | undefined;
         UserDocumentCompliance?: ({
             SignedDocuments?: {
@@ -1114,6 +1136,8 @@ export declare const User: {
                 CountryCode?: string | undefined;
                 SocialSecurityNumber?: string | undefined;
                 IdentificationNumber?: string | undefined;
+                FirstName?: string | undefined;
+                LastName?: string | undefined;
             } | undefined;
             UserDocumentCompliance?: {
                 SignedDocuments?: {
@@ -1216,6 +1240,8 @@ export declare const User: {
                 CountryCode?: string | undefined;
                 SocialSecurityNumber?: string | undefined;
                 IdentificationNumber?: string | undefined;
+                FirstName?: string | undefined;
+                LastName?: string | undefined;
             } | undefined;
             UserDocumentCompliance?: {
                 SignedDocuments?: {
@@ -1385,6 +1411,8 @@ export declare const User: {
                 CountryCode?: string | undefined;
                 SocialSecurityNumber?: string | undefined;
                 IdentificationNumber?: string | undefined;
+                FirstName?: string | undefined;
+                LastName?: string | undefined;
             } & {
                 Birthdate?: string | undefined;
                 PhoneNumber?: string | undefined;
@@ -1397,6 +1425,8 @@ export declare const User: {
                 CountryCode?: string | undefined;
                 SocialSecurityNumber?: string | undefined;
                 IdentificationNumber?: string | undefined;
+                FirstName?: string | undefined;
+                LastName?: string | undefined;
             } & { [K_12 in Exclude<keyof I["User"]["KYCDetails"], keyof UserKYCDetails>]: never; }) | undefined;
             UserDocumentCompliance?: ({
                 SignedDocuments?: {
@@ -1535,6 +1565,8 @@ export declare const User: {
                 CountryCode?: string | undefined;
                 SocialSecurityNumber?: string | undefined;
                 IdentificationNumber?: string | undefined;
+                FirstName?: string | undefined;
+                LastName?: string | undefined;
             } | undefined;
             UserDocumentCompliance?: {
                 SignedDocuments?: {
@@ -1637,6 +1669,8 @@ export declare const User: {
                 CountryCode?: string | undefined;
                 SocialSecurityNumber?: string | undefined;
                 IdentificationNumber?: string | undefined;
+                FirstName?: string | undefined;
+                LastName?: string | undefined;
             } | undefined;
             UserDocumentCompliance?: {
                 SignedDocuments?: {
@@ -1806,6 +1840,8 @@ export declare const User: {
                 CountryCode?: string | undefined;
                 SocialSecurityNumber?: string | undefined;
                 IdentificationNumber?: string | undefined;
+                FirstName?: string | undefined;
+                LastName?: string | undefined;
             } & {
                 Birthdate?: string | undefined;
                 PhoneNumber?: string | undefined;
@@ -1818,6 +1854,8 @@ export declare const User: {
                 CountryCode?: string | undefined;
                 SocialSecurityNumber?: string | undefined;
                 IdentificationNumber?: string | undefined;
+                FirstName?: string | undefined;
+                LastName?: string | undefined;
             } & { [K_32 in Exclude<keyof I_1["User"]["KYCDetails"], keyof UserKYCDetails>]: never; }) | undefined;
             UserDocumentCompliance?: ({
                 SignedDocuments?: {
@@ -2031,6 +2069,8 @@ export declare const UserList: {
                     CountryCode?: string | undefined;
                     SocialSecurityNumber?: string | undefined;
                     IdentificationNumber?: string | undefined;
+                    FirstName?: string | undefined;
+                    LastName?: string | undefined;
                 } | undefined;
                 UserDocumentCompliance?: {
                     SignedDocuments?: {
@@ -2136,6 +2176,8 @@ export declare const UserList: {
                     CountryCode?: string | undefined;
                     SocialSecurityNumber?: string | undefined;
                     IdentificationNumber?: string | undefined;
+                    FirstName?: string | undefined;
+                    LastName?: string | undefined;
                 } | undefined;
                 UserDocumentCompliance?: {
                     SignedDocuments?: {
@@ -2238,6 +2280,8 @@ export declare const UserList: {
                     CountryCode?: string | undefined;
                     SocialSecurityNumber?: string | undefined;
                     IdentificationNumber?: string | undefined;
+                    FirstName?: string | undefined;
+                    LastName?: string | undefined;
                 } | undefined;
                 UserDocumentCompliance?: {
                     SignedDocuments?: {
@@ -2340,6 +2384,8 @@ export declare const UserList: {
                     CountryCode?: string | undefined;
                     SocialSecurityNumber?: string | undefined;
                     IdentificationNumber?: string | undefined;
+                    FirstName?: string | undefined;
+                    LastName?: string | undefined;
                 } | undefined;
                 UserDocumentCompliance?: {
                     SignedDocuments?: {
@@ -2509,6 +2555,8 @@ export declare const UserList: {
                     CountryCode?: string | undefined;
                     SocialSecurityNumber?: string | undefined;
                     IdentificationNumber?: string | undefined;
+                    FirstName?: string | undefined;
+                    LastName?: string | undefined;
                 } & {
                     Birthdate?: string | undefined;
                     PhoneNumber?: string | undefined;
@@ -2521,6 +2569,8 @@ export declare const UserList: {
                     CountryCode?: string | undefined;
                     SocialSecurityNumber?: string | undefined;
                     IdentificationNumber?: string | undefined;
+                    FirstName?: string | undefined;
+                    LastName?: string | undefined;
                 } & { [K_12 in Exclude<keyof I["Users"][number]["User"]["KYCDetails"], keyof UserKYCDetails>]: never; }) | undefined;
                 UserDocumentCompliance?: ({
                     SignedDocuments?: {
@@ -2658,6 +2708,8 @@ export declare const UserList: {
                     CountryCode?: string | undefined;
                     SocialSecurityNumber?: string | undefined;
                     IdentificationNumber?: string | undefined;
+                    FirstName?: string | undefined;
+                    LastName?: string | undefined;
                 } | undefined;
                 UserDocumentCompliance?: {
                     SignedDocuments?: {
@@ -2764,6 +2816,8 @@ export declare const UserList: {
                     CountryCode?: string | undefined;
                     SocialSecurityNumber?: string | undefined;
                     IdentificationNumber?: string | undefined;
+                    FirstName?: string | undefined;
+                    LastName?: string | undefined;
                 } | undefined;
                 UserDocumentCompliance?: {
                     SignedDocuments?: {
@@ -2869,6 +2923,8 @@ export declare const UserList: {
                     CountryCode?: string | undefined;
                     SocialSecurityNumber?: string | undefined;
                     IdentificationNumber?: string | undefined;
+                    FirstName?: string | undefined;
+                    LastName?: string | undefined;
                 } | undefined;
                 UserDocumentCompliance?: {
                     SignedDocuments?: {
@@ -2971,6 +3027,8 @@ export declare const UserList: {
                     CountryCode?: string | undefined;
                     SocialSecurityNumber?: string | undefined;
                     IdentificationNumber?: string | undefined;
+                    FirstName?: string | undefined;
+                    LastName?: string | undefined;
                 } | undefined;
                 UserDocumentCompliance?: {
                     SignedDocuments?: {
@@ -3073,6 +3131,8 @@ export declare const UserList: {
                     CountryCode?: string | undefined;
                     SocialSecurityNumber?: string | undefined;
                     IdentificationNumber?: string | undefined;
+                    FirstName?: string | undefined;
+                    LastName?: string | undefined;
                 } | undefined;
                 UserDocumentCompliance?: {
                     SignedDocuments?: {
@@ -3242,6 +3302,8 @@ export declare const UserList: {
                     CountryCode?: string | undefined;
                     SocialSecurityNumber?: string | undefined;
                     IdentificationNumber?: string | undefined;
+                    FirstName?: string | undefined;
+                    LastName?: string | undefined;
                 } & {
                     Birthdate?: string | undefined;
                     PhoneNumber?: string | undefined;
@@ -3254,6 +3316,8 @@ export declare const UserList: {
                     CountryCode?: string | undefined;
                     SocialSecurityNumber?: string | undefined;
                     IdentificationNumber?: string | undefined;
+                    FirstName?: string | undefined;
+                    LastName?: string | undefined;
                 } & { [K_34 in Exclude<keyof I_1["Users"][number]["User"]["KYCDetails"], keyof UserKYCDetails>]: never; }) | undefined;
                 UserDocumentCompliance?: ({
                     SignedDocuments?: {
@@ -3391,6 +3455,8 @@ export declare const UserList: {
                     CountryCode?: string | undefined;
                     SocialSecurityNumber?: string | undefined;
                     IdentificationNumber?: string | undefined;
+                    FirstName?: string | undefined;
+                    LastName?: string | undefined;
                 } | undefined;
                 UserDocumentCompliance?: {
                     SignedDocuments?: {

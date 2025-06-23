@@ -450,6 +450,8 @@ function createBaseUserKYCDetails() {
         CountryCode: "",
         SocialSecurityNumber: "",
         IdentificationNumber: "",
+        FirstName: "",
+        LastName: "",
     };
 }
 export const UserKYCDetails = {
@@ -486,6 +488,12 @@ export const UserKYCDetails = {
         }
         if (message.IdentificationNumber !== "") {
             writer.uint32(90).string(message.IdentificationNumber);
+        }
+        if (message.FirstName !== "") {
+            writer.uint32(98).string(message.FirstName);
+        }
+        if (message.LastName !== "") {
+            writer.uint32(106).string(message.LastName);
         }
         return writer;
     },
@@ -562,6 +570,18 @@ export const UserKYCDetails = {
                     }
                     message.IdentificationNumber = reader.string();
                     continue;
+                case 12:
+                    if (tag !== 98) {
+                        break;
+                    }
+                    message.FirstName = reader.string();
+                    continue;
+                case 13:
+                    if (tag !== 106) {
+                        break;
+                    }
+                    message.LastName = reader.string();
+                    continue;
             }
             if ((tag & 7) === 4 || tag === 0) {
                 break;
@@ -583,6 +603,8 @@ export const UserKYCDetails = {
             CountryCode: isSet(object.CountryCode) ? globalThis.String(object.CountryCode) : "",
             SocialSecurityNumber: isSet(object.SocialSecurityNumber) ? globalThis.String(object.SocialSecurityNumber) : "",
             IdentificationNumber: isSet(object.IdentificationNumber) ? globalThis.String(object.IdentificationNumber) : "",
+            FirstName: isSet(object.FirstName) ? globalThis.String(object.FirstName) : "",
+            LastName: isSet(object.LastName) ? globalThis.String(object.LastName) : "",
         };
     },
     toJSON(message) {
@@ -620,13 +642,19 @@ export const UserKYCDetails = {
         if (message.IdentificationNumber !== "") {
             obj.IdentificationNumber = message.IdentificationNumber;
         }
+        if (message.FirstName !== "") {
+            obj.FirstName = message.FirstName;
+        }
+        if (message.LastName !== "") {
+            obj.LastName = message.LastName;
+        }
         return obj;
     },
     create(base) {
         return UserKYCDetails.fromPartial(base !== null && base !== void 0 ? base : {});
     },
     fromPartial(object) {
-        var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l;
+        var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o;
         const message = createBaseUserKYCDetails();
         message.Birthdate = (_a = object.Birthdate) !== null && _a !== void 0 ? _a : "";
         message.PhoneNumber = (_b = object.PhoneNumber) !== null && _b !== void 0 ? _b : "";
@@ -639,6 +667,8 @@ export const UserKYCDetails = {
         message.CountryCode = (_j = object.CountryCode) !== null && _j !== void 0 ? _j : "";
         message.SocialSecurityNumber = (_k = object.SocialSecurityNumber) !== null && _k !== void 0 ? _k : "";
         message.IdentificationNumber = (_l = object.IdentificationNumber) !== null && _l !== void 0 ? _l : "";
+        message.FirstName = (_m = object.FirstName) !== null && _m !== void 0 ? _m : "";
+        message.LastName = (_o = object.LastName) !== null && _o !== void 0 ? _o : "";
         return message;
     },
 };

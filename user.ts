@@ -394,6 +394,8 @@ export interface UserKYCDetails {
   CountryCode: string;
   SocialSecurityNumber: string;
   IdentificationNumber: string;
+  FirstName: string;
+  LastName: string;
 }
 
 export interface UserDetails {
@@ -611,6 +613,8 @@ function createBaseUserKYCDetails(): UserKYCDetails {
     CountryCode: "",
     SocialSecurityNumber: "",
     IdentificationNumber: "",
+    FirstName: "",
+    LastName: "",
   };
 }
 
@@ -648,6 +652,12 @@ export const UserKYCDetails = {
     }
     if (message.IdentificationNumber !== "") {
       writer.uint32(90).string(message.IdentificationNumber);
+    }
+    if (message.FirstName !== "") {
+      writer.uint32(98).string(message.FirstName);
+    }
+    if (message.LastName !== "") {
+      writer.uint32(106).string(message.LastName);
     }
     return writer;
   },
@@ -736,6 +746,20 @@ export const UserKYCDetails = {
 
           message.IdentificationNumber = reader.string();
           continue;
+        case 12:
+          if (tag !== 98) {
+            break;
+          }
+
+          message.FirstName = reader.string();
+          continue;
+        case 13:
+          if (tag !== 106) {
+            break;
+          }
+
+          message.LastName = reader.string();
+          continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -758,6 +782,8 @@ export const UserKYCDetails = {
       CountryCode: isSet(object.CountryCode) ? globalThis.String(object.CountryCode) : "",
       SocialSecurityNumber: isSet(object.SocialSecurityNumber) ? globalThis.String(object.SocialSecurityNumber) : "",
       IdentificationNumber: isSet(object.IdentificationNumber) ? globalThis.String(object.IdentificationNumber) : "",
+      FirstName: isSet(object.FirstName) ? globalThis.String(object.FirstName) : "",
+      LastName: isSet(object.LastName) ? globalThis.String(object.LastName) : "",
     };
   },
 
@@ -796,6 +822,12 @@ export const UserKYCDetails = {
     if (message.IdentificationNumber !== "") {
       obj.IdentificationNumber = message.IdentificationNumber;
     }
+    if (message.FirstName !== "") {
+      obj.FirstName = message.FirstName;
+    }
+    if (message.LastName !== "") {
+      obj.LastName = message.LastName;
+    }
     return obj;
   },
 
@@ -815,6 +847,8 @@ export const UserKYCDetails = {
     message.CountryCode = object.CountryCode ?? "";
     message.SocialSecurityNumber = object.SocialSecurityNumber ?? "";
     message.IdentificationNumber = object.IdentificationNumber ?? "";
+    message.FirstName = object.FirstName ?? "";
+    message.LastName = object.LastName ?? "";
     return message;
   },
 };
