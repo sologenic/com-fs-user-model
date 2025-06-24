@@ -51,8 +51,8 @@ github.com/sologenic/com-fs-utils-lib/go/logger v0.0.0-20250530185346-13f30acaff
 github.com/sologenic/com-fs-utils-lib/go/logger v0.0.0-20250530185346-13f30acaff8e/go.mod h1:++g+mQb95rje/dEjNJDM1F1ftwM1GobPgAh1zNG+hEw=
 github.com/sologenic/com-fs-utils-lib/models/audit v0.0.0-20250530185346-13f30acaff8e h1:aMh2OwOwnE123xsXvx+acO/LmJe3wxeExatPN5IZaP8=
 github.com/sologenic/com-fs-utils-lib/models/audit v0.0.0-20250530185346-13f30acaff8e/go.mod h1:aesYC9CUzVQ4JUHZwpLYx0yeNK1Sl37vzLKmDKQiyoY=
-github.com/sologenic/com-fs-utils-lib/models/language v0.0.0-20250530185346-13f30acaff8e h1:n9sNefyZfbtYhWX/zWRLhi7y024pMrhEkZyDIKWU6aM=
-github.com/sologenic/com-fs-utils-lib/models/language v0.0.0-20250530185346-13f30acaff8e/go.mod h1:ipl1XbvOUcvF9Hp1DJwvfhMLialqJS/btL6QvT2eTZI=
+github.com/sologenic/com-fs-utils-lib/models/language v0.0.0-20250610001621-c73b8e9ef79e h1:wvUKkqsFNqpMs0GYKE7CGkfB4J0XiVNhbUclOGL+XSE=
+github.com/sologenic/com-fs-utils-lib/models/language v0.0.0-20250610001621-c73b8e9ef79e/go.mod h1:ipl1XbvOUcvF9Hp1DJwvfhMLialqJS/btL6QvT2eTZI=
 github.com/sologenic/com-fs-utils-lib/models/metadata v0.0.0-20250530185346-13f30acaff8e h1:OnRHyPU8wYocm3WJYGHTZNamg7/LHVza7gnGhmrLXC8=
 github.com/sologenic/com-fs-utils-lib/models/metadata v0.0.0-20250530185346-13f30acaff8e/go.mod h1:ftOGlExX3C/AN24/N3j3+rHo4C7ehxfHNGpimuWv7IQ=
 github.com/sologenic/com-fs-utils-lib/models/role v0.0.0-20250530185346-13f30acaff8e h1:asL3RnrL5xH5/dODpFsCeZBPqBPgzRmqb8IrFp8rRCs=

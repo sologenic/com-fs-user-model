@@ -6,6 +6,25 @@ import { Lang } from "./sologenic/com-fs-utils-lib/models/language/language";
 import { MetaData, Network } from "./sologenic/com-fs-utils-lib/models/metadata/metadata";
 import { Role } from "./sologenic/com-fs-utils-lib/models/role/role";
 export declare const protobufPackage = "user";
+export declare enum KYCStatus {
+    /** KYC_STATUS_UNSPECIFIED - Default value, should not be used */
+    KYC_STATUS_UNSPECIFIED = 0,
+    /** KYC_STATUS_PENDING - Inquiry created but not completed */
+    KYC_STATUS_PENDING = 1,
+    /** KYC_STATUS_IN_REVIEW - Inquiry submitted but under manual review */
+    KYC_STATUS_IN_REVIEW = 2,
+    /** KYC_STATUS_APPROVED - Inquiry completed and approved */
+    KYC_STATUS_APPROVED = 3,
+    /** KYC_STATUS_REJECTED - Inquiry completed and explicitly rejected */
+    KYC_STATUS_REJECTED = 4,
+    /** KYC_STATUS_FAILED - Inquiry failed due to an error (e.g., document mismatch, bad image quality) */
+    KYC_STATUS_FAILED = 5,
+    /** KYC_STATUS_EXPIRED - Inquiry expired (e.g., not completed in time) */
+    KYC_STATUS_EXPIRED = 6,
+    UNRECOGNIZED = -1
+}
+export declare function kYCStatusFromJSON(object: any): KYCStatus;
+export declare function kYCStatusToJSON(object: KYCStatus): string;
 export declare enum EmploymentType {
     NOT_USED_EMPLOYMENTTYPE = 0,
     FULL_TIME = 1,
@@ -78,6 +97,8 @@ export interface UserKYCDetails {
     CountryCode: string;
     SocialSecurityNumber: string;
     IdentificationNumber: string;
+    FirstName: string;
+    LastName: string;
 }
 export interface UserDetails {
     /** email address used for firebase authentication */
@@ -106,6 +127,8 @@ export interface UserDetails {
     KYCInquiries: string[];
     KYCDetails: UserKYCDetails | undefined;
     UserDocumentCompliance: UserDocumentCompliance | undefined;
+    /** Status of KYC verification, e.g., PENDING, APPROVED, REJECTED */
+    KYCStatus: KYCStatus;
 }
 /** TODO: to be verified when more information is available */
 export interface Employment {
@@ -212,6 +235,8 @@ export declare const UserKYCDetails: {
         CountryCode?: string | undefined;
         SocialSecurityNumber?: string | undefined;
         IdentificationNumber?: string | undefined;
+        FirstName?: string | undefined;
+        LastName?: string | undefined;
     } & {
         Birthdate?: string | undefined;
         PhoneNumber?: string | undefined;
@@ -224,6 +249,8 @@ export declare const UserKYCDetails: {
         CountryCode?: string | undefined;
         SocialSecurityNumber?: string | undefined;
         IdentificationNumber?: string | undefined;
+        FirstName?: string | undefined;
+        LastName?: string | undefined;
     } & { [K in Exclude<keyof I, keyof UserKYCDetails>]: never; }>(base?: I | undefined): UserKYCDetails;
     fromPartial<I_1 extends {
         Birthdate?: string | undefined;
@@ -237,6 +264,8 @@ export declare const UserKYCDetails: {
         CountryCode?: string | undefined;
         SocialSecurityNumber?: string | undefined;
         IdentificationNumber?: string | undefined;
+        FirstName?: string | undefined;
+        LastName?: string | undefined;
     } & {
         Birthdate?: string | undefined;
         PhoneNumber?: string | undefined;
@@ -249,6 +278,8 @@ export declare const UserKYCDetails: {
         CountryCode?: string | undefined;
         SocialSecurityNumber?: string | undefined;
         IdentificationNumber?: string | undefined;
+        FirstName?: string | undefined;
+        LastName?: string | undefined;
     } & { [K_1 in Exclude<keyof I_1, keyof UserKYCDetails>]: never; }>(object: I_1): UserKYCDetails;
 };
 export declare const UserDetails: {
@@ -334,6 +365,8 @@ export declare const UserDetails: {
             CountryCode?: string | undefined;
             SocialSecurityNumber?: string | undefined;
             IdentificationNumber?: string | undefined;
+            FirstName?: string | undefined;
+            LastName?: string | undefined;
         } | undefined;
         UserDocumentCompliance?: {
             SignedDocuments?: {
@@ -344,6 +377,7 @@ export declare const UserDetails: {
                 FileMD5SUM?: string | undefined;
             }[] | undefined;
         } | undefined;
+        KYCStatus?: KYCStatus | undefined;
     } & {
         UserID?: string | undefined;
         FirstName?: string | undefined;
@@ -502,6 +536,8 @@ export declare const UserDetails: {
             CountryCode?: string | undefined;
             SocialSecurityNumber?: string | undefined;
             IdentificationNumber?: string | undefined;
+            FirstName?: string | undefined;
+            LastName?: string | undefined;
         } & {
             Birthdate?: string | undefined;
             PhoneNumber?: string | undefined;
@@ -514,6 +550,8 @@ export declare const UserDetails: {
             CountryCode?: string | undefined;
             SocialSecurityNumber?: string | undefined;
             IdentificationNumber?: string | undefined;
+            FirstName?: string | undefined;
+            LastName?: string | undefined;
         } & { [K_12 in Exclude<keyof I["KYCDetails"], keyof UserKYCDetails>]: never; }) | undefined;
         UserDocumentCompliance?: ({
             SignedDocuments?: {
@@ -550,6 +588,7 @@ export declare const UserDetails: {
                 FileMD5SUM?: string | undefined;
             }[]>]: never; }) | undefined;
         } & { [K_15 in Exclude<keyof I["UserDocumentCompliance"], "SignedDocuments">]: never; }) | undefined;
+        KYCStatus?: KYCStatus | undefined;
     } & { [K_16 in Exclude<keyof I, keyof UserDetails>]: never; }>(base?: I | undefined): UserDetails;
     fromPartial<I_1 extends {
         UserID?: string | undefined;
@@ -629,6 +668,8 @@ export declare const UserDetails: {
             CountryCode?: string | undefined;
             SocialSecurityNumber?: string | undefined;
             IdentificationNumber?: string | undefined;
+            FirstName?: string | undefined;
+            LastName?: string | undefined;
         } | undefined;
         UserDocumentCompliance?: {
             SignedDocuments?: {
@@ -639,6 +680,7 @@ export declare const UserDetails: {
                 FileMD5SUM?: string | undefined;
             }[] | undefined;
         } | undefined;
+        KYCStatus?: KYCStatus | undefined;
     } & {
         UserID?: string | undefined;
         FirstName?: string | undefined;
@@ -797,6 +839,8 @@ export declare const UserDetails: {
             CountryCode?: string | undefined;
             SocialSecurityNumber?: string | undefined;
             IdentificationNumber?: string | undefined;
+            FirstName?: string | undefined;
+            LastName?: string | undefined;
         } & {
             Birthdate?: string | undefined;
             PhoneNumber?: string | undefined;
@@ -809,6 +853,8 @@ export declare const UserDetails: {
             CountryCode?: string | undefined;
             SocialSecurityNumber?: string | undefined;
             IdentificationNumber?: string | undefined;
+            FirstName?: string | undefined;
+            LastName?: string | undefined;
         } & { [K_29 in Exclude<keyof I_1["KYCDetails"], keyof UserKYCDetails>]: never; }) | undefined;
         UserDocumentCompliance?: ({
             SignedDocuments?: {
@@ -845,6 +891,7 @@ export declare const UserDetails: {
                 FileMD5SUM?: string | undefined;
             }[]>]: never; }) | undefined;
         } & { [K_32 in Exclude<keyof I_1["UserDocumentCompliance"], "SignedDocuments">]: never; }) | undefined;
+        KYCStatus?: KYCStatus | undefined;
     } & { [K_33 in Exclude<keyof I_1, keyof UserDetails>]: never; }>(object: I_1): UserDetails;
 };
 export declare const Employment: {
@@ -1089,6 +1136,8 @@ export declare const User: {
                 CountryCode?: string | undefined;
                 SocialSecurityNumber?: string | undefined;
                 IdentificationNumber?: string | undefined;
+                FirstName?: string | undefined;
+                LastName?: string | undefined;
             } | undefined;
             UserDocumentCompliance?: {
                 SignedDocuments?: {
@@ -1099,6 +1148,7 @@ export declare const User: {
                     FileMD5SUM?: string | undefined;
                 }[] | undefined;
             } | undefined;
+            KYCStatus?: KYCStatus | undefined;
         } | undefined;
         MetaData?: {
             Network?: Network | undefined;
@@ -1190,6 +1240,8 @@ export declare const User: {
                 CountryCode?: string | undefined;
                 SocialSecurityNumber?: string | undefined;
                 IdentificationNumber?: string | undefined;
+                FirstName?: string | undefined;
+                LastName?: string | undefined;
             } | undefined;
             UserDocumentCompliance?: {
                 SignedDocuments?: {
@@ -1200,6 +1252,7 @@ export declare const User: {
                     FileMD5SUM?: string | undefined;
                 }[] | undefined;
             } | undefined;
+            KYCStatus?: KYCStatus | undefined;
         } & {
             UserID?: string | undefined;
             FirstName?: string | undefined;
@@ -1358,6 +1411,8 @@ export declare const User: {
                 CountryCode?: string | undefined;
                 SocialSecurityNumber?: string | undefined;
                 IdentificationNumber?: string | undefined;
+                FirstName?: string | undefined;
+                LastName?: string | undefined;
             } & {
                 Birthdate?: string | undefined;
                 PhoneNumber?: string | undefined;
@@ -1370,6 +1425,8 @@ export declare const User: {
                 CountryCode?: string | undefined;
                 SocialSecurityNumber?: string | undefined;
                 IdentificationNumber?: string | undefined;
+                FirstName?: string | undefined;
+                LastName?: string | undefined;
             } & { [K_12 in Exclude<keyof I["User"]["KYCDetails"], keyof UserKYCDetails>]: never; }) | undefined;
             UserDocumentCompliance?: ({
                 SignedDocuments?: {
@@ -1406,6 +1463,7 @@ export declare const User: {
                     FileMD5SUM?: string | undefined;
                 }[]>]: never; }) | undefined;
             } & { [K_15 in Exclude<keyof I["User"]["UserDocumentCompliance"], "SignedDocuments">]: never; }) | undefined;
+            KYCStatus?: KYCStatus | undefined;
         } & { [K_16 in Exclude<keyof I["User"], keyof UserDetails>]: never; }) | undefined;
         MetaData?: ({
             Network?: Network | undefined;
@@ -1507,6 +1565,8 @@ export declare const User: {
                 CountryCode?: string | undefined;
                 SocialSecurityNumber?: string | undefined;
                 IdentificationNumber?: string | undefined;
+                FirstName?: string | undefined;
+                LastName?: string | undefined;
             } | undefined;
             UserDocumentCompliance?: {
                 SignedDocuments?: {
@@ -1517,6 +1577,7 @@ export declare const User: {
                     FileMD5SUM?: string | undefined;
                 }[] | undefined;
             } | undefined;
+            KYCStatus?: KYCStatus | undefined;
         } | undefined;
         MetaData?: {
             Network?: Network | undefined;
@@ -1608,6 +1669,8 @@ export declare const User: {
                 CountryCode?: string | undefined;
                 SocialSecurityNumber?: string | undefined;
                 IdentificationNumber?: string | undefined;
+                FirstName?: string | undefined;
+                LastName?: string | undefined;
             } | undefined;
             UserDocumentCompliance?: {
                 SignedDocuments?: {
@@ -1618,6 +1681,7 @@ export declare const User: {
                     FileMD5SUM?: string | undefined;
                 }[] | undefined;
             } | undefined;
+            KYCStatus?: KYCStatus | undefined;
         } & {
             UserID?: string | undefined;
             FirstName?: string | undefined;
@@ -1776,6 +1840,8 @@ export declare const User: {
                 CountryCode?: string | undefined;
                 SocialSecurityNumber?: string | undefined;
                 IdentificationNumber?: string | undefined;
+                FirstName?: string | undefined;
+                LastName?: string | undefined;
             } & {
                 Birthdate?: string | undefined;
                 PhoneNumber?: string | undefined;
@@ -1788,6 +1854,8 @@ export declare const User: {
                 CountryCode?: string | undefined;
                 SocialSecurityNumber?: string | undefined;
                 IdentificationNumber?: string | undefined;
+                FirstName?: string | undefined;
+                LastName?: string | undefined;
             } & { [K_32 in Exclude<keyof I_1["User"]["KYCDetails"], keyof UserKYCDetails>]: never; }) | undefined;
             UserDocumentCompliance?: ({
                 SignedDocuments?: {
@@ -1824,6 +1892,7 @@ export declare const User: {
                     FileMD5SUM?: string | undefined;
                 }[]>]: never; }) | undefined;
             } & { [K_35 in Exclude<keyof I_1["User"]["UserDocumentCompliance"], "SignedDocuments">]: never; }) | undefined;
+            KYCStatus?: KYCStatus | undefined;
         } & { [K_36 in Exclude<keyof I_1["User"], keyof UserDetails>]: never; }) | undefined;
         MetaData?: ({
             Network?: Network | undefined;
@@ -2000,6 +2069,8 @@ export declare const UserList: {
                     CountryCode?: string | undefined;
                     SocialSecurityNumber?: string | undefined;
                     IdentificationNumber?: string | undefined;
+                    FirstName?: string | undefined;
+                    LastName?: string | undefined;
                 } | undefined;
                 UserDocumentCompliance?: {
                     SignedDocuments?: {
@@ -2010,6 +2081,7 @@ export declare const UserList: {
                         FileMD5SUM?: string | undefined;
                     }[] | undefined;
                 } | undefined;
+                KYCStatus?: KYCStatus | undefined;
             } | undefined;
             MetaData?: {
                 Network?: Network | undefined;
@@ -2104,6 +2176,8 @@ export declare const UserList: {
                     CountryCode?: string | undefined;
                     SocialSecurityNumber?: string | undefined;
                     IdentificationNumber?: string | undefined;
+                    FirstName?: string | undefined;
+                    LastName?: string | undefined;
                 } | undefined;
                 UserDocumentCompliance?: {
                     SignedDocuments?: {
@@ -2114,6 +2188,7 @@ export declare const UserList: {
                         FileMD5SUM?: string | undefined;
                     }[] | undefined;
                 } | undefined;
+                KYCStatus?: KYCStatus | undefined;
             } | undefined;
             MetaData?: {
                 Network?: Network | undefined;
@@ -2205,6 +2280,8 @@ export declare const UserList: {
                     CountryCode?: string | undefined;
                     SocialSecurityNumber?: string | undefined;
                     IdentificationNumber?: string | undefined;
+                    FirstName?: string | undefined;
+                    LastName?: string | undefined;
                 } | undefined;
                 UserDocumentCompliance?: {
                     SignedDocuments?: {
@@ -2215,6 +2292,7 @@ export declare const UserList: {
                         FileMD5SUM?: string | undefined;
                     }[] | undefined;
                 } | undefined;
+                KYCStatus?: KYCStatus | undefined;
             } | undefined;
             MetaData?: {
                 Network?: Network | undefined;
@@ -2306,6 +2384,8 @@ export declare const UserList: {
                     CountryCode?: string | undefined;
                     SocialSecurityNumber?: string | undefined;
                     IdentificationNumber?: string | undefined;
+                    FirstName?: string | undefined;
+                    LastName?: string | undefined;
                 } | undefined;
                 UserDocumentCompliance?: {
                     SignedDocuments?: {
@@ -2316,6 +2396,7 @@ export declare const UserList: {
                         FileMD5SUM?: string | undefined;
                     }[] | undefined;
                 } | undefined;
+                KYCStatus?: KYCStatus | undefined;
             } & {
                 UserID?: string | undefined;
                 FirstName?: string | undefined;
@@ -2474,6 +2555,8 @@ export declare const UserList: {
                     CountryCode?: string | undefined;
                     SocialSecurityNumber?: string | undefined;
                     IdentificationNumber?: string | undefined;
+                    FirstName?: string | undefined;
+                    LastName?: string | undefined;
                 } & {
                     Birthdate?: string | undefined;
                     PhoneNumber?: string | undefined;
@@ -2486,6 +2569,8 @@ export declare const UserList: {
                     CountryCode?: string | undefined;
                     SocialSecurityNumber?: string | undefined;
                     IdentificationNumber?: string | undefined;
+                    FirstName?: string | undefined;
+                    LastName?: string | undefined;
                 } & { [K_12 in Exclude<keyof I["Users"][number]["User"]["KYCDetails"], keyof UserKYCDetails>]: never; }) | undefined;
                 UserDocumentCompliance?: ({
                     SignedDocuments?: {
@@ -2522,6 +2607,7 @@ export declare const UserList: {
                         FileMD5SUM?: string | undefined;
                     }[]>]: never; }) | undefined;
                 } & { [K_15 in Exclude<keyof I["Users"][number]["User"]["UserDocumentCompliance"], "SignedDocuments">]: never; }) | undefined;
+                KYCStatus?: KYCStatus | undefined;
             } & { [K_16 in Exclude<keyof I["Users"][number]["User"], keyof UserDetails>]: never; }) | undefined;
             MetaData?: ({
                 Network?: Network | undefined;
@@ -2622,6 +2708,8 @@ export declare const UserList: {
                     CountryCode?: string | undefined;
                     SocialSecurityNumber?: string | undefined;
                     IdentificationNumber?: string | undefined;
+                    FirstName?: string | undefined;
+                    LastName?: string | undefined;
                 } | undefined;
                 UserDocumentCompliance?: {
                     SignedDocuments?: {
@@ -2632,6 +2720,7 @@ export declare const UserList: {
                         FileMD5SUM?: string | undefined;
                     }[] | undefined;
                 } | undefined;
+                KYCStatus?: KYCStatus | undefined;
             } | undefined;
             MetaData?: {
                 Network?: Network | undefined;
@@ -2727,6 +2816,8 @@ export declare const UserList: {
                     CountryCode?: string | undefined;
                     SocialSecurityNumber?: string | undefined;
                     IdentificationNumber?: string | undefined;
+                    FirstName?: string | undefined;
+                    LastName?: string | undefined;
                 } | undefined;
                 UserDocumentCompliance?: {
                     SignedDocuments?: {
@@ -2737,6 +2828,7 @@ export declare const UserList: {
                         FileMD5SUM?: string | undefined;
                     }[] | undefined;
                 } | undefined;
+                KYCStatus?: KYCStatus | undefined;
             } | undefined;
             MetaData?: {
                 Network?: Network | undefined;
@@ -2831,6 +2923,8 @@ export declare const UserList: {
                     CountryCode?: string | undefined;
                     SocialSecurityNumber?: string | undefined;
                     IdentificationNumber?: string | undefined;
+                    FirstName?: string | undefined;
+                    LastName?: string | undefined;
                 } | undefined;
                 UserDocumentCompliance?: {
                     SignedDocuments?: {
@@ -2841,6 +2935,7 @@ export declare const UserList: {
                         FileMD5SUM?: string | undefined;
                     }[] | undefined;
                 } | undefined;
+                KYCStatus?: KYCStatus | undefined;
             } | undefined;
             MetaData?: {
                 Network?: Network | undefined;
@@ -2932,6 +3027,8 @@ export declare const UserList: {
                     CountryCode?: string | undefined;
                     SocialSecurityNumber?: string | undefined;
                     IdentificationNumber?: string | undefined;
+                    FirstName?: string | undefined;
+                    LastName?: string | undefined;
                 } | undefined;
                 UserDocumentCompliance?: {
                     SignedDocuments?: {
@@ -2942,6 +3039,7 @@ export declare const UserList: {
                         FileMD5SUM?: string | undefined;
                     }[] | undefined;
                 } | undefined;
+                KYCStatus?: KYCStatus | undefined;
             } | undefined;
             MetaData?: {
                 Network?: Network | undefined;
@@ -3033,6 +3131,8 @@ export declare const UserList: {
                     CountryCode?: string | undefined;
                     SocialSecurityNumber?: string | undefined;
                     IdentificationNumber?: string | undefined;
+                    FirstName?: string | undefined;
+                    LastName?: string | undefined;
                 } | undefined;
                 UserDocumentCompliance?: {
                     SignedDocuments?: {
@@ -3043,6 +3143,7 @@ export declare const UserList: {
                         FileMD5SUM?: string | undefined;
                     }[] | undefined;
                 } | undefined;
+                KYCStatus?: KYCStatus | undefined;
             } & {
                 UserID?: string | undefined;
                 FirstName?: string | undefined;
@@ -3201,6 +3302,8 @@ export declare const UserList: {
                     CountryCode?: string | undefined;
                     SocialSecurityNumber?: string | undefined;
                     IdentificationNumber?: string | undefined;
+                    FirstName?: string | undefined;
+                    LastName?: string | undefined;
                 } & {
                     Birthdate?: string | undefined;
                     PhoneNumber?: string | undefined;
@@ -3213,6 +3316,8 @@ export declare const UserList: {
                     CountryCode?: string | undefined;
                     SocialSecurityNumber?: string | undefined;
                     IdentificationNumber?: string | undefined;
+                    FirstName?: string | undefined;
+                    LastName?: string | undefined;
                 } & { [K_34 in Exclude<keyof I_1["Users"][number]["User"]["KYCDetails"], keyof UserKYCDetails>]: never; }) | undefined;
                 UserDocumentCompliance?: ({
                     SignedDocuments?: {
@@ -3249,6 +3354,7 @@ export declare const UserList: {
                         FileMD5SUM?: string | undefined;
                     }[]>]: never; }) | undefined;
                 } & { [K_37 in Exclude<keyof I_1["Users"][number]["User"]["UserDocumentCompliance"], "SignedDocuments">]: never; }) | undefined;
+                KYCStatus?: KYCStatus | undefined;
             } & { [K_38 in Exclude<keyof I_1["Users"][number]["User"], keyof UserDetails>]: never; }) | undefined;
             MetaData?: ({
                 Network?: Network | undefined;
@@ -3349,6 +3455,8 @@ export declare const UserList: {
                     CountryCode?: string | undefined;
                     SocialSecurityNumber?: string | undefined;
                     IdentificationNumber?: string | undefined;
+                    FirstName?: string | undefined;
+                    LastName?: string | undefined;
                 } | undefined;
                 UserDocumentCompliance?: {
                     SignedDocuments?: {
@@ -3359,6 +3467,7 @@ export declare const UserList: {
                         FileMD5SUM?: string | undefined;
                     }[] | undefined;
                 } | undefined;
+                KYCStatus?: KYCStatus | undefined;
             } | undefined;
             MetaData?: {
                 Network?: Network | undefined;

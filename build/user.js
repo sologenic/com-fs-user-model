@@ -13,6 +13,74 @@ import { langFromJSON, langToJSON } from "./sologenic/com-fs-utils-lib/models/la
 import { MetaData, networkFromJSON, networkToJSON, } from "./sologenic/com-fs-utils-lib/models/metadata/metadata";
 import { roleFromJSON, roleToJSON } from "./sologenic/com-fs-utils-lib/models/role/role";
 export const protobufPackage = "user";
+export var KYCStatus;
+(function (KYCStatus) {
+    /** KYC_STATUS_UNSPECIFIED - Default value, should not be used */
+    KYCStatus[KYCStatus["KYC_STATUS_UNSPECIFIED"] = 0] = "KYC_STATUS_UNSPECIFIED";
+    /** KYC_STATUS_PENDING - Inquiry created but not completed */
+    KYCStatus[KYCStatus["KYC_STATUS_PENDING"] = 1] = "KYC_STATUS_PENDING";
+    /** KYC_STATUS_IN_REVIEW - Inquiry submitted but under manual review */
+    KYCStatus[KYCStatus["KYC_STATUS_IN_REVIEW"] = 2] = "KYC_STATUS_IN_REVIEW";
+    /** KYC_STATUS_APPROVED - Inquiry completed and approved */
+    KYCStatus[KYCStatus["KYC_STATUS_APPROVED"] = 3] = "KYC_STATUS_APPROVED";
+    /** KYC_STATUS_REJECTED - Inquiry completed and explicitly rejected */
+    KYCStatus[KYCStatus["KYC_STATUS_REJECTED"] = 4] = "KYC_STATUS_REJECTED";
+    /** KYC_STATUS_FAILED - Inquiry failed due to an error (e.g., document mismatch, bad image quality) */
+    KYCStatus[KYCStatus["KYC_STATUS_FAILED"] = 5] = "KYC_STATUS_FAILED";
+    /** KYC_STATUS_EXPIRED - Inquiry expired (e.g., not completed in time) */
+    KYCStatus[KYCStatus["KYC_STATUS_EXPIRED"] = 6] = "KYC_STATUS_EXPIRED";
+    KYCStatus[KYCStatus["UNRECOGNIZED"] = -1] = "UNRECOGNIZED";
+})(KYCStatus || (KYCStatus = {}));
+export function kYCStatusFromJSON(object) {
+    switch (object) {
+        case 0:
+        case "KYC_STATUS_UNSPECIFIED":
+            return KYCStatus.KYC_STATUS_UNSPECIFIED;
+        case 1:
+        case "KYC_STATUS_PENDING":
+            return KYCStatus.KYC_STATUS_PENDING;
+        case 2:
+        case "KYC_STATUS_IN_REVIEW":
+            return KYCStatus.KYC_STATUS_IN_REVIEW;
+        case 3:
+        case "KYC_STATUS_APPROVED":
+            return KYCStatus.KYC_STATUS_APPROVED;
+        case 4:
+        case "KYC_STATUS_REJECTED":
+            return KYCStatus.KYC_STATUS_REJECTED;
+        case 5:
+        case "KYC_STATUS_FAILED":
+            return KYCStatus.KYC_STATUS_FAILED;
+        case 6:
+        case "KYC_STATUS_EXPIRED":
+            return KYCStatus.KYC_STATUS_EXPIRED;
+        case -1:
+        case "UNRECOGNIZED":
+        default:
+            return KYCStatus.UNRECOGNIZED;
+    }
+}
+export function kYCStatusToJSON(object) {
+    switch (object) {
+        case KYCStatus.KYC_STATUS_UNSPECIFIED:
+            return "KYC_STATUS_UNSPECIFIED";
+        case KYCStatus.KYC_STATUS_PENDING:
+            return "KYC_STATUS_PENDING";
+        case KYCStatus.KYC_STATUS_IN_REVIEW:
+            return "KYC_STATUS_IN_REVIEW";
+        case KYCStatus.KYC_STATUS_APPROVED:
+            return "KYC_STATUS_APPROVED";
+        case KYCStatus.KYC_STATUS_REJECTED:
+            return "KYC_STATUS_REJECTED";
+        case KYCStatus.KYC_STATUS_FAILED:
+            return "KYC_STATUS_FAILED";
+        case KYCStatus.KYC_STATUS_EXPIRED:
+            return "KYC_STATUS_EXPIRED";
+        case KYCStatus.UNRECOGNIZED:
+        default:
+            return "UNRECOGNIZED";
+    }
+}
 export var EmploymentType;
 (function (EmploymentType) {
     EmploymentType[EmploymentType["NOT_USED_EMPLOYMENTTYPE"] = 0] = "NOT_USED_EMPLOYMENTTYPE";
@@ -382,6 +450,8 @@ function createBaseUserKYCDetails() {
         CountryCode: "",
         SocialSecurityNumber: "",
         IdentificationNumber: "",
+        FirstName: "",
+        LastName: "",
     };
 }
 export const UserKYCDetails = {
@@ -418,6 +488,12 @@ export const UserKYCDetails = {
         }
         if (message.IdentificationNumber !== "") {
             writer.uint32(90).string(message.IdentificationNumber);
+        }
+        if (message.FirstName !== "") {
+            writer.uint32(98).string(message.FirstName);
+        }
+        if (message.LastName !== "") {
+            writer.uint32(106).string(message.LastName);
         }
         return writer;
     },
@@ -494,6 +570,18 @@ export const UserKYCDetails = {
                     }
                     message.IdentificationNumber = reader.string();
                     continue;
+                case 12:
+                    if (tag !== 98) {
+                        break;
+                    }
+                    message.FirstName = reader.string();
+                    continue;
+                case 13:
+                    if (tag !== 106) {
+                        break;
+                    }
+                    message.LastName = reader.string();
+                    continue;
             }
             if ((tag & 7) === 4 || tag === 0) {
                 break;
@@ -515,6 +603,8 @@ export const UserKYCDetails = {
             CountryCode: isSet(object.CountryCode) ? globalThis.String(object.CountryCode) : "",
             SocialSecurityNumber: isSet(object.SocialSecurityNumber) ? globalThis.String(object.SocialSecurityNumber) : "",
             IdentificationNumber: isSet(object.IdentificationNumber) ? globalThis.String(object.IdentificationNumber) : "",
+            FirstName: isSet(object.FirstName) ? globalThis.String(object.FirstName) : "",
+            LastName: isSet(object.LastName) ? globalThis.String(object.LastName) : "",
         };
     },
     toJSON(message) {
@@ -552,13 +642,19 @@ export const UserKYCDetails = {
         if (message.IdentificationNumber !== "") {
             obj.IdentificationNumber = message.IdentificationNumber;
         }
+        if (message.FirstName !== "") {
+            obj.FirstName = message.FirstName;
+        }
+        if (message.LastName !== "") {
+            obj.LastName = message.LastName;
+        }
         return obj;
     },
     create(base) {
         return UserKYCDetails.fromPartial(base !== null && base !== void 0 ? base : {});
     },
     fromPartial(object) {
-        var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l;
+        var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o;
         const message = createBaseUserKYCDetails();
         message.Birthdate = (_a = object.Birthdate) !== null && _a !== void 0 ? _a : "";
         message.PhoneNumber = (_b = object.PhoneNumber) !== null && _b !== void 0 ? _b : "";
@@ -571,6 +667,8 @@ export const UserKYCDetails = {
         message.CountryCode = (_j = object.CountryCode) !== null && _j !== void 0 ? _j : "";
         message.SocialSecurityNumber = (_k = object.SocialSecurityNumber) !== null && _k !== void 0 ? _k : "";
         message.IdentificationNumber = (_l = object.IdentificationNumber) !== null && _l !== void 0 ? _l : "";
+        message.FirstName = (_m = object.FirstName) !== null && _m !== void 0 ? _m : "";
+        message.LastName = (_o = object.LastName) !== null && _o !== void 0 ? _o : "";
         return message;
     },
 };
@@ -595,6 +693,7 @@ function createBaseUserDetails() {
         KYCInquiries: [],
         KYCDetails: undefined,
         UserDocumentCompliance: undefined,
+        KYCStatus: 0,
     };
 }
 export const UserDetails = {
@@ -655,6 +754,9 @@ export const UserDetails = {
         }
         if (message.UserDocumentCompliance !== undefined) {
             UserDocumentCompliance.encode(message.UserDocumentCompliance, writer.uint32(154).fork()).ldelim();
+        }
+        if (message.KYCStatus !== 0) {
+            writer.uint32(160).int32(message.KYCStatus);
         }
         return writer;
     },
@@ -779,6 +881,12 @@ export const UserDetails = {
                     }
                     message.UserDocumentCompliance = UserDocumentCompliance.decode(reader, reader.uint32());
                     continue;
+                case 20:
+                    if (tag !== 160) {
+                        break;
+                    }
+                    message.KYCStatus = reader.int32();
+                    continue;
             }
             if ((tag & 7) === 4 || tag === 0) {
                 break;
@@ -812,6 +920,7 @@ export const UserDetails = {
             UserDocumentCompliance: isSet(object.UserDocumentCompliance)
                 ? UserDocumentCompliance.fromJSON(object.UserDocumentCompliance)
                 : undefined,
+            KYCStatus: isSet(object.KYCStatus) ? kYCStatusFromJSON(object.KYCStatus) : 0,
         };
     },
     toJSON(message) {
@@ -874,13 +983,16 @@ export const UserDetails = {
         if (message.UserDocumentCompliance !== undefined) {
             obj.UserDocumentCompliance = UserDocumentCompliance.toJSON(message.UserDocumentCompliance);
         }
+        if (message.KYCStatus !== 0) {
+            obj.KYCStatus = kYCStatusToJSON(message.KYCStatus);
+        }
         return obj;
     },
     create(base) {
         return UserDetails.fromPartial(base !== null && base !== void 0 ? base : {});
     },
     fromPartial(object) {
-        var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q;
+        var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q, _r;
         const message = createBaseUserDetails();
         message.UserID = (_a = object.UserID) !== null && _a !== void 0 ? _a : "";
         message.FirstName = (_b = object.FirstName) !== null && _b !== void 0 ? _b : "";
@@ -910,6 +1022,7 @@ export const UserDetails = {
             (object.UserDocumentCompliance !== undefined && object.UserDocumentCompliance !== null)
                 ? UserDocumentCompliance.fromPartial(object.UserDocumentCompliance)
                 : undefined;
+        message.KYCStatus = (_r = object.KYCStatus) !== null && _r !== void 0 ? _r : 0;
         return message;
     },
 };

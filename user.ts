@@ -21,6 +21,76 @@ import { Role, roleFromJSON, roleToJSON } from "./sologenic/com-fs-utils-lib/mod
 
 export const protobufPackage = "user";
 
+export enum KYCStatus {
+  /** KYC_STATUS_UNSPECIFIED - Default value, should not be used */
+  KYC_STATUS_UNSPECIFIED = 0,
+  /** KYC_STATUS_PENDING - Inquiry created but not completed */
+  KYC_STATUS_PENDING = 1,
+  /** KYC_STATUS_IN_REVIEW - Inquiry submitted but under manual review */
+  KYC_STATUS_IN_REVIEW = 2,
+  /** KYC_STATUS_APPROVED - Inquiry completed and approved */
+  KYC_STATUS_APPROVED = 3,
+  /** KYC_STATUS_REJECTED - Inquiry completed and explicitly rejected */
+  KYC_STATUS_REJECTED = 4,
+  /** KYC_STATUS_FAILED - Inquiry failed due to an error (e.g., document mismatch, bad image quality) */
+  KYC_STATUS_FAILED = 5,
+  /** KYC_STATUS_EXPIRED - Inquiry expired (e.g., not completed in time) */
+  KYC_STATUS_EXPIRED = 6,
+  UNRECOGNIZED = -1,
+}
+
+export function kYCStatusFromJSON(object: any): KYCStatus {
+  switch (object) {
+    case 0:
+    case "KYC_STATUS_UNSPECIFIED":
+      return KYCStatus.KYC_STATUS_UNSPECIFIED;
+    case 1:
+    case "KYC_STATUS_PENDING":
+      return KYCStatus.KYC_STATUS_PENDING;
+    case 2:
+    case "KYC_STATUS_IN_REVIEW":
+      return KYCStatus.KYC_STATUS_IN_REVIEW;
+    case 3:
+    case "KYC_STATUS_APPROVED":
+      return KYCStatus.KYC_STATUS_APPROVED;
+    case 4:
+    case "KYC_STATUS_REJECTED":
+      return KYCStatus.KYC_STATUS_REJECTED;
+    case 5:
+    case "KYC_STATUS_FAILED":
+      return KYCStatus.KYC_STATUS_FAILED;
+    case 6:
+    case "KYC_STATUS_EXPIRED":
+      return KYCStatus.KYC_STATUS_EXPIRED;
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return KYCStatus.UNRECOGNIZED;
+  }
+}
+
+export function kYCStatusToJSON(object: KYCStatus): string {
+  switch (object) {
+    case KYCStatus.KYC_STATUS_UNSPECIFIED:
+      return "KYC_STATUS_UNSPECIFIED";
+    case KYCStatus.KYC_STATUS_PENDING:
+      return "KYC_STATUS_PENDING";
+    case KYCStatus.KYC_STATUS_IN_REVIEW:
+      return "KYC_STATUS_IN_REVIEW";
+    case KYCStatus.KYC_STATUS_APPROVED:
+      return "KYC_STATUS_APPROVED";
+    case KYCStatus.KYC_STATUS_REJECTED:
+      return "KYC_STATUS_REJECTED";
+    case KYCStatus.KYC_STATUS_FAILED:
+      return "KYC_STATUS_FAILED";
+    case KYCStatus.KYC_STATUS_EXPIRED:
+      return "KYC_STATUS_EXPIRED";
+    case KYCStatus.UNRECOGNIZED:
+    default:
+      return "UNRECOGNIZED";
+  }
+}
+
 export enum EmploymentType {
   NOT_USED_EMPLOYMENTTYPE = 0,
   FULL_TIME = 1,
@@ -324,6 +394,8 @@ export interface UserKYCDetails {
   CountryCode: string;
   SocialSecurityNumber: string;
   IdentificationNumber: string;
+  FirstName: string;
+  LastName: string;
 }
 
 export interface UserDetails {
@@ -356,7 +428,11 @@ export interface UserDetails {
   /** Array of inquiry ID's */
   KYCInquiries: string[];
   KYCDetails: UserKYCDetails | undefined;
-  UserDocumentCompliance: UserDocumentCompliance | undefined;
+  UserDocumentCompliance:
+    | UserDocumentCompliance
+    | undefined;
+  /** Status of KYC verification, e.g., PENDING, APPROVED, REJECTED */
+  KYCStatus: KYCStatus;
 }
 
 /** TODO: to be verified when more information is available */
@@ -537,6 +613,8 @@ function createBaseUserKYCDetails(): UserKYCDetails {
     CountryCode: "",
     SocialSecurityNumber: "",
     IdentificationNumber: "",
+    FirstName: "",
+    LastName: "",
   };
 }
 
@@ -574,6 +652,12 @@ export const UserKYCDetails = {
     }
     if (message.IdentificationNumber !== "") {
       writer.uint32(90).string(message.IdentificationNumber);
+    }
+    if (message.FirstName !== "") {
+      writer.uint32(98).string(message.FirstName);
+    }
+    if (message.LastName !== "") {
+      writer.uint32(106).string(message.LastName);
     }
     return writer;
   },
@@ -662,6 +746,20 @@ export const UserKYCDetails = {
 
           message.IdentificationNumber = reader.string();
           continue;
+        case 12:
+          if (tag !== 98) {
+            break;
+          }
+
+          message.FirstName = reader.string();
+          continue;
+        case 13:
+          if (tag !== 106) {
+            break;
+          }
+
+          message.LastName = reader.string();
+          continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -684,6 +782,8 @@ export const UserKYCDetails = {
       CountryCode: isSet(object.CountryCode) ? globalThis.String(object.CountryCode) : "",
       SocialSecurityNumber: isSet(object.SocialSecurityNumber) ? globalThis.String(object.SocialSecurityNumber) : "",
       IdentificationNumber: isSet(object.IdentificationNumber) ? globalThis.String(object.IdentificationNumber) : "",
+      FirstName: isSet(object.FirstName) ? globalThis.String(object.FirstName) : "",
+      LastName: isSet(object.LastName) ? globalThis.String(object.LastName) : "",
     };
   },
 
@@ -722,6 +822,12 @@ export const UserKYCDetails = {
     if (message.IdentificationNumber !== "") {
       obj.IdentificationNumber = message.IdentificationNumber;
     }
+    if (message.FirstName !== "") {
+      obj.FirstName = message.FirstName;
+    }
+    if (message.LastName !== "") {
+      obj.LastName = message.LastName;
+    }
     return obj;
   },
 
@@ -741,6 +847,8 @@ export const UserKYCDetails = {
     message.CountryCode = object.CountryCode ?? "";
     message.SocialSecurityNumber = object.SocialSecurityNumber ?? "";
     message.IdentificationNumber = object.IdentificationNumber ?? "";
+    message.FirstName = object.FirstName ?? "";
+    message.LastName = object.LastName ?? "";
     return message;
   },
 };
@@ -766,6 +874,7 @@ function createBaseUserDetails(): UserDetails {
     KYCInquiries: [],
     KYCDetails: undefined,
     UserDocumentCompliance: undefined,
+    KYCStatus: 0,
   };
 }
 
@@ -827,6 +936,9 @@ export const UserDetails = {
     }
     if (message.UserDocumentCompliance !== undefined) {
       UserDocumentCompliance.encode(message.UserDocumentCompliance, writer.uint32(154).fork()).ldelim();
+    }
+    if (message.KYCStatus !== 0) {
+      writer.uint32(160).int32(message.KYCStatus);
     }
     return writer;
   },
@@ -971,6 +1083,13 @@ export const UserDetails = {
 
           message.UserDocumentCompliance = UserDocumentCompliance.decode(reader, reader.uint32());
           continue;
+        case 20:
+          if (tag !== 160) {
+            break;
+          }
+
+          message.KYCStatus = reader.int32() as any;
+          continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -1005,6 +1124,7 @@ export const UserDetails = {
       UserDocumentCompliance: isSet(object.UserDocumentCompliance)
         ? UserDocumentCompliance.fromJSON(object.UserDocumentCompliance)
         : undefined,
+      KYCStatus: isSet(object.KYCStatus) ? kYCStatusFromJSON(object.KYCStatus) : 0,
     };
   },
 
@@ -1067,6 +1187,9 @@ export const UserDetails = {
     if (message.UserDocumentCompliance !== undefined) {
       obj.UserDocumentCompliance = UserDocumentCompliance.toJSON(message.UserDocumentCompliance);
     }
+    if (message.KYCStatus !== 0) {
+      obj.KYCStatus = kYCStatusToJSON(message.KYCStatus);
+    }
     return obj;
   },
 
@@ -1103,6 +1226,7 @@ export const UserDetails = {
       (object.UserDocumentCompliance !== undefined && object.UserDocumentCompliance !== null)
         ? UserDocumentCompliance.fromPartial(object.UserDocumentCompliance)
         : undefined;
+    message.KYCStatus = object.KYCStatus ?? 0;
     return message;
   },
 };
