@@ -193,6 +193,7 @@ export interface Filter {
     Limit?: number | undefined;
     InquiryID?: string | undefined;
     Status?: UserStatus | undefined;
+    ExternalUserIDs: string[];
 }
 export declare const IDNumber: {
     encode(message: IDNumber, writer?: _m0.Writer): _m0.Writer;
@@ -3553,6 +3554,7 @@ export declare const Filter: {
         Limit?: number | undefined;
         InquiryID?: string | undefined;
         Status?: UserStatus | undefined;
+        ExternalUserIDs?: string[] | undefined;
     } & {
         UserIDs?: (string[] & string[] & { [K in Exclude<keyof I["UserIDs"], keyof string[]>]: never; }) | undefined;
         Network?: Network | undefined;
@@ -3561,7 +3563,8 @@ export declare const Filter: {
         Limit?: number | undefined;
         InquiryID?: string | undefined;
         Status?: UserStatus | undefined;
-    } & { [K_1 in Exclude<keyof I, keyof Filter>]: never; }>(base?: I | undefined): Filter;
+        ExternalUserIDs?: (string[] & string[] & { [K_1 in Exclude<keyof I["ExternalUserIDs"], keyof string[]>]: never; }) | undefined;
+    } & { [K_2 in Exclude<keyof I, keyof Filter>]: never; }>(base?: I | undefined): Filter;
     fromPartial<I_1 extends {
         UserIDs?: string[] | undefined;
         Network?: Network | undefined;
@@ -3570,15 +3573,17 @@ export declare const Filter: {
         Limit?: number | undefined;
         InquiryID?: string | undefined;
         Status?: UserStatus | undefined;
+        ExternalUserIDs?: string[] | undefined;
     } & {
-        UserIDs?: (string[] & string[] & { [K_2 in Exclude<keyof I_1["UserIDs"], keyof string[]>]: never; }) | undefined;
+        UserIDs?: (string[] & string[] & { [K_3 in Exclude<keyof I_1["UserIDs"], keyof string[]>]: never; }) | undefined;
         Network?: Network | undefined;
         OrganizationID?: string | undefined;
         Offset?: number | undefined;
         Limit?: number | undefined;
         InquiryID?: string | undefined;
         Status?: UserStatus | undefined;
-    } & { [K_3 in Exclude<keyof I_1, keyof Filter>]: never; }>(object: I_1): Filter;
+        ExternalUserIDs?: (string[] & string[] & { [K_4 in Exclude<keyof I_1["ExternalUserIDs"], keyof string[]>]: never; }) | undefined;
+    } & { [K_5 in Exclude<keyof I_1, keyof Filter>]: never; }>(object: I_1): Filter;
 };
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 export type DeepPartial<T> = T extends Builtin ? T : T extends globalThis.Array<infer U> ? globalThis.Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? {

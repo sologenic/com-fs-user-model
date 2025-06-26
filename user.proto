@@ -184,4 +184,5 @@ message Filter {
     optional int32 Limit = 5;
     optional string InquiryID = 6;
     optional UserStatus Status = 7;
+    repeated string ExternalUserIDs = 8;
 }

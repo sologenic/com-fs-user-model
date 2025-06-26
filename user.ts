@@ -509,6 +509,7 @@ export interface Filter {
   Limit?: number | undefined;
   InquiryID?: string | undefined;
   Status?: UserStatus | undefined;
+  ExternalUserIDs: string[];
 }
 
 function createBaseIDNumber(): IDNumber {
@@ -2180,6 +2181,7 @@ function createBaseFilter(): Filter {
     Limit: undefined,
     InquiryID: undefined,
     Status: undefined,
+    ExternalUserIDs: [],
   };
 }
 
@@ -2205,6 +2207,9 @@ export const Filter = {
     }
     if (message.Status !== undefined) {
       writer.uint32(56).int32(message.Status);
+    }
+    for (const v of message.ExternalUserIDs) {
+      writer.uint32(66).string(v!);
     }
     return writer;
   },
@@ -2265,6 +2270,13 @@ export const Filter = {
 
           message.Status = reader.int32() as any;
           continue;
+        case 8:
+          if (tag !== 66) {
+            break;
+          }
+
+          message.ExternalUserIDs.push(reader.string());
+          continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -2283,6 +2295,9 @@ export const Filter = {
       Limit: isSet(object.Limit) ? globalThis.Number(object.Limit) : undefined,
       InquiryID: isSet(object.InquiryID) ? globalThis.String(object.InquiryID) : undefined,
       Status: isSet(object.Status) ? userStatusFromJSON(object.Status) : undefined,
+      ExternalUserIDs: globalThis.Array.isArray(object?.ExternalUserIDs)
+        ? object.ExternalUserIDs.map((e: any) => globalThis.String(e))
+        : [],
     };
   },
 
@@ -2309,6 +2324,9 @@ export const Filter = {
     if (message.Status !== undefined) {
       obj.Status = userStatusToJSON(message.Status);
     }
+    if (message.ExternalUserIDs?.length) {
+      obj.ExternalUserIDs = message.ExternalUserIDs;
+    }
     return obj;
   },
 
@@ -2324,6 +2342,7 @@ export const Filter = {
     message.Limit = object.Limit ?? undefined;
     message.InquiryID = object.InquiryID ?? undefined;
     message.Status = object.Status ?? undefined;
+    message.ExternalUserIDs = object.ExternalUserIDs?.map((e) => e) || [];
     return message;
   },
 };
