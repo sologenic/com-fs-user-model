@@ -50,8 +50,6 @@ export interface TradeProfileDetails {
     DuplicateOrderLimit: number;
     /** Risk based multiplier */
     RiskMultiplier: number;
-<<<<<<< HEAD
-=======
 }
 /** This is user mutable. User can change this limited only by the admin set configuration. */
 export interface UserTradeProfile {
@@ -63,7 +61,6 @@ export interface UserTradeProfile {
     SingleOrderLimit: number;
     /** Maximum order quantity - limits the number of shares per order */
     MaxOrderQuantity: number;
->>>>>>> db9c8c5 (added user trade profile property for the user)
 }
 export interface TradeProfileControlMetadata {
     LockedFields: LockableField[];

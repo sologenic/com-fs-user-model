@@ -60,19 +60,12 @@ message UserDetails {
     string OrganizationID = 13; // UUID
     optional Employment Employment = 14;
     role.Role Role = 15; // A retail user will always have a role of "NORMAL_USER"
-<<<<<<< HEAD
     tradeprofile.TradeProfileDetails TradeProfile = 16; // Trade profile details
     repeated string KYCInquiries = 17; // Array of inquiry ID's
     UserKYCDetails KYCDetails = 18;
     document.UserDocumentCompliance UserDocumentCompliance = 19;
     KYCStatus KYCStatus = 20; // Status of KYC verification, e.g., PENDING, APPROVED, REJECTED
-
-=======
-    tradeprofile.TradeProfileDetails TradeProfile = 16; // Trade profile details - Admin mutable, User immutable
-    repeated string KYCInquiries = 17; // Array of inquiry ID's 
-    UserKYCDetails KYCDetails = 18;
-    tradeprofile.UserTradeProfile UserTradeProfile = 19;
->>>>>>> db9c8c5 (added user trade profile property for the user)
+    tradeprofile.UserTradeProfile UserTradeProfile = 21;
 }
 
 

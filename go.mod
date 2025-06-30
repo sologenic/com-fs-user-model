@@ -3,24 +3,14 @@ module github.com/sologenic/com-fs-user-model
 go 1.24.3
 
 require (
-<<<<<<< HEAD
-	github.com/sologenic/com-fs-document-model v0.0.0-20250529220725-7a52b83dfd04
-	github.com/sologenic/com-fs-trade-profile-model v0.0.0-20250526220108-858d005076d4
+	github.com/sologenic/com-fs-document-model v0.0.0-20250625181251-d71adbf57803
+	github.com/sologenic/com-fs-trade-profile-model v0.0.0-20250630183716-c9da17041dc8
 	github.com/sologenic/com-fs-utils-lib/go/grpc-client v0.0.0-20250530185346-13f30acaff8e
 	github.com/sologenic/com-fs-utils-lib/models/audit v0.0.0-20250530185346-13f30acaff8e
 	github.com/sologenic/com-fs-utils-lib/models/language v0.0.0-20250610001621-c73b8e9ef79e
 	github.com/sologenic/com-fs-utils-lib/models/metadata v0.0.0-20250530185346-13f30acaff8e
 	github.com/sologenic/com-fs-utils-lib/models/role v0.0.0-20250530185346-13f30acaff8e
 	google.golang.org/grpc v1.72.2
-=======
-	github.com/sologenic/com-fs-trade-profile-model v0.0.0-20250630183716-c9da17041dc8
-	github.com/sologenic/com-fs-utils-lib/go/grpc-client v0.0.0-20250314155456-e14d49a8b728
-	github.com/sologenic/com-fs-utils-lib/models/audit v0.0.0-20250314155456-e14d49a8b728
-	github.com/sologenic/com-fs-utils-lib/models/language v0.0.0-20250522235409-85654eaa5ebc
-	github.com/sologenic/com-fs-utils-lib/models/metadata v0.0.0-20250314155456-e14d49a8b728
-	github.com/sologenic/com-fs-utils-lib/models/role v0.0.0-20250411234808-20ee098868aa
-	google.golang.org/grpc v1.71.1
->>>>>>> db9c8c5 (added user trade profile property for the user)
 	google.golang.org/protobuf v1.36.6
 )
 

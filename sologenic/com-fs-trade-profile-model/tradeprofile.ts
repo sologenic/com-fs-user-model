@@ -102,8 +102,6 @@ export interface TradeProfileDetails {
   DuplicateOrderLimit: number;
   /** Risk based multiplier */
   RiskMultiplier: number;
-<<<<<<< HEAD
-=======
 }
 
 /** This is user mutable. User can change this limited only by the admin set configuration. */
@@ -116,7 +114,6 @@ export interface UserTradeProfile {
   SingleOrderLimit: number;
   /** Maximum order quantity - limits the number of shares per order */
   MaxOrderQuantity: number;
->>>>>>> db9c8c5 (added user trade profile property for the user)
 }
 
 export interface TradeProfileControlMetadata {
@@ -539,8 +536,6 @@ export const TradeProfileDetails = {
     message.PriceCheckDeviation = object.PriceCheckDeviation ?? 0;
     message.DuplicateOrderLimit = object.DuplicateOrderLimit ?? 0;
     message.RiskMultiplier = object.RiskMultiplier ?? 0;
-<<<<<<< HEAD
-=======
     return message;
   },
 };
@@ -649,7 +644,6 @@ export const UserTradeProfile = {
     message.IsShortSellingEnabled = object.IsShortSellingEnabled ?? false;
     message.SingleOrderLimit = object.SingleOrderLimit ?? 0;
     message.MaxOrderQuantity = object.MaxOrderQuantity ?? 0;
->>>>>>> db9c8c5 (added user trade profile property for the user)
     return message;
   },
 };

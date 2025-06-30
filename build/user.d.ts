@@ -1,10 +1,6 @@
 import _m0 from "protobufjs/minimal";
-<<<<<<< HEAD
 import { UserDocumentCompliance } from "./sologenic/com-fs-document-model/document";
-import { TradeProfileDetails } from "./sologenic/com-fs-trade-profile-model/tradeprofile";
-=======
 import { TradeProfileDetails, UserTradeProfile } from "./sologenic/com-fs-trade-profile-model/tradeprofile";
->>>>>>> db9c8c5 (added user trade profile property for the user)
 import { Audit } from "./sologenic/com-fs-utils-lib/models/audit/audit";
 import { Lang } from "./sologenic/com-fs-utils-lib/models/language/language";
 import { MetaData, Network } from "./sologenic/com-fs-utils-lib/models/metadata/metadata";
@@ -125,18 +121,15 @@ export interface UserDetails {
     Employment?: Employment | undefined;
     /** A retail user will always have a role of "NORMAL_USER" */
     Role: Role;
-    /** Trade profile details - Admin mutable, User immutable */
+    /** Trade profile details */
     TradeProfile: TradeProfileDetails | undefined;
     /** Array of inquiry ID's */
     KYCInquiries: string[];
     KYCDetails: UserKYCDetails | undefined;
-<<<<<<< HEAD
     UserDocumentCompliance: UserDocumentCompliance | undefined;
     /** Status of KYC verification, e.g., PENDING, APPROVED, REJECTED */
     KYCStatus: KYCStatus;
-=======
     UserTradeProfile: UserTradeProfile | undefined;
->>>>>>> db9c8c5 (added user trade profile property for the user)
 }
 /** TODO: to be verified when more information is available */
 export interface Employment {
@@ -378,7 +371,6 @@ export declare const UserDetails: {
             FirstName?: string | undefined;
             LastName?: string | undefined;
         } | undefined;
-<<<<<<< HEAD
         UserDocumentCompliance?: {
             SignedDocuments?: {
                 Name?: string | undefined;
@@ -389,14 +381,12 @@ export declare const UserDetails: {
             }[] | undefined;
         } | undefined;
         KYCStatus?: KYCStatus | undefined;
-=======
         UserTradeProfile?: {
             IsMarginTradingEnabled?: boolean | undefined;
             IsShortSellingEnabled?: boolean | undefined;
             SingleOrderLimit?: number | undefined;
             MaxOrderQuantity?: number | undefined;
         } | undefined;
->>>>>>> db9c8c5 (added user trade profile property for the user)
     } & {
         UserID?: string | undefined;
         FirstName?: string | undefined;
@@ -574,7 +564,6 @@ export declare const UserDetails: {
             FirstName?: string | undefined;
             LastName?: string | undefined;
         } & { [K_12 in Exclude<keyof I["KYCDetails"], keyof UserKYCDetails>]: never; }) | undefined;
-<<<<<<< HEAD
         UserDocumentCompliance?: ({
             SignedDocuments?: {
                 Name?: string | undefined;
@@ -611,8 +600,6 @@ export declare const UserDetails: {
             }[]>]: never; }) | undefined;
         } & { [K_15 in Exclude<keyof I["UserDocumentCompliance"], "SignedDocuments">]: never; }) | undefined;
         KYCStatus?: KYCStatus | undefined;
-    } & { [K_16 in Exclude<keyof I, keyof UserDetails>]: never; }>(base?: I | undefined): UserDetails;
-=======
         UserTradeProfile?: ({
             IsMarginTradingEnabled?: boolean | undefined;
             IsShortSellingEnabled?: boolean | undefined;
@@ -623,9 +610,8 @@ export declare const UserDetails: {
             IsShortSellingEnabled?: boolean | undefined;
             SingleOrderLimit?: number | undefined;
             MaxOrderQuantity?: number | undefined;
-        } & { [K_13 in Exclude<keyof I["UserTradeProfile"], keyof UserTradeProfile>]: never; }) | undefined;
-    } & { [K_14 in Exclude<keyof I, keyof UserDetails>]: never; }>(base?: I | undefined): UserDetails;
->>>>>>> db9c8c5 (added user trade profile property for the user)
+        } & { [K_16 in Exclude<keyof I["UserTradeProfile"], keyof UserTradeProfile>]: never; }) | undefined;
+    } & { [K_17 in Exclude<keyof I, keyof UserDetails>]: never; }>(base?: I | undefined): UserDetails;
     fromPartial<I_1 extends {
         UserID?: string | undefined;
         FirstName?: string | undefined;
@@ -708,7 +694,6 @@ export declare const UserDetails: {
             FirstName?: string | undefined;
             LastName?: string | undefined;
         } | undefined;
-<<<<<<< HEAD
         UserDocumentCompliance?: {
             SignedDocuments?: {
                 Name?: string | undefined;
@@ -719,14 +704,12 @@ export declare const UserDetails: {
             }[] | undefined;
         } | undefined;
         KYCStatus?: KYCStatus | undefined;
-=======
         UserTradeProfile?: {
             IsMarginTradingEnabled?: boolean | undefined;
             IsShortSellingEnabled?: boolean | undefined;
             SingleOrderLimit?: number | undefined;
             MaxOrderQuantity?: number | undefined;
         } | undefined;
->>>>>>> db9c8c5 (added user trade profile property for the user)
     } & {
         UserID?: string | undefined;
         FirstName?: string | undefined;
@@ -748,11 +731,7 @@ export declare const UserDetails: {
             Address?: string | undefined;
             Alias?: string | undefined;
             Type?: WalletType | undefined;
-<<<<<<< HEAD
-        } & { [K_17 in Exclude<keyof I_1["Wallets"][number], keyof Wallet>]: never; })[] & { [K_18 in Exclude<keyof I_1["Wallets"], keyof {
-=======
-        } & { [K_15 in Exclude<keyof I_1["Wallets"][number], keyof Wallet>]: never; })[] & { [K_16 in Exclude<keyof I_1["Wallets"], keyof {
->>>>>>> db9c8c5 (added user trade profile property for the user)
+        } & { [K_18 in Exclude<keyof I_1["Wallets"][number], keyof Wallet>]: never; })[] & { [K_19 in Exclude<keyof I_1["Wallets"], keyof {
             Address?: string | undefined;
             Alias?: string | undefined;
             Type?: WalletType | undefined;
@@ -766,11 +745,7 @@ export declare const UserDetails: {
         } & {
             URL?: string | undefined;
             Type?: SocialType | undefined;
-<<<<<<< HEAD
-        } & { [K_19 in Exclude<keyof I_1["Socials"][number], keyof Social>]: never; })[] & { [K_20 in Exclude<keyof I_1["Socials"], keyof {
-=======
-        } & { [K_17 in Exclude<keyof I_1["Socials"][number], keyof Social>]: never; })[] & { [K_18 in Exclude<keyof I_1["Socials"], keyof {
->>>>>>> db9c8c5 (added user trade profile property for the user)
+        } & { [K_20 in Exclude<keyof I_1["Socials"][number], keyof Social>]: never; })[] & { [K_21 in Exclude<keyof I_1["Socials"], keyof {
             URL?: string | undefined;
             Type?: SocialType | undefined;
         }[]>]: never; }) | undefined;
@@ -812,11 +787,7 @@ export declare const UserDetails: {
                 Amount?: number | undefined;
                 Currency?: string | undefined;
                 Frequency?: IncomeFrequency | undefined;
-<<<<<<< HEAD
-            } & { [K_21 in Exclude<keyof I_1["Employment"]["Income"], keyof Income>]: never; }) | undefined;
-=======
-            } & { [K_19 in Exclude<keyof I_1["Employment"]["Income"], keyof Income>]: never; }) | undefined;
->>>>>>> db9c8c5 (added user trade profile property for the user)
+            } & { [K_22 in Exclude<keyof I_1["Employment"]["Income"], keyof Income>]: never; }) | undefined;
             Contact?: ({
                 Name?: string | undefined;
                 Email?: string | undefined;
@@ -827,17 +798,10 @@ export declare const UserDetails: {
                 Email?: string | undefined;
                 Phone?: string | undefined;
                 Address?: string | undefined;
-<<<<<<< HEAD
-            } & { [K_22 in Exclude<keyof I_1["Employment"]["Contact"], keyof EmployerContact>]: never; }) | undefined;
+            } & { [K_23 in Exclude<keyof I_1["Employment"]["Contact"], keyof EmployerContact>]: never; }) | undefined;
             IsVerified?: boolean | undefined;
             VerifiedAt?: string | undefined;
-        } & { [K_23 in Exclude<keyof I_1["Employment"], keyof Employment>]: never; }) | undefined;
-=======
-            } & { [K_20 in Exclude<keyof I_1["Employment"]["Contact"], keyof EmployerContact>]: never; }) | undefined;
-            IsVerified?: boolean | undefined;
-            VerifiedAt?: string | undefined;
-        } & { [K_21 in Exclude<keyof I_1["Employment"], keyof Employment>]: never; }) | undefined;
->>>>>>> db9c8c5 (added user trade profile property for the user)
+        } & { [K_24 in Exclude<keyof I_1["Employment"], keyof Employment>]: never; }) | undefined;
         Role?: Role | undefined;
         TradeProfile?: ({
             IsTradingEnabled?: boolean | undefined;
@@ -872,45 +836,28 @@ export declare const UserDetails: {
             } & {
                 Value?: number | undefined;
                 IsGreaterThan?: boolean | undefined;
-<<<<<<< HEAD
-            } & { [K_24 in Exclude<keyof I_1["TradeProfile"]["AggregateNotionalLimit"], keyof import("./sologenic/com-fs-trade-profile-model/tradeprofile").DropdownNumericValue>]: never; }) | undefined;
-=======
-            } & { [K_22 in Exclude<keyof I_1["TradeProfile"]["AggregateNotionalLimit"], keyof import("./sologenic/com-fs-trade-profile-model/tradeprofile").DropdownNumericValue>]: never; }) | undefined;
->>>>>>> db9c8c5 (added user trade profile property for the user)
+            } & { [K_25 in Exclude<keyof I_1["TradeProfile"]["AggregateNotionalLimit"], keyof import("./sologenic/com-fs-trade-profile-model/tradeprofile").DropdownNumericValue>]: never; }) | undefined;
             SingleOrderLimit?: ({
                 Value?: number | undefined;
                 IsGreaterThan?: boolean | undefined;
             } & {
                 Value?: number | undefined;
                 IsGreaterThan?: boolean | undefined;
-<<<<<<< HEAD
-            } & { [K_25 in Exclude<keyof I_1["TradeProfile"]["SingleOrderLimit"], keyof import("./sologenic/com-fs-trade-profile-model/tradeprofile").DropdownNumericValue>]: never; }) | undefined;
-=======
-            } & { [K_23 in Exclude<keyof I_1["TradeProfile"]["SingleOrderLimit"], keyof import("./sologenic/com-fs-trade-profile-model/tradeprofile").DropdownNumericValue>]: never; }) | undefined;
->>>>>>> db9c8c5 (added user trade profile property for the user)
+            } & { [K_26 in Exclude<keyof I_1["TradeProfile"]["SingleOrderLimit"], keyof import("./sologenic/com-fs-trade-profile-model/tradeprofile").DropdownNumericValue>]: never; }) | undefined;
             MaxOrderQuantity?: ({
                 Value?: number | undefined;
                 IsGreaterThan?: boolean | undefined;
             } & {
                 Value?: number | undefined;
                 IsGreaterThan?: boolean | undefined;
-<<<<<<< HEAD
-            } & { [K_26 in Exclude<keyof I_1["TradeProfile"]["MaxOrderQuantity"], keyof import("./sologenic/com-fs-trade-profile-model/tradeprofile").DropdownNumericValue>]: never; }) | undefined;
-=======
-            } & { [K_24 in Exclude<keyof I_1["TradeProfile"]["MaxOrderQuantity"], keyof import("./sologenic/com-fs-trade-profile-model/tradeprofile").DropdownNumericValue>]: never; }) | undefined;
->>>>>>> db9c8c5 (added user trade profile property for the user)
+            } & { [K_27 in Exclude<keyof I_1["TradeProfile"]["MaxOrderQuantity"], keyof import("./sologenic/com-fs-trade-profile-model/tradeprofile").DropdownNumericValue>]: never; }) | undefined;
             AggressivePercentage?: number | undefined;
             SymbolGrossADVPercent?: number | undefined;
             PriceCheckDeviation?: number | undefined;
             DuplicateOrderLimit?: number | undefined;
             RiskMultiplier?: number | undefined;
-<<<<<<< HEAD
-        } & { [K_27 in Exclude<keyof I_1["TradeProfile"], keyof TradeProfileDetails>]: never; }) | undefined;
-        KYCInquiries?: (string[] & string[] & { [K_28 in Exclude<keyof I_1["KYCInquiries"], keyof string[]>]: never; }) | undefined;
-=======
-        } & { [K_25 in Exclude<keyof I_1["TradeProfile"], keyof TradeProfileDetails>]: never; }) | undefined;
-        KYCInquiries?: (string[] & string[] & { [K_26 in Exclude<keyof I_1["KYCInquiries"], keyof string[]>]: never; }) | undefined;
->>>>>>> db9c8c5 (added user trade profile property for the user)
+        } & { [K_28 in Exclude<keyof I_1["TradeProfile"], keyof TradeProfileDetails>]: never; }) | undefined;
+        KYCInquiries?: (string[] & string[] & { [K_29 in Exclude<keyof I_1["KYCInquiries"], keyof string[]>]: never; }) | undefined;
         KYCDetails?: ({
             Birthdate?: string | undefined;
             PhoneNumber?: string | undefined;
@@ -937,10 +884,9 @@ export declare const UserDetails: {
             CountryCode?: string | undefined;
             SocialSecurityNumber?: string | undefined;
             IdentificationNumber?: string | undefined;
-<<<<<<< HEAD
             FirstName?: string | undefined;
             LastName?: string | undefined;
-        } & { [K_29 in Exclude<keyof I_1["KYCDetails"], keyof UserKYCDetails>]: never; }) | undefined;
+        } & { [K_30 in Exclude<keyof I_1["KYCDetails"], keyof UserKYCDetails>]: never; }) | undefined;
         UserDocumentCompliance?: ({
             SignedDocuments?: {
                 Name?: string | undefined;
@@ -968,18 +914,15 @@ export declare const UserDetails: {
                 DocumentState?: import("./sologenic/com-fs-document-model/document").DocumentState | undefined;
                 SignedAt?: Date | undefined;
                 FileMD5SUM?: string | undefined;
-            } & { [K_30 in Exclude<keyof I_1["UserDocumentCompliance"]["SignedDocuments"][number], keyof import("./sologenic/com-fs-document-model/document").SignedDocument>]: never; })[] & { [K_31 in Exclude<keyof I_1["UserDocumentCompliance"]["SignedDocuments"], keyof {
+            } & { [K_31 in Exclude<keyof I_1["UserDocumentCompliance"]["SignedDocuments"][number], keyof import("./sologenic/com-fs-document-model/document").SignedDocument>]: never; })[] & { [K_32 in Exclude<keyof I_1["UserDocumentCompliance"]["SignedDocuments"], keyof {
                 Name?: string | undefined;
                 SignedVersion?: string | undefined;
                 DocumentState?: import("./sologenic/com-fs-document-model/document").DocumentState | undefined;
                 SignedAt?: Date | undefined;
                 FileMD5SUM?: string | undefined;
             }[]>]: never; }) | undefined;
-        } & { [K_32 in Exclude<keyof I_1["UserDocumentCompliance"], "SignedDocuments">]: never; }) | undefined;
+        } & { [K_33 in Exclude<keyof I_1["UserDocumentCompliance"], "SignedDocuments">]: never; }) | undefined;
         KYCStatus?: KYCStatus | undefined;
-    } & { [K_33 in Exclude<keyof I_1, keyof UserDetails>]: never; }>(object: I_1): UserDetails;
-=======
-        } & { [K_27 in Exclude<keyof I_1["KYCDetails"], keyof UserKYCDetails>]: never; }) | undefined;
         UserTradeProfile?: ({
             IsMarginTradingEnabled?: boolean | undefined;
             IsShortSellingEnabled?: boolean | undefined;
@@ -990,9 +933,8 @@ export declare const UserDetails: {
             IsShortSellingEnabled?: boolean | undefined;
             SingleOrderLimit?: number | undefined;
             MaxOrderQuantity?: number | undefined;
-        } & { [K_28 in Exclude<keyof I_1["UserTradeProfile"], keyof UserTradeProfile>]: never; }) | undefined;
-    } & { [K_29 in Exclude<keyof I_1, keyof UserDetails>]: never; }>(object: I_1): UserDetails;
->>>>>>> db9c8c5 (added user trade profile property for the user)
+        } & { [K_34 in Exclude<keyof I_1["UserTradeProfile"], keyof UserTradeProfile>]: never; }) | undefined;
+    } & { [K_35 in Exclude<keyof I_1, keyof UserDetails>]: never; }>(object: I_1): UserDetails;
 };
 export declare const Employment: {
     encode(message: Employment, writer?: _m0.Writer): _m0.Writer;
@@ -1240,7 +1182,6 @@ export declare const User: {
                 FirstName?: string | undefined;
                 LastName?: string | undefined;
             } | undefined;
-<<<<<<< HEAD
             UserDocumentCompliance?: {
                 SignedDocuments?: {
                     Name?: string | undefined;
@@ -1251,14 +1192,12 @@ export declare const User: {
                 }[] | undefined;
             } | undefined;
             KYCStatus?: KYCStatus | undefined;
-=======
             UserTradeProfile?: {
                 IsMarginTradingEnabled?: boolean | undefined;
                 IsShortSellingEnabled?: boolean | undefined;
                 SingleOrderLimit?: number | undefined;
                 MaxOrderQuantity?: number | undefined;
             } | undefined;
->>>>>>> db9c8c5 (added user trade profile property for the user)
         } | undefined;
         MetaData?: {
             Network?: Network | undefined;
@@ -1354,7 +1293,6 @@ export declare const User: {
                 FirstName?: string | undefined;
                 LastName?: string | undefined;
             } | undefined;
-<<<<<<< HEAD
             UserDocumentCompliance?: {
                 SignedDocuments?: {
                     Name?: string | undefined;
@@ -1365,14 +1303,12 @@ export declare const User: {
                 }[] | undefined;
             } | undefined;
             KYCStatus?: KYCStatus | undefined;
-=======
             UserTradeProfile?: {
                 IsMarginTradingEnabled?: boolean | undefined;
                 IsShortSellingEnabled?: boolean | undefined;
                 SingleOrderLimit?: number | undefined;
                 MaxOrderQuantity?: number | undefined;
             } | undefined;
->>>>>>> db9c8c5 (added user trade profile property for the user)
         } & {
             UserID?: string | undefined;
             FirstName?: string | undefined;
@@ -1550,7 +1486,6 @@ export declare const User: {
                 FirstName?: string | undefined;
                 LastName?: string | undefined;
             } & { [K_12 in Exclude<keyof I["User"]["KYCDetails"], keyof UserKYCDetails>]: never; }) | undefined;
-<<<<<<< HEAD
             UserDocumentCompliance?: ({
                 SignedDocuments?: {
                     Name?: string | undefined;
@@ -1587,8 +1522,6 @@ export declare const User: {
                 }[]>]: never; }) | undefined;
             } & { [K_15 in Exclude<keyof I["User"]["UserDocumentCompliance"], "SignedDocuments">]: never; }) | undefined;
             KYCStatus?: KYCStatus | undefined;
-        } & { [K_16 in Exclude<keyof I["User"], keyof UserDetails>]: never; }) | undefined;
-=======
             UserTradeProfile?: ({
                 IsMarginTradingEnabled?: boolean | undefined;
                 IsShortSellingEnabled?: boolean | undefined;
@@ -1599,9 +1532,8 @@ export declare const User: {
                 IsShortSellingEnabled?: boolean | undefined;
                 SingleOrderLimit?: number | undefined;
                 MaxOrderQuantity?: number | undefined;
-            } & { [K_13 in Exclude<keyof I["User"]["UserTradeProfile"], keyof UserTradeProfile>]: never; }) | undefined;
-        } & { [K_14 in Exclude<keyof I["User"], keyof UserDetails>]: never; }) | undefined;
->>>>>>> db9c8c5 (added user trade profile property for the user)
+            } & { [K_16 in Exclude<keyof I["User"]["UserTradeProfile"], keyof UserTradeProfile>]: never; }) | undefined;
+        } & { [K_17 in Exclude<keyof I["User"], keyof UserDetails>]: never; }) | undefined;
         MetaData?: ({
             Network?: Network | undefined;
             UpdatedAt?: Date | undefined;
@@ -1612,11 +1544,7 @@ export declare const User: {
             UpdatedAt?: Date | undefined;
             CreatedAt?: Date | undefined;
             UpdatedByAccount?: string | undefined;
-<<<<<<< HEAD
-        } & { [K_17 in Exclude<keyof I["MetaData"], keyof MetaData>]: never; }) | undefined;
-=======
-        } & { [K_15 in Exclude<keyof I["MetaData"], keyof MetaData>]: never; }) | undefined;
->>>>>>> db9c8c5 (added user trade profile property for the user)
+        } & { [K_18 in Exclude<keyof I["MetaData"], keyof MetaData>]: never; }) | undefined;
         Audit?: ({
             ChangedBy?: string | undefined;
             ChangedAt?: Date | undefined;
@@ -1625,13 +1553,8 @@ export declare const User: {
             ChangedBy?: string | undefined;
             ChangedAt?: Date | undefined;
             Reason?: string | undefined;
-<<<<<<< HEAD
-        } & { [K_18 in Exclude<keyof I["Audit"], keyof Audit>]: never; }) | undefined;
-    } & { [K_19 in Exclude<keyof I, keyof User>]: never; }>(base?: I | undefined): User;
-=======
-        } & { [K_16 in Exclude<keyof I["Audit"], keyof Audit>]: never; }) | undefined;
-    } & { [K_17 in Exclude<keyof I, keyof User>]: never; }>(base?: I | undefined): User;
->>>>>>> db9c8c5 (added user trade profile property for the user)
+        } & { [K_19 in Exclude<keyof I["Audit"], keyof Audit>]: never; }) | undefined;
+    } & { [K_20 in Exclude<keyof I, keyof User>]: never; }>(base?: I | undefined): User;
     fromPartial<I_1 extends {
         User?: {
             UserID?: string | undefined;
@@ -1715,7 +1638,6 @@ export declare const User: {
                 FirstName?: string | undefined;
                 LastName?: string | undefined;
             } | undefined;
-<<<<<<< HEAD
             UserDocumentCompliance?: {
                 SignedDocuments?: {
                     Name?: string | undefined;
@@ -1726,14 +1648,12 @@ export declare const User: {
                 }[] | undefined;
             } | undefined;
             KYCStatus?: KYCStatus | undefined;
-=======
             UserTradeProfile?: {
                 IsMarginTradingEnabled?: boolean | undefined;
                 IsShortSellingEnabled?: boolean | undefined;
                 SingleOrderLimit?: number | undefined;
                 MaxOrderQuantity?: number | undefined;
             } | undefined;
->>>>>>> db9c8c5 (added user trade profile property for the user)
         } | undefined;
         MetaData?: {
             Network?: Network | undefined;
@@ -1829,7 +1749,6 @@ export declare const User: {
                 FirstName?: string | undefined;
                 LastName?: string | undefined;
             } | undefined;
-<<<<<<< HEAD
             UserDocumentCompliance?: {
                 SignedDocuments?: {
                     Name?: string | undefined;
@@ -1840,14 +1759,12 @@ export declare const User: {
                 }[] | undefined;
             } | undefined;
             KYCStatus?: KYCStatus | undefined;
-=======
             UserTradeProfile?: {
                 IsMarginTradingEnabled?: boolean | undefined;
                 IsShortSellingEnabled?: boolean | undefined;
                 SingleOrderLimit?: number | undefined;
                 MaxOrderQuantity?: number | undefined;
             } | undefined;
->>>>>>> db9c8c5 (added user trade profile property for the user)
         } & {
             UserID?: string | undefined;
             FirstName?: string | undefined;
@@ -1869,11 +1786,7 @@ export declare const User: {
                 Address?: string | undefined;
                 Alias?: string | undefined;
                 Type?: WalletType | undefined;
-<<<<<<< HEAD
-            } & { [K_20 in Exclude<keyof I_1["User"]["Wallets"][number], keyof Wallet>]: never; })[] & { [K_21 in Exclude<keyof I_1["User"]["Wallets"], keyof {
-=======
-            } & { [K_18 in Exclude<keyof I_1["User"]["Wallets"][number], keyof Wallet>]: never; })[] & { [K_19 in Exclude<keyof I_1["User"]["Wallets"], keyof {
->>>>>>> db9c8c5 (added user trade profile property for the user)
+            } & { [K_21 in Exclude<keyof I_1["User"]["Wallets"][number], keyof Wallet>]: never; })[] & { [K_22 in Exclude<keyof I_1["User"]["Wallets"], keyof {
                 Address?: string | undefined;
                 Alias?: string | undefined;
                 Type?: WalletType | undefined;
@@ -1887,11 +1800,7 @@ export declare const User: {
             } & {
                 URL?: string | undefined;
                 Type?: SocialType | undefined;
-<<<<<<< HEAD
-            } & { [K_22 in Exclude<keyof I_1["User"]["Socials"][number], keyof Social>]: never; })[] & { [K_23 in Exclude<keyof I_1["User"]["Socials"], keyof {
-=======
-            } & { [K_20 in Exclude<keyof I_1["User"]["Socials"][number], keyof Social>]: never; })[] & { [K_21 in Exclude<keyof I_1["User"]["Socials"], keyof {
->>>>>>> db9c8c5 (added user trade profile property for the user)
+            } & { [K_23 in Exclude<keyof I_1["User"]["Socials"][number], keyof Social>]: never; })[] & { [K_24 in Exclude<keyof I_1["User"]["Socials"], keyof {
                 URL?: string | undefined;
                 Type?: SocialType | undefined;
             }[]>]: never; }) | undefined;
@@ -1933,11 +1842,7 @@ export declare const User: {
                     Amount?: number | undefined;
                     Currency?: string | undefined;
                     Frequency?: IncomeFrequency | undefined;
-<<<<<<< HEAD
-                } & { [K_24 in Exclude<keyof I_1["User"]["Employment"]["Income"], keyof Income>]: never; }) | undefined;
-=======
-                } & { [K_22 in Exclude<keyof I_1["User"]["Employment"]["Income"], keyof Income>]: never; }) | undefined;
->>>>>>> db9c8c5 (added user trade profile property for the user)
+                } & { [K_25 in Exclude<keyof I_1["User"]["Employment"]["Income"], keyof Income>]: never; }) | undefined;
                 Contact?: ({
                     Name?: string | undefined;
                     Email?: string | undefined;
@@ -1948,17 +1853,10 @@ export declare const User: {
                     Email?: string | undefined;
                     Phone?: string | undefined;
                     Address?: string | undefined;
-<<<<<<< HEAD
-                } & { [K_25 in Exclude<keyof I_1["User"]["Employment"]["Contact"], keyof EmployerContact>]: never; }) | undefined;
+                } & { [K_26 in Exclude<keyof I_1["User"]["Employment"]["Contact"], keyof EmployerContact>]: never; }) | undefined;
                 IsVerified?: boolean | undefined;
                 VerifiedAt?: string | undefined;
-            } & { [K_26 in Exclude<keyof I_1["User"]["Employment"], keyof Employment>]: never; }) | undefined;
-=======
-                } & { [K_23 in Exclude<keyof I_1["User"]["Employment"]["Contact"], keyof EmployerContact>]: never; }) | undefined;
-                IsVerified?: boolean | undefined;
-                VerifiedAt?: string | undefined;
-            } & { [K_24 in Exclude<keyof I_1["User"]["Employment"], keyof Employment>]: never; }) | undefined;
->>>>>>> db9c8c5 (added user trade profile property for the user)
+            } & { [K_27 in Exclude<keyof I_1["User"]["Employment"], keyof Employment>]: never; }) | undefined;
             Role?: Role | undefined;
             TradeProfile?: ({
                 IsTradingEnabled?: boolean | undefined;
@@ -1993,45 +1891,28 @@ export declare const User: {
                 } & {
                     Value?: number | undefined;
                     IsGreaterThan?: boolean | undefined;
-<<<<<<< HEAD
-                } & { [K_27 in Exclude<keyof I_1["User"]["TradeProfile"]["AggregateNotionalLimit"], keyof import("./sologenic/com-fs-trade-profile-model/tradeprofile").DropdownNumericValue>]: never; }) | undefined;
-=======
-                } & { [K_25 in Exclude<keyof I_1["User"]["TradeProfile"]["AggregateNotionalLimit"], keyof import("./sologenic/com-fs-trade-profile-model/tradeprofile").DropdownNumericValue>]: never; }) | undefined;
->>>>>>> db9c8c5 (added user trade profile property for the user)
+                } & { [K_28 in Exclude<keyof I_1["User"]["TradeProfile"]["AggregateNotionalLimit"], keyof import("./sologenic/com-fs-trade-profile-model/tradeprofile").DropdownNumericValue>]: never; }) | undefined;
                 SingleOrderLimit?: ({
                     Value?: number | undefined;
                     IsGreaterThan?: boolean | undefined;
                 } & {
                     Value?: number | undefined;
                     IsGreaterThan?: boolean | undefined;
-<<<<<<< HEAD
-                } & { [K_28 in Exclude<keyof I_1["User"]["TradeProfile"]["SingleOrderLimit"], keyof import("./sologenic/com-fs-trade-profile-model/tradeprofile").DropdownNumericValue>]: never; }) | undefined;
-=======
-                } & { [K_26 in Exclude<keyof I_1["User"]["TradeProfile"]["SingleOrderLimit"], keyof import("./sologenic/com-fs-trade-profile-model/tradeprofile").DropdownNumericValue>]: never; }) | undefined;
->>>>>>> db9c8c5 (added user trade profile property for the user)
+                } & { [K_29 in Exclude<keyof I_1["User"]["TradeProfile"]["SingleOrderLimit"], keyof import("./sologenic/com-fs-trade-profile-model/tradeprofile").DropdownNumericValue>]: never; }) | undefined;
                 MaxOrderQuantity?: ({
                     Value?: number | undefined;
                     IsGreaterThan?: boolean | undefined;
                 } & {
                     Value?: number | undefined;
                     IsGreaterThan?: boolean | undefined;
-<<<<<<< HEAD
-                } & { [K_29 in Exclude<keyof I_1["User"]["TradeProfile"]["MaxOrderQuantity"], keyof import("./sologenic/com-fs-trade-profile-model/tradeprofile").DropdownNumericValue>]: never; }) | undefined;
-=======
-                } & { [K_27 in Exclude<keyof I_1["User"]["TradeProfile"]["MaxOrderQuantity"], keyof import("./sologenic/com-fs-trade-profile-model/tradeprofile").DropdownNumericValue>]: never; }) | undefined;
->>>>>>> db9c8c5 (added user trade profile property for the user)
+                } & { [K_30 in Exclude<keyof I_1["User"]["TradeProfile"]["MaxOrderQuantity"], keyof import("./sologenic/com-fs-trade-profile-model/tradeprofile").DropdownNumericValue>]: never; }) | undefined;
                 AggressivePercentage?: number | undefined;
                 SymbolGrossADVPercent?: number | undefined;
                 PriceCheckDeviation?: number | undefined;
                 DuplicateOrderLimit?: number | undefined;
                 RiskMultiplier?: number | undefined;
-<<<<<<< HEAD
-            } & { [K_30 in Exclude<keyof I_1["User"]["TradeProfile"], keyof TradeProfileDetails>]: never; }) | undefined;
-            KYCInquiries?: (string[] & string[] & { [K_31 in Exclude<keyof I_1["User"]["KYCInquiries"], keyof string[]>]: never; }) | undefined;
-=======
-            } & { [K_28 in Exclude<keyof I_1["User"]["TradeProfile"], keyof TradeProfileDetails>]: never; }) | undefined;
-            KYCInquiries?: (string[] & string[] & { [K_29 in Exclude<keyof I_1["User"]["KYCInquiries"], keyof string[]>]: never; }) | undefined;
->>>>>>> db9c8c5 (added user trade profile property for the user)
+            } & { [K_31 in Exclude<keyof I_1["User"]["TradeProfile"], keyof TradeProfileDetails>]: never; }) | undefined;
+            KYCInquiries?: (string[] & string[] & { [K_32 in Exclude<keyof I_1["User"]["KYCInquiries"], keyof string[]>]: never; }) | undefined;
             KYCDetails?: ({
                 Birthdate?: string | undefined;
                 PhoneNumber?: string | undefined;
@@ -2058,10 +1939,9 @@ export declare const User: {
                 CountryCode?: string | undefined;
                 SocialSecurityNumber?: string | undefined;
                 IdentificationNumber?: string | undefined;
-<<<<<<< HEAD
                 FirstName?: string | undefined;
                 LastName?: string | undefined;
-            } & { [K_32 in Exclude<keyof I_1["User"]["KYCDetails"], keyof UserKYCDetails>]: never; }) | undefined;
+            } & { [K_33 in Exclude<keyof I_1["User"]["KYCDetails"], keyof UserKYCDetails>]: never; }) | undefined;
             UserDocumentCompliance?: ({
                 SignedDocuments?: {
                     Name?: string | undefined;
@@ -2089,18 +1969,15 @@ export declare const User: {
                     DocumentState?: import("./sologenic/com-fs-document-model/document").DocumentState | undefined;
                     SignedAt?: Date | undefined;
                     FileMD5SUM?: string | undefined;
-                } & { [K_33 in Exclude<keyof I_1["User"]["UserDocumentCompliance"]["SignedDocuments"][number], keyof import("./sologenic/com-fs-document-model/document").SignedDocument>]: never; })[] & { [K_34 in Exclude<keyof I_1["User"]["UserDocumentCompliance"]["SignedDocuments"], keyof {
+                } & { [K_34 in Exclude<keyof I_1["User"]["UserDocumentCompliance"]["SignedDocuments"][number], keyof import("./sologenic/com-fs-document-model/document").SignedDocument>]: never; })[] & { [K_35 in Exclude<keyof I_1["User"]["UserDocumentCompliance"]["SignedDocuments"], keyof {
                     Name?: string | undefined;
                     SignedVersion?: string | undefined;
                     DocumentState?: import("./sologenic/com-fs-document-model/document").DocumentState | undefined;
                     SignedAt?: Date | undefined;
                     FileMD5SUM?: string | undefined;
                 }[]>]: never; }) | undefined;
-            } & { [K_35 in Exclude<keyof I_1["User"]["UserDocumentCompliance"], "SignedDocuments">]: never; }) | undefined;
+            } & { [K_36 in Exclude<keyof I_1["User"]["UserDocumentCompliance"], "SignedDocuments">]: never; }) | undefined;
             KYCStatus?: KYCStatus | undefined;
-        } & { [K_36 in Exclude<keyof I_1["User"], keyof UserDetails>]: never; }) | undefined;
-=======
-            } & { [K_30 in Exclude<keyof I_1["User"]["KYCDetails"], keyof UserKYCDetails>]: never; }) | undefined;
             UserTradeProfile?: ({
                 IsMarginTradingEnabled?: boolean | undefined;
                 IsShortSellingEnabled?: boolean | undefined;
@@ -2111,9 +1988,8 @@ export declare const User: {
                 IsShortSellingEnabled?: boolean | undefined;
                 SingleOrderLimit?: number | undefined;
                 MaxOrderQuantity?: number | undefined;
-            } & { [K_31 in Exclude<keyof I_1["User"]["UserTradeProfile"], keyof UserTradeProfile>]: never; }) | undefined;
-        } & { [K_32 in Exclude<keyof I_1["User"], keyof UserDetails>]: never; }) | undefined;
->>>>>>> db9c8c5 (added user trade profile property for the user)
+            } & { [K_37 in Exclude<keyof I_1["User"]["UserTradeProfile"], keyof UserTradeProfile>]: never; }) | undefined;
+        } & { [K_38 in Exclude<keyof I_1["User"], keyof UserDetails>]: never; }) | undefined;
         MetaData?: ({
             Network?: Network | undefined;
             UpdatedAt?: Date | undefined;
@@ -2124,11 +2000,7 @@ export declare const User: {
             UpdatedAt?: Date | undefined;
             CreatedAt?: Date | undefined;
             UpdatedByAccount?: string | undefined;
-<<<<<<< HEAD
-        } & { [K_37 in Exclude<keyof I_1["MetaData"], keyof MetaData>]: never; }) | undefined;
-=======
-        } & { [K_33 in Exclude<keyof I_1["MetaData"], keyof MetaData>]: never; }) | undefined;
->>>>>>> db9c8c5 (added user trade profile property for the user)
+        } & { [K_39 in Exclude<keyof I_1["MetaData"], keyof MetaData>]: never; }) | undefined;
         Audit?: ({
             ChangedBy?: string | undefined;
             ChangedAt?: Date | undefined;
@@ -2137,13 +2009,8 @@ export declare const User: {
             ChangedBy?: string | undefined;
             ChangedAt?: Date | undefined;
             Reason?: string | undefined;
-<<<<<<< HEAD
-        } & { [K_38 in Exclude<keyof I_1["Audit"], keyof Audit>]: never; }) | undefined;
-    } & { [K_39 in Exclude<keyof I_1, keyof User>]: never; }>(object: I_1): User;
-=======
-        } & { [K_34 in Exclude<keyof I_1["Audit"], keyof Audit>]: never; }) | undefined;
-    } & { [K_35 in Exclude<keyof I_1, keyof User>]: never; }>(object: I_1): User;
->>>>>>> db9c8c5 (added user trade profile property for the user)
+        } & { [K_40 in Exclude<keyof I_1["Audit"], keyof Audit>]: never; }) | undefined;
+    } & { [K_41 in Exclude<keyof I_1, keyof User>]: never; }>(object: I_1): User;
 };
 export declare const UserID: {
     encode(message: UserID, writer?: _m0.Writer): _m0.Writer;
@@ -2302,7 +2169,6 @@ export declare const UserList: {
                     FirstName?: string | undefined;
                     LastName?: string | undefined;
                 } | undefined;
-<<<<<<< HEAD
                 UserDocumentCompliance?: {
                     SignedDocuments?: {
                         Name?: string | undefined;
@@ -2313,14 +2179,12 @@ export declare const UserList: {
                     }[] | undefined;
                 } | undefined;
                 KYCStatus?: KYCStatus | undefined;
-=======
                 UserTradeProfile?: {
                     IsMarginTradingEnabled?: boolean | undefined;
                     IsShortSellingEnabled?: boolean | undefined;
                     SingleOrderLimit?: number | undefined;
                     MaxOrderQuantity?: number | undefined;
                 } | undefined;
->>>>>>> db9c8c5 (added user trade profile property for the user)
             } | undefined;
             MetaData?: {
                 Network?: Network | undefined;
@@ -2419,7 +2283,6 @@ export declare const UserList: {
                     FirstName?: string | undefined;
                     LastName?: string | undefined;
                 } | undefined;
-<<<<<<< HEAD
                 UserDocumentCompliance?: {
                     SignedDocuments?: {
                         Name?: string | undefined;
@@ -2430,14 +2293,12 @@ export declare const UserList: {
                     }[] | undefined;
                 } | undefined;
                 KYCStatus?: KYCStatus | undefined;
-=======
                 UserTradeProfile?: {
                     IsMarginTradingEnabled?: boolean | undefined;
                     IsShortSellingEnabled?: boolean | undefined;
                     SingleOrderLimit?: number | undefined;
                     MaxOrderQuantity?: number | undefined;
                 } | undefined;
->>>>>>> db9c8c5 (added user trade profile property for the user)
             } | undefined;
             MetaData?: {
                 Network?: Network | undefined;
@@ -2533,7 +2394,6 @@ export declare const UserList: {
                     FirstName?: string | undefined;
                     LastName?: string | undefined;
                 } | undefined;
-<<<<<<< HEAD
                 UserDocumentCompliance?: {
                     SignedDocuments?: {
                         Name?: string | undefined;
@@ -2544,14 +2404,12 @@ export declare const UserList: {
                     }[] | undefined;
                 } | undefined;
                 KYCStatus?: KYCStatus | undefined;
-=======
                 UserTradeProfile?: {
                     IsMarginTradingEnabled?: boolean | undefined;
                     IsShortSellingEnabled?: boolean | undefined;
                     SingleOrderLimit?: number | undefined;
                     MaxOrderQuantity?: number | undefined;
                 } | undefined;
->>>>>>> db9c8c5 (added user trade profile property for the user)
             } | undefined;
             MetaData?: {
                 Network?: Network | undefined;
@@ -2647,7 +2505,6 @@ export declare const UserList: {
                     FirstName?: string | undefined;
                     LastName?: string | undefined;
                 } | undefined;
-<<<<<<< HEAD
                 UserDocumentCompliance?: {
                     SignedDocuments?: {
                         Name?: string | undefined;
@@ -2658,14 +2515,12 @@ export declare const UserList: {
                     }[] | undefined;
                 } | undefined;
                 KYCStatus?: KYCStatus | undefined;
-=======
                 UserTradeProfile?: {
                     IsMarginTradingEnabled?: boolean | undefined;
                     IsShortSellingEnabled?: boolean | undefined;
                     SingleOrderLimit?: number | undefined;
                     MaxOrderQuantity?: number | undefined;
                 } | undefined;
->>>>>>> db9c8c5 (added user trade profile property for the user)
             } & {
                 UserID?: string | undefined;
                 FirstName?: string | undefined;
@@ -2843,7 +2698,6 @@ export declare const UserList: {
                     FirstName?: string | undefined;
                     LastName?: string | undefined;
                 } & { [K_12 in Exclude<keyof I["Users"][number]["User"]["KYCDetails"], keyof UserKYCDetails>]: never; }) | undefined;
-<<<<<<< HEAD
                 UserDocumentCompliance?: ({
                     SignedDocuments?: {
                         Name?: string | undefined;
@@ -2880,8 +2734,6 @@ export declare const UserList: {
                     }[]>]: never; }) | undefined;
                 } & { [K_15 in Exclude<keyof I["Users"][number]["User"]["UserDocumentCompliance"], "SignedDocuments">]: never; }) | undefined;
                 KYCStatus?: KYCStatus | undefined;
-            } & { [K_16 in Exclude<keyof I["Users"][number]["User"], keyof UserDetails>]: never; }) | undefined;
-=======
                 UserTradeProfile?: ({
                     IsMarginTradingEnabled?: boolean | undefined;
                     IsShortSellingEnabled?: boolean | undefined;
@@ -2892,9 +2744,8 @@ export declare const UserList: {
                     IsShortSellingEnabled?: boolean | undefined;
                     SingleOrderLimit?: number | undefined;
                     MaxOrderQuantity?: number | undefined;
-                } & { [K_13 in Exclude<keyof I["Users"][number]["User"]["UserTradeProfile"], keyof UserTradeProfile>]: never; }) | undefined;
-            } & { [K_14 in Exclude<keyof I["Users"][number]["User"], keyof UserDetails>]: never; }) | undefined;
->>>>>>> db9c8c5 (added user trade profile property for the user)
+                } & { [K_16 in Exclude<keyof I["Users"][number]["User"]["UserTradeProfile"], keyof UserTradeProfile>]: never; }) | undefined;
+            } & { [K_17 in Exclude<keyof I["Users"][number]["User"], keyof UserDetails>]: never; }) | undefined;
             MetaData?: ({
                 Network?: Network | undefined;
                 UpdatedAt?: Date | undefined;
@@ -2905,11 +2756,7 @@ export declare const UserList: {
                 UpdatedAt?: Date | undefined;
                 CreatedAt?: Date | undefined;
                 UpdatedByAccount?: string | undefined;
-<<<<<<< HEAD
-            } & { [K_17 in Exclude<keyof I["Users"][number]["MetaData"], keyof MetaData>]: never; }) | undefined;
-=======
-            } & { [K_15 in Exclude<keyof I["Users"][number]["MetaData"], keyof MetaData>]: never; }) | undefined;
->>>>>>> db9c8c5 (added user trade profile property for the user)
+            } & { [K_18 in Exclude<keyof I["Users"][number]["MetaData"], keyof MetaData>]: never; }) | undefined;
             Audit?: ({
                 ChangedBy?: string | undefined;
                 ChangedAt?: Date | undefined;
@@ -2918,13 +2765,8 @@ export declare const UserList: {
                 ChangedBy?: string | undefined;
                 ChangedAt?: Date | undefined;
                 Reason?: string | undefined;
-<<<<<<< HEAD
-            } & { [K_18 in Exclude<keyof I["Users"][number]["Audit"], keyof Audit>]: never; }) | undefined;
-        } & { [K_19 in Exclude<keyof I["Users"][number], keyof User>]: never; })[] & { [K_20 in Exclude<keyof I["Users"], keyof {
-=======
-            } & { [K_16 in Exclude<keyof I["Users"][number]["Audit"], keyof Audit>]: never; }) | undefined;
-        } & { [K_17 in Exclude<keyof I["Users"][number], keyof User>]: never; })[] & { [K_18 in Exclude<keyof I["Users"], keyof {
->>>>>>> db9c8c5 (added user trade profile property for the user)
+            } & { [K_19 in Exclude<keyof I["Users"][number]["Audit"], keyof Audit>]: never; }) | undefined;
+        } & { [K_20 in Exclude<keyof I["Users"][number], keyof User>]: never; })[] & { [K_21 in Exclude<keyof I["Users"], keyof {
             User?: {
                 UserID?: string | undefined;
                 FirstName?: string | undefined;
@@ -3007,7 +2849,6 @@ export declare const UserList: {
                     FirstName?: string | undefined;
                     LastName?: string | undefined;
                 } | undefined;
-<<<<<<< HEAD
                 UserDocumentCompliance?: {
                     SignedDocuments?: {
                         Name?: string | undefined;
@@ -3018,14 +2859,12 @@ export declare const UserList: {
                     }[] | undefined;
                 } | undefined;
                 KYCStatus?: KYCStatus | undefined;
-=======
                 UserTradeProfile?: {
                     IsMarginTradingEnabled?: boolean | undefined;
                     IsShortSellingEnabled?: boolean | undefined;
                     SingleOrderLimit?: number | undefined;
                     MaxOrderQuantity?: number | undefined;
                 } | undefined;
->>>>>>> db9c8c5 (added user trade profile property for the user)
             } | undefined;
             MetaData?: {
                 Network?: Network | undefined;
@@ -3040,11 +2879,7 @@ export declare const UserList: {
             } | undefined;
         }[]>]: never; }) | undefined;
         Offset?: number | undefined;
-<<<<<<< HEAD
-    } & { [K_21 in Exclude<keyof I, keyof UserList>]: never; }>(base?: I | undefined): UserList;
-=======
-    } & { [K_19 in Exclude<keyof I, keyof UserList>]: never; }>(base?: I | undefined): UserList;
->>>>>>> db9c8c5 (added user trade profile property for the user)
+    } & { [K_22 in Exclude<keyof I, keyof UserList>]: never; }>(base?: I | undefined): UserList;
     fromPartial<I_1 extends {
         Users?: {
             User?: {
@@ -3129,7 +2964,6 @@ export declare const UserList: {
                     FirstName?: string | undefined;
                     LastName?: string | undefined;
                 } | undefined;
-<<<<<<< HEAD
                 UserDocumentCompliance?: {
                     SignedDocuments?: {
                         Name?: string | undefined;
@@ -3140,14 +2974,12 @@ export declare const UserList: {
                     }[] | undefined;
                 } | undefined;
                 KYCStatus?: KYCStatus | undefined;
-=======
                 UserTradeProfile?: {
                     IsMarginTradingEnabled?: boolean | undefined;
                     IsShortSellingEnabled?: boolean | undefined;
                     SingleOrderLimit?: number | undefined;
                     MaxOrderQuantity?: number | undefined;
                 } | undefined;
->>>>>>> db9c8c5 (added user trade profile property for the user)
             } | undefined;
             MetaData?: {
                 Network?: Network | undefined;
@@ -3246,7 +3078,6 @@ export declare const UserList: {
                     FirstName?: string | undefined;
                     LastName?: string | undefined;
                 } | undefined;
-<<<<<<< HEAD
                 UserDocumentCompliance?: {
                     SignedDocuments?: {
                         Name?: string | undefined;
@@ -3257,14 +3088,12 @@ export declare const UserList: {
                     }[] | undefined;
                 } | undefined;
                 KYCStatus?: KYCStatus | undefined;
-=======
                 UserTradeProfile?: {
                     IsMarginTradingEnabled?: boolean | undefined;
                     IsShortSellingEnabled?: boolean | undefined;
                     SingleOrderLimit?: number | undefined;
                     MaxOrderQuantity?: number | undefined;
                 } | undefined;
->>>>>>> db9c8c5 (added user trade profile property for the user)
             } | undefined;
             MetaData?: {
                 Network?: Network | undefined;
@@ -3360,7 +3189,6 @@ export declare const UserList: {
                     FirstName?: string | undefined;
                     LastName?: string | undefined;
                 } | undefined;
-<<<<<<< HEAD
                 UserDocumentCompliance?: {
                     SignedDocuments?: {
                         Name?: string | undefined;
@@ -3371,14 +3199,12 @@ export declare const UserList: {
                     }[] | undefined;
                 } | undefined;
                 KYCStatus?: KYCStatus | undefined;
-=======
                 UserTradeProfile?: {
                     IsMarginTradingEnabled?: boolean | undefined;
                     IsShortSellingEnabled?: boolean | undefined;
                     SingleOrderLimit?: number | undefined;
                     MaxOrderQuantity?: number | undefined;
                 } | undefined;
->>>>>>> db9c8c5 (added user trade profile property for the user)
             } | undefined;
             MetaData?: {
                 Network?: Network | undefined;
@@ -3474,7 +3300,6 @@ export declare const UserList: {
                     FirstName?: string | undefined;
                     LastName?: string | undefined;
                 } | undefined;
-<<<<<<< HEAD
                 UserDocumentCompliance?: {
                     SignedDocuments?: {
                         Name?: string | undefined;
@@ -3485,14 +3310,12 @@ export declare const UserList: {
                     }[] | undefined;
                 } | undefined;
                 KYCStatus?: KYCStatus | undefined;
-=======
                 UserTradeProfile?: {
                     IsMarginTradingEnabled?: boolean | undefined;
                     IsShortSellingEnabled?: boolean | undefined;
                     SingleOrderLimit?: number | undefined;
                     MaxOrderQuantity?: number | undefined;
                 } | undefined;
->>>>>>> db9c8c5 (added user trade profile property for the user)
             } & {
                 UserID?: string | undefined;
                 FirstName?: string | undefined;
@@ -3514,11 +3337,7 @@ export declare const UserList: {
                     Address?: string | undefined;
                     Alias?: string | undefined;
                     Type?: WalletType | undefined;
-<<<<<<< HEAD
-                } & { [K_22 in Exclude<keyof I_1["Users"][number]["User"]["Wallets"][number], keyof Wallet>]: never; })[] & { [K_23 in Exclude<keyof I_1["Users"][number]["User"]["Wallets"], keyof {
-=======
-                } & { [K_20 in Exclude<keyof I_1["Users"][number]["User"]["Wallets"][number], keyof Wallet>]: never; })[] & { [K_21 in Exclude<keyof I_1["Users"][number]["User"]["Wallets"], keyof {
->>>>>>> db9c8c5 (added user trade profile property for the user)
+                } & { [K_23 in Exclude<keyof I_1["Users"][number]["User"]["Wallets"][number], keyof Wallet>]: never; })[] & { [K_24 in Exclude<keyof I_1["Users"][number]["User"]["Wallets"], keyof {
                     Address?: string | undefined;
                     Alias?: string | undefined;
                     Type?: WalletType | undefined;
@@ -3532,11 +3351,7 @@ export declare const UserList: {
                 } & {
                     URL?: string | undefined;
                     Type?: SocialType | undefined;
-<<<<<<< HEAD
-                } & { [K_24 in Exclude<keyof I_1["Users"][number]["User"]["Socials"][number], keyof Social>]: never; })[] & { [K_25 in Exclude<keyof I_1["Users"][number]["User"]["Socials"], keyof {
-=======
-                } & { [K_22 in Exclude<keyof I_1["Users"][number]["User"]["Socials"][number], keyof Social>]: never; })[] & { [K_23 in Exclude<keyof I_1["Users"][number]["User"]["Socials"], keyof {
->>>>>>> db9c8c5 (added user trade profile property for the user)
+                } & { [K_25 in Exclude<keyof I_1["Users"][number]["User"]["Socials"][number], keyof Social>]: never; })[] & { [K_26 in Exclude<keyof I_1["Users"][number]["User"]["Socials"], keyof {
                     URL?: string | undefined;
                     Type?: SocialType | undefined;
                 }[]>]: never; }) | undefined;
@@ -3578,11 +3393,7 @@ export declare const UserList: {
                         Amount?: number | undefined;
                         Currency?: string | undefined;
                         Frequency?: IncomeFrequency | undefined;
-<<<<<<< HEAD
-                    } & { [K_26 in Exclude<keyof I_1["Users"][number]["User"]["Employment"]["Income"], keyof Income>]: never; }) | undefined;
-=======
-                    } & { [K_24 in Exclude<keyof I_1["Users"][number]["User"]["Employment"]["Income"], keyof Income>]: never; }) | undefined;
->>>>>>> db9c8c5 (added user trade profile property for the user)
+                    } & { [K_27 in Exclude<keyof I_1["Users"][number]["User"]["Employment"]["Income"], keyof Income>]: never; }) | undefined;
                     Contact?: ({
                         Name?: string | undefined;
                         Email?: string | undefined;
@@ -3593,17 +3404,10 @@ export declare const UserList: {
                         Email?: string | undefined;
                         Phone?: string | undefined;
                         Address?: string | undefined;
-<<<<<<< HEAD
-                    } & { [K_27 in Exclude<keyof I_1["Users"][number]["User"]["Employment"]["Contact"], keyof EmployerContact>]: never; }) | undefined;
+                    } & { [K_28 in Exclude<keyof I_1["Users"][number]["User"]["Employment"]["Contact"], keyof EmployerContact>]: never; }) | undefined;
                     IsVerified?: boolean | undefined;
                     VerifiedAt?: string | undefined;
-                } & { [K_28 in Exclude<keyof I_1["Users"][number]["User"]["Employment"], keyof Employment>]: never; }) | undefined;
-=======
-                    } & { [K_25 in Exclude<keyof I_1["Users"][number]["User"]["Employment"]["Contact"], keyof EmployerContact>]: never; }) | undefined;
-                    IsVerified?: boolean | undefined;
-                    VerifiedAt?: string | undefined;
-                } & { [K_26 in Exclude<keyof I_1["Users"][number]["User"]["Employment"], keyof Employment>]: never; }) | undefined;
->>>>>>> db9c8c5 (added user trade profile property for the user)
+                } & { [K_29 in Exclude<keyof I_1["Users"][number]["User"]["Employment"], keyof Employment>]: never; }) | undefined;
                 Role?: Role | undefined;
                 TradeProfile?: ({
                     IsTradingEnabled?: boolean | undefined;
@@ -3638,45 +3442,28 @@ export declare const UserList: {
                     } & {
                         Value?: number | undefined;
                         IsGreaterThan?: boolean | undefined;
-<<<<<<< HEAD
-                    } & { [K_29 in Exclude<keyof I_1["Users"][number]["User"]["TradeProfile"]["AggregateNotionalLimit"], keyof import("./sologenic/com-fs-trade-profile-model/tradeprofile").DropdownNumericValue>]: never; }) | undefined;
-=======
-                    } & { [K_27 in Exclude<keyof I_1["Users"][number]["User"]["TradeProfile"]["AggregateNotionalLimit"], keyof import("./sologenic/com-fs-trade-profile-model/tradeprofile").DropdownNumericValue>]: never; }) | undefined;
->>>>>>> db9c8c5 (added user trade profile property for the user)
+                    } & { [K_30 in Exclude<keyof I_1["Users"][number]["User"]["TradeProfile"]["AggregateNotionalLimit"], keyof import("./sologenic/com-fs-trade-profile-model/tradeprofile").DropdownNumericValue>]: never; }) | undefined;
                     SingleOrderLimit?: ({
                         Value?: number | undefined;
                         IsGreaterThan?: boolean | undefined;
                     } & {
                         Value?: number | undefined;
                         IsGreaterThan?: boolean | undefined;
-<<<<<<< HEAD
-                    } & { [K_30 in Exclude<keyof I_1["Users"][number]["User"]["TradeProfile"]["SingleOrderLimit"], keyof import("./sologenic/com-fs-trade-profile-model/tradeprofile").DropdownNumericValue>]: never; }) | undefined;
-=======
-                    } & { [K_28 in Exclude<keyof I_1["Users"][number]["User"]["TradeProfile"]["SingleOrderLimit"], keyof import("./sologenic/com-fs-trade-profile-model/tradeprofile").DropdownNumericValue>]: never; }) | undefined;
->>>>>>> db9c8c5 (added user trade profile property for the user)
+                    } & { [K_31 in Exclude<keyof I_1["Users"][number]["User"]["TradeProfile"]["SingleOrderLimit"], keyof import("./sologenic/com-fs-trade-profile-model/tradeprofile").DropdownNumericValue>]: never; }) | undefined;
                     MaxOrderQuantity?: ({
                         Value?: number | undefined;
                         IsGreaterThan?: boolean | undefined;
                     } & {
                         Value?: number | undefined;
                         IsGreaterThan?: boolean | undefined;
-<<<<<<< HEAD
-                    } & { [K_31 in Exclude<keyof I_1["Users"][number]["User"]["TradeProfile"]["MaxOrderQuantity"], keyof import("./sologenic/com-fs-trade-profile-model/tradeprofile").DropdownNumericValue>]: never; }) | undefined;
-=======
-                    } & { [K_29 in Exclude<keyof I_1["Users"][number]["User"]["TradeProfile"]["MaxOrderQuantity"], keyof import("./sologenic/com-fs-trade-profile-model/tradeprofile").DropdownNumericValue>]: never; }) | undefined;
->>>>>>> db9c8c5 (added user trade profile property for the user)
+                    } & { [K_32 in Exclude<keyof I_1["Users"][number]["User"]["TradeProfile"]["MaxOrderQuantity"], keyof import("./sologenic/com-fs-trade-profile-model/tradeprofile").DropdownNumericValue>]: never; }) | undefined;
                     AggressivePercentage?: number | undefined;
                     SymbolGrossADVPercent?: number | undefined;
                     PriceCheckDeviation?: number | undefined;
                     DuplicateOrderLimit?: number | undefined;
                     RiskMultiplier?: number | undefined;
-<<<<<<< HEAD
-                } & { [K_32 in Exclude<keyof I_1["Users"][number]["User"]["TradeProfile"], keyof TradeProfileDetails>]: never; }) | undefined;
-                KYCInquiries?: (string[] & string[] & { [K_33 in Exclude<keyof I_1["Users"][number]["User"]["KYCInquiries"], keyof string[]>]: never; }) | undefined;
-=======
-                } & { [K_30 in Exclude<keyof I_1["Users"][number]["User"]["TradeProfile"], keyof TradeProfileDetails>]: never; }) | undefined;
-                KYCInquiries?: (string[] & string[] & { [K_31 in Exclude<keyof I_1["Users"][number]["User"]["KYCInquiries"], keyof string[]>]: never; }) | undefined;
->>>>>>> db9c8c5 (added user trade profile property for the user)
+                } & { [K_33 in Exclude<keyof I_1["Users"][number]["User"]["TradeProfile"], keyof TradeProfileDetails>]: never; }) | undefined;
+                KYCInquiries?: (string[] & string[] & { [K_34 in Exclude<keyof I_1["Users"][number]["User"]["KYCInquiries"], keyof string[]>]: never; }) | undefined;
                 KYCDetails?: ({
                     Birthdate?: string | undefined;
                     PhoneNumber?: string | undefined;
@@ -3703,10 +3490,9 @@ export declare const UserList: {
                     CountryCode?: string | undefined;
                     SocialSecurityNumber?: string | undefined;
                     IdentificationNumber?: string | undefined;
-<<<<<<< HEAD
                     FirstName?: string | undefined;
                     LastName?: string | undefined;
-                } & { [K_34 in Exclude<keyof I_1["Users"][number]["User"]["KYCDetails"], keyof UserKYCDetails>]: never; }) | undefined;
+                } & { [K_35 in Exclude<keyof I_1["Users"][number]["User"]["KYCDetails"], keyof UserKYCDetails>]: never; }) | undefined;
                 UserDocumentCompliance?: ({
                     SignedDocuments?: {
                         Name?: string | undefined;
@@ -3734,18 +3520,15 @@ export declare const UserList: {
                         DocumentState?: import("./sologenic/com-fs-document-model/document").DocumentState | undefined;
                         SignedAt?: Date | undefined;
                         FileMD5SUM?: string | undefined;
-                    } & { [K_35 in Exclude<keyof I_1["Users"][number]["User"]["UserDocumentCompliance"]["SignedDocuments"][number], keyof import("./sologenic/com-fs-document-model/document").SignedDocument>]: never; })[] & { [K_36 in Exclude<keyof I_1["Users"][number]["User"]["UserDocumentCompliance"]["SignedDocuments"], keyof {
+                    } & { [K_36 in Exclude<keyof I_1["Users"][number]["User"]["UserDocumentCompliance"]["SignedDocuments"][number], keyof import("./sologenic/com-fs-document-model/document").SignedDocument>]: never; })[] & { [K_37 in Exclude<keyof I_1["Users"][number]["User"]["UserDocumentCompliance"]["SignedDocuments"], keyof {
                         Name?: string | undefined;
                         SignedVersion?: string | undefined;
                         DocumentState?: import("./sologenic/com-fs-document-model/document").DocumentState | undefined;
                         SignedAt?: Date | undefined;
                         FileMD5SUM?: string | undefined;
                     }[]>]: never; }) | undefined;
-                } & { [K_37 in Exclude<keyof I_1["Users"][number]["User"]["UserDocumentCompliance"], "SignedDocuments">]: never; }) | undefined;
+                } & { [K_38 in Exclude<keyof I_1["Users"][number]["User"]["UserDocumentCompliance"], "SignedDocuments">]: never; }) | undefined;
                 KYCStatus?: KYCStatus | undefined;
-            } & { [K_38 in Exclude<keyof I_1["Users"][number]["User"], keyof UserDetails>]: never; }) | undefined;
-=======
-                } & { [K_32 in Exclude<keyof I_1["Users"][number]["User"]["KYCDetails"], keyof UserKYCDetails>]: never; }) | undefined;
                 UserTradeProfile?: ({
                     IsMarginTradingEnabled?: boolean | undefined;
                     IsShortSellingEnabled?: boolean | undefined;
@@ -3756,9 +3539,8 @@ export declare const UserList: {
                     IsShortSellingEnabled?: boolean | undefined;
                     SingleOrderLimit?: number | undefined;
                     MaxOrderQuantity?: number | undefined;
-                } & { [K_33 in Exclude<keyof I_1["Users"][number]["User"]["UserTradeProfile"], keyof UserTradeProfile>]: never; }) | undefined;
-            } & { [K_34 in Exclude<keyof I_1["Users"][number]["User"], keyof UserDetails>]: never; }) | undefined;
->>>>>>> db9c8c5 (added user trade profile property for the user)
+                } & { [K_39 in Exclude<keyof I_1["Users"][number]["User"]["UserTradeProfile"], keyof UserTradeProfile>]: never; }) | undefined;
+            } & { [K_40 in Exclude<keyof I_1["Users"][number]["User"], keyof UserDetails>]: never; }) | undefined;
             MetaData?: ({
                 Network?: Network | undefined;
                 UpdatedAt?: Date | undefined;
@@ -3769,11 +3551,7 @@ export declare const UserList: {
                 UpdatedAt?: Date | undefined;
                 CreatedAt?: Date | undefined;
                 UpdatedByAccount?: string | undefined;
-<<<<<<< HEAD
-            } & { [K_39 in Exclude<keyof I_1["Users"][number]["MetaData"], keyof MetaData>]: never; }) | undefined;
-=======
-            } & { [K_35 in Exclude<keyof I_1["Users"][number]["MetaData"], keyof MetaData>]: never; }) | undefined;
->>>>>>> db9c8c5 (added user trade profile property for the user)
+            } & { [K_41 in Exclude<keyof I_1["Users"][number]["MetaData"], keyof MetaData>]: never; }) | undefined;
             Audit?: ({
                 ChangedBy?: string | undefined;
                 ChangedAt?: Date | undefined;
@@ -3782,13 +3560,8 @@ export declare const UserList: {
                 ChangedBy?: string | undefined;
                 ChangedAt?: Date | undefined;
                 Reason?: string | undefined;
-<<<<<<< HEAD
-            } & { [K_40 in Exclude<keyof I_1["Users"][number]["Audit"], keyof Audit>]: never; }) | undefined;
-        } & { [K_41 in Exclude<keyof I_1["Users"][number], keyof User>]: never; })[] & { [K_42 in Exclude<keyof I_1["Users"], keyof {
-=======
-            } & { [K_36 in Exclude<keyof I_1["Users"][number]["Audit"], keyof Audit>]: never; }) | undefined;
-        } & { [K_37 in Exclude<keyof I_1["Users"][number], keyof User>]: never; })[] & { [K_38 in Exclude<keyof I_1["Users"], keyof {
->>>>>>> db9c8c5 (added user trade profile property for the user)
+            } & { [K_42 in Exclude<keyof I_1["Users"][number]["Audit"], keyof Audit>]: never; }) | undefined;
+        } & { [K_43 in Exclude<keyof I_1["Users"][number], keyof User>]: never; })[] & { [K_44 in Exclude<keyof I_1["Users"], keyof {
             User?: {
                 UserID?: string | undefined;
                 FirstName?: string | undefined;
@@ -3871,7 +3644,6 @@ export declare const UserList: {
                     FirstName?: string | undefined;
                     LastName?: string | undefined;
                 } | undefined;
-<<<<<<< HEAD
                 UserDocumentCompliance?: {
                     SignedDocuments?: {
                         Name?: string | undefined;
@@ -3882,14 +3654,12 @@ export declare const UserList: {
                     }[] | undefined;
                 } | undefined;
                 KYCStatus?: KYCStatus | undefined;
-=======
                 UserTradeProfile?: {
                     IsMarginTradingEnabled?: boolean | undefined;
                     IsShortSellingEnabled?: boolean | undefined;
                     SingleOrderLimit?: number | undefined;
                     MaxOrderQuantity?: number | undefined;
                 } | undefined;
->>>>>>> db9c8c5 (added user trade profile property for the user)
             } | undefined;
             MetaData?: {
                 Network?: Network | undefined;
@@ -3904,11 +3674,7 @@ export declare const UserList: {
             } | undefined;
         }[]>]: never; }) | undefined;
         Offset?: number | undefined;
-<<<<<<< HEAD
-    } & { [K_43 in Exclude<keyof I_1, keyof UserList>]: never; }>(object: I_1): UserList;
-=======
-    } & { [K_39 in Exclude<keyof I_1, keyof UserList>]: never; }>(object: I_1): UserList;
->>>>>>> db9c8c5 (added user trade profile property for the user)
+    } & { [K_45 in Exclude<keyof I_1, keyof UserList>]: never; }>(object: I_1): UserList;
 };
 export declare const StatusMessage: {
     encode(message: StatusMessage, writer?: _m0.Writer): _m0.Writer;

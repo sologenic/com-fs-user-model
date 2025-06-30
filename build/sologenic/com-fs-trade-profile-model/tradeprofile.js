@@ -390,11 +390,7 @@ export const TradeProfileDetails = {
         return TradeProfileDetails.fromPartial(base !== null && base !== void 0 ? base : {});
     },
     fromPartial(object) {
-<<<<<<< HEAD
-        var _a, _b, _c, _d, _e, _f, _g, _h;
-=======
         var _a, _b, _c, _d, _e, _f, _g, _h, _j;
->>>>>>> db9c8c5 (added user trade profile property for the user)
         const message = createBaseTradeProfileDetails();
         message.IsTradingEnabled = (_a = object.IsTradingEnabled) !== null && _a !== void 0 ? _a : false;
         message.IsOrderAcceptanceEnabled = (_b = object.IsOrderAcceptanceEnabled) !== null && _b !== void 0 ? _b : false;
@@ -410,13 +406,6 @@ export const TradeProfileDetails = {
         message.MaxOrderQuantity = (object.MaxOrderQuantity !== undefined && object.MaxOrderQuantity !== null)
             ? DropdownNumericValue.fromPartial(object.MaxOrderQuantity)
             : undefined;
-<<<<<<< HEAD
-        message.AggressivePercentage = (_d = object.AggressivePercentage) !== null && _d !== void 0 ? _d : 0;
-        message.SymbolGrossADVPercent = (_e = object.SymbolGrossADVPercent) !== null && _e !== void 0 ? _e : 0;
-        message.PriceCheckDeviation = (_f = object.PriceCheckDeviation) !== null && _f !== void 0 ? _f : 0;
-        message.DuplicateOrderLimit = (_g = object.DuplicateOrderLimit) !== null && _g !== void 0 ? _g : 0;
-        message.RiskMultiplier = (_h = object.RiskMultiplier) !== null && _h !== void 0 ? _h : 0;
-=======
         message.AggressivePercentage = (_e = object.AggressivePercentage) !== null && _e !== void 0 ? _e : 0;
         message.SymbolGrossADVPercent = (_f = object.SymbolGrossADVPercent) !== null && _f !== void 0 ? _f : 0;
         message.PriceCheckDeviation = (_g = object.PriceCheckDeviation) !== null && _g !== void 0 ? _g : 0;
@@ -521,7 +510,6 @@ export const UserTradeProfile = {
         message.IsShortSellingEnabled = (_b = object.IsShortSellingEnabled) !== null && _b !== void 0 ? _b : false;
         message.SingleOrderLimit = (_c = object.SingleOrderLimit) !== null && _c !== void 0 ? _c : 0;
         message.MaxOrderQuantity = (_d = object.MaxOrderQuantity) !== null && _d !== void 0 ? _d : 0;
->>>>>>> db9c8c5 (added user trade profile property for the user)
         return message;
     },
 };
