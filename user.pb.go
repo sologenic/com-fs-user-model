@@ -585,6 +585,7 @@ func (x *UserKYCDetails) GetLastName() string {
 }
 
 type UserDetails struct {
+<<<<<<< HEAD
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
@@ -609,6 +610,30 @@ type UserDetails struct {
 	KYCDetails             *UserKYCDetails                                 `protobuf:"bytes,18,opt,name=KYCDetails,proto3" json:"KYCDetails,omitempty"`
 	UserDocumentCompliance *com_fs_document_model.UserDocumentCompliance   `protobuf:"bytes,19,opt,name=UserDocumentCompliance,proto3" json:"UserDocumentCompliance,omitempty"`
 	KYCStatus              KYCStatus                                       `protobuf:"varint,20,opt,name=KYCStatus,proto3,enum=user.KYCStatus" json:"KYCStatus,omitempty"` // Status of KYC verification, e.g., PENDING, APPROVED, REJECTED
+=======
+	state            protoimpl.MessageState                          `protogen:"open.v1"`
+	UserID           string                                          `protobuf:"bytes,1,opt,name=UserID,proto3" json:"UserID,omitempty"` // email address used for firebase authentication
+	FirstName        string                                          `protobuf:"bytes,2,opt,name=FirstName,proto3" json:"FirstName,omitempty"`
+	LastName         string                                          `protobuf:"bytes,3,opt,name=LastName,proto3" json:"LastName,omitempty"`
+	Address          string                                          `protobuf:"bytes,4,opt,name=Address,proto3" json:"Address,omitempty"`
+	Avatar           string                                          `protobuf:"bytes,5,opt,name=Avatar,proto3" json:"Avatar,omitempty"`
+	Alias            string                                          `protobuf:"bytes,6,opt,name=Alias,proto3" json:"Alias,omitempty"` // "Nickname"
+	Description      string                                          `protobuf:"bytes,7,opt,name=Description,proto3" json:"Description,omitempty"`
+	Status           UserStatus                                      `protobuf:"varint,8,opt,name=Status,proto3,enum=user.UserStatus" json:"Status,omitempty"`
+	Wallets          []*Wallet                                       `protobuf:"bytes,9,rep,name=Wallets,proto3" json:"Wallets,omitempty"`
+	Socials          []*Social                                       `protobuf:"bytes,10,rep,name=Socials,proto3" json:"Socials,omitempty"`
+	Language         language.Lang                                   `protobuf:"varint,11,opt,name=Language,proto3,enum=language.Lang" json:"Language,omitempty"`
+	ExternalUserID   string                                          `protobuf:"bytes,12,opt,name=ExternalUserID,proto3" json:"ExternalUserID,omitempty"` // UUID for the external user identifier in the KYC provider
+	OrganizationID   string                                          `protobuf:"bytes,13,opt,name=OrganizationID,proto3" json:"OrganizationID,omitempty"` // UUID
+	Employment       *Employment                                     `protobuf:"bytes,14,opt,name=Employment,proto3,oneof" json:"Employment,omitempty"`
+	Role             role.Role                                       `protobuf:"varint,15,opt,name=Role,proto3,enum=role.Role" json:"Role,omitempty"` // A retail user will always have a role of "NORMAL_USER"
+	TradeProfile     *com_fs_trade_profile_model.TradeProfileDetails `protobuf:"bytes,16,opt,name=TradeProfile,proto3" json:"TradeProfile,omitempty"` // Trade profile details - Admin mutable, User immutable
+	KYCInquiries     []string                                        `protobuf:"bytes,17,rep,name=KYCInquiries,proto3" json:"KYCInquiries,omitempty"` // Array of inquiry ID's
+	KYCDetails       *UserKYCDetails                                 `protobuf:"bytes,18,opt,name=KYCDetails,proto3" json:"KYCDetails,omitempty"`
+	UserTradeProfile *com_fs_trade_profile_model.UserTradeProfile    `protobuf:"bytes,19,opt,name=UserTradeProfile,proto3" json:"UserTradeProfile,omitempty"`
+	unknownFields    protoimpl.UnknownFields
+	sizeCache        protoimpl.SizeCache
+>>>>>>> db9c8c5 (added user trade profile property for the user)
 }
 
 func (x *UserDetails) Reset() {
@@ -769,13 +794,20 @@ func (x *UserDetails) GetKYCDetails() *UserKYCDetails {
 	return nil
 }
 
+<<<<<<< HEAD
 func (x *UserDetails) GetUserDocumentCompliance() *com_fs_document_model.UserDocumentCompliance {
 	if x != nil {
 		return x.UserDocumentCompliance
+=======
+func (x *UserDetails) GetUserTradeProfile() *com_fs_trade_profile_model.UserTradeProfile {
+	if x != nil {
+		return x.UserTradeProfile
+>>>>>>> db9c8c5 (added user trade profile property for the user)
 	}
 	return nil
 }
 
+<<<<<<< HEAD
 func (x *UserDetails) GetKYCStatus() KYCStatus {
 	if x != nil {
 		return x.KYCStatus
@@ -783,6 +815,8 @@ func (x *UserDetails) GetKYCStatus() KYCStatus {
 	return KYCStatus_KYC_STATUS_UNSPECIFIED
 }
 
+=======
+>>>>>>> db9c8c5 (added user trade profile property for the user)
 // TODO: to be verified when more information is available
 type Employment struct {
 	state         protoimpl.MessageState
@@ -1520,6 +1554,7 @@ func (x *Filter) GetExternalUserIDs() []string {
 
 var File_user_proto protoreflect.FileDescriptor
 
+<<<<<<< HEAD
 var file_user_proto_rawDesc = []byte{
 	0x0a, 0x0a, 0x75, 0x73, 0x65, 0x72, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x12, 0x04, 0x75, 0x73,
 	0x65, 0x72, 0x1a, 0x1f, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x2f, 0x70, 0x72, 0x6f, 0x74, 0x6f,
@@ -1802,6 +1837,172 @@ var file_user_proto_rawDesc = []byte{
 	0x2d, 0x75, 0x73, 0x65, 0x72, 0x2d, 0x6d, 0x6f, 0x64, 0x65, 0x6c, 0x3b, 0x75, 0x73, 0x65, 0x72,
 	0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
+=======
+const file_user_proto_rawDesc = "" +
+	"\n" +
+	"\n" +
+	"user.proto\x12\x04user\x1a\x1fgoogle/protobuf/timestamp.proto\x1a9sologenic/com-fs-utils-lib/models/metadata/metadata.proto\x1a3sologenic/com-fs-utils-lib/models/audit/audit.proto\x1a1sologenic/com-fs-utils-lib/models/role/role.proto\x1a9sologenic/com-fs-utils-lib/models/language/language.proto\x1a7sologenic/com-fs-trade-profile-model/tradeprofile.proto\"\x98\x01\n" +
+	"\bIDNumber\x12&\n" +
+	"\x0eIssuingCountry\x18\x01 \x01(\tR\x0eIssuingCountry\x120\n" +
+	"\x13IdentificationClass\x18\x02 \x01(\tR\x13IdentificationClass\x122\n" +
+	"\x14IdentificationNumber\x18\x03 \x01(\tR\x14IdentificationNumber\"\xce\x03\n" +
+	"\x0eUserKYCDetails\x12\x1c\n" +
+	"\tBirthdate\x18\x01 \x01(\tR\tBirthdate\x12 \n" +
+	"\vPhoneNumber\x18\x02 \x01(\tR\vPhoneNumber\x12\"\n" +
+	"\fEmailAddress\x18\x03 \x01(\tR\fEmailAddress\x12&\n" +
+	"\x0eAddressStreet1\x18\x04 \x01(\tR\x0eAddressStreet1\x12&\n" +
+	"\x0eAddressStreet2\x18\x05 \x01(\tR\x0eAddressStreet2\x12 \n" +
+	"\vAddressCity\x18\x06 \x01(\tR\vAddressCity\x12.\n" +
+	"\x12AddressSubdivision\x18\a \x01(\tR\x12AddressSubdivision\x12,\n" +
+	"\x11AddressPostalCode\x18\b \x01(\tR\x11AddressPostalCode\x12 \n" +
+	"\vCountryCode\x18\t \x01(\tR\vCountryCode\x122\n" +
+	"\x14SocialSecurityNumber\x18\n" +
+	" \x01(\tR\x14SocialSecurityNumber\x122\n" +
+	"\x14IdentificationNumber\x18\v \x01(\tR\x14IdentificationNumber\"\x92\x06\n" +
+	"\vUserDetails\x12\x16\n" +
+	"\x06UserID\x18\x01 \x01(\tR\x06UserID\x12\x1c\n" +
+	"\tFirstName\x18\x02 \x01(\tR\tFirstName\x12\x1a\n" +
+	"\bLastName\x18\x03 \x01(\tR\bLastName\x12\x18\n" +
+	"\aAddress\x18\x04 \x01(\tR\aAddress\x12\x16\n" +
+	"\x06Avatar\x18\x05 \x01(\tR\x06Avatar\x12\x14\n" +
+	"\x05Alias\x18\x06 \x01(\tR\x05Alias\x12 \n" +
+	"\vDescription\x18\a \x01(\tR\vDescription\x12(\n" +
+	"\x06Status\x18\b \x01(\x0e2\x10.user.UserStatusR\x06Status\x12&\n" +
+	"\aWallets\x18\t \x03(\v2\f.user.WalletR\aWallets\x12&\n" +
+	"\aSocials\x18\n" +
+	" \x03(\v2\f.user.SocialR\aSocials\x12*\n" +
+	"\bLanguage\x18\v \x01(\x0e2\x0e.language.LangR\bLanguage\x12&\n" +
+	"\x0eExternalUserID\x18\f \x01(\tR\x0eExternalUserID\x12&\n" +
+	"\x0eOrganizationID\x18\r \x01(\tR\x0eOrganizationID\x125\n" +
+	"\n" +
+	"Employment\x18\x0e \x01(\v2\x10.user.EmploymentH\x00R\n" +
+	"Employment\x88\x01\x01\x12\x1e\n" +
+	"\x04Role\x18\x0f \x01(\x0e2\n" +
+	".role.RoleR\x04Role\x12E\n" +
+	"\fTradeProfile\x18\x10 \x01(\v2!.tradeprofile.TradeProfileDetailsR\fTradeProfile\x12\"\n" +
+	"\fKYCInquiries\x18\x11 \x03(\tR\fKYCInquiries\x124\n" +
+	"\n" +
+	"KYCDetails\x18\x12 \x01(\v2\x14.user.UserKYCDetailsR\n" +
+	"KYCDetails\x12J\n" +
+	"\x10UserTradeProfile\x18\x13 \x01(\v2\x1e.tradeprofile.UserTradeProfileR\x10UserTradeProfileB\r\n" +
+	"\v_Employment\"\xab\x03\n" +
+	"\n" +
+	"Employment\x12\"\n" +
+	"\fEmployerName\x18\x01 \x01(\tR\fEmployerName\x12\x1a\n" +
+	"\bJobTitle\x18\x02 \x01(\tR\bJobTitle\x128\n" +
+	"\tStartDate\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampR\tStartDate\x124\n" +
+	"\aEndDate\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampR\aEndDate\x12(\n" +
+	"\x04Type\x18\x05 \x01(\x0e2\x14.user.EmploymentTypeR\x04Type\x12\x1f\n" +
+	"\bIndustry\x18\x06 \x01(\tH\x00R\bIndustry\x88\x01\x01\x12$\n" +
+	"\x06Income\x18\a \x01(\v2\f.user.IncomeR\x06Income\x12/\n" +
+	"\aContact\x18\b \x01(\v2\x15.user.EmployerContactR\aContact\x12\x1e\n" +
+	"\n" +
+	"IsVerified\x18\t \x01(\bR\n" +
+	"IsVerified\x12\x1e\n" +
+	"\n" +
+	"VerifiedAt\x18\n" +
+	" \x01(\tR\n" +
+	"VerifiedAtB\v\n" +
+	"\t_Industry\"q\n" +
+	"\x06Income\x12\x16\n" +
+	"\x06Amount\x18\x01 \x01(\x02R\x06Amount\x12\x1a\n" +
+	"\bCurrency\x18\x02 \x01(\tR\bCurrency\x123\n" +
+	"\tFrequency\x18\x03 \x01(\x0e2\x15.user.IncomeFrequencyR\tFrequency\"k\n" +
+	"\x0fEmployerContact\x12\x12\n" +
+	"\x04Name\x18\x01 \x01(\tR\x04Name\x12\x14\n" +
+	"\x05Email\x18\x02 \x01(\tR\x05Email\x12\x14\n" +
+	"\x05Phone\x18\x03 \x01(\tR\x05Phone\x12\x18\n" +
+	"\aAddress\x18\x04 \x01(\tR\aAddress\"\x81\x01\n" +
+	"\x04User\x12%\n" +
+	"\x04User\x18\x01 \x01(\v2\x11.user.UserDetailsR\x04User\x12.\n" +
+	"\bMetaData\x18\x02 \x01(\v2\x12.metadata.MetaDataR\bMetaData\x12\"\n" +
+	"\x05Audit\x18\x03 \x01(\v2\f.audit.AuditR\x05Audit\"\x86\x01\n" +
+	"\x06UserID\x12\x16\n" +
+	"\x06UserID\x18\x01 \x01(\tR\x06UserID\x12&\n" +
+	"\x0eOrganizationID\x18\x02 \x01(\tR\x0eOrganizationID\x120\n" +
+	"\aNetwork\x18\x03 \x01(\x0e2\x11.metadata.NetworkH\x00R\aNetwork\x88\x01\x01B\n" +
+	"\n" +
+	"\b_Network\"@\n" +
+	"\x06Social\x12\x10\n" +
+	"\x03URL\x18\x01 \x01(\tR\x03URL\x12$\n" +
+	"\x04Type\x18\x02 \x01(\x0e2\x10.user.SocialTypeR\x04Type\"^\n" +
+	"\x06Wallet\x12\x18\n" +
+	"\aAddress\x18\x01 \x01(\tR\aAddress\x12\x14\n" +
+	"\x05Alias\x18\x02 \x01(\tR\x05Alias\x12$\n" +
+	"\x04Type\x18\x03 \x01(\x0e2\x10.user.WalletTypeR\x04Type\"T\n" +
+	"\bUserList\x12 \n" +
+	"\x05Users\x18\x01 \x03(\v2\n" +
+	".user.UserR\x05Users\x12\x1b\n" +
+	"\x06Offset\x18\x02 \x01(\x05H\x00R\x06Offset\x88\x01\x01B\t\n" +
+	"\a_Offset\"\xdb\x01\n" +
+	"\rStatusMessage\x12\x16\n" +
+	"\x06UserID\x18\x01 \x01(\tR\x06UserID\x12&\n" +
+	"\x0eOrganizationID\x18\x02 \x01(\tR\x0eOrganizationID\x12(\n" +
+	"\x06Status\x18\x03 \x01(\x0e2\x10.user.UserStatusR\x06Status\x120\n" +
+	"\aNetwork\x18\x04 \x01(\x0e2\x11.metadata.NetworkH\x00R\aNetwork\x88\x01\x01\x12\"\n" +
+	"\x05Audit\x18\x05 \x01(\v2\f.audit.AuditR\x05AuditB\n" +
+	"\n" +
+	"\b_Network\"\xc0\x02\n" +
+	"\x06Filter\x12\x18\n" +
+	"\aUserIDs\x18\x01 \x03(\tR\aUserIDs\x120\n" +
+	"\aNetwork\x18\x02 \x01(\x0e2\x11.metadata.NetworkH\x00R\aNetwork\x88\x01\x01\x12&\n" +
+	"\x0eOrganizationID\x18\x03 \x01(\tR\x0eOrganizationID\x12\x1b\n" +
+	"\x06Offset\x18\x04 \x01(\x05H\x01R\x06Offset\x88\x01\x01\x12\x19\n" +
+	"\x05Limit\x18\x05 \x01(\x05H\x02R\x05Limit\x88\x01\x01\x12!\n" +
+	"\tInquiryID\x18\x06 \x01(\tH\x03R\tInquiryID\x88\x01\x01\x12-\n" +
+	"\x06Status\x18\a \x01(\x0e2\x10.user.UserStatusH\x04R\x06Status\x88\x01\x01B\n" +
+	"\n" +
+	"\b_NetworkB\t\n" +
+	"\a_OffsetB\b\n" +
+	"\x06_LimitB\f\n" +
+	"\n" +
+	"_InquiryIDB\t\n" +
+	"\a_Status*\x8b\x01\n" +
+	"\x0eEmploymentType\x12\x1b\n" +
+	"\x17NOT_USED_EMPLOYMENTTYPE\x10\x00\x12\r\n" +
+	"\tFULL_TIME\x10\x01\x12\r\n" +
+	"\tPART_TIME\x10\x02\x12\f\n" +
+	"\bCONTRACT\x10\x03\x12\r\n" +
+	"\tFREELANCE\x10\x04\x12\x11\n" +
+	"\rSELF_EMPLOYED\x10\x05\x12\x0e\n" +
+	"\n" +
+	"INTERNSHIP\x10\x06*q\n" +
+	"\x0fIncomeFrequency\x12\x1c\n" +
+	"\x18NOT_USED_INCOMEFREQUENCY\x10\x00\x12\n" +
+	"\n" +
+	"\x06HOURLY\x10\x01\x12\n" +
+	"\n" +
+	"\x06WEEKLY\x10\x02\x12\r\n" +
+	"\tBI_WEEKLY\x10\x03\x12\v\n" +
+	"\aMONTHLY\x10\x04\x12\f\n" +
+	"\bANNUALLY\x10\x05*H\n" +
+	"\n" +
+	"UserStatus\x12\x17\n" +
+	"\x13NOT_USED_USERSTATUS\x10\x00\x12\n" +
+	"\n" +
+	"\x06ACTIVE\x10\x01\x12\x15\n" +
+	"\x11ADMIN_DEACTIVATED\x10\x02*G\n" +
+	"\n" +
+	"WalletType\x12\x17\n" +
+	"\x13NOT_USED_WALLETTYPE\x10\x00\x12\b\n" +
+	"\x04TFSA\x10\x01\x12\b\n" +
+	"\x04RRSP\x10\x02\x12\f\n" +
+	"\bSTANDARD\x10\x03*\x9d\x01\n" +
+	"\n" +
+	"SocialType\x12\x17\n" +
+	"\x13NOT_USED_SOCIALTYPE\x10\x00\x12\v\n" +
+	"\aWEBSITE\x10\x01\x12\n" +
+	"\n" +
+	"\x06GITHUB\x10\x02\x12\n" +
+	"\n" +
+	"\x06REDDIT\x10\x03\x12\v\n" +
+	"\aDISCORD\x10\x04\x12\v\n" +
+	"\aTWITTER\x10\x05\x12\f\n" +
+	"\bFACEBOOK\x10\x06\x12\f\n" +
+	"\bTELEGRAM\x10\a\x12\r\n" +
+	"\tINSTAGRAM\x10\b\x12\f\n" +
+	"\bLINKEDIN\x10\tB-Z+github.com/sologenic/com-fs-user-model;userb\x06proto3"
+>>>>>>> db9c8c5 (added user trade profile property for the user)
 
 var (
 	file_user_proto_rawDescOnce sync.Once
@@ -1817,6 +2018,7 @@ func file_user_proto_rawDescGZIP() []byte {
 
 var file_user_proto_enumTypes = make([]protoimpl.EnumInfo, 6)
 var file_user_proto_msgTypes = make([]protoimpl.MessageInfo, 13)
+<<<<<<< HEAD
 var file_user_proto_goTypes = []interface{}{
 	(KYCStatus)(0),          // 0: user.KYCStatus
 	(EmploymentType)(0),     // 1: user.EmploymentType
@@ -1880,6 +2082,69 @@ var file_user_proto_depIdxs = []int32{
 	28, // [28:28] is the sub-list for extension type_name
 	28, // [28:28] is the sub-list for extension extendee
 	0,  // [0:28] is the sub-list for field type_name
+=======
+var file_user_proto_goTypes = []any{
+	(EmploymentType)(0),     // 0: user.EmploymentType
+	(IncomeFrequency)(0),    // 1: user.IncomeFrequency
+	(UserStatus)(0),         // 2: user.UserStatus
+	(WalletType)(0),         // 3: user.WalletType
+	(SocialType)(0),         // 4: user.SocialType
+	(*IDNumber)(nil),        // 5: user.IDNumber
+	(*UserKYCDetails)(nil),  // 6: user.UserKYCDetails
+	(*UserDetails)(nil),     // 7: user.UserDetails
+	(*Employment)(nil),      // 8: user.Employment
+	(*Income)(nil),          // 9: user.Income
+	(*EmployerContact)(nil), // 10: user.EmployerContact
+	(*User)(nil),            // 11: user.User
+	(*UserID)(nil),          // 12: user.UserID
+	(*Social)(nil),          // 13: user.Social
+	(*Wallet)(nil),          // 14: user.Wallet
+	(*UserList)(nil),        // 15: user.UserList
+	(*StatusMessage)(nil),   // 16: user.StatusMessage
+	(*Filter)(nil),          // 17: user.Filter
+	(language.Lang)(0),      // 18: language.Lang
+	(role.Role)(0),          // 19: role.Role
+	(*com_fs_trade_profile_model.TradeProfileDetails)(nil), // 20: tradeprofile.TradeProfileDetails
+	(*com_fs_trade_profile_model.UserTradeProfile)(nil),    // 21: tradeprofile.UserTradeProfile
+	(*timestamppb.Timestamp)(nil),                          // 22: google.protobuf.Timestamp
+	(*metadata.MetaData)(nil),                              // 23: metadata.MetaData
+	(*audit.Audit)(nil),                                    // 24: audit.Audit
+	(metadata.Network)(0),                                  // 25: metadata.Network
+}
+var file_user_proto_depIdxs = []int32{
+	2,  // 0: user.UserDetails.Status:type_name -> user.UserStatus
+	14, // 1: user.UserDetails.Wallets:type_name -> user.Wallet
+	13, // 2: user.UserDetails.Socials:type_name -> user.Social
+	18, // 3: user.UserDetails.Language:type_name -> language.Lang
+	8,  // 4: user.UserDetails.Employment:type_name -> user.Employment
+	19, // 5: user.UserDetails.Role:type_name -> role.Role
+	20, // 6: user.UserDetails.TradeProfile:type_name -> tradeprofile.TradeProfileDetails
+	6,  // 7: user.UserDetails.KYCDetails:type_name -> user.UserKYCDetails
+	21, // 8: user.UserDetails.UserTradeProfile:type_name -> tradeprofile.UserTradeProfile
+	22, // 9: user.Employment.StartDate:type_name -> google.protobuf.Timestamp
+	22, // 10: user.Employment.EndDate:type_name -> google.protobuf.Timestamp
+	0,  // 11: user.Employment.Type:type_name -> user.EmploymentType
+	9,  // 12: user.Employment.Income:type_name -> user.Income
+	10, // 13: user.Employment.Contact:type_name -> user.EmployerContact
+	1,  // 14: user.Income.Frequency:type_name -> user.IncomeFrequency
+	7,  // 15: user.User.User:type_name -> user.UserDetails
+	23, // 16: user.User.MetaData:type_name -> metadata.MetaData
+	24, // 17: user.User.Audit:type_name -> audit.Audit
+	25, // 18: user.UserID.Network:type_name -> metadata.Network
+	4,  // 19: user.Social.Type:type_name -> user.SocialType
+	3,  // 20: user.Wallet.Type:type_name -> user.WalletType
+	11, // 21: user.UserList.Users:type_name -> user.User
+	2,  // 22: user.StatusMessage.Status:type_name -> user.UserStatus
+	25, // 23: user.StatusMessage.Network:type_name -> metadata.Network
+	24, // 24: user.StatusMessage.Audit:type_name -> audit.Audit
+	25, // 25: user.Filter.Network:type_name -> metadata.Network
+	2,  // 26: user.Filter.Status:type_name -> user.UserStatus
+	27, // [27:27] is the sub-list for method output_type
+	27, // [27:27] is the sub-list for method input_type
+	27, // [27:27] is the sub-list for extension type_name
+	27, // [27:27] is the sub-list for extension extendee
+	0,  // [0:27] is the sub-list for field type_name
+>>>>>>> db9c8c5 (added user trade profile property for the user)
 }
 
 func init() { file_user_proto_init() }

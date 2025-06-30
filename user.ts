@@ -7,8 +7,12 @@
 /* eslint-disable */
 import _m0 from "protobufjs/minimal";
 import { Timestamp } from "./google/protobuf/timestamp";
+<<<<<<< HEAD
 import { UserDocumentCompliance } from "./sologenic/com-fs-document-model/document";
 import { TradeProfileDetails } from "./sologenic/com-fs-trade-profile-model/tradeprofile";
+=======
+import { TradeProfileDetails, UserTradeProfile } from "./sologenic/com-fs-trade-profile-model/tradeprofile";
+>>>>>>> db9c8c5 (added user trade profile property for the user)
 import { Audit } from "./sologenic/com-fs-utils-lib/models/audit/audit";
 import { Lang, langFromJSON, langToJSON } from "./sologenic/com-fs-utils-lib/models/language/language";
 import {
@@ -421,18 +425,22 @@ export interface UserDetails {
     | undefined;
   /** A retail user will always have a role of "NORMAL_USER" */
   Role: Role;
-  /** Trade profile details */
+  /** Trade profile details - Admin mutable, User immutable */
   TradeProfile:
     | TradeProfileDetails
     | undefined;
   /** Array of inquiry ID's */
   KYCInquiries: string[];
   KYCDetails: UserKYCDetails | undefined;
+<<<<<<< HEAD
   UserDocumentCompliance:
     | UserDocumentCompliance
     | undefined;
   /** Status of KYC verification, e.g., PENDING, APPROVED, REJECTED */
   KYCStatus: KYCStatus;
+=======
+  UserTradeProfile: UserTradeProfile | undefined;
+>>>>>>> db9c8c5 (added user trade profile property for the user)
 }
 
 /** TODO: to be verified when more information is available */
@@ -874,8 +882,12 @@ function createBaseUserDetails(): UserDetails {
     TradeProfile: undefined,
     KYCInquiries: [],
     KYCDetails: undefined,
+<<<<<<< HEAD
     UserDocumentCompliance: undefined,
     KYCStatus: 0,
+=======
+    UserTradeProfile: undefined,
+>>>>>>> db9c8c5 (added user trade profile property for the user)
   };
 }
 
@@ -935,11 +947,16 @@ export const UserDetails = {
     if (message.KYCDetails !== undefined) {
       UserKYCDetails.encode(message.KYCDetails, writer.uint32(146).fork()).ldelim();
     }
+<<<<<<< HEAD
     if (message.UserDocumentCompliance !== undefined) {
       UserDocumentCompliance.encode(message.UserDocumentCompliance, writer.uint32(154).fork()).ldelim();
     }
     if (message.KYCStatus !== 0) {
       writer.uint32(160).int32(message.KYCStatus);
+=======
+    if (message.UserTradeProfile !== undefined) {
+      UserTradeProfile.encode(message.UserTradeProfile, writer.uint32(154).fork()).ldelim();
+>>>>>>> db9c8c5 (added user trade profile property for the user)
     }
     return writer;
   },
@@ -1082,6 +1099,7 @@ export const UserDetails = {
             break;
           }
 
+<<<<<<< HEAD
           message.UserDocumentCompliance = UserDocumentCompliance.decode(reader, reader.uint32());
           continue;
         case 20:
@@ -1090,6 +1108,9 @@ export const UserDetails = {
           }
 
           message.KYCStatus = reader.int32() as any;
+=======
+          message.UserTradeProfile = UserTradeProfile.decode(reader, reader.uint32());
+>>>>>>> db9c8c5 (added user trade profile property for the user)
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -1122,10 +1143,14 @@ export const UserDetails = {
         ? object.KYCInquiries.map((e: any) => globalThis.String(e))
         : [],
       KYCDetails: isSet(object.KYCDetails) ? UserKYCDetails.fromJSON(object.KYCDetails) : undefined,
+<<<<<<< HEAD
       UserDocumentCompliance: isSet(object.UserDocumentCompliance)
         ? UserDocumentCompliance.fromJSON(object.UserDocumentCompliance)
         : undefined,
       KYCStatus: isSet(object.KYCStatus) ? kYCStatusFromJSON(object.KYCStatus) : 0,
+=======
+      UserTradeProfile: isSet(object.UserTradeProfile) ? UserTradeProfile.fromJSON(object.UserTradeProfile) : undefined,
+>>>>>>> db9c8c5 (added user trade profile property for the user)
     };
   },
 
@@ -1185,11 +1210,16 @@ export const UserDetails = {
     if (message.KYCDetails !== undefined) {
       obj.KYCDetails = UserKYCDetails.toJSON(message.KYCDetails);
     }
+<<<<<<< HEAD
     if (message.UserDocumentCompliance !== undefined) {
       obj.UserDocumentCompliance = UserDocumentCompliance.toJSON(message.UserDocumentCompliance);
     }
     if (message.KYCStatus !== 0) {
       obj.KYCStatus = kYCStatusToJSON(message.KYCStatus);
+=======
+    if (message.UserTradeProfile !== undefined) {
+      obj.UserTradeProfile = UserTradeProfile.toJSON(message.UserTradeProfile);
+>>>>>>> db9c8c5 (added user trade profile property for the user)
     }
     return obj;
   },
@@ -1223,11 +1253,17 @@ export const UserDetails = {
     message.KYCDetails = (object.KYCDetails !== undefined && object.KYCDetails !== null)
       ? UserKYCDetails.fromPartial(object.KYCDetails)
       : undefined;
+<<<<<<< HEAD
     message.UserDocumentCompliance =
       (object.UserDocumentCompliance !== undefined && object.UserDocumentCompliance !== null)
         ? UserDocumentCompliance.fromPartial(object.UserDocumentCompliance)
         : undefined;
     message.KYCStatus = object.KYCStatus ?? 0;
+=======
+    message.UserTradeProfile = (object.UserTradeProfile !== undefined && object.UserTradeProfile !== null)
+      ? UserTradeProfile.fromPartial(object.UserTradeProfile)
+      : undefined;
+>>>>>>> db9c8c5 (added user trade profile property for the user)
     return message;
   },
 };

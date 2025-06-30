@@ -41,6 +41,7 @@ github.com/pmezard/go-difflib v1.0.0/go.mod h1:iKH77koFhYxTK1pcRnkKkqfTogsbg7gZN
 github.com/rs/xid v1.6.0/go.mod h1:7XoLgs4eV+QndskICGsho+ADou8ySMSjJKDIan90Nz0=
 github.com/rs/zerolog v1.34.0 h1:k43nTLIwcTVQAncfCw4KZ2VY6ukYoZaBPNOE8txlOeY=
 github.com/rs/zerolog v1.34.0/go.mod h1:bJsvje4Z08ROH4Nhs5iH600c3IkWhwp44iRc54W6wYQ=
+<<<<<<< HEAD
 github.com/sologenic/com-fs-document-model v0.0.0-20250529220725-7a52b83dfd04 h1:WCrMC9xVETD37g4XthfygVhPpPR+gePhdb5xPFrGCNI=
 github.com/sologenic/com-fs-document-model v0.0.0-20250529220725-7a52b83dfd04/go.mod h1:W+2VFTLpNSSIhc0vzLyTvxMb3uqAW5PsgwB7tKJMtwU=
 github.com/sologenic/com-fs-trade-profile-model v0.0.0-20250526220108-858d005076d4 h1:IjeC0+5CliidC0ii/fQUQRfZhq75LFuf2upvFqRoPmo=
@@ -57,6 +58,34 @@ github.com/sologenic/com-fs-utils-lib/models/metadata v0.0.0-20250530185346-13f3
 github.com/sologenic/com-fs-utils-lib/models/metadata v0.0.0-20250530185346-13f30acaff8e/go.mod h1:ftOGlExX3C/AN24/N3j3+rHo4C7ehxfHNGpimuWv7IQ=
 github.com/sologenic/com-fs-utils-lib/models/role v0.0.0-20250530185346-13f30acaff8e h1:asL3RnrL5xH5/dODpFsCeZBPqBPgzRmqb8IrFp8rRCs=
 github.com/sologenic/com-fs-utils-lib/models/role v0.0.0-20250530185346-13f30acaff8e/go.mod h1:EzYV8QKfACoaaPwBFXY6R95AOORkV3TXxw8k1m26o+w=
+=======
+github.com/sologenic/com-fs-email-template-model v0.0.0-20250411003446-a4a450647f72 h1:9pUm4p/Vq8TcLCDDNVeTyrExpAuY5X2zY04Zj4Ns99c=
+github.com/sologenic/com-fs-email-template-model v0.0.0-20250411003446-a4a450647f72/go.mod h1:4KfaWkDr9tQJOXWKxKBO7r7cFKqHfeXF/QfJrFhDZEs=
+github.com/sologenic/com-fs-notification-model v0.0.0-20250404162422-163bee3e694c h1:KxHKMs82BXyKIAayVvKpKR8OORJJ1OB3bDSA1UuVAvE=
+github.com/sologenic/com-fs-notification-model v0.0.0-20250404162422-163bee3e694c/go.mod h1:ra+2m8VexCwK1VnWwlXB2FyooPS4m7BZHWjwAo2Awgw=
+github.com/sologenic/com-fs-notification-translation-model v0.0.0-20250411165620-fa24cef01548 h1:kUDMfNuV1nX41b6vphs6RdA1uodSaQqJKRIFUWPQPSs=
+github.com/sologenic/com-fs-notification-translation-model v0.0.0-20250411165620-fa24cef01548/go.mod h1:slkUINA8bRrE9xdXcb+KZcOeU9D/bgndUM2MwaepJSQ=
+github.com/sologenic/com-fs-trade-profile-model v0.0.0-20250508212619-50d926f69ba6 h1:19ANRbEw/jfYf9xp8sJhIX4S8JB8+cZMgKUVcrZudqI=
+github.com/sologenic/com-fs-trade-profile-model v0.0.0-20250508212619-50d926f69ba6/go.mod h1:xUu8z+vOxRKxtJ9rvvPd9tH+z47SNZXJ26H02ZcD5Rc=
+github.com/sologenic/com-fs-trade-profile-model v0.0.0-20250630182911-a1e6a8062e7b h1:5gSEwfQy1SUDe16upsNES4L92XijrrCPbIrwYHGrTzI=
+github.com/sologenic/com-fs-trade-profile-model v0.0.0-20250630182911-a1e6a8062e7b/go.mod h1:xUu8z+vOxRKxtJ9rvvPd9tH+z47SNZXJ26H02ZcD5Rc=
+github.com/sologenic/com-fs-trade-profile-model v0.0.0-20250630183716-c9da17041dc8 h1:amEHiYCG+MUunD1XSGL9eaEddN3LMwWJrXg0DVp+GFQ=
+github.com/sologenic/com-fs-trade-profile-model v0.0.0-20250630183716-c9da17041dc8/go.mod h1:xUu8z+vOxRKxtJ9rvvPd9tH+z47SNZXJ26H02ZcD5Rc=
+github.com/sologenic/com-fs-utils-lib/go/grpc-client v0.0.0-20250314155456-e14d49a8b728 h1:/D7zO/zYRfdXepxTiegPAMQgAI6OXPtjj+vkxgGTKLg=
+github.com/sologenic/com-fs-utils-lib/go/grpc-client v0.0.0-20250314155456-e14d49a8b728/go.mod h1:CP73V5ZmuGgngRuQbBTmVNusvVmF7kRKeRz85P61o8M=
+github.com/sologenic/com-fs-utils-lib/go/logger v0.0.0-20250314155456-e14d49a8b728 h1:/9S8109e7OpgPChi+NP+vZVzABcA8WmOi03nPh5uKcA=
+github.com/sologenic/com-fs-utils-lib/go/logger v0.0.0-20250314155456-e14d49a8b728/go.mod h1:++g+mQb95rje/dEjNJDM1F1ftwM1GobPgAh1zNG+hEw=
+github.com/sologenic/com-fs-utils-lib/models/audit v0.0.0-20250314155456-e14d49a8b728 h1:1zbVJK3u1xNkyezpDhTUrfJcaFjsgUy9tk+RMsBygcE=
+github.com/sologenic/com-fs-utils-lib/models/audit v0.0.0-20250314155456-e14d49a8b728/go.mod h1:aesYC9CUzVQ4JUHZwpLYx0yeNK1Sl37vzLKmDKQiyoY=
+github.com/sologenic/com-fs-utils-lib/models/language v0.0.0-20250522230347-a8399472e68c h1:iZLR/nGvBXNhZMqIk9p3/YOJLx1X093CfoFtW7Zn+08=
+github.com/sologenic/com-fs-utils-lib/models/language v0.0.0-20250522230347-a8399472e68c/go.mod h1:dfNyIOxe+MTThPFdbrHAos8xuDAd9Xcm/rgRaGR+D2w=
+github.com/sologenic/com-fs-utils-lib/models/language v0.0.0-20250522235409-85654eaa5ebc h1:UDLq5TnqPaAvWaJS9wKUHt3S7yFB05LOD0L6CdN6e8M=
+github.com/sologenic/com-fs-utils-lib/models/language v0.0.0-20250522235409-85654eaa5ebc/go.mod h1:ipl1XbvOUcvF9Hp1DJwvfhMLialqJS/btL6QvT2eTZI=
+github.com/sologenic/com-fs-utils-lib/models/metadata v0.0.0-20250314155456-e14d49a8b728 h1:4E4HgYqPFyASPiJvGrDUtiQu+DBYDL+35uqjbOoZo5Y=
+github.com/sologenic/com-fs-utils-lib/models/metadata v0.0.0-20250314155456-e14d49a8b728/go.mod h1:ftOGlExX3C/AN24/N3j3+rHo4C7ehxfHNGpimuWv7IQ=
+github.com/sologenic/com-fs-utils-lib/models/role v0.0.0-20250411234808-20ee098868aa h1:5nEXM6VZDBqrMjm9RDneCEnWypI/2iJVJsXS6gfO+1g=
+github.com/sologenic/com-fs-utils-lib/models/role v0.0.0-20250411234808-20ee098868aa/go.mod h1:EzYV8QKfACoaaPwBFXY6R95AOORkV3TXxw8k1m26o+w=
+>>>>>>> db9c8c5 (added user trade profile property for the user)
 github.com/stretchr/testify v1.10.0 h1:Xv5erBjTwe/5IxqUQTdXv5kgmIvbHo3QQyRwhJsOfJA=
 github.com/stretchr/testify v1.10.0/go.mod h1:r2ic/lqez/lEtzL7wO/rwa5dbSLXVDPFyf8C91i36aY=
 go.opentelemetry.io/auto/sdk v1.1.0 h1:cH53jehLUN6UFLY71z+NDOiNJqDdPRaXzTel0sJySYA=

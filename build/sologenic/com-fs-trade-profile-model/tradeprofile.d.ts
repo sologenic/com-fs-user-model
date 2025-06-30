@@ -32,6 +32,8 @@ export interface TradeProfileDetails {
     IsOrderAcceptanceEnabled: boolean;
     /** If true, enables margin trading (buying power); if false, trading is limited to cash position. */
     IsMarginTradingEnabled: boolean;
+    /** If true, enables short selling */
+    IsShortSellingEnabled: boolean;
     /** Dropdown selection fields */
     AggregateNotionalLimit: DropdownNumericValue | undefined;
     /** Maximum single order value - limits the total monetary value allowed per order */
@@ -48,6 +50,20 @@ export interface TradeProfileDetails {
     DuplicateOrderLimit: number;
     /** Risk based multiplier */
     RiskMultiplier: number;
+<<<<<<< HEAD
+=======
+}
+/** This is user mutable. User can change this limited only by the admin set configuration. */
+export interface UserTradeProfile {
+    /** If true, enables margin trading (buying power); if false, trading is limited to cash position. */
+    IsMarginTradingEnabled: boolean;
+    /** If true, enables short selling */
+    IsShortSellingEnabled: boolean;
+    /** Maximum single order value - limits the total monetary value allowed per order */
+    SingleOrderLimit: number;
+    /** Maximum order quantity - limits the number of shares per order */
+    MaxOrderQuantity: number;
+>>>>>>> db9c8c5 (added user trade profile property for the user)
 }
 export interface TradeProfileControlMetadata {
     LockedFields: LockableField[];
@@ -90,6 +106,7 @@ export declare const DefaultTradeProfile: {
             IsTradingEnabled?: boolean | undefined;
             IsOrderAcceptanceEnabled?: boolean | undefined;
             IsMarginTradingEnabled?: boolean | undefined;
+            IsShortSellingEnabled?: boolean | undefined;
             AggregateNotionalLimit?: {
                 Value?: number | undefined;
                 IsGreaterThan?: boolean | undefined;
@@ -165,6 +182,7 @@ export declare const DefaultTradeProfile: {
             IsTradingEnabled?: boolean | undefined;
             IsOrderAcceptanceEnabled?: boolean | undefined;
             IsMarginTradingEnabled?: boolean | undefined;
+            IsShortSellingEnabled?: boolean | undefined;
             AggregateNotionalLimit?: {
                 Value?: number | undefined;
                 IsGreaterThan?: boolean | undefined;
@@ -186,6 +204,7 @@ export declare const DefaultTradeProfile: {
             IsTradingEnabled?: boolean | undefined;
             IsOrderAcceptanceEnabled?: boolean | undefined;
             IsMarginTradingEnabled?: boolean | undefined;
+            IsShortSellingEnabled?: boolean | undefined;
             AggregateNotionalLimit?: ({
                 Value?: number | undefined;
                 IsGreaterThan?: boolean | undefined;
@@ -366,6 +385,7 @@ export declare const DefaultTradeProfile: {
             IsTradingEnabled?: boolean | undefined;
             IsOrderAcceptanceEnabled?: boolean | undefined;
             IsMarginTradingEnabled?: boolean | undefined;
+            IsShortSellingEnabled?: boolean | undefined;
             AggregateNotionalLimit?: {
                 Value?: number | undefined;
                 IsGreaterThan?: boolean | undefined;
@@ -441,6 +461,7 @@ export declare const DefaultTradeProfile: {
             IsTradingEnabled?: boolean | undefined;
             IsOrderAcceptanceEnabled?: boolean | undefined;
             IsMarginTradingEnabled?: boolean | undefined;
+            IsShortSellingEnabled?: boolean | undefined;
             AggregateNotionalLimit?: {
                 Value?: number | undefined;
                 IsGreaterThan?: boolean | undefined;
@@ -462,6 +483,7 @@ export declare const DefaultTradeProfile: {
             IsTradingEnabled?: boolean | undefined;
             IsOrderAcceptanceEnabled?: boolean | undefined;
             IsMarginTradingEnabled?: boolean | undefined;
+            IsShortSellingEnabled?: boolean | undefined;
             AggregateNotionalLimit?: ({
                 Value?: number | undefined;
                 IsGreaterThan?: boolean | undefined;
@@ -647,6 +669,7 @@ export declare const TradeProfileDetails: {
         IsTradingEnabled?: boolean | undefined;
         IsOrderAcceptanceEnabled?: boolean | undefined;
         IsMarginTradingEnabled?: boolean | undefined;
+        IsShortSellingEnabled?: boolean | undefined;
         AggregateNotionalLimit?: {
             Value?: number | undefined;
             IsGreaterThan?: boolean | undefined;
@@ -668,6 +691,7 @@ export declare const TradeProfileDetails: {
         IsTradingEnabled?: boolean | undefined;
         IsOrderAcceptanceEnabled?: boolean | undefined;
         IsMarginTradingEnabled?: boolean | undefined;
+        IsShortSellingEnabled?: boolean | undefined;
         AggregateNotionalLimit?: ({
             Value?: number | undefined;
             IsGreaterThan?: boolean | undefined;
@@ -699,6 +723,7 @@ export declare const TradeProfileDetails: {
         IsTradingEnabled?: boolean | undefined;
         IsOrderAcceptanceEnabled?: boolean | undefined;
         IsMarginTradingEnabled?: boolean | undefined;
+        IsShortSellingEnabled?: boolean | undefined;
         AggregateNotionalLimit?: {
             Value?: number | undefined;
             IsGreaterThan?: boolean | undefined;
@@ -720,6 +745,7 @@ export declare const TradeProfileDetails: {
         IsTradingEnabled?: boolean | undefined;
         IsOrderAcceptanceEnabled?: boolean | undefined;
         IsMarginTradingEnabled?: boolean | undefined;
+        IsShortSellingEnabled?: boolean | undefined;
         AggregateNotionalLimit?: ({
             Value?: number | undefined;
             IsGreaterThan?: boolean | undefined;
@@ -747,6 +773,34 @@ export declare const TradeProfileDetails: {
         DuplicateOrderLimit?: number | undefined;
         RiskMultiplier?: number | undefined;
     } & { [K_7 in Exclude<keyof I_1, keyof TradeProfileDetails>]: never; }>(object: I_1): TradeProfileDetails;
+};
+export declare const UserTradeProfile: {
+    encode(message: UserTradeProfile, writer?: _m0.Writer): _m0.Writer;
+    decode(input: _m0.Reader | Uint8Array, length?: number): UserTradeProfile;
+    fromJSON(object: any): UserTradeProfile;
+    toJSON(message: UserTradeProfile): unknown;
+    create<I extends {
+        IsMarginTradingEnabled?: boolean | undefined;
+        IsShortSellingEnabled?: boolean | undefined;
+        SingleOrderLimit?: number | undefined;
+        MaxOrderQuantity?: number | undefined;
+    } & {
+        IsMarginTradingEnabled?: boolean | undefined;
+        IsShortSellingEnabled?: boolean | undefined;
+        SingleOrderLimit?: number | undefined;
+        MaxOrderQuantity?: number | undefined;
+    } & { [K in Exclude<keyof I, keyof UserTradeProfile>]: never; }>(base?: I | undefined): UserTradeProfile;
+    fromPartial<I_1 extends {
+        IsMarginTradingEnabled?: boolean | undefined;
+        IsShortSellingEnabled?: boolean | undefined;
+        SingleOrderLimit?: number | undefined;
+        MaxOrderQuantity?: number | undefined;
+    } & {
+        IsMarginTradingEnabled?: boolean | undefined;
+        IsShortSellingEnabled?: boolean | undefined;
+        SingleOrderLimit?: number | undefined;
+        MaxOrderQuantity?: number | undefined;
+    } & { [K_1 in Exclude<keyof I_1, keyof UserTradeProfile>]: never; }>(object: I_1): UserTradeProfile;
 };
 export declare const TradeProfileControlMetadata: {
     encode(message: TradeProfileControlMetadata, writer?: _m0.Writer): _m0.Writer;

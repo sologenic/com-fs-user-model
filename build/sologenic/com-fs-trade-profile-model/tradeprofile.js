@@ -180,6 +180,7 @@ function createBaseTradeProfileDetails() {
         IsTradingEnabled: false,
         IsOrderAcceptanceEnabled: false,
         IsMarginTradingEnabled: false,
+        IsShortSellingEnabled: false,
         AggregateNotionalLimit: undefined,
         SingleOrderLimit: undefined,
         MaxOrderQuantity: undefined,
@@ -200,6 +201,9 @@ export const TradeProfileDetails = {
         }
         if (message.IsMarginTradingEnabled !== false) {
             writer.uint32(24).bool(message.IsMarginTradingEnabled);
+        }
+        if (message.IsShortSellingEnabled !== false) {
+            writer.uint32(32).bool(message.IsShortSellingEnabled);
         }
         if (message.AggregateNotionalLimit !== undefined) {
             DropdownNumericValue.encode(message.AggregateNotionalLimit, writer.uint32(802).fork()).ldelim();
@@ -251,6 +255,12 @@ export const TradeProfileDetails = {
                         break;
                     }
                     message.IsMarginTradingEnabled = reader.bool();
+                    continue;
+                case 4:
+                    if (tag !== 32) {
+                        break;
+                    }
+                    message.IsShortSellingEnabled = reader.bool();
                     continue;
                 case 100:
                     if (tag !== 802) {
@@ -317,6 +327,9 @@ export const TradeProfileDetails = {
             IsMarginTradingEnabled: isSet(object.IsMarginTradingEnabled)
                 ? globalThis.Boolean(object.IsMarginTradingEnabled)
                 : false,
+            IsShortSellingEnabled: isSet(object.IsShortSellingEnabled)
+                ? globalThis.Boolean(object.IsShortSellingEnabled)
+                : false,
             AggregateNotionalLimit: isSet(object.AggregateNotionalLimit)
                 ? DropdownNumericValue.fromJSON(object.AggregateNotionalLimit)
                 : undefined,
@@ -343,6 +356,9 @@ export const TradeProfileDetails = {
         }
         if (message.IsMarginTradingEnabled !== false) {
             obj.IsMarginTradingEnabled = message.IsMarginTradingEnabled;
+        }
+        if (message.IsShortSellingEnabled !== false) {
+            obj.IsShortSellingEnabled = message.IsShortSellingEnabled;
         }
         if (message.AggregateNotionalLimit !== undefined) {
             obj.AggregateNotionalLimit = DropdownNumericValue.toJSON(message.AggregateNotionalLimit);
@@ -374,11 +390,16 @@ export const TradeProfileDetails = {
         return TradeProfileDetails.fromPartial(base !== null && base !== void 0 ? base : {});
     },
     fromPartial(object) {
+<<<<<<< HEAD
         var _a, _b, _c, _d, _e, _f, _g, _h;
+=======
+        var _a, _b, _c, _d, _e, _f, _g, _h, _j;
+>>>>>>> db9c8c5 (added user trade profile property for the user)
         const message = createBaseTradeProfileDetails();
         message.IsTradingEnabled = (_a = object.IsTradingEnabled) !== null && _a !== void 0 ? _a : false;
         message.IsOrderAcceptanceEnabled = (_b = object.IsOrderAcceptanceEnabled) !== null && _b !== void 0 ? _b : false;
         message.IsMarginTradingEnabled = (_c = object.IsMarginTradingEnabled) !== null && _c !== void 0 ? _c : false;
+        message.IsShortSellingEnabled = (_d = object.IsShortSellingEnabled) !== null && _d !== void 0 ? _d : false;
         message.AggregateNotionalLimit =
             (object.AggregateNotionalLimit !== undefined && object.AggregateNotionalLimit !== null)
                 ? DropdownNumericValue.fromPartial(object.AggregateNotionalLimit)
@@ -389,11 +410,118 @@ export const TradeProfileDetails = {
         message.MaxOrderQuantity = (object.MaxOrderQuantity !== undefined && object.MaxOrderQuantity !== null)
             ? DropdownNumericValue.fromPartial(object.MaxOrderQuantity)
             : undefined;
+<<<<<<< HEAD
         message.AggressivePercentage = (_d = object.AggressivePercentage) !== null && _d !== void 0 ? _d : 0;
         message.SymbolGrossADVPercent = (_e = object.SymbolGrossADVPercent) !== null && _e !== void 0 ? _e : 0;
         message.PriceCheckDeviation = (_f = object.PriceCheckDeviation) !== null && _f !== void 0 ? _f : 0;
         message.DuplicateOrderLimit = (_g = object.DuplicateOrderLimit) !== null && _g !== void 0 ? _g : 0;
         message.RiskMultiplier = (_h = object.RiskMultiplier) !== null && _h !== void 0 ? _h : 0;
+=======
+        message.AggressivePercentage = (_e = object.AggressivePercentage) !== null && _e !== void 0 ? _e : 0;
+        message.SymbolGrossADVPercent = (_f = object.SymbolGrossADVPercent) !== null && _f !== void 0 ? _f : 0;
+        message.PriceCheckDeviation = (_g = object.PriceCheckDeviation) !== null && _g !== void 0 ? _g : 0;
+        message.DuplicateOrderLimit = (_h = object.DuplicateOrderLimit) !== null && _h !== void 0 ? _h : 0;
+        message.RiskMultiplier = (_j = object.RiskMultiplier) !== null && _j !== void 0 ? _j : 0;
+        return message;
+    },
+};
+function createBaseUserTradeProfile() {
+    return { IsMarginTradingEnabled: false, IsShortSellingEnabled: false, SingleOrderLimit: 0, MaxOrderQuantity: 0 };
+}
+export const UserTradeProfile = {
+    encode(message, writer = _m0.Writer.create()) {
+        if (message.IsMarginTradingEnabled !== false) {
+            writer.uint32(8).bool(message.IsMarginTradingEnabled);
+        }
+        if (message.IsShortSellingEnabled !== false) {
+            writer.uint32(16).bool(message.IsShortSellingEnabled);
+        }
+        if (message.SingleOrderLimit !== 0) {
+            writer.uint32(24).int32(message.SingleOrderLimit);
+        }
+        if (message.MaxOrderQuantity !== 0) {
+            writer.uint32(32).int32(message.MaxOrderQuantity);
+        }
+        return writer;
+    },
+    decode(input, length) {
+        const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+        let end = length === undefined ? reader.len : reader.pos + length;
+        const message = createBaseUserTradeProfile();
+        while (reader.pos < end) {
+            const tag = reader.uint32();
+            switch (tag >>> 3) {
+                case 1:
+                    if (tag !== 8) {
+                        break;
+                    }
+                    message.IsMarginTradingEnabled = reader.bool();
+                    continue;
+                case 2:
+                    if (tag !== 16) {
+                        break;
+                    }
+                    message.IsShortSellingEnabled = reader.bool();
+                    continue;
+                case 3:
+                    if (tag !== 24) {
+                        break;
+                    }
+                    message.SingleOrderLimit = reader.int32();
+                    continue;
+                case 4:
+                    if (tag !== 32) {
+                        break;
+                    }
+                    message.MaxOrderQuantity = reader.int32();
+                    continue;
+            }
+            if ((tag & 7) === 4 || tag === 0) {
+                break;
+            }
+            reader.skipType(tag & 7);
+        }
+        return message;
+    },
+    fromJSON(object) {
+        return {
+            IsMarginTradingEnabled: isSet(object.IsMarginTradingEnabled)
+                ? globalThis.Boolean(object.IsMarginTradingEnabled)
+                : false,
+            IsShortSellingEnabled: isSet(object.IsShortSellingEnabled)
+                ? globalThis.Boolean(object.IsShortSellingEnabled)
+                : false,
+            SingleOrderLimit: isSet(object.SingleOrderLimit) ? globalThis.Number(object.SingleOrderLimit) : 0,
+            MaxOrderQuantity: isSet(object.MaxOrderQuantity) ? globalThis.Number(object.MaxOrderQuantity) : 0,
+        };
+    },
+    toJSON(message) {
+        const obj = {};
+        if (message.IsMarginTradingEnabled !== false) {
+            obj.IsMarginTradingEnabled = message.IsMarginTradingEnabled;
+        }
+        if (message.IsShortSellingEnabled !== false) {
+            obj.IsShortSellingEnabled = message.IsShortSellingEnabled;
+        }
+        if (message.SingleOrderLimit !== 0) {
+            obj.SingleOrderLimit = Math.round(message.SingleOrderLimit);
+        }
+        if (message.MaxOrderQuantity !== 0) {
+            obj.MaxOrderQuantity = Math.round(message.MaxOrderQuantity);
+        }
+        return obj;
+    },
+    create(base) {
+        return UserTradeProfile.fromPartial(base !== null && base !== void 0 ? base : {});
+    },
+    fromPartial(object) {
+        var _a, _b, _c, _d;
+        const message = createBaseUserTradeProfile();
+        message.IsMarginTradingEnabled = (_a = object.IsMarginTradingEnabled) !== null && _a !== void 0 ? _a : false;
+        message.IsShortSellingEnabled = (_b = object.IsShortSellingEnabled) !== null && _b !== void 0 ? _b : false;
+        message.SingleOrderLimit = (_c = object.SingleOrderLimit) !== null && _c !== void 0 ? _c : 0;
+        message.MaxOrderQuantity = (_d = object.MaxOrderQuantity) !== null && _d !== void 0 ? _d : 0;
+>>>>>>> db9c8c5 (added user trade profile property for the user)
         return message;
     },
 };
