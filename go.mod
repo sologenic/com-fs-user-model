@@ -4,7 +4,7 @@ go 1.24.3
 
 require (
 	github.com/sologenic/com-fs-document-model v0.0.0-20250625181251-d71adbf57803
-	github.com/sologenic/com-fs-trade-profile-model v0.0.0-20250630183716-c9da17041dc8
+	github.com/sologenic/com-fs-trade-profile-model v0.0.0-20250710161722-4671f0a36c58
 	github.com/sologenic/com-fs-utils-lib/go/grpc-client v0.0.0-20250530185346-13f30acaff8e
 	github.com/sologenic/com-fs-utils-lib/models/audit v0.0.0-20250530185346-13f30acaff8e
 	github.com/sologenic/com-fs-utils-lib/models/language v0.0.0-20250610001621-c73b8e9ef79e

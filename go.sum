@@ -47,6 +47,8 @@ github.com/sologenic/com-fs-document-model v0.0.0-20250625181251-d71adbf57803 h1
 github.com/sologenic/com-fs-document-model v0.0.0-20250625181251-d71adbf57803/go.mod h1:W+2VFTLpNSSIhc0vzLyTvxMb3uqAW5PsgwB7tKJMtwU=
 github.com/sologenic/com-fs-trade-profile-model v0.0.0-20250630183716-c9da17041dc8 h1:amEHiYCG+MUunD1XSGL9eaEddN3LMwWJrXg0DVp+GFQ=
 github.com/sologenic/com-fs-trade-profile-model v0.0.0-20250630183716-c9da17041dc8/go.mod h1:xUu8z+vOxRKxtJ9rvvPd9tH+z47SNZXJ26H02ZcD5Rc=
+github.com/sologenic/com-fs-trade-profile-model v0.0.0-20250710161722-4671f0a36c58 h1:4aNpbV7eUz+cHgsbQOAEqQNp3cMg+84W8Q5wYHbgMDI=
+github.com/sologenic/com-fs-trade-profile-model v0.0.0-20250710161722-4671f0a36c58/go.mod h1:xUu8z+vOxRKxtJ9rvvPd9tH+z47SNZXJ26H02ZcD5Rc=
 github.com/sologenic/com-fs-utils-lib/go/grpc-client v0.0.0-20250530185346-13f30acaff8e h1:GyRwGoPD7E4wZcBpc/iKaZQhzzRPdZctvqt8EM177z4=
 github.com/sologenic/com-fs-utils-lib/go/grpc-client v0.0.0-20250530185346-13f30acaff8e/go.mod h1:CP73V5ZmuGgngRuQbBTmVNusvVmF7kRKeRz85P61o8M=
 github.com/sologenic/com-fs-utils-lib/go/logger v0.0.0-20250530185346-13f30acaff8e h1:j2uCWOm25rwRi45Nf7vciP1/CrSd0RZmopARrkQofsM=
