@@ -4,7 +4,7 @@
   "description": "Full stack model for Admin User",
   "main": "build/user.js",
   "scripts": {
-    "build": "rm -rf ./build && npx tsc -p tsconfig.json"  
+    "build": "rm -rf ./build && npx tsc -p tsconfig.json"
   },
   "devDependencies": {
     "@types/node": "^20.12.12",

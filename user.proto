@@ -66,6 +66,7 @@ message UserDetails {
     document.UserDocumentCompliance UserDocumentCompliance = 19;
     KYCStatus KYCStatus = 20; // Status of KYC verification, e.g., PENDING, APPROVED, REJECTED
     tradeprofile.UserTradeProfile UserTradeProfile = 21;
+    repeated ComplianceQuestions ComplianceQuestions = 22;
 }
 
 
@@ -186,4 +187,43 @@ message Filter {
     optional string InquiryID = 6;
     optional UserStatus Status = 7;
     repeated string ExternalUserIDs = 8;
+}
+
+// This model is open to having multiple questionaires with regards to compliance like MiFID, etc.
+message ComplianceQuestions {
+  optional USA USA = 1;
+}
+
+message USA {
+  google.protobuf.Timestamp RecordedAt = 1;
+  int64 YearsExperience = 2;
+  int64 AnnualIncome = 3;
+  int64 NetWorth = 4;
+  LiquidationImportance ConversionImportance = 5;
+  RiskTolerance Tolerance = 6;
+  InvestmentObjective Objective = 7;
+}
+
+enum LiquidationImportance {
+  VERY_IMPORTANT = 0;
+  SOMEWHAT_IMPORTANT = 1;
+  NOT_IMPORTANT = 2;
+  NO_PREFERENCE = 3;
+}
+
+enum RiskTolerance {
+  CONSERVATIVE = 0;
+  MODERATELY_CONSERVATIVE = 1;
+  MODERATE = 2;
+  MODERATELY_AGGRESSIVE = 3;
+  SIGNIFICANT_RISK = 4;
+}
+
+enum InvestmentObjective {
+  INCOME = 0;
+  BALANCED = 1;
+  GROWTH_AND_INCOME = 2;
+  SAFE_LONG_TERM_GROWTH = 3;
+  GREATER_RISK_LONG_TERM_GROWTH = 4;
+  SPECULATION = 5;
 }
