@@ -15,7 +15,6 @@ export var LockableField;
     LockableField[LockableField["IS_TRADING_ENABLED"] = 1] = "IS_TRADING_ENABLED";
     LockableField[LockableField["IS_ORDER_ACCEPTANCE_ENABLED"] = 2] = "IS_ORDER_ACCEPTANCE_ENABLED";
     LockableField[LockableField["IS_MARGIN_TRADING_ENABLED"] = 3] = "IS_MARGIN_TRADING_ENABLED";
-    LockableField[LockableField["IS_SHORT_SELLING_ENABLED"] = 4] = "IS_SHORT_SELLING_ENABLED";
     LockableField[LockableField["UNRECOGNIZED"] = -1] = "UNRECOGNIZED";
 })(LockableField || (LockableField = {}));
 export function lockableFieldFromJSON(object) {
@@ -32,9 +31,6 @@ export function lockableFieldFromJSON(object) {
         case 3:
         case "IS_MARGIN_TRADING_ENABLED":
             return LockableField.IS_MARGIN_TRADING_ENABLED;
-        case 4:
-        case "IS_SHORT_SELLING_ENABLED":
-            return LockableField.IS_SHORT_SELLING_ENABLED;
         case -1:
         case "UNRECOGNIZED":
         default:
@@ -51,8 +47,6 @@ export function lockableFieldToJSON(object) {
             return "IS_ORDER_ACCEPTANCE_ENABLED";
         case LockableField.IS_MARGIN_TRADING_ENABLED:
             return "IS_MARGIN_TRADING_ENABLED";
-        case LockableField.IS_SHORT_SELLING_ENABLED:
-            return "IS_SHORT_SELLING_ENABLED";
         case LockableField.UNRECOGNIZED:
         default:
             return "UNRECOGNIZED";

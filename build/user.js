@@ -198,6 +198,43 @@ export function incomeFrequencyToJSON(object) {
             return "UNRECOGNIZED";
     }
 }
+export var SignerType;
+(function (SignerType) {
+    SignerType[SignerType["NOT_USER_SIGNETTYPE"] = 0] = "NOT_USER_SIGNETTYPE";
+    SignerType[SignerType["BROWSER_EXT"] = 1] = "BROWSER_EXT";
+    SignerType[SignerType["MOBILE_APP"] = 2] = "MOBILE_APP";
+    SignerType[SignerType["UNRECOGNIZED"] = -1] = "UNRECOGNIZED";
+})(SignerType || (SignerType = {}));
+export function signerTypeFromJSON(object) {
+    switch (object) {
+        case 0:
+        case "NOT_USER_SIGNETTYPE":
+            return SignerType.NOT_USER_SIGNETTYPE;
+        case 1:
+        case "BROWSER_EXT":
+            return SignerType.BROWSER_EXT;
+        case 2:
+        case "MOBILE_APP":
+            return SignerType.MOBILE_APP;
+        case -1:
+        case "UNRECOGNIZED":
+        default:
+            return SignerType.UNRECOGNIZED;
+    }
+}
+export function signerTypeToJSON(object) {
+    switch (object) {
+        case SignerType.NOT_USER_SIGNETTYPE:
+            return "NOT_USER_SIGNETTYPE";
+        case SignerType.BROWSER_EXT:
+            return "BROWSER_EXT";
+        case SignerType.MOBILE_APP:
+            return "MOBILE_APP";
+        case SignerType.UNRECOGNIZED:
+        default:
+            return "UNRECOGNIZED";
+    }
+}
 export var UserStatus;
 (function (UserStatus) {
     UserStatus[UserStatus["NOT_USED_USERSTATUS"] = 0] = "NOT_USED_USERSTATUS";
@@ -1811,7 +1848,7 @@ export const Social = {
     },
 };
 function createBaseWallet() {
-    return { Address: "", Alias: "", Type: 0 };
+    return { Address: "", Alias: "", Type: 0, SignerType: 0 };
 }
 export const Wallet = {
     encode(message, writer = _m0.Writer.create()) {
@@ -1823,6 +1860,9 @@ export const Wallet = {
         }
         if (message.Type !== 0) {
             writer.uint32(24).int32(message.Type);
+        }
+        if (message.SignerType !== 0) {
+            writer.uint32(32).int32(message.SignerType);
         }
         return writer;
     },
@@ -1851,6 +1891,12 @@ export const Wallet = {
                     }
                     message.Type = reader.int32();
                     continue;
+                case 4:
+                    if (tag !== 32) {
+                        break;
+                    }
+                    message.SignerType = reader.int32();
+                    continue;
             }
             if ((tag & 7) === 4 || tag === 0) {
                 break;
@@ -1864,6 +1910,7 @@ export const Wallet = {
             Address: isSet(object.Address) ? globalThis.String(object.Address) : "",
             Alias: isSet(object.Alias) ? globalThis.String(object.Alias) : "",
             Type: isSet(object.Type) ? walletTypeFromJSON(object.Type) : 0,
+            SignerType: isSet(object.SignerType) ? signerTypeFromJSON(object.SignerType) : 0,
         };
     },
     toJSON(message) {
@@ -1877,17 +1924,21 @@ export const Wallet = {
         if (message.Type !== 0) {
             obj.Type = walletTypeToJSON(message.Type);
         }
+        if (message.SignerType !== 0) {
+            obj.SignerType = signerTypeToJSON(message.SignerType);
+        }
         return obj;
     },
     create(base) {
         return Wallet.fromPartial(base !== null && base !== void 0 ? base : {});
     },
     fromPartial(object) {
-        var _a, _b, _c;
+        var _a, _b, _c, _d;
         const message = createBaseWallet();
         message.Address = (_a = object.Address) !== null && _a !== void 0 ? _a : "";
         message.Alias = (_b = object.Alias) !== null && _b !== void 0 ? _b : "";
         message.Type = (_c = object.Type) !== null && _c !== void 0 ? _c : 0;
+        message.SignerType = (_d = object.SignerType) !== null && _d !== void 0 ? _d : 0;
         return message;
     },
 };

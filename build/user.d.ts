@@ -48,6 +48,14 @@ export declare enum IncomeFrequency {
 }
 export declare function incomeFrequencyFromJSON(object: any): IncomeFrequency;
 export declare function incomeFrequencyToJSON(object: IncomeFrequency): string;
+export declare enum SignerType {
+    NOT_USER_SIGNETTYPE = 0,
+    BROWSER_EXT = 1,
+    MOBILE_APP = 2,
+    UNRECOGNIZED = -1
+}
+export declare function signerTypeFromJSON(object: any): SignerType;
+export declare function signerTypeToJSON(object: SignerType): string;
 export declare enum UserStatus {
     NOT_USED_USERSTATUS = 0,
     ACTIVE = 1,
@@ -205,6 +213,7 @@ export interface Wallet {
     Address: string;
     Alias: string;
     Type: WalletType;
+    SignerType: SignerType;
 }
 export interface UserList {
     Users: User[];
@@ -346,6 +355,7 @@ export declare const UserDetails: {
             Address?: string | undefined;
             Alias?: string | undefined;
             Type?: WalletType | undefined;
+            SignerType?: SignerType | undefined;
         }[] | undefined;
         Socials?: {
             URL?: string | undefined;
@@ -455,18 +465,22 @@ export declare const UserDetails: {
             Address?: string | undefined;
             Alias?: string | undefined;
             Type?: WalletType | undefined;
+            SignerType?: SignerType | undefined;
         }[] & ({
             Address?: string | undefined;
             Alias?: string | undefined;
             Type?: WalletType | undefined;
+            SignerType?: SignerType | undefined;
         } & {
             Address?: string | undefined;
             Alias?: string | undefined;
             Type?: WalletType | undefined;
+            SignerType?: SignerType | undefined;
         } & { [K in Exclude<keyof I["Wallets"][number], keyof Wallet>]: never; })[] & { [K_1 in Exclude<keyof I["Wallets"], keyof {
             Address?: string | undefined;
             Alias?: string | undefined;
             Type?: WalletType | undefined;
+            SignerType?: SignerType | undefined;
         }[]>]: never; }) | undefined;
         Socials?: ({
             URL?: string | undefined;
@@ -729,6 +743,7 @@ export declare const UserDetails: {
             Address?: string | undefined;
             Alias?: string | undefined;
             Type?: WalletType | undefined;
+            SignerType?: SignerType | undefined;
         }[] | undefined;
         Socials?: {
             URL?: string | undefined;
@@ -838,18 +853,22 @@ export declare const UserDetails: {
             Address?: string | undefined;
             Alias?: string | undefined;
             Type?: WalletType | undefined;
+            SignerType?: SignerType | undefined;
         }[] & ({
             Address?: string | undefined;
             Alias?: string | undefined;
             Type?: WalletType | undefined;
+            SignerType?: SignerType | undefined;
         } & {
             Address?: string | undefined;
             Alias?: string | undefined;
             Type?: WalletType | undefined;
+            SignerType?: SignerType | undefined;
         } & { [K_21 in Exclude<keyof I_1["Wallets"][number], keyof Wallet>]: never; })[] & { [K_22 in Exclude<keyof I_1["Wallets"], keyof {
             Address?: string | undefined;
             Alias?: string | undefined;
             Type?: WalletType | undefined;
+            SignerType?: SignerType | undefined;
         }[]>]: never; }) | undefined;
         Socials?: ({
             URL?: string | undefined;
@@ -1277,6 +1296,7 @@ export declare const User: {
                 Address?: string | undefined;
                 Alias?: string | undefined;
                 Type?: WalletType | undefined;
+                SignerType?: SignerType | undefined;
             }[] | undefined;
             Socials?: {
                 URL?: string | undefined;
@@ -1399,6 +1419,7 @@ export declare const User: {
                 Address?: string | undefined;
                 Alias?: string | undefined;
                 Type?: WalletType | undefined;
+                SignerType?: SignerType | undefined;
             }[] | undefined;
             Socials?: {
                 URL?: string | undefined;
@@ -1508,18 +1529,22 @@ export declare const User: {
                 Address?: string | undefined;
                 Alias?: string | undefined;
                 Type?: WalletType | undefined;
+                SignerType?: SignerType | undefined;
             }[] & ({
                 Address?: string | undefined;
                 Alias?: string | undefined;
                 Type?: WalletType | undefined;
+                SignerType?: SignerType | undefined;
             } & {
                 Address?: string | undefined;
                 Alias?: string | undefined;
                 Type?: WalletType | undefined;
+                SignerType?: SignerType | undefined;
             } & { [K in Exclude<keyof I["User"]["Wallets"][number], keyof Wallet>]: never; })[] & { [K_1 in Exclude<keyof I["User"]["Wallets"], keyof {
                 Address?: string | undefined;
                 Alias?: string | undefined;
                 Type?: WalletType | undefined;
+                SignerType?: SignerType | undefined;
             }[]>]: never; }) | undefined;
             Socials?: ({
                 URL?: string | undefined;
@@ -1804,6 +1829,7 @@ export declare const User: {
                 Address?: string | undefined;
                 Alias?: string | undefined;
                 Type?: WalletType | undefined;
+                SignerType?: SignerType | undefined;
             }[] | undefined;
             Socials?: {
                 URL?: string | undefined;
@@ -1926,6 +1952,7 @@ export declare const User: {
                 Address?: string | undefined;
                 Alias?: string | undefined;
                 Type?: WalletType | undefined;
+                SignerType?: SignerType | undefined;
             }[] | undefined;
             Socials?: {
                 URL?: string | undefined;
@@ -2035,18 +2062,22 @@ export declare const User: {
                 Address?: string | undefined;
                 Alias?: string | undefined;
                 Type?: WalletType | undefined;
+                SignerType?: SignerType | undefined;
             }[] & ({
                 Address?: string | undefined;
                 Alias?: string | undefined;
                 Type?: WalletType | undefined;
+                SignerType?: SignerType | undefined;
             } & {
                 Address?: string | undefined;
                 Alias?: string | undefined;
                 Type?: WalletType | undefined;
+                SignerType?: SignerType | undefined;
             } & { [K_24 in Exclude<keyof I_1["User"]["Wallets"][number], keyof Wallet>]: never; })[] & { [K_25 in Exclude<keyof I_1["User"]["Wallets"], keyof {
                 Address?: string | undefined;
                 Alias?: string | undefined;
                 Type?: WalletType | undefined;
+                SignerType?: SignerType | undefined;
             }[]>]: never; }) | undefined;
             Socials?: ({
                 URL?: string | undefined;
@@ -2371,19 +2402,23 @@ export declare const Wallet: {
         Address?: string | undefined;
         Alias?: string | undefined;
         Type?: WalletType | undefined;
+        SignerType?: SignerType | undefined;
     } & {
         Address?: string | undefined;
         Alias?: string | undefined;
         Type?: WalletType | undefined;
+        SignerType?: SignerType | undefined;
     } & { [K in Exclude<keyof I, keyof Wallet>]: never; }>(base?: I | undefined): Wallet;
     fromPartial<I_1 extends {
         Address?: string | undefined;
         Alias?: string | undefined;
         Type?: WalletType | undefined;
+        SignerType?: SignerType | undefined;
     } & {
         Address?: string | undefined;
         Alias?: string | undefined;
         Type?: WalletType | undefined;
+        SignerType?: SignerType | undefined;
     } & { [K_1 in Exclude<keyof I_1, keyof Wallet>]: never; }>(object: I_1): Wallet;
 };
 export declare const UserList: {
@@ -2406,6 +2441,7 @@ export declare const UserList: {
                     Address?: string | undefined;
                     Alias?: string | undefined;
                     Type?: WalletType | undefined;
+                    SignerType?: SignerType | undefined;
                 }[] | undefined;
                 Socials?: {
                     URL?: string | undefined;
@@ -2531,6 +2567,7 @@ export declare const UserList: {
                     Address?: string | undefined;
                     Alias?: string | undefined;
                     Type?: WalletType | undefined;
+                    SignerType?: SignerType | undefined;
                 }[] | undefined;
                 Socials?: {
                     URL?: string | undefined;
@@ -2653,6 +2690,7 @@ export declare const UserList: {
                     Address?: string | undefined;
                     Alias?: string | undefined;
                     Type?: WalletType | undefined;
+                    SignerType?: SignerType | undefined;
                 }[] | undefined;
                 Socials?: {
                     URL?: string | undefined;
@@ -2775,6 +2813,7 @@ export declare const UserList: {
                     Address?: string | undefined;
                     Alias?: string | undefined;
                     Type?: WalletType | undefined;
+                    SignerType?: SignerType | undefined;
                 }[] | undefined;
                 Socials?: {
                     URL?: string | undefined;
@@ -2884,18 +2923,22 @@ export declare const UserList: {
                     Address?: string | undefined;
                     Alias?: string | undefined;
                     Type?: WalletType | undefined;
+                    SignerType?: SignerType | undefined;
                 }[] & ({
                     Address?: string | undefined;
                     Alias?: string | undefined;
                     Type?: WalletType | undefined;
+                    SignerType?: SignerType | undefined;
                 } & {
                     Address?: string | undefined;
                     Alias?: string | undefined;
                     Type?: WalletType | undefined;
+                    SignerType?: SignerType | undefined;
                 } & { [K in Exclude<keyof I["Users"][number]["User"]["Wallets"][number], keyof Wallet>]: never; })[] & { [K_1 in Exclude<keyof I["Users"][number]["User"]["Wallets"], keyof {
                     Address?: string | undefined;
                     Alias?: string | undefined;
                     Type?: WalletType | undefined;
+                    SignerType?: SignerType | undefined;
                 }[]>]: never; }) | undefined;
                 Socials?: ({
                     URL?: string | undefined;
@@ -3179,6 +3222,7 @@ export declare const UserList: {
                     Address?: string | undefined;
                     Alias?: string | undefined;
                     Type?: WalletType | undefined;
+                    SignerType?: SignerType | undefined;
                 }[] | undefined;
                 Socials?: {
                     URL?: string | undefined;
@@ -3305,6 +3349,7 @@ export declare const UserList: {
                     Address?: string | undefined;
                     Alias?: string | undefined;
                     Type?: WalletType | undefined;
+                    SignerType?: SignerType | undefined;
                 }[] | undefined;
                 Socials?: {
                     URL?: string | undefined;
@@ -3430,6 +3475,7 @@ export declare const UserList: {
                     Address?: string | undefined;
                     Alias?: string | undefined;
                     Type?: WalletType | undefined;
+                    SignerType?: SignerType | undefined;
                 }[] | undefined;
                 Socials?: {
                     URL?: string | undefined;
@@ -3552,6 +3598,7 @@ export declare const UserList: {
                     Address?: string | undefined;
                     Alias?: string | undefined;
                     Type?: WalletType | undefined;
+                    SignerType?: SignerType | undefined;
                 }[] | undefined;
                 Socials?: {
                     URL?: string | undefined;
@@ -3674,6 +3721,7 @@ export declare const UserList: {
                     Address?: string | undefined;
                     Alias?: string | undefined;
                     Type?: WalletType | undefined;
+                    SignerType?: SignerType | undefined;
                 }[] | undefined;
                 Socials?: {
                     URL?: string | undefined;
@@ -3783,18 +3831,22 @@ export declare const UserList: {
                     Address?: string | undefined;
                     Alias?: string | undefined;
                     Type?: WalletType | undefined;
+                    SignerType?: SignerType | undefined;
                 }[] & ({
                     Address?: string | undefined;
                     Alias?: string | undefined;
                     Type?: WalletType | undefined;
+                    SignerType?: SignerType | undefined;
                 } & {
                     Address?: string | undefined;
                     Alias?: string | undefined;
                     Type?: WalletType | undefined;
+                    SignerType?: SignerType | undefined;
                 } & { [K_26 in Exclude<keyof I_1["Users"][number]["User"]["Wallets"][number], keyof Wallet>]: never; })[] & { [K_27 in Exclude<keyof I_1["Users"][number]["User"]["Wallets"], keyof {
                     Address?: string | undefined;
                     Alias?: string | undefined;
                     Type?: WalletType | undefined;
+                    SignerType?: SignerType | undefined;
                 }[]>]: never; }) | undefined;
                 Socials?: ({
                     URL?: string | undefined;
@@ -4078,6 +4130,7 @@ export declare const UserList: {
                     Address?: string | undefined;
                     Alias?: string | undefined;
                     Type?: WalletType | undefined;
+                    SignerType?: SignerType | undefined;
                 }[] | undefined;
                 Socials?: {
                     URL?: string | undefined;

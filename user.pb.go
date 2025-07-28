@@ -208,6 +208,55 @@ func (IncomeFrequency) EnumDescriptor() ([]byte, []int) {
 	return file_user_proto_rawDescGZIP(), []int{2}
 }
 
+type SignerType int32
+
+const (
+	SignerType_NOT_USER_SIGNETTYPE SignerType = 0
+	SignerType_BROWSER_EXT         SignerType = 1
+	SignerType_MOBILE_APP          SignerType = 2
+)
+
+// Enum value maps for SignerType.
+var (
+	SignerType_name = map[int32]string{
+		0: "NOT_USER_SIGNETTYPE",
+		1: "BROWSER_EXT",
+		2: "MOBILE_APP",
+	}
+	SignerType_value = map[string]int32{
+		"NOT_USER_SIGNETTYPE": 0,
+		"BROWSER_EXT":         1,
+		"MOBILE_APP":          2,
+	}
+)
+
+func (x SignerType) Enum() *SignerType {
+	p := new(SignerType)
+	*p = x
+	return p
+}
+
+func (x SignerType) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (SignerType) Descriptor() protoreflect.EnumDescriptor {
+	return file_user_proto_enumTypes[3].Descriptor()
+}
+
+func (SignerType) Type() protoreflect.EnumType {
+	return &file_user_proto_enumTypes[3]
+}
+
+func (x SignerType) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use SignerType.Descriptor instead.
+func (SignerType) EnumDescriptor() ([]byte, []int) {
+	return file_user_proto_rawDescGZIP(), []int{3}
+}
+
 type UserStatus int32
 
 const (
@@ -241,11 +290,11 @@ func (x UserStatus) String() string {
 }
 
 func (UserStatus) Descriptor() protoreflect.EnumDescriptor {
-	return file_user_proto_enumTypes[3].Descriptor()
+	return file_user_proto_enumTypes[4].Descriptor()
 }
 
 func (UserStatus) Type() protoreflect.EnumType {
-	return &file_user_proto_enumTypes[3]
+	return &file_user_proto_enumTypes[4]
 }
 
 func (x UserStatus) Number() protoreflect.EnumNumber {
@@ -254,7 +303,7 @@ func (x UserStatus) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use UserStatus.Descriptor instead.
 func (UserStatus) EnumDescriptor() ([]byte, []int) {
-	return file_user_proto_rawDescGZIP(), []int{3}
+	return file_user_proto_rawDescGZIP(), []int{4}
 }
 
 type WalletType int32
@@ -293,11 +342,11 @@ func (x WalletType) String() string {
 }
 
 func (WalletType) Descriptor() protoreflect.EnumDescriptor {
-	return file_user_proto_enumTypes[4].Descriptor()
+	return file_user_proto_enumTypes[5].Descriptor()
 }
 
 func (WalletType) Type() protoreflect.EnumType {
-	return &file_user_proto_enumTypes[4]
+	return &file_user_proto_enumTypes[5]
 }
 
 func (x WalletType) Number() protoreflect.EnumNumber {
@@ -306,7 +355,7 @@ func (x WalletType) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use WalletType.Descriptor instead.
 func (WalletType) EnumDescriptor() ([]byte, []int) {
-	return file_user_proto_rawDescGZIP(), []int{4}
+	return file_user_proto_rawDescGZIP(), []int{5}
 }
 
 type SocialType int32
@@ -363,11 +412,11 @@ func (x SocialType) String() string {
 }
 
 func (SocialType) Descriptor() protoreflect.EnumDescriptor {
-	return file_user_proto_enumTypes[5].Descriptor()
+	return file_user_proto_enumTypes[6].Descriptor()
 }
 
 func (SocialType) Type() protoreflect.EnumType {
-	return &file_user_proto_enumTypes[5]
+	return &file_user_proto_enumTypes[6]
 }
 
 func (x SocialType) Number() protoreflect.EnumNumber {
@@ -376,7 +425,7 @@ func (x SocialType) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use SocialType.Descriptor instead.
 func (SocialType) EnumDescriptor() ([]byte, []int) {
-	return file_user_proto_rawDescGZIP(), []int{5}
+	return file_user_proto_rawDescGZIP(), []int{6}
 }
 
 type LiquidationImportance int32
@@ -415,11 +464,11 @@ func (x LiquidationImportance) String() string {
 }
 
 func (LiquidationImportance) Descriptor() protoreflect.EnumDescriptor {
-	return file_user_proto_enumTypes[6].Descriptor()
+	return file_user_proto_enumTypes[7].Descriptor()
 }
 
 func (LiquidationImportance) Type() protoreflect.EnumType {
-	return &file_user_proto_enumTypes[6]
+	return &file_user_proto_enumTypes[7]
 }
 
 func (x LiquidationImportance) Number() protoreflect.EnumNumber {
@@ -428,7 +477,7 @@ func (x LiquidationImportance) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use LiquidationImportance.Descriptor instead.
 func (LiquidationImportance) EnumDescriptor() ([]byte, []int) {
-	return file_user_proto_rawDescGZIP(), []int{6}
+	return file_user_proto_rawDescGZIP(), []int{7}
 }
 
 type RiskTolerance int32
@@ -470,11 +519,11 @@ func (x RiskTolerance) String() string {
 }
 
 func (RiskTolerance) Descriptor() protoreflect.EnumDescriptor {
-	return file_user_proto_enumTypes[7].Descriptor()
+	return file_user_proto_enumTypes[8].Descriptor()
 }
 
 func (RiskTolerance) Type() protoreflect.EnumType {
-	return &file_user_proto_enumTypes[7]
+	return &file_user_proto_enumTypes[8]
 }
 
 func (x RiskTolerance) Number() protoreflect.EnumNumber {
@@ -483,7 +532,7 @@ func (x RiskTolerance) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use RiskTolerance.Descriptor instead.
 func (RiskTolerance) EnumDescriptor() ([]byte, []int) {
-	return file_user_proto_rawDescGZIP(), []int{7}
+	return file_user_proto_rawDescGZIP(), []int{8}
 }
 
 type InvestmentObjective int32
@@ -528,11 +577,11 @@ func (x InvestmentObjective) String() string {
 }
 
 func (InvestmentObjective) Descriptor() protoreflect.EnumDescriptor {
-	return file_user_proto_enumTypes[8].Descriptor()
+	return file_user_proto_enumTypes[9].Descriptor()
 }
 
 func (InvestmentObjective) Type() protoreflect.EnumType {
-	return &file_user_proto_enumTypes[8]
+	return &file_user_proto_enumTypes[9]
 }
 
 func (x InvestmentObjective) Number() protoreflect.EnumNumber {
@@ -541,7 +590,7 @@ func (x InvestmentObjective) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use InvestmentObjective.Descriptor instead.
 func (InvestmentObjective) EnumDescriptor() ([]byte, []int) {
-	return file_user_proto_rawDescGZIP(), []int{8}
+	return file_user_proto_rawDescGZIP(), []int{9}
 }
 
 type IDNumber struct {
@@ -1378,6 +1427,7 @@ type Wallet struct {
 	Address       string                 `protobuf:"bytes,1,opt,name=Address,proto3" json:"Address,omitempty"`
 	Alias         string                 `protobuf:"bytes,2,opt,name=Alias,proto3" json:"Alias,omitempty"`
 	Type          WalletType             `protobuf:"varint,3,opt,name=Type,proto3,enum=user.WalletType" json:"Type,omitempty"`
+	SignerType    SignerType             `protobuf:"varint,4,opt,name=SignerType,proto3,enum=user.SignerType" json:"SignerType,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1431,6 +1481,13 @@ func (x *Wallet) GetType() WalletType {
 		return x.Type
 	}
 	return WalletType_NOT_USED_WALLETTYPE
+}
+
+func (x *Wallet) GetSignerType() SignerType {
+	if x != nil {
+		return x.SignerType
+	}
+	return SignerType_NOT_USER_SIGNETTYPE
 }
 
 type UserList struct {
@@ -1892,11 +1949,14 @@ const file_user_proto_rawDesc = "" +
 	"\b_Network\"@\n" +
 	"\x06Social\x12\x10\n" +
 	"\x03URL\x18\x01 \x01(\tR\x03URL\x12$\n" +
-	"\x04Type\x18\x02 \x01(\x0e2\x10.user.SocialTypeR\x04Type\"^\n" +
+	"\x04Type\x18\x02 \x01(\x0e2\x10.user.SocialTypeR\x04Type\"\x90\x01\n" +
 	"\x06Wallet\x12\x18\n" +
 	"\aAddress\x18\x01 \x01(\tR\aAddress\x12\x14\n" +
 	"\x05Alias\x18\x02 \x01(\tR\x05Alias\x12$\n" +
-	"\x04Type\x18\x03 \x01(\x0e2\x10.user.WalletTypeR\x04Type\"T\n" +
+	"\x04Type\x18\x03 \x01(\x0e2\x10.user.WalletTypeR\x04Type\x120\n" +
+	"\n" +
+	"SignerType\x18\x04 \x01(\x0e2\x10.user.SignerTypeR\n" +
+	"SignerType\"T\n" +
 	"\bUserList\x12 \n" +
 	"\x05Users\x18\x01 \x03(\v2\n" +
 	".user.UserR\x05Users\x12\x1b\n" +
@@ -1964,7 +2024,13 @@ const file_user_proto_rawDesc = "" +
 	"\x06WEEKLY\x10\x02\x12\r\n" +
 	"\tBI_WEEKLY\x10\x03\x12\v\n" +
 	"\aMONTHLY\x10\x04\x12\f\n" +
-	"\bANNUALLY\x10\x05*H\n" +
+	"\bANNUALLY\x10\x05*F\n" +
+	"\n" +
+	"SignerType\x12\x17\n" +
+	"\x13NOT_USER_SIGNETTYPE\x10\x00\x12\x0f\n" +
+	"\vBROWSER_EXT\x10\x01\x12\x0e\n" +
+	"\n" +
+	"MOBILE_APP\x10\x02*H\n" +
 	"\n" +
 	"UserStatus\x12\x17\n" +
 	"\x13NOT_USED_USERSTATUS\x10\x00\x12\n" +
@@ -2023,84 +2089,86 @@ func file_user_proto_rawDescGZIP() []byte {
 	return file_user_proto_rawDescData
 }
 
-var file_user_proto_enumTypes = make([]protoimpl.EnumInfo, 9)
+var file_user_proto_enumTypes = make([]protoimpl.EnumInfo, 10)
 var file_user_proto_msgTypes = make([]protoimpl.MessageInfo, 15)
 var file_user_proto_goTypes = []any{
 	(KYCStatus)(0),              // 0: user.KYCStatus
 	(EmploymentType)(0),         // 1: user.EmploymentType
 	(IncomeFrequency)(0),        // 2: user.IncomeFrequency
-	(UserStatus)(0),             // 3: user.UserStatus
-	(WalletType)(0),             // 4: user.WalletType
-	(SocialType)(0),             // 5: user.SocialType
-	(LiquidationImportance)(0),  // 6: user.LiquidationImportance
-	(RiskTolerance)(0),          // 7: user.RiskTolerance
-	(InvestmentObjective)(0),    // 8: user.InvestmentObjective
-	(*IDNumber)(nil),            // 9: user.IDNumber
-	(*UserKYCDetails)(nil),      // 10: user.UserKYCDetails
-	(*UserDetails)(nil),         // 11: user.UserDetails
-	(*Employment)(nil),          // 12: user.Employment
-	(*Income)(nil),              // 13: user.Income
-	(*EmployerContact)(nil),     // 14: user.EmployerContact
-	(*User)(nil),                // 15: user.User
-	(*UserID)(nil),              // 16: user.UserID
-	(*Social)(nil),              // 17: user.Social
-	(*Wallet)(nil),              // 18: user.Wallet
-	(*UserList)(nil),            // 19: user.UserList
-	(*StatusMessage)(nil),       // 20: user.StatusMessage
-	(*Filter)(nil),              // 21: user.Filter
-	(*ComplianceQuestions)(nil), // 22: user.ComplianceQuestions
-	(*USA)(nil),                 // 23: user.USA
-	(language.Lang)(0),          // 24: language.Lang
-	(role.Role)(0),              // 25: role.Role
-	(*com_fs_trade_profile_model.TradeProfileDetails)(nil), // 26: tradeprofile.TradeProfileDetails
-	(*com_fs_document_model.UserDocumentCompliance)(nil),   // 27: document.UserDocumentCompliance
-	(*com_fs_trade_profile_model.UserTradeProfile)(nil),    // 28: tradeprofile.UserTradeProfile
-	(*timestamppb.Timestamp)(nil),                          // 29: google.protobuf.Timestamp
-	(*metadata.MetaData)(nil),                              // 30: metadata.MetaData
-	(*audit.Audit)(nil),                                    // 31: audit.Audit
-	(metadata.Network)(0),                                  // 32: metadata.Network
+	(SignerType)(0),             // 3: user.SignerType
+	(UserStatus)(0),             // 4: user.UserStatus
+	(WalletType)(0),             // 5: user.WalletType
+	(SocialType)(0),             // 6: user.SocialType
+	(LiquidationImportance)(0),  // 7: user.LiquidationImportance
+	(RiskTolerance)(0),          // 8: user.RiskTolerance
+	(InvestmentObjective)(0),    // 9: user.InvestmentObjective
+	(*IDNumber)(nil),            // 10: user.IDNumber
+	(*UserKYCDetails)(nil),      // 11: user.UserKYCDetails
+	(*UserDetails)(nil),         // 12: user.UserDetails
+	(*Employment)(nil),          // 13: user.Employment
+	(*Income)(nil),              // 14: user.Income
+	(*EmployerContact)(nil),     // 15: user.EmployerContact
+	(*User)(nil),                // 16: user.User
+	(*UserID)(nil),              // 17: user.UserID
+	(*Social)(nil),              // 18: user.Social
+	(*Wallet)(nil),              // 19: user.Wallet
+	(*UserList)(nil),            // 20: user.UserList
+	(*StatusMessage)(nil),       // 21: user.StatusMessage
+	(*Filter)(nil),              // 22: user.Filter
+	(*ComplianceQuestions)(nil), // 23: user.ComplianceQuestions
+	(*USA)(nil),                 // 24: user.USA
+	(language.Lang)(0),          // 25: language.Lang
+	(role.Role)(0),              // 26: role.Role
+	(*com_fs_trade_profile_model.TradeProfileDetails)(nil), // 27: tradeprofile.TradeProfileDetails
+	(*com_fs_document_model.UserDocumentCompliance)(nil),   // 28: document.UserDocumentCompliance
+	(*com_fs_trade_profile_model.UserTradeProfile)(nil),    // 29: tradeprofile.UserTradeProfile
+	(*timestamppb.Timestamp)(nil),                          // 30: google.protobuf.Timestamp
+	(*metadata.MetaData)(nil),                              // 31: metadata.MetaData
+	(*audit.Audit)(nil),                                    // 32: audit.Audit
+	(metadata.Network)(0),                                  // 33: metadata.Network
 }
 var file_user_proto_depIdxs = []int32{
-	3,  // 0: user.UserDetails.Status:type_name -> user.UserStatus
-	18, // 1: user.UserDetails.Wallets:type_name -> user.Wallet
-	17, // 2: user.UserDetails.Socials:type_name -> user.Social
-	24, // 3: user.UserDetails.Language:type_name -> language.Lang
-	12, // 4: user.UserDetails.Employment:type_name -> user.Employment
-	25, // 5: user.UserDetails.Role:type_name -> role.Role
-	26, // 6: user.UserDetails.TradeProfile:type_name -> tradeprofile.TradeProfileDetails
-	10, // 7: user.UserDetails.KYCDetails:type_name -> user.UserKYCDetails
-	27, // 8: user.UserDetails.UserDocumentCompliance:type_name -> document.UserDocumentCompliance
+	4,  // 0: user.UserDetails.Status:type_name -> user.UserStatus
+	19, // 1: user.UserDetails.Wallets:type_name -> user.Wallet
+	18, // 2: user.UserDetails.Socials:type_name -> user.Social
+	25, // 3: user.UserDetails.Language:type_name -> language.Lang
+	13, // 4: user.UserDetails.Employment:type_name -> user.Employment
+	26, // 5: user.UserDetails.Role:type_name -> role.Role
+	27, // 6: user.UserDetails.TradeProfile:type_name -> tradeprofile.TradeProfileDetails
+	11, // 7: user.UserDetails.KYCDetails:type_name -> user.UserKYCDetails
+	28, // 8: user.UserDetails.UserDocumentCompliance:type_name -> document.UserDocumentCompliance
 	0,  // 9: user.UserDetails.KYCStatus:type_name -> user.KYCStatus
-	28, // 10: user.UserDetails.UserTradeProfile:type_name -> tradeprofile.UserTradeProfile
-	22, // 11: user.UserDetails.ComplianceQuestions:type_name -> user.ComplianceQuestions
-	29, // 12: user.Employment.StartDate:type_name -> google.protobuf.Timestamp
-	29, // 13: user.Employment.EndDate:type_name -> google.protobuf.Timestamp
+	29, // 10: user.UserDetails.UserTradeProfile:type_name -> tradeprofile.UserTradeProfile
+	23, // 11: user.UserDetails.ComplianceQuestions:type_name -> user.ComplianceQuestions
+	30, // 12: user.Employment.StartDate:type_name -> google.protobuf.Timestamp
+	30, // 13: user.Employment.EndDate:type_name -> google.protobuf.Timestamp
 	1,  // 14: user.Employment.Type:type_name -> user.EmploymentType
-	13, // 15: user.Employment.Income:type_name -> user.Income
-	14, // 16: user.Employment.Contact:type_name -> user.EmployerContact
+	14, // 15: user.Employment.Income:type_name -> user.Income
+	15, // 16: user.Employment.Contact:type_name -> user.EmployerContact
 	2,  // 17: user.Income.Frequency:type_name -> user.IncomeFrequency
-	11, // 18: user.User.User:type_name -> user.UserDetails
-	30, // 19: user.User.MetaData:type_name -> metadata.MetaData
-	31, // 20: user.User.Audit:type_name -> audit.Audit
-	32, // 21: user.UserID.Network:type_name -> metadata.Network
-	5,  // 22: user.Social.Type:type_name -> user.SocialType
-	4,  // 23: user.Wallet.Type:type_name -> user.WalletType
-	15, // 24: user.UserList.Users:type_name -> user.User
-	3,  // 25: user.StatusMessage.Status:type_name -> user.UserStatus
-	32, // 26: user.StatusMessage.Network:type_name -> metadata.Network
-	31, // 27: user.StatusMessage.Audit:type_name -> audit.Audit
-	32, // 28: user.Filter.Network:type_name -> metadata.Network
-	3,  // 29: user.Filter.Status:type_name -> user.UserStatus
-	23, // 30: user.ComplianceQuestions.USA:type_name -> user.USA
-	29, // 31: user.USA.RecordedAt:type_name -> google.protobuf.Timestamp
-	6,  // 32: user.USA.ConversionImportance:type_name -> user.LiquidationImportance
-	7,  // 33: user.USA.Tolerance:type_name -> user.RiskTolerance
-	8,  // 34: user.USA.Objective:type_name -> user.InvestmentObjective
-	35, // [35:35] is the sub-list for method output_type
-	35, // [35:35] is the sub-list for method input_type
-	35, // [35:35] is the sub-list for extension type_name
-	35, // [35:35] is the sub-list for extension extendee
-	0,  // [0:35] is the sub-list for field type_name
+	12, // 18: user.User.User:type_name -> user.UserDetails
+	31, // 19: user.User.MetaData:type_name -> metadata.MetaData
+	32, // 20: user.User.Audit:type_name -> audit.Audit
+	33, // 21: user.UserID.Network:type_name -> metadata.Network
+	6,  // 22: user.Social.Type:type_name -> user.SocialType
+	5,  // 23: user.Wallet.Type:type_name -> user.WalletType
+	3,  // 24: user.Wallet.SignerType:type_name -> user.SignerType
+	16, // 25: user.UserList.Users:type_name -> user.User
+	4,  // 26: user.StatusMessage.Status:type_name -> user.UserStatus
+	33, // 27: user.StatusMessage.Network:type_name -> metadata.Network
+	32, // 28: user.StatusMessage.Audit:type_name -> audit.Audit
+	33, // 29: user.Filter.Network:type_name -> metadata.Network
+	4,  // 30: user.Filter.Status:type_name -> user.UserStatus
+	24, // 31: user.ComplianceQuestions.USA:type_name -> user.USA
+	30, // 32: user.USA.RecordedAt:type_name -> google.protobuf.Timestamp
+	7,  // 33: user.USA.ConversionImportance:type_name -> user.LiquidationImportance
+	8,  // 34: user.USA.Tolerance:type_name -> user.RiskTolerance
+	9,  // 35: user.USA.Objective:type_name -> user.InvestmentObjective
+	36, // [36:36] is the sub-list for method output_type
+	36, // [36:36] is the sub-list for method input_type
+	36, // [36:36] is the sub-list for extension type_name
+	36, // [36:36] is the sub-list for extension extendee
+	0,  // [0:36] is the sub-list for field type_name
 }
 
 func init() { file_user_proto_init() }
@@ -2120,7 +2188,7 @@ func file_user_proto_init() {
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_user_proto_rawDesc), len(file_user_proto_rawDesc)),
-			NumEnums:      9,
+			NumEnums:      10,
 			NumMessages:   15,
 			NumExtensions: 0,
 			NumServices:   0,

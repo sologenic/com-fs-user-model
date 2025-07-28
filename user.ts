@@ -212,6 +212,45 @@ export function incomeFrequencyToJSON(object: IncomeFrequency): string {
   }
 }
 
+export enum SignerType {
+  NOT_USER_SIGNETTYPE = 0,
+  BROWSER_EXT = 1,
+  MOBILE_APP = 2,
+  UNRECOGNIZED = -1,
+}
+
+export function signerTypeFromJSON(object: any): SignerType {
+  switch (object) {
+    case 0:
+    case "NOT_USER_SIGNETTYPE":
+      return SignerType.NOT_USER_SIGNETTYPE;
+    case 1:
+    case "BROWSER_EXT":
+      return SignerType.BROWSER_EXT;
+    case 2:
+    case "MOBILE_APP":
+      return SignerType.MOBILE_APP;
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return SignerType.UNRECOGNIZED;
+  }
+}
+
+export function signerTypeToJSON(object: SignerType): string {
+  switch (object) {
+    case SignerType.NOT_USER_SIGNETTYPE:
+      return "NOT_USER_SIGNETTYPE";
+    case SignerType.BROWSER_EXT:
+      return "BROWSER_EXT";
+    case SignerType.MOBILE_APP:
+      return "MOBILE_APP";
+    case SignerType.UNRECOGNIZED:
+    default:
+      return "UNRECOGNIZED";
+  }
+}
+
 export enum UserStatus {
   NOT_USED_USERSTATUS = 0,
   ACTIVE = 1,
@@ -642,6 +681,7 @@ export interface Wallet {
   Address: string;
   Alias: string;
   Type: WalletType;
+  SignerType: SignerType;
 }
 
 export interface UserList {
@@ -2098,7 +2138,7 @@ export const Social = {
 };
 
 function createBaseWallet(): Wallet {
-  return { Address: "", Alias: "", Type: 0 };
+  return { Address: "", Alias: "", Type: 0, SignerType: 0 };
 }
 
 export const Wallet = {
@@ -2111,6 +2151,9 @@ export const Wallet = {
     }
     if (message.Type !== 0) {
       writer.uint32(24).int32(message.Type);
+    }
+    if (message.SignerType !== 0) {
+      writer.uint32(32).int32(message.SignerType);
     }
     return writer;
   },
@@ -2143,6 +2186,13 @@ export const Wallet = {
 
           message.Type = reader.int32() as any;
           continue;
+        case 4:
+          if (tag !== 32) {
+            break;
+          }
+
+          message.SignerType = reader.int32() as any;
+          continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -2157,6 +2207,7 @@ export const Wallet = {
       Address: isSet(object.Address) ? globalThis.String(object.Address) : "",
       Alias: isSet(object.Alias) ? globalThis.String(object.Alias) : "",
       Type: isSet(object.Type) ? walletTypeFromJSON(object.Type) : 0,
+      SignerType: isSet(object.SignerType) ? signerTypeFromJSON(object.SignerType) : 0,
     };
   },
 
@@ -2171,6 +2222,9 @@ export const Wallet = {
     if (message.Type !== 0) {
       obj.Type = walletTypeToJSON(message.Type);
     }
+    if (message.SignerType !== 0) {
+      obj.SignerType = signerTypeToJSON(message.SignerType);
+    }
     return obj;
   },
 
@@ -2182,6 +2236,7 @@ export const Wallet = {
     message.Address = object.Address ?? "";
     message.Alias = object.Alias ?? "";
     message.Type = object.Type ?? 0;
+    message.SignerType = object.SignerType ?? 0;
     return message;
   },
 };

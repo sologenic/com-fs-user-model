@@ -137,6 +137,13 @@ message Wallet {
     string Address = 1;
     string Alias = 2;
     WalletType Type = 3;
+    SignerType SignerType = 4;
+}
+
+enum SignerType {
+    NOT_USER_SIGNETTYPE = 0;
+    BROWSER_EXT = 1;
+    MOBILE_APP = 2;
 }
 
 enum UserStatus {
