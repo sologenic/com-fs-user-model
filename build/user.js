@@ -881,6 +881,7 @@ function createBaseUserDetails() {
         KYCStatus: 0,
         UserTradeProfile: undefined,
         ComplianceQuestions: [],
+        BrokerAccounts: [],
     };
 }
 export const UserDetails = {
@@ -950,6 +951,9 @@ export const UserDetails = {
         }
         for (const v of message.ComplianceQuestions) {
             ComplianceQuestions.encode(v, writer.uint32(178).fork()).ldelim();
+        }
+        for (const v of message.BrokerAccounts) {
+            BrokerAccount.encode(v, writer.uint32(186).fork()).ldelim();
         }
         return writer;
     },
@@ -1092,6 +1096,12 @@ export const UserDetails = {
                     }
                     message.ComplianceQuestions.push(ComplianceQuestions.decode(reader, reader.uint32()));
                     continue;
+                case 23:
+                    if (tag !== 186) {
+                        break;
+                    }
+                    message.BrokerAccounts.push(BrokerAccount.decode(reader, reader.uint32()));
+                    continue;
             }
             if ((tag & 7) === 4 || tag === 0) {
                 break;
@@ -1130,10 +1140,13 @@ export const UserDetails = {
             ComplianceQuestions: globalThis.Array.isArray(object === null || object === void 0 ? void 0 : object.ComplianceQuestions)
                 ? object.ComplianceQuestions.map((e) => ComplianceQuestions.fromJSON(e))
                 : [],
+            BrokerAccounts: globalThis.Array.isArray(object === null || object === void 0 ? void 0 : object.BrokerAccounts)
+                ? object.BrokerAccounts.map((e) => BrokerAccount.fromJSON(e))
+                : [],
         };
     },
     toJSON(message) {
-        var _a, _b, _c, _d;
+        var _a, _b, _c, _d, _e;
         const obj = {};
         if (message.UserID !== "") {
             obj.UserID = message.UserID;
@@ -1201,13 +1214,16 @@ export const UserDetails = {
         if ((_d = message.ComplianceQuestions) === null || _d === void 0 ? void 0 : _d.length) {
             obj.ComplianceQuestions = message.ComplianceQuestions.map((e) => ComplianceQuestions.toJSON(e));
         }
+        if ((_e = message.BrokerAccounts) === null || _e === void 0 ? void 0 : _e.length) {
+            obj.BrokerAccounts = message.BrokerAccounts.map((e) => BrokerAccount.toJSON(e));
+        }
         return obj;
     },
     create(base) {
         return UserDetails.fromPartial(base !== null && base !== void 0 ? base : {});
     },
     fromPartial(object) {
-        var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q, _r, _s;
+        var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q, _r, _s, _t;
         const message = createBaseUserDetails();
         message.UserID = (_a = object.UserID) !== null && _a !== void 0 ? _a : "";
         message.FirstName = (_b = object.FirstName) !== null && _b !== void 0 ? _b : "";
@@ -1242,6 +1258,7 @@ export const UserDetails = {
             ? UserTradeProfile.fromPartial(object.UserTradeProfile)
             : undefined;
         message.ComplianceQuestions = ((_s = object.ComplianceQuestions) === null || _s === void 0 ? void 0 : _s.map((e) => ComplianceQuestions.fromPartial(e))) || [];
+        message.BrokerAccounts = ((_t = object.BrokerAccounts) === null || _t === void 0 ? void 0 : _t.map((e) => BrokerAccount.fromPartial(e))) || [];
         return message;
     },
 };
@@ -2476,6 +2493,137 @@ export const USA = {
         message.ConversionImportance = (_e = object.ConversionImportance) !== null && _e !== void 0 ? _e : 0;
         message.Tolerance = (_f = object.Tolerance) !== null && _f !== void 0 ? _f : 0;
         message.Objective = (_g = object.Objective) !== null && _g !== void 0 ? _g : 0;
+        return message;
+    },
+};
+function createBaseBrokerAccount() {
+    return { RQD: undefined };
+}
+export const BrokerAccount = {
+    encode(message, writer = _m0.Writer.create()) {
+        if (message.RQD !== undefined) {
+            RQD.encode(message.RQD, writer.uint32(10).fork()).ldelim();
+        }
+        return writer;
+    },
+    decode(input, length) {
+        const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+        let end = length === undefined ? reader.len : reader.pos + length;
+        const message = createBaseBrokerAccount();
+        while (reader.pos < end) {
+            const tag = reader.uint32();
+            switch (tag >>> 3) {
+                case 1:
+                    if (tag !== 10) {
+                        break;
+                    }
+                    message.RQD = RQD.decode(reader, reader.uint32());
+                    continue;
+            }
+            if ((tag & 7) === 4 || tag === 0) {
+                break;
+            }
+            reader.skipType(tag & 7);
+        }
+        return message;
+    },
+    fromJSON(object) {
+        return { RQD: isSet(object.RQD) ? RQD.fromJSON(object.RQD) : undefined };
+    },
+    toJSON(message) {
+        const obj = {};
+        if (message.RQD !== undefined) {
+            obj.RQD = RQD.toJSON(message.RQD);
+        }
+        return obj;
+    },
+    create(base) {
+        return BrokerAccount.fromPartial(base !== null && base !== void 0 ? base : {});
+    },
+    fromPartial(object) {
+        const message = createBaseBrokerAccount();
+        message.RQD = (object.RQD !== undefined && object.RQD !== null) ? RQD.fromPartial(object.RQD) : undefined;
+        return message;
+    },
+};
+function createBaseRQD() {
+    return { Corr: "", Office: "", AccountNumber: "" };
+}
+export const RQD = {
+    encode(message, writer = _m0.Writer.create()) {
+        if (message.Corr !== "") {
+            writer.uint32(10).string(message.Corr);
+        }
+        if (message.Office !== "") {
+            writer.uint32(18).string(message.Office);
+        }
+        if (message.AccountNumber !== "") {
+            writer.uint32(26).string(message.AccountNumber);
+        }
+        return writer;
+    },
+    decode(input, length) {
+        const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+        let end = length === undefined ? reader.len : reader.pos + length;
+        const message = createBaseRQD();
+        while (reader.pos < end) {
+            const tag = reader.uint32();
+            switch (tag >>> 3) {
+                case 1:
+                    if (tag !== 10) {
+                        break;
+                    }
+                    message.Corr = reader.string();
+                    continue;
+                case 2:
+                    if (tag !== 18) {
+                        break;
+                    }
+                    message.Office = reader.string();
+                    continue;
+                case 3:
+                    if (tag !== 26) {
+                        break;
+                    }
+                    message.AccountNumber = reader.string();
+                    continue;
+            }
+            if ((tag & 7) === 4 || tag === 0) {
+                break;
+            }
+            reader.skipType(tag & 7);
+        }
+        return message;
+    },
+    fromJSON(object) {
+        return {
+            Corr: isSet(object.Corr) ? globalThis.String(object.Corr) : "",
+            Office: isSet(object.Office) ? globalThis.String(object.Office) : "",
+            AccountNumber: isSet(object.AccountNumber) ? globalThis.String(object.AccountNumber) : "",
+        };
+    },
+    toJSON(message) {
+        const obj = {};
+        if (message.Corr !== "") {
+            obj.Corr = message.Corr;
+        }
+        if (message.Office !== "") {
+            obj.Office = message.Office;
+        }
+        if (message.AccountNumber !== "") {
+            obj.AccountNumber = message.AccountNumber;
+        }
+        return obj;
+    },
+    create(base) {
+        return RQD.fromPartial(base !== null && base !== void 0 ? base : {});
+    },
+    fromPartial(object) {
+        var _a, _b, _c;
+        const message = createBaseRQD();
+        message.Corr = (_a = object.Corr) !== null && _a !== void 0 ? _a : "";
+        message.Office = (_b = object.Office) !== null && _b !== void 0 ? _b : "";
+        message.AccountNumber = (_c = object.AccountNumber) !== null && _c !== void 0 ? _c : "";
         return message;
     },
 };

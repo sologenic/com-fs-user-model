@@ -628,6 +628,7 @@ export interface UserDetails {
   KYCStatus: KYCStatus;
   UserTradeProfile: UserTradeProfile | undefined;
   ComplianceQuestions: ComplianceQuestions[];
+  BrokerAccounts: BrokerAccount[];
 }
 
 /** TODO: to be verified when more information is available */
@@ -721,6 +722,16 @@ export interface USA {
   ConversionImportance: LiquidationImportance;
   Tolerance: RiskTolerance;
   Objective: InvestmentObjective;
+}
+
+export interface BrokerAccount {
+  RQD?: RQD | undefined;
+}
+
+export interface RQD {
+  Corr: string;
+  Office: string;
+  AccountNumber: string;
 }
 
 function createBaseIDNumber(): IDNumber {
@@ -1089,6 +1100,7 @@ function createBaseUserDetails(): UserDetails {
     KYCStatus: 0,
     UserTradeProfile: undefined,
     ComplianceQuestions: [],
+    BrokerAccounts: [],
   };
 }
 
@@ -1159,6 +1171,9 @@ export const UserDetails = {
     }
     for (const v of message.ComplianceQuestions) {
       ComplianceQuestions.encode(v!, writer.uint32(178).fork()).ldelim();
+    }
+    for (const v of message.BrokerAccounts) {
+      BrokerAccount.encode(v!, writer.uint32(186).fork()).ldelim();
     }
     return writer;
   },
@@ -1324,6 +1339,13 @@ export const UserDetails = {
 
           message.ComplianceQuestions.push(ComplianceQuestions.decode(reader, reader.uint32()));
           continue;
+        case 23:
+          if (tag !== 186) {
+            break;
+          }
+
+          message.BrokerAccounts.push(BrokerAccount.decode(reader, reader.uint32()));
+          continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -1362,6 +1384,9 @@ export const UserDetails = {
       UserTradeProfile: isSet(object.UserTradeProfile) ? UserTradeProfile.fromJSON(object.UserTradeProfile) : undefined,
       ComplianceQuestions: globalThis.Array.isArray(object?.ComplianceQuestions)
         ? object.ComplianceQuestions.map((e: any) => ComplianceQuestions.fromJSON(e))
+        : [],
+      BrokerAccounts: globalThis.Array.isArray(object?.BrokerAccounts)
+        ? object.BrokerAccounts.map((e: any) => BrokerAccount.fromJSON(e))
         : [],
     };
   },
@@ -1434,6 +1459,9 @@ export const UserDetails = {
     if (message.ComplianceQuestions?.length) {
       obj.ComplianceQuestions = message.ComplianceQuestions.map((e) => ComplianceQuestions.toJSON(e));
     }
+    if (message.BrokerAccounts?.length) {
+      obj.BrokerAccounts = message.BrokerAccounts.map((e) => BrokerAccount.toJSON(e));
+    }
     return obj;
   },
 
@@ -1475,6 +1503,7 @@ export const UserDetails = {
       ? UserTradeProfile.fromPartial(object.UserTradeProfile)
       : undefined;
     message.ComplianceQuestions = object.ComplianceQuestions?.map((e) => ComplianceQuestions.fromPartial(e)) || [];
+    message.BrokerAccounts = object.BrokerAccounts?.map((e) => BrokerAccount.fromPartial(e)) || [];
     return message;
   },
 };
@@ -2821,6 +2850,152 @@ export const USA = {
     message.ConversionImportance = object.ConversionImportance ?? 0;
     message.Tolerance = object.Tolerance ?? 0;
     message.Objective = object.Objective ?? 0;
+    return message;
+  },
+};
+
+function createBaseBrokerAccount(): BrokerAccount {
+  return { RQD: undefined };
+}
+
+export const BrokerAccount = {
+  encode(message: BrokerAccount, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.RQD !== undefined) {
+      RQD.encode(message.RQD, writer.uint32(10).fork()).ldelim();
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): BrokerAccount {
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseBrokerAccount();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          if (tag !== 10) {
+            break;
+          }
+
+          message.RQD = RQD.decode(reader, reader.uint32());
+          continue;
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): BrokerAccount {
+    return { RQD: isSet(object.RQD) ? RQD.fromJSON(object.RQD) : undefined };
+  },
+
+  toJSON(message: BrokerAccount): unknown {
+    const obj: any = {};
+    if (message.RQD !== undefined) {
+      obj.RQD = RQD.toJSON(message.RQD);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<BrokerAccount>, I>>(base?: I): BrokerAccount {
+    return BrokerAccount.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<BrokerAccount>, I>>(object: I): BrokerAccount {
+    const message = createBaseBrokerAccount();
+    message.RQD = (object.RQD !== undefined && object.RQD !== null) ? RQD.fromPartial(object.RQD) : undefined;
+    return message;
+  },
+};
+
+function createBaseRQD(): RQD {
+  return { Corr: "", Office: "", AccountNumber: "" };
+}
+
+export const RQD = {
+  encode(message: RQD, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.Corr !== "") {
+      writer.uint32(10).string(message.Corr);
+    }
+    if (message.Office !== "") {
+      writer.uint32(18).string(message.Office);
+    }
+    if (message.AccountNumber !== "") {
+      writer.uint32(26).string(message.AccountNumber);
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): RQD {
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseRQD();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          if (tag !== 10) {
+            break;
+          }
+
+          message.Corr = reader.string();
+          continue;
+        case 2:
+          if (tag !== 18) {
+            break;
+          }
+
+          message.Office = reader.string();
+          continue;
+        case 3:
+          if (tag !== 26) {
+            break;
+          }
+
+          message.AccountNumber = reader.string();
+          continue;
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): RQD {
+    return {
+      Corr: isSet(object.Corr) ? globalThis.String(object.Corr) : "",
+      Office: isSet(object.Office) ? globalThis.String(object.Office) : "",
+      AccountNumber: isSet(object.AccountNumber) ? globalThis.String(object.AccountNumber) : "",
+    };
+  },
+
+  toJSON(message: RQD): unknown {
+    const obj: any = {};
+    if (message.Corr !== "") {
+      obj.Corr = message.Corr;
+    }
+    if (message.Office !== "") {
+      obj.Office = message.Office;
+    }
+    if (message.AccountNumber !== "") {
+      obj.AccountNumber = message.AccountNumber;
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<RQD>, I>>(base?: I): RQD {
+    return RQD.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<RQD>, I>>(object: I): RQD {
+    const message = createBaseRQD();
+    message.Corr = object.Corr ?? "";
+    message.Office = object.Office ?? "";
+    message.AccountNumber = object.AccountNumber ?? "";
     return message;
   },
 };

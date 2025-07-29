@@ -67,6 +67,7 @@ message UserDetails {
     KYCStatus KYCStatus = 20; // Status of KYC verification, e.g., PENDING, APPROVED, REJECTED
     tradeprofile.UserTradeProfile UserTradeProfile = 21;
     repeated ComplianceQuestions ComplianceQuestions = 22;
+    repeated BrokerAccount BrokerAccounts = 23;
 }
 
 
@@ -233,4 +234,14 @@ enum InvestmentObjective {
   SAFE_LONG_TERM_GROWTH = 3;
   GREATER_RISK_LONG_TERM_GROWTH = 4;
   SPECULATION = 5;
+}
+
+message BrokerAccount {
+  optional RQD RQD = 1;
+}
+
+message RQD {
+  string Corr = 1;
+  string Office = 2;
+  string AccountNumber = 3;
 }
