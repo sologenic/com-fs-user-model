@@ -214,8 +214,10 @@ export function incomeFrequencyToJSON(object: IncomeFrequency): string {
 
 export enum SignerType {
   NOT_USER_SIGNETTYPE = 0,
-  BROWSER_EXT = 1,
-  MOBILE_APP = 2,
+  MOBILE_APP = 1,
+  BROWSER_LEAP = 2,
+  BROWSER_COSMOSTATION = 3,
+  BROWSER_KEPLR = 4,
   UNRECOGNIZED = -1,
 }
 
@@ -225,11 +227,17 @@ export function signerTypeFromJSON(object: any): SignerType {
     case "NOT_USER_SIGNETTYPE":
       return SignerType.NOT_USER_SIGNETTYPE;
     case 1:
-    case "BROWSER_EXT":
-      return SignerType.BROWSER_EXT;
-    case 2:
     case "MOBILE_APP":
       return SignerType.MOBILE_APP;
+    case 2:
+    case "BROWSER_LEAP":
+      return SignerType.BROWSER_LEAP;
+    case 3:
+    case "BROWSER_COSMOSTATION":
+      return SignerType.BROWSER_COSMOSTATION;
+    case 4:
+    case "BROWSER_KEPLR":
+      return SignerType.BROWSER_KEPLR;
     case -1:
     case "UNRECOGNIZED":
     default:
@@ -241,10 +249,14 @@ export function signerTypeToJSON(object: SignerType): string {
   switch (object) {
     case SignerType.NOT_USER_SIGNETTYPE:
       return "NOT_USER_SIGNETTYPE";
-    case SignerType.BROWSER_EXT:
-      return "BROWSER_EXT";
     case SignerType.MOBILE_APP:
       return "MOBILE_APP";
+    case SignerType.BROWSER_LEAP:
+      return "BROWSER_LEAP";
+    case SignerType.BROWSER_COSMOSTATION:
+      return "BROWSER_COSMOSTATION";
+    case SignerType.BROWSER_KEPLR:
+      return "BROWSER_KEPLR";
     case SignerType.UNRECOGNIZED:
     default:
       return "UNRECOGNIZED";

@@ -50,8 +50,10 @@ export declare function incomeFrequencyFromJSON(object: any): IncomeFrequency;
 export declare function incomeFrequencyToJSON(object: IncomeFrequency): string;
 export declare enum SignerType {
     NOT_USER_SIGNETTYPE = 0,
-    BROWSER_EXT = 1,
-    MOBILE_APP = 2,
+    MOBILE_APP = 1,
+    BROWSER_LEAP = 2,
+    BROWSER_COSMOSTATION = 3,
+    BROWSER_KEPLR = 4,
     UNRECOGNIZED = -1
 }
 export declare function signerTypeFromJSON(object: any): SignerType;

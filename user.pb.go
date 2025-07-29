@@ -211,22 +211,28 @@ func (IncomeFrequency) EnumDescriptor() ([]byte, []int) {
 type SignerType int32
 
 const (
-	SignerType_NOT_USER_SIGNETTYPE SignerType = 0
-	SignerType_BROWSER_EXT         SignerType = 1
-	SignerType_MOBILE_APP          SignerType = 2
+	SignerType_NOT_USER_SIGNETTYPE  SignerType = 0
+	SignerType_MOBILE_APP           SignerType = 1
+	SignerType_BROWSER_LEAP         SignerType = 2
+	SignerType_BROWSER_COSMOSTATION SignerType = 3
+	SignerType_BROWSER_KEPLR        SignerType = 4
 )
 
 // Enum value maps for SignerType.
 var (
 	SignerType_name = map[int32]string{
 		0: "NOT_USER_SIGNETTYPE",
-		1: "BROWSER_EXT",
-		2: "MOBILE_APP",
+		1: "MOBILE_APP",
+		2: "BROWSER_LEAP",
+		3: "BROWSER_COSMOSTATION",
+		4: "BROWSER_KEPLR",
 	}
 	SignerType_value = map[string]int32{
-		"NOT_USER_SIGNETTYPE": 0,
-		"BROWSER_EXT":         1,
-		"MOBILE_APP":          2,
+		"NOT_USER_SIGNETTYPE":  0,
+		"MOBILE_APP":           1,
+		"BROWSER_LEAP":         2,
+		"BROWSER_COSMOSTATION": 3,
+		"BROWSER_KEPLR":        4,
 	}
 )
 
@@ -2024,13 +2030,15 @@ const file_user_proto_rawDesc = "" +
 	"\x06WEEKLY\x10\x02\x12\r\n" +
 	"\tBI_WEEKLY\x10\x03\x12\v\n" +
 	"\aMONTHLY\x10\x04\x12\f\n" +
-	"\bANNUALLY\x10\x05*F\n" +
+	"\bANNUALLY\x10\x05*t\n" +
 	"\n" +
 	"SignerType\x12\x17\n" +
-	"\x13NOT_USER_SIGNETTYPE\x10\x00\x12\x0f\n" +
-	"\vBROWSER_EXT\x10\x01\x12\x0e\n" +
+	"\x13NOT_USER_SIGNETTYPE\x10\x00\x12\x0e\n" +
 	"\n" +
-	"MOBILE_APP\x10\x02*H\n" +
+	"MOBILE_APP\x10\x01\x12\x10\n" +
+	"\fBROWSER_LEAP\x10\x02\x12\x18\n" +
+	"\x14BROWSER_COSMOSTATION\x10\x03\x12\x11\n" +
+	"\rBROWSER_KEPLR\x10\x04*H\n" +
 	"\n" +
 	"UserStatus\x12\x17\n" +
 	"\x13NOT_USED_USERSTATUS\x10\x00\x12\n" +

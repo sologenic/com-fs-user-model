@@ -201,8 +201,10 @@ export function incomeFrequencyToJSON(object) {
 export var SignerType;
 (function (SignerType) {
     SignerType[SignerType["NOT_USER_SIGNETTYPE"] = 0] = "NOT_USER_SIGNETTYPE";
-    SignerType[SignerType["BROWSER_EXT"] = 1] = "BROWSER_EXT";
-    SignerType[SignerType["MOBILE_APP"] = 2] = "MOBILE_APP";
+    SignerType[SignerType["MOBILE_APP"] = 1] = "MOBILE_APP";
+    SignerType[SignerType["BROWSER_LEAP"] = 2] = "BROWSER_LEAP";
+    SignerType[SignerType["BROWSER_COSMOSTATION"] = 3] = "BROWSER_COSMOSTATION";
+    SignerType[SignerType["BROWSER_KEPLR"] = 4] = "BROWSER_KEPLR";
     SignerType[SignerType["UNRECOGNIZED"] = -1] = "UNRECOGNIZED";
 })(SignerType || (SignerType = {}));
 export function signerTypeFromJSON(object) {
@@ -211,11 +213,17 @@ export function signerTypeFromJSON(object) {
         case "NOT_USER_SIGNETTYPE":
             return SignerType.NOT_USER_SIGNETTYPE;
         case 1:
-        case "BROWSER_EXT":
-            return SignerType.BROWSER_EXT;
-        case 2:
         case "MOBILE_APP":
             return SignerType.MOBILE_APP;
+        case 2:
+        case "BROWSER_LEAP":
+            return SignerType.BROWSER_LEAP;
+        case 3:
+        case "BROWSER_COSMOSTATION":
+            return SignerType.BROWSER_COSMOSTATION;
+        case 4:
+        case "BROWSER_KEPLR":
+            return SignerType.BROWSER_KEPLR;
         case -1:
         case "UNRECOGNIZED":
         default:
@@ -226,10 +234,14 @@ export function signerTypeToJSON(object) {
     switch (object) {
         case SignerType.NOT_USER_SIGNETTYPE:
             return "NOT_USER_SIGNETTYPE";
-        case SignerType.BROWSER_EXT:
-            return "BROWSER_EXT";
         case SignerType.MOBILE_APP:
             return "MOBILE_APP";
+        case SignerType.BROWSER_LEAP:
+            return "BROWSER_LEAP";
+        case SignerType.BROWSER_COSMOSTATION:
+            return "BROWSER_COSMOSTATION";
+        case SignerType.BROWSER_KEPLR:
+            return "BROWSER_KEPLR";
         case SignerType.UNRECOGNIZED:
         default:
             return "UNRECOGNIZED";
