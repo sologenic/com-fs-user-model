@@ -2497,12 +2497,18 @@ export const USA = {
     },
 };
 function createBaseBrokerAccount() {
-    return { RQD: undefined };
+    return { AccountID: "", Broker: "", OrganizationID: "" };
 }
 export const BrokerAccount = {
     encode(message, writer = _m0.Writer.create()) {
-        if (message.RQD !== undefined) {
-            RQD.encode(message.RQD, writer.uint32(10).fork()).ldelim();
+        if (message.AccountID !== "") {
+            writer.uint32(10).string(message.AccountID);
+        }
+        if (message.Broker !== "") {
+            writer.uint32(18).string(message.Broker);
+        }
+        if (message.OrganizationID !== "") {
+            writer.uint32(26).string(message.OrganizationID);
         }
         return writer;
     },
@@ -2517,75 +2523,19 @@ export const BrokerAccount = {
                     if (tag !== 10) {
                         break;
                     }
-                    message.RQD = RQD.decode(reader, reader.uint32());
-                    continue;
-            }
-            if ((tag & 7) === 4 || tag === 0) {
-                break;
-            }
-            reader.skipType(tag & 7);
-        }
-        return message;
-    },
-    fromJSON(object) {
-        return { RQD: isSet(object.RQD) ? RQD.fromJSON(object.RQD) : undefined };
-    },
-    toJSON(message) {
-        const obj = {};
-        if (message.RQD !== undefined) {
-            obj.RQD = RQD.toJSON(message.RQD);
-        }
-        return obj;
-    },
-    create(base) {
-        return BrokerAccount.fromPartial(base !== null && base !== void 0 ? base : {});
-    },
-    fromPartial(object) {
-        const message = createBaseBrokerAccount();
-        message.RQD = (object.RQD !== undefined && object.RQD !== null) ? RQD.fromPartial(object.RQD) : undefined;
-        return message;
-    },
-};
-function createBaseRQD() {
-    return { Corr: "", Office: "", AccountNumber: "" };
-}
-export const RQD = {
-    encode(message, writer = _m0.Writer.create()) {
-        if (message.Corr !== "") {
-            writer.uint32(10).string(message.Corr);
-        }
-        if (message.Office !== "") {
-            writer.uint32(18).string(message.Office);
-        }
-        if (message.AccountNumber !== "") {
-            writer.uint32(26).string(message.AccountNumber);
-        }
-        return writer;
-    },
-    decode(input, length) {
-        const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
-        let end = length === undefined ? reader.len : reader.pos + length;
-        const message = createBaseRQD();
-        while (reader.pos < end) {
-            const tag = reader.uint32();
-            switch (tag >>> 3) {
-                case 1:
-                    if (tag !== 10) {
-                        break;
-                    }
-                    message.Corr = reader.string();
+                    message.AccountID = reader.string();
                     continue;
                 case 2:
                     if (tag !== 18) {
                         break;
                     }
-                    message.Office = reader.string();
+                    message.Broker = reader.string();
                     continue;
                 case 3:
                     if (tag !== 26) {
                         break;
                     }
-                    message.AccountNumber = reader.string();
+                    message.OrganizationID = reader.string();
                     continue;
             }
             if ((tag & 7) === 4 || tag === 0) {
@@ -2597,33 +2547,33 @@ export const RQD = {
     },
     fromJSON(object) {
         return {
-            Corr: isSet(object.Corr) ? globalThis.String(object.Corr) : "",
-            Office: isSet(object.Office) ? globalThis.String(object.Office) : "",
-            AccountNumber: isSet(object.AccountNumber) ? globalThis.String(object.AccountNumber) : "",
+            AccountID: isSet(object.AccountID) ? globalThis.String(object.AccountID) : "",
+            Broker: isSet(object.Broker) ? globalThis.String(object.Broker) : "",
+            OrganizationID: isSet(object.OrganizationID) ? globalThis.String(object.OrganizationID) : "",
         };
     },
     toJSON(message) {
         const obj = {};
-        if (message.Corr !== "") {
-            obj.Corr = message.Corr;
+        if (message.AccountID !== "") {
+            obj.AccountID = message.AccountID;
         }
-        if (message.Office !== "") {
-            obj.Office = message.Office;
+        if (message.Broker !== "") {
+            obj.Broker = message.Broker;
         }
-        if (message.AccountNumber !== "") {
-            obj.AccountNumber = message.AccountNumber;
+        if (message.OrganizationID !== "") {
+            obj.OrganizationID = message.OrganizationID;
         }
         return obj;
     },
     create(base) {
-        return RQD.fromPartial(base !== null && base !== void 0 ? base : {});
+        return BrokerAccount.fromPartial(base !== null && base !== void 0 ? base : {});
     },
     fromPartial(object) {
         var _a, _b, _c;
-        const message = createBaseRQD();
-        message.Corr = (_a = object.Corr) !== null && _a !== void 0 ? _a : "";
-        message.Office = (_b = object.Office) !== null && _b !== void 0 ? _b : "";
-        message.AccountNumber = (_c = object.AccountNumber) !== null && _c !== void 0 ? _c : "";
+        const message = createBaseBrokerAccount();
+        message.AccountID = (_a = object.AccountID) !== null && _a !== void 0 ? _a : "";
+        message.Broker = (_b = object.Broker) !== null && _b !== void 0 ? _b : "";
+        message.OrganizationID = (_c = object.OrganizationID) !== null && _c !== void 0 ? _c : "";
         return message;
     },
 };

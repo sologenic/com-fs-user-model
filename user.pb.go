@@ -1864,10 +1864,12 @@ func (x *USA) GetObjective() InvestmentObjective {
 }
 
 type BrokerAccount struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	RQD           *RQD                   `protobuf:"bytes,1,opt,name=RQD,proto3,oneof" json:"RQD,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state          protoimpl.MessageState `protogen:"open.v1"`
+	AccountID      string                 `protobuf:"bytes,1,opt,name=AccountID,proto3" json:"AccountID,omitempty"`           // user's identifier in the broker account
+	Broker         string                 `protobuf:"bytes,2,opt,name=Broker,proto3" json:"Broker,omitempty"`                 // "RQD", etc.
+	OrganizationID string                 `protobuf:"bytes,3,opt,name=OrganizationID,proto3" json:"OrganizationID,omitempty"` // broker identifier
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
 }
 
 func (x *BrokerAccount) Reset() {
@@ -1900,69 +1902,23 @@ func (*BrokerAccount) Descriptor() ([]byte, []int) {
 	return file_user_proto_rawDescGZIP(), []int{15}
 }
 
-func (x *BrokerAccount) GetRQD() *RQD {
+func (x *BrokerAccount) GetAccountID() string {
 	if x != nil {
-		return x.RQD
-	}
-	return nil
-}
-
-type RQD struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Corr          string                 `protobuf:"bytes,1,opt,name=Corr,proto3" json:"Corr,omitempty"`
-	Office        string                 `protobuf:"bytes,2,opt,name=Office,proto3" json:"Office,omitempty"`
-	AccountNumber string                 `protobuf:"bytes,3,opt,name=AccountNumber,proto3" json:"AccountNumber,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *RQD) Reset() {
-	*x = RQD{}
-	mi := &file_user_proto_msgTypes[16]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *RQD) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*RQD) ProtoMessage() {}
-
-func (x *RQD) ProtoReflect() protoreflect.Message {
-	mi := &file_user_proto_msgTypes[16]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use RQD.ProtoReflect.Descriptor instead.
-func (*RQD) Descriptor() ([]byte, []int) {
-	return file_user_proto_rawDescGZIP(), []int{16}
-}
-
-func (x *RQD) GetCorr() string {
-	if x != nil {
-		return x.Corr
+		return x.AccountID
 	}
 	return ""
 }
 
-func (x *RQD) GetOffice() string {
+func (x *BrokerAccount) GetBroker() string {
 	if x != nil {
-		return x.Office
+		return x.Broker
 	}
 	return ""
 }
 
-func (x *RQD) GetAccountNumber() string {
+func (x *BrokerAccount) GetOrganizationID() string {
 	if x != nil {
-		return x.AccountNumber
+		return x.OrganizationID
 	}
 	return ""
 }
@@ -2111,14 +2067,11 @@ const file_user_proto_rawDesc = "" +
 	"\bNetWorth\x18\x04 \x01(\x03R\bNetWorth\x12O\n" +
 	"\x14ConversionImportance\x18\x05 \x01(\x0e2\x1b.user.LiquidationImportanceR\x14ConversionImportance\x121\n" +
 	"\tTolerance\x18\x06 \x01(\x0e2\x13.user.RiskToleranceR\tTolerance\x127\n" +
-	"\tObjective\x18\a \x01(\x0e2\x19.user.InvestmentObjectiveR\tObjective\"9\n" +
-	"\rBrokerAccount\x12 \n" +
-	"\x03RQD\x18\x01 \x01(\v2\t.user.RQDH\x00R\x03RQD\x88\x01\x01B\x06\n" +
-	"\x04_RQD\"W\n" +
-	"\x03RQD\x12\x12\n" +
-	"\x04Corr\x18\x01 \x01(\tR\x04Corr\x12\x16\n" +
-	"\x06Office\x18\x02 \x01(\tR\x06Office\x12$\n" +
-	"\rAccountNumber\x18\x03 \x01(\tR\rAccountNumber*\xba\x01\n" +
+	"\tObjective\x18\a \x01(\x0e2\x19.user.InvestmentObjectiveR\tObjective\"m\n" +
+	"\rBrokerAccount\x12\x1c\n" +
+	"\tAccountID\x18\x01 \x01(\tR\tAccountID\x12\x16\n" +
+	"\x06Broker\x18\x02 \x01(\tR\x06Broker\x12&\n" +
+	"\x0eOrganizationID\x18\x03 \x01(\tR\x0eOrganizationID*\xba\x01\n" +
 	"\tKYCStatus\x12\x1a\n" +
 	"\x16KYC_STATUS_UNSPECIFIED\x10\x00\x12\x16\n" +
 	"\x12KYC_STATUS_PENDING\x10\x01\x12\x18\n" +
@@ -2210,7 +2163,7 @@ func file_user_proto_rawDescGZIP() []byte {
 }
 
 var file_user_proto_enumTypes = make([]protoimpl.EnumInfo, 10)
-var file_user_proto_msgTypes = make([]protoimpl.MessageInfo, 17)
+var file_user_proto_msgTypes = make([]protoimpl.MessageInfo, 16)
 var file_user_proto_goTypes = []any{
 	(KYCStatus)(0),              // 0: user.KYCStatus
 	(EmploymentType)(0),         // 1: user.EmploymentType
@@ -2238,61 +2191,59 @@ var file_user_proto_goTypes = []any{
 	(*ComplianceQuestions)(nil), // 23: user.ComplianceQuestions
 	(*USA)(nil),                 // 24: user.USA
 	(*BrokerAccount)(nil),       // 25: user.BrokerAccount
-	(*RQD)(nil),                 // 26: user.RQD
-	(language.Lang)(0),          // 27: language.Lang
-	(role.Role)(0),              // 28: role.Role
-	(*com_fs_trade_profile_model.TradeProfileDetails)(nil), // 29: tradeprofile.TradeProfileDetails
-	(*com_fs_document_model.UserDocumentCompliance)(nil),   // 30: document.UserDocumentCompliance
-	(*com_fs_trade_profile_model.UserTradeProfile)(nil),    // 31: tradeprofile.UserTradeProfile
-	(*timestamppb.Timestamp)(nil),                          // 32: google.protobuf.Timestamp
-	(*metadata.MetaData)(nil),                              // 33: metadata.MetaData
-	(*audit.Audit)(nil),                                    // 34: audit.Audit
-	(metadata.Network)(0),                                  // 35: metadata.Network
+	(language.Lang)(0),          // 26: language.Lang
+	(role.Role)(0),              // 27: role.Role
+	(*com_fs_trade_profile_model.TradeProfileDetails)(nil), // 28: tradeprofile.TradeProfileDetails
+	(*com_fs_document_model.UserDocumentCompliance)(nil),   // 29: document.UserDocumentCompliance
+	(*com_fs_trade_profile_model.UserTradeProfile)(nil),    // 30: tradeprofile.UserTradeProfile
+	(*timestamppb.Timestamp)(nil),                          // 31: google.protobuf.Timestamp
+	(*metadata.MetaData)(nil),                              // 32: metadata.MetaData
+	(*audit.Audit)(nil),                                    // 33: audit.Audit
+	(metadata.Network)(0),                                  // 34: metadata.Network
 }
 var file_user_proto_depIdxs = []int32{
 	4,  // 0: user.UserDetails.Status:type_name -> user.UserStatus
 	19, // 1: user.UserDetails.Wallets:type_name -> user.Wallet
 	18, // 2: user.UserDetails.Socials:type_name -> user.Social
-	27, // 3: user.UserDetails.Language:type_name -> language.Lang
+	26, // 3: user.UserDetails.Language:type_name -> language.Lang
 	13, // 4: user.UserDetails.Employment:type_name -> user.Employment
-	28, // 5: user.UserDetails.Role:type_name -> role.Role
-	29, // 6: user.UserDetails.TradeProfile:type_name -> tradeprofile.TradeProfileDetails
+	27, // 5: user.UserDetails.Role:type_name -> role.Role
+	28, // 6: user.UserDetails.TradeProfile:type_name -> tradeprofile.TradeProfileDetails
 	11, // 7: user.UserDetails.KYCDetails:type_name -> user.UserKYCDetails
-	30, // 8: user.UserDetails.UserDocumentCompliance:type_name -> document.UserDocumentCompliance
+	29, // 8: user.UserDetails.UserDocumentCompliance:type_name -> document.UserDocumentCompliance
 	0,  // 9: user.UserDetails.KYCStatus:type_name -> user.KYCStatus
-	31, // 10: user.UserDetails.UserTradeProfile:type_name -> tradeprofile.UserTradeProfile
+	30, // 10: user.UserDetails.UserTradeProfile:type_name -> tradeprofile.UserTradeProfile
 	23, // 11: user.UserDetails.ComplianceQuestions:type_name -> user.ComplianceQuestions
 	25, // 12: user.UserDetails.BrokerAccounts:type_name -> user.BrokerAccount
-	32, // 13: user.Employment.StartDate:type_name -> google.protobuf.Timestamp
-	32, // 14: user.Employment.EndDate:type_name -> google.protobuf.Timestamp
+	31, // 13: user.Employment.StartDate:type_name -> google.protobuf.Timestamp
+	31, // 14: user.Employment.EndDate:type_name -> google.protobuf.Timestamp
 	1,  // 15: user.Employment.Type:type_name -> user.EmploymentType
 	14, // 16: user.Employment.Income:type_name -> user.Income
 	15, // 17: user.Employment.Contact:type_name -> user.EmployerContact
 	2,  // 18: user.Income.Frequency:type_name -> user.IncomeFrequency
 	12, // 19: user.User.User:type_name -> user.UserDetails
-	33, // 20: user.User.MetaData:type_name -> metadata.MetaData
-	34, // 21: user.User.Audit:type_name -> audit.Audit
-	35, // 22: user.UserID.Network:type_name -> metadata.Network
+	32, // 20: user.User.MetaData:type_name -> metadata.MetaData
+	33, // 21: user.User.Audit:type_name -> audit.Audit
+	34, // 22: user.UserID.Network:type_name -> metadata.Network
 	6,  // 23: user.Social.Type:type_name -> user.SocialType
 	5,  // 24: user.Wallet.Type:type_name -> user.WalletType
 	3,  // 25: user.Wallet.SignerType:type_name -> user.SignerType
 	16, // 26: user.UserList.Users:type_name -> user.User
 	4,  // 27: user.StatusMessage.Status:type_name -> user.UserStatus
-	35, // 28: user.StatusMessage.Network:type_name -> metadata.Network
-	34, // 29: user.StatusMessage.Audit:type_name -> audit.Audit
-	35, // 30: user.Filter.Network:type_name -> metadata.Network
+	34, // 28: user.StatusMessage.Network:type_name -> metadata.Network
+	33, // 29: user.StatusMessage.Audit:type_name -> audit.Audit
+	34, // 30: user.Filter.Network:type_name -> metadata.Network
 	4,  // 31: user.Filter.Status:type_name -> user.UserStatus
 	24, // 32: user.ComplianceQuestions.USA:type_name -> user.USA
-	32, // 33: user.USA.RecordedAt:type_name -> google.protobuf.Timestamp
+	31, // 33: user.USA.RecordedAt:type_name -> google.protobuf.Timestamp
 	7,  // 34: user.USA.ConversionImportance:type_name -> user.LiquidationImportance
 	8,  // 35: user.USA.Tolerance:type_name -> user.RiskTolerance
 	9,  // 36: user.USA.Objective:type_name -> user.InvestmentObjective
-	26, // 37: user.BrokerAccount.RQD:type_name -> user.RQD
-	38, // [38:38] is the sub-list for method output_type
-	38, // [38:38] is the sub-list for method input_type
-	38, // [38:38] is the sub-list for extension type_name
-	38, // [38:38] is the sub-list for extension extendee
-	0,  // [0:38] is the sub-list for field type_name
+	37, // [37:37] is the sub-list for method output_type
+	37, // [37:37] is the sub-list for method input_type
+	37, // [37:37] is the sub-list for extension type_name
+	37, // [37:37] is the sub-list for extension extendee
+	0,  // [0:37] is the sub-list for field type_name
 }
 
 func init() { file_user_proto_init() }
@@ -2307,14 +2258,13 @@ func file_user_proto_init() {
 	file_user_proto_msgTypes[11].OneofWrappers = []any{}
 	file_user_proto_msgTypes[12].OneofWrappers = []any{}
 	file_user_proto_msgTypes[13].OneofWrappers = []any{}
-	file_user_proto_msgTypes[15].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_user_proto_rawDesc), len(file_user_proto_rawDesc)),
 			NumEnums:      10,
-			NumMessages:   17,
+			NumMessages:   16,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

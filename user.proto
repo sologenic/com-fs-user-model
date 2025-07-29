@@ -237,11 +237,7 @@ enum InvestmentObjective {
 }
 
 message BrokerAccount {
-  optional RQD RQD = 1;
-}
-
-message RQD {
-  string Corr = 1;
-  string Office = 2;
-  string AccountNumber = 3;
+  string AccountID = 1; // user's identifier in the broker account
+  string Broker = 2; // "RQD", etc.
+  string OrganizationID = 3; // broker identifier
 }

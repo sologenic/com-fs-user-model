@@ -725,13 +725,12 @@ export interface USA {
 }
 
 export interface BrokerAccount {
-  RQD?: RQD | undefined;
-}
-
-export interface RQD {
-  Corr: string;
-  Office: string;
-  AccountNumber: string;
+  /** user's identifier in the broker account */
+  AccountID: string;
+  /** "RQD", etc. */
+  Broker: string;
+  /** broker identifier */
+  OrganizationID: string;
 }
 
 function createBaseIDNumber(): IDNumber {
@@ -2855,13 +2854,19 @@ export const USA = {
 };
 
 function createBaseBrokerAccount(): BrokerAccount {
-  return { RQD: undefined };
+  return { AccountID: "", Broker: "", OrganizationID: "" };
 }
 
 export const BrokerAccount = {
   encode(message: BrokerAccount, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.RQD !== undefined) {
-      RQD.encode(message.RQD, writer.uint32(10).fork()).ldelim();
+    if (message.AccountID !== "") {
+      writer.uint32(10).string(message.AccountID);
+    }
+    if (message.Broker !== "") {
+      writer.uint32(18).string(message.Broker);
+    }
+    if (message.OrganizationID !== "") {
+      writer.uint32(26).string(message.OrganizationID);
     }
     return writer;
   },
@@ -2878,7 +2883,21 @@ export const BrokerAccount = {
             break;
           }
 
-          message.RQD = RQD.decode(reader, reader.uint32());
+          message.AccountID = reader.string();
+          continue;
+        case 2:
+          if (tag !== 18) {
+            break;
+          }
+
+          message.Broker = reader.string();
+          continue;
+        case 3:
+          if (tag !== 26) {
+            break;
+          }
+
+          message.OrganizationID = reader.string();
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -2890,13 +2909,23 @@ export const BrokerAccount = {
   },
 
   fromJSON(object: any): BrokerAccount {
-    return { RQD: isSet(object.RQD) ? RQD.fromJSON(object.RQD) : undefined };
+    return {
+      AccountID: isSet(object.AccountID) ? globalThis.String(object.AccountID) : "",
+      Broker: isSet(object.Broker) ? globalThis.String(object.Broker) : "",
+      OrganizationID: isSet(object.OrganizationID) ? globalThis.String(object.OrganizationID) : "",
+    };
   },
 
   toJSON(message: BrokerAccount): unknown {
     const obj: any = {};
-    if (message.RQD !== undefined) {
-      obj.RQD = RQD.toJSON(message.RQD);
+    if (message.AccountID !== "") {
+      obj.AccountID = message.AccountID;
+    }
+    if (message.Broker !== "") {
+      obj.Broker = message.Broker;
+    }
+    if (message.OrganizationID !== "") {
+      obj.OrganizationID = message.OrganizationID;
     }
     return obj;
   },
@@ -2906,96 +2935,9 @@ export const BrokerAccount = {
   },
   fromPartial<I extends Exact<DeepPartial<BrokerAccount>, I>>(object: I): BrokerAccount {
     const message = createBaseBrokerAccount();
-    message.RQD = (object.RQD !== undefined && object.RQD !== null) ? RQD.fromPartial(object.RQD) : undefined;
-    return message;
-  },
-};
-
-function createBaseRQD(): RQD {
-  return { Corr: "", Office: "", AccountNumber: "" };
-}
-
-export const RQD = {
-  encode(message: RQD, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.Corr !== "") {
-      writer.uint32(10).string(message.Corr);
-    }
-    if (message.Office !== "") {
-      writer.uint32(18).string(message.Office);
-    }
-    if (message.AccountNumber !== "") {
-      writer.uint32(26).string(message.AccountNumber);
-    }
-    return writer;
-  },
-
-  decode(input: _m0.Reader | Uint8Array, length?: number): RQD {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseRQD();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1:
-          if (tag !== 10) {
-            break;
-          }
-
-          message.Corr = reader.string();
-          continue;
-        case 2:
-          if (tag !== 18) {
-            break;
-          }
-
-          message.Office = reader.string();
-          continue;
-        case 3:
-          if (tag !== 26) {
-            break;
-          }
-
-          message.AccountNumber = reader.string();
-          continue;
-      }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
-      }
-      reader.skipType(tag & 7);
-    }
-    return message;
-  },
-
-  fromJSON(object: any): RQD {
-    return {
-      Corr: isSet(object.Corr) ? globalThis.String(object.Corr) : "",
-      Office: isSet(object.Office) ? globalThis.String(object.Office) : "",
-      AccountNumber: isSet(object.AccountNumber) ? globalThis.String(object.AccountNumber) : "",
-    };
-  },
-
-  toJSON(message: RQD): unknown {
-    const obj: any = {};
-    if (message.Corr !== "") {
-      obj.Corr = message.Corr;
-    }
-    if (message.Office !== "") {
-      obj.Office = message.Office;
-    }
-    if (message.AccountNumber !== "") {
-      obj.AccountNumber = message.AccountNumber;
-    }
-    return obj;
-  },
-
-  create<I extends Exact<DeepPartial<RQD>, I>>(base?: I): RQD {
-    return RQD.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<RQD>, I>>(object: I): RQD {
-    const message = createBaseRQD();
-    message.Corr = object.Corr ?? "";
-    message.Office = object.Office ?? "";
-    message.AccountNumber = object.AccountNumber ?? "";
+    message.AccountID = object.AccountID ?? "";
+    message.Broker = object.Broker ?? "";
+    message.OrganizationID = object.OrganizationID ?? "";
     return message;
   },
 };
