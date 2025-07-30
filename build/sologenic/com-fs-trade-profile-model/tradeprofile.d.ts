@@ -8,6 +8,7 @@ export declare enum LockableField {
     IS_TRADING_ENABLED = 1,
     IS_ORDER_ACCEPTANCE_ENABLED = 2,
     IS_MARGIN_TRADING_ENABLED = 3,
+    IS_SHORT_SELLING_ENABLED = 4,
     UNRECOGNIZED = -1
 }
 export declare function lockableFieldFromJSON(object: any): LockableField;
@@ -26,7 +27,10 @@ export interface DefaultTradeProfile {
  * 2. Embedded in a user's model for individual trade profile configuration
  */
 export interface TradeProfileDetails {
-    /** Boolean fields */
+    /**
+     * Boolean fields
+     * MAINTENANCE: When adding new boolean fields below, make sure to also add them to the LockableField enum
+     */
     IsTradingEnabled: boolean;
     /** If true, orders are accepted; if false, close and cancel Only */
     IsOrderAcceptanceEnabled: boolean;

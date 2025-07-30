@@ -8,6 +8,7 @@ package user
 
 import (
 	com_fs_document_model "github.com/sologenic/com-fs-document-model"
+	com_fs_order_model "github.com/sologenic/com-fs-order-model"
 	com_fs_trade_profile_model "github.com/sologenic/com-fs-trade-profile-model"
 	audit "github.com/sologenic/com-fs-utils-lib/models/audit"
 	language "github.com/sologenic/com-fs-utils-lib/models/language"
@@ -823,6 +824,7 @@ type UserDetails struct {
 	KYCStatus              KYCStatus                                       `protobuf:"varint,20,opt,name=KYCStatus,proto3,enum=user.KYCStatus" json:"KYCStatus,omitempty"` // Status of KYC verification, e.g., PENDING, APPROVED, REJECTED
 	UserTradeProfile       *com_fs_trade_profile_model.UserTradeProfile    `protobuf:"bytes,21,opt,name=UserTradeProfile,proto3" json:"UserTradeProfile,omitempty"`
 	ComplianceQuestions    []*ComplianceQuestions                          `protobuf:"bytes,22,rep,name=ComplianceQuestions,proto3" json:"ComplianceQuestions,omitempty"`
+	BrokerAccounts         []*BrokerAccount                                `protobuf:"bytes,23,rep,name=BrokerAccounts,proto3" json:"BrokerAccounts,omitempty"`
 	unknownFields          protoimpl.UnknownFields
 	sizeCache              protoimpl.SizeCache
 }
@@ -1007,6 +1009,13 @@ func (x *UserDetails) GetUserTradeProfile() *com_fs_trade_profile_model.UserTrad
 func (x *UserDetails) GetComplianceQuestions() []*ComplianceQuestions {
 	if x != nil {
 		return x.ComplianceQuestions
+	}
+	return nil
+}
+
+func (x *UserDetails) GetBrokerAccounts() []*BrokerAccount {
+	if x != nil {
+		return x.BrokerAccounts
 	}
 	return nil
 }
@@ -1861,12 +1870,72 @@ func (x *USA) GetObjective() InvestmentObjective {
 	return InvestmentObjective_INCOME
 }
 
+type BrokerAccount struct {
+	state          protoimpl.MessageState            `protogen:"open.v1"`
+	AccountID      string                            `protobuf:"bytes,1,opt,name=AccountID,proto3" json:"AccountID,omitempty"`                      // user's identifier in the broker account
+	Broker         com_fs_order_model.ClearingBroker `protobuf:"varint,2,opt,name=Broker,proto3,enum=order.ClearingBroker" json:"Broker,omitempty"` // "RQD", etc.
+	OrganizationID string                            `protobuf:"bytes,3,opt,name=OrganizationID,proto3" json:"OrganizationID,omitempty"`            // broker identifier
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
+}
+
+func (x *BrokerAccount) Reset() {
+	*x = BrokerAccount{}
+	mi := &file_user_proto_msgTypes[15]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *BrokerAccount) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*BrokerAccount) ProtoMessage() {}
+
+func (x *BrokerAccount) ProtoReflect() protoreflect.Message {
+	mi := &file_user_proto_msgTypes[15]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use BrokerAccount.ProtoReflect.Descriptor instead.
+func (*BrokerAccount) Descriptor() ([]byte, []int) {
+	return file_user_proto_rawDescGZIP(), []int{15}
+}
+
+func (x *BrokerAccount) GetAccountID() string {
+	if x != nil {
+		return x.AccountID
+	}
+	return ""
+}
+
+func (x *BrokerAccount) GetBroker() com_fs_order_model.ClearingBroker {
+	if x != nil {
+		return x.Broker
+	}
+	return com_fs_order_model.ClearingBroker(0)
+}
+
+func (x *BrokerAccount) GetOrganizationID() string {
+	if x != nil {
+		return x.OrganizationID
+	}
+	return ""
+}
+
 var File_user_proto protoreflect.FileDescriptor
 
 const file_user_proto_rawDesc = "" +
 	"\n" +
 	"\n" +
-	"user.proto\x12\x04user\x1a\x1fgoogle/protobuf/timestamp.proto\x1a9sologenic/com-fs-utils-lib/models/metadata/metadata.proto\x1a3sologenic/com-fs-utils-lib/models/audit/audit.proto\x1a1sologenic/com-fs-utils-lib/models/role/role.proto\x1a9sologenic/com-fs-utils-lib/models/language/language.proto\x1a7sologenic/com-fs-trade-profile-model/tradeprofile.proto\x1a.sologenic/com-fs-document-model/document.proto\"\x98\x01\n" +
+	"user.proto\x12\x04user\x1a\x1fgoogle/protobuf/timestamp.proto\x1a9sologenic/com-fs-utils-lib/models/metadata/metadata.proto\x1a3sologenic/com-fs-utils-lib/models/audit/audit.proto\x1a1sologenic/com-fs-utils-lib/models/role/role.proto\x1a9sologenic/com-fs-utils-lib/models/language/language.proto\x1a7sologenic/com-fs-trade-profile-model/tradeprofile.proto\x1a.sologenic/com-fs-document-model/document.proto\x1a)sologenic/com-fs-order-model/broker.proto\"\x98\x01\n" +
 	"\bIDNumber\x12&\n" +
 	"\x0eIssuingCountry\x18\x01 \x01(\tR\x0eIssuingCountry\x120\n" +
 	"\x13IdentificationClass\x18\x02 \x01(\tR\x13IdentificationClass\x122\n" +
@@ -1885,7 +1954,7 @@ const file_user_proto_rawDesc = "" +
 	" \x01(\tR\x14SocialSecurityNumber\x122\n" +
 	"\x14IdentificationNumber\x18\v \x01(\tR\x14IdentificationNumber\x12\x1c\n" +
 	"\tFirstName\x18\f \x01(\tR\tFirstName\x12\x1a\n" +
-	"\bLastName\x18\r \x01(\tR\bLastName\"\xe8\a\n" +
+	"\bLastName\x18\r \x01(\tR\bLastName\"\xa5\b\n" +
 	"\vUserDetails\x12\x16\n" +
 	"\x06UserID\x18\x01 \x01(\tR\x06UserID\x12\x1c\n" +
 	"\tFirstName\x18\x02 \x01(\tR\tFirstName\x12\x1a\n" +
@@ -1914,7 +1983,8 @@ const file_user_proto_rawDesc = "" +
 	"\x16UserDocumentCompliance\x18\x13 \x01(\v2 .document.UserDocumentComplianceR\x16UserDocumentCompliance\x12-\n" +
 	"\tKYCStatus\x18\x14 \x01(\x0e2\x0f.user.KYCStatusR\tKYCStatus\x12J\n" +
 	"\x10UserTradeProfile\x18\x15 \x01(\v2\x1e.tradeprofile.UserTradeProfileR\x10UserTradeProfile\x12K\n" +
-	"\x13ComplianceQuestions\x18\x16 \x03(\v2\x19.user.ComplianceQuestionsR\x13ComplianceQuestionsB\r\n" +
+	"\x13ComplianceQuestions\x18\x16 \x03(\v2\x19.user.ComplianceQuestionsR\x13ComplianceQuestions\x12;\n" +
+	"\x0eBrokerAccounts\x18\x17 \x03(\v2\x13.user.BrokerAccountR\x0eBrokerAccountsB\r\n" +
 	"\v_Employment\"\xab\x03\n" +
 	"\n" +
 	"Employment\x12\"\n" +
@@ -2004,7 +2074,11 @@ const file_user_proto_rawDesc = "" +
 	"\bNetWorth\x18\x04 \x01(\x03R\bNetWorth\x12O\n" +
 	"\x14ConversionImportance\x18\x05 \x01(\x0e2\x1b.user.LiquidationImportanceR\x14ConversionImportance\x121\n" +
 	"\tTolerance\x18\x06 \x01(\x0e2\x13.user.RiskToleranceR\tTolerance\x127\n" +
-	"\tObjective\x18\a \x01(\x0e2\x19.user.InvestmentObjectiveR\tObjective*\xba\x01\n" +
+	"\tObjective\x18\a \x01(\x0e2\x19.user.InvestmentObjectiveR\tObjective\"\x84\x01\n" +
+	"\rBrokerAccount\x12\x1c\n" +
+	"\tAccountID\x18\x01 \x01(\tR\tAccountID\x12-\n" +
+	"\x06Broker\x18\x02 \x01(\x0e2\x15.order.ClearingBrokerR\x06Broker\x12&\n" +
+	"\x0eOrganizationID\x18\x03 \x01(\tR\x0eOrganizationID*\xba\x01\n" +
 	"\tKYCStatus\x12\x1a\n" +
 	"\x16KYC_STATUS_UNSPECIFIED\x10\x00\x12\x16\n" +
 	"\x12KYC_STATUS_PENDING\x10\x01\x12\x18\n" +
@@ -2098,7 +2172,7 @@ func file_user_proto_rawDescGZIP() []byte {
 }
 
 var file_user_proto_enumTypes = make([]protoimpl.EnumInfo, 10)
-var file_user_proto_msgTypes = make([]protoimpl.MessageInfo, 15)
+var file_user_proto_msgTypes = make([]protoimpl.MessageInfo, 16)
 var file_user_proto_goTypes = []any{
 	(KYCStatus)(0),              // 0: user.KYCStatus
 	(EmploymentType)(0),         // 1: user.EmploymentType
@@ -2125,58 +2199,62 @@ var file_user_proto_goTypes = []any{
 	(*Filter)(nil),              // 22: user.Filter
 	(*ComplianceQuestions)(nil), // 23: user.ComplianceQuestions
 	(*USA)(nil),                 // 24: user.USA
-	(language.Lang)(0),          // 25: language.Lang
-	(role.Role)(0),              // 26: role.Role
-	(*com_fs_trade_profile_model.TradeProfileDetails)(nil), // 27: tradeprofile.TradeProfileDetails
-	(*com_fs_document_model.UserDocumentCompliance)(nil),   // 28: document.UserDocumentCompliance
-	(*com_fs_trade_profile_model.UserTradeProfile)(nil),    // 29: tradeprofile.UserTradeProfile
-	(*timestamppb.Timestamp)(nil),                          // 30: google.protobuf.Timestamp
-	(*metadata.MetaData)(nil),                              // 31: metadata.MetaData
-	(*audit.Audit)(nil),                                    // 32: audit.Audit
-	(metadata.Network)(0),                                  // 33: metadata.Network
+	(*BrokerAccount)(nil),       // 25: user.BrokerAccount
+	(language.Lang)(0),          // 26: language.Lang
+	(role.Role)(0),              // 27: role.Role
+	(*com_fs_trade_profile_model.TradeProfileDetails)(nil), // 28: tradeprofile.TradeProfileDetails
+	(*com_fs_document_model.UserDocumentCompliance)(nil),   // 29: document.UserDocumentCompliance
+	(*com_fs_trade_profile_model.UserTradeProfile)(nil),    // 30: tradeprofile.UserTradeProfile
+	(*timestamppb.Timestamp)(nil),                          // 31: google.protobuf.Timestamp
+	(*metadata.MetaData)(nil),                              // 32: metadata.MetaData
+	(*audit.Audit)(nil),                                    // 33: audit.Audit
+	(metadata.Network)(0),                                  // 34: metadata.Network
+	(com_fs_order_model.ClearingBroker)(0),                 // 35: order.ClearingBroker
 }
 var file_user_proto_depIdxs = []int32{
 	4,  // 0: user.UserDetails.Status:type_name -> user.UserStatus
 	19, // 1: user.UserDetails.Wallets:type_name -> user.Wallet
 	18, // 2: user.UserDetails.Socials:type_name -> user.Social
-	25, // 3: user.UserDetails.Language:type_name -> language.Lang
+	26, // 3: user.UserDetails.Language:type_name -> language.Lang
 	13, // 4: user.UserDetails.Employment:type_name -> user.Employment
-	26, // 5: user.UserDetails.Role:type_name -> role.Role
-	27, // 6: user.UserDetails.TradeProfile:type_name -> tradeprofile.TradeProfileDetails
+	27, // 5: user.UserDetails.Role:type_name -> role.Role
+	28, // 6: user.UserDetails.TradeProfile:type_name -> tradeprofile.TradeProfileDetails
 	11, // 7: user.UserDetails.KYCDetails:type_name -> user.UserKYCDetails
-	28, // 8: user.UserDetails.UserDocumentCompliance:type_name -> document.UserDocumentCompliance
+	29, // 8: user.UserDetails.UserDocumentCompliance:type_name -> document.UserDocumentCompliance
 	0,  // 9: user.UserDetails.KYCStatus:type_name -> user.KYCStatus
-	29, // 10: user.UserDetails.UserTradeProfile:type_name -> tradeprofile.UserTradeProfile
+	30, // 10: user.UserDetails.UserTradeProfile:type_name -> tradeprofile.UserTradeProfile
 	23, // 11: user.UserDetails.ComplianceQuestions:type_name -> user.ComplianceQuestions
-	30, // 12: user.Employment.StartDate:type_name -> google.protobuf.Timestamp
-	30, // 13: user.Employment.EndDate:type_name -> google.protobuf.Timestamp
-	1,  // 14: user.Employment.Type:type_name -> user.EmploymentType
-	14, // 15: user.Employment.Income:type_name -> user.Income
-	15, // 16: user.Employment.Contact:type_name -> user.EmployerContact
-	2,  // 17: user.Income.Frequency:type_name -> user.IncomeFrequency
-	12, // 18: user.User.User:type_name -> user.UserDetails
-	31, // 19: user.User.MetaData:type_name -> metadata.MetaData
-	32, // 20: user.User.Audit:type_name -> audit.Audit
-	33, // 21: user.UserID.Network:type_name -> metadata.Network
-	6,  // 22: user.Social.Type:type_name -> user.SocialType
-	5,  // 23: user.Wallet.Type:type_name -> user.WalletType
-	3,  // 24: user.Wallet.SignerType:type_name -> user.SignerType
-	16, // 25: user.UserList.Users:type_name -> user.User
-	4,  // 26: user.StatusMessage.Status:type_name -> user.UserStatus
-	33, // 27: user.StatusMessage.Network:type_name -> metadata.Network
-	32, // 28: user.StatusMessage.Audit:type_name -> audit.Audit
-	33, // 29: user.Filter.Network:type_name -> metadata.Network
-	4,  // 30: user.Filter.Status:type_name -> user.UserStatus
-	24, // 31: user.ComplianceQuestions.USA:type_name -> user.USA
-	30, // 32: user.USA.RecordedAt:type_name -> google.protobuf.Timestamp
-	7,  // 33: user.USA.ConversionImportance:type_name -> user.LiquidationImportance
-	8,  // 34: user.USA.Tolerance:type_name -> user.RiskTolerance
-	9,  // 35: user.USA.Objective:type_name -> user.InvestmentObjective
-	36, // [36:36] is the sub-list for method output_type
-	36, // [36:36] is the sub-list for method input_type
-	36, // [36:36] is the sub-list for extension type_name
-	36, // [36:36] is the sub-list for extension extendee
-	0,  // [0:36] is the sub-list for field type_name
+	25, // 12: user.UserDetails.BrokerAccounts:type_name -> user.BrokerAccount
+	31, // 13: user.Employment.StartDate:type_name -> google.protobuf.Timestamp
+	31, // 14: user.Employment.EndDate:type_name -> google.protobuf.Timestamp
+	1,  // 15: user.Employment.Type:type_name -> user.EmploymentType
+	14, // 16: user.Employment.Income:type_name -> user.Income
+	15, // 17: user.Employment.Contact:type_name -> user.EmployerContact
+	2,  // 18: user.Income.Frequency:type_name -> user.IncomeFrequency
+	12, // 19: user.User.User:type_name -> user.UserDetails
+	32, // 20: user.User.MetaData:type_name -> metadata.MetaData
+	33, // 21: user.User.Audit:type_name -> audit.Audit
+	34, // 22: user.UserID.Network:type_name -> metadata.Network
+	6,  // 23: user.Social.Type:type_name -> user.SocialType
+	5,  // 24: user.Wallet.Type:type_name -> user.WalletType
+	3,  // 25: user.Wallet.SignerType:type_name -> user.SignerType
+	16, // 26: user.UserList.Users:type_name -> user.User
+	4,  // 27: user.StatusMessage.Status:type_name -> user.UserStatus
+	34, // 28: user.StatusMessage.Network:type_name -> metadata.Network
+	33, // 29: user.StatusMessage.Audit:type_name -> audit.Audit
+	34, // 30: user.Filter.Network:type_name -> metadata.Network
+	4,  // 31: user.Filter.Status:type_name -> user.UserStatus
+	24, // 32: user.ComplianceQuestions.USA:type_name -> user.USA
+	31, // 33: user.USA.RecordedAt:type_name -> google.protobuf.Timestamp
+	7,  // 34: user.USA.ConversionImportance:type_name -> user.LiquidationImportance
+	8,  // 35: user.USA.Tolerance:type_name -> user.RiskTolerance
+	9,  // 36: user.USA.Objective:type_name -> user.InvestmentObjective
+	35, // 37: user.BrokerAccount.Broker:type_name -> order.ClearingBroker
+	38, // [38:38] is the sub-list for method output_type
+	38, // [38:38] is the sub-list for method input_type
+	38, // [38:38] is the sub-list for extension type_name
+	38, // [38:38] is the sub-list for extension extendee
+	0,  // [0:38] is the sub-list for field type_name
 }
 
 func init() { file_user_proto_init() }
@@ -2197,7 +2275,7 @@ func file_user_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_user_proto_rawDesc), len(file_user_proto_rawDesc)),
 			NumEnums:      10,
-			NumMessages:   15,
+			NumMessages:   16,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

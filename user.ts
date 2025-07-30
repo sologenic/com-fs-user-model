@@ -9,6 +9,7 @@ import Long from "long";
 import _m0 from "protobufjs/minimal";
 import { Timestamp } from "./google/protobuf/timestamp";
 import { UserDocumentCompliance } from "./sologenic/com-fs-document-model/document";
+import { ClearingBroker, clearingBrokerFromJSON, clearingBrokerToJSON } from "./sologenic/com-fs-order-model/broker";
 import { TradeProfileDetails, UserTradeProfile } from "./sologenic/com-fs-trade-profile-model/tradeprofile";
 import { Audit } from "./sologenic/com-fs-utils-lib/models/audit/audit";
 import { Lang, langFromJSON, langToJSON } from "./sologenic/com-fs-utils-lib/models/language/language";
@@ -640,6 +641,7 @@ export interface UserDetails {
   KYCStatus: KYCStatus;
   UserTradeProfile: UserTradeProfile | undefined;
   ComplianceQuestions: ComplianceQuestions[];
+  BrokerAccounts: BrokerAccount[];
 }
 
 /** TODO: to be verified when more information is available */
@@ -733,6 +735,15 @@ export interface USA {
   ConversionImportance: LiquidationImportance;
   Tolerance: RiskTolerance;
   Objective: InvestmentObjective;
+}
+
+export interface BrokerAccount {
+  /** user's identifier in the broker account */
+  AccountID: string;
+  /** "RQD", etc. */
+  Broker: ClearingBroker;
+  /** broker identifier */
+  OrganizationID: string;
 }
 
 function createBaseIDNumber(): IDNumber {
@@ -1101,6 +1112,7 @@ function createBaseUserDetails(): UserDetails {
     KYCStatus: 0,
     UserTradeProfile: undefined,
     ComplianceQuestions: [],
+    BrokerAccounts: [],
   };
 }
 
@@ -1171,6 +1183,9 @@ export const UserDetails = {
     }
     for (const v of message.ComplianceQuestions) {
       ComplianceQuestions.encode(v!, writer.uint32(178).fork()).ldelim();
+    }
+    for (const v of message.BrokerAccounts) {
+      BrokerAccount.encode(v!, writer.uint32(186).fork()).ldelim();
     }
     return writer;
   },
@@ -1336,6 +1351,13 @@ export const UserDetails = {
 
           message.ComplianceQuestions.push(ComplianceQuestions.decode(reader, reader.uint32()));
           continue;
+        case 23:
+          if (tag !== 186) {
+            break;
+          }
+
+          message.BrokerAccounts.push(BrokerAccount.decode(reader, reader.uint32()));
+          continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -1374,6 +1396,9 @@ export const UserDetails = {
       UserTradeProfile: isSet(object.UserTradeProfile) ? UserTradeProfile.fromJSON(object.UserTradeProfile) : undefined,
       ComplianceQuestions: globalThis.Array.isArray(object?.ComplianceQuestions)
         ? object.ComplianceQuestions.map((e: any) => ComplianceQuestions.fromJSON(e))
+        : [],
+      BrokerAccounts: globalThis.Array.isArray(object?.BrokerAccounts)
+        ? object.BrokerAccounts.map((e: any) => BrokerAccount.fromJSON(e))
         : [],
     };
   },
@@ -1446,6 +1471,9 @@ export const UserDetails = {
     if (message.ComplianceQuestions?.length) {
       obj.ComplianceQuestions = message.ComplianceQuestions.map((e) => ComplianceQuestions.toJSON(e));
     }
+    if (message.BrokerAccounts?.length) {
+      obj.BrokerAccounts = message.BrokerAccounts.map((e) => BrokerAccount.toJSON(e));
+    }
     return obj;
   },
 
@@ -1487,6 +1515,7 @@ export const UserDetails = {
       ? UserTradeProfile.fromPartial(object.UserTradeProfile)
       : undefined;
     message.ComplianceQuestions = object.ComplianceQuestions?.map((e) => ComplianceQuestions.fromPartial(e)) || [];
+    message.BrokerAccounts = object.BrokerAccounts?.map((e) => BrokerAccount.fromPartial(e)) || [];
     return message;
   },
 };
@@ -2833,6 +2862,95 @@ export const USA = {
     message.ConversionImportance = object.ConversionImportance ?? 0;
     message.Tolerance = object.Tolerance ?? 0;
     message.Objective = object.Objective ?? 0;
+    return message;
+  },
+};
+
+function createBaseBrokerAccount(): BrokerAccount {
+  return { AccountID: "", Broker: 0, OrganizationID: "" };
+}
+
+export const BrokerAccount = {
+  encode(message: BrokerAccount, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.AccountID !== "") {
+      writer.uint32(10).string(message.AccountID);
+    }
+    if (message.Broker !== 0) {
+      writer.uint32(16).int32(message.Broker);
+    }
+    if (message.OrganizationID !== "") {
+      writer.uint32(26).string(message.OrganizationID);
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): BrokerAccount {
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseBrokerAccount();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          if (tag !== 10) {
+            break;
+          }
+
+          message.AccountID = reader.string();
+          continue;
+        case 2:
+          if (tag !== 16) {
+            break;
+          }
+
+          message.Broker = reader.int32() as any;
+          continue;
+        case 3:
+          if (tag !== 26) {
+            break;
+          }
+
+          message.OrganizationID = reader.string();
+          continue;
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): BrokerAccount {
+    return {
+      AccountID: isSet(object.AccountID) ? globalThis.String(object.AccountID) : "",
+      Broker: isSet(object.Broker) ? clearingBrokerFromJSON(object.Broker) : 0,
+      OrganizationID: isSet(object.OrganizationID) ? globalThis.String(object.OrganizationID) : "",
+    };
+  },
+
+  toJSON(message: BrokerAccount): unknown {
+    const obj: any = {};
+    if (message.AccountID !== "") {
+      obj.AccountID = message.AccountID;
+    }
+    if (message.Broker !== 0) {
+      obj.Broker = clearingBrokerToJSON(message.Broker);
+    }
+    if (message.OrganizationID !== "") {
+      obj.OrganizationID = message.OrganizationID;
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<BrokerAccount>, I>>(base?: I): BrokerAccount {
+    return BrokerAccount.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<BrokerAccount>, I>>(object: I): BrokerAccount {
+    const message = createBaseBrokerAccount();
+    message.AccountID = object.AccountID ?? "";
+    message.Broker = object.Broker ?? 0;
+    message.OrganizationID = object.OrganizationID ?? "";
     return message;
   },
 };

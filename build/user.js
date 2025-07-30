@@ -8,6 +8,7 @@ import Long from "long";
 import _m0 from "protobufjs/minimal";
 import { Timestamp } from "./google/protobuf/timestamp";
 import { UserDocumentCompliance } from "./sologenic/com-fs-document-model/document";
+import { clearingBrokerFromJSON, clearingBrokerToJSON } from "./sologenic/com-fs-order-model/broker";
 import { TradeProfileDetails, UserTradeProfile } from "./sologenic/com-fs-trade-profile-model/tradeprofile";
 import { Audit } from "./sologenic/com-fs-utils-lib/models/audit/audit";
 import { langFromJSON, langToJSON } from "./sologenic/com-fs-utils-lib/models/language/language";
@@ -893,6 +894,7 @@ function createBaseUserDetails() {
         KYCStatus: 0,
         UserTradeProfile: undefined,
         ComplianceQuestions: [],
+        BrokerAccounts: [],
     };
 }
 export const UserDetails = {
@@ -962,6 +964,9 @@ export const UserDetails = {
         }
         for (const v of message.ComplianceQuestions) {
             ComplianceQuestions.encode(v, writer.uint32(178).fork()).ldelim();
+        }
+        for (const v of message.BrokerAccounts) {
+            BrokerAccount.encode(v, writer.uint32(186).fork()).ldelim();
         }
         return writer;
     },
@@ -1104,6 +1109,12 @@ export const UserDetails = {
                     }
                     message.ComplianceQuestions.push(ComplianceQuestions.decode(reader, reader.uint32()));
                     continue;
+                case 23:
+                    if (tag !== 186) {
+                        break;
+                    }
+                    message.BrokerAccounts.push(BrokerAccount.decode(reader, reader.uint32()));
+                    continue;
             }
             if ((tag & 7) === 4 || tag === 0) {
                 break;
@@ -1142,10 +1153,13 @@ export const UserDetails = {
             ComplianceQuestions: globalThis.Array.isArray(object === null || object === void 0 ? void 0 : object.ComplianceQuestions)
                 ? object.ComplianceQuestions.map((e) => ComplianceQuestions.fromJSON(e))
                 : [],
+            BrokerAccounts: globalThis.Array.isArray(object === null || object === void 0 ? void 0 : object.BrokerAccounts)
+                ? object.BrokerAccounts.map((e) => BrokerAccount.fromJSON(e))
+                : [],
         };
     },
     toJSON(message) {
-        var _a, _b, _c, _d;
+        var _a, _b, _c, _d, _e;
         const obj = {};
         if (message.UserID !== "") {
             obj.UserID = message.UserID;
@@ -1213,13 +1227,16 @@ export const UserDetails = {
         if ((_d = message.ComplianceQuestions) === null || _d === void 0 ? void 0 : _d.length) {
             obj.ComplianceQuestions = message.ComplianceQuestions.map((e) => ComplianceQuestions.toJSON(e));
         }
+        if ((_e = message.BrokerAccounts) === null || _e === void 0 ? void 0 : _e.length) {
+            obj.BrokerAccounts = message.BrokerAccounts.map((e) => BrokerAccount.toJSON(e));
+        }
         return obj;
     },
     create(base) {
         return UserDetails.fromPartial(base !== null && base !== void 0 ? base : {});
     },
     fromPartial(object) {
-        var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q, _r, _s;
+        var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q, _r, _s, _t;
         const message = createBaseUserDetails();
         message.UserID = (_a = object.UserID) !== null && _a !== void 0 ? _a : "";
         message.FirstName = (_b = object.FirstName) !== null && _b !== void 0 ? _b : "";
@@ -1254,6 +1271,7 @@ export const UserDetails = {
             ? UserTradeProfile.fromPartial(object.UserTradeProfile)
             : undefined;
         message.ComplianceQuestions = ((_s = object.ComplianceQuestions) === null || _s === void 0 ? void 0 : _s.map((e) => ComplianceQuestions.fromPartial(e))) || [];
+        message.BrokerAccounts = ((_t = object.BrokerAccounts) === null || _t === void 0 ? void 0 : _t.map((e) => BrokerAccount.fromPartial(e))) || [];
         return message;
     },
 };
@@ -2488,6 +2506,87 @@ export const USA = {
         message.ConversionImportance = (_e = object.ConversionImportance) !== null && _e !== void 0 ? _e : 0;
         message.Tolerance = (_f = object.Tolerance) !== null && _f !== void 0 ? _f : 0;
         message.Objective = (_g = object.Objective) !== null && _g !== void 0 ? _g : 0;
+        return message;
+    },
+};
+function createBaseBrokerAccount() {
+    return { AccountID: "", Broker: 0, OrganizationID: "" };
+}
+export const BrokerAccount = {
+    encode(message, writer = _m0.Writer.create()) {
+        if (message.AccountID !== "") {
+            writer.uint32(10).string(message.AccountID);
+        }
+        if (message.Broker !== 0) {
+            writer.uint32(16).int32(message.Broker);
+        }
+        if (message.OrganizationID !== "") {
+            writer.uint32(26).string(message.OrganizationID);
+        }
+        return writer;
+    },
+    decode(input, length) {
+        const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+        let end = length === undefined ? reader.len : reader.pos + length;
+        const message = createBaseBrokerAccount();
+        while (reader.pos < end) {
+            const tag = reader.uint32();
+            switch (tag >>> 3) {
+                case 1:
+                    if (tag !== 10) {
+                        break;
+                    }
+                    message.AccountID = reader.string();
+                    continue;
+                case 2:
+                    if (tag !== 16) {
+                        break;
+                    }
+                    message.Broker = reader.int32();
+                    continue;
+                case 3:
+                    if (tag !== 26) {
+                        break;
+                    }
+                    message.OrganizationID = reader.string();
+                    continue;
+            }
+            if ((tag & 7) === 4 || tag === 0) {
+                break;
+            }
+            reader.skipType(tag & 7);
+        }
+        return message;
+    },
+    fromJSON(object) {
+        return {
+            AccountID: isSet(object.AccountID) ? globalThis.String(object.AccountID) : "",
+            Broker: isSet(object.Broker) ? clearingBrokerFromJSON(object.Broker) : 0,
+            OrganizationID: isSet(object.OrganizationID) ? globalThis.String(object.OrganizationID) : "",
+        };
+    },
+    toJSON(message) {
+        const obj = {};
+        if (message.AccountID !== "") {
+            obj.AccountID = message.AccountID;
+        }
+        if (message.Broker !== 0) {
+            obj.Broker = clearingBrokerToJSON(message.Broker);
+        }
+        if (message.OrganizationID !== "") {
+            obj.OrganizationID = message.OrganizationID;
+        }
+        return obj;
+    },
+    create(base) {
+        return BrokerAccount.fromPartial(base !== null && base !== void 0 ? base : {});
+    },
+    fromPartial(object) {
+        var _a, _b, _c;
+        const message = createBaseBrokerAccount();
+        message.AccountID = (_a = object.AccountID) !== null && _a !== void 0 ? _a : "";
+        message.Broker = (_b = object.Broker) !== null && _b !== void 0 ? _b : 0;
+        message.OrganizationID = (_c = object.OrganizationID) !== null && _c !== void 0 ? _c : "";
         return message;
     },
 };
