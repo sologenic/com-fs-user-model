@@ -8,6 +8,7 @@ package user
 
 import (
 	com_fs_document_model "github.com/sologenic/com-fs-document-model"
+	com_fs_order_model "github.com/sologenic/com-fs-order-model"
 	com_fs_trade_profile_model "github.com/sologenic/com-fs-trade-profile-model"
 	audit "github.com/sologenic/com-fs-utils-lib/models/audit"
 	language "github.com/sologenic/com-fs-utils-lib/models/language"
@@ -1864,10 +1865,10 @@ func (x *USA) GetObjective() InvestmentObjective {
 }
 
 type BrokerAccount struct {
-	state          protoimpl.MessageState `protogen:"open.v1"`
-	AccountID      string                 `protobuf:"bytes,1,opt,name=AccountID,proto3" json:"AccountID,omitempty"`           // user's identifier in the broker account
-	Broker         string                 `protobuf:"bytes,2,opt,name=Broker,proto3" json:"Broker,omitempty"`                 // "RQD", etc.
-	OrganizationID string                 `protobuf:"bytes,3,opt,name=OrganizationID,proto3" json:"OrganizationID,omitempty"` // broker identifier
+	state          protoimpl.MessageState            `protogen:"open.v1"`
+	AccountID      string                            `protobuf:"bytes,1,opt,name=AccountID,proto3" json:"AccountID,omitempty"`                      // user's identifier in the broker account
+	Broker         com_fs_order_model.ClearingBroker `protobuf:"varint,2,opt,name=Broker,proto3,enum=order.ClearingBroker" json:"Broker,omitempty"` // "RQD", etc.
+	OrganizationID string                            `protobuf:"bytes,3,opt,name=OrganizationID,proto3" json:"OrganizationID,omitempty"`            // broker identifier
 	unknownFields  protoimpl.UnknownFields
 	sizeCache      protoimpl.SizeCache
 }
@@ -1909,11 +1910,11 @@ func (x *BrokerAccount) GetAccountID() string {
 	return ""
 }
 
-func (x *BrokerAccount) GetBroker() string {
+func (x *BrokerAccount) GetBroker() com_fs_order_model.ClearingBroker {
 	if x != nil {
 		return x.Broker
 	}
-	return ""
+	return com_fs_order_model.ClearingBroker(0)
 }
 
 func (x *BrokerAccount) GetOrganizationID() string {
@@ -1928,7 +1929,7 @@ var File_user_proto protoreflect.FileDescriptor
 const file_user_proto_rawDesc = "" +
 	"\n" +
 	"\n" +
-	"user.proto\x12\x04user\x1a\x1fgoogle/protobuf/timestamp.proto\x1a9sologenic/com-fs-utils-lib/models/metadata/metadata.proto\x1a3sologenic/com-fs-utils-lib/models/audit/audit.proto\x1a1sologenic/com-fs-utils-lib/models/role/role.proto\x1a9sologenic/com-fs-utils-lib/models/language/language.proto\x1a7sologenic/com-fs-trade-profile-model/tradeprofile.proto\x1a.sologenic/com-fs-document-model/document.proto\"\x98\x01\n" +
+	"user.proto\x12\x04user\x1a\x1fgoogle/protobuf/timestamp.proto\x1a9sologenic/com-fs-utils-lib/models/metadata/metadata.proto\x1a3sologenic/com-fs-utils-lib/models/audit/audit.proto\x1a1sologenic/com-fs-utils-lib/models/role/role.proto\x1a9sologenic/com-fs-utils-lib/models/language/language.proto\x1a7sologenic/com-fs-trade-profile-model/tradeprofile.proto\x1a.sologenic/com-fs-document-model/document.proto\x1a)sologenic/com-fs-order-model/broker.proto\"\x98\x01\n" +
 	"\bIDNumber\x12&\n" +
 	"\x0eIssuingCountry\x18\x01 \x01(\tR\x0eIssuingCountry\x120\n" +
 	"\x13IdentificationClass\x18\x02 \x01(\tR\x13IdentificationClass\x122\n" +
@@ -2067,10 +2068,10 @@ const file_user_proto_rawDesc = "" +
 	"\bNetWorth\x18\x04 \x01(\x03R\bNetWorth\x12O\n" +
 	"\x14ConversionImportance\x18\x05 \x01(\x0e2\x1b.user.LiquidationImportanceR\x14ConversionImportance\x121\n" +
 	"\tTolerance\x18\x06 \x01(\x0e2\x13.user.RiskToleranceR\tTolerance\x127\n" +
-	"\tObjective\x18\a \x01(\x0e2\x19.user.InvestmentObjectiveR\tObjective\"m\n" +
+	"\tObjective\x18\a \x01(\x0e2\x19.user.InvestmentObjectiveR\tObjective\"\x84\x01\n" +
 	"\rBrokerAccount\x12\x1c\n" +
-	"\tAccountID\x18\x01 \x01(\tR\tAccountID\x12\x16\n" +
-	"\x06Broker\x18\x02 \x01(\tR\x06Broker\x12&\n" +
+	"\tAccountID\x18\x01 \x01(\tR\tAccountID\x12-\n" +
+	"\x06Broker\x18\x02 \x01(\x0e2\x15.order.ClearingBrokerR\x06Broker\x12&\n" +
 	"\x0eOrganizationID\x18\x03 \x01(\tR\x0eOrganizationID*\xba\x01\n" +
 	"\tKYCStatus\x12\x1a\n" +
 	"\x16KYC_STATUS_UNSPECIFIED\x10\x00\x12\x16\n" +
@@ -2200,6 +2201,7 @@ var file_user_proto_goTypes = []any{
 	(*metadata.MetaData)(nil),                              // 32: metadata.MetaData
 	(*audit.Audit)(nil),                                    // 33: audit.Audit
 	(metadata.Network)(0),                                  // 34: metadata.Network
+	(com_fs_order_model.ClearingBroker)(0),                 // 35: order.ClearingBroker
 }
 var file_user_proto_depIdxs = []int32{
 	4,  // 0: user.UserDetails.Status:type_name -> user.UserStatus
@@ -2239,11 +2241,12 @@ var file_user_proto_depIdxs = []int32{
 	7,  // 34: user.USA.ConversionImportance:type_name -> user.LiquidationImportance
 	8,  // 35: user.USA.Tolerance:type_name -> user.RiskTolerance
 	9,  // 36: user.USA.Objective:type_name -> user.InvestmentObjective
-	37, // [37:37] is the sub-list for method output_type
-	37, // [37:37] is the sub-list for method input_type
-	37, // [37:37] is the sub-list for extension type_name
-	37, // [37:37] is the sub-list for extension extendee
-	0,  // [0:37] is the sub-list for field type_name
+	35, // 37: user.BrokerAccount.Broker:type_name -> order.ClearingBroker
+	38, // [38:38] is the sub-list for method output_type
+	38, // [38:38] is the sub-list for method input_type
+	38, // [38:38] is the sub-list for extension type_name
+	38, // [38:38] is the sub-list for extension extendee
+	0,  // [0:38] is the sub-list for field type_name
 }
 
 func init() { file_user_proto_init() }

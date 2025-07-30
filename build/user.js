@@ -8,6 +8,7 @@ import Long from "long";
 import _m0 from "protobufjs/minimal";
 import { Timestamp } from "./google/protobuf/timestamp";
 import { UserDocumentCompliance } from "./sologenic/com-fs-document-model/document";
+import { clearingBrokerFromJSON, clearingBrokerToJSON } from "./sologenic/com-fs-order-model/broker";
 import { TradeProfileDetails, UserTradeProfile } from "./sologenic/com-fs-trade-profile-model/tradeprofile";
 import { Audit } from "./sologenic/com-fs-utils-lib/models/audit/audit";
 import { langFromJSON, langToJSON } from "./sologenic/com-fs-utils-lib/models/language/language";
@@ -2497,15 +2498,15 @@ export const USA = {
     },
 };
 function createBaseBrokerAccount() {
-    return { AccountID: "", Broker: "", OrganizationID: "" };
+    return { AccountID: "", Broker: 0, OrganizationID: "" };
 }
 export const BrokerAccount = {
     encode(message, writer = _m0.Writer.create()) {
         if (message.AccountID !== "") {
             writer.uint32(10).string(message.AccountID);
         }
-        if (message.Broker !== "") {
-            writer.uint32(18).string(message.Broker);
+        if (message.Broker !== 0) {
+            writer.uint32(16).int32(message.Broker);
         }
         if (message.OrganizationID !== "") {
             writer.uint32(26).string(message.OrganizationID);
@@ -2526,10 +2527,10 @@ export const BrokerAccount = {
                     message.AccountID = reader.string();
                     continue;
                 case 2:
-                    if (tag !== 18) {
+                    if (tag !== 16) {
                         break;
                     }
-                    message.Broker = reader.string();
+                    message.Broker = reader.int32();
                     continue;
                 case 3:
                     if (tag !== 26) {
@@ -2548,7 +2549,7 @@ export const BrokerAccount = {
     fromJSON(object) {
         return {
             AccountID: isSet(object.AccountID) ? globalThis.String(object.AccountID) : "",
-            Broker: isSet(object.Broker) ? globalThis.String(object.Broker) : "",
+            Broker: isSet(object.Broker) ? clearingBrokerFromJSON(object.Broker) : 0,
             OrganizationID: isSet(object.OrganizationID) ? globalThis.String(object.OrganizationID) : "",
         };
     },
@@ -2557,8 +2558,8 @@ export const BrokerAccount = {
         if (message.AccountID !== "") {
             obj.AccountID = message.AccountID;
         }
-        if (message.Broker !== "") {
-            obj.Broker = message.Broker;
+        if (message.Broker !== 0) {
+            obj.Broker = clearingBrokerToJSON(message.Broker);
         }
         if (message.OrganizationID !== "") {
             obj.OrganizationID = message.OrganizationID;
@@ -2572,7 +2573,7 @@ export const BrokerAccount = {
         var _a, _b, _c;
         const message = createBaseBrokerAccount();
         message.AccountID = (_a = object.AccountID) !== null && _a !== void 0 ? _a : "";
-        message.Broker = (_b = object.Broker) !== null && _b !== void 0 ? _b : "";
+        message.Broker = (_b = object.Broker) !== null && _b !== void 0 ? _b : 0;
         message.OrganizationID = (_c = object.OrganizationID) !== null && _c !== void 0 ? _c : "";
         return message;
     },

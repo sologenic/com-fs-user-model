@@ -11,6 +11,7 @@ import "sologenic/com-fs-utils-lib/models/role/role.proto";
 import "sologenic/com-fs-utils-lib/models/language/language.proto";
 import "sologenic/com-fs-trade-profile-model/tradeprofile.proto";
 import "sologenic/com-fs-document-model/document.proto";
+import "sologenic/com-fs-order-model/broker.proto";
 
 message IDNumber {
     string IssuingCountry = 1;
@@ -238,6 +239,6 @@ enum InvestmentObjective {
 
 message BrokerAccount {
   string AccountID = 1; // user's identifier in the broker account
-  string Broker = 2; // "RQD", etc.
+  order.ClearingBroker Broker = 2; // "RQD", etc.
   string OrganizationID = 3; // broker identifier
 }

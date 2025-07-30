@@ -1,5 +1,6 @@
 import _m0 from "protobufjs/minimal";
 import { UserDocumentCompliance } from "./sologenic/com-fs-document-model/document";
+import { ClearingBroker } from "./sologenic/com-fs-order-model/broker";
 import { TradeProfileDetails, UserTradeProfile } from "./sologenic/com-fs-trade-profile-model/tradeprofile";
 import { Audit } from "./sologenic/com-fs-utils-lib/models/audit/audit";
 import { Lang } from "./sologenic/com-fs-utils-lib/models/language/language";
@@ -254,7 +255,7 @@ export interface BrokerAccount {
     /** user's identifier in the broker account */
     AccountID: string;
     /** "RQD", etc. */
-    Broker: string;
+    Broker: ClearingBroker;
     /** broker identifier */
     OrganizationID: string;
 }
@@ -463,7 +464,7 @@ export declare const UserDetails: {
         }[] | undefined;
         BrokerAccounts?: {
             AccountID?: string | undefined;
-            Broker?: string | undefined;
+            Broker?: ClearingBroker | undefined;
             OrganizationID?: string | undefined;
         }[] | undefined;
     } & {
@@ -745,19 +746,19 @@ export declare const UserDetails: {
         }[]>]: never; }) | undefined;
         BrokerAccounts?: ({
             AccountID?: string | undefined;
-            Broker?: string | undefined;
+            Broker?: ClearingBroker | undefined;
             OrganizationID?: string | undefined;
         }[] & ({
             AccountID?: string | undefined;
-            Broker?: string | undefined;
+            Broker?: ClearingBroker | undefined;
             OrganizationID?: string | undefined;
         } & {
             AccountID?: string | undefined;
-            Broker?: string | undefined;
+            Broker?: ClearingBroker | undefined;
             OrganizationID?: string | undefined;
         } & { [K_20 in Exclude<keyof I["BrokerAccounts"][number], keyof BrokerAccount>]: never; })[] & { [K_21 in Exclude<keyof I["BrokerAccounts"], keyof {
             AccountID?: string | undefined;
-            Broker?: string | undefined;
+            Broker?: ClearingBroker | undefined;
             OrganizationID?: string | undefined;
         }[]>]: never; }) | undefined;
     } & { [K_22 in Exclude<keyof I, keyof UserDetails>]: never; }>(base?: I | undefined): UserDetails;
@@ -873,7 +874,7 @@ export declare const UserDetails: {
         }[] | undefined;
         BrokerAccounts?: {
             AccountID?: string | undefined;
-            Broker?: string | undefined;
+            Broker?: ClearingBroker | undefined;
             OrganizationID?: string | undefined;
         }[] | undefined;
     } & {
@@ -1155,19 +1156,19 @@ export declare const UserDetails: {
         }[]>]: never; }) | undefined;
         BrokerAccounts?: ({
             AccountID?: string | undefined;
-            Broker?: string | undefined;
+            Broker?: ClearingBroker | undefined;
             OrganizationID?: string | undefined;
         }[] & ({
             AccountID?: string | undefined;
-            Broker?: string | undefined;
+            Broker?: ClearingBroker | undefined;
             OrganizationID?: string | undefined;
         } & {
             AccountID?: string | undefined;
-            Broker?: string | undefined;
+            Broker?: ClearingBroker | undefined;
             OrganizationID?: string | undefined;
         } & { [K_43 in Exclude<keyof I_1["BrokerAccounts"][number], keyof BrokerAccount>]: never; })[] & { [K_44 in Exclude<keyof I_1["BrokerAccounts"], keyof {
             AccountID?: string | undefined;
-            Broker?: string | undefined;
+            Broker?: ClearingBroker | undefined;
             OrganizationID?: string | undefined;
         }[]>]: never; }) | undefined;
     } & { [K_45 in Exclude<keyof I_1, keyof UserDetails>]: never; }>(object: I_1): UserDetails;
@@ -1448,7 +1449,7 @@ export declare const User: {
             }[] | undefined;
             BrokerAccounts?: {
                 AccountID?: string | undefined;
-                Broker?: string | undefined;
+                Broker?: ClearingBroker | undefined;
                 OrganizationID?: string | undefined;
             }[] | undefined;
         } | undefined;
@@ -1576,7 +1577,7 @@ export declare const User: {
             }[] | undefined;
             BrokerAccounts?: {
                 AccountID?: string | undefined;
-                Broker?: string | undefined;
+                Broker?: ClearingBroker | undefined;
                 OrganizationID?: string | undefined;
             }[] | undefined;
         } & {
@@ -1858,19 +1859,19 @@ export declare const User: {
             }[]>]: never; }) | undefined;
             BrokerAccounts?: ({
                 AccountID?: string | undefined;
-                Broker?: string | undefined;
+                Broker?: ClearingBroker | undefined;
                 OrganizationID?: string | undefined;
             }[] & ({
                 AccountID?: string | undefined;
-                Broker?: string | undefined;
+                Broker?: ClearingBroker | undefined;
                 OrganizationID?: string | undefined;
             } & {
                 AccountID?: string | undefined;
-                Broker?: string | undefined;
+                Broker?: ClearingBroker | undefined;
                 OrganizationID?: string | undefined;
             } & { [K_20 in Exclude<keyof I["User"]["BrokerAccounts"][number], keyof BrokerAccount>]: never; })[] & { [K_21 in Exclude<keyof I["User"]["BrokerAccounts"], keyof {
                 AccountID?: string | undefined;
-                Broker?: string | undefined;
+                Broker?: ClearingBroker | undefined;
                 OrganizationID?: string | undefined;
             }[]>]: never; }) | undefined;
         } & { [K_22 in Exclude<keyof I["User"], keyof UserDetails>]: never; }) | undefined;
@@ -2008,7 +2009,7 @@ export declare const User: {
             }[] | undefined;
             BrokerAccounts?: {
                 AccountID?: string | undefined;
-                Broker?: string | undefined;
+                Broker?: ClearingBroker | undefined;
                 OrganizationID?: string | undefined;
             }[] | undefined;
         } | undefined;
@@ -2136,7 +2137,7 @@ export declare const User: {
             }[] | undefined;
             BrokerAccounts?: {
                 AccountID?: string | undefined;
-                Broker?: string | undefined;
+                Broker?: ClearingBroker | undefined;
                 OrganizationID?: string | undefined;
             }[] | undefined;
         } & {
@@ -2418,19 +2419,19 @@ export declare const User: {
             }[]>]: never; }) | undefined;
             BrokerAccounts?: ({
                 AccountID?: string | undefined;
-                Broker?: string | undefined;
+                Broker?: ClearingBroker | undefined;
                 OrganizationID?: string | undefined;
             }[] & ({
                 AccountID?: string | undefined;
-                Broker?: string | undefined;
+                Broker?: ClearingBroker | undefined;
                 OrganizationID?: string | undefined;
             } & {
                 AccountID?: string | undefined;
-                Broker?: string | undefined;
+                Broker?: ClearingBroker | undefined;
                 OrganizationID?: string | undefined;
             } & { [K_46 in Exclude<keyof I_1["User"]["BrokerAccounts"][number], keyof BrokerAccount>]: never; })[] & { [K_47 in Exclude<keyof I_1["User"]["BrokerAccounts"], keyof {
                 AccountID?: string | undefined;
-                Broker?: string | undefined;
+                Broker?: ClearingBroker | undefined;
                 OrganizationID?: string | undefined;
             }[]>]: never; }) | undefined;
         } & { [K_48 in Exclude<keyof I_1["User"], keyof UserDetails>]: never; }) | undefined;
@@ -2647,7 +2648,7 @@ export declare const UserList: {
                 }[] | undefined;
                 BrokerAccounts?: {
                     AccountID?: string | undefined;
-                    Broker?: string | undefined;
+                    Broker?: ClearingBroker | undefined;
                     OrganizationID?: string | undefined;
                 }[] | undefined;
             } | undefined;
@@ -2778,7 +2779,7 @@ export declare const UserList: {
                 }[] | undefined;
                 BrokerAccounts?: {
                     AccountID?: string | undefined;
-                    Broker?: string | undefined;
+                    Broker?: ClearingBroker | undefined;
                     OrganizationID?: string | undefined;
                 }[] | undefined;
             } | undefined;
@@ -2906,7 +2907,7 @@ export declare const UserList: {
                 }[] | undefined;
                 BrokerAccounts?: {
                     AccountID?: string | undefined;
-                    Broker?: string | undefined;
+                    Broker?: ClearingBroker | undefined;
                     OrganizationID?: string | undefined;
                 }[] | undefined;
             } | undefined;
@@ -3034,7 +3035,7 @@ export declare const UserList: {
                 }[] | undefined;
                 BrokerAccounts?: {
                     AccountID?: string | undefined;
-                    Broker?: string | undefined;
+                    Broker?: ClearingBroker | undefined;
                     OrganizationID?: string | undefined;
                 }[] | undefined;
             } & {
@@ -3316,19 +3317,19 @@ export declare const UserList: {
                 }[]>]: never; }) | undefined;
                 BrokerAccounts?: ({
                     AccountID?: string | undefined;
-                    Broker?: string | undefined;
+                    Broker?: ClearingBroker | undefined;
                     OrganizationID?: string | undefined;
                 }[] & ({
                     AccountID?: string | undefined;
-                    Broker?: string | undefined;
+                    Broker?: ClearingBroker | undefined;
                     OrganizationID?: string | undefined;
                 } & {
                     AccountID?: string | undefined;
-                    Broker?: string | undefined;
+                    Broker?: ClearingBroker | undefined;
                     OrganizationID?: string | undefined;
                 } & { [K_20 in Exclude<keyof I["Users"][number]["User"]["BrokerAccounts"][number], keyof BrokerAccount>]: never; })[] & { [K_21 in Exclude<keyof I["Users"][number]["User"]["BrokerAccounts"], keyof {
                     AccountID?: string | undefined;
-                    Broker?: string | undefined;
+                    Broker?: ClearingBroker | undefined;
                     OrganizationID?: string | undefined;
                 }[]>]: never; }) | undefined;
             } & { [K_22 in Exclude<keyof I["Users"][number]["User"], keyof UserDetails>]: never; }) | undefined;
@@ -3465,7 +3466,7 @@ export declare const UserList: {
                 }[] | undefined;
                 BrokerAccounts?: {
                     AccountID?: string | undefined;
-                    Broker?: string | undefined;
+                    Broker?: ClearingBroker | undefined;
                     OrganizationID?: string | undefined;
                 }[] | undefined;
             } | undefined;
@@ -3597,7 +3598,7 @@ export declare const UserList: {
                 }[] | undefined;
                 BrokerAccounts?: {
                     AccountID?: string | undefined;
-                    Broker?: string | undefined;
+                    Broker?: ClearingBroker | undefined;
                     OrganizationID?: string | undefined;
                 }[] | undefined;
             } | undefined;
@@ -3728,7 +3729,7 @@ export declare const UserList: {
                 }[] | undefined;
                 BrokerAccounts?: {
                     AccountID?: string | undefined;
-                    Broker?: string | undefined;
+                    Broker?: ClearingBroker | undefined;
                     OrganizationID?: string | undefined;
                 }[] | undefined;
             } | undefined;
@@ -3856,7 +3857,7 @@ export declare const UserList: {
                 }[] | undefined;
                 BrokerAccounts?: {
                     AccountID?: string | undefined;
-                    Broker?: string | undefined;
+                    Broker?: ClearingBroker | undefined;
                     OrganizationID?: string | undefined;
                 }[] | undefined;
             } | undefined;
@@ -3984,7 +3985,7 @@ export declare const UserList: {
                 }[] | undefined;
                 BrokerAccounts?: {
                     AccountID?: string | undefined;
-                    Broker?: string | undefined;
+                    Broker?: ClearingBroker | undefined;
                     OrganizationID?: string | undefined;
                 }[] | undefined;
             } & {
@@ -4266,19 +4267,19 @@ export declare const UserList: {
                 }[]>]: never; }) | undefined;
                 BrokerAccounts?: ({
                     AccountID?: string | undefined;
-                    Broker?: string | undefined;
+                    Broker?: ClearingBroker | undefined;
                     OrganizationID?: string | undefined;
                 }[] & ({
                     AccountID?: string | undefined;
-                    Broker?: string | undefined;
+                    Broker?: ClearingBroker | undefined;
                     OrganizationID?: string | undefined;
                 } & {
                     AccountID?: string | undefined;
-                    Broker?: string | undefined;
+                    Broker?: ClearingBroker | undefined;
                     OrganizationID?: string | undefined;
                 } & { [K_48 in Exclude<keyof I_1["Users"][number]["User"]["BrokerAccounts"][number], keyof BrokerAccount>]: never; })[] & { [K_49 in Exclude<keyof I_1["Users"][number]["User"]["BrokerAccounts"], keyof {
                     AccountID?: string | undefined;
-                    Broker?: string | undefined;
+                    Broker?: ClearingBroker | undefined;
                     OrganizationID?: string | undefined;
                 }[]>]: never; }) | undefined;
             } & { [K_50 in Exclude<keyof I_1["Users"][number]["User"], keyof UserDetails>]: never; }) | undefined;
@@ -4415,7 +4416,7 @@ export declare const UserList: {
                 }[] | undefined;
                 BrokerAccounts?: {
                     AccountID?: string | undefined;
-                    Broker?: string | undefined;
+                    Broker?: ClearingBroker | undefined;
                     OrganizationID?: string | undefined;
                 }[] | undefined;
             } | undefined;
@@ -4645,20 +4646,20 @@ export declare const BrokerAccount: {
     toJSON(message: BrokerAccount): unknown;
     create<I extends {
         AccountID?: string | undefined;
-        Broker?: string | undefined;
+        Broker?: ClearingBroker | undefined;
         OrganizationID?: string | undefined;
     } & {
         AccountID?: string | undefined;
-        Broker?: string | undefined;
+        Broker?: ClearingBroker | undefined;
         OrganizationID?: string | undefined;
     } & { [K in Exclude<keyof I, keyof BrokerAccount>]: never; }>(base?: I | undefined): BrokerAccount;
     fromPartial<I_1 extends {
         AccountID?: string | undefined;
-        Broker?: string | undefined;
+        Broker?: ClearingBroker | undefined;
         OrganizationID?: string | undefined;
     } & {
         AccountID?: string | undefined;
-        Broker?: string | undefined;
+        Broker?: ClearingBroker | undefined;
         OrganizationID?: string | undefined;
     } & { [K_1 in Exclude<keyof I_1, keyof BrokerAccount>]: never; }>(object: I_1): BrokerAccount;
 };
