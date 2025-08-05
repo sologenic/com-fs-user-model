@@ -239,6 +239,7 @@ export interface Filter {
     InquiryID?: string | undefined;
     Status?: UserStatus | undefined;
     ExternalUserIDs: string[];
+    WalletAddress?: string | undefined;
 }
 /** This model is open to having multiple questionaires with regards to compliance like MiFID, etc. */
 export interface ComplianceQuestions {
@@ -4507,6 +4508,7 @@ export declare const Filter: {
         InquiryID?: string | undefined;
         Status?: UserStatus | undefined;
         ExternalUserIDs?: string[] | undefined;
+        WalletAddress?: string | undefined;
     } & {
         UserIDs?: (string[] & string[] & { [K in Exclude<keyof I["UserIDs"], keyof string[]>]: never; }) | undefined;
         Network?: Network | undefined;
@@ -4516,6 +4518,7 @@ export declare const Filter: {
         InquiryID?: string | undefined;
         Status?: UserStatus | undefined;
         ExternalUserIDs?: (string[] & string[] & { [K_1 in Exclude<keyof I["ExternalUserIDs"], keyof string[]>]: never; }) | undefined;
+        WalletAddress?: string | undefined;
     } & { [K_2 in Exclude<keyof I, keyof Filter>]: never; }>(base?: I | undefined): Filter;
     fromPartial<I_1 extends {
         UserIDs?: string[] | undefined;
@@ -4526,6 +4529,7 @@ export declare const Filter: {
         InquiryID?: string | undefined;
         Status?: UserStatus | undefined;
         ExternalUserIDs?: string[] | undefined;
+        WalletAddress?: string | undefined;
     } & {
         UserIDs?: (string[] & string[] & { [K_3 in Exclude<keyof I_1["UserIDs"], keyof string[]>]: never; }) | undefined;
         Network?: Network | undefined;
@@ -4535,6 +4539,7 @@ export declare const Filter: {
         InquiryID?: string | undefined;
         Status?: UserStatus | undefined;
         ExternalUserIDs?: (string[] & string[] & { [K_4 in Exclude<keyof I_1["ExternalUserIDs"], keyof string[]>]: never; }) | undefined;
+        WalletAddress?: string | undefined;
     } & { [K_5 in Exclude<keyof I_1, keyof Filter>]: never; }>(object: I_1): Filter;
 };
 export declare const ComplianceQuestions: {

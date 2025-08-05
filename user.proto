@@ -198,6 +198,7 @@ message Filter {
     optional string InquiryID = 6;
     optional UserStatus Status = 7;
     repeated string ExternalUserIDs = 8;
+    optional string WalletAddress = 9;
 }
 
 // This model is open to having multiple questionaires with regards to compliance like MiFID, etc.

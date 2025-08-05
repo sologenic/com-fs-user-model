@@ -2159,6 +2159,7 @@ function createBaseFilter() {
         InquiryID: undefined,
         Status: undefined,
         ExternalUserIDs: [],
+        WalletAddress: undefined,
     };
 }
 export const Filter = {
@@ -2186,6 +2187,9 @@ export const Filter = {
         }
         for (const v of message.ExternalUserIDs) {
             writer.uint32(66).string(v);
+        }
+        if (message.WalletAddress !== undefined) {
+            writer.uint32(74).string(message.WalletAddress);
         }
         return writer;
     },
@@ -2244,6 +2248,12 @@ export const Filter = {
                     }
                     message.ExternalUserIDs.push(reader.string());
                     continue;
+                case 9:
+                    if (tag !== 74) {
+                        break;
+                    }
+                    message.WalletAddress = reader.string();
+                    continue;
             }
             if ((tag & 7) === 4 || tag === 0) {
                 break;
@@ -2264,6 +2274,7 @@ export const Filter = {
             ExternalUserIDs: globalThis.Array.isArray(object === null || object === void 0 ? void 0 : object.ExternalUserIDs)
                 ? object.ExternalUserIDs.map((e) => globalThis.String(e))
                 : [],
+            WalletAddress: isSet(object.WalletAddress) ? globalThis.String(object.WalletAddress) : undefined,
         };
     },
     toJSON(message) {
@@ -2293,13 +2304,16 @@ export const Filter = {
         if ((_b = message.ExternalUserIDs) === null || _b === void 0 ? void 0 : _b.length) {
             obj.ExternalUserIDs = message.ExternalUserIDs;
         }
+        if (message.WalletAddress !== undefined) {
+            obj.WalletAddress = message.WalletAddress;
+        }
         return obj;
     },
     create(base) {
         return Filter.fromPartial(base !== null && base !== void 0 ? base : {});
     },
     fromPartial(object) {
-        var _a, _b, _c, _d, _e, _f, _g, _h;
+        var _a, _b, _c, _d, _e, _f, _g, _h, _j;
         const message = createBaseFilter();
         message.UserIDs = ((_a = object.UserIDs) === null || _a === void 0 ? void 0 : _a.map((e) => e)) || [];
         message.Network = (_b = object.Network) !== null && _b !== void 0 ? _b : undefined;
@@ -2309,6 +2323,7 @@ export const Filter = {
         message.InquiryID = (_f = object.InquiryID) !== null && _f !== void 0 ? _f : undefined;
         message.Status = (_g = object.Status) !== null && _g !== void 0 ? _g : undefined;
         message.ExternalUserIDs = ((_h = object.ExternalUserIDs) === null || _h === void 0 ? void 0 : _h.map((e) => e)) || [];
+        message.WalletAddress = (_j = object.WalletAddress) !== null && _j !== void 0 ? _j : undefined;
         return message;
     },
 };

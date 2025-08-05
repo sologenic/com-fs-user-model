@@ -720,6 +720,7 @@ export interface Filter {
   InquiryID?: string | undefined;
   Status?: UserStatus | undefined;
   ExternalUserIDs: string[];
+  WalletAddress?: string | undefined;
 }
 
 /** This model is open to having multiple questionaires with regards to compliance like MiFID, etc. */
@@ -2485,6 +2486,7 @@ function createBaseFilter(): Filter {
     InquiryID: undefined,
     Status: undefined,
     ExternalUserIDs: [],
+    WalletAddress: undefined,
   };
 }
 
@@ -2513,6 +2515,9 @@ export const Filter = {
     }
     for (const v of message.ExternalUserIDs) {
       writer.uint32(66).string(v!);
+    }
+    if (message.WalletAddress !== undefined) {
+      writer.uint32(74).string(message.WalletAddress);
     }
     return writer;
   },
@@ -2580,6 +2585,13 @@ export const Filter = {
 
           message.ExternalUserIDs.push(reader.string());
           continue;
+        case 9:
+          if (tag !== 74) {
+            break;
+          }
+
+          message.WalletAddress = reader.string();
+          continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -2601,6 +2613,7 @@ export const Filter = {
       ExternalUserIDs: globalThis.Array.isArray(object?.ExternalUserIDs)
         ? object.ExternalUserIDs.map((e: any) => globalThis.String(e))
         : [],
+      WalletAddress: isSet(object.WalletAddress) ? globalThis.String(object.WalletAddress) : undefined,
     };
   },
 
@@ -2630,6 +2643,9 @@ export const Filter = {
     if (message.ExternalUserIDs?.length) {
       obj.ExternalUserIDs = message.ExternalUserIDs;
     }
+    if (message.WalletAddress !== undefined) {
+      obj.WalletAddress = message.WalletAddress;
+    }
     return obj;
   },
 
@@ -2646,6 +2662,7 @@ export const Filter = {
     message.InquiryID = object.InquiryID ?? undefined;
     message.Status = object.Status ?? undefined;
     message.ExternalUserIDs = object.ExternalUserIDs?.map((e) => e) || [];
+    message.WalletAddress = object.WalletAddress ?? undefined;
     return message;
   },
 };
