@@ -244,4 +244,5 @@ message BrokerAccount {
   string AccountID = 1; // user's identifier in the broker account
   order.ClearingBroker Broker = 2; // "RQD", etc.
   string OrganizationID = 3; // broker identifier
+  repeated string Profiles = 4; // bank account profiles for the broker account
 }

@@ -2525,7 +2525,7 @@ export const USA = {
     },
 };
 function createBaseBrokerAccount() {
-    return { AccountID: "", Broker: 0, OrganizationID: "" };
+    return { AccountID: "", Broker: 0, OrganizationID: "", Profiles: [] };
 }
 export const BrokerAccount = {
     encode(message, writer = _m0.Writer.create()) {
@@ -2537,6 +2537,9 @@ export const BrokerAccount = {
         }
         if (message.OrganizationID !== "") {
             writer.uint32(26).string(message.OrganizationID);
+        }
+        for (const v of message.Profiles) {
+            writer.uint32(34).string(v);
         }
         return writer;
     },
@@ -2565,6 +2568,12 @@ export const BrokerAccount = {
                     }
                     message.OrganizationID = reader.string();
                     continue;
+                case 4:
+                    if (tag !== 34) {
+                        break;
+                    }
+                    message.Profiles.push(reader.string());
+                    continue;
             }
             if ((tag & 7) === 4 || tag === 0) {
                 break;
@@ -2578,9 +2587,11 @@ export const BrokerAccount = {
             AccountID: isSet(object.AccountID) ? globalThis.String(object.AccountID) : "",
             Broker: isSet(object.Broker) ? clearingBrokerFromJSON(object.Broker) : 0,
             OrganizationID: isSet(object.OrganizationID) ? globalThis.String(object.OrganizationID) : "",
+            Profiles: globalThis.Array.isArray(object === null || object === void 0 ? void 0 : object.Profiles) ? object.Profiles.map((e) => globalThis.String(e)) : [],
         };
     },
     toJSON(message) {
+        var _a;
         const obj = {};
         if (message.AccountID !== "") {
             obj.AccountID = message.AccountID;
@@ -2591,17 +2602,21 @@ export const BrokerAccount = {
         if (message.OrganizationID !== "") {
             obj.OrganizationID = message.OrganizationID;
         }
+        if ((_a = message.Profiles) === null || _a === void 0 ? void 0 : _a.length) {
+            obj.Profiles = message.Profiles;
+        }
         return obj;
     },
     create(base) {
         return BrokerAccount.fromPartial(base !== null && base !== void 0 ? base : {});
     },
     fromPartial(object) {
-        var _a, _b, _c;
+        var _a, _b, _c, _d;
         const message = createBaseBrokerAccount();
         message.AccountID = (_a = object.AccountID) !== null && _a !== void 0 ? _a : "";
         message.Broker = (_b = object.Broker) !== null && _b !== void 0 ? _b : 0;
         message.OrganizationID = (_c = object.OrganizationID) !== null && _c !== void 0 ? _c : "";
+        message.Profiles = ((_d = object.Profiles) === null || _d === void 0 ? void 0 : _d.map((e) => e)) || [];
         return message;
     },
 };

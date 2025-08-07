@@ -745,6 +745,8 @@ export interface BrokerAccount {
   Broker: ClearingBroker;
   /** broker identifier */
   OrganizationID: string;
+  /** bank account profiles for the broker account */
+  Profiles: string[];
 }
 
 function createBaseIDNumber(): IDNumber {
@@ -2884,7 +2886,7 @@ export const USA = {
 };
 
 function createBaseBrokerAccount(): BrokerAccount {
-  return { AccountID: "", Broker: 0, OrganizationID: "" };
+  return { AccountID: "", Broker: 0, OrganizationID: "", Profiles: [] };
 }
 
 export const BrokerAccount = {
@@ -2897,6 +2899,9 @@ export const BrokerAccount = {
     }
     if (message.OrganizationID !== "") {
       writer.uint32(26).string(message.OrganizationID);
+    }
+    for (const v of message.Profiles) {
+      writer.uint32(34).string(v!);
     }
     return writer;
   },
@@ -2929,6 +2934,13 @@ export const BrokerAccount = {
 
           message.OrganizationID = reader.string();
           continue;
+        case 4:
+          if (tag !== 34) {
+            break;
+          }
+
+          message.Profiles.push(reader.string());
+          continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -2943,6 +2955,7 @@ export const BrokerAccount = {
       AccountID: isSet(object.AccountID) ? globalThis.String(object.AccountID) : "",
       Broker: isSet(object.Broker) ? clearingBrokerFromJSON(object.Broker) : 0,
       OrganizationID: isSet(object.OrganizationID) ? globalThis.String(object.OrganizationID) : "",
+      Profiles: globalThis.Array.isArray(object?.Profiles) ? object.Profiles.map((e: any) => globalThis.String(e)) : [],
     };
   },
 
@@ -2957,6 +2970,9 @@ export const BrokerAccount = {
     if (message.OrganizationID !== "") {
       obj.OrganizationID = message.OrganizationID;
     }
+    if (message.Profiles?.length) {
+      obj.Profiles = message.Profiles;
+    }
     return obj;
   },
 
@@ -2968,6 +2984,7 @@ export const BrokerAccount = {
     message.AccountID = object.AccountID ?? "";
     message.Broker = object.Broker ?? 0;
     message.OrganizationID = object.OrganizationID ?? "";
+    message.Profiles = object.Profiles?.map((e) => e) || [];
     return message;
   },
 };
