@@ -69,6 +69,7 @@ message UserDetails {
     tradeprofile.UserTradeProfile UserTradeProfile = 21;
     repeated ComplianceQuestions ComplianceQuestions = 22;
     repeated BrokerAccount BrokerAccounts = 23;
+    repeated BankAccount BankAccounts = 24;
 }
 
 
@@ -214,6 +215,16 @@ message USA {
   LiquidationImportance ConversionImportance = 5;
   RiskTolerance Tolerance = 6;
   InvestmentObjective Objective = 7;
+}
+
+message BankAccount {
+  string AccountName = 1;
+  string BankName = 2; // user's identifier in the bank account
+  string BankAddress = 3; // bank address
+  string AccountNumber = 4; // bank account number
+  string ABA = 5; // bank routing number
+  string SWIFT = 6;
+  string IBAN = 7;
 }
 
 enum LiquidationImportance {
