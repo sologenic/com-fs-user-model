@@ -642,6 +642,7 @@ export interface UserDetails {
   UserTradeProfile: UserTradeProfile | undefined;
   ComplianceQuestions: ComplianceQuestions[];
   BrokerAccounts: BrokerAccount[];
+  BankAccounts: BankAccount[];
 }
 
 /** TODO: to be verified when more information is available */
@@ -738,6 +739,20 @@ export interface USA {
   Objective: InvestmentObjective;
 }
 
+export interface BankAccount {
+  AccountName: string;
+  /** user's identifier in the bank account */
+  BankName: string;
+  /** bank address */
+  BankAddress: string;
+  /** bank account number */
+  AccountNumber: string;
+  /** bank routing number */
+  ABA: string;
+  SWIFT: string;
+  IBAN: string;
+}
+
 export interface BrokerAccount {
   /** user's identifier in the broker account */
   AccountID: string;
@@ -745,6 +760,8 @@ export interface BrokerAccount {
   Broker: ClearingBroker;
   /** broker identifier */
   OrganizationID: string;
+  /** bank account profiles for the broker account */
+  Profiles: string[];
 }
 
 function createBaseIDNumber(): IDNumber {
@@ -1114,6 +1131,7 @@ function createBaseUserDetails(): UserDetails {
     UserTradeProfile: undefined,
     ComplianceQuestions: [],
     BrokerAccounts: [],
+    BankAccounts: [],
   };
 }
 
@@ -1187,6 +1205,9 @@ export const UserDetails = {
     }
     for (const v of message.BrokerAccounts) {
       BrokerAccount.encode(v!, writer.uint32(186).fork()).ldelim();
+    }
+    for (const v of message.BankAccounts) {
+      BankAccount.encode(v!, writer.uint32(194).fork()).ldelim();
     }
     return writer;
   },
@@ -1359,6 +1380,13 @@ export const UserDetails = {
 
           message.BrokerAccounts.push(BrokerAccount.decode(reader, reader.uint32()));
           continue;
+        case 24:
+          if (tag !== 194) {
+            break;
+          }
+
+          message.BankAccounts.push(BankAccount.decode(reader, reader.uint32()));
+          continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -1400,6 +1428,9 @@ export const UserDetails = {
         : [],
       BrokerAccounts: globalThis.Array.isArray(object?.BrokerAccounts)
         ? object.BrokerAccounts.map((e: any) => BrokerAccount.fromJSON(e))
+        : [],
+      BankAccounts: globalThis.Array.isArray(object?.BankAccounts)
+        ? object.BankAccounts.map((e: any) => BankAccount.fromJSON(e))
         : [],
     };
   },
@@ -1475,6 +1506,9 @@ export const UserDetails = {
     if (message.BrokerAccounts?.length) {
       obj.BrokerAccounts = message.BrokerAccounts.map((e) => BrokerAccount.toJSON(e));
     }
+    if (message.BankAccounts?.length) {
+      obj.BankAccounts = message.BankAccounts.map((e) => BankAccount.toJSON(e));
+    }
     return obj;
   },
 
@@ -1517,6 +1551,7 @@ export const UserDetails = {
       : undefined;
     message.ComplianceQuestions = object.ComplianceQuestions?.map((e) => ComplianceQuestions.fromPartial(e)) || [];
     message.BrokerAccounts = object.BrokerAccounts?.map((e) => BrokerAccount.fromPartial(e)) || [];
+    message.BankAccounts = object.BankAccounts?.map((e) => BankAccount.fromPartial(e)) || [];
     return message;
   },
 };
@@ -2883,8 +2918,157 @@ export const USA = {
   },
 };
 
+function createBaseBankAccount(): BankAccount {
+  return { AccountName: "", BankName: "", BankAddress: "", AccountNumber: "", ABA: "", SWIFT: "", IBAN: "" };
+}
+
+export const BankAccount = {
+  encode(message: BankAccount, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.AccountName !== "") {
+      writer.uint32(10).string(message.AccountName);
+    }
+    if (message.BankName !== "") {
+      writer.uint32(18).string(message.BankName);
+    }
+    if (message.BankAddress !== "") {
+      writer.uint32(26).string(message.BankAddress);
+    }
+    if (message.AccountNumber !== "") {
+      writer.uint32(34).string(message.AccountNumber);
+    }
+    if (message.ABA !== "") {
+      writer.uint32(42).string(message.ABA);
+    }
+    if (message.SWIFT !== "") {
+      writer.uint32(50).string(message.SWIFT);
+    }
+    if (message.IBAN !== "") {
+      writer.uint32(58).string(message.IBAN);
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): BankAccount {
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseBankAccount();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          if (tag !== 10) {
+            break;
+          }
+
+          message.AccountName = reader.string();
+          continue;
+        case 2:
+          if (tag !== 18) {
+            break;
+          }
+
+          message.BankName = reader.string();
+          continue;
+        case 3:
+          if (tag !== 26) {
+            break;
+          }
+
+          message.BankAddress = reader.string();
+          continue;
+        case 4:
+          if (tag !== 34) {
+            break;
+          }
+
+          message.AccountNumber = reader.string();
+          continue;
+        case 5:
+          if (tag !== 42) {
+            break;
+          }
+
+          message.ABA = reader.string();
+          continue;
+        case 6:
+          if (tag !== 50) {
+            break;
+          }
+
+          message.SWIFT = reader.string();
+          continue;
+        case 7:
+          if (tag !== 58) {
+            break;
+          }
+
+          message.IBAN = reader.string();
+          continue;
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): BankAccount {
+    return {
+      AccountName: isSet(object.AccountName) ? globalThis.String(object.AccountName) : "",
+      BankName: isSet(object.BankName) ? globalThis.String(object.BankName) : "",
+      BankAddress: isSet(object.BankAddress) ? globalThis.String(object.BankAddress) : "",
+      AccountNumber: isSet(object.AccountNumber) ? globalThis.String(object.AccountNumber) : "",
+      ABA: isSet(object.ABA) ? globalThis.String(object.ABA) : "",
+      SWIFT: isSet(object.SWIFT) ? globalThis.String(object.SWIFT) : "",
+      IBAN: isSet(object.IBAN) ? globalThis.String(object.IBAN) : "",
+    };
+  },
+
+  toJSON(message: BankAccount): unknown {
+    const obj: any = {};
+    if (message.AccountName !== "") {
+      obj.AccountName = message.AccountName;
+    }
+    if (message.BankName !== "") {
+      obj.BankName = message.BankName;
+    }
+    if (message.BankAddress !== "") {
+      obj.BankAddress = message.BankAddress;
+    }
+    if (message.AccountNumber !== "") {
+      obj.AccountNumber = message.AccountNumber;
+    }
+    if (message.ABA !== "") {
+      obj.ABA = message.ABA;
+    }
+    if (message.SWIFT !== "") {
+      obj.SWIFT = message.SWIFT;
+    }
+    if (message.IBAN !== "") {
+      obj.IBAN = message.IBAN;
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<BankAccount>, I>>(base?: I): BankAccount {
+    return BankAccount.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<BankAccount>, I>>(object: I): BankAccount {
+    const message = createBaseBankAccount();
+    message.AccountName = object.AccountName ?? "";
+    message.BankName = object.BankName ?? "";
+    message.BankAddress = object.BankAddress ?? "";
+    message.AccountNumber = object.AccountNumber ?? "";
+    message.ABA = object.ABA ?? "";
+    message.SWIFT = object.SWIFT ?? "";
+    message.IBAN = object.IBAN ?? "";
+    return message;
+  },
+};
+
 function createBaseBrokerAccount(): BrokerAccount {
-  return { AccountID: "", Broker: 0, OrganizationID: "" };
+  return { AccountID: "", Broker: 0, OrganizationID: "", Profiles: [] };
 }
 
 export const BrokerAccount = {
@@ -2897,6 +3081,9 @@ export const BrokerAccount = {
     }
     if (message.OrganizationID !== "") {
       writer.uint32(26).string(message.OrganizationID);
+    }
+    for (const v of message.Profiles) {
+      writer.uint32(34).string(v!);
     }
     return writer;
   },
@@ -2929,6 +3116,13 @@ export const BrokerAccount = {
 
           message.OrganizationID = reader.string();
           continue;
+        case 4:
+          if (tag !== 34) {
+            break;
+          }
+
+          message.Profiles.push(reader.string());
+          continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -2943,6 +3137,7 @@ export const BrokerAccount = {
       AccountID: isSet(object.AccountID) ? globalThis.String(object.AccountID) : "",
       Broker: isSet(object.Broker) ? clearingBrokerFromJSON(object.Broker) : 0,
       OrganizationID: isSet(object.OrganizationID) ? globalThis.String(object.OrganizationID) : "",
+      Profiles: globalThis.Array.isArray(object?.Profiles) ? object.Profiles.map((e: any) => globalThis.String(e)) : [],
     };
   },
 
@@ -2957,6 +3152,9 @@ export const BrokerAccount = {
     if (message.OrganizationID !== "") {
       obj.OrganizationID = message.OrganizationID;
     }
+    if (message.Profiles?.length) {
+      obj.Profiles = message.Profiles;
+    }
     return obj;
   },
 
@@ -2968,6 +3166,7 @@ export const BrokerAccount = {
     message.AccountID = object.AccountID ?? "";
     message.Broker = object.Broker ?? 0;
     message.OrganizationID = object.OrganizationID ?? "";
+    message.Profiles = object.Profiles?.map((e) => e) || [];
     return message;
   },
 };
