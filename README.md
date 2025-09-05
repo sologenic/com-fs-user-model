@@ -51,7 +51,7 @@ Often a clone will contain the following:
 
 A clone will virtually never contain the following:
 
-- `UserDetails.UserTradeProfile` - The user's trade profile: Tends to be very specific for stock trading, which is only 1-2 organizations per country/jurisdiction.
+- `UserDetails.UserTradeProfile`, `UserDetails.TradeProfileDetails` - The user's trade profile: Tends to be very specific for stock trading, which is only 1-2 organizations per country/jurisdiction.
 
 ### Cloning changes to a user
 
