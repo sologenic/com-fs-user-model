@@ -1,64 +1,14 @@
 import _m0 from "protobufjs/minimal";
 import { UserDocumentCompliance } from "./sologenic/com-fs-document-model/document";
-import { ClearingBroker } from "./sologenic/com-fs-order-model/broker";
 import { TradeProfileDetails, UserTradeProfile } from "./sologenic/com-fs-trade-profile-model/tradeprofile";
 import { Audit } from "./sologenic/com-fs-utils-lib/models/audit/audit";
 import { Lang } from "./sologenic/com-fs-utils-lib/models/language/language";
 import { MetaData, Network } from "./sologenic/com-fs-utils-lib/models/metadata/metadata";
 import { Role } from "./sologenic/com-fs-utils-lib/models/role/role";
+import { ComplianceQuestions } from "./user-compliance";
+import { BankAccount, BrokerAccount, Wallet } from "./user-fundings";
+import { Employment, KYCStatus, UserKYCDetails } from "./user-kyc";
 export declare const protobufPackage = "user";
-export declare enum KYCStatus {
-    /** KYC_STATUS_UNSPECIFIED - Default value, should not be used */
-    KYC_STATUS_UNSPECIFIED = 0,
-    /** KYC_STATUS_PENDING - Inquiry created but not completed */
-    KYC_STATUS_PENDING = 1,
-    /** KYC_STATUS_IN_REVIEW - Inquiry submitted but under manual review */
-    KYC_STATUS_IN_REVIEW = 2,
-    /** KYC_STATUS_APPROVED - Inquiry completed and approved */
-    KYC_STATUS_APPROVED = 3,
-    /** KYC_STATUS_REJECTED - Inquiry completed and explicitly rejected */
-    KYC_STATUS_REJECTED = 4,
-    /** KYC_STATUS_FAILED - Inquiry failed due to an error (e.g., document mismatch, bad image quality) */
-    KYC_STATUS_FAILED = 5,
-    /** KYC_STATUS_EXPIRED - Inquiry expired (e.g., not completed in time) */
-    KYC_STATUS_EXPIRED = 6,
-    UNRECOGNIZED = -1
-}
-export declare function kYCStatusFromJSON(object: any): KYCStatus;
-export declare function kYCStatusToJSON(object: KYCStatus): string;
-export declare enum EmploymentType {
-    NOT_USED_EMPLOYMENTTYPE = 0,
-    FULL_TIME = 1,
-    PART_TIME = 2,
-    CONTRACT = 3,
-    FREELANCE = 4,
-    SELF_EMPLOYED = 5,
-    INTERNSHIP = 6,
-    UNRECOGNIZED = -1
-}
-export declare function employmentTypeFromJSON(object: any): EmploymentType;
-export declare function employmentTypeToJSON(object: EmploymentType): string;
-export declare enum IncomeFrequency {
-    NOT_USED_INCOMEFREQUENCY = 0,
-    HOURLY = 1,
-    WEEKLY = 2,
-    BI_WEEKLY = 3,
-    MONTHLY = 4,
-    ANNUALLY = 5,
-    UNRECOGNIZED = -1
-}
-export declare function incomeFrequencyFromJSON(object: any): IncomeFrequency;
-export declare function incomeFrequencyToJSON(object: IncomeFrequency): string;
-export declare enum SignerType {
-    NOT_USER_SIGNETTYPE = 0,
-    MOBILE_APP = 1,
-    BROWSER_LEAP = 2,
-    BROWSER_COSMOSTATION = 3,
-    BROWSER_KEPLR = 4,
-    UNRECOGNIZED = -1
-}
-export declare function signerTypeFromJSON(object: any): SignerType;
-export declare function signerTypeToJSON(object: SignerType): string;
 export declare enum UserStatus {
     NOT_USED_USERSTATUS = 0,
     ACTIVE = 1,
@@ -67,15 +17,6 @@ export declare enum UserStatus {
 }
 export declare function userStatusFromJSON(object: any): UserStatus;
 export declare function userStatusToJSON(object: UserStatus): string;
-export declare enum WalletType {
-    NOT_USED_WALLETTYPE = 0,
-    TFSA = 1,
-    RRSP = 2,
-    STANDARD = 3,
-    UNRECOGNIZED = -1
-}
-export declare function walletTypeFromJSON(object: any): WalletType;
-export declare function walletTypeToJSON(object: WalletType): string;
 export declare enum SocialType {
     NOT_USED_SOCIALTYPE = 0,
     WEBSITE = 1,
@@ -91,56 +32,6 @@ export declare enum SocialType {
 }
 export declare function socialTypeFromJSON(object: any): SocialType;
 export declare function socialTypeToJSON(object: SocialType): string;
-export declare enum LiquidationImportance {
-    VERY_IMPORTANT = 0,
-    SOMEWHAT_IMPORTANT = 1,
-    NOT_IMPORTANT = 2,
-    NO_PREFERENCE = 3,
-    UNRECOGNIZED = -1
-}
-export declare function liquidationImportanceFromJSON(object: any): LiquidationImportance;
-export declare function liquidationImportanceToJSON(object: LiquidationImportance): string;
-export declare enum RiskTolerance {
-    CONSERVATIVE = 0,
-    MODERATELY_CONSERVATIVE = 1,
-    MODERATE = 2,
-    MODERATELY_AGGRESSIVE = 3,
-    SIGNIFICANT_RISK = 4,
-    UNRECOGNIZED = -1
-}
-export declare function riskToleranceFromJSON(object: any): RiskTolerance;
-export declare function riskToleranceToJSON(object: RiskTolerance): string;
-export declare enum InvestmentObjective {
-    INCOME = 0,
-    BALANCED = 1,
-    GROWTH_AND_INCOME = 2,
-    SAFE_LONG_TERM_GROWTH = 3,
-    GREATER_RISK_LONG_TERM_GROWTH = 4,
-    SPECULATION = 5,
-    UNRECOGNIZED = -1
-}
-export declare function investmentObjectiveFromJSON(object: any): InvestmentObjective;
-export declare function investmentObjectiveToJSON(object: InvestmentObjective): string;
-export interface IDNumber {
-    IssuingCountry: string;
-    IdentificationClass: string;
-    IdentificationNumber: string;
-}
-export interface UserKYCDetails {
-    Birthdate: string;
-    PhoneNumber: string;
-    EmailAddress: string;
-    AddressStreet1: string;
-    AddressStreet2: string;
-    AddressCity: string;
-    AddressSubdivision: string;
-    AddressPostalCode: string;
-    CountryCode: string;
-    SocialSecurityNumber: string;
-    IdentificationNumber: string;
-    FirstName: string;
-    LastName: string;
-}
 export interface UserDetails {
     /** email address used for firebase authentication */
     UserID: string;
@@ -157,7 +48,7 @@ export interface UserDetails {
     Language: Lang;
     /** UUID for the external user identifier in the KYC provider */
     ExternalUserID: string;
-    /** UUID */
+    /** UUID of the current organization the user is cloned into */
     OrganizationID: string;
     Employment?: Employment | undefined;
     /** A retail user will always have a role of "NORMAL_USER" */
@@ -175,50 +66,16 @@ export interface UserDetails {
     BrokerAccounts: BrokerAccount[];
     BankAccounts: BankAccount[];
 }
-/** TODO: to be verified when more information is available */
-export interface Employment {
-    EmployerName: string;
-    JobTitle: string;
-    StartDate: Date | undefined;
-    /** Empty if still employed */
-    EndDate: Date | undefined;
-    Type: EmploymentType;
-    Industry?: string | undefined;
-    Income: Income | undefined;
-    Contact: EmployerContact | undefined;
-    IsVerified: boolean;
-    VerifiedAt: string;
-}
-export interface Income {
-    Amount: number;
-    Currency: string;
-    Frequency: IncomeFrequency;
-}
-export interface EmployerContact {
-    Name: string;
-    Email: string;
-    Phone: string;
-    Address: string;
-}
 export interface User {
     User: UserDetails | undefined;
     MetaData: MetaData | undefined;
     Audit: Audit | undefined;
-}
-export interface UserID {
-    UserID: string;
-    OrganizationID: string;
-    Network?: Network | undefined;
+    /** List of organizations where the user is part of (cloned into) */
+    OrganizationIDs: string[];
 }
 export interface Social {
     URL: string;
     Type: SocialType;
-}
-export interface Wallet {
-    Address: string;
-    Alias: string;
-    Type: WalletType;
-    SignerType: SignerType;
 }
 export interface UserList {
     Users: User[];
@@ -231,141 +88,6 @@ export interface StatusMessage {
     Network?: Network | undefined;
     Audit: Audit | undefined;
 }
-export interface Filter {
-    UserIDs: string[];
-    Network?: Network | undefined;
-    OrganizationID: string;
-    Offset?: number | undefined;
-    Limit?: number | undefined;
-    InquiryID?: string | undefined;
-    Status?: UserStatus | undefined;
-    ExternalUserIDs: string[];
-    WalletAddress?: string | undefined;
-}
-/** This model is open to having multiple questionaires with regards to compliance like MiFID, etc. */
-export interface ComplianceQuestions {
-    USA?: USA | undefined;
-}
-export interface USA {
-    RecordedAt: Date | undefined;
-    YearsExperience: number;
-    AnnualIncome: number;
-    NetWorth: number;
-    ConversionImportance: LiquidationImportance;
-    Tolerance: RiskTolerance;
-    Objective: InvestmentObjective;
-}
-export interface BankAccount {
-    AccountName: string;
-    /** user's identifier in the bank account */
-    BankName: string;
-    /** bank address */
-    BankAddress: string;
-    /** bank account number */
-    AccountNumber: string;
-    /** bank routing number */
-    ABA: string;
-    SWIFT: string;
-    IBAN: string;
-}
-export interface BrokerAccount {
-    /** user's identifier in the broker account */
-    AccountID: string;
-    /** "RQD", etc. */
-    Broker: ClearingBroker;
-    /** broker identifier */
-    OrganizationID: string;
-    /** bank account profiles for the broker account */
-    Profiles: string[];
-}
-export declare const IDNumber: {
-    encode(message: IDNumber, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): IDNumber;
-    fromJSON(object: any): IDNumber;
-    toJSON(message: IDNumber): unknown;
-    create<I extends {
-        IssuingCountry?: string | undefined;
-        IdentificationClass?: string | undefined;
-        IdentificationNumber?: string | undefined;
-    } & {
-        IssuingCountry?: string | undefined;
-        IdentificationClass?: string | undefined;
-        IdentificationNumber?: string | undefined;
-    } & { [K in Exclude<keyof I, keyof IDNumber>]: never; }>(base?: I | undefined): IDNumber;
-    fromPartial<I_1 extends {
-        IssuingCountry?: string | undefined;
-        IdentificationClass?: string | undefined;
-        IdentificationNumber?: string | undefined;
-    } & {
-        IssuingCountry?: string | undefined;
-        IdentificationClass?: string | undefined;
-        IdentificationNumber?: string | undefined;
-    } & { [K_1 in Exclude<keyof I_1, keyof IDNumber>]: never; }>(object: I_1): IDNumber;
-};
-export declare const UserKYCDetails: {
-    encode(message: UserKYCDetails, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): UserKYCDetails;
-    fromJSON(object: any): UserKYCDetails;
-    toJSON(message: UserKYCDetails): unknown;
-    create<I extends {
-        Birthdate?: string | undefined;
-        PhoneNumber?: string | undefined;
-        EmailAddress?: string | undefined;
-        AddressStreet1?: string | undefined;
-        AddressStreet2?: string | undefined;
-        AddressCity?: string | undefined;
-        AddressSubdivision?: string | undefined;
-        AddressPostalCode?: string | undefined;
-        CountryCode?: string | undefined;
-        SocialSecurityNumber?: string | undefined;
-        IdentificationNumber?: string | undefined;
-        FirstName?: string | undefined;
-        LastName?: string | undefined;
-    } & {
-        Birthdate?: string | undefined;
-        PhoneNumber?: string | undefined;
-        EmailAddress?: string | undefined;
-        AddressStreet1?: string | undefined;
-        AddressStreet2?: string | undefined;
-        AddressCity?: string | undefined;
-        AddressSubdivision?: string | undefined;
-        AddressPostalCode?: string | undefined;
-        CountryCode?: string | undefined;
-        SocialSecurityNumber?: string | undefined;
-        IdentificationNumber?: string | undefined;
-        FirstName?: string | undefined;
-        LastName?: string | undefined;
-    } & { [K in Exclude<keyof I, keyof UserKYCDetails>]: never; }>(base?: I | undefined): UserKYCDetails;
-    fromPartial<I_1 extends {
-        Birthdate?: string | undefined;
-        PhoneNumber?: string | undefined;
-        EmailAddress?: string | undefined;
-        AddressStreet1?: string | undefined;
-        AddressStreet2?: string | undefined;
-        AddressCity?: string | undefined;
-        AddressSubdivision?: string | undefined;
-        AddressPostalCode?: string | undefined;
-        CountryCode?: string | undefined;
-        SocialSecurityNumber?: string | undefined;
-        IdentificationNumber?: string | undefined;
-        FirstName?: string | undefined;
-        LastName?: string | undefined;
-    } & {
-        Birthdate?: string | undefined;
-        PhoneNumber?: string | undefined;
-        EmailAddress?: string | undefined;
-        AddressStreet1?: string | undefined;
-        AddressStreet2?: string | undefined;
-        AddressCity?: string | undefined;
-        AddressSubdivision?: string | undefined;
-        AddressPostalCode?: string | undefined;
-        CountryCode?: string | undefined;
-        SocialSecurityNumber?: string | undefined;
-        IdentificationNumber?: string | undefined;
-        FirstName?: string | undefined;
-        LastName?: string | undefined;
-    } & { [K_1 in Exclude<keyof I_1, keyof UserKYCDetails>]: never; }>(object: I_1): UserKYCDetails;
-};
 export declare const UserDetails: {
     encode(message: UserDetails, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): UserDetails;
@@ -383,8 +105,8 @@ export declare const UserDetails: {
         Wallets?: {
             Address?: string | undefined;
             Alias?: string | undefined;
-            Type?: WalletType | undefined;
-            SignerType?: SignerType | undefined;
+            Type?: import("./user-fundings").WalletType | undefined;
+            SignerType?: import("./user-fundings").SignerType | undefined;
         }[] | undefined;
         Socials?: {
             URL?: string | undefined;
@@ -398,12 +120,12 @@ export declare const UserDetails: {
             JobTitle?: string | undefined;
             StartDate?: Date | undefined;
             EndDate?: Date | undefined;
-            Type?: EmploymentType | undefined;
+            Type?: import("./user-kyc").EmploymentType | undefined;
             Industry?: string | undefined;
             Income?: {
                 Amount?: number | undefined;
                 Currency?: string | undefined;
-                Frequency?: IncomeFrequency | undefined;
+                Frequency?: import("./user-kyc").IncomeFrequency | undefined;
             } | undefined;
             Contact?: {
                 Name?: string | undefined;
@@ -476,14 +198,14 @@ export declare const UserDetails: {
                 YearsExperience?: number | undefined;
                 AnnualIncome?: number | undefined;
                 NetWorth?: number | undefined;
-                ConversionImportance?: LiquidationImportance | undefined;
-                Tolerance?: RiskTolerance | undefined;
-                Objective?: InvestmentObjective | undefined;
+                ConversionImportance?: import("./user-compliance").LiquidationImportance | undefined;
+                Tolerance?: import("./user-compliance").RiskTolerance | undefined;
+                Objective?: import("./user-compliance").InvestmentObjective | undefined;
             } | undefined;
         }[] | undefined;
         BrokerAccounts?: {
             AccountID?: string | undefined;
-            Broker?: ClearingBroker | undefined;
+            Broker?: import("./sologenic/com-fs-order-model/broker").ClearingBroker | undefined;
             OrganizationID?: string | undefined;
             Profiles?: string[] | undefined;
         }[] | undefined;
@@ -508,23 +230,23 @@ export declare const UserDetails: {
         Wallets?: ({
             Address?: string | undefined;
             Alias?: string | undefined;
-            Type?: WalletType | undefined;
-            SignerType?: SignerType | undefined;
+            Type?: import("./user-fundings").WalletType | undefined;
+            SignerType?: import("./user-fundings").SignerType | undefined;
         }[] & ({
             Address?: string | undefined;
             Alias?: string | undefined;
-            Type?: WalletType | undefined;
-            SignerType?: SignerType | undefined;
+            Type?: import("./user-fundings").WalletType | undefined;
+            SignerType?: import("./user-fundings").SignerType | undefined;
         } & {
             Address?: string | undefined;
             Alias?: string | undefined;
-            Type?: WalletType | undefined;
-            SignerType?: SignerType | undefined;
+            Type?: import("./user-fundings").WalletType | undefined;
+            SignerType?: import("./user-fundings").SignerType | undefined;
         } & { [K in Exclude<keyof I["Wallets"][number], keyof Wallet>]: never; })[] & { [K_1 in Exclude<keyof I["Wallets"], keyof {
             Address?: string | undefined;
             Alias?: string | undefined;
-            Type?: WalletType | undefined;
-            SignerType?: SignerType | undefined;
+            Type?: import("./user-fundings").WalletType | undefined;
+            SignerType?: import("./user-fundings").SignerType | undefined;
         }[]>]: never; }) | undefined;
         Socials?: ({
             URL?: string | undefined;
@@ -547,12 +269,12 @@ export declare const UserDetails: {
             JobTitle?: string | undefined;
             StartDate?: Date | undefined;
             EndDate?: Date | undefined;
-            Type?: EmploymentType | undefined;
+            Type?: import("./user-kyc").EmploymentType | undefined;
             Industry?: string | undefined;
             Income?: {
                 Amount?: number | undefined;
                 Currency?: string | undefined;
-                Frequency?: IncomeFrequency | undefined;
+                Frequency?: import("./user-kyc").IncomeFrequency | undefined;
             } | undefined;
             Contact?: {
                 Name?: string | undefined;
@@ -567,17 +289,17 @@ export declare const UserDetails: {
             JobTitle?: string | undefined;
             StartDate?: Date | undefined;
             EndDate?: Date | undefined;
-            Type?: EmploymentType | undefined;
+            Type?: import("./user-kyc").EmploymentType | undefined;
             Industry?: string | undefined;
             Income?: ({
                 Amount?: number | undefined;
                 Currency?: string | undefined;
-                Frequency?: IncomeFrequency | undefined;
+                Frequency?: import("./user-kyc").IncomeFrequency | undefined;
             } & {
                 Amount?: number | undefined;
                 Currency?: string | undefined;
-                Frequency?: IncomeFrequency | undefined;
-            } & { [K_4 in Exclude<keyof I["Employment"]["Income"], keyof Income>]: never; }) | undefined;
+                Frequency?: import("./user-kyc").IncomeFrequency | undefined;
+            } & { [K_4 in Exclude<keyof I["Employment"]["Income"], keyof import("./user-kyc").Income>]: never; }) | undefined;
             Contact?: ({
                 Name?: string | undefined;
                 Email?: string | undefined;
@@ -588,7 +310,7 @@ export declare const UserDetails: {
                 Email?: string | undefined;
                 Phone?: string | undefined;
                 Address?: string | undefined;
-            } & { [K_5 in Exclude<keyof I["Employment"]["Contact"], keyof EmployerContact>]: never; }) | undefined;
+            } & { [K_5 in Exclude<keyof I["Employment"]["Contact"], keyof import("./user-kyc").EmployerContact>]: never; }) | undefined;
             IsVerified?: boolean | undefined;
             VerifiedAt?: string | undefined;
         } & { [K_6 in Exclude<keyof I["Employment"], keyof Employment>]: never; }) | undefined;
@@ -730,9 +452,9 @@ export declare const UserDetails: {
                 YearsExperience?: number | undefined;
                 AnnualIncome?: number | undefined;
                 NetWorth?: number | undefined;
-                ConversionImportance?: LiquidationImportance | undefined;
-                Tolerance?: RiskTolerance | undefined;
-                Objective?: InvestmentObjective | undefined;
+                ConversionImportance?: import("./user-compliance").LiquidationImportance | undefined;
+                Tolerance?: import("./user-compliance").RiskTolerance | undefined;
+                Objective?: import("./user-compliance").InvestmentObjective | undefined;
             } | undefined;
         }[] & ({
             USA?: {
@@ -740,9 +462,9 @@ export declare const UserDetails: {
                 YearsExperience?: number | undefined;
                 AnnualIncome?: number | undefined;
                 NetWorth?: number | undefined;
-                ConversionImportance?: LiquidationImportance | undefined;
-                Tolerance?: RiskTolerance | undefined;
-                Objective?: InvestmentObjective | undefined;
+                ConversionImportance?: import("./user-compliance").LiquidationImportance | undefined;
+                Tolerance?: import("./user-compliance").RiskTolerance | undefined;
+                Objective?: import("./user-compliance").InvestmentObjective | undefined;
             } | undefined;
         } & {
             USA?: ({
@@ -750,47 +472,47 @@ export declare const UserDetails: {
                 YearsExperience?: number | undefined;
                 AnnualIncome?: number | undefined;
                 NetWorth?: number | undefined;
-                ConversionImportance?: LiquidationImportance | undefined;
-                Tolerance?: RiskTolerance | undefined;
-                Objective?: InvestmentObjective | undefined;
+                ConversionImportance?: import("./user-compliance").LiquidationImportance | undefined;
+                Tolerance?: import("./user-compliance").RiskTolerance | undefined;
+                Objective?: import("./user-compliance").InvestmentObjective | undefined;
             } & {
                 RecordedAt?: Date | undefined;
                 YearsExperience?: number | undefined;
                 AnnualIncome?: number | undefined;
                 NetWorth?: number | undefined;
-                ConversionImportance?: LiquidationImportance | undefined;
-                Tolerance?: RiskTolerance | undefined;
-                Objective?: InvestmentObjective | undefined;
-            } & { [K_17 in Exclude<keyof I["ComplianceQuestions"][number]["USA"], keyof USA>]: never; }) | undefined;
+                ConversionImportance?: import("./user-compliance").LiquidationImportance | undefined;
+                Tolerance?: import("./user-compliance").RiskTolerance | undefined;
+                Objective?: import("./user-compliance").InvestmentObjective | undefined;
+            } & { [K_17 in Exclude<keyof I["ComplianceQuestions"][number]["USA"], keyof import("./user-compliance").USA>]: never; }) | undefined;
         } & { [K_18 in Exclude<keyof I["ComplianceQuestions"][number], "USA">]: never; })[] & { [K_19 in Exclude<keyof I["ComplianceQuestions"], keyof {
             USA?: {
                 RecordedAt?: Date | undefined;
                 YearsExperience?: number | undefined;
                 AnnualIncome?: number | undefined;
                 NetWorth?: number | undefined;
-                ConversionImportance?: LiquidationImportance | undefined;
-                Tolerance?: RiskTolerance | undefined;
-                Objective?: InvestmentObjective | undefined;
+                ConversionImportance?: import("./user-compliance").LiquidationImportance | undefined;
+                Tolerance?: import("./user-compliance").RiskTolerance | undefined;
+                Objective?: import("./user-compliance").InvestmentObjective | undefined;
             } | undefined;
         }[]>]: never; }) | undefined;
         BrokerAccounts?: ({
             AccountID?: string | undefined;
-            Broker?: ClearingBroker | undefined;
+            Broker?: import("./sologenic/com-fs-order-model/broker").ClearingBroker | undefined;
             OrganizationID?: string | undefined;
             Profiles?: string[] | undefined;
         }[] & ({
             AccountID?: string | undefined;
-            Broker?: ClearingBroker | undefined;
+            Broker?: import("./sologenic/com-fs-order-model/broker").ClearingBroker | undefined;
             OrganizationID?: string | undefined;
             Profiles?: string[] | undefined;
         } & {
             AccountID?: string | undefined;
-            Broker?: ClearingBroker | undefined;
+            Broker?: import("./sologenic/com-fs-order-model/broker").ClearingBroker | undefined;
             OrganizationID?: string | undefined;
             Profiles?: (string[] & string[] & { [K_20 in Exclude<keyof I["BrokerAccounts"][number]["Profiles"], keyof string[]>]: never; }) | undefined;
         } & { [K_21 in Exclude<keyof I["BrokerAccounts"][number], keyof BrokerAccount>]: never; })[] & { [K_22 in Exclude<keyof I["BrokerAccounts"], keyof {
             AccountID?: string | undefined;
-            Broker?: ClearingBroker | undefined;
+            Broker?: import("./sologenic/com-fs-order-model/broker").ClearingBroker | undefined;
             OrganizationID?: string | undefined;
             Profiles?: string[] | undefined;
         }[]>]: never; }) | undefined;
@@ -840,8 +562,8 @@ export declare const UserDetails: {
         Wallets?: {
             Address?: string | undefined;
             Alias?: string | undefined;
-            Type?: WalletType | undefined;
-            SignerType?: SignerType | undefined;
+            Type?: import("./user-fundings").WalletType | undefined;
+            SignerType?: import("./user-fundings").SignerType | undefined;
         }[] | undefined;
         Socials?: {
             URL?: string | undefined;
@@ -855,12 +577,12 @@ export declare const UserDetails: {
             JobTitle?: string | undefined;
             StartDate?: Date | undefined;
             EndDate?: Date | undefined;
-            Type?: EmploymentType | undefined;
+            Type?: import("./user-kyc").EmploymentType | undefined;
             Industry?: string | undefined;
             Income?: {
                 Amount?: number | undefined;
                 Currency?: string | undefined;
-                Frequency?: IncomeFrequency | undefined;
+                Frequency?: import("./user-kyc").IncomeFrequency | undefined;
             } | undefined;
             Contact?: {
                 Name?: string | undefined;
@@ -933,14 +655,14 @@ export declare const UserDetails: {
                 YearsExperience?: number | undefined;
                 AnnualIncome?: number | undefined;
                 NetWorth?: number | undefined;
-                ConversionImportance?: LiquidationImportance | undefined;
-                Tolerance?: RiskTolerance | undefined;
-                Objective?: InvestmentObjective | undefined;
+                ConversionImportance?: import("./user-compliance").LiquidationImportance | undefined;
+                Tolerance?: import("./user-compliance").RiskTolerance | undefined;
+                Objective?: import("./user-compliance").InvestmentObjective | undefined;
             } | undefined;
         }[] | undefined;
         BrokerAccounts?: {
             AccountID?: string | undefined;
-            Broker?: ClearingBroker | undefined;
+            Broker?: import("./sologenic/com-fs-order-model/broker").ClearingBroker | undefined;
             OrganizationID?: string | undefined;
             Profiles?: string[] | undefined;
         }[] | undefined;
@@ -965,23 +687,23 @@ export declare const UserDetails: {
         Wallets?: ({
             Address?: string | undefined;
             Alias?: string | undefined;
-            Type?: WalletType | undefined;
-            SignerType?: SignerType | undefined;
+            Type?: import("./user-fundings").WalletType | undefined;
+            SignerType?: import("./user-fundings").SignerType | undefined;
         }[] & ({
             Address?: string | undefined;
             Alias?: string | undefined;
-            Type?: WalletType | undefined;
-            SignerType?: SignerType | undefined;
+            Type?: import("./user-fundings").WalletType | undefined;
+            SignerType?: import("./user-fundings").SignerType | undefined;
         } & {
             Address?: string | undefined;
             Alias?: string | undefined;
-            Type?: WalletType | undefined;
-            SignerType?: SignerType | undefined;
+            Type?: import("./user-fundings").WalletType | undefined;
+            SignerType?: import("./user-fundings").SignerType | undefined;
         } & { [K_26 in Exclude<keyof I_1["Wallets"][number], keyof Wallet>]: never; })[] & { [K_27 in Exclude<keyof I_1["Wallets"], keyof {
             Address?: string | undefined;
             Alias?: string | undefined;
-            Type?: WalletType | undefined;
-            SignerType?: SignerType | undefined;
+            Type?: import("./user-fundings").WalletType | undefined;
+            SignerType?: import("./user-fundings").SignerType | undefined;
         }[]>]: never; }) | undefined;
         Socials?: ({
             URL?: string | undefined;
@@ -1004,12 +726,12 @@ export declare const UserDetails: {
             JobTitle?: string | undefined;
             StartDate?: Date | undefined;
             EndDate?: Date | undefined;
-            Type?: EmploymentType | undefined;
+            Type?: import("./user-kyc").EmploymentType | undefined;
             Industry?: string | undefined;
             Income?: {
                 Amount?: number | undefined;
                 Currency?: string | undefined;
-                Frequency?: IncomeFrequency | undefined;
+                Frequency?: import("./user-kyc").IncomeFrequency | undefined;
             } | undefined;
             Contact?: {
                 Name?: string | undefined;
@@ -1024,17 +746,17 @@ export declare const UserDetails: {
             JobTitle?: string | undefined;
             StartDate?: Date | undefined;
             EndDate?: Date | undefined;
-            Type?: EmploymentType | undefined;
+            Type?: import("./user-kyc").EmploymentType | undefined;
             Industry?: string | undefined;
             Income?: ({
                 Amount?: number | undefined;
                 Currency?: string | undefined;
-                Frequency?: IncomeFrequency | undefined;
+                Frequency?: import("./user-kyc").IncomeFrequency | undefined;
             } & {
                 Amount?: number | undefined;
                 Currency?: string | undefined;
-                Frequency?: IncomeFrequency | undefined;
-            } & { [K_30 in Exclude<keyof I_1["Employment"]["Income"], keyof Income>]: never; }) | undefined;
+                Frequency?: import("./user-kyc").IncomeFrequency | undefined;
+            } & { [K_30 in Exclude<keyof I_1["Employment"]["Income"], keyof import("./user-kyc").Income>]: never; }) | undefined;
             Contact?: ({
                 Name?: string | undefined;
                 Email?: string | undefined;
@@ -1045,7 +767,7 @@ export declare const UserDetails: {
                 Email?: string | undefined;
                 Phone?: string | undefined;
                 Address?: string | undefined;
-            } & { [K_31 in Exclude<keyof I_1["Employment"]["Contact"], keyof EmployerContact>]: never; }) | undefined;
+            } & { [K_31 in Exclude<keyof I_1["Employment"]["Contact"], keyof import("./user-kyc").EmployerContact>]: never; }) | undefined;
             IsVerified?: boolean | undefined;
             VerifiedAt?: string | undefined;
         } & { [K_32 in Exclude<keyof I_1["Employment"], keyof Employment>]: never; }) | undefined;
@@ -1187,9 +909,9 @@ export declare const UserDetails: {
                 YearsExperience?: number | undefined;
                 AnnualIncome?: number | undefined;
                 NetWorth?: number | undefined;
-                ConversionImportance?: LiquidationImportance | undefined;
-                Tolerance?: RiskTolerance | undefined;
-                Objective?: InvestmentObjective | undefined;
+                ConversionImportance?: import("./user-compliance").LiquidationImportance | undefined;
+                Tolerance?: import("./user-compliance").RiskTolerance | undefined;
+                Objective?: import("./user-compliance").InvestmentObjective | undefined;
             } | undefined;
         }[] & ({
             USA?: {
@@ -1197,9 +919,9 @@ export declare const UserDetails: {
                 YearsExperience?: number | undefined;
                 AnnualIncome?: number | undefined;
                 NetWorth?: number | undefined;
-                ConversionImportance?: LiquidationImportance | undefined;
-                Tolerance?: RiskTolerance | undefined;
-                Objective?: InvestmentObjective | undefined;
+                ConversionImportance?: import("./user-compliance").LiquidationImportance | undefined;
+                Tolerance?: import("./user-compliance").RiskTolerance | undefined;
+                Objective?: import("./user-compliance").InvestmentObjective | undefined;
             } | undefined;
         } & {
             USA?: ({
@@ -1207,47 +929,47 @@ export declare const UserDetails: {
                 YearsExperience?: number | undefined;
                 AnnualIncome?: number | undefined;
                 NetWorth?: number | undefined;
-                ConversionImportance?: LiquidationImportance | undefined;
-                Tolerance?: RiskTolerance | undefined;
-                Objective?: InvestmentObjective | undefined;
+                ConversionImportance?: import("./user-compliance").LiquidationImportance | undefined;
+                Tolerance?: import("./user-compliance").RiskTolerance | undefined;
+                Objective?: import("./user-compliance").InvestmentObjective | undefined;
             } & {
                 RecordedAt?: Date | undefined;
                 YearsExperience?: number | undefined;
                 AnnualIncome?: number | undefined;
                 NetWorth?: number | undefined;
-                ConversionImportance?: LiquidationImportance | undefined;
-                Tolerance?: RiskTolerance | undefined;
-                Objective?: InvestmentObjective | undefined;
-            } & { [K_43 in Exclude<keyof I_1["ComplianceQuestions"][number]["USA"], keyof USA>]: never; }) | undefined;
+                ConversionImportance?: import("./user-compliance").LiquidationImportance | undefined;
+                Tolerance?: import("./user-compliance").RiskTolerance | undefined;
+                Objective?: import("./user-compliance").InvestmentObjective | undefined;
+            } & { [K_43 in Exclude<keyof I_1["ComplianceQuestions"][number]["USA"], keyof import("./user-compliance").USA>]: never; }) | undefined;
         } & { [K_44 in Exclude<keyof I_1["ComplianceQuestions"][number], "USA">]: never; })[] & { [K_45 in Exclude<keyof I_1["ComplianceQuestions"], keyof {
             USA?: {
                 RecordedAt?: Date | undefined;
                 YearsExperience?: number | undefined;
                 AnnualIncome?: number | undefined;
                 NetWorth?: number | undefined;
-                ConversionImportance?: LiquidationImportance | undefined;
-                Tolerance?: RiskTolerance | undefined;
-                Objective?: InvestmentObjective | undefined;
+                ConversionImportance?: import("./user-compliance").LiquidationImportance | undefined;
+                Tolerance?: import("./user-compliance").RiskTolerance | undefined;
+                Objective?: import("./user-compliance").InvestmentObjective | undefined;
             } | undefined;
         }[]>]: never; }) | undefined;
         BrokerAccounts?: ({
             AccountID?: string | undefined;
-            Broker?: ClearingBroker | undefined;
+            Broker?: import("./sologenic/com-fs-order-model/broker").ClearingBroker | undefined;
             OrganizationID?: string | undefined;
             Profiles?: string[] | undefined;
         }[] & ({
             AccountID?: string | undefined;
-            Broker?: ClearingBroker | undefined;
+            Broker?: import("./sologenic/com-fs-order-model/broker").ClearingBroker | undefined;
             OrganizationID?: string | undefined;
             Profiles?: string[] | undefined;
         } & {
             AccountID?: string | undefined;
-            Broker?: ClearingBroker | undefined;
+            Broker?: import("./sologenic/com-fs-order-model/broker").ClearingBroker | undefined;
             OrganizationID?: string | undefined;
             Profiles?: (string[] & string[] & { [K_46 in Exclude<keyof I_1["BrokerAccounts"][number]["Profiles"], keyof string[]>]: never; }) | undefined;
         } & { [K_47 in Exclude<keyof I_1["BrokerAccounts"][number], keyof BrokerAccount>]: never; })[] & { [K_48 in Exclude<keyof I_1["BrokerAccounts"], keyof {
             AccountID?: string | undefined;
-            Broker?: ClearingBroker | undefined;
+            Broker?: import("./sologenic/com-fs-order-model/broker").ClearingBroker | undefined;
             OrganizationID?: string | undefined;
             Profiles?: string[] | undefined;
         }[]>]: never; }) | undefined;
@@ -1286,164 +1008,6 @@ export declare const UserDetails: {
         }[]>]: never; }) | undefined;
     } & { [K_51 in Exclude<keyof I_1, keyof UserDetails>]: never; }>(object: I_1): UserDetails;
 };
-export declare const Employment: {
-    encode(message: Employment, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): Employment;
-    fromJSON(object: any): Employment;
-    toJSON(message: Employment): unknown;
-    create<I extends {
-        EmployerName?: string | undefined;
-        JobTitle?: string | undefined;
-        StartDate?: Date | undefined;
-        EndDate?: Date | undefined;
-        Type?: EmploymentType | undefined;
-        Industry?: string | undefined;
-        Income?: {
-            Amount?: number | undefined;
-            Currency?: string | undefined;
-            Frequency?: IncomeFrequency | undefined;
-        } | undefined;
-        Contact?: {
-            Name?: string | undefined;
-            Email?: string | undefined;
-            Phone?: string | undefined;
-            Address?: string | undefined;
-        } | undefined;
-        IsVerified?: boolean | undefined;
-        VerifiedAt?: string | undefined;
-    } & {
-        EmployerName?: string | undefined;
-        JobTitle?: string | undefined;
-        StartDate?: Date | undefined;
-        EndDate?: Date | undefined;
-        Type?: EmploymentType | undefined;
-        Industry?: string | undefined;
-        Income?: ({
-            Amount?: number | undefined;
-            Currency?: string | undefined;
-            Frequency?: IncomeFrequency | undefined;
-        } & {
-            Amount?: number | undefined;
-            Currency?: string | undefined;
-            Frequency?: IncomeFrequency | undefined;
-        } & { [K in Exclude<keyof I["Income"], keyof Income>]: never; }) | undefined;
-        Contact?: ({
-            Name?: string | undefined;
-            Email?: string | undefined;
-            Phone?: string | undefined;
-            Address?: string | undefined;
-        } & {
-            Name?: string | undefined;
-            Email?: string | undefined;
-            Phone?: string | undefined;
-            Address?: string | undefined;
-        } & { [K_1 in Exclude<keyof I["Contact"], keyof EmployerContact>]: never; }) | undefined;
-        IsVerified?: boolean | undefined;
-        VerifiedAt?: string | undefined;
-    } & { [K_2 in Exclude<keyof I, keyof Employment>]: never; }>(base?: I | undefined): Employment;
-    fromPartial<I_1 extends {
-        EmployerName?: string | undefined;
-        JobTitle?: string | undefined;
-        StartDate?: Date | undefined;
-        EndDate?: Date | undefined;
-        Type?: EmploymentType | undefined;
-        Industry?: string | undefined;
-        Income?: {
-            Amount?: number | undefined;
-            Currency?: string | undefined;
-            Frequency?: IncomeFrequency | undefined;
-        } | undefined;
-        Contact?: {
-            Name?: string | undefined;
-            Email?: string | undefined;
-            Phone?: string | undefined;
-            Address?: string | undefined;
-        } | undefined;
-        IsVerified?: boolean | undefined;
-        VerifiedAt?: string | undefined;
-    } & {
-        EmployerName?: string | undefined;
-        JobTitle?: string | undefined;
-        StartDate?: Date | undefined;
-        EndDate?: Date | undefined;
-        Type?: EmploymentType | undefined;
-        Industry?: string | undefined;
-        Income?: ({
-            Amount?: number | undefined;
-            Currency?: string | undefined;
-            Frequency?: IncomeFrequency | undefined;
-        } & {
-            Amount?: number | undefined;
-            Currency?: string | undefined;
-            Frequency?: IncomeFrequency | undefined;
-        } & { [K_3 in Exclude<keyof I_1["Income"], keyof Income>]: never; }) | undefined;
-        Contact?: ({
-            Name?: string | undefined;
-            Email?: string | undefined;
-            Phone?: string | undefined;
-            Address?: string | undefined;
-        } & {
-            Name?: string | undefined;
-            Email?: string | undefined;
-            Phone?: string | undefined;
-            Address?: string | undefined;
-        } & { [K_4 in Exclude<keyof I_1["Contact"], keyof EmployerContact>]: never; }) | undefined;
-        IsVerified?: boolean | undefined;
-        VerifiedAt?: string | undefined;
-    } & { [K_5 in Exclude<keyof I_1, keyof Employment>]: never; }>(object: I_1): Employment;
-};
-export declare const Income: {
-    encode(message: Income, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): Income;
-    fromJSON(object: any): Income;
-    toJSON(message: Income): unknown;
-    create<I extends {
-        Amount?: number | undefined;
-        Currency?: string | undefined;
-        Frequency?: IncomeFrequency | undefined;
-    } & {
-        Amount?: number | undefined;
-        Currency?: string | undefined;
-        Frequency?: IncomeFrequency | undefined;
-    } & { [K in Exclude<keyof I, keyof Income>]: never; }>(base?: I | undefined): Income;
-    fromPartial<I_1 extends {
-        Amount?: number | undefined;
-        Currency?: string | undefined;
-        Frequency?: IncomeFrequency | undefined;
-    } & {
-        Amount?: number | undefined;
-        Currency?: string | undefined;
-        Frequency?: IncomeFrequency | undefined;
-    } & { [K_1 in Exclude<keyof I_1, keyof Income>]: never; }>(object: I_1): Income;
-};
-export declare const EmployerContact: {
-    encode(message: EmployerContact, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): EmployerContact;
-    fromJSON(object: any): EmployerContact;
-    toJSON(message: EmployerContact): unknown;
-    create<I extends {
-        Name?: string | undefined;
-        Email?: string | undefined;
-        Phone?: string | undefined;
-        Address?: string | undefined;
-    } & {
-        Name?: string | undefined;
-        Email?: string | undefined;
-        Phone?: string | undefined;
-        Address?: string | undefined;
-    } & { [K in Exclude<keyof I, keyof EmployerContact>]: never; }>(base?: I | undefined): EmployerContact;
-    fromPartial<I_1 extends {
-        Name?: string | undefined;
-        Email?: string | undefined;
-        Phone?: string | undefined;
-        Address?: string | undefined;
-    } & {
-        Name?: string | undefined;
-        Email?: string | undefined;
-        Phone?: string | undefined;
-        Address?: string | undefined;
-    } & { [K_1 in Exclude<keyof I_1, keyof EmployerContact>]: never; }>(object: I_1): EmployerContact;
-};
 export declare const User: {
     encode(message: User, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): User;
@@ -1462,8 +1026,8 @@ export declare const User: {
             Wallets?: {
                 Address?: string | undefined;
                 Alias?: string | undefined;
-                Type?: WalletType | undefined;
-                SignerType?: SignerType | undefined;
+                Type?: import("./user-fundings").WalletType | undefined;
+                SignerType?: import("./user-fundings").SignerType | undefined;
             }[] | undefined;
             Socials?: {
                 URL?: string | undefined;
@@ -1477,12 +1041,12 @@ export declare const User: {
                 JobTitle?: string | undefined;
                 StartDate?: Date | undefined;
                 EndDate?: Date | undefined;
-                Type?: EmploymentType | undefined;
+                Type?: import("./user-kyc").EmploymentType | undefined;
                 Industry?: string | undefined;
                 Income?: {
                     Amount?: number | undefined;
                     Currency?: string | undefined;
-                    Frequency?: IncomeFrequency | undefined;
+                    Frequency?: import("./user-kyc").IncomeFrequency | undefined;
                 } | undefined;
                 Contact?: {
                     Name?: string | undefined;
@@ -1555,14 +1119,14 @@ export declare const User: {
                     YearsExperience?: number | undefined;
                     AnnualIncome?: number | undefined;
                     NetWorth?: number | undefined;
-                    ConversionImportance?: LiquidationImportance | undefined;
-                    Tolerance?: RiskTolerance | undefined;
-                    Objective?: InvestmentObjective | undefined;
+                    ConversionImportance?: import("./user-compliance").LiquidationImportance | undefined;
+                    Tolerance?: import("./user-compliance").RiskTolerance | undefined;
+                    Objective?: import("./user-compliance").InvestmentObjective | undefined;
                 } | undefined;
             }[] | undefined;
             BrokerAccounts?: {
                 AccountID?: string | undefined;
-                Broker?: ClearingBroker | undefined;
+                Broker?: import("./sologenic/com-fs-order-model/broker").ClearingBroker | undefined;
                 OrganizationID?: string | undefined;
                 Profiles?: string[] | undefined;
             }[] | undefined;
@@ -1587,6 +1151,7 @@ export declare const User: {
             ChangedAt?: Date | undefined;
             Reason?: string | undefined;
         } | undefined;
+        OrganizationIDs?: string[] | undefined;
     } & {
         User?: ({
             UserID?: string | undefined;
@@ -1600,8 +1165,8 @@ export declare const User: {
             Wallets?: {
                 Address?: string | undefined;
                 Alias?: string | undefined;
-                Type?: WalletType | undefined;
-                SignerType?: SignerType | undefined;
+                Type?: import("./user-fundings").WalletType | undefined;
+                SignerType?: import("./user-fundings").SignerType | undefined;
             }[] | undefined;
             Socials?: {
                 URL?: string | undefined;
@@ -1615,12 +1180,12 @@ export declare const User: {
                 JobTitle?: string | undefined;
                 StartDate?: Date | undefined;
                 EndDate?: Date | undefined;
-                Type?: EmploymentType | undefined;
+                Type?: import("./user-kyc").EmploymentType | undefined;
                 Industry?: string | undefined;
                 Income?: {
                     Amount?: number | undefined;
                     Currency?: string | undefined;
-                    Frequency?: IncomeFrequency | undefined;
+                    Frequency?: import("./user-kyc").IncomeFrequency | undefined;
                 } | undefined;
                 Contact?: {
                     Name?: string | undefined;
@@ -1693,14 +1258,14 @@ export declare const User: {
                     YearsExperience?: number | undefined;
                     AnnualIncome?: number | undefined;
                     NetWorth?: number | undefined;
-                    ConversionImportance?: LiquidationImportance | undefined;
-                    Tolerance?: RiskTolerance | undefined;
-                    Objective?: InvestmentObjective | undefined;
+                    ConversionImportance?: import("./user-compliance").LiquidationImportance | undefined;
+                    Tolerance?: import("./user-compliance").RiskTolerance | undefined;
+                    Objective?: import("./user-compliance").InvestmentObjective | undefined;
                 } | undefined;
             }[] | undefined;
             BrokerAccounts?: {
                 AccountID?: string | undefined;
-                Broker?: ClearingBroker | undefined;
+                Broker?: import("./sologenic/com-fs-order-model/broker").ClearingBroker | undefined;
                 OrganizationID?: string | undefined;
                 Profiles?: string[] | undefined;
             }[] | undefined;
@@ -1725,23 +1290,23 @@ export declare const User: {
             Wallets?: ({
                 Address?: string | undefined;
                 Alias?: string | undefined;
-                Type?: WalletType | undefined;
-                SignerType?: SignerType | undefined;
+                Type?: import("./user-fundings").WalletType | undefined;
+                SignerType?: import("./user-fundings").SignerType | undefined;
             }[] & ({
                 Address?: string | undefined;
                 Alias?: string | undefined;
-                Type?: WalletType | undefined;
-                SignerType?: SignerType | undefined;
+                Type?: import("./user-fundings").WalletType | undefined;
+                SignerType?: import("./user-fundings").SignerType | undefined;
             } & {
                 Address?: string | undefined;
                 Alias?: string | undefined;
-                Type?: WalletType | undefined;
-                SignerType?: SignerType | undefined;
+                Type?: import("./user-fundings").WalletType | undefined;
+                SignerType?: import("./user-fundings").SignerType | undefined;
             } & { [K in Exclude<keyof I["User"]["Wallets"][number], keyof Wallet>]: never; })[] & { [K_1 in Exclude<keyof I["User"]["Wallets"], keyof {
                 Address?: string | undefined;
                 Alias?: string | undefined;
-                Type?: WalletType | undefined;
-                SignerType?: SignerType | undefined;
+                Type?: import("./user-fundings").WalletType | undefined;
+                SignerType?: import("./user-fundings").SignerType | undefined;
             }[]>]: never; }) | undefined;
             Socials?: ({
                 URL?: string | undefined;
@@ -1764,12 +1329,12 @@ export declare const User: {
                 JobTitle?: string | undefined;
                 StartDate?: Date | undefined;
                 EndDate?: Date | undefined;
-                Type?: EmploymentType | undefined;
+                Type?: import("./user-kyc").EmploymentType | undefined;
                 Industry?: string | undefined;
                 Income?: {
                     Amount?: number | undefined;
                     Currency?: string | undefined;
-                    Frequency?: IncomeFrequency | undefined;
+                    Frequency?: import("./user-kyc").IncomeFrequency | undefined;
                 } | undefined;
                 Contact?: {
                     Name?: string | undefined;
@@ -1784,17 +1349,17 @@ export declare const User: {
                 JobTitle?: string | undefined;
                 StartDate?: Date | undefined;
                 EndDate?: Date | undefined;
-                Type?: EmploymentType | undefined;
+                Type?: import("./user-kyc").EmploymentType | undefined;
                 Industry?: string | undefined;
                 Income?: ({
                     Amount?: number | undefined;
                     Currency?: string | undefined;
-                    Frequency?: IncomeFrequency | undefined;
+                    Frequency?: import("./user-kyc").IncomeFrequency | undefined;
                 } & {
                     Amount?: number | undefined;
                     Currency?: string | undefined;
-                    Frequency?: IncomeFrequency | undefined;
-                } & { [K_4 in Exclude<keyof I["User"]["Employment"]["Income"], keyof Income>]: never; }) | undefined;
+                    Frequency?: import("./user-kyc").IncomeFrequency | undefined;
+                } & { [K_4 in Exclude<keyof I["User"]["Employment"]["Income"], keyof import("./user-kyc").Income>]: never; }) | undefined;
                 Contact?: ({
                     Name?: string | undefined;
                     Email?: string | undefined;
@@ -1805,7 +1370,7 @@ export declare const User: {
                     Email?: string | undefined;
                     Phone?: string | undefined;
                     Address?: string | undefined;
-                } & { [K_5 in Exclude<keyof I["User"]["Employment"]["Contact"], keyof EmployerContact>]: never; }) | undefined;
+                } & { [K_5 in Exclude<keyof I["User"]["Employment"]["Contact"], keyof import("./user-kyc").EmployerContact>]: never; }) | undefined;
                 IsVerified?: boolean | undefined;
                 VerifiedAt?: string | undefined;
             } & { [K_6 in Exclude<keyof I["User"]["Employment"], keyof Employment>]: never; }) | undefined;
@@ -1947,9 +1512,9 @@ export declare const User: {
                     YearsExperience?: number | undefined;
                     AnnualIncome?: number | undefined;
                     NetWorth?: number | undefined;
-                    ConversionImportance?: LiquidationImportance | undefined;
-                    Tolerance?: RiskTolerance | undefined;
-                    Objective?: InvestmentObjective | undefined;
+                    ConversionImportance?: import("./user-compliance").LiquidationImportance | undefined;
+                    Tolerance?: import("./user-compliance").RiskTolerance | undefined;
+                    Objective?: import("./user-compliance").InvestmentObjective | undefined;
                 } | undefined;
             }[] & ({
                 USA?: {
@@ -1957,9 +1522,9 @@ export declare const User: {
                     YearsExperience?: number | undefined;
                     AnnualIncome?: number | undefined;
                     NetWorth?: number | undefined;
-                    ConversionImportance?: LiquidationImportance | undefined;
-                    Tolerance?: RiskTolerance | undefined;
-                    Objective?: InvestmentObjective | undefined;
+                    ConversionImportance?: import("./user-compliance").LiquidationImportance | undefined;
+                    Tolerance?: import("./user-compliance").RiskTolerance | undefined;
+                    Objective?: import("./user-compliance").InvestmentObjective | undefined;
                 } | undefined;
             } & {
                 USA?: ({
@@ -1967,47 +1532,47 @@ export declare const User: {
                     YearsExperience?: number | undefined;
                     AnnualIncome?: number | undefined;
                     NetWorth?: number | undefined;
-                    ConversionImportance?: LiquidationImportance | undefined;
-                    Tolerance?: RiskTolerance | undefined;
-                    Objective?: InvestmentObjective | undefined;
+                    ConversionImportance?: import("./user-compliance").LiquidationImportance | undefined;
+                    Tolerance?: import("./user-compliance").RiskTolerance | undefined;
+                    Objective?: import("./user-compliance").InvestmentObjective | undefined;
                 } & {
                     RecordedAt?: Date | undefined;
                     YearsExperience?: number | undefined;
                     AnnualIncome?: number | undefined;
                     NetWorth?: number | undefined;
-                    ConversionImportance?: LiquidationImportance | undefined;
-                    Tolerance?: RiskTolerance | undefined;
-                    Objective?: InvestmentObjective | undefined;
-                } & { [K_17 in Exclude<keyof I["User"]["ComplianceQuestions"][number]["USA"], keyof USA>]: never; }) | undefined;
+                    ConversionImportance?: import("./user-compliance").LiquidationImportance | undefined;
+                    Tolerance?: import("./user-compliance").RiskTolerance | undefined;
+                    Objective?: import("./user-compliance").InvestmentObjective | undefined;
+                } & { [K_17 in Exclude<keyof I["User"]["ComplianceQuestions"][number]["USA"], keyof import("./user-compliance").USA>]: never; }) | undefined;
             } & { [K_18 in Exclude<keyof I["User"]["ComplianceQuestions"][number], "USA">]: never; })[] & { [K_19 in Exclude<keyof I["User"]["ComplianceQuestions"], keyof {
                 USA?: {
                     RecordedAt?: Date | undefined;
                     YearsExperience?: number | undefined;
                     AnnualIncome?: number | undefined;
                     NetWorth?: number | undefined;
-                    ConversionImportance?: LiquidationImportance | undefined;
-                    Tolerance?: RiskTolerance | undefined;
-                    Objective?: InvestmentObjective | undefined;
+                    ConversionImportance?: import("./user-compliance").LiquidationImportance | undefined;
+                    Tolerance?: import("./user-compliance").RiskTolerance | undefined;
+                    Objective?: import("./user-compliance").InvestmentObjective | undefined;
                 } | undefined;
             }[]>]: never; }) | undefined;
             BrokerAccounts?: ({
                 AccountID?: string | undefined;
-                Broker?: ClearingBroker | undefined;
+                Broker?: import("./sologenic/com-fs-order-model/broker").ClearingBroker | undefined;
                 OrganizationID?: string | undefined;
                 Profiles?: string[] | undefined;
             }[] & ({
                 AccountID?: string | undefined;
-                Broker?: ClearingBroker | undefined;
+                Broker?: import("./sologenic/com-fs-order-model/broker").ClearingBroker | undefined;
                 OrganizationID?: string | undefined;
                 Profiles?: string[] | undefined;
             } & {
                 AccountID?: string | undefined;
-                Broker?: ClearingBroker | undefined;
+                Broker?: import("./sologenic/com-fs-order-model/broker").ClearingBroker | undefined;
                 OrganizationID?: string | undefined;
                 Profiles?: (string[] & string[] & { [K_20 in Exclude<keyof I["User"]["BrokerAccounts"][number]["Profiles"], keyof string[]>]: never; }) | undefined;
             } & { [K_21 in Exclude<keyof I["User"]["BrokerAccounts"][number], keyof BrokerAccount>]: never; })[] & { [K_22 in Exclude<keyof I["User"]["BrokerAccounts"], keyof {
                 AccountID?: string | undefined;
-                Broker?: ClearingBroker | undefined;
+                Broker?: import("./sologenic/com-fs-order-model/broker").ClearingBroker | undefined;
                 OrganizationID?: string | undefined;
                 Profiles?: string[] | undefined;
             }[]>]: never; }) | undefined;
@@ -2065,7 +1630,8 @@ export declare const User: {
             ChangedAt?: Date | undefined;
             Reason?: string | undefined;
         } & { [K_27 in Exclude<keyof I["Audit"], keyof Audit>]: never; }) | undefined;
-    } & { [K_28 in Exclude<keyof I, keyof User>]: never; }>(base?: I | undefined): User;
+        OrganizationIDs?: (string[] & string[] & { [K_28 in Exclude<keyof I["OrganizationIDs"], keyof string[]>]: never; }) | undefined;
+    } & { [K_29 in Exclude<keyof I, keyof User>]: never; }>(base?: I | undefined): User;
     fromPartial<I_1 extends {
         User?: {
             UserID?: string | undefined;
@@ -2079,8 +1645,8 @@ export declare const User: {
             Wallets?: {
                 Address?: string | undefined;
                 Alias?: string | undefined;
-                Type?: WalletType | undefined;
-                SignerType?: SignerType | undefined;
+                Type?: import("./user-fundings").WalletType | undefined;
+                SignerType?: import("./user-fundings").SignerType | undefined;
             }[] | undefined;
             Socials?: {
                 URL?: string | undefined;
@@ -2094,12 +1660,12 @@ export declare const User: {
                 JobTitle?: string | undefined;
                 StartDate?: Date | undefined;
                 EndDate?: Date | undefined;
-                Type?: EmploymentType | undefined;
+                Type?: import("./user-kyc").EmploymentType | undefined;
                 Industry?: string | undefined;
                 Income?: {
                     Amount?: number | undefined;
                     Currency?: string | undefined;
-                    Frequency?: IncomeFrequency | undefined;
+                    Frequency?: import("./user-kyc").IncomeFrequency | undefined;
                 } | undefined;
                 Contact?: {
                     Name?: string | undefined;
@@ -2172,14 +1738,14 @@ export declare const User: {
                     YearsExperience?: number | undefined;
                     AnnualIncome?: number | undefined;
                     NetWorth?: number | undefined;
-                    ConversionImportance?: LiquidationImportance | undefined;
-                    Tolerance?: RiskTolerance | undefined;
-                    Objective?: InvestmentObjective | undefined;
+                    ConversionImportance?: import("./user-compliance").LiquidationImportance | undefined;
+                    Tolerance?: import("./user-compliance").RiskTolerance | undefined;
+                    Objective?: import("./user-compliance").InvestmentObjective | undefined;
                 } | undefined;
             }[] | undefined;
             BrokerAccounts?: {
                 AccountID?: string | undefined;
-                Broker?: ClearingBroker | undefined;
+                Broker?: import("./sologenic/com-fs-order-model/broker").ClearingBroker | undefined;
                 OrganizationID?: string | undefined;
                 Profiles?: string[] | undefined;
             }[] | undefined;
@@ -2204,6 +1770,7 @@ export declare const User: {
             ChangedAt?: Date | undefined;
             Reason?: string | undefined;
         } | undefined;
+        OrganizationIDs?: string[] | undefined;
     } & {
         User?: ({
             UserID?: string | undefined;
@@ -2217,8 +1784,8 @@ export declare const User: {
             Wallets?: {
                 Address?: string | undefined;
                 Alias?: string | undefined;
-                Type?: WalletType | undefined;
-                SignerType?: SignerType | undefined;
+                Type?: import("./user-fundings").WalletType | undefined;
+                SignerType?: import("./user-fundings").SignerType | undefined;
             }[] | undefined;
             Socials?: {
                 URL?: string | undefined;
@@ -2232,12 +1799,12 @@ export declare const User: {
                 JobTitle?: string | undefined;
                 StartDate?: Date | undefined;
                 EndDate?: Date | undefined;
-                Type?: EmploymentType | undefined;
+                Type?: import("./user-kyc").EmploymentType | undefined;
                 Industry?: string | undefined;
                 Income?: {
                     Amount?: number | undefined;
                     Currency?: string | undefined;
-                    Frequency?: IncomeFrequency | undefined;
+                    Frequency?: import("./user-kyc").IncomeFrequency | undefined;
                 } | undefined;
                 Contact?: {
                     Name?: string | undefined;
@@ -2310,14 +1877,14 @@ export declare const User: {
                     YearsExperience?: number | undefined;
                     AnnualIncome?: number | undefined;
                     NetWorth?: number | undefined;
-                    ConversionImportance?: LiquidationImportance | undefined;
-                    Tolerance?: RiskTolerance | undefined;
-                    Objective?: InvestmentObjective | undefined;
+                    ConversionImportance?: import("./user-compliance").LiquidationImportance | undefined;
+                    Tolerance?: import("./user-compliance").RiskTolerance | undefined;
+                    Objective?: import("./user-compliance").InvestmentObjective | undefined;
                 } | undefined;
             }[] | undefined;
             BrokerAccounts?: {
                 AccountID?: string | undefined;
-                Broker?: ClearingBroker | undefined;
+                Broker?: import("./sologenic/com-fs-order-model/broker").ClearingBroker | undefined;
                 OrganizationID?: string | undefined;
                 Profiles?: string[] | undefined;
             }[] | undefined;
@@ -2342,23 +1909,23 @@ export declare const User: {
             Wallets?: ({
                 Address?: string | undefined;
                 Alias?: string | undefined;
-                Type?: WalletType | undefined;
-                SignerType?: SignerType | undefined;
+                Type?: import("./user-fundings").WalletType | undefined;
+                SignerType?: import("./user-fundings").SignerType | undefined;
             }[] & ({
                 Address?: string | undefined;
                 Alias?: string | undefined;
-                Type?: WalletType | undefined;
-                SignerType?: SignerType | undefined;
+                Type?: import("./user-fundings").WalletType | undefined;
+                SignerType?: import("./user-fundings").SignerType | undefined;
             } & {
                 Address?: string | undefined;
                 Alias?: string | undefined;
-                Type?: WalletType | undefined;
-                SignerType?: SignerType | undefined;
-            } & { [K_29 in Exclude<keyof I_1["User"]["Wallets"][number], keyof Wallet>]: never; })[] & { [K_30 in Exclude<keyof I_1["User"]["Wallets"], keyof {
+                Type?: import("./user-fundings").WalletType | undefined;
+                SignerType?: import("./user-fundings").SignerType | undefined;
+            } & { [K_30 in Exclude<keyof I_1["User"]["Wallets"][number], keyof Wallet>]: never; })[] & { [K_31 in Exclude<keyof I_1["User"]["Wallets"], keyof {
                 Address?: string | undefined;
                 Alias?: string | undefined;
-                Type?: WalletType | undefined;
-                SignerType?: SignerType | undefined;
+                Type?: import("./user-fundings").WalletType | undefined;
+                SignerType?: import("./user-fundings").SignerType | undefined;
             }[]>]: never; }) | undefined;
             Socials?: ({
                 URL?: string | undefined;
@@ -2369,7 +1936,7 @@ export declare const User: {
             } & {
                 URL?: string | undefined;
                 Type?: SocialType | undefined;
-            } & { [K_31 in Exclude<keyof I_1["User"]["Socials"][number], keyof Social>]: never; })[] & { [K_32 in Exclude<keyof I_1["User"]["Socials"], keyof {
+            } & { [K_32 in Exclude<keyof I_1["User"]["Socials"][number], keyof Social>]: never; })[] & { [K_33 in Exclude<keyof I_1["User"]["Socials"], keyof {
                 URL?: string | undefined;
                 Type?: SocialType | undefined;
             }[]>]: never; }) | undefined;
@@ -2381,12 +1948,12 @@ export declare const User: {
                 JobTitle?: string | undefined;
                 StartDate?: Date | undefined;
                 EndDate?: Date | undefined;
-                Type?: EmploymentType | undefined;
+                Type?: import("./user-kyc").EmploymentType | undefined;
                 Industry?: string | undefined;
                 Income?: {
                     Amount?: number | undefined;
                     Currency?: string | undefined;
-                    Frequency?: IncomeFrequency | undefined;
+                    Frequency?: import("./user-kyc").IncomeFrequency | undefined;
                 } | undefined;
                 Contact?: {
                     Name?: string | undefined;
@@ -2401,17 +1968,17 @@ export declare const User: {
                 JobTitle?: string | undefined;
                 StartDate?: Date | undefined;
                 EndDate?: Date | undefined;
-                Type?: EmploymentType | undefined;
+                Type?: import("./user-kyc").EmploymentType | undefined;
                 Industry?: string | undefined;
                 Income?: ({
                     Amount?: number | undefined;
                     Currency?: string | undefined;
-                    Frequency?: IncomeFrequency | undefined;
+                    Frequency?: import("./user-kyc").IncomeFrequency | undefined;
                 } & {
                     Amount?: number | undefined;
                     Currency?: string | undefined;
-                    Frequency?: IncomeFrequency | undefined;
-                } & { [K_33 in Exclude<keyof I_1["User"]["Employment"]["Income"], keyof Income>]: never; }) | undefined;
+                    Frequency?: import("./user-kyc").IncomeFrequency | undefined;
+                } & { [K_34 in Exclude<keyof I_1["User"]["Employment"]["Income"], keyof import("./user-kyc").Income>]: never; }) | undefined;
                 Contact?: ({
                     Name?: string | undefined;
                     Email?: string | undefined;
@@ -2422,10 +1989,10 @@ export declare const User: {
                     Email?: string | undefined;
                     Phone?: string | undefined;
                     Address?: string | undefined;
-                } & { [K_34 in Exclude<keyof I_1["User"]["Employment"]["Contact"], keyof EmployerContact>]: never; }) | undefined;
+                } & { [K_35 in Exclude<keyof I_1["User"]["Employment"]["Contact"], keyof import("./user-kyc").EmployerContact>]: never; }) | undefined;
                 IsVerified?: boolean | undefined;
                 VerifiedAt?: string | undefined;
-            } & { [K_35 in Exclude<keyof I_1["User"]["Employment"], keyof Employment>]: never; }) | undefined;
+            } & { [K_36 in Exclude<keyof I_1["User"]["Employment"], keyof Employment>]: never; }) | undefined;
             Role?: Role | undefined;
             TradeProfile?: ({
                 IsTradingEnabled?: boolean | undefined;
@@ -2460,28 +2027,28 @@ export declare const User: {
                 } & {
                     Value?: number | undefined;
                     IsGreaterThan?: boolean | undefined;
-                } & { [K_36 in Exclude<keyof I_1["User"]["TradeProfile"]["AggregateNotionalLimit"], keyof import("./sologenic/com-fs-trade-profile-model/tradeprofile").DropdownNumericValue>]: never; }) | undefined;
+                } & { [K_37 in Exclude<keyof I_1["User"]["TradeProfile"]["AggregateNotionalLimit"], keyof import("./sologenic/com-fs-trade-profile-model/tradeprofile").DropdownNumericValue>]: never; }) | undefined;
                 SingleOrderLimit?: ({
                     Value?: number | undefined;
                     IsGreaterThan?: boolean | undefined;
                 } & {
                     Value?: number | undefined;
                     IsGreaterThan?: boolean | undefined;
-                } & { [K_37 in Exclude<keyof I_1["User"]["TradeProfile"]["SingleOrderLimit"], keyof import("./sologenic/com-fs-trade-profile-model/tradeprofile").DropdownNumericValue>]: never; }) | undefined;
+                } & { [K_38 in Exclude<keyof I_1["User"]["TradeProfile"]["SingleOrderLimit"], keyof import("./sologenic/com-fs-trade-profile-model/tradeprofile").DropdownNumericValue>]: never; }) | undefined;
                 MaxOrderQuantity?: ({
                     Value?: number | undefined;
                     IsGreaterThan?: boolean | undefined;
                 } & {
                     Value?: number | undefined;
                     IsGreaterThan?: boolean | undefined;
-                } & { [K_38 in Exclude<keyof I_1["User"]["TradeProfile"]["MaxOrderQuantity"], keyof import("./sologenic/com-fs-trade-profile-model/tradeprofile").DropdownNumericValue>]: never; }) | undefined;
+                } & { [K_39 in Exclude<keyof I_1["User"]["TradeProfile"]["MaxOrderQuantity"], keyof import("./sologenic/com-fs-trade-profile-model/tradeprofile").DropdownNumericValue>]: never; }) | undefined;
                 AggressivePercentage?: number | undefined;
                 SymbolGrossADVPercent?: number | undefined;
                 PriceCheckDeviation?: number | undefined;
                 DuplicateOrderLimit?: number | undefined;
                 RiskMultiplier?: number | undefined;
-            } & { [K_39 in Exclude<keyof I_1["User"]["TradeProfile"], keyof TradeProfileDetails>]: never; }) | undefined;
-            KYCInquiries?: (string[] & string[] & { [K_40 in Exclude<keyof I_1["User"]["KYCInquiries"], keyof string[]>]: never; }) | undefined;
+            } & { [K_40 in Exclude<keyof I_1["User"]["TradeProfile"], keyof TradeProfileDetails>]: never; }) | undefined;
+            KYCInquiries?: (string[] & string[] & { [K_41 in Exclude<keyof I_1["User"]["KYCInquiries"], keyof string[]>]: never; }) | undefined;
             KYCDetails?: ({
                 Birthdate?: string | undefined;
                 PhoneNumber?: string | undefined;
@@ -2510,7 +2077,7 @@ export declare const User: {
                 IdentificationNumber?: string | undefined;
                 FirstName?: string | undefined;
                 LastName?: string | undefined;
-            } & { [K_41 in Exclude<keyof I_1["User"]["KYCDetails"], keyof UserKYCDetails>]: never; }) | undefined;
+            } & { [K_42 in Exclude<keyof I_1["User"]["KYCDetails"], keyof UserKYCDetails>]: never; }) | undefined;
             UserDocumentCompliance?: ({
                 SignedDocuments?: {
                     Name?: string | undefined;
@@ -2538,14 +2105,14 @@ export declare const User: {
                     DocumentState?: import("./sologenic/com-fs-document-model/document").DocumentState | undefined;
                     SignedAt?: Date | undefined;
                     FileMD5SUM?: string | undefined;
-                } & { [K_42 in Exclude<keyof I_1["User"]["UserDocumentCompliance"]["SignedDocuments"][number], keyof import("./sologenic/com-fs-document-model/document").SignedDocument>]: never; })[] & { [K_43 in Exclude<keyof I_1["User"]["UserDocumentCompliance"]["SignedDocuments"], keyof {
+                } & { [K_43 in Exclude<keyof I_1["User"]["UserDocumentCompliance"]["SignedDocuments"][number], keyof import("./sologenic/com-fs-document-model/document").SignedDocument>]: never; })[] & { [K_44 in Exclude<keyof I_1["User"]["UserDocumentCompliance"]["SignedDocuments"], keyof {
                     Name?: string | undefined;
                     SignedVersion?: string | undefined;
                     DocumentState?: import("./sologenic/com-fs-document-model/document").DocumentState | undefined;
                     SignedAt?: Date | undefined;
                     FileMD5SUM?: string | undefined;
                 }[]>]: never; }) | undefined;
-            } & { [K_44 in Exclude<keyof I_1["User"]["UserDocumentCompliance"], "SignedDocuments">]: never; }) | undefined;
+            } & { [K_45 in Exclude<keyof I_1["User"]["UserDocumentCompliance"], "SignedDocuments">]: never; }) | undefined;
             KYCStatus?: KYCStatus | undefined;
             UserTradeProfile?: ({
                 IsMarginTradingEnabled?: boolean | undefined;
@@ -2557,16 +2124,16 @@ export declare const User: {
                 IsShortSellingEnabled?: boolean | undefined;
                 SingleOrderLimit?: number | undefined;
                 MaxOrderQuantity?: number | undefined;
-            } & { [K_45 in Exclude<keyof I_1["User"]["UserTradeProfile"], keyof UserTradeProfile>]: never; }) | undefined;
+            } & { [K_46 in Exclude<keyof I_1["User"]["UserTradeProfile"], keyof UserTradeProfile>]: never; }) | undefined;
             ComplianceQuestions?: ({
                 USA?: {
                     RecordedAt?: Date | undefined;
                     YearsExperience?: number | undefined;
                     AnnualIncome?: number | undefined;
                     NetWorth?: number | undefined;
-                    ConversionImportance?: LiquidationImportance | undefined;
-                    Tolerance?: RiskTolerance | undefined;
-                    Objective?: InvestmentObjective | undefined;
+                    ConversionImportance?: import("./user-compliance").LiquidationImportance | undefined;
+                    Tolerance?: import("./user-compliance").RiskTolerance | undefined;
+                    Objective?: import("./user-compliance").InvestmentObjective | undefined;
                 } | undefined;
             }[] & ({
                 USA?: {
@@ -2574,9 +2141,9 @@ export declare const User: {
                     YearsExperience?: number | undefined;
                     AnnualIncome?: number | undefined;
                     NetWorth?: number | undefined;
-                    ConversionImportance?: LiquidationImportance | undefined;
-                    Tolerance?: RiskTolerance | undefined;
-                    Objective?: InvestmentObjective | undefined;
+                    ConversionImportance?: import("./user-compliance").LiquidationImportance | undefined;
+                    Tolerance?: import("./user-compliance").RiskTolerance | undefined;
+                    Objective?: import("./user-compliance").InvestmentObjective | undefined;
                 } | undefined;
             } & {
                 USA?: ({
@@ -2584,47 +2151,47 @@ export declare const User: {
                     YearsExperience?: number | undefined;
                     AnnualIncome?: number | undefined;
                     NetWorth?: number | undefined;
-                    ConversionImportance?: LiquidationImportance | undefined;
-                    Tolerance?: RiskTolerance | undefined;
-                    Objective?: InvestmentObjective | undefined;
+                    ConversionImportance?: import("./user-compliance").LiquidationImportance | undefined;
+                    Tolerance?: import("./user-compliance").RiskTolerance | undefined;
+                    Objective?: import("./user-compliance").InvestmentObjective | undefined;
                 } & {
                     RecordedAt?: Date | undefined;
                     YearsExperience?: number | undefined;
                     AnnualIncome?: number | undefined;
                     NetWorth?: number | undefined;
-                    ConversionImportance?: LiquidationImportance | undefined;
-                    Tolerance?: RiskTolerance | undefined;
-                    Objective?: InvestmentObjective | undefined;
-                } & { [K_46 in Exclude<keyof I_1["User"]["ComplianceQuestions"][number]["USA"], keyof USA>]: never; }) | undefined;
-            } & { [K_47 in Exclude<keyof I_1["User"]["ComplianceQuestions"][number], "USA">]: never; })[] & { [K_48 in Exclude<keyof I_1["User"]["ComplianceQuestions"], keyof {
+                    ConversionImportance?: import("./user-compliance").LiquidationImportance | undefined;
+                    Tolerance?: import("./user-compliance").RiskTolerance | undefined;
+                    Objective?: import("./user-compliance").InvestmentObjective | undefined;
+                } & { [K_47 in Exclude<keyof I_1["User"]["ComplianceQuestions"][number]["USA"], keyof import("./user-compliance").USA>]: never; }) | undefined;
+            } & { [K_48 in Exclude<keyof I_1["User"]["ComplianceQuestions"][number], "USA">]: never; })[] & { [K_49 in Exclude<keyof I_1["User"]["ComplianceQuestions"], keyof {
                 USA?: {
                     RecordedAt?: Date | undefined;
                     YearsExperience?: number | undefined;
                     AnnualIncome?: number | undefined;
                     NetWorth?: number | undefined;
-                    ConversionImportance?: LiquidationImportance | undefined;
-                    Tolerance?: RiskTolerance | undefined;
-                    Objective?: InvestmentObjective | undefined;
+                    ConversionImportance?: import("./user-compliance").LiquidationImportance | undefined;
+                    Tolerance?: import("./user-compliance").RiskTolerance | undefined;
+                    Objective?: import("./user-compliance").InvestmentObjective | undefined;
                 } | undefined;
             }[]>]: never; }) | undefined;
             BrokerAccounts?: ({
                 AccountID?: string | undefined;
-                Broker?: ClearingBroker | undefined;
+                Broker?: import("./sologenic/com-fs-order-model/broker").ClearingBroker | undefined;
                 OrganizationID?: string | undefined;
                 Profiles?: string[] | undefined;
             }[] & ({
                 AccountID?: string | undefined;
-                Broker?: ClearingBroker | undefined;
+                Broker?: import("./sologenic/com-fs-order-model/broker").ClearingBroker | undefined;
                 OrganizationID?: string | undefined;
                 Profiles?: string[] | undefined;
             } & {
                 AccountID?: string | undefined;
-                Broker?: ClearingBroker | undefined;
+                Broker?: import("./sologenic/com-fs-order-model/broker").ClearingBroker | undefined;
                 OrganizationID?: string | undefined;
-                Profiles?: (string[] & string[] & { [K_49 in Exclude<keyof I_1["User"]["BrokerAccounts"][number]["Profiles"], keyof string[]>]: never; }) | undefined;
-            } & { [K_50 in Exclude<keyof I_1["User"]["BrokerAccounts"][number], keyof BrokerAccount>]: never; })[] & { [K_51 in Exclude<keyof I_1["User"]["BrokerAccounts"], keyof {
+                Profiles?: (string[] & string[] & { [K_50 in Exclude<keyof I_1["User"]["BrokerAccounts"][number]["Profiles"], keyof string[]>]: never; }) | undefined;
+            } & { [K_51 in Exclude<keyof I_1["User"]["BrokerAccounts"][number], keyof BrokerAccount>]: never; })[] & { [K_52 in Exclude<keyof I_1["User"]["BrokerAccounts"], keyof {
                 AccountID?: string | undefined;
-                Broker?: ClearingBroker | undefined;
+                Broker?: import("./sologenic/com-fs-order-model/broker").ClearingBroker | undefined;
                 OrganizationID?: string | undefined;
                 Profiles?: string[] | undefined;
             }[]>]: never; }) | undefined;
@@ -2652,7 +2219,7 @@ export declare const User: {
                 ABA?: string | undefined;
                 SWIFT?: string | undefined;
                 IBAN?: string | undefined;
-            } & { [K_52 in Exclude<keyof I_1["User"]["BankAccounts"][number], keyof BankAccount>]: never; })[] & { [K_53 in Exclude<keyof I_1["User"]["BankAccounts"], keyof {
+            } & { [K_53 in Exclude<keyof I_1["User"]["BankAccounts"][number], keyof BankAccount>]: never; })[] & { [K_54 in Exclude<keyof I_1["User"]["BankAccounts"], keyof {
                 AccountName?: string | undefined;
                 BankName?: string | undefined;
                 BankAddress?: string | undefined;
@@ -2661,7 +2228,7 @@ export declare const User: {
                 SWIFT?: string | undefined;
                 IBAN?: string | undefined;
             }[]>]: never; }) | undefined;
-        } & { [K_54 in Exclude<keyof I_1["User"], keyof UserDetails>]: never; }) | undefined;
+        } & { [K_55 in Exclude<keyof I_1["User"], keyof UserDetails>]: never; }) | undefined;
         MetaData?: ({
             Network?: Network | undefined;
             UpdatedAt?: Date | undefined;
@@ -2672,7 +2239,7 @@ export declare const User: {
             UpdatedAt?: Date | undefined;
             CreatedAt?: Date | undefined;
             UpdatedByAccount?: string | undefined;
-        } & { [K_55 in Exclude<keyof I_1["MetaData"], keyof MetaData>]: never; }) | undefined;
+        } & { [K_56 in Exclude<keyof I_1["MetaData"], keyof MetaData>]: never; }) | undefined;
         Audit?: ({
             ChangedBy?: string | undefined;
             ChangedAt?: Date | undefined;
@@ -2681,32 +2248,9 @@ export declare const User: {
             ChangedBy?: string | undefined;
             ChangedAt?: Date | undefined;
             Reason?: string | undefined;
-        } & { [K_56 in Exclude<keyof I_1["Audit"], keyof Audit>]: never; }) | undefined;
-    } & { [K_57 in Exclude<keyof I_1, keyof User>]: never; }>(object: I_1): User;
-};
-export declare const UserID: {
-    encode(message: UserID, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): UserID;
-    fromJSON(object: any): UserID;
-    toJSON(message: UserID): unknown;
-    create<I extends {
-        UserID?: string | undefined;
-        OrganizationID?: string | undefined;
-        Network?: Network | undefined;
-    } & {
-        UserID?: string | undefined;
-        OrganizationID?: string | undefined;
-        Network?: Network | undefined;
-    } & { [K in Exclude<keyof I, keyof UserID>]: never; }>(base?: I | undefined): UserID;
-    fromPartial<I_1 extends {
-        UserID?: string | undefined;
-        OrganizationID?: string | undefined;
-        Network?: Network | undefined;
-    } & {
-        UserID?: string | undefined;
-        OrganizationID?: string | undefined;
-        Network?: Network | undefined;
-    } & { [K_1 in Exclude<keyof I_1, keyof UserID>]: never; }>(object: I_1): UserID;
+        } & { [K_57 in Exclude<keyof I_1["Audit"], keyof Audit>]: never; }) | undefined;
+        OrganizationIDs?: (string[] & string[] & { [K_58 in Exclude<keyof I_1["OrganizationIDs"], keyof string[]>]: never; }) | undefined;
+    } & { [K_59 in Exclude<keyof I_1, keyof User>]: never; }>(object: I_1): User;
 };
 export declare const Social: {
     encode(message: Social, writer?: _m0.Writer): _m0.Writer;
@@ -2728,34 +2272,6 @@ export declare const Social: {
         Type?: SocialType | undefined;
     } & { [K_1 in Exclude<keyof I_1, keyof Social>]: never; }>(object: I_1): Social;
 };
-export declare const Wallet: {
-    encode(message: Wallet, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): Wallet;
-    fromJSON(object: any): Wallet;
-    toJSON(message: Wallet): unknown;
-    create<I extends {
-        Address?: string | undefined;
-        Alias?: string | undefined;
-        Type?: WalletType | undefined;
-        SignerType?: SignerType | undefined;
-    } & {
-        Address?: string | undefined;
-        Alias?: string | undefined;
-        Type?: WalletType | undefined;
-        SignerType?: SignerType | undefined;
-    } & { [K in Exclude<keyof I, keyof Wallet>]: never; }>(base?: I | undefined): Wallet;
-    fromPartial<I_1 extends {
-        Address?: string | undefined;
-        Alias?: string | undefined;
-        Type?: WalletType | undefined;
-        SignerType?: SignerType | undefined;
-    } & {
-        Address?: string | undefined;
-        Alias?: string | undefined;
-        Type?: WalletType | undefined;
-        SignerType?: SignerType | undefined;
-    } & { [K_1 in Exclude<keyof I_1, keyof Wallet>]: never; }>(object: I_1): Wallet;
-};
 export declare const UserList: {
     encode(message: UserList, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): UserList;
@@ -2775,8 +2291,8 @@ export declare const UserList: {
                 Wallets?: {
                     Address?: string | undefined;
                     Alias?: string | undefined;
-                    Type?: WalletType | undefined;
-                    SignerType?: SignerType | undefined;
+                    Type?: import("./user-fundings").WalletType | undefined;
+                    SignerType?: import("./user-fundings").SignerType | undefined;
                 }[] | undefined;
                 Socials?: {
                     URL?: string | undefined;
@@ -2790,12 +2306,12 @@ export declare const UserList: {
                     JobTitle?: string | undefined;
                     StartDate?: Date | undefined;
                     EndDate?: Date | undefined;
-                    Type?: EmploymentType | undefined;
+                    Type?: import("./user-kyc").EmploymentType | undefined;
                     Industry?: string | undefined;
                     Income?: {
                         Amount?: number | undefined;
                         Currency?: string | undefined;
-                        Frequency?: IncomeFrequency | undefined;
+                        Frequency?: import("./user-kyc").IncomeFrequency | undefined;
                     } | undefined;
                     Contact?: {
                         Name?: string | undefined;
@@ -2868,14 +2384,14 @@ export declare const UserList: {
                         YearsExperience?: number | undefined;
                         AnnualIncome?: number | undefined;
                         NetWorth?: number | undefined;
-                        ConversionImportance?: LiquidationImportance | undefined;
-                        Tolerance?: RiskTolerance | undefined;
-                        Objective?: InvestmentObjective | undefined;
+                        ConversionImportance?: import("./user-compliance").LiquidationImportance | undefined;
+                        Tolerance?: import("./user-compliance").RiskTolerance | undefined;
+                        Objective?: import("./user-compliance").InvestmentObjective | undefined;
                     } | undefined;
                 }[] | undefined;
                 BrokerAccounts?: {
                     AccountID?: string | undefined;
-                    Broker?: ClearingBroker | undefined;
+                    Broker?: import("./sologenic/com-fs-order-model/broker").ClearingBroker | undefined;
                     OrganizationID?: string | undefined;
                     Profiles?: string[] | undefined;
                 }[] | undefined;
@@ -2900,6 +2416,7 @@ export declare const UserList: {
                 ChangedAt?: Date | undefined;
                 Reason?: string | undefined;
             } | undefined;
+            OrganizationIDs?: string[] | undefined;
         }[] | undefined;
         Offset?: number | undefined;
     } & {
@@ -2916,8 +2433,8 @@ export declare const UserList: {
                 Wallets?: {
                     Address?: string | undefined;
                     Alias?: string | undefined;
-                    Type?: WalletType | undefined;
-                    SignerType?: SignerType | undefined;
+                    Type?: import("./user-fundings").WalletType | undefined;
+                    SignerType?: import("./user-fundings").SignerType | undefined;
                 }[] | undefined;
                 Socials?: {
                     URL?: string | undefined;
@@ -2931,12 +2448,12 @@ export declare const UserList: {
                     JobTitle?: string | undefined;
                     StartDate?: Date | undefined;
                     EndDate?: Date | undefined;
-                    Type?: EmploymentType | undefined;
+                    Type?: import("./user-kyc").EmploymentType | undefined;
                     Industry?: string | undefined;
                     Income?: {
                         Amount?: number | undefined;
                         Currency?: string | undefined;
-                        Frequency?: IncomeFrequency | undefined;
+                        Frequency?: import("./user-kyc").IncomeFrequency | undefined;
                     } | undefined;
                     Contact?: {
                         Name?: string | undefined;
@@ -3009,14 +2526,14 @@ export declare const UserList: {
                         YearsExperience?: number | undefined;
                         AnnualIncome?: number | undefined;
                         NetWorth?: number | undefined;
-                        ConversionImportance?: LiquidationImportance | undefined;
-                        Tolerance?: RiskTolerance | undefined;
-                        Objective?: InvestmentObjective | undefined;
+                        ConversionImportance?: import("./user-compliance").LiquidationImportance | undefined;
+                        Tolerance?: import("./user-compliance").RiskTolerance | undefined;
+                        Objective?: import("./user-compliance").InvestmentObjective | undefined;
                     } | undefined;
                 }[] | undefined;
                 BrokerAccounts?: {
                     AccountID?: string | undefined;
-                    Broker?: ClearingBroker | undefined;
+                    Broker?: import("./sologenic/com-fs-order-model/broker").ClearingBroker | undefined;
                     OrganizationID?: string | undefined;
                     Profiles?: string[] | undefined;
                 }[] | undefined;
@@ -3041,6 +2558,7 @@ export declare const UserList: {
                 ChangedAt?: Date | undefined;
                 Reason?: string | undefined;
             } | undefined;
+            OrganizationIDs?: string[] | undefined;
         }[] & ({
             User?: {
                 UserID?: string | undefined;
@@ -3054,8 +2572,8 @@ export declare const UserList: {
                 Wallets?: {
                     Address?: string | undefined;
                     Alias?: string | undefined;
-                    Type?: WalletType | undefined;
-                    SignerType?: SignerType | undefined;
+                    Type?: import("./user-fundings").WalletType | undefined;
+                    SignerType?: import("./user-fundings").SignerType | undefined;
                 }[] | undefined;
                 Socials?: {
                     URL?: string | undefined;
@@ -3069,12 +2587,12 @@ export declare const UserList: {
                     JobTitle?: string | undefined;
                     StartDate?: Date | undefined;
                     EndDate?: Date | undefined;
-                    Type?: EmploymentType | undefined;
+                    Type?: import("./user-kyc").EmploymentType | undefined;
                     Industry?: string | undefined;
                     Income?: {
                         Amount?: number | undefined;
                         Currency?: string | undefined;
-                        Frequency?: IncomeFrequency | undefined;
+                        Frequency?: import("./user-kyc").IncomeFrequency | undefined;
                     } | undefined;
                     Contact?: {
                         Name?: string | undefined;
@@ -3147,14 +2665,14 @@ export declare const UserList: {
                         YearsExperience?: number | undefined;
                         AnnualIncome?: number | undefined;
                         NetWorth?: number | undefined;
-                        ConversionImportance?: LiquidationImportance | undefined;
-                        Tolerance?: RiskTolerance | undefined;
-                        Objective?: InvestmentObjective | undefined;
+                        ConversionImportance?: import("./user-compliance").LiquidationImportance | undefined;
+                        Tolerance?: import("./user-compliance").RiskTolerance | undefined;
+                        Objective?: import("./user-compliance").InvestmentObjective | undefined;
                     } | undefined;
                 }[] | undefined;
                 BrokerAccounts?: {
                     AccountID?: string | undefined;
-                    Broker?: ClearingBroker | undefined;
+                    Broker?: import("./sologenic/com-fs-order-model/broker").ClearingBroker | undefined;
                     OrganizationID?: string | undefined;
                     Profiles?: string[] | undefined;
                 }[] | undefined;
@@ -3179,6 +2697,7 @@ export declare const UserList: {
                 ChangedAt?: Date | undefined;
                 Reason?: string | undefined;
             } | undefined;
+            OrganizationIDs?: string[] | undefined;
         } & {
             User?: ({
                 UserID?: string | undefined;
@@ -3192,8 +2711,8 @@ export declare const UserList: {
                 Wallets?: {
                     Address?: string | undefined;
                     Alias?: string | undefined;
-                    Type?: WalletType | undefined;
-                    SignerType?: SignerType | undefined;
+                    Type?: import("./user-fundings").WalletType | undefined;
+                    SignerType?: import("./user-fundings").SignerType | undefined;
                 }[] | undefined;
                 Socials?: {
                     URL?: string | undefined;
@@ -3207,12 +2726,12 @@ export declare const UserList: {
                     JobTitle?: string | undefined;
                     StartDate?: Date | undefined;
                     EndDate?: Date | undefined;
-                    Type?: EmploymentType | undefined;
+                    Type?: import("./user-kyc").EmploymentType | undefined;
                     Industry?: string | undefined;
                     Income?: {
                         Amount?: number | undefined;
                         Currency?: string | undefined;
-                        Frequency?: IncomeFrequency | undefined;
+                        Frequency?: import("./user-kyc").IncomeFrequency | undefined;
                     } | undefined;
                     Contact?: {
                         Name?: string | undefined;
@@ -3285,14 +2804,14 @@ export declare const UserList: {
                         YearsExperience?: number | undefined;
                         AnnualIncome?: number | undefined;
                         NetWorth?: number | undefined;
-                        ConversionImportance?: LiquidationImportance | undefined;
-                        Tolerance?: RiskTolerance | undefined;
-                        Objective?: InvestmentObjective | undefined;
+                        ConversionImportance?: import("./user-compliance").LiquidationImportance | undefined;
+                        Tolerance?: import("./user-compliance").RiskTolerance | undefined;
+                        Objective?: import("./user-compliance").InvestmentObjective | undefined;
                     } | undefined;
                 }[] | undefined;
                 BrokerAccounts?: {
                     AccountID?: string | undefined;
-                    Broker?: ClearingBroker | undefined;
+                    Broker?: import("./sologenic/com-fs-order-model/broker").ClearingBroker | undefined;
                     OrganizationID?: string | undefined;
                     Profiles?: string[] | undefined;
                 }[] | undefined;
@@ -3317,23 +2836,23 @@ export declare const UserList: {
                 Wallets?: ({
                     Address?: string | undefined;
                     Alias?: string | undefined;
-                    Type?: WalletType | undefined;
-                    SignerType?: SignerType | undefined;
+                    Type?: import("./user-fundings").WalletType | undefined;
+                    SignerType?: import("./user-fundings").SignerType | undefined;
                 }[] & ({
                     Address?: string | undefined;
                     Alias?: string | undefined;
-                    Type?: WalletType | undefined;
-                    SignerType?: SignerType | undefined;
+                    Type?: import("./user-fundings").WalletType | undefined;
+                    SignerType?: import("./user-fundings").SignerType | undefined;
                 } & {
                     Address?: string | undefined;
                     Alias?: string | undefined;
-                    Type?: WalletType | undefined;
-                    SignerType?: SignerType | undefined;
+                    Type?: import("./user-fundings").WalletType | undefined;
+                    SignerType?: import("./user-fundings").SignerType | undefined;
                 } & { [K in Exclude<keyof I["Users"][number]["User"]["Wallets"][number], keyof Wallet>]: never; })[] & { [K_1 in Exclude<keyof I["Users"][number]["User"]["Wallets"], keyof {
                     Address?: string | undefined;
                     Alias?: string | undefined;
-                    Type?: WalletType | undefined;
-                    SignerType?: SignerType | undefined;
+                    Type?: import("./user-fundings").WalletType | undefined;
+                    SignerType?: import("./user-fundings").SignerType | undefined;
                 }[]>]: never; }) | undefined;
                 Socials?: ({
                     URL?: string | undefined;
@@ -3356,12 +2875,12 @@ export declare const UserList: {
                     JobTitle?: string | undefined;
                     StartDate?: Date | undefined;
                     EndDate?: Date | undefined;
-                    Type?: EmploymentType | undefined;
+                    Type?: import("./user-kyc").EmploymentType | undefined;
                     Industry?: string | undefined;
                     Income?: {
                         Amount?: number | undefined;
                         Currency?: string | undefined;
-                        Frequency?: IncomeFrequency | undefined;
+                        Frequency?: import("./user-kyc").IncomeFrequency | undefined;
                     } | undefined;
                     Contact?: {
                         Name?: string | undefined;
@@ -3376,17 +2895,17 @@ export declare const UserList: {
                     JobTitle?: string | undefined;
                     StartDate?: Date | undefined;
                     EndDate?: Date | undefined;
-                    Type?: EmploymentType | undefined;
+                    Type?: import("./user-kyc").EmploymentType | undefined;
                     Industry?: string | undefined;
                     Income?: ({
                         Amount?: number | undefined;
                         Currency?: string | undefined;
-                        Frequency?: IncomeFrequency | undefined;
+                        Frequency?: import("./user-kyc").IncomeFrequency | undefined;
                     } & {
                         Amount?: number | undefined;
                         Currency?: string | undefined;
-                        Frequency?: IncomeFrequency | undefined;
-                    } & { [K_4 in Exclude<keyof I["Users"][number]["User"]["Employment"]["Income"], keyof Income>]: never; }) | undefined;
+                        Frequency?: import("./user-kyc").IncomeFrequency | undefined;
+                    } & { [K_4 in Exclude<keyof I["Users"][number]["User"]["Employment"]["Income"], keyof import("./user-kyc").Income>]: never; }) | undefined;
                     Contact?: ({
                         Name?: string | undefined;
                         Email?: string | undefined;
@@ -3397,7 +2916,7 @@ export declare const UserList: {
                         Email?: string | undefined;
                         Phone?: string | undefined;
                         Address?: string | undefined;
-                    } & { [K_5 in Exclude<keyof I["Users"][number]["User"]["Employment"]["Contact"], keyof EmployerContact>]: never; }) | undefined;
+                    } & { [K_5 in Exclude<keyof I["Users"][number]["User"]["Employment"]["Contact"], keyof import("./user-kyc").EmployerContact>]: never; }) | undefined;
                     IsVerified?: boolean | undefined;
                     VerifiedAt?: string | undefined;
                 } & { [K_6 in Exclude<keyof I["Users"][number]["User"]["Employment"], keyof Employment>]: never; }) | undefined;
@@ -3539,9 +3058,9 @@ export declare const UserList: {
                         YearsExperience?: number | undefined;
                         AnnualIncome?: number | undefined;
                         NetWorth?: number | undefined;
-                        ConversionImportance?: LiquidationImportance | undefined;
-                        Tolerance?: RiskTolerance | undefined;
-                        Objective?: InvestmentObjective | undefined;
+                        ConversionImportance?: import("./user-compliance").LiquidationImportance | undefined;
+                        Tolerance?: import("./user-compliance").RiskTolerance | undefined;
+                        Objective?: import("./user-compliance").InvestmentObjective | undefined;
                     } | undefined;
                 }[] & ({
                     USA?: {
@@ -3549,9 +3068,9 @@ export declare const UserList: {
                         YearsExperience?: number | undefined;
                         AnnualIncome?: number | undefined;
                         NetWorth?: number | undefined;
-                        ConversionImportance?: LiquidationImportance | undefined;
-                        Tolerance?: RiskTolerance | undefined;
-                        Objective?: InvestmentObjective | undefined;
+                        ConversionImportance?: import("./user-compliance").LiquidationImportance | undefined;
+                        Tolerance?: import("./user-compliance").RiskTolerance | undefined;
+                        Objective?: import("./user-compliance").InvestmentObjective | undefined;
                     } | undefined;
                 } & {
                     USA?: ({
@@ -3559,47 +3078,47 @@ export declare const UserList: {
                         YearsExperience?: number | undefined;
                         AnnualIncome?: number | undefined;
                         NetWorth?: number | undefined;
-                        ConversionImportance?: LiquidationImportance | undefined;
-                        Tolerance?: RiskTolerance | undefined;
-                        Objective?: InvestmentObjective | undefined;
+                        ConversionImportance?: import("./user-compliance").LiquidationImportance | undefined;
+                        Tolerance?: import("./user-compliance").RiskTolerance | undefined;
+                        Objective?: import("./user-compliance").InvestmentObjective | undefined;
                     } & {
                         RecordedAt?: Date | undefined;
                         YearsExperience?: number | undefined;
                         AnnualIncome?: number | undefined;
                         NetWorth?: number | undefined;
-                        ConversionImportance?: LiquidationImportance | undefined;
-                        Tolerance?: RiskTolerance | undefined;
-                        Objective?: InvestmentObjective | undefined;
-                    } & { [K_17 in Exclude<keyof I["Users"][number]["User"]["ComplianceQuestions"][number]["USA"], keyof USA>]: never; }) | undefined;
+                        ConversionImportance?: import("./user-compliance").LiquidationImportance | undefined;
+                        Tolerance?: import("./user-compliance").RiskTolerance | undefined;
+                        Objective?: import("./user-compliance").InvestmentObjective | undefined;
+                    } & { [K_17 in Exclude<keyof I["Users"][number]["User"]["ComplianceQuestions"][number]["USA"], keyof import("./user-compliance").USA>]: never; }) | undefined;
                 } & { [K_18 in Exclude<keyof I["Users"][number]["User"]["ComplianceQuestions"][number], "USA">]: never; })[] & { [K_19 in Exclude<keyof I["Users"][number]["User"]["ComplianceQuestions"], keyof {
                     USA?: {
                         RecordedAt?: Date | undefined;
                         YearsExperience?: number | undefined;
                         AnnualIncome?: number | undefined;
                         NetWorth?: number | undefined;
-                        ConversionImportance?: LiquidationImportance | undefined;
-                        Tolerance?: RiskTolerance | undefined;
-                        Objective?: InvestmentObjective | undefined;
+                        ConversionImportance?: import("./user-compliance").LiquidationImportance | undefined;
+                        Tolerance?: import("./user-compliance").RiskTolerance | undefined;
+                        Objective?: import("./user-compliance").InvestmentObjective | undefined;
                     } | undefined;
                 }[]>]: never; }) | undefined;
                 BrokerAccounts?: ({
                     AccountID?: string | undefined;
-                    Broker?: ClearingBroker | undefined;
+                    Broker?: import("./sologenic/com-fs-order-model/broker").ClearingBroker | undefined;
                     OrganizationID?: string | undefined;
                     Profiles?: string[] | undefined;
                 }[] & ({
                     AccountID?: string | undefined;
-                    Broker?: ClearingBroker | undefined;
+                    Broker?: import("./sologenic/com-fs-order-model/broker").ClearingBroker | undefined;
                     OrganizationID?: string | undefined;
                     Profiles?: string[] | undefined;
                 } & {
                     AccountID?: string | undefined;
-                    Broker?: ClearingBroker | undefined;
+                    Broker?: import("./sologenic/com-fs-order-model/broker").ClearingBroker | undefined;
                     OrganizationID?: string | undefined;
                     Profiles?: (string[] & string[] & { [K_20 in Exclude<keyof I["Users"][number]["User"]["BrokerAccounts"][number]["Profiles"], keyof string[]>]: never; }) | undefined;
                 } & { [K_21 in Exclude<keyof I["Users"][number]["User"]["BrokerAccounts"][number], keyof BrokerAccount>]: never; })[] & { [K_22 in Exclude<keyof I["Users"][number]["User"]["BrokerAccounts"], keyof {
                     AccountID?: string | undefined;
-                    Broker?: ClearingBroker | undefined;
+                    Broker?: import("./sologenic/com-fs-order-model/broker").ClearingBroker | undefined;
                     OrganizationID?: string | undefined;
                     Profiles?: string[] | undefined;
                 }[]>]: never; }) | undefined;
@@ -3657,7 +3176,8 @@ export declare const UserList: {
                 ChangedAt?: Date | undefined;
                 Reason?: string | undefined;
             } & { [K_27 in Exclude<keyof I["Users"][number]["Audit"], keyof Audit>]: never; }) | undefined;
-        } & { [K_28 in Exclude<keyof I["Users"][number], keyof User>]: never; })[] & { [K_29 in Exclude<keyof I["Users"], keyof {
+            OrganizationIDs?: (string[] & string[] & { [K_28 in Exclude<keyof I["Users"][number]["OrganizationIDs"], keyof string[]>]: never; }) | undefined;
+        } & { [K_29 in Exclude<keyof I["Users"][number], keyof User>]: never; })[] & { [K_30 in Exclude<keyof I["Users"], keyof {
             User?: {
                 UserID?: string | undefined;
                 FirstName?: string | undefined;
@@ -3670,8 +3190,8 @@ export declare const UserList: {
                 Wallets?: {
                     Address?: string | undefined;
                     Alias?: string | undefined;
-                    Type?: WalletType | undefined;
-                    SignerType?: SignerType | undefined;
+                    Type?: import("./user-fundings").WalletType | undefined;
+                    SignerType?: import("./user-fundings").SignerType | undefined;
                 }[] | undefined;
                 Socials?: {
                     URL?: string | undefined;
@@ -3685,12 +3205,12 @@ export declare const UserList: {
                     JobTitle?: string | undefined;
                     StartDate?: Date | undefined;
                     EndDate?: Date | undefined;
-                    Type?: EmploymentType | undefined;
+                    Type?: import("./user-kyc").EmploymentType | undefined;
                     Industry?: string | undefined;
                     Income?: {
                         Amount?: number | undefined;
                         Currency?: string | undefined;
-                        Frequency?: IncomeFrequency | undefined;
+                        Frequency?: import("./user-kyc").IncomeFrequency | undefined;
                     } | undefined;
                     Contact?: {
                         Name?: string | undefined;
@@ -3763,14 +3283,14 @@ export declare const UserList: {
                         YearsExperience?: number | undefined;
                         AnnualIncome?: number | undefined;
                         NetWorth?: number | undefined;
-                        ConversionImportance?: LiquidationImportance | undefined;
-                        Tolerance?: RiskTolerance | undefined;
-                        Objective?: InvestmentObjective | undefined;
+                        ConversionImportance?: import("./user-compliance").LiquidationImportance | undefined;
+                        Tolerance?: import("./user-compliance").RiskTolerance | undefined;
+                        Objective?: import("./user-compliance").InvestmentObjective | undefined;
                     } | undefined;
                 }[] | undefined;
                 BrokerAccounts?: {
                     AccountID?: string | undefined;
-                    Broker?: ClearingBroker | undefined;
+                    Broker?: import("./sologenic/com-fs-order-model/broker").ClearingBroker | undefined;
                     OrganizationID?: string | undefined;
                     Profiles?: string[] | undefined;
                 }[] | undefined;
@@ -3795,9 +3315,10 @@ export declare const UserList: {
                 ChangedAt?: Date | undefined;
                 Reason?: string | undefined;
             } | undefined;
+            OrganizationIDs?: string[] | undefined;
         }[]>]: never; }) | undefined;
         Offset?: number | undefined;
-    } & { [K_30 in Exclude<keyof I, keyof UserList>]: never; }>(base?: I | undefined): UserList;
+    } & { [K_31 in Exclude<keyof I, keyof UserList>]: never; }>(base?: I | undefined): UserList;
     fromPartial<I_1 extends {
         Users?: {
             User?: {
@@ -3812,8 +3333,8 @@ export declare const UserList: {
                 Wallets?: {
                     Address?: string | undefined;
                     Alias?: string | undefined;
-                    Type?: WalletType | undefined;
-                    SignerType?: SignerType | undefined;
+                    Type?: import("./user-fundings").WalletType | undefined;
+                    SignerType?: import("./user-fundings").SignerType | undefined;
                 }[] | undefined;
                 Socials?: {
                     URL?: string | undefined;
@@ -3827,12 +3348,12 @@ export declare const UserList: {
                     JobTitle?: string | undefined;
                     StartDate?: Date | undefined;
                     EndDate?: Date | undefined;
-                    Type?: EmploymentType | undefined;
+                    Type?: import("./user-kyc").EmploymentType | undefined;
                     Industry?: string | undefined;
                     Income?: {
                         Amount?: number | undefined;
                         Currency?: string | undefined;
-                        Frequency?: IncomeFrequency | undefined;
+                        Frequency?: import("./user-kyc").IncomeFrequency | undefined;
                     } | undefined;
                     Contact?: {
                         Name?: string | undefined;
@@ -3905,14 +3426,14 @@ export declare const UserList: {
                         YearsExperience?: number | undefined;
                         AnnualIncome?: number | undefined;
                         NetWorth?: number | undefined;
-                        ConversionImportance?: LiquidationImportance | undefined;
-                        Tolerance?: RiskTolerance | undefined;
-                        Objective?: InvestmentObjective | undefined;
+                        ConversionImportance?: import("./user-compliance").LiquidationImportance | undefined;
+                        Tolerance?: import("./user-compliance").RiskTolerance | undefined;
+                        Objective?: import("./user-compliance").InvestmentObjective | undefined;
                     } | undefined;
                 }[] | undefined;
                 BrokerAccounts?: {
                     AccountID?: string | undefined;
-                    Broker?: ClearingBroker | undefined;
+                    Broker?: import("./sologenic/com-fs-order-model/broker").ClearingBroker | undefined;
                     OrganizationID?: string | undefined;
                     Profiles?: string[] | undefined;
                 }[] | undefined;
@@ -3937,6 +3458,7 @@ export declare const UserList: {
                 ChangedAt?: Date | undefined;
                 Reason?: string | undefined;
             } | undefined;
+            OrganizationIDs?: string[] | undefined;
         }[] | undefined;
         Offset?: number | undefined;
     } & {
@@ -3953,8 +3475,8 @@ export declare const UserList: {
                 Wallets?: {
                     Address?: string | undefined;
                     Alias?: string | undefined;
-                    Type?: WalletType | undefined;
-                    SignerType?: SignerType | undefined;
+                    Type?: import("./user-fundings").WalletType | undefined;
+                    SignerType?: import("./user-fundings").SignerType | undefined;
                 }[] | undefined;
                 Socials?: {
                     URL?: string | undefined;
@@ -3968,12 +3490,12 @@ export declare const UserList: {
                     JobTitle?: string | undefined;
                     StartDate?: Date | undefined;
                     EndDate?: Date | undefined;
-                    Type?: EmploymentType | undefined;
+                    Type?: import("./user-kyc").EmploymentType | undefined;
                     Industry?: string | undefined;
                     Income?: {
                         Amount?: number | undefined;
                         Currency?: string | undefined;
-                        Frequency?: IncomeFrequency | undefined;
+                        Frequency?: import("./user-kyc").IncomeFrequency | undefined;
                     } | undefined;
                     Contact?: {
                         Name?: string | undefined;
@@ -4046,14 +3568,14 @@ export declare const UserList: {
                         YearsExperience?: number | undefined;
                         AnnualIncome?: number | undefined;
                         NetWorth?: number | undefined;
-                        ConversionImportance?: LiquidationImportance | undefined;
-                        Tolerance?: RiskTolerance | undefined;
-                        Objective?: InvestmentObjective | undefined;
+                        ConversionImportance?: import("./user-compliance").LiquidationImportance | undefined;
+                        Tolerance?: import("./user-compliance").RiskTolerance | undefined;
+                        Objective?: import("./user-compliance").InvestmentObjective | undefined;
                     } | undefined;
                 }[] | undefined;
                 BrokerAccounts?: {
                     AccountID?: string | undefined;
-                    Broker?: ClearingBroker | undefined;
+                    Broker?: import("./sologenic/com-fs-order-model/broker").ClearingBroker | undefined;
                     OrganizationID?: string | undefined;
                     Profiles?: string[] | undefined;
                 }[] | undefined;
@@ -4078,6 +3600,7 @@ export declare const UserList: {
                 ChangedAt?: Date | undefined;
                 Reason?: string | undefined;
             } | undefined;
+            OrganizationIDs?: string[] | undefined;
         }[] & ({
             User?: {
                 UserID?: string | undefined;
@@ -4091,8 +3614,8 @@ export declare const UserList: {
                 Wallets?: {
                     Address?: string | undefined;
                     Alias?: string | undefined;
-                    Type?: WalletType | undefined;
-                    SignerType?: SignerType | undefined;
+                    Type?: import("./user-fundings").WalletType | undefined;
+                    SignerType?: import("./user-fundings").SignerType | undefined;
                 }[] | undefined;
                 Socials?: {
                     URL?: string | undefined;
@@ -4106,12 +3629,12 @@ export declare const UserList: {
                     JobTitle?: string | undefined;
                     StartDate?: Date | undefined;
                     EndDate?: Date | undefined;
-                    Type?: EmploymentType | undefined;
+                    Type?: import("./user-kyc").EmploymentType | undefined;
                     Industry?: string | undefined;
                     Income?: {
                         Amount?: number | undefined;
                         Currency?: string | undefined;
-                        Frequency?: IncomeFrequency | undefined;
+                        Frequency?: import("./user-kyc").IncomeFrequency | undefined;
                     } | undefined;
                     Contact?: {
                         Name?: string | undefined;
@@ -4184,14 +3707,14 @@ export declare const UserList: {
                         YearsExperience?: number | undefined;
                         AnnualIncome?: number | undefined;
                         NetWorth?: number | undefined;
-                        ConversionImportance?: LiquidationImportance | undefined;
-                        Tolerance?: RiskTolerance | undefined;
-                        Objective?: InvestmentObjective | undefined;
+                        ConversionImportance?: import("./user-compliance").LiquidationImportance | undefined;
+                        Tolerance?: import("./user-compliance").RiskTolerance | undefined;
+                        Objective?: import("./user-compliance").InvestmentObjective | undefined;
                     } | undefined;
                 }[] | undefined;
                 BrokerAccounts?: {
                     AccountID?: string | undefined;
-                    Broker?: ClearingBroker | undefined;
+                    Broker?: import("./sologenic/com-fs-order-model/broker").ClearingBroker | undefined;
                     OrganizationID?: string | undefined;
                     Profiles?: string[] | undefined;
                 }[] | undefined;
@@ -4216,6 +3739,7 @@ export declare const UserList: {
                 ChangedAt?: Date | undefined;
                 Reason?: string | undefined;
             } | undefined;
+            OrganizationIDs?: string[] | undefined;
         } & {
             User?: ({
                 UserID?: string | undefined;
@@ -4229,8 +3753,8 @@ export declare const UserList: {
                 Wallets?: {
                     Address?: string | undefined;
                     Alias?: string | undefined;
-                    Type?: WalletType | undefined;
-                    SignerType?: SignerType | undefined;
+                    Type?: import("./user-fundings").WalletType | undefined;
+                    SignerType?: import("./user-fundings").SignerType | undefined;
                 }[] | undefined;
                 Socials?: {
                     URL?: string | undefined;
@@ -4244,12 +3768,12 @@ export declare const UserList: {
                     JobTitle?: string | undefined;
                     StartDate?: Date | undefined;
                     EndDate?: Date | undefined;
-                    Type?: EmploymentType | undefined;
+                    Type?: import("./user-kyc").EmploymentType | undefined;
                     Industry?: string | undefined;
                     Income?: {
                         Amount?: number | undefined;
                         Currency?: string | undefined;
-                        Frequency?: IncomeFrequency | undefined;
+                        Frequency?: import("./user-kyc").IncomeFrequency | undefined;
                     } | undefined;
                     Contact?: {
                         Name?: string | undefined;
@@ -4322,14 +3846,14 @@ export declare const UserList: {
                         YearsExperience?: number | undefined;
                         AnnualIncome?: number | undefined;
                         NetWorth?: number | undefined;
-                        ConversionImportance?: LiquidationImportance | undefined;
-                        Tolerance?: RiskTolerance | undefined;
-                        Objective?: InvestmentObjective | undefined;
+                        ConversionImportance?: import("./user-compliance").LiquidationImportance | undefined;
+                        Tolerance?: import("./user-compliance").RiskTolerance | undefined;
+                        Objective?: import("./user-compliance").InvestmentObjective | undefined;
                     } | undefined;
                 }[] | undefined;
                 BrokerAccounts?: {
                     AccountID?: string | undefined;
-                    Broker?: ClearingBroker | undefined;
+                    Broker?: import("./sologenic/com-fs-order-model/broker").ClearingBroker | undefined;
                     OrganizationID?: string | undefined;
                     Profiles?: string[] | undefined;
                 }[] | undefined;
@@ -4354,23 +3878,23 @@ export declare const UserList: {
                 Wallets?: ({
                     Address?: string | undefined;
                     Alias?: string | undefined;
-                    Type?: WalletType | undefined;
-                    SignerType?: SignerType | undefined;
+                    Type?: import("./user-fundings").WalletType | undefined;
+                    SignerType?: import("./user-fundings").SignerType | undefined;
                 }[] & ({
                     Address?: string | undefined;
                     Alias?: string | undefined;
-                    Type?: WalletType | undefined;
-                    SignerType?: SignerType | undefined;
+                    Type?: import("./user-fundings").WalletType | undefined;
+                    SignerType?: import("./user-fundings").SignerType | undefined;
                 } & {
                     Address?: string | undefined;
                     Alias?: string | undefined;
-                    Type?: WalletType | undefined;
-                    SignerType?: SignerType | undefined;
-                } & { [K_31 in Exclude<keyof I_1["Users"][number]["User"]["Wallets"][number], keyof Wallet>]: never; })[] & { [K_32 in Exclude<keyof I_1["Users"][number]["User"]["Wallets"], keyof {
+                    Type?: import("./user-fundings").WalletType | undefined;
+                    SignerType?: import("./user-fundings").SignerType | undefined;
+                } & { [K_32 in Exclude<keyof I_1["Users"][number]["User"]["Wallets"][number], keyof Wallet>]: never; })[] & { [K_33 in Exclude<keyof I_1["Users"][number]["User"]["Wallets"], keyof {
                     Address?: string | undefined;
                     Alias?: string | undefined;
-                    Type?: WalletType | undefined;
-                    SignerType?: SignerType | undefined;
+                    Type?: import("./user-fundings").WalletType | undefined;
+                    SignerType?: import("./user-fundings").SignerType | undefined;
                 }[]>]: never; }) | undefined;
                 Socials?: ({
                     URL?: string | undefined;
@@ -4381,7 +3905,7 @@ export declare const UserList: {
                 } & {
                     URL?: string | undefined;
                     Type?: SocialType | undefined;
-                } & { [K_33 in Exclude<keyof I_1["Users"][number]["User"]["Socials"][number], keyof Social>]: never; })[] & { [K_34 in Exclude<keyof I_1["Users"][number]["User"]["Socials"], keyof {
+                } & { [K_34 in Exclude<keyof I_1["Users"][number]["User"]["Socials"][number], keyof Social>]: never; })[] & { [K_35 in Exclude<keyof I_1["Users"][number]["User"]["Socials"], keyof {
                     URL?: string | undefined;
                     Type?: SocialType | undefined;
                 }[]>]: never; }) | undefined;
@@ -4393,12 +3917,12 @@ export declare const UserList: {
                     JobTitle?: string | undefined;
                     StartDate?: Date | undefined;
                     EndDate?: Date | undefined;
-                    Type?: EmploymentType | undefined;
+                    Type?: import("./user-kyc").EmploymentType | undefined;
                     Industry?: string | undefined;
                     Income?: {
                         Amount?: number | undefined;
                         Currency?: string | undefined;
-                        Frequency?: IncomeFrequency | undefined;
+                        Frequency?: import("./user-kyc").IncomeFrequency | undefined;
                     } | undefined;
                     Contact?: {
                         Name?: string | undefined;
@@ -4413,17 +3937,17 @@ export declare const UserList: {
                     JobTitle?: string | undefined;
                     StartDate?: Date | undefined;
                     EndDate?: Date | undefined;
-                    Type?: EmploymentType | undefined;
+                    Type?: import("./user-kyc").EmploymentType | undefined;
                     Industry?: string | undefined;
                     Income?: ({
                         Amount?: number | undefined;
                         Currency?: string | undefined;
-                        Frequency?: IncomeFrequency | undefined;
+                        Frequency?: import("./user-kyc").IncomeFrequency | undefined;
                     } & {
                         Amount?: number | undefined;
                         Currency?: string | undefined;
-                        Frequency?: IncomeFrequency | undefined;
-                    } & { [K_35 in Exclude<keyof I_1["Users"][number]["User"]["Employment"]["Income"], keyof Income>]: never; }) | undefined;
+                        Frequency?: import("./user-kyc").IncomeFrequency | undefined;
+                    } & { [K_36 in Exclude<keyof I_1["Users"][number]["User"]["Employment"]["Income"], keyof import("./user-kyc").Income>]: never; }) | undefined;
                     Contact?: ({
                         Name?: string | undefined;
                         Email?: string | undefined;
@@ -4434,10 +3958,10 @@ export declare const UserList: {
                         Email?: string | undefined;
                         Phone?: string | undefined;
                         Address?: string | undefined;
-                    } & { [K_36 in Exclude<keyof I_1["Users"][number]["User"]["Employment"]["Contact"], keyof EmployerContact>]: never; }) | undefined;
+                    } & { [K_37 in Exclude<keyof I_1["Users"][number]["User"]["Employment"]["Contact"], keyof import("./user-kyc").EmployerContact>]: never; }) | undefined;
                     IsVerified?: boolean | undefined;
                     VerifiedAt?: string | undefined;
-                } & { [K_37 in Exclude<keyof I_1["Users"][number]["User"]["Employment"], keyof Employment>]: never; }) | undefined;
+                } & { [K_38 in Exclude<keyof I_1["Users"][number]["User"]["Employment"], keyof Employment>]: never; }) | undefined;
                 Role?: Role | undefined;
                 TradeProfile?: ({
                     IsTradingEnabled?: boolean | undefined;
@@ -4472,28 +3996,28 @@ export declare const UserList: {
                     } & {
                         Value?: number | undefined;
                         IsGreaterThan?: boolean | undefined;
-                    } & { [K_38 in Exclude<keyof I_1["Users"][number]["User"]["TradeProfile"]["AggregateNotionalLimit"], keyof import("./sologenic/com-fs-trade-profile-model/tradeprofile").DropdownNumericValue>]: never; }) | undefined;
+                    } & { [K_39 in Exclude<keyof I_1["Users"][number]["User"]["TradeProfile"]["AggregateNotionalLimit"], keyof import("./sologenic/com-fs-trade-profile-model/tradeprofile").DropdownNumericValue>]: never; }) | undefined;
                     SingleOrderLimit?: ({
                         Value?: number | undefined;
                         IsGreaterThan?: boolean | undefined;
                     } & {
                         Value?: number | undefined;
                         IsGreaterThan?: boolean | undefined;
-                    } & { [K_39 in Exclude<keyof I_1["Users"][number]["User"]["TradeProfile"]["SingleOrderLimit"], keyof import("./sologenic/com-fs-trade-profile-model/tradeprofile").DropdownNumericValue>]: never; }) | undefined;
+                    } & { [K_40 in Exclude<keyof I_1["Users"][number]["User"]["TradeProfile"]["SingleOrderLimit"], keyof import("./sologenic/com-fs-trade-profile-model/tradeprofile").DropdownNumericValue>]: never; }) | undefined;
                     MaxOrderQuantity?: ({
                         Value?: number | undefined;
                         IsGreaterThan?: boolean | undefined;
                     } & {
                         Value?: number | undefined;
                         IsGreaterThan?: boolean | undefined;
-                    } & { [K_40 in Exclude<keyof I_1["Users"][number]["User"]["TradeProfile"]["MaxOrderQuantity"], keyof import("./sologenic/com-fs-trade-profile-model/tradeprofile").DropdownNumericValue>]: never; }) | undefined;
+                    } & { [K_41 in Exclude<keyof I_1["Users"][number]["User"]["TradeProfile"]["MaxOrderQuantity"], keyof import("./sologenic/com-fs-trade-profile-model/tradeprofile").DropdownNumericValue>]: never; }) | undefined;
                     AggressivePercentage?: number | undefined;
                     SymbolGrossADVPercent?: number | undefined;
                     PriceCheckDeviation?: number | undefined;
                     DuplicateOrderLimit?: number | undefined;
                     RiskMultiplier?: number | undefined;
-                } & { [K_41 in Exclude<keyof I_1["Users"][number]["User"]["TradeProfile"], keyof TradeProfileDetails>]: never; }) | undefined;
-                KYCInquiries?: (string[] & string[] & { [K_42 in Exclude<keyof I_1["Users"][number]["User"]["KYCInquiries"], keyof string[]>]: never; }) | undefined;
+                } & { [K_42 in Exclude<keyof I_1["Users"][number]["User"]["TradeProfile"], keyof TradeProfileDetails>]: never; }) | undefined;
+                KYCInquiries?: (string[] & string[] & { [K_43 in Exclude<keyof I_1["Users"][number]["User"]["KYCInquiries"], keyof string[]>]: never; }) | undefined;
                 KYCDetails?: ({
                     Birthdate?: string | undefined;
                     PhoneNumber?: string | undefined;
@@ -4522,7 +4046,7 @@ export declare const UserList: {
                     IdentificationNumber?: string | undefined;
                     FirstName?: string | undefined;
                     LastName?: string | undefined;
-                } & { [K_43 in Exclude<keyof I_1["Users"][number]["User"]["KYCDetails"], keyof UserKYCDetails>]: never; }) | undefined;
+                } & { [K_44 in Exclude<keyof I_1["Users"][number]["User"]["KYCDetails"], keyof UserKYCDetails>]: never; }) | undefined;
                 UserDocumentCompliance?: ({
                     SignedDocuments?: {
                         Name?: string | undefined;
@@ -4550,14 +4074,14 @@ export declare const UserList: {
                         DocumentState?: import("./sologenic/com-fs-document-model/document").DocumentState | undefined;
                         SignedAt?: Date | undefined;
                         FileMD5SUM?: string | undefined;
-                    } & { [K_44 in Exclude<keyof I_1["Users"][number]["User"]["UserDocumentCompliance"]["SignedDocuments"][number], keyof import("./sologenic/com-fs-document-model/document").SignedDocument>]: never; })[] & { [K_45 in Exclude<keyof I_1["Users"][number]["User"]["UserDocumentCompliance"]["SignedDocuments"], keyof {
+                    } & { [K_45 in Exclude<keyof I_1["Users"][number]["User"]["UserDocumentCompliance"]["SignedDocuments"][number], keyof import("./sologenic/com-fs-document-model/document").SignedDocument>]: never; })[] & { [K_46 in Exclude<keyof I_1["Users"][number]["User"]["UserDocumentCompliance"]["SignedDocuments"], keyof {
                         Name?: string | undefined;
                         SignedVersion?: string | undefined;
                         DocumentState?: import("./sologenic/com-fs-document-model/document").DocumentState | undefined;
                         SignedAt?: Date | undefined;
                         FileMD5SUM?: string | undefined;
                     }[]>]: never; }) | undefined;
-                } & { [K_46 in Exclude<keyof I_1["Users"][number]["User"]["UserDocumentCompliance"], "SignedDocuments">]: never; }) | undefined;
+                } & { [K_47 in Exclude<keyof I_1["Users"][number]["User"]["UserDocumentCompliance"], "SignedDocuments">]: never; }) | undefined;
                 KYCStatus?: KYCStatus | undefined;
                 UserTradeProfile?: ({
                     IsMarginTradingEnabled?: boolean | undefined;
@@ -4569,16 +4093,16 @@ export declare const UserList: {
                     IsShortSellingEnabled?: boolean | undefined;
                     SingleOrderLimit?: number | undefined;
                     MaxOrderQuantity?: number | undefined;
-                } & { [K_47 in Exclude<keyof I_1["Users"][number]["User"]["UserTradeProfile"], keyof UserTradeProfile>]: never; }) | undefined;
+                } & { [K_48 in Exclude<keyof I_1["Users"][number]["User"]["UserTradeProfile"], keyof UserTradeProfile>]: never; }) | undefined;
                 ComplianceQuestions?: ({
                     USA?: {
                         RecordedAt?: Date | undefined;
                         YearsExperience?: number | undefined;
                         AnnualIncome?: number | undefined;
                         NetWorth?: number | undefined;
-                        ConversionImportance?: LiquidationImportance | undefined;
-                        Tolerance?: RiskTolerance | undefined;
-                        Objective?: InvestmentObjective | undefined;
+                        ConversionImportance?: import("./user-compliance").LiquidationImportance | undefined;
+                        Tolerance?: import("./user-compliance").RiskTolerance | undefined;
+                        Objective?: import("./user-compliance").InvestmentObjective | undefined;
                     } | undefined;
                 }[] & ({
                     USA?: {
@@ -4586,9 +4110,9 @@ export declare const UserList: {
                         YearsExperience?: number | undefined;
                         AnnualIncome?: number | undefined;
                         NetWorth?: number | undefined;
-                        ConversionImportance?: LiquidationImportance | undefined;
-                        Tolerance?: RiskTolerance | undefined;
-                        Objective?: InvestmentObjective | undefined;
+                        ConversionImportance?: import("./user-compliance").LiquidationImportance | undefined;
+                        Tolerance?: import("./user-compliance").RiskTolerance | undefined;
+                        Objective?: import("./user-compliance").InvestmentObjective | undefined;
                     } | undefined;
                 } & {
                     USA?: ({
@@ -4596,47 +4120,47 @@ export declare const UserList: {
                         YearsExperience?: number | undefined;
                         AnnualIncome?: number | undefined;
                         NetWorth?: number | undefined;
-                        ConversionImportance?: LiquidationImportance | undefined;
-                        Tolerance?: RiskTolerance | undefined;
-                        Objective?: InvestmentObjective | undefined;
+                        ConversionImportance?: import("./user-compliance").LiquidationImportance | undefined;
+                        Tolerance?: import("./user-compliance").RiskTolerance | undefined;
+                        Objective?: import("./user-compliance").InvestmentObjective | undefined;
                     } & {
                         RecordedAt?: Date | undefined;
                         YearsExperience?: number | undefined;
                         AnnualIncome?: number | undefined;
                         NetWorth?: number | undefined;
-                        ConversionImportance?: LiquidationImportance | undefined;
-                        Tolerance?: RiskTolerance | undefined;
-                        Objective?: InvestmentObjective | undefined;
-                    } & { [K_48 in Exclude<keyof I_1["Users"][number]["User"]["ComplianceQuestions"][number]["USA"], keyof USA>]: never; }) | undefined;
-                } & { [K_49 in Exclude<keyof I_1["Users"][number]["User"]["ComplianceQuestions"][number], "USA">]: never; })[] & { [K_50 in Exclude<keyof I_1["Users"][number]["User"]["ComplianceQuestions"], keyof {
+                        ConversionImportance?: import("./user-compliance").LiquidationImportance | undefined;
+                        Tolerance?: import("./user-compliance").RiskTolerance | undefined;
+                        Objective?: import("./user-compliance").InvestmentObjective | undefined;
+                    } & { [K_49 in Exclude<keyof I_1["Users"][number]["User"]["ComplianceQuestions"][number]["USA"], keyof import("./user-compliance").USA>]: never; }) | undefined;
+                } & { [K_50 in Exclude<keyof I_1["Users"][number]["User"]["ComplianceQuestions"][number], "USA">]: never; })[] & { [K_51 in Exclude<keyof I_1["Users"][number]["User"]["ComplianceQuestions"], keyof {
                     USA?: {
                         RecordedAt?: Date | undefined;
                         YearsExperience?: number | undefined;
                         AnnualIncome?: number | undefined;
                         NetWorth?: number | undefined;
-                        ConversionImportance?: LiquidationImportance | undefined;
-                        Tolerance?: RiskTolerance | undefined;
-                        Objective?: InvestmentObjective | undefined;
+                        ConversionImportance?: import("./user-compliance").LiquidationImportance | undefined;
+                        Tolerance?: import("./user-compliance").RiskTolerance | undefined;
+                        Objective?: import("./user-compliance").InvestmentObjective | undefined;
                     } | undefined;
                 }[]>]: never; }) | undefined;
                 BrokerAccounts?: ({
                     AccountID?: string | undefined;
-                    Broker?: ClearingBroker | undefined;
+                    Broker?: import("./sologenic/com-fs-order-model/broker").ClearingBroker | undefined;
                     OrganizationID?: string | undefined;
                     Profiles?: string[] | undefined;
                 }[] & ({
                     AccountID?: string | undefined;
-                    Broker?: ClearingBroker | undefined;
+                    Broker?: import("./sologenic/com-fs-order-model/broker").ClearingBroker | undefined;
                     OrganizationID?: string | undefined;
                     Profiles?: string[] | undefined;
                 } & {
                     AccountID?: string | undefined;
-                    Broker?: ClearingBroker | undefined;
+                    Broker?: import("./sologenic/com-fs-order-model/broker").ClearingBroker | undefined;
                     OrganizationID?: string | undefined;
-                    Profiles?: (string[] & string[] & { [K_51 in Exclude<keyof I_1["Users"][number]["User"]["BrokerAccounts"][number]["Profiles"], keyof string[]>]: never; }) | undefined;
-                } & { [K_52 in Exclude<keyof I_1["Users"][number]["User"]["BrokerAccounts"][number], keyof BrokerAccount>]: never; })[] & { [K_53 in Exclude<keyof I_1["Users"][number]["User"]["BrokerAccounts"], keyof {
+                    Profiles?: (string[] & string[] & { [K_52 in Exclude<keyof I_1["Users"][number]["User"]["BrokerAccounts"][number]["Profiles"], keyof string[]>]: never; }) | undefined;
+                } & { [K_53 in Exclude<keyof I_1["Users"][number]["User"]["BrokerAccounts"][number], keyof BrokerAccount>]: never; })[] & { [K_54 in Exclude<keyof I_1["Users"][number]["User"]["BrokerAccounts"], keyof {
                     AccountID?: string | undefined;
-                    Broker?: ClearingBroker | undefined;
+                    Broker?: import("./sologenic/com-fs-order-model/broker").ClearingBroker | undefined;
                     OrganizationID?: string | undefined;
                     Profiles?: string[] | undefined;
                 }[]>]: never; }) | undefined;
@@ -4664,7 +4188,7 @@ export declare const UserList: {
                     ABA?: string | undefined;
                     SWIFT?: string | undefined;
                     IBAN?: string | undefined;
-                } & { [K_54 in Exclude<keyof I_1["Users"][number]["User"]["BankAccounts"][number], keyof BankAccount>]: never; })[] & { [K_55 in Exclude<keyof I_1["Users"][number]["User"]["BankAccounts"], keyof {
+                } & { [K_55 in Exclude<keyof I_1["Users"][number]["User"]["BankAccounts"][number], keyof BankAccount>]: never; })[] & { [K_56 in Exclude<keyof I_1["Users"][number]["User"]["BankAccounts"], keyof {
                     AccountName?: string | undefined;
                     BankName?: string | undefined;
                     BankAddress?: string | undefined;
@@ -4673,7 +4197,7 @@ export declare const UserList: {
                     SWIFT?: string | undefined;
                     IBAN?: string | undefined;
                 }[]>]: never; }) | undefined;
-            } & { [K_56 in Exclude<keyof I_1["Users"][number]["User"], keyof UserDetails>]: never; }) | undefined;
+            } & { [K_57 in Exclude<keyof I_1["Users"][number]["User"], keyof UserDetails>]: never; }) | undefined;
             MetaData?: ({
                 Network?: Network | undefined;
                 UpdatedAt?: Date | undefined;
@@ -4684,7 +4208,7 @@ export declare const UserList: {
                 UpdatedAt?: Date | undefined;
                 CreatedAt?: Date | undefined;
                 UpdatedByAccount?: string | undefined;
-            } & { [K_57 in Exclude<keyof I_1["Users"][number]["MetaData"], keyof MetaData>]: never; }) | undefined;
+            } & { [K_58 in Exclude<keyof I_1["Users"][number]["MetaData"], keyof MetaData>]: never; }) | undefined;
             Audit?: ({
                 ChangedBy?: string | undefined;
                 ChangedAt?: Date | undefined;
@@ -4693,8 +4217,9 @@ export declare const UserList: {
                 ChangedBy?: string | undefined;
                 ChangedAt?: Date | undefined;
                 Reason?: string | undefined;
-            } & { [K_58 in Exclude<keyof I_1["Users"][number]["Audit"], keyof Audit>]: never; }) | undefined;
-        } & { [K_59 in Exclude<keyof I_1["Users"][number], keyof User>]: never; })[] & { [K_60 in Exclude<keyof I_1["Users"], keyof {
+            } & { [K_59 in Exclude<keyof I_1["Users"][number]["Audit"], keyof Audit>]: never; }) | undefined;
+            OrganizationIDs?: (string[] & string[] & { [K_60 in Exclude<keyof I_1["Users"][number]["OrganizationIDs"], keyof string[]>]: never; }) | undefined;
+        } & { [K_61 in Exclude<keyof I_1["Users"][number], keyof User>]: never; })[] & { [K_62 in Exclude<keyof I_1["Users"], keyof {
             User?: {
                 UserID?: string | undefined;
                 FirstName?: string | undefined;
@@ -4707,8 +4232,8 @@ export declare const UserList: {
                 Wallets?: {
                     Address?: string | undefined;
                     Alias?: string | undefined;
-                    Type?: WalletType | undefined;
-                    SignerType?: SignerType | undefined;
+                    Type?: import("./user-fundings").WalletType | undefined;
+                    SignerType?: import("./user-fundings").SignerType | undefined;
                 }[] | undefined;
                 Socials?: {
                     URL?: string | undefined;
@@ -4722,12 +4247,12 @@ export declare const UserList: {
                     JobTitle?: string | undefined;
                     StartDate?: Date | undefined;
                     EndDate?: Date | undefined;
-                    Type?: EmploymentType | undefined;
+                    Type?: import("./user-kyc").EmploymentType | undefined;
                     Industry?: string | undefined;
                     Income?: {
                         Amount?: number | undefined;
                         Currency?: string | undefined;
-                        Frequency?: IncomeFrequency | undefined;
+                        Frequency?: import("./user-kyc").IncomeFrequency | undefined;
                     } | undefined;
                     Contact?: {
                         Name?: string | undefined;
@@ -4800,14 +4325,14 @@ export declare const UserList: {
                         YearsExperience?: number | undefined;
                         AnnualIncome?: number | undefined;
                         NetWorth?: number | undefined;
-                        ConversionImportance?: LiquidationImportance | undefined;
-                        Tolerance?: RiskTolerance | undefined;
-                        Objective?: InvestmentObjective | undefined;
+                        ConversionImportance?: import("./user-compliance").LiquidationImportance | undefined;
+                        Tolerance?: import("./user-compliance").RiskTolerance | undefined;
+                        Objective?: import("./user-compliance").InvestmentObjective | undefined;
                     } | undefined;
                 }[] | undefined;
                 BrokerAccounts?: {
                     AccountID?: string | undefined;
-                    Broker?: ClearingBroker | undefined;
+                    Broker?: import("./sologenic/com-fs-order-model/broker").ClearingBroker | undefined;
                     OrganizationID?: string | undefined;
                     Profiles?: string[] | undefined;
                 }[] | undefined;
@@ -4832,9 +4357,10 @@ export declare const UserList: {
                 ChangedAt?: Date | undefined;
                 Reason?: string | undefined;
             } | undefined;
+            OrganizationIDs?: string[] | undefined;
         }[]>]: never; }) | undefined;
         Offset?: number | undefined;
-    } & { [K_61 in Exclude<keyof I_1, keyof UserList>]: never; }>(object: I_1): UserList;
+    } & { [K_63 in Exclude<keyof I_1, keyof UserList>]: never; }>(object: I_1): UserList;
 };
 export declare const StatusMessage: {
     encode(message: StatusMessage, writer?: _m0.Writer): _m0.Writer;
@@ -4891,226 +4417,6 @@ export declare const StatusMessage: {
             Reason?: string | undefined;
         } & { [K_2 in Exclude<keyof I_1["Audit"], keyof Audit>]: never; }) | undefined;
     } & { [K_3 in Exclude<keyof I_1, keyof StatusMessage>]: never; }>(object: I_1): StatusMessage;
-};
-export declare const Filter: {
-    encode(message: Filter, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): Filter;
-    fromJSON(object: any): Filter;
-    toJSON(message: Filter): unknown;
-    create<I extends {
-        UserIDs?: string[] | undefined;
-        Network?: Network | undefined;
-        OrganizationID?: string | undefined;
-        Offset?: number | undefined;
-        Limit?: number | undefined;
-        InquiryID?: string | undefined;
-        Status?: UserStatus | undefined;
-        ExternalUserIDs?: string[] | undefined;
-        WalletAddress?: string | undefined;
-    } & {
-        UserIDs?: (string[] & string[] & { [K in Exclude<keyof I["UserIDs"], keyof string[]>]: never; }) | undefined;
-        Network?: Network | undefined;
-        OrganizationID?: string | undefined;
-        Offset?: number | undefined;
-        Limit?: number | undefined;
-        InquiryID?: string | undefined;
-        Status?: UserStatus | undefined;
-        ExternalUserIDs?: (string[] & string[] & { [K_1 in Exclude<keyof I["ExternalUserIDs"], keyof string[]>]: never; }) | undefined;
-        WalletAddress?: string | undefined;
-    } & { [K_2 in Exclude<keyof I, keyof Filter>]: never; }>(base?: I | undefined): Filter;
-    fromPartial<I_1 extends {
-        UserIDs?: string[] | undefined;
-        Network?: Network | undefined;
-        OrganizationID?: string | undefined;
-        Offset?: number | undefined;
-        Limit?: number | undefined;
-        InquiryID?: string | undefined;
-        Status?: UserStatus | undefined;
-        ExternalUserIDs?: string[] | undefined;
-        WalletAddress?: string | undefined;
-    } & {
-        UserIDs?: (string[] & string[] & { [K_3 in Exclude<keyof I_1["UserIDs"], keyof string[]>]: never; }) | undefined;
-        Network?: Network | undefined;
-        OrganizationID?: string | undefined;
-        Offset?: number | undefined;
-        Limit?: number | undefined;
-        InquiryID?: string | undefined;
-        Status?: UserStatus | undefined;
-        ExternalUserIDs?: (string[] & string[] & { [K_4 in Exclude<keyof I_1["ExternalUserIDs"], keyof string[]>]: never; }) | undefined;
-        WalletAddress?: string | undefined;
-    } & { [K_5 in Exclude<keyof I_1, keyof Filter>]: never; }>(object: I_1): Filter;
-};
-export declare const ComplianceQuestions: {
-    encode(message: ComplianceQuestions, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): ComplianceQuestions;
-    fromJSON(object: any): ComplianceQuestions;
-    toJSON(message: ComplianceQuestions): unknown;
-    create<I extends {
-        USA?: {
-            RecordedAt?: Date | undefined;
-            YearsExperience?: number | undefined;
-            AnnualIncome?: number | undefined;
-            NetWorth?: number | undefined;
-            ConversionImportance?: LiquidationImportance | undefined;
-            Tolerance?: RiskTolerance | undefined;
-            Objective?: InvestmentObjective | undefined;
-        } | undefined;
-    } & {
-        USA?: ({
-            RecordedAt?: Date | undefined;
-            YearsExperience?: number | undefined;
-            AnnualIncome?: number | undefined;
-            NetWorth?: number | undefined;
-            ConversionImportance?: LiquidationImportance | undefined;
-            Tolerance?: RiskTolerance | undefined;
-            Objective?: InvestmentObjective | undefined;
-        } & {
-            RecordedAt?: Date | undefined;
-            YearsExperience?: number | undefined;
-            AnnualIncome?: number | undefined;
-            NetWorth?: number | undefined;
-            ConversionImportance?: LiquidationImportance | undefined;
-            Tolerance?: RiskTolerance | undefined;
-            Objective?: InvestmentObjective | undefined;
-        } & { [K in Exclude<keyof I["USA"], keyof USA>]: never; }) | undefined;
-    } & { [K_1 in Exclude<keyof I, "USA">]: never; }>(base?: I | undefined): ComplianceQuestions;
-    fromPartial<I_1 extends {
-        USA?: {
-            RecordedAt?: Date | undefined;
-            YearsExperience?: number | undefined;
-            AnnualIncome?: number | undefined;
-            NetWorth?: number | undefined;
-            ConversionImportance?: LiquidationImportance | undefined;
-            Tolerance?: RiskTolerance | undefined;
-            Objective?: InvestmentObjective | undefined;
-        } | undefined;
-    } & {
-        USA?: ({
-            RecordedAt?: Date | undefined;
-            YearsExperience?: number | undefined;
-            AnnualIncome?: number | undefined;
-            NetWorth?: number | undefined;
-            ConversionImportance?: LiquidationImportance | undefined;
-            Tolerance?: RiskTolerance | undefined;
-            Objective?: InvestmentObjective | undefined;
-        } & {
-            RecordedAt?: Date | undefined;
-            YearsExperience?: number | undefined;
-            AnnualIncome?: number | undefined;
-            NetWorth?: number | undefined;
-            ConversionImportance?: LiquidationImportance | undefined;
-            Tolerance?: RiskTolerance | undefined;
-            Objective?: InvestmentObjective | undefined;
-        } & { [K_2 in Exclude<keyof I_1["USA"], keyof USA>]: never; }) | undefined;
-    } & { [K_3 in Exclude<keyof I_1, "USA">]: never; }>(object: I_1): ComplianceQuestions;
-};
-export declare const USA: {
-    encode(message: USA, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): USA;
-    fromJSON(object: any): USA;
-    toJSON(message: USA): unknown;
-    create<I extends {
-        RecordedAt?: Date | undefined;
-        YearsExperience?: number | undefined;
-        AnnualIncome?: number | undefined;
-        NetWorth?: number | undefined;
-        ConversionImportance?: LiquidationImportance | undefined;
-        Tolerance?: RiskTolerance | undefined;
-        Objective?: InvestmentObjective | undefined;
-    } & {
-        RecordedAt?: Date | undefined;
-        YearsExperience?: number | undefined;
-        AnnualIncome?: number | undefined;
-        NetWorth?: number | undefined;
-        ConversionImportance?: LiquidationImportance | undefined;
-        Tolerance?: RiskTolerance | undefined;
-        Objective?: InvestmentObjective | undefined;
-    } & { [K in Exclude<keyof I, keyof USA>]: never; }>(base?: I | undefined): USA;
-    fromPartial<I_1 extends {
-        RecordedAt?: Date | undefined;
-        YearsExperience?: number | undefined;
-        AnnualIncome?: number | undefined;
-        NetWorth?: number | undefined;
-        ConversionImportance?: LiquidationImportance | undefined;
-        Tolerance?: RiskTolerance | undefined;
-        Objective?: InvestmentObjective | undefined;
-    } & {
-        RecordedAt?: Date | undefined;
-        YearsExperience?: number | undefined;
-        AnnualIncome?: number | undefined;
-        NetWorth?: number | undefined;
-        ConversionImportance?: LiquidationImportance | undefined;
-        Tolerance?: RiskTolerance | undefined;
-        Objective?: InvestmentObjective | undefined;
-    } & { [K_1 in Exclude<keyof I_1, keyof USA>]: never; }>(object: I_1): USA;
-};
-export declare const BankAccount: {
-    encode(message: BankAccount, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): BankAccount;
-    fromJSON(object: any): BankAccount;
-    toJSON(message: BankAccount): unknown;
-    create<I extends {
-        AccountName?: string | undefined;
-        BankName?: string | undefined;
-        BankAddress?: string | undefined;
-        AccountNumber?: string | undefined;
-        ABA?: string | undefined;
-        SWIFT?: string | undefined;
-        IBAN?: string | undefined;
-    } & {
-        AccountName?: string | undefined;
-        BankName?: string | undefined;
-        BankAddress?: string | undefined;
-        AccountNumber?: string | undefined;
-        ABA?: string | undefined;
-        SWIFT?: string | undefined;
-        IBAN?: string | undefined;
-    } & { [K in Exclude<keyof I, keyof BankAccount>]: never; }>(base?: I | undefined): BankAccount;
-    fromPartial<I_1 extends {
-        AccountName?: string | undefined;
-        BankName?: string | undefined;
-        BankAddress?: string | undefined;
-        AccountNumber?: string | undefined;
-        ABA?: string | undefined;
-        SWIFT?: string | undefined;
-        IBAN?: string | undefined;
-    } & {
-        AccountName?: string | undefined;
-        BankName?: string | undefined;
-        BankAddress?: string | undefined;
-        AccountNumber?: string | undefined;
-        ABA?: string | undefined;
-        SWIFT?: string | undefined;
-        IBAN?: string | undefined;
-    } & { [K_1 in Exclude<keyof I_1, keyof BankAccount>]: never; }>(object: I_1): BankAccount;
-};
-export declare const BrokerAccount: {
-    encode(message: BrokerAccount, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): BrokerAccount;
-    fromJSON(object: any): BrokerAccount;
-    toJSON(message: BrokerAccount): unknown;
-    create<I extends {
-        AccountID?: string | undefined;
-        Broker?: ClearingBroker | undefined;
-        OrganizationID?: string | undefined;
-        Profiles?: string[] | undefined;
-    } & {
-        AccountID?: string | undefined;
-        Broker?: ClearingBroker | undefined;
-        OrganizationID?: string | undefined;
-        Profiles?: (string[] & string[] & { [K in Exclude<keyof I["Profiles"], keyof string[]>]: never; }) | undefined;
-    } & { [K_1 in Exclude<keyof I, keyof BrokerAccount>]: never; }>(base?: I | undefined): BrokerAccount;
-    fromPartial<I_1 extends {
-        AccountID?: string | undefined;
-        Broker?: ClearingBroker | undefined;
-        OrganizationID?: string | undefined;
-        Profiles?: string[] | undefined;
-    } & {
-        AccountID?: string | undefined;
-        Broker?: ClearingBroker | undefined;
-        OrganizationID?: string | undefined;
-        Profiles?: (string[] & string[] & { [K_2 in Exclude<keyof I_1["Profiles"], keyof string[]>]: never; }) | undefined;
-    } & { [K_3 in Exclude<keyof I_1, keyof BrokerAccount>]: never; }>(object: I_1): BrokerAccount;
 };
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 export type DeepPartial<T> = T extends Builtin ? T : T extends globalThis.Array<infer U> ? globalThis.Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? {

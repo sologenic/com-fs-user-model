@@ -2,7 +2,7 @@ import _m0 from "protobufjs/minimal";
 import { AssetType } from "../com-fs-asset-model/asset";
 import { Decimal } from "../com-fs-utils-lib/go/decimal/decimal";
 import { Network } from "../com-fs-utils-lib/models/metadata/metadata";
-import { OrderType, ProcessInfo } from "./util";
+import { OrderType, ProcessInfo, TimeInForce } from "./util";
 export declare const protobufPackage = "order";
 export declare enum ClearingBroker {
     NOT_USED_CLEARING_BROKER = 0,
@@ -12,25 +12,6 @@ export declare enum ClearingBroker {
 }
 export declare function clearingBrokerFromJSON(object: any): ClearingBroker;
 export declare function clearingBrokerToJSON(object: ClearingBroker): string;
-export declare enum TimeInForce {
-    NOT_USED_TIME_IN_FORCE = 0,
-    DAY = 1,
-    /** GOOD_TIL_CANCELED - GTC */
-    GOOD_TIL_CANCELED = 2,
-    /** AT_THE_OPENING - OPG */
-    AT_THE_OPENING = 3,
-    /** AT_THE_CLOSE - CLS */
-    AT_THE_CLOSE = 4,
-    /** IMMEDIATE_OR_CANCEL - IOC */
-    IMMEDIATE_OR_CANCEL = 5,
-    /** FILL_OR_KILL - FOK */
-    FILL_OR_KILL = 6,
-    /** GOOD_TIL_TIME - GTT */
-    GOOD_TIL_TIME = 7,
-    UNRECOGNIZED = -1
-}
-export declare function timeInForceFromJSON(object: any): TimeInForce;
-export declare function timeInForceToJSON(object: TimeInForce): string;
 export declare enum TradeType {
     NOT_USED_TRADE_TYPE = 0,
     MARKET = 1,
@@ -125,7 +106,7 @@ export interface BrokerOrderDetails {
     TrailPercent?: Decimal | undefined;
     /** High Water Mark, used for trailing stop orders */
     HWM?: Decimal | undefined;
-    /** defaults to false TODO: needs explanation */
+    /** defaults to false, High Water Mark is used for trailing stop orders */
     ExtendedHours: boolean;
     CreatedAt: Date | undefined;
     UpdatedAt?: Date | undefined;

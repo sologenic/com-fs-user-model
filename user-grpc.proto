@@ -6,6 +6,7 @@ option go_package = "github.com/sologenic/com-fs-user-model;user";
 
 import "google/protobuf/empty.proto";
 import "user.proto";
+import "user-filters.proto";
 
 service UserService {
     rpc Get (UserID) returns (User) {}
@@ -13,5 +14,3 @@ service UserService {
     rpc Upsert (User) returns (UserID) {}
     rpc SetStatus (StatusMessage) returns (google.protobuf.Empty) {}
 }
-
-

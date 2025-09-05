@@ -2,7 +2,8 @@
 /// <reference types="node" />
 import { type CallOptions, ChannelCredentials, Client, type ClientOptions, type ClientUnaryCall, type handleUnaryCall, Metadata, type ServiceError, type UntypedServiceImplementation } from "@grpc/grpc-js";
 import { Empty } from "./google/protobuf/empty";
-import { Filter, StatusMessage, User, UserID, UserList } from "./user";
+import { StatusMessage, User, UserList } from "./user";
+import { Filter, UserID } from "./user-filters";
 export declare const protobufPackage = "user";
 export type UserServiceService = typeof UserServiceService;
 export declare const UserServiceService: {

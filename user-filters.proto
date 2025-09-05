@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+package user;
+
+option go_package = "github.com/sologenic/com-fs-user-model;user";
+
+import "sologenic/com-fs-utils-lib/models/metadata/metadata.proto";
+import "user.proto";
+
+message Filter {
+    repeated string UserIDs = 1;
+    optional metadata.Network Network = 2; 
+    string OrganizationID = 3;
+    optional int32 Offset = 4;
+    optional int32 Limit = 5;
+    optional string InquiryID = 6;
+    optional UserStatus Status = 7;
+    repeated string ExternalUserIDs = 8;
+    optional string WalletAddress = 9;
+}
+
+message UserID {
+    string UserID = 1;
+    string OrganizationID = 2;
+    optional metadata.Network Network = 3; 
+}

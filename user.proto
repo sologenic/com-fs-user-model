@@ -4,46 +4,15 @@ package user;
 
 option go_package = "github.com/sologenic/com-fs-user-model;user";
 
-import "google/protobuf/timestamp.proto";
 import "sologenic/com-fs-utils-lib/models/metadata/metadata.proto";
 import "sologenic/com-fs-utils-lib/models/audit/audit.proto";
 import "sologenic/com-fs-utils-lib/models/role/role.proto";
 import "sologenic/com-fs-utils-lib/models/language/language.proto";
 import "sologenic/com-fs-trade-profile-model/tradeprofile.proto";
 import "sologenic/com-fs-document-model/document.proto";
-import "sologenic/com-fs-order-model/broker.proto";
-
-message IDNumber {
-    string IssuingCountry = 1;
-    string IdentificationClass = 2;
-    string IdentificationNumber = 3;
-}
-
-message UserKYCDetails {
-    string Birthdate = 1;
-    string PhoneNumber = 2;
-    string EmailAddress = 3;
-    string AddressStreet1 = 4;
-    string AddressStreet2 = 5;
-    string AddressCity = 6;
-    string AddressSubdivision = 7;
-    string AddressPostalCode = 8;
-    string CountryCode = 9;
-    string SocialSecurityNumber = 10;
-    string IdentificationNumber = 11;
-    string FirstName = 12;
-    string LastName = 13;
-}
-
-enum KYCStatus {
-  KYC_STATUS_UNSPECIFIED = 0; // Default value, should not be used
-  KYC_STATUS_PENDING = 1;     // Inquiry created but not completed
-  KYC_STATUS_IN_REVIEW = 2;   // Inquiry submitted but under manual review
-  KYC_STATUS_APPROVED = 3;    // Inquiry completed and approved
-  KYC_STATUS_REJECTED = 4;    // Inquiry completed and explicitly rejected
-  KYC_STATUS_FAILED = 5;      // Inquiry failed due to an error (e.g., document mismatch, bad image quality)
-  KYC_STATUS_EXPIRED = 6;     // Inquiry expired (e.g., not completed in time)
-}
+import "user-kyc.proto";
+import "user-compliance.proto";
+import "user-fundings.proto";
 
 message UserDetails {
     string UserID = 1; // email address used for firebase authentication
@@ -57,12 +26,12 @@ message UserDetails {
     repeated Wallet Wallets = 9;
     repeated Social Socials = 10;
     language.Lang Language = 11;
-    string ExternalUserID = 12; // UUID for the external user identifier in the KYC provider
-    string OrganizationID = 13; // UUID
+    string ExternalUserID = 12; // UUID for the external user identifier for example to be used in communication with the KYC provider, or other places where an anonymous ID is required
+    string OrganizationID = 13; // UUID of the current organization the user is cloned into
     optional Employment Employment = 14;
     role.Role Role = 15; // A retail user will always have a role of "NORMAL_USER"
     tradeprofile.TradeProfileDetails TradeProfile = 16; // Trade profile details
-    repeated string KYCInquiries = 17; // Array of inquiry ID's
+    repeated string KYCInquiries = 17; // Array of KYC integration IDs
     UserKYCDetails KYCDetails = 18;
     document.UserDocumentCompliance UserDocumentCompliance = 19;
     KYCStatus KYCStatus = 20; // Status of KYC verification, e.g., PENDING, APPROVED, REJECTED
@@ -72,109 +41,16 @@ message UserDetails {
     repeated BankAccount BankAccounts = 24;
 }
 
-
-// TODO: to be verified when more information is available
-message Employment {
-    string EmployerName = 1;
-    string JobTitle = 2;
-    google.protobuf.Timestamp StartDate = 3; 
-    google.protobuf.Timestamp EndDate = 4; // Empty if still employed
-    EmploymentType Type = 5;
-    optional string Industry = 6;
-    Income Income = 7;
-    EmployerContact Contact = 8;
-    bool IsVerified = 9;
-    string VerifiedAt = 10;
-}
-
-message Income {
-    float Amount = 1;
-    string Currency = 2;
-    IncomeFrequency Frequency = 3;
-}
-
-message EmployerContact {
-    string Name = 1;
-    string Email = 2;
-    string Phone = 3;
-    string Address = 4;
-}
-
-enum EmploymentType {
-    NOT_USED_EMPLOYMENTTYPE = 0;
-    FULL_TIME = 1;
-    PART_TIME = 2;
-    CONTRACT = 3;
-    FREELANCE = 4;
-    SELF_EMPLOYED = 5;
-    INTERNSHIP = 6;
-}
-
-enum IncomeFrequency {
-    NOT_USED_INCOMEFREQUENCY = 0;
-    HOURLY = 1;
-    WEEKLY = 2;
-    BI_WEEKLY = 3;
-    MONTHLY = 4;
-    ANNUALLY = 5;
-}
-
 message User {
     UserDetails User = 1;
     metadata.MetaData MetaData = 2;
     audit.Audit Audit = 3;
+    repeated string OrganizationIDs = 4; // List of organizations where the user is part of (cloned into)
 } 
-
-message UserID {
-    string UserID = 1;
-    string OrganizationID = 2;
-    optional metadata.Network Network = 3; 
-}
 
 message Social {
     string URL = 1;
     SocialType Type = 2;
-}
-
-message Wallet {
-    string Address = 1;
-    string Alias = 2;
-    WalletType Type = 3;
-    SignerType SignerType = 4;
-}
-
-enum SignerType {
-    NOT_USER_SIGNETTYPE = 0;
-    MOBILE_APP = 1;
-    BROWSER_LEAP = 2;
-    BROWSER_COSMOSTATION = 3;
-    BROWSER_KEPLR = 4;
-}
-
-enum UserStatus {
-    NOT_USED_USERSTATUS = 0;
-    ACTIVE = 1;
-    ADMIN_DEACTIVATED = 2; 
-}
-
-enum WalletType {
-    NOT_USED_WALLETTYPE = 0;
-    TFSA = 1;
-    RRSP = 2;
-    STANDARD = 3;
-}
-
-enum SocialType {
-    NOT_USED_SOCIALTYPE = 0;
-    WEBSITE = 1;
-    GITHUB = 2;
-    REDDIT = 3;
-    DISCORD = 4;
-    TWITTER = 5;
-    FACEBOOK = 6;
-    TELEGRAM = 7;
-    INSTAGRAM = 8;
-    LINKEDIN = 9;
 }
 
 message UserList {
@@ -190,70 +66,21 @@ message StatusMessage {
     audit.Audit Audit = 5;
 }
 
-message Filter {
-    repeated string UserIDs = 1;
-    optional metadata.Network Network = 2; 
-    string OrganizationID = 3;
-    optional int32 Offset = 4;
-    optional int32 Limit = 5;
-    optional string InquiryID = 6;
-    optional UserStatus Status = 7;
-    repeated string ExternalUserIDs = 8;
-    optional string WalletAddress = 9;
+enum UserStatus {
+    NOT_USED_USERSTATUS = 0;
+    ACTIVE = 1;
+    ADMIN_DEACTIVATED = 2; 
 }
 
-// This model is open to having multiple questionaires with regards to compliance like MiFID, etc.
-message ComplianceQuestions {
-  optional USA USA = 1;
-}
-
-message USA {
-  google.protobuf.Timestamp RecordedAt = 1;
-  int64 YearsExperience = 2;
-  int64 AnnualIncome = 3;
-  int64 NetWorth = 4;
-  LiquidationImportance ConversionImportance = 5;
-  RiskTolerance Tolerance = 6;
-  InvestmentObjective Objective = 7;
-}
-
-message BankAccount {
-  string AccountName = 1;
-  string BankName = 2; // user's identifier in the bank account
-  string BankAddress = 3; // bank address
-  string AccountNumber = 4; // bank account number
-  string ABA = 5; // bank routing number
-  string SWIFT = 6;
-  string IBAN = 7;
-}
-
-enum LiquidationImportance {
-  VERY_IMPORTANT = 0;
-  SOMEWHAT_IMPORTANT = 1;
-  NOT_IMPORTANT = 2;
-  NO_PREFERENCE = 3;
-}
-
-enum RiskTolerance {
-  CONSERVATIVE = 0;
-  MODERATELY_CONSERVATIVE = 1;
-  MODERATE = 2;
-  MODERATELY_AGGRESSIVE = 3;
-  SIGNIFICANT_RISK = 4;
-}
-
-enum InvestmentObjective {
-  INCOME = 0;
-  BALANCED = 1;
-  GROWTH_AND_INCOME = 2;
-  SAFE_LONG_TERM_GROWTH = 3;
-  GREATER_RISK_LONG_TERM_GROWTH = 4;
-  SPECULATION = 5;
-}
-
-message BrokerAccount {
-  string AccountID = 1; // user's identifier in the broker account
-  order.ClearingBroker Broker = 2; // "RQD", etc.
-  string OrganizationID = 3; // broker identifier
-  repeated string Profiles = 4; // bank account profiles for the broker account
+enum SocialType {
+    NOT_USED_SOCIALTYPE = 0;
+    WEBSITE = 1;
+    GITHUB = 2;
+    REDDIT = 3;
+    DISCORD = 4;
+    TWITTER = 5;
+    FACEBOOK = 6;
+    TELEGRAM = 7;
+    INSTAGRAM = 8;
+    LINKEDIN = 9;
 }

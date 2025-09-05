@@ -4,7 +4,8 @@ import { type CallOptions, ChannelCredentials, Client, type ClientOptions, type 
 import _m0 from "protobufjs/minimal";
 import { Empty } from "./google/protobuf/empty";
 import { Network } from "./sologenic/com-fs-utils-lib/models/metadata/metadata";
-import { Filter, StatusMessage, User, UserID, UserList } from "./user";
+import { StatusMessage, User, UserList } from "./user";
+import { Filter, UserID } from "./user-filters";
 export declare const protobufPackage = "user";
 export interface AuditFilter {
     UserID?: string | undefined;

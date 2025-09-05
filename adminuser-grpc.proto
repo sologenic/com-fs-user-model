@@ -7,6 +7,7 @@ option go_package = "github.com/sologenic/com-fs-user-model;user";
 import "google/protobuf/empty.proto";
 import "sologenic/com-fs-utils-lib/models/metadata/metadata.proto";
 import "user.proto";
+import "user-filters.proto";
 
 service AdminUserService {
     rpc Get (UserID) returns (User) {}

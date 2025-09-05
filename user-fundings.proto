@@ -1,0 +1,46 @@
+syntax = "proto3";
+
+package user;
+
+option go_package = "github.com/sologenic/com-fs-user-model;user";
+
+import "sologenic/com-fs-order-model/broker.proto";
+
+message Wallet {
+    string Address = 1;
+    string Alias = 2;
+    WalletType Type = 3;
+    SignerType SignerType = 4;
+}
+
+message BankAccount {
+  string AccountName = 1;
+  string BankName = 2; // user's identifier in the bank account
+  string BankAddress = 3; // bank address
+  string AccountNumber = 4; // bank account number
+  string ABA = 5; // bank routing number
+  string SWIFT = 6;
+  string IBAN = 7;
+}
+
+message BrokerAccount {
+  string AccountID = 1; // user's identifier in the broker account
+  order.ClearingBroker Broker = 2; // "RQD", etc.
+  string OrganizationID = 3; // broker identifier
+  repeated string Profiles = 4; // bank account profiles for the broker account
+}
+
+enum SignerType {
+    NOT_USER_SIGNETTYPE = 0;
+    MOBILE_APP = 1;
+    BROWSER_LEAP = 2;
+    BROWSER_COSMOSTATION = 3;
+    BROWSER_KEPLR = 4;
+}
+
+enum WalletType {
+    NOT_USED_WALLETTYPE = 0;
+    TFSA = 1;
+    RRSP = 2;
+    STANDARD = 3;
+}
