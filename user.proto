@@ -39,6 +39,7 @@ message UserDetails {
     repeated ComplianceQuestions ComplianceQuestions = 22;
     repeated BrokerAccount BrokerAccounts = 23;
     repeated BankAccount BankAccounts = 24;
+    UISettings UISettings = 25;
 }
 
 message User {
@@ -83,4 +84,14 @@ enum SocialType {
     TELEGRAM = 7;
     INSTAGRAM = 8;
     LINKEDIN = 9;
+}
+
+message UISettings {
+    Theme Theme = 1;
+}
+
+enum Theme {
+    NOT_USED_THEME = 0;
+    DARK = 1;
+    LIGHT = 2;
 }

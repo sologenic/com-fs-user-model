@@ -143,6 +143,45 @@ export function socialTypeToJSON(object: SocialType): string {
   }
 }
 
+export enum Theme {
+  NOT_USED_THEME = 0,
+  DARK = 1,
+  LIGHT = 2,
+  UNRECOGNIZED = -1,
+}
+
+export function themeFromJSON(object: any): Theme {
+  switch (object) {
+    case 0:
+    case "NOT_USED_THEME":
+      return Theme.NOT_USED_THEME;
+    case 1:
+    case "DARK":
+      return Theme.DARK;
+    case 2:
+    case "LIGHT":
+      return Theme.LIGHT;
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return Theme.UNRECOGNIZED;
+  }
+}
+
+export function themeToJSON(object: Theme): string {
+  switch (object) {
+    case Theme.NOT_USED_THEME:
+      return "NOT_USED_THEME";
+    case Theme.DARK:
+      return "DARK";
+    case Theme.LIGHT:
+      return "LIGHT";
+    case Theme.UNRECOGNIZED:
+    default:
+      return "UNRECOGNIZED";
+  }
+}
+
 export interface UserDetails {
   /** email address used for firebase authentication */
   UserID: string;
@@ -157,7 +196,7 @@ export interface UserDetails {
   Wallets: Wallet[];
   Socials: Social[];
   Language: Lang;
-  /** UUID for the external user identifier in the KYC provider */
+  /** UUID for the external user identifier for example to be used in communication with the KYC provider, or other places where an anonymous ID is required */
   ExternalUserID: string;
   /** UUID of the current organization the user is cloned into */
   OrganizationID: string;
@@ -170,7 +209,7 @@ export interface UserDetails {
   TradeProfile:
     | TradeProfileDetails
     | undefined;
-  /** Array of inquiry ID's */
+  /** Array of KYC integration IDs */
   KYCInquiries: string[];
   KYCDetails: UserKYCDetails | undefined;
   UserDocumentCompliance:
@@ -182,6 +221,7 @@ export interface UserDetails {
   ComplianceQuestions: ComplianceQuestions[];
   BrokerAccounts: BrokerAccount[];
   BankAccounts: BankAccount[];
+  UISettings: UISettings | undefined;
 }
 
 export interface User {
@@ -212,6 +252,10 @@ export interface StatusMessage {
   Audit: Audit | undefined;
 }
 
+export interface UISettings {
+  Theme: Theme;
+}
+
 function createBaseUserDetails(): UserDetails {
   return {
     UserID: "",
@@ -238,6 +282,7 @@ function createBaseUserDetails(): UserDetails {
     ComplianceQuestions: [],
     BrokerAccounts: [],
     BankAccounts: [],
+    UISettings: undefined,
   };
 }
 
@@ -314,6 +359,9 @@ export const UserDetails = {
     }
     for (const v of message.BankAccounts) {
       BankAccount.encode(v!, writer.uint32(194).fork()).ldelim();
+    }
+    if (message.UISettings !== undefined) {
+      UISettings.encode(message.UISettings, writer.uint32(202).fork()).ldelim();
     }
     return writer;
   },
@@ -493,6 +541,13 @@ export const UserDetails = {
 
           message.BankAccounts.push(BankAccount.decode(reader, reader.uint32()));
           continue;
+        case 25:
+          if (tag !== 202) {
+            break;
+          }
+
+          message.UISettings = UISettings.decode(reader, reader.uint32());
+          continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -538,6 +593,7 @@ export const UserDetails = {
       BankAccounts: globalThis.Array.isArray(object?.BankAccounts)
         ? object.BankAccounts.map((e: any) => BankAccount.fromJSON(e))
         : [],
+      UISettings: isSet(object.UISettings) ? UISettings.fromJSON(object.UISettings) : undefined,
     };
   },
 
@@ -615,6 +671,9 @@ export const UserDetails = {
     if (message.BankAccounts?.length) {
       obj.BankAccounts = message.BankAccounts.map((e) => BankAccount.toJSON(e));
     }
+    if (message.UISettings !== undefined) {
+      obj.UISettings = UISettings.toJSON(message.UISettings);
+    }
     return obj;
   },
 
@@ -658,6 +717,9 @@ export const UserDetails = {
     message.ComplianceQuestions = object.ComplianceQuestions?.map((e) => ComplianceQuestions.fromPartial(e)) || [];
     message.BrokerAccounts = object.BrokerAccounts?.map((e) => BrokerAccount.fromPartial(e)) || [];
     message.BankAccounts = object.BankAccounts?.map((e) => BankAccount.fromPartial(e)) || [];
+    message.UISettings = (object.UISettings !== undefined && object.UISettings !== null)
+      ? UISettings.fromPartial(object.UISettings)
+      : undefined;
     return message;
   },
 };
@@ -1035,6 +1097,63 @@ export const StatusMessage = {
     message.Status = object.Status ?? 0;
     message.Network = object.Network ?? undefined;
     message.Audit = (object.Audit !== undefined && object.Audit !== null) ? Audit.fromPartial(object.Audit) : undefined;
+    return message;
+  },
+};
+
+function createBaseUISettings(): UISettings {
+  return { Theme: 0 };
+}
+
+export const UISettings = {
+  encode(message: UISettings, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.Theme !== 0) {
+      writer.uint32(8).int32(message.Theme);
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): UISettings {
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseUISettings();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          if (tag !== 8) {
+            break;
+          }
+
+          message.Theme = reader.int32() as any;
+          continue;
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): UISettings {
+    return { Theme: isSet(object.Theme) ? themeFromJSON(object.Theme) : 0 };
+  },
+
+  toJSON(message: UISettings): unknown {
+    const obj: any = {};
+    if (message.Theme !== 0) {
+      obj.Theme = themeToJSON(message.Theme);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<UISettings>, I>>(base?: I): UISettings {
+    return UISettings.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<UISettings>, I>>(object: I): UISettings {
+    const message = createBaseUISettings();
+    message.Theme = object.Theme ?? 0;
     return message;
   },
 };

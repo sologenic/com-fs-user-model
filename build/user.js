@@ -131,6 +131,43 @@ export function socialTypeToJSON(object) {
             return "UNRECOGNIZED";
     }
 }
+export var Theme;
+(function (Theme) {
+    Theme[Theme["NOT_USED_THEME"] = 0] = "NOT_USED_THEME";
+    Theme[Theme["DARK"] = 1] = "DARK";
+    Theme[Theme["LIGHT"] = 2] = "LIGHT";
+    Theme[Theme["UNRECOGNIZED"] = -1] = "UNRECOGNIZED";
+})(Theme || (Theme = {}));
+export function themeFromJSON(object) {
+    switch (object) {
+        case 0:
+        case "NOT_USED_THEME":
+            return Theme.NOT_USED_THEME;
+        case 1:
+        case "DARK":
+            return Theme.DARK;
+        case 2:
+        case "LIGHT":
+            return Theme.LIGHT;
+        case -1:
+        case "UNRECOGNIZED":
+        default:
+            return Theme.UNRECOGNIZED;
+    }
+}
+export function themeToJSON(object) {
+    switch (object) {
+        case Theme.NOT_USED_THEME:
+            return "NOT_USED_THEME";
+        case Theme.DARK:
+            return "DARK";
+        case Theme.LIGHT:
+            return "LIGHT";
+        case Theme.UNRECOGNIZED:
+        default:
+            return "UNRECOGNIZED";
+    }
+}
 function createBaseUserDetails() {
     return {
         UserID: "",
@@ -157,6 +194,7 @@ function createBaseUserDetails() {
         ComplianceQuestions: [],
         BrokerAccounts: [],
         BankAccounts: [],
+        UISettings: undefined,
     };
 }
 export const UserDetails = {
@@ -232,6 +270,9 @@ export const UserDetails = {
         }
         for (const v of message.BankAccounts) {
             BankAccount.encode(v, writer.uint32(194).fork()).ldelim();
+        }
+        if (message.UISettings !== undefined) {
+            UISettings.encode(message.UISettings, writer.uint32(202).fork()).ldelim();
         }
         return writer;
     },
@@ -386,6 +427,12 @@ export const UserDetails = {
                     }
                     message.BankAccounts.push(BankAccount.decode(reader, reader.uint32()));
                     continue;
+                case 25:
+                    if (tag !== 202) {
+                        break;
+                    }
+                    message.UISettings = UISettings.decode(reader, reader.uint32());
+                    continue;
             }
             if ((tag & 7) === 4 || tag === 0) {
                 break;
@@ -430,6 +477,7 @@ export const UserDetails = {
             BankAccounts: globalThis.Array.isArray(object === null || object === void 0 ? void 0 : object.BankAccounts)
                 ? object.BankAccounts.map((e) => BankAccount.fromJSON(e))
                 : [],
+            UISettings: isSet(object.UISettings) ? UISettings.fromJSON(object.UISettings) : undefined,
         };
     },
     toJSON(message) {
@@ -507,6 +555,9 @@ export const UserDetails = {
         if ((_f = message.BankAccounts) === null || _f === void 0 ? void 0 : _f.length) {
             obj.BankAccounts = message.BankAccounts.map((e) => BankAccount.toJSON(e));
         }
+        if (message.UISettings !== undefined) {
+            obj.UISettings = UISettings.toJSON(message.UISettings);
+        }
         return obj;
     },
     create(base) {
@@ -550,6 +601,9 @@ export const UserDetails = {
         message.ComplianceQuestions = ((_s = object.ComplianceQuestions) === null || _s === void 0 ? void 0 : _s.map((e) => ComplianceQuestions.fromPartial(e))) || [];
         message.BrokerAccounts = ((_t = object.BrokerAccounts) === null || _t === void 0 ? void 0 : _t.map((e) => BrokerAccount.fromPartial(e))) || [];
         message.BankAccounts = ((_u = object.BankAccounts) === null || _u === void 0 ? void 0 : _u.map((e) => BankAccount.fromPartial(e))) || [];
+        message.UISettings = (object.UISettings !== undefined && object.UISettings !== null)
+            ? UISettings.fromPartial(object.UISettings)
+            : undefined;
         return message;
     },
 };
@@ -896,6 +950,57 @@ export const StatusMessage = {
         message.Status = (_c = object.Status) !== null && _c !== void 0 ? _c : 0;
         message.Network = (_d = object.Network) !== null && _d !== void 0 ? _d : undefined;
         message.Audit = (object.Audit !== undefined && object.Audit !== null) ? Audit.fromPartial(object.Audit) : undefined;
+        return message;
+    },
+};
+function createBaseUISettings() {
+    return { Theme: 0 };
+}
+export const UISettings = {
+    encode(message, writer = _m0.Writer.create()) {
+        if (message.Theme !== 0) {
+            writer.uint32(8).int32(message.Theme);
+        }
+        return writer;
+    },
+    decode(input, length) {
+        const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+        let end = length === undefined ? reader.len : reader.pos + length;
+        const message = createBaseUISettings();
+        while (reader.pos < end) {
+            const tag = reader.uint32();
+            switch (tag >>> 3) {
+                case 1:
+                    if (tag !== 8) {
+                        break;
+                    }
+                    message.Theme = reader.int32();
+                    continue;
+            }
+            if ((tag & 7) === 4 || tag === 0) {
+                break;
+            }
+            reader.skipType(tag & 7);
+        }
+        return message;
+    },
+    fromJSON(object) {
+        return { Theme: isSet(object.Theme) ? themeFromJSON(object.Theme) : 0 };
+    },
+    toJSON(message) {
+        const obj = {};
+        if (message.Theme !== 0) {
+            obj.Theme = themeToJSON(message.Theme);
+        }
+        return obj;
+    },
+    create(base) {
+        return UISettings.fromPartial(base !== null && base !== void 0 ? base : {});
+    },
+    fromPartial(object) {
+        var _a;
+        const message = createBaseUISettings();
+        message.Theme = (_a = object.Theme) !== null && _a !== void 0 ? _a : 0;
         return message;
     },
 };
