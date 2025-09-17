@@ -41,7 +41,7 @@ message UserDetails {
     repeated BrokerAccount BrokerAccounts = 23;
     repeated BankAccount BankAccounts = 24;
     UISettings UISettings = 25;
-    optional commission.CommissionSettings CommissionSettings = 26;
+    optional commission.CommissionSettings CommissionSettings = 26; // Broker API specific commission fields for user level (overrrides organization level)
 }
 
 message User {
