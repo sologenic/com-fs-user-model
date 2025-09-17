@@ -9,6 +9,7 @@ import _m0 from "protobufjs/minimal";
 import { Timestamp } from "../../google/protobuf/timestamp";
 import { assetTypeFromJSON, assetTypeToJSON } from "../com-fs-asset-model/asset";
 import { Decimal } from "../com-fs-utils-lib/go/decimal/decimal";
+import { CommissionSettings } from "../com-fs-utils-lib/models/commission/commission";
 import { networkFromJSON, networkToJSON } from "../com-fs-utils-lib/models/metadata/metadata";
 import { orderTypeFromJSON, orderTypeToJSON, ProcessInfo, timeInForceFromJSON, timeInForceToJSON, } from "./util";
 export const protobufPackage = "order";
@@ -304,52 +305,6 @@ export function brokerOrderStatusToJSON(object) {
             return "UNRECOGNIZED";
     }
 }
-export var CommissionType;
-(function (CommissionType) {
-    CommissionType[CommissionType["NOT_USED_COMMISSION_TYPE"] = 0] = "NOT_USED_COMMISSION_TYPE";
-    /** NOTIONAL - Charge commission on a per order basis (default) */
-    CommissionType[CommissionType["NOTIONAL"] = 1] = "NOTIONAL";
-    /** QTY - Charge commission on a per qty/contract basis, pro rated */
-    CommissionType[CommissionType["QTY"] = 2] = "QTY";
-    /** BPS - Commission expressed in basis points (percent), converted to notional amount for purposes of calculating commission(max two decimal places) */
-    CommissionType[CommissionType["BPS"] = 3] = "BPS";
-    CommissionType[CommissionType["UNRECOGNIZED"] = -1] = "UNRECOGNIZED";
-})(CommissionType || (CommissionType = {}));
-export function commissionTypeFromJSON(object) {
-    switch (object) {
-        case 0:
-        case "NOT_USED_COMMISSION_TYPE":
-            return CommissionType.NOT_USED_COMMISSION_TYPE;
-        case 1:
-        case "NOTIONAL":
-            return CommissionType.NOTIONAL;
-        case 2:
-        case "QTY":
-            return CommissionType.QTY;
-        case 3:
-        case "BPS":
-            return CommissionType.BPS;
-        case -1:
-        case "UNRECOGNIZED":
-        default:
-            return CommissionType.UNRECOGNIZED;
-    }
-}
-export function commissionTypeToJSON(object) {
-    switch (object) {
-        case CommissionType.NOT_USED_COMMISSION_TYPE:
-            return "NOT_USED_COMMISSION_TYPE";
-        case CommissionType.NOTIONAL:
-            return "NOTIONAL";
-        case CommissionType.QTY:
-            return "QTY";
-        case CommissionType.BPS:
-            return "BPS";
-        case CommissionType.UNRECOGNIZED:
-        default:
-            return "UNRECOGNIZED";
-    }
-}
 function createBaseBrokerOrderDetails() {
     return {
         BrokerAssignedID: "",
@@ -385,10 +340,9 @@ function createBaseBrokerOrderDetails() {
         ProcessInfo: undefined,
         InstanceID: undefined,
         ClearingBroker: 0,
-        Commission: undefined,
-        CommissionType: undefined,
         EventID: undefined,
         EventTime: undefined,
+        CommissionSettings: undefined,
     };
 }
 export const BrokerOrderDetails = {
@@ -492,17 +446,14 @@ export const BrokerOrderDetails = {
         if (message.ClearingBroker !== 0) {
             writer.uint32(264).int32(message.ClearingBroker);
         }
-        if (message.Commission !== undefined) {
-            Decimal.encode(message.Commission, writer.uint32(274).fork()).ldelim();
-        }
-        if (message.CommissionType !== undefined) {
-            writer.uint32(280).int32(message.CommissionType);
-        }
         if (message.EventID !== undefined) {
             writer.uint32(290).string(message.EventID);
         }
         if (message.EventTime !== undefined) {
             Timestamp.encode(toTimestamp(message.EventTime), writer.uint32(298).fork()).ldelim();
+        }
+        if (message.CommissionSettings !== undefined) {
+            CommissionSettings.encode(message.CommissionSettings, writer.uint32(306).fork()).ldelim();
         }
         return writer;
     },
@@ -711,18 +662,6 @@ export const BrokerOrderDetails = {
                     }
                     message.ClearingBroker = reader.int32();
                     continue;
-                case 34:
-                    if (tag !== 274) {
-                        break;
-                    }
-                    message.Commission = Decimal.decode(reader, reader.uint32());
-                    continue;
-                case 35:
-                    if (tag !== 280) {
-                        break;
-                    }
-                    message.CommissionType = reader.int32();
-                    continue;
                 case 36:
                     if (tag !== 290) {
                         break;
@@ -734,6 +673,12 @@ export const BrokerOrderDetails = {
                         break;
                     }
                     message.EventTime = fromTimestamp(Timestamp.decode(reader, reader.uint32()));
+                    continue;
+                case 38:
+                    if (tag !== 306) {
+                        break;
+                    }
+                    message.CommissionSettings = CommissionSettings.decode(reader, reader.uint32());
                     continue;
             }
             if ((tag & 7) === 4 || tag === 0) {
@@ -778,10 +723,11 @@ export const BrokerOrderDetails = {
             ProcessInfo: isSet(object.ProcessInfo) ? ProcessInfo.fromJSON(object.ProcessInfo) : undefined,
             InstanceID: isSet(object.InstanceID) ? globalThis.String(object.InstanceID) : undefined,
             ClearingBroker: isSet(object.ClearingBroker) ? clearingBrokerFromJSON(object.ClearingBroker) : 0,
-            Commission: isSet(object.Commission) ? Decimal.fromJSON(object.Commission) : undefined,
-            CommissionType: isSet(object.CommissionType) ? commissionTypeFromJSON(object.CommissionType) : undefined,
             EventID: isSet(object.EventID) ? globalThis.String(object.EventID) : undefined,
             EventTime: isSet(object.EventTime) ? fromJsonTimestamp(object.EventTime) : undefined,
+            CommissionSettings: isSet(object.CommissionSettings)
+                ? CommissionSettings.fromJSON(object.CommissionSettings)
+                : undefined,
         };
     },
     toJSON(message) {
@@ -885,17 +831,14 @@ export const BrokerOrderDetails = {
         if (message.ClearingBroker !== 0) {
             obj.ClearingBroker = clearingBrokerToJSON(message.ClearingBroker);
         }
-        if (message.Commission !== undefined) {
-            obj.Commission = Decimal.toJSON(message.Commission);
-        }
-        if (message.CommissionType !== undefined) {
-            obj.CommissionType = commissionTypeToJSON(message.CommissionType);
-        }
         if (message.EventID !== undefined) {
             obj.EventID = message.EventID;
         }
         if (message.EventTime !== undefined) {
             obj.EventTime = message.EventTime.toISOString();
+        }
+        if (message.CommissionSettings !== undefined) {
+            obj.CommissionSettings = CommissionSettings.toJSON(message.CommissionSettings);
         }
         return obj;
     },
@@ -903,7 +846,7 @@ export const BrokerOrderDetails = {
         return BrokerOrderDetails.fromPartial(base !== null && base !== void 0 ? base : {});
     },
     fromPartial(object) {
-        var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q, _r, _s, _t, _u, _v, _w, _x;
+        var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q, _r, _s, _t, _u, _v, _w;
         const message = createBaseBrokerOrderDetails();
         message.BrokerAssignedID = (_a = object.BrokerAssignedID) !== null && _a !== void 0 ? _a : "";
         message.ClientOrderID = (object.ClientOrderID !== undefined && object.ClientOrderID !== null)
@@ -964,12 +907,11 @@ export const BrokerOrderDetails = {
             : undefined;
         message.InstanceID = (_t = object.InstanceID) !== null && _t !== void 0 ? _t : undefined;
         message.ClearingBroker = (_u = object.ClearingBroker) !== null && _u !== void 0 ? _u : 0;
-        message.Commission = (object.Commission !== undefined && object.Commission !== null)
-            ? Decimal.fromPartial(object.Commission)
+        message.EventID = (_v = object.EventID) !== null && _v !== void 0 ? _v : undefined;
+        message.EventTime = (_w = object.EventTime) !== null && _w !== void 0 ? _w : undefined;
+        message.CommissionSettings = (object.CommissionSettings !== undefined && object.CommissionSettings !== null)
+            ? CommissionSettings.fromPartial(object.CommissionSettings)
             : undefined;
-        message.CommissionType = (_v = object.CommissionType) !== null && _v !== void 0 ? _v : undefined;
-        message.EventID = (_w = object.EventID) !== null && _w !== void 0 ? _w : undefined;
-        message.EventTime = (_x = object.EventTime) !== null && _x !== void 0 ? _x : undefined;
         return message;
     },
 };

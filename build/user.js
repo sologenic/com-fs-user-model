@@ -7,8 +7,8 @@
 import _m0 from "protobufjs/minimal";
 import { UserDocumentCompliance } from "./sologenic/com-fs-document-model/document";
 import { TradeProfileDetails, UserTradeProfile } from "./sologenic/com-fs-trade-profile-model/tradeprofile";
-import { Decimal } from "./sologenic/com-fs-utils-lib/go/decimal/decimal";
 import { Audit } from "./sologenic/com-fs-utils-lib/models/audit/audit";
+import { CommissionSettings } from "./sologenic/com-fs-utils-lib/models/commission/commission";
 import { langFromJSON, langToJSON } from "./sologenic/com-fs-utils-lib/models/language/language";
 import { MetaData, networkFromJSON, networkToJSON, } from "./sologenic/com-fs-utils-lib/models/metadata/metadata";
 import { roleFromJSON, roleToJSON } from "./sologenic/com-fs-utils-lib/models/role/role";
@@ -165,52 +165,6 @@ export function themeToJSON(object) {
         case Theme.LIGHT:
             return "LIGHT";
         case Theme.UNRECOGNIZED:
-        default:
-            return "UNRECOGNIZED";
-    }
-}
-export var CommissionType;
-(function (CommissionType) {
-    CommissionType[CommissionType["NOT_USED_COMMISSION_TYPE"] = 0] = "NOT_USED_COMMISSION_TYPE";
-    /** NOTIONAL - Charge commission on a per order basis (default) */
-    CommissionType[CommissionType["NOTIONAL"] = 1] = "NOTIONAL";
-    /** QTY - Charge commission on a per qty/contract basis, pro rated */
-    CommissionType[CommissionType["QTY"] = 2] = "QTY";
-    /** BPS - Commission expressed in basis points (percent), converted to notional amount for purposes of calculating commission(max two decimal places) */
-    CommissionType[CommissionType["BPS"] = 3] = "BPS";
-    CommissionType[CommissionType["UNRECOGNIZED"] = -1] = "UNRECOGNIZED";
-})(CommissionType || (CommissionType = {}));
-export function commissionTypeFromJSON(object) {
-    switch (object) {
-        case 0:
-        case "NOT_USED_COMMISSION_TYPE":
-            return CommissionType.NOT_USED_COMMISSION_TYPE;
-        case 1:
-        case "NOTIONAL":
-            return CommissionType.NOTIONAL;
-        case 2:
-        case "QTY":
-            return CommissionType.QTY;
-        case 3:
-        case "BPS":
-            return CommissionType.BPS;
-        case -1:
-        case "UNRECOGNIZED":
-        default:
-            return CommissionType.UNRECOGNIZED;
-    }
-}
-export function commissionTypeToJSON(object) {
-    switch (object) {
-        case CommissionType.NOT_USED_COMMISSION_TYPE:
-            return "NOT_USED_COMMISSION_TYPE";
-        case CommissionType.NOTIONAL:
-            return "NOTIONAL";
-        case CommissionType.QTY:
-            return "QTY";
-        case CommissionType.BPS:
-            return "BPS";
-        case CommissionType.UNRECOGNIZED:
         default:
             return "UNRECOGNIZED";
     }
@@ -1067,75 +1021,6 @@ export const UISettings = {
         var _a;
         const message = createBaseUISettings();
         message.Theme = (_a = object.Theme) !== null && _a !== void 0 ? _a : 0;
-        return message;
-    },
-};
-function createBaseCommissionSettings() {
-    return { Commission: undefined, CommissionType: undefined };
-}
-export const CommissionSettings = {
-    encode(message, writer = _m0.Writer.create()) {
-        if (message.Commission !== undefined) {
-            Decimal.encode(message.Commission, writer.uint32(202).fork()).ldelim();
-        }
-        if (message.CommissionType !== undefined) {
-            writer.uint32(208).int32(message.CommissionType);
-        }
-        return writer;
-    },
-    decode(input, length) {
-        const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
-        let end = length === undefined ? reader.len : reader.pos + length;
-        const message = createBaseCommissionSettings();
-        while (reader.pos < end) {
-            const tag = reader.uint32();
-            switch (tag >>> 3) {
-                case 25:
-                    if (tag !== 202) {
-                        break;
-                    }
-                    message.Commission = Decimal.decode(reader, reader.uint32());
-                    continue;
-                case 26:
-                    if (tag !== 208) {
-                        break;
-                    }
-                    message.CommissionType = reader.int32();
-                    continue;
-            }
-            if ((tag & 7) === 4 || tag === 0) {
-                break;
-            }
-            reader.skipType(tag & 7);
-        }
-        return message;
-    },
-    fromJSON(object) {
-        return {
-            Commission: isSet(object.Commission) ? Decimal.fromJSON(object.Commission) : undefined,
-            CommissionType: isSet(object.CommissionType) ? commissionTypeFromJSON(object.CommissionType) : undefined,
-        };
-    },
-    toJSON(message) {
-        const obj = {};
-        if (message.Commission !== undefined) {
-            obj.Commission = Decimal.toJSON(message.Commission);
-        }
-        if (message.CommissionType !== undefined) {
-            obj.CommissionType = commissionTypeToJSON(message.CommissionType);
-        }
-        return obj;
-    },
-    create(base) {
-        return CommissionSettings.fromPartial(base !== null && base !== void 0 ? base : {});
-    },
-    fromPartial(object) {
-        var _a;
-        const message = createBaseCommissionSettings();
-        message.Commission = (object.Commission !== undefined && object.Commission !== null)
-            ? Decimal.fromPartial(object.Commission)
-            : undefined;
-        message.CommissionType = (_a = object.CommissionType) !== null && _a !== void 0 ? _a : undefined;
         return message;
     },
 };
