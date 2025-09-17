@@ -6,6 +6,7 @@ require (
 	github.com/sologenic/com-fs-document-model v0.0.0-20250625181251-d71adbf57803
 	github.com/sologenic/com-fs-order-model v0.0.0-20250731233833-6ad2f4cd26e6
 	github.com/sologenic/com-fs-trade-profile-model v0.0.0-20250710161722-4671f0a36c58
+	github.com/sologenic/com-fs-utils-lib/go/decimal v0.0.0-20241028230612-350dd06f24af
 	github.com/sologenic/com-fs-utils-lib/go/grpc-client v0.0.0-20250731190227-eba0dc415460
 	github.com/sologenic/com-fs-utils-lib/models/audit v0.0.0-20250731190227-eba0dc415460
 	github.com/sologenic/com-fs-utils-lib/models/language v0.0.0-20250731190227-eba0dc415460
@@ -31,7 +32,6 @@ require (
 	github.com/rs/zerolog v1.34.0 // indirect
 	github.com/shopspring/decimal v1.4.0 // indirect
 	github.com/sologenic/com-fs-asset-model v0.0.0-20250716180737-c98a6368a431 // indirect
-	github.com/sologenic/com-fs-utils-lib/go/decimal v0.0.0-20241028230612-350dd06f24af // indirect
 	github.com/sologenic/com-fs-utils-lib/go/logger v0.0.0-20240906214824-8118c42c5b35 // indirect
 	go.opentelemetry.io/auto/sdk v1.1.0 // indirect
 	go.opentelemetry.io/contrib/instrumentation/net/http/otelhttp v0.62.0 // indirect
