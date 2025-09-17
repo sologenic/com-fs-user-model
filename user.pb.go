@@ -9,8 +9,8 @@ package user
 import (
 	com_fs_document_model "github.com/sologenic/com-fs-document-model"
 	com_fs_trade_profile_model "github.com/sologenic/com-fs-trade-profile-model"
-	decimal "github.com/sologenic/com-fs-utils-lib/go/decimal"
 	audit "github.com/sologenic/com-fs-utils-lib/models/audit"
+	commission "github.com/sologenic/com-fs-utils-lib/models/commission"
 	language "github.com/sologenic/com-fs-utils-lib/models/language"
 	metadata "github.com/sologenic/com-fs-utils-lib/models/metadata"
 	role "github.com/sologenic/com-fs-utils-lib/models/role"
@@ -196,58 +196,6 @@ func (Theme) EnumDescriptor() ([]byte, []int) {
 	return file_user_proto_rawDescGZIP(), []int{2}
 }
 
-type CommissionType int32
-
-const (
-	CommissionType_NOT_USED_COMMISSION_TYPE CommissionType = 0
-	CommissionType_NOTIONAL                 CommissionType = 1 // Charge commission on a per order basis (default)
-	CommissionType_QTY                      CommissionType = 2 // Charge commission on a per qty/contract basis, pro rated
-	CommissionType_BPS                      CommissionType = 3 // Commission expressed in basis points (percent), converted to notional amount for purposes of calculating commission(max two decimal places)
-)
-
-// Enum value maps for CommissionType.
-var (
-	CommissionType_name = map[int32]string{
-		0: "NOT_USED_COMMISSION_TYPE",
-		1: "NOTIONAL",
-		2: "QTY",
-		3: "BPS",
-	}
-	CommissionType_value = map[string]int32{
-		"NOT_USED_COMMISSION_TYPE": 0,
-		"NOTIONAL":                 1,
-		"QTY":                      2,
-		"BPS":                      3,
-	}
-)
-
-func (x CommissionType) Enum() *CommissionType {
-	p := new(CommissionType)
-	*p = x
-	return p
-}
-
-func (x CommissionType) String() string {
-	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
-}
-
-func (CommissionType) Descriptor() protoreflect.EnumDescriptor {
-	return file_user_proto_enumTypes[3].Descriptor()
-}
-
-func (CommissionType) Type() protoreflect.EnumType {
-	return &file_user_proto_enumTypes[3]
-}
-
-func (x CommissionType) Number() protoreflect.EnumNumber {
-	return protoreflect.EnumNumber(x)
-}
-
-// Deprecated: Use CommissionType.Descriptor instead.
-func (CommissionType) EnumDescriptor() ([]byte, []int) {
-	return file_user_proto_rawDescGZIP(), []int{3}
-}
-
 type UserDetails struct {
 	state                  protoimpl.MessageState                          `protogen:"open.v1"`
 	UserID                 string                                          `protobuf:"bytes,1,opt,name=UserID,proto3" json:"UserID,omitempty"` // email address used for firebase authentication
@@ -275,7 +223,7 @@ type UserDetails struct {
 	BrokerAccounts         []*BrokerAccount                                `protobuf:"bytes,23,rep,name=BrokerAccounts,proto3" json:"BrokerAccounts,omitempty"`
 	BankAccounts           []*BankAccount                                  `protobuf:"bytes,24,rep,name=BankAccounts,proto3" json:"BankAccounts,omitempty"`
 	UISettings             *UISettings                                     `protobuf:"bytes,25,opt,name=UISettings,proto3" json:"UISettings,omitempty"`
-	CommissionSettings     *CommissionSettings                             `protobuf:"bytes,26,opt,name=CommissionSettings,proto3,oneof" json:"CommissionSettings,omitempty"`
+	CommissionSettings     *commission.CommissionSettings                  `protobuf:"bytes,26,opt,name=CommissionSettings,proto3,oneof" json:"CommissionSettings,omitempty"`
 	unknownFields          protoimpl.UnknownFields
 	sizeCache              protoimpl.SizeCache
 }
@@ -485,7 +433,7 @@ func (x *UserDetails) GetUISettings() *UISettings {
 	return nil
 }
 
-func (x *UserDetails) GetCommissionSettings() *CommissionSettings {
+func (x *UserDetails) GetCommissionSettings() *commission.CommissionSettings {
 	if x != nil {
 		return x.CommissionSettings
 	}
@@ -784,65 +732,12 @@ func (x *UISettings) GetTheme() Theme {
 	return Theme_NOT_USED_THEME
 }
 
-// Broker API specific commission fields for user level (overrrides organization level)
-type CommissionSettings struct {
-	state          protoimpl.MessageState `protogen:"open.v1"`
-	Commission     *decimal.Decimal       `protobuf:"bytes,25,opt,name=Commission,proto3,oneof" json:"Commission,omitempty"`                                   // Commission charged for the order
-	CommissionType *CommissionType        `protobuf:"varint,26,opt,name=CommissionType,proto3,enum=user.CommissionType,oneof" json:"CommissionType,omitempty"` // How commission field value is calculated
-	unknownFields  protoimpl.UnknownFields
-	sizeCache      protoimpl.SizeCache
-}
-
-func (x *CommissionSettings) Reset() {
-	*x = CommissionSettings{}
-	mi := &file_user_proto_msgTypes[6]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *CommissionSettings) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*CommissionSettings) ProtoMessage() {}
-
-func (x *CommissionSettings) ProtoReflect() protoreflect.Message {
-	mi := &file_user_proto_msgTypes[6]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use CommissionSettings.ProtoReflect.Descriptor instead.
-func (*CommissionSettings) Descriptor() ([]byte, []int) {
-	return file_user_proto_rawDescGZIP(), []int{6}
-}
-
-func (x *CommissionSettings) GetCommission() *decimal.Decimal {
-	if x != nil {
-		return x.Commission
-	}
-	return nil
-}
-
-func (x *CommissionSettings) GetCommissionType() CommissionType {
-	if x != nil && x.CommissionType != nil {
-		return *x.CommissionType
-	}
-	return CommissionType_NOT_USED_COMMISSION_TYPE
-}
-
 var File_user_proto protoreflect.FileDescriptor
 
 const file_user_proto_rawDesc = "" +
 	"\n" +
 	"\n" +
-	"user.proto\x12\x04user\x1a9sologenic/com-fs-utils-lib/models/metadata/metadata.proto\x1a3sologenic/com-fs-utils-lib/models/audit/audit.proto\x1a1sologenic/com-fs-utils-lib/models/role/role.proto\x1a9sologenic/com-fs-utils-lib/models/language/language.proto\x1a7sologenic/com-fs-trade-profile-model/tradeprofile.proto\x1a.sologenic/com-fs-document-model/document.proto\x1a\x0euser-kyc.proto\x1a\x15user-compliance.proto\x1a\x13user-fundings.proto\x1a3sologenic/com-fs-utils-lib/go/decimal/decimal.proto\"\xf4\t\n" +
+	"user.proto\x12\x04user\x1a9sologenic/com-fs-utils-lib/models/metadata/metadata.proto\x1a3sologenic/com-fs-utils-lib/models/audit/audit.proto\x1a1sologenic/com-fs-utils-lib/models/role/role.proto\x1a9sologenic/com-fs-utils-lib/models/language/language.proto\x1a7sologenic/com-fs-trade-profile-model/tradeprofile.proto\x1a.sologenic/com-fs-document-model/document.proto\x1a\x0euser-kyc.proto\x1a\x15user-compliance.proto\x1a\x13user-fundings.proto\x1a=sologenic/com-fs-utils-lib/models/commission/commission.proto\"\xfa\t\n" +
 	"\vUserDetails\x12\x16\n" +
 	"\x06UserID\x18\x01 \x01(\tR\x06UserID\x12\x1c\n" +
 	"\tFirstName\x18\x02 \x01(\tR\tFirstName\x12\x1a\n" +
@@ -876,8 +771,8 @@ const file_user_proto_rawDesc = "" +
 	"\fBankAccounts\x18\x18 \x03(\v2\x11.user.BankAccountR\fBankAccounts\x120\n" +
 	"\n" +
 	"UISettings\x18\x19 \x01(\v2\x10.user.UISettingsR\n" +
-	"UISettings\x12M\n" +
-	"\x12CommissionSettings\x18\x1a \x01(\v2\x18.user.CommissionSettingsH\x01R\x12CommissionSettings\x88\x01\x01B\r\n" +
+	"UISettings\x12S\n" +
+	"\x12CommissionSettings\x18\x1a \x01(\v2\x1e.commission.CommissionSettingsH\x01R\x12CommissionSettings\x88\x01\x01B\r\n" +
 	"\v_EmploymentB\x15\n" +
 	"\x13_CommissionSettings\"\xab\x01\n" +
 	"\x04User\x12%\n" +
@@ -903,14 +798,7 @@ const file_user_proto_rawDesc = "" +
 	"\b_Network\"/\n" +
 	"\n" +
 	"UISettings\x12!\n" +
-	"\x05Theme\x18\x01 \x01(\x0e2\v.user.ThemeR\x05Theme\"\xb0\x01\n" +
-	"\x12CommissionSettings\x125\n" +
-	"\n" +
-	"Commission\x18\x19 \x01(\v2\x10.decimal.DecimalH\x00R\n" +
-	"Commission\x88\x01\x01\x12A\n" +
-	"\x0eCommissionType\x18\x1a \x01(\x0e2\x14.user.CommissionTypeH\x01R\x0eCommissionType\x88\x01\x01B\r\n" +
-	"\v_CommissionB\x11\n" +
-	"\x0f_CommissionType*H\n" +
+	"\x05Theme\x18\x01 \x01(\x0e2\v.user.ThemeR\x05Theme*H\n" +
 	"\n" +
 	"UserStatus\x12\x17\n" +
 	"\x13NOT_USED_USERSTATUS\x10\x00\x12\n" +
@@ -934,12 +822,7 @@ const file_user_proto_rawDesc = "" +
 	"\x05Theme\x12\x12\n" +
 	"\x0eNOT_USED_THEME\x10\x00\x12\b\n" +
 	"\x04DARK\x10\x01\x12\t\n" +
-	"\x05LIGHT\x10\x02*N\n" +
-	"\x0eCommissionType\x12\x1c\n" +
-	"\x18NOT_USED_COMMISSION_TYPE\x10\x00\x12\f\n" +
-	"\bNOTIONAL\x10\x01\x12\a\n" +
-	"\x03QTY\x10\x02\x12\a\n" +
-	"\x03BPS\x10\x03B-Z+github.com/sologenic/com-fs-user-model;userb\x06proto3"
+	"\x05LIGHT\x10\x02B-Z+github.com/sologenic/com-fs-user-model;userb\x06proto3"
 
 var (
 	file_user_proto_rawDescOnce sync.Once
@@ -953,70 +836,66 @@ func file_user_proto_rawDescGZIP() []byte {
 	return file_user_proto_rawDescData
 }
 
-var file_user_proto_enumTypes = make([]protoimpl.EnumInfo, 4)
-var file_user_proto_msgTypes = make([]protoimpl.MessageInfo, 7)
+var file_user_proto_enumTypes = make([]protoimpl.EnumInfo, 3)
+var file_user_proto_msgTypes = make([]protoimpl.MessageInfo, 6)
 var file_user_proto_goTypes = []any{
-	(UserStatus)(0),            // 0: user.UserStatus
-	(SocialType)(0),            // 1: user.SocialType
-	(Theme)(0),                 // 2: user.Theme
-	(CommissionType)(0),        // 3: user.CommissionType
-	(*UserDetails)(nil),        // 4: user.UserDetails
-	(*User)(nil),               // 5: user.User
-	(*Social)(nil),             // 6: user.Social
-	(*UserList)(nil),           // 7: user.UserList
-	(*StatusMessage)(nil),      // 8: user.StatusMessage
-	(*UISettings)(nil),         // 9: user.UISettings
-	(*CommissionSettings)(nil), // 10: user.CommissionSettings
-	(*Wallet)(nil),             // 11: user.Wallet
-	(language.Lang)(0),         // 12: language.Lang
-	(*Employment)(nil),         // 13: user.Employment
-	(role.Role)(0),             // 14: role.Role
-	(*com_fs_trade_profile_model.TradeProfileDetails)(nil), // 15: tradeprofile.TradeProfileDetails
-	(*UserKYCDetails)(nil),                                 // 16: user.UserKYCDetails
-	(*com_fs_document_model.UserDocumentCompliance)(nil),   // 17: document.UserDocumentCompliance
-	(KYCStatus)(0), // 18: user.KYCStatus
-	(*com_fs_trade_profile_model.UserTradeProfile)(nil), // 19: tradeprofile.UserTradeProfile
-	(*ComplianceQuestions)(nil),                         // 20: user.ComplianceQuestions
-	(*BrokerAccount)(nil),                               // 21: user.BrokerAccount
-	(*BankAccount)(nil),                                 // 22: user.BankAccount
-	(*metadata.MetaData)(nil),                           // 23: metadata.MetaData
-	(*audit.Audit)(nil),                                 // 24: audit.Audit
-	(metadata.Network)(0),                               // 25: metadata.Network
-	(*decimal.Decimal)(nil),                             // 26: decimal.Decimal
+	(UserStatus)(0),       // 0: user.UserStatus
+	(SocialType)(0),       // 1: user.SocialType
+	(Theme)(0),            // 2: user.Theme
+	(*UserDetails)(nil),   // 3: user.UserDetails
+	(*User)(nil),          // 4: user.User
+	(*Social)(nil),        // 5: user.Social
+	(*UserList)(nil),      // 6: user.UserList
+	(*StatusMessage)(nil), // 7: user.StatusMessage
+	(*UISettings)(nil),    // 8: user.UISettings
+	(*Wallet)(nil),        // 9: user.Wallet
+	(language.Lang)(0),    // 10: language.Lang
+	(*Employment)(nil),    // 11: user.Employment
+	(role.Role)(0),        // 12: role.Role
+	(*com_fs_trade_profile_model.TradeProfileDetails)(nil), // 13: tradeprofile.TradeProfileDetails
+	(*UserKYCDetails)(nil),                                 // 14: user.UserKYCDetails
+	(*com_fs_document_model.UserDocumentCompliance)(nil),   // 15: document.UserDocumentCompliance
+	(KYCStatus)(0), // 16: user.KYCStatus
+	(*com_fs_trade_profile_model.UserTradeProfile)(nil), // 17: tradeprofile.UserTradeProfile
+	(*ComplianceQuestions)(nil),                         // 18: user.ComplianceQuestions
+	(*BrokerAccount)(nil),                               // 19: user.BrokerAccount
+	(*BankAccount)(nil),                                 // 20: user.BankAccount
+	(*commission.CommissionSettings)(nil),               // 21: commission.CommissionSettings
+	(*metadata.MetaData)(nil),                           // 22: metadata.MetaData
+	(*audit.Audit)(nil),                                 // 23: audit.Audit
+	(metadata.Network)(0),                               // 24: metadata.Network
 }
 var file_user_proto_depIdxs = []int32{
 	0,  // 0: user.UserDetails.Status:type_name -> user.UserStatus
-	11, // 1: user.UserDetails.Wallets:type_name -> user.Wallet
-	6,  // 2: user.UserDetails.Socials:type_name -> user.Social
-	12, // 3: user.UserDetails.Language:type_name -> language.Lang
-	13, // 4: user.UserDetails.Employment:type_name -> user.Employment
-	14, // 5: user.UserDetails.Role:type_name -> role.Role
-	15, // 6: user.UserDetails.TradeProfile:type_name -> tradeprofile.TradeProfileDetails
-	16, // 7: user.UserDetails.KYCDetails:type_name -> user.UserKYCDetails
-	17, // 8: user.UserDetails.UserDocumentCompliance:type_name -> document.UserDocumentCompliance
-	18, // 9: user.UserDetails.KYCStatus:type_name -> user.KYCStatus
-	19, // 10: user.UserDetails.UserTradeProfile:type_name -> tradeprofile.UserTradeProfile
-	20, // 11: user.UserDetails.ComplianceQuestions:type_name -> user.ComplianceQuestions
-	21, // 12: user.UserDetails.BrokerAccounts:type_name -> user.BrokerAccount
-	22, // 13: user.UserDetails.BankAccounts:type_name -> user.BankAccount
-	9,  // 14: user.UserDetails.UISettings:type_name -> user.UISettings
-	10, // 15: user.UserDetails.CommissionSettings:type_name -> user.CommissionSettings
-	4,  // 16: user.User.User:type_name -> user.UserDetails
-	23, // 17: user.User.MetaData:type_name -> metadata.MetaData
-	24, // 18: user.User.Audit:type_name -> audit.Audit
+	9,  // 1: user.UserDetails.Wallets:type_name -> user.Wallet
+	5,  // 2: user.UserDetails.Socials:type_name -> user.Social
+	10, // 3: user.UserDetails.Language:type_name -> language.Lang
+	11, // 4: user.UserDetails.Employment:type_name -> user.Employment
+	12, // 5: user.UserDetails.Role:type_name -> role.Role
+	13, // 6: user.UserDetails.TradeProfile:type_name -> tradeprofile.TradeProfileDetails
+	14, // 7: user.UserDetails.KYCDetails:type_name -> user.UserKYCDetails
+	15, // 8: user.UserDetails.UserDocumentCompliance:type_name -> document.UserDocumentCompliance
+	16, // 9: user.UserDetails.KYCStatus:type_name -> user.KYCStatus
+	17, // 10: user.UserDetails.UserTradeProfile:type_name -> tradeprofile.UserTradeProfile
+	18, // 11: user.UserDetails.ComplianceQuestions:type_name -> user.ComplianceQuestions
+	19, // 12: user.UserDetails.BrokerAccounts:type_name -> user.BrokerAccount
+	20, // 13: user.UserDetails.BankAccounts:type_name -> user.BankAccount
+	8,  // 14: user.UserDetails.UISettings:type_name -> user.UISettings
+	21, // 15: user.UserDetails.CommissionSettings:type_name -> commission.CommissionSettings
+	3,  // 16: user.User.User:type_name -> user.UserDetails
+	22, // 17: user.User.MetaData:type_name -> metadata.MetaData
+	23, // 18: user.User.Audit:type_name -> audit.Audit
 	1,  // 19: user.Social.Type:type_name -> user.SocialType
-	5,  // 20: user.UserList.Users:type_name -> user.User
+	4,  // 20: user.UserList.Users:type_name -> user.User
 	0,  // 21: user.StatusMessage.Status:type_name -> user.UserStatus
-	25, // 22: user.StatusMessage.Network:type_name -> metadata.Network
-	24, // 23: user.StatusMessage.Audit:type_name -> audit.Audit
+	24, // 22: user.StatusMessage.Network:type_name -> metadata.Network
+	23, // 23: user.StatusMessage.Audit:type_name -> audit.Audit
 	2,  // 24: user.UISettings.Theme:type_name -> user.Theme
-	26, // 25: user.CommissionSettings.Commission:type_name -> decimal.Decimal
-	3,  // 26: user.CommissionSettings.CommissionType:type_name -> user.CommissionType
-	27, // [27:27] is the sub-list for method output_type
-	27, // [27:27] is the sub-list for method input_type
-	27, // [27:27] is the sub-list for extension type_name
-	27, // [27:27] is the sub-list for extension extendee
-	0,  // [0:27] is the sub-list for field type_name
+	25, // [25:25] is the sub-list for method output_type
+	25, // [25:25] is the sub-list for method input_type
+	25, // [25:25] is the sub-list for extension type_name
+	25, // [25:25] is the sub-list for extension extendee
+	0,  // [0:25] is the sub-list for field type_name
 }
 
 func init() { file_user_proto_init() }
@@ -1030,14 +909,13 @@ func file_user_proto_init() {
 	file_user_proto_msgTypes[0].OneofWrappers = []any{}
 	file_user_proto_msgTypes[3].OneofWrappers = []any{}
 	file_user_proto_msgTypes[4].OneofWrappers = []any{}
-	file_user_proto_msgTypes[6].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_user_proto_rawDesc), len(file_user_proto_rawDesc)),
-			NumEnums:      4,
-			NumMessages:   7,
+			NumEnums:      3,
+			NumMessages:   6,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

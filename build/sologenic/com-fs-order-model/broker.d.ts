@@ -1,6 +1,7 @@
 import _m0 from "protobufjs/minimal";
 import { AssetType } from "../com-fs-asset-model/asset";
 import { Decimal } from "../com-fs-utils-lib/go/decimal/decimal";
+import { CommissionSettings } from "../com-fs-utils-lib/models/commission/commission";
 import { Network } from "../com-fs-utils-lib/models/metadata/metadata";
 import { OrderType, ProcessInfo, TimeInForce } from "./util";
 export declare const protobufPackage = "order";
@@ -75,18 +76,6 @@ export declare enum BrokerOrderStatus {
 }
 export declare function brokerOrderStatusFromJSON(object: any): BrokerOrderStatus;
 export declare function brokerOrderStatusToJSON(object: BrokerOrderStatus): string;
-export declare enum CommissionType {
-    NOT_USED_COMMISSION_TYPE = 0,
-    /** NOTIONAL - Charge commission on a per order basis (default) */
-    NOTIONAL = 1,
-    /** QTY - Charge commission on a per qty/contract basis, pro rated */
-    QTY = 2,
-    /** BPS - Commission expressed in basis points (percent), converted to notional amount for purposes of calculating commission(max two decimal places) */
-    BPS = 3,
-    UNRECOGNIZED = -1
-}
-export declare function commissionTypeFromJSON(object: any): CommissionType;
-export declare function commissionTypeToJSON(object: CommissionType): string;
 /** Key orderID-SmartContractAddr-network (is as unique identifier for the order in message to the broker) */
 export interface BrokerOrderDetails {
     /** auto generated ID from the broker */
@@ -142,10 +131,6 @@ export interface BrokerOrderDetails {
     InstanceID?: string | undefined;
     /** Broker that cleared the order, e.g. Alpaca, RQD, etc. */
     ClearingBroker: ClearingBroker;
-    /** Broker API specific commission fields */
-    Commission?: Decimal | undefined;
-    /** How commission field value is calculated */
-    CommissionType?: CommissionType | undefined;
     /**
      * SSE Event tracking fields for precise event recovery using since_id parameter
      * Enables seamless subscription from past point-in-time to real-time pushes
@@ -153,6 +138,8 @@ export interface BrokerOrderDetails {
      */
     EventID?: string | undefined;
     EventTime?: Date | undefined;
+    /** Broker API specific commission */
+    CommissionSettings?: CommissionSettings | undefined;
 }
 export interface ClientOrderID {
     Network: Network;
@@ -244,13 +231,15 @@ export declare const BrokerOrderDetails: {
         } | undefined;
         InstanceID?: string | undefined;
         ClearingBroker?: ClearingBroker | undefined;
-        Commission?: {
-            Value?: number | undefined;
-            Exp?: number | undefined;
-        } | undefined;
-        CommissionType?: CommissionType | undefined;
         EventID?: string | undefined;
         EventTime?: Date | undefined;
+        CommissionSettings?: {
+            Commission?: {
+                Value?: number | undefined;
+                Exp?: number | undefined;
+            } | undefined;
+            CommissionType?: import("../com-fs-utils-lib/models/commission/commission").CommissionType | undefined;
+        } | undefined;
     } & {
         BrokerAssignedID?: string | undefined;
         ClientOrderID?: ({
@@ -371,17 +360,25 @@ export declare const BrokerOrderDetails: {
         } & { [K_13 in Exclude<keyof I["ProcessInfo"], keyof ProcessInfo>]: never; }) | undefined;
         InstanceID?: string | undefined;
         ClearingBroker?: ClearingBroker | undefined;
-        Commission?: ({
-            Value?: number | undefined;
-            Exp?: number | undefined;
-        } & {
-            Value?: number | undefined;
-            Exp?: number | undefined;
-        } & { [K_14 in Exclude<keyof I["Commission"], keyof Decimal>]: never; }) | undefined;
-        CommissionType?: CommissionType | undefined;
         EventID?: string | undefined;
         EventTime?: Date | undefined;
-    } & { [K_15 in Exclude<keyof I, keyof BrokerOrderDetails>]: never; }>(base?: I | undefined): BrokerOrderDetails;
+        CommissionSettings?: ({
+            Commission?: {
+                Value?: number | undefined;
+                Exp?: number | undefined;
+            } | undefined;
+            CommissionType?: import("../com-fs-utils-lib/models/commission/commission").CommissionType | undefined;
+        } & {
+            Commission?: ({
+                Value?: number | undefined;
+                Exp?: number | undefined;
+            } & {
+                Value?: number | undefined;
+                Exp?: number | undefined;
+            } & { [K_14 in Exclude<keyof I["CommissionSettings"]["Commission"], keyof Decimal>]: never; }) | undefined;
+            CommissionType?: import("../com-fs-utils-lib/models/commission/commission").CommissionType | undefined;
+        } & { [K_15 in Exclude<keyof I["CommissionSettings"], keyof CommissionSettings>]: never; }) | undefined;
+    } & { [K_16 in Exclude<keyof I, keyof BrokerOrderDetails>]: never; }>(base?: I | undefined): BrokerOrderDetails;
     fromPartial<I_1 extends {
         BrokerAssignedID?: string | undefined;
         ClientOrderID?: {
@@ -459,13 +456,15 @@ export declare const BrokerOrderDetails: {
         } | undefined;
         InstanceID?: string | undefined;
         ClearingBroker?: ClearingBroker | undefined;
-        Commission?: {
-            Value?: number | undefined;
-            Exp?: number | undefined;
-        } | undefined;
-        CommissionType?: CommissionType | undefined;
         EventID?: string | undefined;
         EventTime?: Date | undefined;
+        CommissionSettings?: {
+            Commission?: {
+                Value?: number | undefined;
+                Exp?: number | undefined;
+            } | undefined;
+            CommissionType?: import("../com-fs-utils-lib/models/commission/commission").CommissionType | undefined;
+        } | undefined;
     } & {
         BrokerAssignedID?: string | undefined;
         ClientOrderID?: ({
@@ -476,7 +475,7 @@ export declare const BrokerOrderDetails: {
             Network?: Network | undefined;
             SmartContractAddr?: string | undefined;
             OrderID?: number | undefined;
-        } & { [K_16 in Exclude<keyof I_1["ClientOrderID"], keyof ClientOrderID>]: never; }) | undefined;
+        } & { [K_17 in Exclude<keyof I_1["ClientOrderID"], keyof ClientOrderID>]: never; }) | undefined;
         SubmittedAt?: Date | undefined;
         FilledAt?: Date | undefined;
         ExpiredAt?: Date | undefined;
@@ -495,63 +494,63 @@ export declare const BrokerOrderDetails: {
         } & {
             Value?: number | undefined;
             Exp?: number | undefined;
-        } & { [K_17 in Exclude<keyof I_1["Notional"], keyof Decimal>]: never; }) | undefined;
+        } & { [K_18 in Exclude<keyof I_1["Notional"], keyof Decimal>]: never; }) | undefined;
         OrderQty?: ({
             Value?: number | undefined;
             Exp?: number | undefined;
         } & {
             Value?: number | undefined;
             Exp?: number | undefined;
-        } & { [K_18 in Exclude<keyof I_1["OrderQty"], keyof Decimal>]: never; }) | undefined;
+        } & { [K_19 in Exclude<keyof I_1["OrderQty"], keyof Decimal>]: never; }) | undefined;
         FilledQty?: ({
             Value?: number | undefined;
             Exp?: number | undefined;
         } & {
             Value?: number | undefined;
             Exp?: number | undefined;
-        } & { [K_19 in Exclude<keyof I_1["FilledQty"], keyof Decimal>]: never; }) | undefined;
+        } & { [K_20 in Exclude<keyof I_1["FilledQty"], keyof Decimal>]: never; }) | undefined;
         FilledAvgPrice?: ({
             Value?: number | undefined;
             Exp?: number | undefined;
         } & {
             Value?: number | undefined;
             Exp?: number | undefined;
-        } & { [K_20 in Exclude<keyof I_1["FilledAvgPrice"], keyof Decimal>]: never; }) | undefined;
+        } & { [K_21 in Exclude<keyof I_1["FilledAvgPrice"], keyof Decimal>]: never; }) | undefined;
         LimitPrice?: ({
             Value?: number | undefined;
             Exp?: number | undefined;
         } & {
             Value?: number | undefined;
             Exp?: number | undefined;
-        } & { [K_21 in Exclude<keyof I_1["LimitPrice"], keyof Decimal>]: never; }) | undefined;
+        } & { [K_22 in Exclude<keyof I_1["LimitPrice"], keyof Decimal>]: never; }) | undefined;
         StopPrice?: ({
             Value?: number | undefined;
             Exp?: number | undefined;
         } & {
             Value?: number | undefined;
             Exp?: number | undefined;
-        } & { [K_22 in Exclude<keyof I_1["StopPrice"], keyof Decimal>]: never; }) | undefined;
+        } & { [K_23 in Exclude<keyof I_1["StopPrice"], keyof Decimal>]: never; }) | undefined;
         TrailPrice?: ({
             Value?: number | undefined;
             Exp?: number | undefined;
         } & {
             Value?: number | undefined;
             Exp?: number | undefined;
-        } & { [K_23 in Exclude<keyof I_1["TrailPrice"], keyof Decimal>]: never; }) | undefined;
+        } & { [K_24 in Exclude<keyof I_1["TrailPrice"], keyof Decimal>]: never; }) | undefined;
         TrailPercent?: ({
             Value?: number | undefined;
             Exp?: number | undefined;
         } & {
             Value?: number | undefined;
             Exp?: number | undefined;
-        } & { [K_24 in Exclude<keyof I_1["TrailPercent"], keyof Decimal>]: never; }) | undefined;
+        } & { [K_25 in Exclude<keyof I_1["TrailPercent"], keyof Decimal>]: never; }) | undefined;
         HWM?: ({
             Value?: number | undefined;
             Exp?: number | undefined;
         } & {
             Value?: number | undefined;
             Exp?: number | undefined;
-        } & { [K_25 in Exclude<keyof I_1["HWM"], keyof Decimal>]: never; }) | undefined;
+        } & { [K_26 in Exclude<keyof I_1["HWM"], keyof Decimal>]: never; }) | undefined;
         ExtendedHours?: boolean | undefined;
         CreatedAt?: Date | undefined;
         UpdatedAt?: Date | undefined;
@@ -562,41 +561,49 @@ export declare const BrokerOrderDetails: {
         } & {
             Value?: number | undefined;
             Exp?: number | undefined;
-        } & { [K_26 in Exclude<keyof I_1["TotalPosition"], keyof Decimal>]: never; }) | undefined;
+        } & { [K_27 in Exclude<keyof I_1["TotalPosition"], keyof Decimal>]: never; }) | undefined;
         PartialPrice?: ({
             Value?: number | undefined;
             Exp?: number | undefined;
         } & {
             Value?: number | undefined;
             Exp?: number | undefined;
-        } & { [K_27 in Exclude<keyof I_1["PartialPrice"], keyof Decimal>]: never; }) | undefined;
+        } & { [K_28 in Exclude<keyof I_1["PartialPrice"], keyof Decimal>]: never; }) | undefined;
         PartialQty?: ({
             Value?: number | undefined;
             Exp?: number | undefined;
         } & {
             Value?: number | undefined;
             Exp?: number | undefined;
-        } & { [K_28 in Exclude<keyof I_1["PartialQty"], keyof Decimal>]: never; }) | undefined;
+        } & { [K_29 in Exclude<keyof I_1["PartialQty"], keyof Decimal>]: never; }) | undefined;
         ProcessInfo?: ({
             ProcessState?: import("./util").ProcessState | undefined;
             ProcessedAt?: Date | undefined;
         } & {
             ProcessState?: import("./util").ProcessState | undefined;
             ProcessedAt?: Date | undefined;
-        } & { [K_29 in Exclude<keyof I_1["ProcessInfo"], keyof ProcessInfo>]: never; }) | undefined;
+        } & { [K_30 in Exclude<keyof I_1["ProcessInfo"], keyof ProcessInfo>]: never; }) | undefined;
         InstanceID?: string | undefined;
         ClearingBroker?: ClearingBroker | undefined;
-        Commission?: ({
-            Value?: number | undefined;
-            Exp?: number | undefined;
-        } & {
-            Value?: number | undefined;
-            Exp?: number | undefined;
-        } & { [K_30 in Exclude<keyof I_1["Commission"], keyof Decimal>]: never; }) | undefined;
-        CommissionType?: CommissionType | undefined;
         EventID?: string | undefined;
         EventTime?: Date | undefined;
-    } & { [K_31 in Exclude<keyof I_1, keyof BrokerOrderDetails>]: never; }>(object: I_1): BrokerOrderDetails;
+        CommissionSettings?: ({
+            Commission?: {
+                Value?: number | undefined;
+                Exp?: number | undefined;
+            } | undefined;
+            CommissionType?: import("../com-fs-utils-lib/models/commission/commission").CommissionType | undefined;
+        } & {
+            Commission?: ({
+                Value?: number | undefined;
+                Exp?: number | undefined;
+            } & {
+                Value?: number | undefined;
+                Exp?: number | undefined;
+            } & { [K_31 in Exclude<keyof I_1["CommissionSettings"]["Commission"], keyof Decimal>]: never; }) | undefined;
+            CommissionType?: import("../com-fs-utils-lib/models/commission/commission").CommissionType | undefined;
+        } & { [K_32 in Exclude<keyof I_1["CommissionSettings"], keyof CommissionSettings>]: never; }) | undefined;
+    } & { [K_33 in Exclude<keyof I_1, keyof BrokerOrderDetails>]: never; }>(object: I_1): BrokerOrderDetails;
 };
 export declare const ClientOrderID: {
     encode(message: ClientOrderID, writer?: _m0.Writer): _m0.Writer;
@@ -705,13 +712,15 @@ export declare const BrokerOrderDetailsList: {
             } | undefined;
             InstanceID?: string | undefined;
             ClearingBroker?: ClearingBroker | undefined;
-            Commission?: {
-                Value?: number | undefined;
-                Exp?: number | undefined;
-            } | undefined;
-            CommissionType?: CommissionType | undefined;
             EventID?: string | undefined;
             EventTime?: Date | undefined;
+            CommissionSettings?: {
+                Commission?: {
+                    Value?: number | undefined;
+                    Exp?: number | undefined;
+                } | undefined;
+                CommissionType?: import("../com-fs-utils-lib/models/commission/commission").CommissionType | undefined;
+            } | undefined;
         }[] | undefined;
     } & {
         BrokerOrderDetailsList?: ({
@@ -791,13 +800,15 @@ export declare const BrokerOrderDetailsList: {
             } | undefined;
             InstanceID?: string | undefined;
             ClearingBroker?: ClearingBroker | undefined;
-            Commission?: {
-                Value?: number | undefined;
-                Exp?: number | undefined;
-            } | undefined;
-            CommissionType?: CommissionType | undefined;
             EventID?: string | undefined;
             EventTime?: Date | undefined;
+            CommissionSettings?: {
+                Commission?: {
+                    Value?: number | undefined;
+                    Exp?: number | undefined;
+                } | undefined;
+                CommissionType?: import("../com-fs-utils-lib/models/commission/commission").CommissionType | undefined;
+            } | undefined;
         }[] & ({
             BrokerAssignedID?: string | undefined;
             ClientOrderID?: {
@@ -875,13 +886,15 @@ export declare const BrokerOrderDetailsList: {
             } | undefined;
             InstanceID?: string | undefined;
             ClearingBroker?: ClearingBroker | undefined;
-            Commission?: {
-                Value?: number | undefined;
-                Exp?: number | undefined;
-            } | undefined;
-            CommissionType?: CommissionType | undefined;
             EventID?: string | undefined;
             EventTime?: Date | undefined;
+            CommissionSettings?: {
+                Commission?: {
+                    Value?: number | undefined;
+                    Exp?: number | undefined;
+                } | undefined;
+                CommissionType?: import("../com-fs-utils-lib/models/commission/commission").CommissionType | undefined;
+            } | undefined;
         } & {
             BrokerAssignedID?: string | undefined;
             ClientOrderID?: ({
@@ -1002,17 +1015,25 @@ export declare const BrokerOrderDetailsList: {
             } & { [K_13 in Exclude<keyof I["BrokerOrderDetailsList"][number]["ProcessInfo"], keyof ProcessInfo>]: never; }) | undefined;
             InstanceID?: string | undefined;
             ClearingBroker?: ClearingBroker | undefined;
-            Commission?: ({
-                Value?: number | undefined;
-                Exp?: number | undefined;
-            } & {
-                Value?: number | undefined;
-                Exp?: number | undefined;
-            } & { [K_14 in Exclude<keyof I["BrokerOrderDetailsList"][number]["Commission"], keyof Decimal>]: never; }) | undefined;
-            CommissionType?: CommissionType | undefined;
             EventID?: string | undefined;
             EventTime?: Date | undefined;
-        } & { [K_15 in Exclude<keyof I["BrokerOrderDetailsList"][number], keyof BrokerOrderDetails>]: never; })[] & { [K_16 in Exclude<keyof I["BrokerOrderDetailsList"], keyof {
+            CommissionSettings?: ({
+                Commission?: {
+                    Value?: number | undefined;
+                    Exp?: number | undefined;
+                } | undefined;
+                CommissionType?: import("../com-fs-utils-lib/models/commission/commission").CommissionType | undefined;
+            } & {
+                Commission?: ({
+                    Value?: number | undefined;
+                    Exp?: number | undefined;
+                } & {
+                    Value?: number | undefined;
+                    Exp?: number | undefined;
+                } & { [K_14 in Exclude<keyof I["BrokerOrderDetailsList"][number]["CommissionSettings"]["Commission"], keyof Decimal>]: never; }) | undefined;
+                CommissionType?: import("../com-fs-utils-lib/models/commission/commission").CommissionType | undefined;
+            } & { [K_15 in Exclude<keyof I["BrokerOrderDetailsList"][number]["CommissionSettings"], keyof CommissionSettings>]: never; }) | undefined;
+        } & { [K_16 in Exclude<keyof I["BrokerOrderDetailsList"][number], keyof BrokerOrderDetails>]: never; })[] & { [K_17 in Exclude<keyof I["BrokerOrderDetailsList"], keyof {
             BrokerAssignedID?: string | undefined;
             ClientOrderID?: {
                 Network?: Network | undefined;
@@ -1089,15 +1110,17 @@ export declare const BrokerOrderDetailsList: {
             } | undefined;
             InstanceID?: string | undefined;
             ClearingBroker?: ClearingBroker | undefined;
-            Commission?: {
-                Value?: number | undefined;
-                Exp?: number | undefined;
-            } | undefined;
-            CommissionType?: CommissionType | undefined;
             EventID?: string | undefined;
             EventTime?: Date | undefined;
+            CommissionSettings?: {
+                Commission?: {
+                    Value?: number | undefined;
+                    Exp?: number | undefined;
+                } | undefined;
+                CommissionType?: import("../com-fs-utils-lib/models/commission/commission").CommissionType | undefined;
+            } | undefined;
         }[]>]: never; }) | undefined;
-    } & { [K_17 in Exclude<keyof I, "BrokerOrderDetailsList">]: never; }>(base?: I | undefined): BrokerOrderDetailsList;
+    } & { [K_18 in Exclude<keyof I, "BrokerOrderDetailsList">]: never; }>(base?: I | undefined): BrokerOrderDetailsList;
     fromPartial<I_1 extends {
         BrokerOrderDetailsList?: {
             BrokerAssignedID?: string | undefined;
@@ -1176,13 +1199,15 @@ export declare const BrokerOrderDetailsList: {
             } | undefined;
             InstanceID?: string | undefined;
             ClearingBroker?: ClearingBroker | undefined;
-            Commission?: {
-                Value?: number | undefined;
-                Exp?: number | undefined;
-            } | undefined;
-            CommissionType?: CommissionType | undefined;
             EventID?: string | undefined;
             EventTime?: Date | undefined;
+            CommissionSettings?: {
+                Commission?: {
+                    Value?: number | undefined;
+                    Exp?: number | undefined;
+                } | undefined;
+                CommissionType?: import("../com-fs-utils-lib/models/commission/commission").CommissionType | undefined;
+            } | undefined;
         }[] | undefined;
     } & {
         BrokerOrderDetailsList?: ({
@@ -1262,13 +1287,15 @@ export declare const BrokerOrderDetailsList: {
             } | undefined;
             InstanceID?: string | undefined;
             ClearingBroker?: ClearingBroker | undefined;
-            Commission?: {
-                Value?: number | undefined;
-                Exp?: number | undefined;
-            } | undefined;
-            CommissionType?: CommissionType | undefined;
             EventID?: string | undefined;
             EventTime?: Date | undefined;
+            CommissionSettings?: {
+                Commission?: {
+                    Value?: number | undefined;
+                    Exp?: number | undefined;
+                } | undefined;
+                CommissionType?: import("../com-fs-utils-lib/models/commission/commission").CommissionType | undefined;
+            } | undefined;
         }[] & ({
             BrokerAssignedID?: string | undefined;
             ClientOrderID?: {
@@ -1346,13 +1373,15 @@ export declare const BrokerOrderDetailsList: {
             } | undefined;
             InstanceID?: string | undefined;
             ClearingBroker?: ClearingBroker | undefined;
-            Commission?: {
-                Value?: number | undefined;
-                Exp?: number | undefined;
-            } | undefined;
-            CommissionType?: CommissionType | undefined;
             EventID?: string | undefined;
             EventTime?: Date | undefined;
+            CommissionSettings?: {
+                Commission?: {
+                    Value?: number | undefined;
+                    Exp?: number | undefined;
+                } | undefined;
+                CommissionType?: import("../com-fs-utils-lib/models/commission/commission").CommissionType | undefined;
+            } | undefined;
         } & {
             BrokerAssignedID?: string | undefined;
             ClientOrderID?: ({
@@ -1363,7 +1392,7 @@ export declare const BrokerOrderDetailsList: {
                 Network?: Network | undefined;
                 SmartContractAddr?: string | undefined;
                 OrderID?: number | undefined;
-            } & { [K_18 in Exclude<keyof I_1["BrokerOrderDetailsList"][number]["ClientOrderID"], keyof ClientOrderID>]: never; }) | undefined;
+            } & { [K_19 in Exclude<keyof I_1["BrokerOrderDetailsList"][number]["ClientOrderID"], keyof ClientOrderID>]: never; }) | undefined;
             SubmittedAt?: Date | undefined;
             FilledAt?: Date | undefined;
             ExpiredAt?: Date | undefined;
@@ -1382,63 +1411,63 @@ export declare const BrokerOrderDetailsList: {
             } & {
                 Value?: number | undefined;
                 Exp?: number | undefined;
-            } & { [K_19 in Exclude<keyof I_1["BrokerOrderDetailsList"][number]["Notional"], keyof Decimal>]: never; }) | undefined;
+            } & { [K_20 in Exclude<keyof I_1["BrokerOrderDetailsList"][number]["Notional"], keyof Decimal>]: never; }) | undefined;
             OrderQty?: ({
                 Value?: number | undefined;
                 Exp?: number | undefined;
             } & {
                 Value?: number | undefined;
                 Exp?: number | undefined;
-            } & { [K_20 in Exclude<keyof I_1["BrokerOrderDetailsList"][number]["OrderQty"], keyof Decimal>]: never; }) | undefined;
+            } & { [K_21 in Exclude<keyof I_1["BrokerOrderDetailsList"][number]["OrderQty"], keyof Decimal>]: never; }) | undefined;
             FilledQty?: ({
                 Value?: number | undefined;
                 Exp?: number | undefined;
             } & {
                 Value?: number | undefined;
                 Exp?: number | undefined;
-            } & { [K_21 in Exclude<keyof I_1["BrokerOrderDetailsList"][number]["FilledQty"], keyof Decimal>]: never; }) | undefined;
+            } & { [K_22 in Exclude<keyof I_1["BrokerOrderDetailsList"][number]["FilledQty"], keyof Decimal>]: never; }) | undefined;
             FilledAvgPrice?: ({
                 Value?: number | undefined;
                 Exp?: number | undefined;
             } & {
                 Value?: number | undefined;
                 Exp?: number | undefined;
-            } & { [K_22 in Exclude<keyof I_1["BrokerOrderDetailsList"][number]["FilledAvgPrice"], keyof Decimal>]: never; }) | undefined;
+            } & { [K_23 in Exclude<keyof I_1["BrokerOrderDetailsList"][number]["FilledAvgPrice"], keyof Decimal>]: never; }) | undefined;
             LimitPrice?: ({
                 Value?: number | undefined;
                 Exp?: number | undefined;
             } & {
                 Value?: number | undefined;
                 Exp?: number | undefined;
-            } & { [K_23 in Exclude<keyof I_1["BrokerOrderDetailsList"][number]["LimitPrice"], keyof Decimal>]: never; }) | undefined;
+            } & { [K_24 in Exclude<keyof I_1["BrokerOrderDetailsList"][number]["LimitPrice"], keyof Decimal>]: never; }) | undefined;
             StopPrice?: ({
                 Value?: number | undefined;
                 Exp?: number | undefined;
             } & {
                 Value?: number | undefined;
                 Exp?: number | undefined;
-            } & { [K_24 in Exclude<keyof I_1["BrokerOrderDetailsList"][number]["StopPrice"], keyof Decimal>]: never; }) | undefined;
+            } & { [K_25 in Exclude<keyof I_1["BrokerOrderDetailsList"][number]["StopPrice"], keyof Decimal>]: never; }) | undefined;
             TrailPrice?: ({
                 Value?: number | undefined;
                 Exp?: number | undefined;
             } & {
                 Value?: number | undefined;
                 Exp?: number | undefined;
-            } & { [K_25 in Exclude<keyof I_1["BrokerOrderDetailsList"][number]["TrailPrice"], keyof Decimal>]: never; }) | undefined;
+            } & { [K_26 in Exclude<keyof I_1["BrokerOrderDetailsList"][number]["TrailPrice"], keyof Decimal>]: never; }) | undefined;
             TrailPercent?: ({
                 Value?: number | undefined;
                 Exp?: number | undefined;
             } & {
                 Value?: number | undefined;
                 Exp?: number | undefined;
-            } & { [K_26 in Exclude<keyof I_1["BrokerOrderDetailsList"][number]["TrailPercent"], keyof Decimal>]: never; }) | undefined;
+            } & { [K_27 in Exclude<keyof I_1["BrokerOrderDetailsList"][number]["TrailPercent"], keyof Decimal>]: never; }) | undefined;
             HWM?: ({
                 Value?: number | undefined;
                 Exp?: number | undefined;
             } & {
                 Value?: number | undefined;
                 Exp?: number | undefined;
-            } & { [K_27 in Exclude<keyof I_1["BrokerOrderDetailsList"][number]["HWM"], keyof Decimal>]: never; }) | undefined;
+            } & { [K_28 in Exclude<keyof I_1["BrokerOrderDetailsList"][number]["HWM"], keyof Decimal>]: never; }) | undefined;
             ExtendedHours?: boolean | undefined;
             CreatedAt?: Date | undefined;
             UpdatedAt?: Date | undefined;
@@ -1449,41 +1478,49 @@ export declare const BrokerOrderDetailsList: {
             } & {
                 Value?: number | undefined;
                 Exp?: number | undefined;
-            } & { [K_28 in Exclude<keyof I_1["BrokerOrderDetailsList"][number]["TotalPosition"], keyof Decimal>]: never; }) | undefined;
+            } & { [K_29 in Exclude<keyof I_1["BrokerOrderDetailsList"][number]["TotalPosition"], keyof Decimal>]: never; }) | undefined;
             PartialPrice?: ({
                 Value?: number | undefined;
                 Exp?: number | undefined;
             } & {
                 Value?: number | undefined;
                 Exp?: number | undefined;
-            } & { [K_29 in Exclude<keyof I_1["BrokerOrderDetailsList"][number]["PartialPrice"], keyof Decimal>]: never; }) | undefined;
+            } & { [K_30 in Exclude<keyof I_1["BrokerOrderDetailsList"][number]["PartialPrice"], keyof Decimal>]: never; }) | undefined;
             PartialQty?: ({
                 Value?: number | undefined;
                 Exp?: number | undefined;
             } & {
                 Value?: number | undefined;
                 Exp?: number | undefined;
-            } & { [K_30 in Exclude<keyof I_1["BrokerOrderDetailsList"][number]["PartialQty"], keyof Decimal>]: never; }) | undefined;
+            } & { [K_31 in Exclude<keyof I_1["BrokerOrderDetailsList"][number]["PartialQty"], keyof Decimal>]: never; }) | undefined;
             ProcessInfo?: ({
                 ProcessState?: import("./util").ProcessState | undefined;
                 ProcessedAt?: Date | undefined;
             } & {
                 ProcessState?: import("./util").ProcessState | undefined;
                 ProcessedAt?: Date | undefined;
-            } & { [K_31 in Exclude<keyof I_1["BrokerOrderDetailsList"][number]["ProcessInfo"], keyof ProcessInfo>]: never; }) | undefined;
+            } & { [K_32 in Exclude<keyof I_1["BrokerOrderDetailsList"][number]["ProcessInfo"], keyof ProcessInfo>]: never; }) | undefined;
             InstanceID?: string | undefined;
             ClearingBroker?: ClearingBroker | undefined;
-            Commission?: ({
-                Value?: number | undefined;
-                Exp?: number | undefined;
-            } & {
-                Value?: number | undefined;
-                Exp?: number | undefined;
-            } & { [K_32 in Exclude<keyof I_1["BrokerOrderDetailsList"][number]["Commission"], keyof Decimal>]: never; }) | undefined;
-            CommissionType?: CommissionType | undefined;
             EventID?: string | undefined;
             EventTime?: Date | undefined;
-        } & { [K_33 in Exclude<keyof I_1["BrokerOrderDetailsList"][number], keyof BrokerOrderDetails>]: never; })[] & { [K_34 in Exclude<keyof I_1["BrokerOrderDetailsList"], keyof {
+            CommissionSettings?: ({
+                Commission?: {
+                    Value?: number | undefined;
+                    Exp?: number | undefined;
+                } | undefined;
+                CommissionType?: import("../com-fs-utils-lib/models/commission/commission").CommissionType | undefined;
+            } & {
+                Commission?: ({
+                    Value?: number | undefined;
+                    Exp?: number | undefined;
+                } & {
+                    Value?: number | undefined;
+                    Exp?: number | undefined;
+                } & { [K_33 in Exclude<keyof I_1["BrokerOrderDetailsList"][number]["CommissionSettings"]["Commission"], keyof Decimal>]: never; }) | undefined;
+                CommissionType?: import("../com-fs-utils-lib/models/commission/commission").CommissionType | undefined;
+            } & { [K_34 in Exclude<keyof I_1["BrokerOrderDetailsList"][number]["CommissionSettings"], keyof CommissionSettings>]: never; }) | undefined;
+        } & { [K_35 in Exclude<keyof I_1["BrokerOrderDetailsList"][number], keyof BrokerOrderDetails>]: never; })[] & { [K_36 in Exclude<keyof I_1["BrokerOrderDetailsList"], keyof {
             BrokerAssignedID?: string | undefined;
             ClientOrderID?: {
                 Network?: Network | undefined;
@@ -1560,15 +1597,17 @@ export declare const BrokerOrderDetailsList: {
             } | undefined;
             InstanceID?: string | undefined;
             ClearingBroker?: ClearingBroker | undefined;
-            Commission?: {
-                Value?: number | undefined;
-                Exp?: number | undefined;
-            } | undefined;
-            CommissionType?: CommissionType | undefined;
             EventID?: string | undefined;
             EventTime?: Date | undefined;
+            CommissionSettings?: {
+                Commission?: {
+                    Value?: number | undefined;
+                    Exp?: number | undefined;
+                } | undefined;
+                CommissionType?: import("../com-fs-utils-lib/models/commission/commission").CommissionType | undefined;
+            } | undefined;
         }[]>]: never; }) | undefined;
-    } & { [K_35 in Exclude<keyof I_1, "BrokerOrderDetailsList">]: never; }>(object: I_1): BrokerOrderDetailsList;
+    } & { [K_37 in Exclude<keyof I_1, "BrokerOrderDetailsList">]: never; }>(object: I_1): BrokerOrderDetailsList;
 };
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 export type DeepPartial<T> = T extends Builtin ? T : T extends globalThis.Array<infer U> ? globalThis.Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? {
