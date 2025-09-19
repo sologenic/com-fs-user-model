@@ -222,7 +222,10 @@ export interface UserDetails {
   ComplianceQuestions: ComplianceQuestions[];
   BrokerAccounts: BrokerAccount[];
   BankAccounts: BankAccount[];
-  UISettings: UISettings | undefined;
+  UISettings:
+    | UISettings
+    | undefined;
+  /** Broker API specific commission fields for user level (overrrides organization level) */
   CommissionSettings?: CommissionSettings | undefined;
 }
 

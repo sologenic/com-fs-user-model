@@ -100,7 +100,7 @@ export function walletTypeToJSON(object) {
     }
 }
 function createBaseWallet() {
-    return { Address: "", Alias: "", Type: 0, SignerType: 0 };
+    return { Address: "", Alias: "", Type: 0, SignerType: 0, RegisteredSmartContracts: [] };
 }
 export const Wallet = {
     encode(message, writer = _m0.Writer.create()) {
@@ -115,6 +115,9 @@ export const Wallet = {
         }
         if (message.SignerType !== 0) {
             writer.uint32(32).int32(message.SignerType);
+        }
+        for (const v of message.RegisteredSmartContracts) {
+            writer.uint32(42).string(v);
         }
         return writer;
     },
@@ -149,6 +152,12 @@ export const Wallet = {
                     }
                     message.SignerType = reader.int32();
                     continue;
+                case 5:
+                    if (tag !== 42) {
+                        break;
+                    }
+                    message.RegisteredSmartContracts.push(reader.string());
+                    continue;
             }
             if ((tag & 7) === 4 || tag === 0) {
                 break;
@@ -163,9 +172,13 @@ export const Wallet = {
             Alias: isSet(object.Alias) ? globalThis.String(object.Alias) : "",
             Type: isSet(object.Type) ? walletTypeFromJSON(object.Type) : 0,
             SignerType: isSet(object.SignerType) ? signerTypeFromJSON(object.SignerType) : 0,
+            RegisteredSmartContracts: globalThis.Array.isArray(object === null || object === void 0 ? void 0 : object.RegisteredSmartContracts)
+                ? object.RegisteredSmartContracts.map((e) => globalThis.String(e))
+                : [],
         };
     },
     toJSON(message) {
+        var _a;
         const obj = {};
         if (message.Address !== "") {
             obj.Address = message.Address;
@@ -179,18 +192,22 @@ export const Wallet = {
         if (message.SignerType !== 0) {
             obj.SignerType = signerTypeToJSON(message.SignerType);
         }
+        if ((_a = message.RegisteredSmartContracts) === null || _a === void 0 ? void 0 : _a.length) {
+            obj.RegisteredSmartContracts = message.RegisteredSmartContracts;
+        }
         return obj;
     },
     create(base) {
         return Wallet.fromPartial(base !== null && base !== void 0 ? base : {});
     },
     fromPartial(object) {
-        var _a, _b, _c, _d;
+        var _a, _b, _c, _d, _e;
         const message = createBaseWallet();
         message.Address = (_a = object.Address) !== null && _a !== void 0 ? _a : "";
         message.Alias = (_b = object.Alias) !== null && _b !== void 0 ? _b : "";
         message.Type = (_c = object.Type) !== null && _c !== void 0 ? _c : 0;
         message.SignerType = (_d = object.SignerType) !== null && _d !== void 0 ? _d : 0;
+        message.RegisteredSmartContracts = ((_e = object.RegisteredSmartContracts) === null || _e === void 0 ? void 0 : _e.map((e) => e)) || [];
         return message;
     },
 };

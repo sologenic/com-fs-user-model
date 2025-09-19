@@ -111,6 +111,8 @@ export interface Wallet {
   Alias: string;
   Type: WalletType;
   SignerType: SignerType;
+  /** smart contract addresses that wallet is registered to */
+  RegisteredSmartContracts: string[];
 }
 
 export interface BankAccount {
@@ -139,7 +141,7 @@ export interface BrokerAccount {
 }
 
 function createBaseWallet(): Wallet {
-  return { Address: "", Alias: "", Type: 0, SignerType: 0 };
+  return { Address: "", Alias: "", Type: 0, SignerType: 0, RegisteredSmartContracts: [] };
 }
 
 export const Wallet = {
@@ -155,6 +157,9 @@ export const Wallet = {
     }
     if (message.SignerType !== 0) {
       writer.uint32(32).int32(message.SignerType);
+    }
+    for (const v of message.RegisteredSmartContracts) {
+      writer.uint32(42).string(v!);
     }
     return writer;
   },
@@ -194,6 +199,13 @@ export const Wallet = {
 
           message.SignerType = reader.int32() as any;
           continue;
+        case 5:
+          if (tag !== 42) {
+            break;
+          }
+
+          message.RegisteredSmartContracts.push(reader.string());
+          continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -209,6 +221,9 @@ export const Wallet = {
       Alias: isSet(object.Alias) ? globalThis.String(object.Alias) : "",
       Type: isSet(object.Type) ? walletTypeFromJSON(object.Type) : 0,
       SignerType: isSet(object.SignerType) ? signerTypeFromJSON(object.SignerType) : 0,
+      RegisteredSmartContracts: globalThis.Array.isArray(object?.RegisteredSmartContracts)
+        ? object.RegisteredSmartContracts.map((e: any) => globalThis.String(e))
+        : [],
     };
   },
 
@@ -226,6 +241,9 @@ export const Wallet = {
     if (message.SignerType !== 0) {
       obj.SignerType = signerTypeToJSON(message.SignerType);
     }
+    if (message.RegisteredSmartContracts?.length) {
+      obj.RegisteredSmartContracts = message.RegisteredSmartContracts;
+    }
     return obj;
   },
 
@@ -238,6 +256,7 @@ export const Wallet = {
     message.Alias = object.Alias ?? "";
     message.Type = object.Type ?? 0;
     message.SignerType = object.SignerType ?? 0;
+    message.RegisteredSmartContracts = object.RegisteredSmartContracts?.map((e) => e) || [];
     return message;
   },
 };

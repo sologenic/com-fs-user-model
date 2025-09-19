@@ -130,13 +130,14 @@ func (WalletType) EnumDescriptor() ([]byte, []int) {
 }
 
 type Wallet struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Address       string                 `protobuf:"bytes,1,opt,name=Address,proto3" json:"Address,omitempty"`
-	Alias         string                 `protobuf:"bytes,2,opt,name=Alias,proto3" json:"Alias,omitempty"`
-	Type          WalletType             `protobuf:"varint,3,opt,name=Type,proto3,enum=user.WalletType" json:"Type,omitempty"`
-	SignerType    SignerType             `protobuf:"varint,4,opt,name=SignerType,proto3,enum=user.SignerType" json:"SignerType,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                    protoimpl.MessageState `protogen:"open.v1"`
+	Address                  string                 `protobuf:"bytes,1,opt,name=Address,proto3" json:"Address,omitempty"`
+	Alias                    string                 `protobuf:"bytes,2,opt,name=Alias,proto3" json:"Alias,omitempty"`
+	Type                     WalletType             `protobuf:"varint,3,opt,name=Type,proto3,enum=user.WalletType" json:"Type,omitempty"`
+	SignerType               SignerType             `protobuf:"varint,4,opt,name=SignerType,proto3,enum=user.SignerType" json:"SignerType,omitempty"`
+	RegisteredSmartContracts []string               `protobuf:"bytes,5,rep,name=RegisteredSmartContracts,proto3" json:"RegisteredSmartContracts,omitempty"` // smart contract addresses that wallet is registered to
+	unknownFields            protoimpl.UnknownFields
+	sizeCache                protoimpl.SizeCache
 }
 
 func (x *Wallet) Reset() {
@@ -195,6 +196,13 @@ func (x *Wallet) GetSignerType() SignerType {
 		return x.SignerType
 	}
 	return SignerType_NOT_USER_SIGNETTYPE
+}
+
+func (x *Wallet) GetRegisteredSmartContracts() []string {
+	if x != nil {
+		return x.RegisteredSmartContracts
+	}
+	return nil
 }
 
 type BankAccount struct {
@@ -361,14 +369,15 @@ var File_user_fundings_proto protoreflect.FileDescriptor
 
 const file_user_fundings_proto_rawDesc = "" +
 	"\n" +
-	"\x13user-fundings.proto\x12\x04user\x1a)sologenic/com-fs-order-model/broker.proto\"\x90\x01\n" +
+	"\x13user-fundings.proto\x12\x04user\x1a)sologenic/com-fs-order-model/broker.proto\"\xcc\x01\n" +
 	"\x06Wallet\x12\x18\n" +
 	"\aAddress\x18\x01 \x01(\tR\aAddress\x12\x14\n" +
 	"\x05Alias\x18\x02 \x01(\tR\x05Alias\x12$\n" +
 	"\x04Type\x18\x03 \x01(\x0e2\x10.user.WalletTypeR\x04Type\x120\n" +
 	"\n" +
 	"SignerType\x18\x04 \x01(\x0e2\x10.user.SignerTypeR\n" +
-	"SignerType\"\xcf\x01\n" +
+	"SignerType\x12:\n" +
+	"\x18RegisteredSmartContracts\x18\x05 \x03(\tR\x18RegisteredSmartContracts\"\xcf\x01\n" +
 	"\vBankAccount\x12 \n" +
 	"\vAccountName\x18\x01 \x01(\tR\vAccountName\x12\x1a\n" +
 	"\bBankName\x18\x02 \x01(\tR\bBankName\x12 \n" +

@@ -223,7 +223,7 @@ type UserDetails struct {
 	BrokerAccounts         []*BrokerAccount                                `protobuf:"bytes,23,rep,name=BrokerAccounts,proto3" json:"BrokerAccounts,omitempty"`
 	BankAccounts           []*BankAccount                                  `protobuf:"bytes,24,rep,name=BankAccounts,proto3" json:"BankAccounts,omitempty"`
 	UISettings             *UISettings                                     `protobuf:"bytes,25,opt,name=UISettings,proto3" json:"UISettings,omitempty"`
-	CommissionSettings     *commission.CommissionSettings                  `protobuf:"bytes,26,opt,name=CommissionSettings,proto3,oneof" json:"CommissionSettings,omitempty"`
+	CommissionSettings     *commission.CommissionSettings                  `protobuf:"bytes,26,opt,name=CommissionSettings,proto3,oneof" json:"CommissionSettings,omitempty"` // Broker API specific commission fields for user level (overrrides organization level)
 	unknownFields          protoimpl.UnknownFields
 	sizeCache              protoimpl.SizeCache
 }
