@@ -42,6 +42,7 @@ message UserDetails {
     repeated BankAccount BankAccounts = 24;
     UISettings UISettings = 25;
     optional commission.CommissionSettings CommissionSettings = 26; // Broker API specific commission fields for user level (overrrides organization level)
+    optional DataFeedAccounts DataFeedAccounts = 27;
 }
 
 message User {
@@ -96,4 +97,12 @@ enum Theme {
     NOT_USED_THEME = 0;
     DARK = 1;
     LIGHT = 2;
+}
+
+message DataFeedAccounts {
+    optional DxFeed DxFeed = 1;
+}
+
+message DxFeed {
+    string AccountID = 1;
 }
