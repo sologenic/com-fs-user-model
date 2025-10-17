@@ -33,6 +33,7 @@ export declare function investmentObjectiveToJSON(object: InvestmentObjective): 
 /** This model is open to having multiple questionaires with regards to compliance like MiFID, etc. */
 export interface ComplianceQuestions {
     USA?: USA | undefined;
+    AlpacaDisclosures?: AlpacaDisclosures | undefined;
 }
 export interface USA {
     RecordedAt: Date | undefined;
@@ -42,6 +43,13 @@ export interface USA {
     ConversionImportance: LiquidationImportance;
     Tolerance: RiskTolerance;
     Objective: InvestmentObjective;
+}
+export interface AlpacaDisclosures {
+    RecordedAt: Date | undefined;
+    IsControlPerson: boolean;
+    IsAffiliatedExchangeOrFinra: boolean;
+    IsPoliticallyExposed: boolean;
+    ImmediateFamilyExposed: boolean;
 }
 export declare const ComplianceQuestions: {
     encode(message: ComplianceQuestions, writer?: _m0.Writer): _m0.Writer;
@@ -57,6 +65,13 @@ export declare const ComplianceQuestions: {
             ConversionImportance?: LiquidationImportance | undefined;
             Tolerance?: RiskTolerance | undefined;
             Objective?: InvestmentObjective | undefined;
+        } | undefined;
+        AlpacaDisclosures?: {
+            RecordedAt?: Date | undefined;
+            IsControlPerson?: boolean | undefined;
+            IsAffiliatedExchangeOrFinra?: boolean | undefined;
+            IsPoliticallyExposed?: boolean | undefined;
+            ImmediateFamilyExposed?: boolean | undefined;
         } | undefined;
     } & {
         USA?: ({
@@ -76,7 +91,20 @@ export declare const ComplianceQuestions: {
             Tolerance?: RiskTolerance | undefined;
             Objective?: InvestmentObjective | undefined;
         } & { [K in Exclude<keyof I["USA"], keyof USA>]: never; }) | undefined;
-    } & { [K_1 in Exclude<keyof I, "USA">]: never; }>(base?: I | undefined): ComplianceQuestions;
+        AlpacaDisclosures?: ({
+            RecordedAt?: Date | undefined;
+            IsControlPerson?: boolean | undefined;
+            IsAffiliatedExchangeOrFinra?: boolean | undefined;
+            IsPoliticallyExposed?: boolean | undefined;
+            ImmediateFamilyExposed?: boolean | undefined;
+        } & {
+            RecordedAt?: Date | undefined;
+            IsControlPerson?: boolean | undefined;
+            IsAffiliatedExchangeOrFinra?: boolean | undefined;
+            IsPoliticallyExposed?: boolean | undefined;
+            ImmediateFamilyExposed?: boolean | undefined;
+        } & { [K_1 in Exclude<keyof I["AlpacaDisclosures"], keyof AlpacaDisclosures>]: never; }) | undefined;
+    } & { [K_2 in Exclude<keyof I, keyof ComplianceQuestions>]: never; }>(base?: I | undefined): ComplianceQuestions;
     fromPartial<I_1 extends {
         USA?: {
             RecordedAt?: Date | undefined;
@@ -86,6 +114,13 @@ export declare const ComplianceQuestions: {
             ConversionImportance?: LiquidationImportance | undefined;
             Tolerance?: RiskTolerance | undefined;
             Objective?: InvestmentObjective | undefined;
+        } | undefined;
+        AlpacaDisclosures?: {
+            RecordedAt?: Date | undefined;
+            IsControlPerson?: boolean | undefined;
+            IsAffiliatedExchangeOrFinra?: boolean | undefined;
+            IsPoliticallyExposed?: boolean | undefined;
+            ImmediateFamilyExposed?: boolean | undefined;
         } | undefined;
     } & {
         USA?: ({
@@ -104,8 +139,21 @@ export declare const ComplianceQuestions: {
             ConversionImportance?: LiquidationImportance | undefined;
             Tolerance?: RiskTolerance | undefined;
             Objective?: InvestmentObjective | undefined;
-        } & { [K_2 in Exclude<keyof I_1["USA"], keyof USA>]: never; }) | undefined;
-    } & { [K_3 in Exclude<keyof I_1, "USA">]: never; }>(object: I_1): ComplianceQuestions;
+        } & { [K_3 in Exclude<keyof I_1["USA"], keyof USA>]: never; }) | undefined;
+        AlpacaDisclosures?: ({
+            RecordedAt?: Date | undefined;
+            IsControlPerson?: boolean | undefined;
+            IsAffiliatedExchangeOrFinra?: boolean | undefined;
+            IsPoliticallyExposed?: boolean | undefined;
+            ImmediateFamilyExposed?: boolean | undefined;
+        } & {
+            RecordedAt?: Date | undefined;
+            IsControlPerson?: boolean | undefined;
+            IsAffiliatedExchangeOrFinra?: boolean | undefined;
+            IsPoliticallyExposed?: boolean | undefined;
+            ImmediateFamilyExposed?: boolean | undefined;
+        } & { [K_4 in Exclude<keyof I_1["AlpacaDisclosures"], keyof AlpacaDisclosures>]: never; }) | undefined;
+    } & { [K_5 in Exclude<keyof I_1, keyof ComplianceQuestions>]: never; }>(object: I_1): ComplianceQuestions;
 };
 export declare const USA: {
     encode(message: USA, writer?: _m0.Writer): _m0.Writer;
@@ -146,6 +194,38 @@ export declare const USA: {
         Tolerance?: RiskTolerance | undefined;
         Objective?: InvestmentObjective | undefined;
     } & { [K_1 in Exclude<keyof I_1, keyof USA>]: never; }>(object: I_1): USA;
+};
+export declare const AlpacaDisclosures: {
+    encode(message: AlpacaDisclosures, writer?: _m0.Writer): _m0.Writer;
+    decode(input: _m0.Reader | Uint8Array, length?: number): AlpacaDisclosures;
+    fromJSON(object: any): AlpacaDisclosures;
+    toJSON(message: AlpacaDisclosures): unknown;
+    create<I extends {
+        RecordedAt?: Date | undefined;
+        IsControlPerson?: boolean | undefined;
+        IsAffiliatedExchangeOrFinra?: boolean | undefined;
+        IsPoliticallyExposed?: boolean | undefined;
+        ImmediateFamilyExposed?: boolean | undefined;
+    } & {
+        RecordedAt?: Date | undefined;
+        IsControlPerson?: boolean | undefined;
+        IsAffiliatedExchangeOrFinra?: boolean | undefined;
+        IsPoliticallyExposed?: boolean | undefined;
+        ImmediateFamilyExposed?: boolean | undefined;
+    } & { [K in Exclude<keyof I, keyof AlpacaDisclosures>]: never; }>(base?: I | undefined): AlpacaDisclosures;
+    fromPartial<I_1 extends {
+        RecordedAt?: Date | undefined;
+        IsControlPerson?: boolean | undefined;
+        IsAffiliatedExchangeOrFinra?: boolean | undefined;
+        IsPoliticallyExposed?: boolean | undefined;
+        ImmediateFamilyExposed?: boolean | undefined;
+    } & {
+        RecordedAt?: Date | undefined;
+        IsControlPerson?: boolean | undefined;
+        IsAffiliatedExchangeOrFinra?: boolean | undefined;
+        IsPoliticallyExposed?: boolean | undefined;
+        ImmediateFamilyExposed?: boolean | undefined;
+    } & { [K_1 in Exclude<keyof I_1, keyof AlpacaDisclosures>]: never; }>(object: I_1): AlpacaDisclosures;
 };
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 export type DeepPartial<T> = T extends Builtin ? T : T extends globalThis.Array<infer U> ? globalThis.Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? {
