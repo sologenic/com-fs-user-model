@@ -164,6 +164,69 @@ export function investmentObjectiveToJSON(object: InvestmentObjective): string {
   }
 }
 
+export enum FundingSource {
+  NOT_USED_FUNDING_SOURCE = 0,
+  EMPLOYMENT_INCOME = 1,
+  INVESTMENTS = 2,
+  INHERITANCE = 3,
+  BUSINESS_INCOME = 4,
+  SAVINGS = 5,
+  FAMILY = 6,
+  UNRECOGNIZED = -1,
+}
+
+export function fundingSourceFromJSON(object: any): FundingSource {
+  switch (object) {
+    case 0:
+    case "NOT_USED_FUNDING_SOURCE":
+      return FundingSource.NOT_USED_FUNDING_SOURCE;
+    case 1:
+    case "EMPLOYMENT_INCOME":
+      return FundingSource.EMPLOYMENT_INCOME;
+    case 2:
+    case "INVESTMENTS":
+      return FundingSource.INVESTMENTS;
+    case 3:
+    case "INHERITANCE":
+      return FundingSource.INHERITANCE;
+    case 4:
+    case "BUSINESS_INCOME":
+      return FundingSource.BUSINESS_INCOME;
+    case 5:
+    case "SAVINGS":
+      return FundingSource.SAVINGS;
+    case 6:
+    case "FAMILY":
+      return FundingSource.FAMILY;
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return FundingSource.UNRECOGNIZED;
+  }
+}
+
+export function fundingSourceToJSON(object: FundingSource): string {
+  switch (object) {
+    case FundingSource.NOT_USED_FUNDING_SOURCE:
+      return "NOT_USED_FUNDING_SOURCE";
+    case FundingSource.EMPLOYMENT_INCOME:
+      return "EMPLOYMENT_INCOME";
+    case FundingSource.INVESTMENTS:
+      return "INVESTMENTS";
+    case FundingSource.INHERITANCE:
+      return "INHERITANCE";
+    case FundingSource.BUSINESS_INCOME:
+      return "BUSINESS_INCOME";
+    case FundingSource.SAVINGS:
+      return "SAVINGS";
+    case FundingSource.FAMILY:
+      return "FAMILY";
+    case FundingSource.UNRECOGNIZED:
+    default:
+      return "UNRECOGNIZED";
+  }
+}
+
 /** This model is open to having multiple questionaires with regards to compliance like MiFID, etc. */
 export interface ComplianceQuestions {
   USA?: USA | undefined;
@@ -186,6 +249,7 @@ export interface AlpacaDisclosures {
   IsAffiliatedExchangeOrFinra: boolean;
   IsPoliticallyExposed: boolean;
   ImmediateFamilyExposed: boolean;
+  FundingSources: FundingSource[];
 }
 
 function createBaseComplianceQuestions(): ComplianceQuestions {
@@ -432,6 +496,7 @@ function createBaseAlpacaDisclosures(): AlpacaDisclosures {
     IsAffiliatedExchangeOrFinra: false,
     IsPoliticallyExposed: false,
     ImmediateFamilyExposed: false,
+    FundingSources: [],
   };
 }
 
@@ -452,6 +517,11 @@ export const AlpacaDisclosures = {
     if (message.ImmediateFamilyExposed !== false) {
       writer.uint32(40).bool(message.ImmediateFamilyExposed);
     }
+    writer.uint32(50).fork();
+    for (const v of message.FundingSources) {
+      writer.int32(v);
+    }
+    writer.ldelim();
     return writer;
   },
 
@@ -497,6 +567,23 @@ export const AlpacaDisclosures = {
 
           message.ImmediateFamilyExposed = reader.bool();
           continue;
+        case 6:
+          if (tag === 48) {
+            message.FundingSources.push(reader.int32() as any);
+
+            continue;
+          }
+
+          if (tag === 50) {
+            const end2 = reader.uint32() + reader.pos;
+            while (reader.pos < end2) {
+              message.FundingSources.push(reader.int32() as any);
+            }
+
+            continue;
+          }
+
+          break;
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -519,6 +606,9 @@ export const AlpacaDisclosures = {
       ImmediateFamilyExposed: isSet(object.ImmediateFamilyExposed)
         ? globalThis.Boolean(object.ImmediateFamilyExposed)
         : false,
+      FundingSources: globalThis.Array.isArray(object?.FundingSources)
+        ? object.FundingSources.map((e: any) => fundingSourceFromJSON(e))
+        : [],
     };
   },
 
@@ -539,6 +629,9 @@ export const AlpacaDisclosures = {
     if (message.ImmediateFamilyExposed !== false) {
       obj.ImmediateFamilyExposed = message.ImmediateFamilyExposed;
     }
+    if (message.FundingSources?.length) {
+      obj.FundingSources = message.FundingSources.map((e) => fundingSourceToJSON(e));
+    }
     return obj;
   },
 
@@ -552,6 +645,7 @@ export const AlpacaDisclosures = {
     message.IsAffiliatedExchangeOrFinra = object.IsAffiliatedExchangeOrFinra ?? false;
     message.IsPoliticallyExposed = object.IsPoliticallyExposed ?? false;
     message.ImmediateFamilyExposed = object.ImmediateFamilyExposed ?? false;
+    message.FundingSources = object.FundingSources?.map((e) => e) || [];
     return message;
   },
 };

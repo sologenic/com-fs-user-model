@@ -155,6 +155,67 @@ export function investmentObjectiveToJSON(object) {
             return "UNRECOGNIZED";
     }
 }
+export var FundingSource;
+(function (FundingSource) {
+    FundingSource[FundingSource["NOT_USED_FUNDING_SOURCE"] = 0] = "NOT_USED_FUNDING_SOURCE";
+    FundingSource[FundingSource["EMPLOYMENT_INCOME"] = 1] = "EMPLOYMENT_INCOME";
+    FundingSource[FundingSource["INVESTMENTS"] = 2] = "INVESTMENTS";
+    FundingSource[FundingSource["INHERITANCE"] = 3] = "INHERITANCE";
+    FundingSource[FundingSource["BUSINESS_INCOME"] = 4] = "BUSINESS_INCOME";
+    FundingSource[FundingSource["SAVINGS"] = 5] = "SAVINGS";
+    FundingSource[FundingSource["FAMILY"] = 6] = "FAMILY";
+    FundingSource[FundingSource["UNRECOGNIZED"] = -1] = "UNRECOGNIZED";
+})(FundingSource || (FundingSource = {}));
+export function fundingSourceFromJSON(object) {
+    switch (object) {
+        case 0:
+        case "NOT_USED_FUNDING_SOURCE":
+            return FundingSource.NOT_USED_FUNDING_SOURCE;
+        case 1:
+        case "EMPLOYMENT_INCOME":
+            return FundingSource.EMPLOYMENT_INCOME;
+        case 2:
+        case "INVESTMENTS":
+            return FundingSource.INVESTMENTS;
+        case 3:
+        case "INHERITANCE":
+            return FundingSource.INHERITANCE;
+        case 4:
+        case "BUSINESS_INCOME":
+            return FundingSource.BUSINESS_INCOME;
+        case 5:
+        case "SAVINGS":
+            return FundingSource.SAVINGS;
+        case 6:
+        case "FAMILY":
+            return FundingSource.FAMILY;
+        case -1:
+        case "UNRECOGNIZED":
+        default:
+            return FundingSource.UNRECOGNIZED;
+    }
+}
+export function fundingSourceToJSON(object) {
+    switch (object) {
+        case FundingSource.NOT_USED_FUNDING_SOURCE:
+            return "NOT_USED_FUNDING_SOURCE";
+        case FundingSource.EMPLOYMENT_INCOME:
+            return "EMPLOYMENT_INCOME";
+        case FundingSource.INVESTMENTS:
+            return "INVESTMENTS";
+        case FundingSource.INHERITANCE:
+            return "INHERITANCE";
+        case FundingSource.BUSINESS_INCOME:
+            return "BUSINESS_INCOME";
+        case FundingSource.SAVINGS:
+            return "SAVINGS";
+        case FundingSource.FAMILY:
+            return "FAMILY";
+        case FundingSource.UNRECOGNIZED:
+        default:
+            return "UNRECOGNIZED";
+    }
+}
 function createBaseComplianceQuestions() {
     return { USA: undefined, AlpacaDisclosures: undefined };
 }
@@ -379,6 +440,7 @@ function createBaseAlpacaDisclosures() {
         IsAffiliatedExchangeOrFinra: false,
         IsPoliticallyExposed: false,
         ImmediateFamilyExposed: false,
+        FundingSources: [],
     };
 }
 export const AlpacaDisclosures = {
@@ -398,6 +460,11 @@ export const AlpacaDisclosures = {
         if (message.ImmediateFamilyExposed !== false) {
             writer.uint32(40).bool(message.ImmediateFamilyExposed);
         }
+        writer.uint32(50).fork();
+        for (const v of message.FundingSources) {
+            writer.int32(v);
+        }
+        writer.ldelim();
         return writer;
     },
     decode(input, length) {
@@ -437,6 +504,19 @@ export const AlpacaDisclosures = {
                     }
                     message.ImmediateFamilyExposed = reader.bool();
                     continue;
+                case 6:
+                    if (tag === 48) {
+                        message.FundingSources.push(reader.int32());
+                        continue;
+                    }
+                    if (tag === 50) {
+                        const end2 = reader.uint32() + reader.pos;
+                        while (reader.pos < end2) {
+                            message.FundingSources.push(reader.int32());
+                        }
+                        continue;
+                    }
+                    break;
             }
             if ((tag & 7) === 4 || tag === 0) {
                 break;
@@ -458,9 +538,13 @@ export const AlpacaDisclosures = {
             ImmediateFamilyExposed: isSet(object.ImmediateFamilyExposed)
                 ? globalThis.Boolean(object.ImmediateFamilyExposed)
                 : false,
+            FundingSources: globalThis.Array.isArray(object === null || object === void 0 ? void 0 : object.FundingSources)
+                ? object.FundingSources.map((e) => fundingSourceFromJSON(e))
+                : [],
         };
     },
     toJSON(message) {
+        var _a;
         const obj = {};
         if (message.RecordedAt !== undefined) {
             obj.RecordedAt = message.RecordedAt.toISOString();
@@ -477,19 +561,23 @@ export const AlpacaDisclosures = {
         if (message.ImmediateFamilyExposed !== false) {
             obj.ImmediateFamilyExposed = message.ImmediateFamilyExposed;
         }
+        if ((_a = message.FundingSources) === null || _a === void 0 ? void 0 : _a.length) {
+            obj.FundingSources = message.FundingSources.map((e) => fundingSourceToJSON(e));
+        }
         return obj;
     },
     create(base) {
         return AlpacaDisclosures.fromPartial(base !== null && base !== void 0 ? base : {});
     },
     fromPartial(object) {
-        var _a, _b, _c, _d, _e;
+        var _a, _b, _c, _d, _e, _f;
         const message = createBaseAlpacaDisclosures();
         message.RecordedAt = (_a = object.RecordedAt) !== null && _a !== void 0 ? _a : undefined;
         message.IsControlPerson = (_b = object.IsControlPerson) !== null && _b !== void 0 ? _b : false;
         message.IsAffiliatedExchangeOrFinra = (_c = object.IsAffiliatedExchangeOrFinra) !== null && _c !== void 0 ? _c : false;
         message.IsPoliticallyExposed = (_d = object.IsPoliticallyExposed) !== null && _d !== void 0 ? _d : false;
         message.ImmediateFamilyExposed = (_e = object.ImmediateFamilyExposed) !== null && _e !== void 0 ? _e : false;
+        message.FundingSources = ((_f = object.FundingSources) === null || _f === void 0 ? void 0 : _f.map((e) => e)) || [];
         return message;
     },
 };
