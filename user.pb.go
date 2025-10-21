@@ -7,9 +7,6 @@
 package user
 
 import (
-	reflect "reflect"
-	sync "sync"
-
 	com_fs_document_model "github.com/sologenic/com-fs-document-model"
 	com_fs_trade_profile_model "github.com/sologenic/com-fs-trade-profile-model"
 	audit "github.com/sologenic/com-fs-utils-lib/models/audit"
@@ -19,6 +16,8 @@ import (
 	role "github.com/sologenic/com-fs-utils-lib/models/role"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
+	reflect "reflect"
+	sync "sync"
 )
 
 const (
@@ -201,10 +200,6 @@ type UserDetails struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	state         protoimpl.MessageState
-	sizeCache     protoimpl.SizeCache
-	unknownFields protoimpl.UnknownFields
-
 	UserID                 string                                          `protobuf:"bytes,1,opt,name=UserID,proto3" json:"UserID,omitempty"` // email address used for firebase authentication
 	FirstName              string                                          `protobuf:"bytes,2,opt,name=FirstName,proto3" json:"FirstName,omitempty"`
 	LastName               string                                          `protobuf:"bytes,3,opt,name=LastName,proto3" json:"LastName,omitempty"`
@@ -232,15 +227,11 @@ type UserDetails struct {
 	UISettings             *UISettings                                     `protobuf:"bytes,25,opt,name=UISettings,proto3" json:"UISettings,omitempty"`
 	CommissionSettings     *commission.CommissionSettings                  `protobuf:"bytes,26,opt,name=CommissionSettings,proto3,oneof" json:"CommissionSettings,omitempty"` // Broker API specific commission fields for user level (overrrides organization level)
 	DataFeedAccounts       *DataFeedAccounts                               `protobuf:"bytes,27,opt,name=DataFeedAccounts,proto3,oneof" json:"DataFeedAccounts,omitempty"`
+	AllowedJurisdictions   []string                                        `protobuf:"bytes,28,rep,name=AllowedJurisdictions,proto3" json:"AllowedJurisdictions,omitempty"` // ISO 3166-1 alpha-3 code e.g. "USA", "CAD"
 }
 
 func (x *UserDetails) Reset() {
 	*x = UserDetails{}
-	if protoimpl.UnsafeEnabled {
-		mi := &file_user_proto_msgTypes[0]
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		ms.StoreMessageInfo(mi)
-	}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_user_proto_msgTypes[0]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
