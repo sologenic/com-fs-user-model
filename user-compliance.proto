@@ -9,6 +9,7 @@ import "google/protobuf/timestamp.proto";
 // This model is open to having multiple questionaires with regards to compliance like MiFID, etc.
 message ComplianceQuestions {
   optional USA USA = 1;
+  optional AlpacaDisclosures AlpacaDisclosures = 2;
 }
 
 message USA {
@@ -19,6 +20,15 @@ message USA {
   LiquidationImportance ConversionImportance = 5;
   RiskTolerance Tolerance = 6;
   InvestmentObjective Objective = 7;
+}
+
+message AlpacaDisclosures {
+  google.protobuf.Timestamp RecordedAt = 1;
+  bool IsControlPerson = 2;
+  bool IsAffiliatedExchangeOrFinra = 3;
+  bool IsPoliticallyExposed = 4;
+  bool ImmediateFamilyExposed = 5;
+  repeated FundingSource FundingSources = 6;
 }
 
 enum LiquidationImportance {
@@ -43,4 +53,14 @@ enum InvestmentObjective {
   SAFE_LONG_TERM_GROWTH = 3;
   GREATER_RISK_LONG_TERM_GROWTH = 4;
   SPECULATION = 5;
+}
+
+enum FundingSource {
+  NOT_USED_FUNDING_SOURCE = 0;
+  EMPLOYMENT_INCOME = 1;
+  INVESTMENTS = 2;
+  INHERITANCE = 3;
+  BUSINESS_INCOME = 4;
+  SAVINGS = 5;
+  FAMILY = 6;
 }
