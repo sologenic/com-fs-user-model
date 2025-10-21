@@ -43,6 +43,7 @@ message UserDetails {
     UISettings UISettings = 25;
     optional commission.CommissionSettings CommissionSettings = 26; // Broker API specific commission fields for user level (overrrides organization level)
     optional DataFeedAccounts DataFeedAccounts = 27;
+    repeated string AllowedJurisdictions = 28; // ISO 3166-1 alpha-3 code e.g. "USA", "CAD"
 }
 
 message User {
