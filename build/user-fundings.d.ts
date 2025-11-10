@@ -25,6 +25,8 @@ export interface Wallet {
     Alias: string;
     Type: WalletType;
     SignerType: SignerType;
+    /** List of organizations linked to this wallet address */
+    Organizations: string[];
 }
 export interface BankAccount {
     AccountName: string;
@@ -59,23 +61,27 @@ export declare const Wallet: {
         Alias?: string | undefined;
         Type?: WalletType | undefined;
         SignerType?: SignerType | undefined;
+        Organizations?: string[] | undefined;
     } & {
         Address?: string | undefined;
         Alias?: string | undefined;
         Type?: WalletType | undefined;
         SignerType?: SignerType | undefined;
-    } & { [K in Exclude<keyof I, keyof Wallet>]: never; }>(base?: I | undefined): Wallet;
+        Organizations?: (string[] & string[] & { [K in Exclude<keyof I["Organizations"], keyof string[]>]: never; }) | undefined;
+    } & { [K_1 in Exclude<keyof I, keyof Wallet>]: never; }>(base?: I | undefined): Wallet;
     fromPartial<I_1 extends {
         Address?: string | undefined;
         Alias?: string | undefined;
         Type?: WalletType | undefined;
         SignerType?: SignerType | undefined;
+        Organizations?: string[] | undefined;
     } & {
         Address?: string | undefined;
         Alias?: string | undefined;
         Type?: WalletType | undefined;
         SignerType?: SignerType | undefined;
-    } & { [K_1 in Exclude<keyof I_1, keyof Wallet>]: never; }>(object: I_1): Wallet;
+        Organizations?: (string[] & string[] & { [K_2 in Exclude<keyof I_1["Organizations"], keyof string[]>]: never; }) | undefined;
+    } & { [K_3 in Exclude<keyof I_1, keyof Wallet>]: never; }>(object: I_1): Wallet;
 };
 export declare const BankAccount: {
     encode(message: BankAccount, writer?: _m0.Writer): _m0.Writer;
