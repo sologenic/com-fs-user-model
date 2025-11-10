@@ -17,6 +17,7 @@ message Filter {
     optional UserStatus Status = 7;
     repeated string ExternalUserIDs = 8;
     optional string WalletAddress = 9;
+    optional string BrokerAccountID = 10;
 }
 
 message UserID {
