@@ -220,6 +220,45 @@ export function processStateToJSON(object: ProcessState): string {
   }
 }
 
+export enum ClearingBroker {
+  NOT_USED_CLEARING_BROKER = 0,
+  ALPACA = 1,
+  RQD = 2,
+  UNRECOGNIZED = -1,
+}
+
+export function clearingBrokerFromJSON(object: any): ClearingBroker {
+  switch (object) {
+    case 0:
+    case "NOT_USED_CLEARING_BROKER":
+      return ClearingBroker.NOT_USED_CLEARING_BROKER;
+    case 1:
+    case "ALPACA":
+      return ClearingBroker.ALPACA;
+    case 2:
+    case "RQD":
+      return ClearingBroker.RQD;
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return ClearingBroker.UNRECOGNIZED;
+  }
+}
+
+export function clearingBrokerToJSON(object: ClearingBroker): string {
+  switch (object) {
+    case ClearingBroker.NOT_USED_CLEARING_BROKER:
+      return "NOT_USED_CLEARING_BROKER";
+    case ClearingBroker.ALPACA:
+      return "ALPACA";
+    case ClearingBroker.RQD:
+      return "RQD";
+    case ClearingBroker.UNRECOGNIZED:
+    default:
+      return "UNRECOGNIZED";
+  }
+}
+
 export interface ProcessInfo {
   ProcessState: ProcessState;
   ProcessedAt: Date | undefined;

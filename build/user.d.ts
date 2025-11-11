@@ -238,7 +238,7 @@ export declare const UserDetails: {
         }[] | undefined;
         BrokerAccounts?: {
             AccountID?: string | undefined;
-            Broker?: import("./sologenic/com-fs-order-model/broker").ClearingBroker | undefined;
+            Broker?: import("./sologenic/com-fs-utils-lib/models/order-properties/order-properties").ClearingBroker | undefined;
             OrganizationID?: string | undefined;
             Profiles?: string[] | undefined;
         }[] | undefined;
@@ -589,22 +589,22 @@ export declare const UserDetails: {
         }[]>]: never; }) | undefined;
         BrokerAccounts?: ({
             AccountID?: string | undefined;
-            Broker?: import("./sologenic/com-fs-order-model/broker").ClearingBroker | undefined;
+            Broker?: import("./sologenic/com-fs-utils-lib/models/order-properties/order-properties").ClearingBroker | undefined;
             OrganizationID?: string | undefined;
             Profiles?: string[] | undefined;
         }[] & ({
             AccountID?: string | undefined;
-            Broker?: import("./sologenic/com-fs-order-model/broker").ClearingBroker | undefined;
+            Broker?: import("./sologenic/com-fs-utils-lib/models/order-properties/order-properties").ClearingBroker | undefined;
             OrganizationID?: string | undefined;
             Profiles?: string[] | undefined;
         } & {
             AccountID?: string | undefined;
-            Broker?: import("./sologenic/com-fs-order-model/broker").ClearingBroker | undefined;
+            Broker?: import("./sologenic/com-fs-utils-lib/models/order-properties/order-properties").ClearingBroker | undefined;
             OrganizationID?: string | undefined;
             Profiles?: (string[] & string[] & { [K_23 in Exclude<keyof I["BrokerAccounts"][number]["Profiles"], keyof string[]>]: never; }) | undefined;
         } & { [K_24 in Exclude<keyof I["BrokerAccounts"][number], keyof BrokerAccount>]: never; })[] & { [K_25 in Exclude<keyof I["BrokerAccounts"], keyof {
             AccountID?: string | undefined;
-            Broker?: import("./sologenic/com-fs-order-model/broker").ClearingBroker | undefined;
+            Broker?: import("./sologenic/com-fs-utils-lib/models/order-properties/order-properties").ClearingBroker | undefined;
             OrganizationID?: string | undefined;
             Profiles?: string[] | undefined;
         }[]>]: never; }) | undefined;
@@ -796,7 +796,7 @@ export declare const UserDetails: {
         }[] | undefined;
         BrokerAccounts?: {
             AccountID?: string | undefined;
-            Broker?: import("./sologenic/com-fs-order-model/broker").ClearingBroker | undefined;
+            Broker?: import("./sologenic/com-fs-utils-lib/models/order-properties/order-properties").ClearingBroker | undefined;
             OrganizationID?: string | undefined;
             Profiles?: string[] | undefined;
         }[] | undefined;
@@ -1147,22 +1147,22 @@ export declare const UserDetails: {
         }[]>]: never; }) | undefined;
         BrokerAccounts?: ({
             AccountID?: string | undefined;
-            Broker?: import("./sologenic/com-fs-order-model/broker").ClearingBroker | undefined;
+            Broker?: import("./sologenic/com-fs-utils-lib/models/order-properties/order-properties").ClearingBroker | undefined;
             OrganizationID?: string | undefined;
             Profiles?: string[] | undefined;
         }[] & ({
             AccountID?: string | undefined;
-            Broker?: import("./sologenic/com-fs-order-model/broker").ClearingBroker | undefined;
+            Broker?: import("./sologenic/com-fs-utils-lib/models/order-properties/order-properties").ClearingBroker | undefined;
             OrganizationID?: string | undefined;
             Profiles?: string[] | undefined;
         } & {
             AccountID?: string | undefined;
-            Broker?: import("./sologenic/com-fs-order-model/broker").ClearingBroker | undefined;
+            Broker?: import("./sologenic/com-fs-utils-lib/models/order-properties/order-properties").ClearingBroker | undefined;
             OrganizationID?: string | undefined;
             Profiles?: (string[] & string[] & { [K_58 in Exclude<keyof I_1["BrokerAccounts"][number]["Profiles"], keyof string[]>]: never; }) | undefined;
         } & { [K_59 in Exclude<keyof I_1["BrokerAccounts"][number], keyof BrokerAccount>]: never; })[] & { [K_60 in Exclude<keyof I_1["BrokerAccounts"], keyof {
             AccountID?: string | undefined;
-            Broker?: import("./sologenic/com-fs-order-model/broker").ClearingBroker | undefined;
+            Broker?: import("./sologenic/com-fs-utils-lib/models/order-properties/order-properties").ClearingBroker | undefined;
             OrganizationID?: string | undefined;
             Profiles?: string[] | undefined;
         }[]>]: never; }) | undefined;
@@ -1361,7 +1361,7 @@ export declare const User: {
             }[] | undefined;
             BrokerAccounts?: {
                 AccountID?: string | undefined;
-                Broker?: import("./sologenic/com-fs-order-model/broker").ClearingBroker | undefined;
+                Broker?: import("./sologenic/com-fs-utils-lib/models/order-properties/order-properties").ClearingBroker | undefined;
                 OrganizationID?: string | undefined;
                 Profiles?: string[] | undefined;
             }[] | undefined;
@@ -1525,7 +1525,7 @@ export declare const User: {
             }[] | undefined;
             BrokerAccounts?: {
                 AccountID?: string | undefined;
-                Broker?: import("./sologenic/com-fs-order-model/broker").ClearingBroker | undefined;
+                Broker?: import("./sologenic/com-fs-utils-lib/models/order-properties/order-properties").ClearingBroker | undefined;
                 OrganizationID?: string | undefined;
                 Profiles?: string[] | undefined;
             }[] | undefined;
@@ -1876,22 +1876,22 @@ export declare const User: {
             }[]>]: never; }) | undefined;
             BrokerAccounts?: ({
                 AccountID?: string | undefined;
-                Broker?: import("./sologenic/com-fs-order-model/broker").ClearingBroker | undefined;
+                Broker?: import("./sologenic/com-fs-utils-lib/models/order-properties/order-properties").ClearingBroker | undefined;
                 OrganizationID?: string | undefined;
                 Profiles?: string[] | undefined;
             }[] & ({
                 AccountID?: string | undefined;
-                Broker?: import("./sologenic/com-fs-order-model/broker").ClearingBroker | undefined;
+                Broker?: import("./sologenic/com-fs-utils-lib/models/order-properties/order-properties").ClearingBroker | undefined;
                 OrganizationID?: string | undefined;
                 Profiles?: string[] | undefined;
             } & {
                 AccountID?: string | undefined;
-                Broker?: import("./sologenic/com-fs-order-model/broker").ClearingBroker | undefined;
+                Broker?: import("./sologenic/com-fs-utils-lib/models/order-properties/order-properties").ClearingBroker | undefined;
                 OrganizationID?: string | undefined;
                 Profiles?: (string[] & string[] & { [K_23 in Exclude<keyof I["User"]["BrokerAccounts"][number]["Profiles"], keyof string[]>]: never; }) | undefined;
             } & { [K_24 in Exclude<keyof I["User"]["BrokerAccounts"][number], keyof BrokerAccount>]: never; })[] & { [K_25 in Exclude<keyof I["User"]["BrokerAccounts"], keyof {
                 AccountID?: string | undefined;
-                Broker?: import("./sologenic/com-fs-order-model/broker").ClearingBroker | undefined;
+                Broker?: import("./sologenic/com-fs-utils-lib/models/order-properties/order-properties").ClearingBroker | undefined;
                 OrganizationID?: string | undefined;
                 Profiles?: string[] | undefined;
             }[]>]: never; }) | undefined;
@@ -2106,7 +2106,7 @@ export declare const User: {
             }[] | undefined;
             BrokerAccounts?: {
                 AccountID?: string | undefined;
-                Broker?: import("./sologenic/com-fs-order-model/broker").ClearingBroker | undefined;
+                Broker?: import("./sologenic/com-fs-utils-lib/models/order-properties/order-properties").ClearingBroker | undefined;
                 OrganizationID?: string | undefined;
                 Profiles?: string[] | undefined;
             }[] | undefined;
@@ -2270,7 +2270,7 @@ export declare const User: {
             }[] | undefined;
             BrokerAccounts?: {
                 AccountID?: string | undefined;
-                Broker?: import("./sologenic/com-fs-order-model/broker").ClearingBroker | undefined;
+                Broker?: import("./sologenic/com-fs-utils-lib/models/order-properties/order-properties").ClearingBroker | undefined;
                 OrganizationID?: string | undefined;
                 Profiles?: string[] | undefined;
             }[] | undefined;
@@ -2621,22 +2621,22 @@ export declare const User: {
             }[]>]: never; }) | undefined;
             BrokerAccounts?: ({
                 AccountID?: string | undefined;
-                Broker?: import("./sologenic/com-fs-order-model/broker").ClearingBroker | undefined;
+                Broker?: import("./sologenic/com-fs-utils-lib/models/order-properties/order-properties").ClearingBroker | undefined;
                 OrganizationID?: string | undefined;
                 Profiles?: string[] | undefined;
             }[] & ({
                 AccountID?: string | undefined;
-                Broker?: import("./sologenic/com-fs-order-model/broker").ClearingBroker | undefined;
+                Broker?: import("./sologenic/com-fs-utils-lib/models/order-properties/order-properties").ClearingBroker | undefined;
                 OrganizationID?: string | undefined;
                 Profiles?: string[] | undefined;
             } & {
                 AccountID?: string | undefined;
-                Broker?: import("./sologenic/com-fs-order-model/broker").ClearingBroker | undefined;
+                Broker?: import("./sologenic/com-fs-utils-lib/models/order-properties/order-properties").ClearingBroker | undefined;
                 OrganizationID?: string | undefined;
                 Profiles?: (string[] & string[] & { [K_62 in Exclude<keyof I_1["User"]["BrokerAccounts"][number]["Profiles"], keyof string[]>]: never; }) | undefined;
             } & { [K_63 in Exclude<keyof I_1["User"]["BrokerAccounts"][number], keyof BrokerAccount>]: never; })[] & { [K_64 in Exclude<keyof I_1["User"]["BrokerAccounts"], keyof {
                 AccountID?: string | undefined;
-                Broker?: import("./sologenic/com-fs-order-model/broker").ClearingBroker | undefined;
+                Broker?: import("./sologenic/com-fs-utils-lib/models/order-properties/order-properties").ClearingBroker | undefined;
                 OrganizationID?: string | undefined;
                 Profiles?: string[] | undefined;
             }[]>]: never; }) | undefined;
@@ -2878,7 +2878,7 @@ export declare const UserList: {
                 }[] | undefined;
                 BrokerAccounts?: {
                     AccountID?: string | undefined;
-                    Broker?: import("./sologenic/com-fs-order-model/broker").ClearingBroker | undefined;
+                    Broker?: import("./sologenic/com-fs-utils-lib/models/order-properties/order-properties").ClearingBroker | undefined;
                     OrganizationID?: string | undefined;
                     Profiles?: string[] | undefined;
                 }[] | undefined;
@@ -3045,7 +3045,7 @@ export declare const UserList: {
                 }[] | undefined;
                 BrokerAccounts?: {
                     AccountID?: string | undefined;
-                    Broker?: import("./sologenic/com-fs-order-model/broker").ClearingBroker | undefined;
+                    Broker?: import("./sologenic/com-fs-utils-lib/models/order-properties/order-properties").ClearingBroker | undefined;
                     OrganizationID?: string | undefined;
                     Profiles?: string[] | undefined;
                 }[] | undefined;
@@ -3209,7 +3209,7 @@ export declare const UserList: {
                 }[] | undefined;
                 BrokerAccounts?: {
                     AccountID?: string | undefined;
-                    Broker?: import("./sologenic/com-fs-order-model/broker").ClearingBroker | undefined;
+                    Broker?: import("./sologenic/com-fs-utils-lib/models/order-properties/order-properties").ClearingBroker | undefined;
                     OrganizationID?: string | undefined;
                     Profiles?: string[] | undefined;
                 }[] | undefined;
@@ -3373,7 +3373,7 @@ export declare const UserList: {
                 }[] | undefined;
                 BrokerAccounts?: {
                     AccountID?: string | undefined;
-                    Broker?: import("./sologenic/com-fs-order-model/broker").ClearingBroker | undefined;
+                    Broker?: import("./sologenic/com-fs-utils-lib/models/order-properties/order-properties").ClearingBroker | undefined;
                     OrganizationID?: string | undefined;
                     Profiles?: string[] | undefined;
                 }[] | undefined;
@@ -3724,22 +3724,22 @@ export declare const UserList: {
                 }[]>]: never; }) | undefined;
                 BrokerAccounts?: ({
                     AccountID?: string | undefined;
-                    Broker?: import("./sologenic/com-fs-order-model/broker").ClearingBroker | undefined;
+                    Broker?: import("./sologenic/com-fs-utils-lib/models/order-properties/order-properties").ClearingBroker | undefined;
                     OrganizationID?: string | undefined;
                     Profiles?: string[] | undefined;
                 }[] & ({
                     AccountID?: string | undefined;
-                    Broker?: import("./sologenic/com-fs-order-model/broker").ClearingBroker | undefined;
+                    Broker?: import("./sologenic/com-fs-utils-lib/models/order-properties/order-properties").ClearingBroker | undefined;
                     OrganizationID?: string | undefined;
                     Profiles?: string[] | undefined;
                 } & {
                     AccountID?: string | undefined;
-                    Broker?: import("./sologenic/com-fs-order-model/broker").ClearingBroker | undefined;
+                    Broker?: import("./sologenic/com-fs-utils-lib/models/order-properties/order-properties").ClearingBroker | undefined;
                     OrganizationID?: string | undefined;
                     Profiles?: (string[] & string[] & { [K_23 in Exclude<keyof I["Users"][number]["User"]["BrokerAccounts"][number]["Profiles"], keyof string[]>]: never; }) | undefined;
                 } & { [K_24 in Exclude<keyof I["Users"][number]["User"]["BrokerAccounts"][number], keyof BrokerAccount>]: never; })[] & { [K_25 in Exclude<keyof I["Users"][number]["User"]["BrokerAccounts"], keyof {
                     AccountID?: string | undefined;
-                    Broker?: import("./sologenic/com-fs-order-model/broker").ClearingBroker | undefined;
+                    Broker?: import("./sologenic/com-fs-utils-lib/models/order-properties/order-properties").ClearingBroker | undefined;
                     OrganizationID?: string | undefined;
                     Profiles?: string[] | undefined;
                 }[]>]: never; }) | undefined;
@@ -3953,7 +3953,7 @@ export declare const UserList: {
                 }[] | undefined;
                 BrokerAccounts?: {
                     AccountID?: string | undefined;
-                    Broker?: import("./sologenic/com-fs-order-model/broker").ClearingBroker | undefined;
+                    Broker?: import("./sologenic/com-fs-utils-lib/models/order-properties/order-properties").ClearingBroker | undefined;
                     OrganizationID?: string | undefined;
                     Profiles?: string[] | undefined;
                 }[] | undefined;
@@ -4121,7 +4121,7 @@ export declare const UserList: {
                 }[] | undefined;
                 BrokerAccounts?: {
                     AccountID?: string | undefined;
-                    Broker?: import("./sologenic/com-fs-order-model/broker").ClearingBroker | undefined;
+                    Broker?: import("./sologenic/com-fs-utils-lib/models/order-properties/order-properties").ClearingBroker | undefined;
                     OrganizationID?: string | undefined;
                     Profiles?: string[] | undefined;
                 }[] | undefined;
@@ -4288,7 +4288,7 @@ export declare const UserList: {
                 }[] | undefined;
                 BrokerAccounts?: {
                     AccountID?: string | undefined;
-                    Broker?: import("./sologenic/com-fs-order-model/broker").ClearingBroker | undefined;
+                    Broker?: import("./sologenic/com-fs-utils-lib/models/order-properties/order-properties").ClearingBroker | undefined;
                     OrganizationID?: string | undefined;
                     Profiles?: string[] | undefined;
                 }[] | undefined;
@@ -4452,7 +4452,7 @@ export declare const UserList: {
                 }[] | undefined;
                 BrokerAccounts?: {
                     AccountID?: string | undefined;
-                    Broker?: import("./sologenic/com-fs-order-model/broker").ClearingBroker | undefined;
+                    Broker?: import("./sologenic/com-fs-utils-lib/models/order-properties/order-properties").ClearingBroker | undefined;
                     OrganizationID?: string | undefined;
                     Profiles?: string[] | undefined;
                 }[] | undefined;
@@ -4616,7 +4616,7 @@ export declare const UserList: {
                 }[] | undefined;
                 BrokerAccounts?: {
                     AccountID?: string | undefined;
-                    Broker?: import("./sologenic/com-fs-order-model/broker").ClearingBroker | undefined;
+                    Broker?: import("./sologenic/com-fs-utils-lib/models/order-properties/order-properties").ClearingBroker | undefined;
                     OrganizationID?: string | undefined;
                     Profiles?: string[] | undefined;
                 }[] | undefined;
@@ -4967,22 +4967,22 @@ export declare const UserList: {
                 }[]>]: never; }) | undefined;
                 BrokerAccounts?: ({
                     AccountID?: string | undefined;
-                    Broker?: import("./sologenic/com-fs-order-model/broker").ClearingBroker | undefined;
+                    Broker?: import("./sologenic/com-fs-utils-lib/models/order-properties/order-properties").ClearingBroker | undefined;
                     OrganizationID?: string | undefined;
                     Profiles?: string[] | undefined;
                 }[] & ({
                     AccountID?: string | undefined;
-                    Broker?: import("./sologenic/com-fs-order-model/broker").ClearingBroker | undefined;
+                    Broker?: import("./sologenic/com-fs-utils-lib/models/order-properties/order-properties").ClearingBroker | undefined;
                     OrganizationID?: string | undefined;
                     Profiles?: string[] | undefined;
                 } & {
                     AccountID?: string | undefined;
-                    Broker?: import("./sologenic/com-fs-order-model/broker").ClearingBroker | undefined;
+                    Broker?: import("./sologenic/com-fs-utils-lib/models/order-properties/order-properties").ClearingBroker | undefined;
                     OrganizationID?: string | undefined;
                     Profiles?: (string[] & string[] & { [K_64 in Exclude<keyof I_1["Users"][number]["User"]["BrokerAccounts"][number]["Profiles"], keyof string[]>]: never; }) | undefined;
                 } & { [K_65 in Exclude<keyof I_1["Users"][number]["User"]["BrokerAccounts"][number], keyof BrokerAccount>]: never; })[] & { [K_66 in Exclude<keyof I_1["Users"][number]["User"]["BrokerAccounts"], keyof {
                     AccountID?: string | undefined;
-                    Broker?: import("./sologenic/com-fs-order-model/broker").ClearingBroker | undefined;
+                    Broker?: import("./sologenic/com-fs-utils-lib/models/order-properties/order-properties").ClearingBroker | undefined;
                     OrganizationID?: string | undefined;
                     Profiles?: string[] | undefined;
                 }[]>]: never; }) | undefined;
@@ -5196,7 +5196,7 @@ export declare const UserList: {
                 }[] | undefined;
                 BrokerAccounts?: {
                     AccountID?: string | undefined;
-                    Broker?: import("./sologenic/com-fs-order-model/broker").ClearingBroker | undefined;
+                    Broker?: import("./sologenic/com-fs-utils-lib/models/order-properties/order-properties").ClearingBroker | undefined;
                     OrganizationID?: string | undefined;
                     Profiles?: string[] | undefined;
                 }[] | undefined;

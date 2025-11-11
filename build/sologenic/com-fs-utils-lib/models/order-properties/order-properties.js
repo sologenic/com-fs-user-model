@@ -209,6 +209,43 @@ export function processStateToJSON(object) {
             return "UNRECOGNIZED";
     }
 }
+export var ClearingBroker;
+(function (ClearingBroker) {
+    ClearingBroker[ClearingBroker["NOT_USED_CLEARING_BROKER"] = 0] = "NOT_USED_CLEARING_BROKER";
+    ClearingBroker[ClearingBroker["ALPACA"] = 1] = "ALPACA";
+    ClearingBroker[ClearingBroker["RQD"] = 2] = "RQD";
+    ClearingBroker[ClearingBroker["UNRECOGNIZED"] = -1] = "UNRECOGNIZED";
+})(ClearingBroker || (ClearingBroker = {}));
+export function clearingBrokerFromJSON(object) {
+    switch (object) {
+        case 0:
+        case "NOT_USED_CLEARING_BROKER":
+            return ClearingBroker.NOT_USED_CLEARING_BROKER;
+        case 1:
+        case "ALPACA":
+            return ClearingBroker.ALPACA;
+        case 2:
+        case "RQD":
+            return ClearingBroker.RQD;
+        case -1:
+        case "UNRECOGNIZED":
+        default:
+            return ClearingBroker.UNRECOGNIZED;
+    }
+}
+export function clearingBrokerToJSON(object) {
+    switch (object) {
+        case ClearingBroker.NOT_USED_CLEARING_BROKER:
+            return "NOT_USED_CLEARING_BROKER";
+        case ClearingBroker.ALPACA:
+            return "ALPACA";
+        case ClearingBroker.RQD:
+            return "RQD";
+        case ClearingBroker.UNRECOGNIZED:
+        default:
+            return "UNRECOGNIZED";
+    }
+}
 function createBaseProcessInfo() {
     return { ProcessState: 0, ProcessedAt: undefined };
 }

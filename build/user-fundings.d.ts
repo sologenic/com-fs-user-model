@@ -1,5 +1,5 @@
 import _m0 from "protobufjs/minimal";
-import { ClearingBroker } from "./sologenic/com-fs-order-model/broker";
+import { ClearingBroker } from "./sologenic/com-fs-utils-lib/models/order-properties/order-properties";
 export declare const protobufPackage = "user";
 export declare enum SignerType {
     NOT_USER_SIGNETTYPE = 0,

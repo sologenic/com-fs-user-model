@@ -4,7 +4,7 @@ package user;
 
 option go_package = "github.com/sologenic/com-fs-user-model;user";
 
-import "sologenic/com-fs-order-model/broker.proto";
+import "sologenic/com-fs-utils-lib/models/order-properties/order-properties.proto";
 
 message Wallet {
     string Address = 1;
@@ -26,7 +26,7 @@ message BankAccount {
 
 message BrokerAccount {
   string AccountID = 1; // user's identifier in the broker account
-  order.ClearingBroker Broker = 2; // "RQD", etc.
+  orderproperties.ClearingBroker Broker = 2; // "RQD", etc.
   string OrganizationID = 3; // broker identifier
   repeated string Profiles = 4; // bank account profiles for the broker account
 }

@@ -6,7 +6,11 @@
 
 /* eslint-disable */
 import _m0 from "protobufjs/minimal";
-import { ClearingBroker, clearingBrokerFromJSON, clearingBrokerToJSON } from "./sologenic/com-fs-order-model/broker";
+import {
+  ClearingBroker,
+  clearingBrokerFromJSON,
+  clearingBrokerToJSON,
+} from "./sologenic/com-fs-utils-lib/models/order-properties/order-properties";
 
 export const protobufPackage = "user";
 

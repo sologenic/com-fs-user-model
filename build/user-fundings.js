@@ -5,7 +5,7 @@
 // source: user-fundings.proto
 /* eslint-disable */
 import _m0 from "protobufjs/minimal";
-import { clearingBrokerFromJSON, clearingBrokerToJSON } from "./sologenic/com-fs-order-model/broker";
+import { clearingBrokerFromJSON, clearingBrokerToJSON, } from "./sologenic/com-fs-utils-lib/models/order-properties/order-properties";
 export const protobufPackage = "user";
 export var SignerType;
 (function (SignerType) {
