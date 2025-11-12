@@ -14,6 +14,7 @@ export declare enum UserStatus {
     NOT_USED_USERSTATUS = 0,
     ACTIVE = 1,
     ADMIN_DEACTIVATED = 2,
+    TO_BE_APPROVED = 3,
     UNRECOGNIZED = -1
 }
 export declare function userStatusFromJSON(object: any): UserStatus;

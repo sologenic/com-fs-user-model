@@ -74,7 +74,8 @@ message StatusMessage {
 enum UserStatus {
     NOT_USED_USERSTATUS = 0;
     ACTIVE = 1;
-    ADMIN_DEACTIVATED = 2; 
+    ADMIN_DEACTIVATED = 2;
+    TO_BE_APPROVED = 3;
 }
 
 enum SocialType {

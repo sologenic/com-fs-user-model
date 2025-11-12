@@ -28,6 +28,7 @@ export enum UserStatus {
   NOT_USED_USERSTATUS = 0,
   ACTIVE = 1,
   ADMIN_DEACTIVATED = 2,
+  TO_BE_APPROVED = 3,
   UNRECOGNIZED = -1,
 }
 
@@ -42,6 +43,9 @@ export function userStatusFromJSON(object: any): UserStatus {
     case 2:
     case "ADMIN_DEACTIVATED":
       return UserStatus.ADMIN_DEACTIVATED;
+    case 3:
+    case "TO_BE_APPROVED":
+      return UserStatus.TO_BE_APPROVED;
     case -1:
     case "UNRECOGNIZED":
     default:
@@ -57,6 +61,8 @@ export function userStatusToJSON(object: UserStatus): string {
       return "ACTIVE";
     case UserStatus.ADMIN_DEACTIVATED:
       return "ADMIN_DEACTIVATED";
+    case UserStatus.TO_BE_APPROVED:
+      return "TO_BE_APPROVED";
     case UserStatus.UNRECOGNIZED:
     default:
       return "UNRECOGNIZED";

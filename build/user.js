@@ -21,6 +21,7 @@ export var UserStatus;
     UserStatus[UserStatus["NOT_USED_USERSTATUS"] = 0] = "NOT_USED_USERSTATUS";
     UserStatus[UserStatus["ACTIVE"] = 1] = "ACTIVE";
     UserStatus[UserStatus["ADMIN_DEACTIVATED"] = 2] = "ADMIN_DEACTIVATED";
+    UserStatus[UserStatus["TO_BE_APPROVED"] = 3] = "TO_BE_APPROVED";
     UserStatus[UserStatus["UNRECOGNIZED"] = -1] = "UNRECOGNIZED";
 })(UserStatus || (UserStatus = {}));
 export function userStatusFromJSON(object) {
@@ -34,6 +35,9 @@ export function userStatusFromJSON(object) {
         case 2:
         case "ADMIN_DEACTIVATED":
             return UserStatus.ADMIN_DEACTIVATED;
+        case 3:
+        case "TO_BE_APPROVED":
+            return UserStatus.TO_BE_APPROVED;
         case -1:
         case "UNRECOGNIZED":
         default:
@@ -48,6 +52,8 @@ export function userStatusToJSON(object) {
             return "ACTIVE";
         case UserStatus.ADMIN_DEACTIVATED:
             return "ADMIN_DEACTIVATED";
+        case UserStatus.TO_BE_APPROVED:
+            return "TO_BE_APPROVED";
         case UserStatus.UNRECOGNIZED:
         default:
             return "UNRECOGNIZED";
