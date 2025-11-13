@@ -64,14 +64,14 @@ export interface UserDetails {
     /** A retail user will always have a role of "NORMAL_USER" */
     Role: Role;
     /** Trade profile details */
-    TradeProfile: TradeProfileDetails | undefined;
+    TradeProfile?: TradeProfileDetails | undefined;
     /** Array of KYC integration IDs */
     KYCInquiries: string[];
     KYCDetails: UserKYCDetails | undefined;
     UserDocumentCompliance: UserDocumentCompliance | undefined;
     /** Status of KYC verification, e.g., PENDING, APPROVED, REJECTED */
     KYCStatus: KYCStatus;
-    UserTradeProfile: UserTradeProfile | undefined;
+    UserTradeProfile?: UserTradeProfile | undefined;
     ComplianceQuestions: ComplianceQuestions[];
     BrokerAccounts: BrokerAccount[];
     BankAccounts: BankAccount[];
@@ -209,6 +209,7 @@ export declare const UserDetails: {
                 DocumentState?: import("./sologenic/com-fs-document-model/document").DocumentState | undefined;
                 SignedAt?: Date | undefined;
                 FileMD5SUM?: string | undefined;
+                TXID?: string | undefined;
             }[] | undefined;
         } | undefined;
         KYCStatus?: KYCStatus | undefined;
@@ -460,6 +461,7 @@ export declare const UserDetails: {
                 DocumentState?: import("./sologenic/com-fs-document-model/document").DocumentState | undefined;
                 SignedAt?: Date | undefined;
                 FileMD5SUM?: string | undefined;
+                TXID?: string | undefined;
             }[] | undefined;
         } & {
             SignedDocuments?: ({
@@ -468,24 +470,28 @@ export declare const UserDetails: {
                 DocumentState?: import("./sologenic/com-fs-document-model/document").DocumentState | undefined;
                 SignedAt?: Date | undefined;
                 FileMD5SUM?: string | undefined;
+                TXID?: string | undefined;
             }[] & ({
                 Name?: string | undefined;
                 SignedVersion?: string | undefined;
                 DocumentState?: import("./sologenic/com-fs-document-model/document").DocumentState | undefined;
                 SignedAt?: Date | undefined;
                 FileMD5SUM?: string | undefined;
+                TXID?: string | undefined;
             } & {
                 Name?: string | undefined;
                 SignedVersion?: string | undefined;
                 DocumentState?: import("./sologenic/com-fs-document-model/document").DocumentState | undefined;
                 SignedAt?: Date | undefined;
                 FileMD5SUM?: string | undefined;
+                TXID?: string | undefined;
             } & { [K_14 in Exclude<keyof I["UserDocumentCompliance"]["SignedDocuments"][number], keyof import("./sologenic/com-fs-document-model/document").SignedDocument>]: never; })[] & { [K_15 in Exclude<keyof I["UserDocumentCompliance"]["SignedDocuments"], keyof {
                 Name?: string | undefined;
                 SignedVersion?: string | undefined;
                 DocumentState?: import("./sologenic/com-fs-document-model/document").DocumentState | undefined;
                 SignedAt?: Date | undefined;
                 FileMD5SUM?: string | undefined;
+                TXID?: string | undefined;
             }[]>]: never; }) | undefined;
         } & { [K_16 in Exclude<keyof I["UserDocumentCompliance"], "SignedDocuments">]: never; }) | undefined;
         KYCStatus?: KYCStatus | undefined;
@@ -767,6 +773,7 @@ export declare const UserDetails: {
                 DocumentState?: import("./sologenic/com-fs-document-model/document").DocumentState | undefined;
                 SignedAt?: Date | undefined;
                 FileMD5SUM?: string | undefined;
+                TXID?: string | undefined;
             }[] | undefined;
         } | undefined;
         KYCStatus?: KYCStatus | undefined;
@@ -1018,6 +1025,7 @@ export declare const UserDetails: {
                 DocumentState?: import("./sologenic/com-fs-document-model/document").DocumentState | undefined;
                 SignedAt?: Date | undefined;
                 FileMD5SUM?: string | undefined;
+                TXID?: string | undefined;
             }[] | undefined;
         } & {
             SignedDocuments?: ({
@@ -1026,24 +1034,28 @@ export declare const UserDetails: {
                 DocumentState?: import("./sologenic/com-fs-document-model/document").DocumentState | undefined;
                 SignedAt?: Date | undefined;
                 FileMD5SUM?: string | undefined;
+                TXID?: string | undefined;
             }[] & ({
                 Name?: string | undefined;
                 SignedVersion?: string | undefined;
                 DocumentState?: import("./sologenic/com-fs-document-model/document").DocumentState | undefined;
                 SignedAt?: Date | undefined;
                 FileMD5SUM?: string | undefined;
+                TXID?: string | undefined;
             } & {
                 Name?: string | undefined;
                 SignedVersion?: string | undefined;
                 DocumentState?: import("./sologenic/com-fs-document-model/document").DocumentState | undefined;
                 SignedAt?: Date | undefined;
                 FileMD5SUM?: string | undefined;
+                TXID?: string | undefined;
             } & { [K_49 in Exclude<keyof I_1["UserDocumentCompliance"]["SignedDocuments"][number], keyof import("./sologenic/com-fs-document-model/document").SignedDocument>]: never; })[] & { [K_50 in Exclude<keyof I_1["UserDocumentCompliance"]["SignedDocuments"], keyof {
                 Name?: string | undefined;
                 SignedVersion?: string | undefined;
                 DocumentState?: import("./sologenic/com-fs-document-model/document").DocumentState | undefined;
                 SignedAt?: Date | undefined;
                 FileMD5SUM?: string | undefined;
+                TXID?: string | undefined;
             }[]>]: never; }) | undefined;
         } & { [K_51 in Exclude<keyof I_1["UserDocumentCompliance"], "SignedDocuments">]: never; }) | undefined;
         KYCStatus?: KYCStatus | undefined;
@@ -1332,6 +1344,7 @@ export declare const User: {
                     DocumentState?: import("./sologenic/com-fs-document-model/document").DocumentState | undefined;
                     SignedAt?: Date | undefined;
                     FileMD5SUM?: string | undefined;
+                    TXID?: string | undefined;
                 }[] | undefined;
             } | undefined;
             KYCStatus?: KYCStatus | undefined;
@@ -1496,6 +1509,7 @@ export declare const User: {
                     DocumentState?: import("./sologenic/com-fs-document-model/document").DocumentState | undefined;
                     SignedAt?: Date | undefined;
                     FileMD5SUM?: string | undefined;
+                    TXID?: string | undefined;
                 }[] | undefined;
             } | undefined;
             KYCStatus?: KYCStatus | undefined;
@@ -1747,6 +1761,7 @@ export declare const User: {
                     DocumentState?: import("./sologenic/com-fs-document-model/document").DocumentState | undefined;
                     SignedAt?: Date | undefined;
                     FileMD5SUM?: string | undefined;
+                    TXID?: string | undefined;
                 }[] | undefined;
             } & {
                 SignedDocuments?: ({
@@ -1755,24 +1770,28 @@ export declare const User: {
                     DocumentState?: import("./sologenic/com-fs-document-model/document").DocumentState | undefined;
                     SignedAt?: Date | undefined;
                     FileMD5SUM?: string | undefined;
+                    TXID?: string | undefined;
                 }[] & ({
                     Name?: string | undefined;
                     SignedVersion?: string | undefined;
                     DocumentState?: import("./sologenic/com-fs-document-model/document").DocumentState | undefined;
                     SignedAt?: Date | undefined;
                     FileMD5SUM?: string | undefined;
+                    TXID?: string | undefined;
                 } & {
                     Name?: string | undefined;
                     SignedVersion?: string | undefined;
                     DocumentState?: import("./sologenic/com-fs-document-model/document").DocumentState | undefined;
                     SignedAt?: Date | undefined;
                     FileMD5SUM?: string | undefined;
+                    TXID?: string | undefined;
                 } & { [K_14 in Exclude<keyof I["User"]["UserDocumentCompliance"]["SignedDocuments"][number], keyof import("./sologenic/com-fs-document-model/document").SignedDocument>]: never; })[] & { [K_15 in Exclude<keyof I["User"]["UserDocumentCompliance"]["SignedDocuments"], keyof {
                     Name?: string | undefined;
                     SignedVersion?: string | undefined;
                     DocumentState?: import("./sologenic/com-fs-document-model/document").DocumentState | undefined;
                     SignedAt?: Date | undefined;
                     FileMD5SUM?: string | undefined;
+                    TXID?: string | undefined;
                 }[]>]: never; }) | undefined;
             } & { [K_16 in Exclude<keyof I["User"]["UserDocumentCompliance"], "SignedDocuments">]: never; }) | undefined;
             KYCStatus?: KYCStatus | undefined;
@@ -2077,6 +2096,7 @@ export declare const User: {
                     DocumentState?: import("./sologenic/com-fs-document-model/document").DocumentState | undefined;
                     SignedAt?: Date | undefined;
                     FileMD5SUM?: string | undefined;
+                    TXID?: string | undefined;
                 }[] | undefined;
             } | undefined;
             KYCStatus?: KYCStatus | undefined;
@@ -2241,6 +2261,7 @@ export declare const User: {
                     DocumentState?: import("./sologenic/com-fs-document-model/document").DocumentState | undefined;
                     SignedAt?: Date | undefined;
                     FileMD5SUM?: string | undefined;
+                    TXID?: string | undefined;
                 }[] | undefined;
             } | undefined;
             KYCStatus?: KYCStatus | undefined;
@@ -2492,6 +2513,7 @@ export declare const User: {
                     DocumentState?: import("./sologenic/com-fs-document-model/document").DocumentState | undefined;
                     SignedAt?: Date | undefined;
                     FileMD5SUM?: string | undefined;
+                    TXID?: string | undefined;
                 }[] | undefined;
             } & {
                 SignedDocuments?: ({
@@ -2500,24 +2522,28 @@ export declare const User: {
                     DocumentState?: import("./sologenic/com-fs-document-model/document").DocumentState | undefined;
                     SignedAt?: Date | undefined;
                     FileMD5SUM?: string | undefined;
+                    TXID?: string | undefined;
                 }[] & ({
                     Name?: string | undefined;
                     SignedVersion?: string | undefined;
                     DocumentState?: import("./sologenic/com-fs-document-model/document").DocumentState | undefined;
                     SignedAt?: Date | undefined;
                     FileMD5SUM?: string | undefined;
+                    TXID?: string | undefined;
                 } & {
                     Name?: string | undefined;
                     SignedVersion?: string | undefined;
                     DocumentState?: import("./sologenic/com-fs-document-model/document").DocumentState | undefined;
                     SignedAt?: Date | undefined;
                     FileMD5SUM?: string | undefined;
+                    TXID?: string | undefined;
                 } & { [K_53 in Exclude<keyof I_1["User"]["UserDocumentCompliance"]["SignedDocuments"][number], keyof import("./sologenic/com-fs-document-model/document").SignedDocument>]: never; })[] & { [K_54 in Exclude<keyof I_1["User"]["UserDocumentCompliance"]["SignedDocuments"], keyof {
                     Name?: string | undefined;
                     SignedVersion?: string | undefined;
                     DocumentState?: import("./sologenic/com-fs-document-model/document").DocumentState | undefined;
                     SignedAt?: Date | undefined;
                     FileMD5SUM?: string | undefined;
+                    TXID?: string | undefined;
                 }[]>]: never; }) | undefined;
             } & { [K_55 in Exclude<keyof I_1["User"]["UserDocumentCompliance"], "SignedDocuments">]: never; }) | undefined;
             KYCStatus?: KYCStatus | undefined;
@@ -2849,6 +2875,7 @@ export declare const UserList: {
                         DocumentState?: import("./sologenic/com-fs-document-model/document").DocumentState | undefined;
                         SignedAt?: Date | undefined;
                         FileMD5SUM?: string | undefined;
+                        TXID?: string | undefined;
                     }[] | undefined;
                 } | undefined;
                 KYCStatus?: KYCStatus | undefined;
@@ -3016,6 +3043,7 @@ export declare const UserList: {
                         DocumentState?: import("./sologenic/com-fs-document-model/document").DocumentState | undefined;
                         SignedAt?: Date | undefined;
                         FileMD5SUM?: string | undefined;
+                        TXID?: string | undefined;
                     }[] | undefined;
                 } | undefined;
                 KYCStatus?: KYCStatus | undefined;
@@ -3180,6 +3208,7 @@ export declare const UserList: {
                         DocumentState?: import("./sologenic/com-fs-document-model/document").DocumentState | undefined;
                         SignedAt?: Date | undefined;
                         FileMD5SUM?: string | undefined;
+                        TXID?: string | undefined;
                     }[] | undefined;
                 } | undefined;
                 KYCStatus?: KYCStatus | undefined;
@@ -3344,6 +3373,7 @@ export declare const UserList: {
                         DocumentState?: import("./sologenic/com-fs-document-model/document").DocumentState | undefined;
                         SignedAt?: Date | undefined;
                         FileMD5SUM?: string | undefined;
+                        TXID?: string | undefined;
                     }[] | undefined;
                 } | undefined;
                 KYCStatus?: KYCStatus | undefined;
@@ -3595,6 +3625,7 @@ export declare const UserList: {
                         DocumentState?: import("./sologenic/com-fs-document-model/document").DocumentState | undefined;
                         SignedAt?: Date | undefined;
                         FileMD5SUM?: string | undefined;
+                        TXID?: string | undefined;
                     }[] | undefined;
                 } & {
                     SignedDocuments?: ({
@@ -3603,24 +3634,28 @@ export declare const UserList: {
                         DocumentState?: import("./sologenic/com-fs-document-model/document").DocumentState | undefined;
                         SignedAt?: Date | undefined;
                         FileMD5SUM?: string | undefined;
+                        TXID?: string | undefined;
                     }[] & ({
                         Name?: string | undefined;
                         SignedVersion?: string | undefined;
                         DocumentState?: import("./sologenic/com-fs-document-model/document").DocumentState | undefined;
                         SignedAt?: Date | undefined;
                         FileMD5SUM?: string | undefined;
+                        TXID?: string | undefined;
                     } & {
                         Name?: string | undefined;
                         SignedVersion?: string | undefined;
                         DocumentState?: import("./sologenic/com-fs-document-model/document").DocumentState | undefined;
                         SignedAt?: Date | undefined;
                         FileMD5SUM?: string | undefined;
+                        TXID?: string | undefined;
                     } & { [K_14 in Exclude<keyof I["Users"][number]["User"]["UserDocumentCompliance"]["SignedDocuments"][number], keyof import("./sologenic/com-fs-document-model/document").SignedDocument>]: never; })[] & { [K_15 in Exclude<keyof I["Users"][number]["User"]["UserDocumentCompliance"]["SignedDocuments"], keyof {
                         Name?: string | undefined;
                         SignedVersion?: string | undefined;
                         DocumentState?: import("./sologenic/com-fs-document-model/document").DocumentState | undefined;
                         SignedAt?: Date | undefined;
                         FileMD5SUM?: string | undefined;
+                        TXID?: string | undefined;
                     }[]>]: never; }) | undefined;
                 } & { [K_16 in Exclude<keyof I["Users"][number]["User"]["UserDocumentCompliance"], "SignedDocuments">]: never; }) | undefined;
                 KYCStatus?: KYCStatus | undefined;
@@ -3924,6 +3959,7 @@ export declare const UserList: {
                         DocumentState?: import("./sologenic/com-fs-document-model/document").DocumentState | undefined;
                         SignedAt?: Date | undefined;
                         FileMD5SUM?: string | undefined;
+                        TXID?: string | undefined;
                     }[] | undefined;
                 } | undefined;
                 KYCStatus?: KYCStatus | undefined;
@@ -4092,6 +4128,7 @@ export declare const UserList: {
                         DocumentState?: import("./sologenic/com-fs-document-model/document").DocumentState | undefined;
                         SignedAt?: Date | undefined;
                         FileMD5SUM?: string | undefined;
+                        TXID?: string | undefined;
                     }[] | undefined;
                 } | undefined;
                 KYCStatus?: KYCStatus | undefined;
@@ -4259,6 +4296,7 @@ export declare const UserList: {
                         DocumentState?: import("./sologenic/com-fs-document-model/document").DocumentState | undefined;
                         SignedAt?: Date | undefined;
                         FileMD5SUM?: string | undefined;
+                        TXID?: string | undefined;
                     }[] | undefined;
                 } | undefined;
                 KYCStatus?: KYCStatus | undefined;
@@ -4423,6 +4461,7 @@ export declare const UserList: {
                         DocumentState?: import("./sologenic/com-fs-document-model/document").DocumentState | undefined;
                         SignedAt?: Date | undefined;
                         FileMD5SUM?: string | undefined;
+                        TXID?: string | undefined;
                     }[] | undefined;
                 } | undefined;
                 KYCStatus?: KYCStatus | undefined;
@@ -4587,6 +4626,7 @@ export declare const UserList: {
                         DocumentState?: import("./sologenic/com-fs-document-model/document").DocumentState | undefined;
                         SignedAt?: Date | undefined;
                         FileMD5SUM?: string | undefined;
+                        TXID?: string | undefined;
                     }[] | undefined;
                 } | undefined;
                 KYCStatus?: KYCStatus | undefined;
@@ -4838,6 +4878,7 @@ export declare const UserList: {
                         DocumentState?: import("./sologenic/com-fs-document-model/document").DocumentState | undefined;
                         SignedAt?: Date | undefined;
                         FileMD5SUM?: string | undefined;
+                        TXID?: string | undefined;
                     }[] | undefined;
                 } & {
                     SignedDocuments?: ({
@@ -4846,24 +4887,28 @@ export declare const UserList: {
                         DocumentState?: import("./sologenic/com-fs-document-model/document").DocumentState | undefined;
                         SignedAt?: Date | undefined;
                         FileMD5SUM?: string | undefined;
+                        TXID?: string | undefined;
                     }[] & ({
                         Name?: string | undefined;
                         SignedVersion?: string | undefined;
                         DocumentState?: import("./sologenic/com-fs-document-model/document").DocumentState | undefined;
                         SignedAt?: Date | undefined;
                         FileMD5SUM?: string | undefined;
+                        TXID?: string | undefined;
                     } & {
                         Name?: string | undefined;
                         SignedVersion?: string | undefined;
                         DocumentState?: import("./sologenic/com-fs-document-model/document").DocumentState | undefined;
                         SignedAt?: Date | undefined;
                         FileMD5SUM?: string | undefined;
+                        TXID?: string | undefined;
                     } & { [K_55 in Exclude<keyof I_1["Users"][number]["User"]["UserDocumentCompliance"]["SignedDocuments"][number], keyof import("./sologenic/com-fs-document-model/document").SignedDocument>]: never; })[] & { [K_56 in Exclude<keyof I_1["Users"][number]["User"]["UserDocumentCompliance"]["SignedDocuments"], keyof {
                         Name?: string | undefined;
                         SignedVersion?: string | undefined;
                         DocumentState?: import("./sologenic/com-fs-document-model/document").DocumentState | undefined;
                         SignedAt?: Date | undefined;
                         FileMD5SUM?: string | undefined;
+                        TXID?: string | undefined;
                     }[]>]: never; }) | undefined;
                 } & { [K_57 in Exclude<keyof I_1["Users"][number]["User"]["UserDocumentCompliance"], "SignedDocuments">]: never; }) | undefined;
                 KYCStatus?: KYCStatus | undefined;
@@ -5167,6 +5212,7 @@ export declare const UserList: {
                         DocumentState?: import("./sologenic/com-fs-document-model/document").DocumentState | undefined;
                         SignedAt?: Date | undefined;
                         FileMD5SUM?: string | undefined;
+                        TXID?: string | undefined;
                     }[] | undefined;
                 } | undefined;
                 KYCStatus?: KYCStatus | undefined;
