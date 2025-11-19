@@ -205,6 +205,7 @@ function createBaseUserDetails() {
         CommissionSettings: undefined,
         DataFeedAccounts: undefined,
         AllowedJurisdictions: [],
+        EmailAddress: "",
     };
 }
 export const UserDetails = {
@@ -292,6 +293,9 @@ export const UserDetails = {
         }
         for (const v of message.AllowedJurisdictions) {
             writer.uint32(226).string(v);
+        }
+        if (message.EmailAddress !== "") {
+            writer.uint32(234).string(message.EmailAddress);
         }
         return writer;
     },
@@ -470,6 +474,12 @@ export const UserDetails = {
                     }
                     message.AllowedJurisdictions.push(reader.string());
                     continue;
+                case 29:
+                    if (tag !== 234) {
+                        break;
+                    }
+                    message.EmailAddress = reader.string();
+                    continue;
             }
             if ((tag & 7) === 4 || tag === 0) {
                 break;
@@ -522,6 +532,7 @@ export const UserDetails = {
             AllowedJurisdictions: globalThis.Array.isArray(object === null || object === void 0 ? void 0 : object.AllowedJurisdictions)
                 ? object.AllowedJurisdictions.map((e) => globalThis.String(e))
                 : [],
+            EmailAddress: isSet(object.EmailAddress) ? globalThis.String(object.EmailAddress) : "",
         };
     },
     toJSON(message) {
@@ -611,13 +622,16 @@ export const UserDetails = {
         if ((_g = message.AllowedJurisdictions) === null || _g === void 0 ? void 0 : _g.length) {
             obj.AllowedJurisdictions = message.AllowedJurisdictions;
         }
+        if (message.EmailAddress !== "") {
+            obj.EmailAddress = message.EmailAddress;
+        }
         return obj;
     },
     create(base) {
         return UserDetails.fromPartial(base !== null && base !== void 0 ? base : {});
     },
     fromPartial(object) {
-        var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q, _r, _s, _t, _u, _v;
+        var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q, _r, _s, _t, _u, _v, _w;
         const message = createBaseUserDetails();
         message.UserID = (_a = object.UserID) !== null && _a !== void 0 ? _a : "";
         message.FirstName = (_b = object.FirstName) !== null && _b !== void 0 ? _b : "";
@@ -664,6 +678,7 @@ export const UserDetails = {
             ? DataFeedAccounts.fromPartial(object.DataFeedAccounts)
             : undefined;
         message.AllowedJurisdictions = ((_v = object.AllowedJurisdictions) === null || _v === void 0 ? void 0 : _v.map((e) => e)) || [];
+        message.EmailAddress = (_w = object.EmailAddress) !== null && _w !== void 0 ? _w : "";
         return message;
     },
 };

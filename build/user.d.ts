@@ -43,7 +43,7 @@ export declare enum Theme {
 export declare function themeFromJSON(object: any): Theme;
 export declare function themeToJSON(object: Theme): string;
 export interface UserDetails {
-    /** email address used for firebase authentication */
+    /** Firebase Auth UID */
     UserID: string;
     FirstName: string;
     LastName: string;
@@ -81,6 +81,8 @@ export interface UserDetails {
     DataFeedAccounts?: DataFeedAccounts | undefined;
     /** ISO 3166-1 alpha-3 code e.g. "USA", "CAD" */
     AllowedJurisdictions: string[];
+    /** Email address for the user, often retrieved from the authentication provider */
+    EmailAddress: string;
 }
 export interface User {
     User: UserDetails | undefined;
@@ -269,6 +271,7 @@ export declare const UserDetails: {
             } | undefined;
         } | undefined;
         AllowedJurisdictions?: string[] | undefined;
+        EmailAddress?: string | undefined;
     } & {
         UserID?: string | undefined;
         FirstName?: string | undefined;
@@ -681,6 +684,7 @@ export declare const UserDetails: {
             } & { [K_31 in Exclude<keyof I["DataFeedAccounts"]["DxFeed"], "AccountID">]: never; }) | undefined;
         } & { [K_32 in Exclude<keyof I["DataFeedAccounts"], "DxFeed">]: never; }) | undefined;
         AllowedJurisdictions?: (string[] & string[] & { [K_33 in Exclude<keyof I["AllowedJurisdictions"], keyof string[]>]: never; }) | undefined;
+        EmailAddress?: string | undefined;
     } & { [K_34 in Exclude<keyof I, keyof UserDetails>]: never; }>(base?: I | undefined): UserDetails;
     fromPartial<I_1 extends {
         UserID?: string | undefined;
@@ -833,6 +837,7 @@ export declare const UserDetails: {
             } | undefined;
         } | undefined;
         AllowedJurisdictions?: string[] | undefined;
+        EmailAddress?: string | undefined;
     } & {
         UserID?: string | undefined;
         FirstName?: string | undefined;
@@ -1245,6 +1250,7 @@ export declare const UserDetails: {
             } & { [K_66 in Exclude<keyof I_1["DataFeedAccounts"]["DxFeed"], "AccountID">]: never; }) | undefined;
         } & { [K_67 in Exclude<keyof I_1["DataFeedAccounts"], "DxFeed">]: never; }) | undefined;
         AllowedJurisdictions?: (string[] & string[] & { [K_68 in Exclude<keyof I_1["AllowedJurisdictions"], keyof string[]>]: never; }) | undefined;
+        EmailAddress?: string | undefined;
     } & { [K_69 in Exclude<keyof I_1, keyof UserDetails>]: never; }>(object: I_1): UserDetails;
 };
 export declare const User: {
@@ -1404,6 +1410,7 @@ export declare const User: {
                 } | undefined;
             } | undefined;
             AllowedJurisdictions?: string[] | undefined;
+            EmailAddress?: string | undefined;
         } | undefined;
         MetaData?: {
             Network?: Network | undefined;
@@ -1569,6 +1576,7 @@ export declare const User: {
                 } | undefined;
             } | undefined;
             AllowedJurisdictions?: string[] | undefined;
+            EmailAddress?: string | undefined;
         } & {
             UserID?: string | undefined;
             FirstName?: string | undefined;
@@ -1981,6 +1989,7 @@ export declare const User: {
                 } & { [K_31 in Exclude<keyof I["User"]["DataFeedAccounts"]["DxFeed"], "AccountID">]: never; }) | undefined;
             } & { [K_32 in Exclude<keyof I["User"]["DataFeedAccounts"], "DxFeed">]: never; }) | undefined;
             AllowedJurisdictions?: (string[] & string[] & { [K_33 in Exclude<keyof I["User"]["AllowedJurisdictions"], keyof string[]>]: never; }) | undefined;
+            EmailAddress?: string | undefined;
         } & { [K_34 in Exclude<keyof I["User"], keyof UserDetails>]: never; }) | undefined;
         MetaData?: ({
             Network?: Network | undefined;
@@ -2156,6 +2165,7 @@ export declare const User: {
                 } | undefined;
             } | undefined;
             AllowedJurisdictions?: string[] | undefined;
+            EmailAddress?: string | undefined;
         } | undefined;
         MetaData?: {
             Network?: Network | undefined;
@@ -2321,6 +2331,7 @@ export declare const User: {
                 } | undefined;
             } | undefined;
             AllowedJurisdictions?: string[] | undefined;
+            EmailAddress?: string | undefined;
         } & {
             UserID?: string | undefined;
             FirstName?: string | undefined;
@@ -2733,6 +2744,7 @@ export declare const User: {
                 } & { [K_70 in Exclude<keyof I_1["User"]["DataFeedAccounts"]["DxFeed"], "AccountID">]: never; }) | undefined;
             } & { [K_71 in Exclude<keyof I_1["User"]["DataFeedAccounts"], "DxFeed">]: never; }) | undefined;
             AllowedJurisdictions?: (string[] & string[] & { [K_72 in Exclude<keyof I_1["User"]["AllowedJurisdictions"], keyof string[]>]: never; }) | undefined;
+            EmailAddress?: string | undefined;
         } & { [K_73 in Exclude<keyof I_1["User"], keyof UserDetails>]: never; }) | undefined;
         MetaData?: ({
             Network?: Network | undefined;
@@ -2935,6 +2947,7 @@ export declare const UserList: {
                     } | undefined;
                 } | undefined;
                 AllowedJurisdictions?: string[] | undefined;
+                EmailAddress?: string | undefined;
             } | undefined;
             MetaData?: {
                 Network?: Network | undefined;
@@ -3103,6 +3116,7 @@ export declare const UserList: {
                     } | undefined;
                 } | undefined;
                 AllowedJurisdictions?: string[] | undefined;
+                EmailAddress?: string | undefined;
             } | undefined;
             MetaData?: {
                 Network?: Network | undefined;
@@ -3268,6 +3282,7 @@ export declare const UserList: {
                     } | undefined;
                 } | undefined;
                 AllowedJurisdictions?: string[] | undefined;
+                EmailAddress?: string | undefined;
             } | undefined;
             MetaData?: {
                 Network?: Network | undefined;
@@ -3433,6 +3448,7 @@ export declare const UserList: {
                     } | undefined;
                 } | undefined;
                 AllowedJurisdictions?: string[] | undefined;
+                EmailAddress?: string | undefined;
             } & {
                 UserID?: string | undefined;
                 FirstName?: string | undefined;
@@ -3845,6 +3861,7 @@ export declare const UserList: {
                     } & { [K_31 in Exclude<keyof I["Users"][number]["User"]["DataFeedAccounts"]["DxFeed"], "AccountID">]: never; }) | undefined;
                 } & { [K_32 in Exclude<keyof I["Users"][number]["User"]["DataFeedAccounts"], "DxFeed">]: never; }) | undefined;
                 AllowedJurisdictions?: (string[] & string[] & { [K_33 in Exclude<keyof I["Users"][number]["User"]["AllowedJurisdictions"], keyof string[]>]: never; }) | undefined;
+                EmailAddress?: string | undefined;
             } & { [K_34 in Exclude<keyof I["Users"][number]["User"], keyof UserDetails>]: never; }) | undefined;
             MetaData?: ({
                 Network?: Network | undefined;
@@ -4019,6 +4036,7 @@ export declare const UserList: {
                     } | undefined;
                 } | undefined;
                 AllowedJurisdictions?: string[] | undefined;
+                EmailAddress?: string | undefined;
             } | undefined;
             MetaData?: {
                 Network?: Network | undefined;
@@ -4188,6 +4206,7 @@ export declare const UserList: {
                     } | undefined;
                 } | undefined;
                 AllowedJurisdictions?: string[] | undefined;
+                EmailAddress?: string | undefined;
             } | undefined;
             MetaData?: {
                 Network?: Network | undefined;
@@ -4356,6 +4375,7 @@ export declare const UserList: {
                     } | undefined;
                 } | undefined;
                 AllowedJurisdictions?: string[] | undefined;
+                EmailAddress?: string | undefined;
             } | undefined;
             MetaData?: {
                 Network?: Network | undefined;
@@ -4521,6 +4541,7 @@ export declare const UserList: {
                     } | undefined;
                 } | undefined;
                 AllowedJurisdictions?: string[] | undefined;
+                EmailAddress?: string | undefined;
             } | undefined;
             MetaData?: {
                 Network?: Network | undefined;
@@ -4686,6 +4707,7 @@ export declare const UserList: {
                     } | undefined;
                 } | undefined;
                 AllowedJurisdictions?: string[] | undefined;
+                EmailAddress?: string | undefined;
             } & {
                 UserID?: string | undefined;
                 FirstName?: string | undefined;
@@ -5098,6 +5120,7 @@ export declare const UserList: {
                     } & { [K_72 in Exclude<keyof I_1["Users"][number]["User"]["DataFeedAccounts"]["DxFeed"], "AccountID">]: never; }) | undefined;
                 } & { [K_73 in Exclude<keyof I_1["Users"][number]["User"]["DataFeedAccounts"], "DxFeed">]: never; }) | undefined;
                 AllowedJurisdictions?: (string[] & string[] & { [K_74 in Exclude<keyof I_1["Users"][number]["User"]["AllowedJurisdictions"], keyof string[]>]: never; }) | undefined;
+                EmailAddress?: string | undefined;
             } & { [K_75 in Exclude<keyof I_1["Users"][number]["User"], keyof UserDetails>]: never; }) | undefined;
             MetaData?: ({
                 Network?: Network | undefined;
@@ -5272,6 +5295,7 @@ export declare const UserList: {
                     } | undefined;
                 } | undefined;
                 AllowedJurisdictions?: string[] | undefined;
+                EmailAddress?: string | undefined;
             } | undefined;
             MetaData?: {
                 Network?: Network | undefined;

@@ -190,7 +190,7 @@ export function themeToJSON(object: Theme): string {
 }
 
 export interface UserDetails {
-  /** email address used for firebase authentication */
+  /** Firebase Auth UID */
   UserID: string;
   FirstName: string;
   LastName: string;
@@ -238,6 +238,8 @@ export interface UserDetails {
     | undefined;
   /** ISO 3166-1 alpha-3 code e.g. "USA", "CAD" */
   AllowedJurisdictions: string[];
+  /** Email address for the user, often retrieved from the authentication provider */
+  EmailAddress: string;
 }
 
 export interface User {
@@ -310,6 +312,7 @@ function createBaseUserDetails(): UserDetails {
     CommissionSettings: undefined,
     DataFeedAccounts: undefined,
     AllowedJurisdictions: [],
+    EmailAddress: "",
   };
 }
 
@@ -398,6 +401,9 @@ export const UserDetails = {
     }
     for (const v of message.AllowedJurisdictions) {
       writer.uint32(226).string(v!);
+    }
+    if (message.EmailAddress !== "") {
+      writer.uint32(234).string(message.EmailAddress);
     }
     return writer;
   },
@@ -605,6 +611,13 @@ export const UserDetails = {
 
           message.AllowedJurisdictions.push(reader.string());
           continue;
+        case 29:
+          if (tag !== 234) {
+            break;
+          }
+
+          message.EmailAddress = reader.string();
+          continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -658,6 +671,7 @@ export const UserDetails = {
       AllowedJurisdictions: globalThis.Array.isArray(object?.AllowedJurisdictions)
         ? object.AllowedJurisdictions.map((e: any) => globalThis.String(e))
         : [],
+      EmailAddress: isSet(object.EmailAddress) ? globalThis.String(object.EmailAddress) : "",
     };
   },
 
@@ -747,6 +761,9 @@ export const UserDetails = {
     if (message.AllowedJurisdictions?.length) {
       obj.AllowedJurisdictions = message.AllowedJurisdictions;
     }
+    if (message.EmailAddress !== "") {
+      obj.EmailAddress = message.EmailAddress;
+    }
     return obj;
   },
 
@@ -800,6 +817,7 @@ export const UserDetails = {
       ? DataFeedAccounts.fromPartial(object.DataFeedAccounts)
       : undefined;
     message.AllowedJurisdictions = object.AllowedJurisdictions?.map((e) => e) || [];
+    message.EmailAddress = object.EmailAddress ?? "";
     return message;
   },
 };
