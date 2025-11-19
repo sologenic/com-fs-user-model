@@ -16,7 +16,7 @@ import "user-fundings.proto";
 import "sologenic/com-fs-utils-lib/models/commission/commission.proto";
 
 message UserDetails {
-    string UserID = 1; // email address used for firebase authentication
+    string UserID = 1; // Firebase Auth UID
     string FirstName = 2; 
     string LastName = 3;
     string Address = 4;
@@ -44,6 +44,7 @@ message UserDetails {
     optional commission.CommissionSettings CommissionSettings = 26; // Broker API specific commission fields for user level (overrrides organization level)
     optional DataFeedAccounts DataFeedAccounts = 27;
     repeated string AllowedJurisdictions = 28; // ISO 3166-1 alpha-3 code e.g. "USA", "CAD"
+    string EmailAddress = 29; // Email address for the user, often retrieved from the authentication provider
 }
 
 message User {

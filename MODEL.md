@@ -48,7 +48,7 @@ The primary message containing all user information. This is the core data struc
 
 | Field | Type | Required | Description |
 |-------|------|----------|-------------|
-| `UserID` | `string` | Yes | Email address used for Firebase authentication. This is the primary unique identifier for the user across all organizations. |
+| `UserID` | `string` | Yes | Firebase Auth UID. This is the primary unique identifier for the user across all organizations. |
 | `FirstName` | `string` | No | User's legal first name. Used for KYC verification and official documents. |
 | `LastName` | `string` | No | User's legal last name. Used for KYC verification and official documents. |
 | `Address` | `string` | No | User's physical address. Can be a full address string or formatted address. |
@@ -76,6 +76,7 @@ The primary message containing all user information. This is the core data struc
 | `CommissionSettings` | `optional commission.CommissionSettings` | No | Broker API specific commission fields at the user level. If set, these override organization-level commission settings for this specific user. Used for custom commission arrangements. |
 | `DataFeedAccounts` | `optional DataFeedAccounts` | No | Data feed account configuration. Currently supports DxFeed integration for market data. |
 | `AllowedJurisdictions` | `repeated string` | No | ISO 3166-1 alpha-3 country codes (e.g., "USA", "CAD", "GBR") representing jurisdictions where the user is allowed to trade or access services. Used for regulatory compliance and geographic restrictions. |
+| `EmailAddress` | `string` | No | Email address for the user, often retrieved from the authentication provider. This is separate from UserID (which is the Firebase Auth UID) and provides the user's email for communication purposes. |
 
 **Use Cases:**
 - Storing complete user profile information
@@ -85,7 +86,8 @@ The primary message containing all user information. This is the core data struc
 - User preference and settings storage
 
 **Important Notes:**
-- `UserID` must be a valid email address as it's used for Firebase authentication
+- `UserID` is the Firebase Auth UID, not an email address
+- `EmailAddress` is a separate field that stores the user's email, typically retrieved from the authentication provider
 - `OrganizationID` is legacy - use `User.OrganizationIDs` for the authoritative organization list
 - `ExternalUserID` enables integration with external systems that require anonymous identifiers
 - `KYCInquiries` can contain multiple IDs for tracking different KYC provider integrations
@@ -154,7 +156,7 @@ Message used for updating or reporting user status changes.
 
 | Field | Type | Required | Description |
 |-------|------|----------|-------------|
-| `UserID` | `string` | Yes | Email address of the user whose status is being changed. |
+| `UserID` | `string` | Yes | Firebase Auth UID of the user whose status is being changed. |
 | `OrganizationID` | `string` | Yes | Organization context for the status change. |
 | `Status` | `UserStatus` | Yes | The new status value. See `UserStatus` enum below. |
 | `Network` | `optional metadata.Network` | No | Network context if applicable. Used for blockchain-related operations. |
@@ -414,7 +416,7 @@ Comprehensive filter message for querying users with multiple filter criteria an
 
 | Field | Type | Required | Description |
 |-------|------|----------|-------------|
-| `UserIDs` | `repeated string` | No | List of user email addresses to filter by. If provided, only users matching these IDs will be returned. |
+| `UserIDs` | `repeated string` | No | List of Firebase Auth UIDs to filter by. If provided, only users matching these IDs will be returned. |
 | `Network` | `optional metadata.Network` | No | Network context filter. Used for blockchain-related filtering. |
 | `OrganizationID` | `string` | Yes | Organization identifier. Filters users to only those belonging to this organization. |
 | `Offset` | `optional int32` | No | Pagination offset. Starting position for paginated results. |
@@ -438,6 +440,7 @@ Comprehensive filter message for querying users with multiple filter criteria an
 - Multiple filter criteria can be combined (AND logic)
 - `Offset` and `Limit` enable pagination
 - `WalletAddress` and `BrokerAccountID` enable reverse lookups
+- `UserIDs` should contain Firebase Auth UIDs, not email addresses
 
 #### UserID
 
@@ -447,7 +450,7 @@ Simple message for identifying a specific user within an organization context.
 
 | Field | Type | Required | Description |
 |-------|------|----------|-------------|
-| `UserID` | `string` | Yes | Email address of the user. |
+| `UserID` | `string` | Yes | Firebase Auth UID of the user. |
 | `OrganizationID` | `string` | Yes | Organization context for the user lookup. |
 | `Network` | `optional metadata.Network` | No | Network context if applicable. Used for blockchain-related operations. |
 
@@ -458,6 +461,7 @@ Simple message for identifying a specific user within an organization context.
 
 **Important Notes:**
 - Both `UserID` and `OrganizationID` are required
+- `UserID` should be the Firebase Auth UID, not an email address
 - `Network` is optional and used for blockchain-specific operations
 
 ---
@@ -667,7 +671,7 @@ Complete KYC verification details including personal information, identification
 |-------|------|----------|-------------|
 | `Birthdate` | `string` | No | User's date of birth. Format may vary but typically ISO 8601 or similar. |
 | `PhoneNumber` | `string` | No | User's phone number. May include country code. |
-| `EmailAddress` | `string` | No | User's email address. May differ from the UserID email. |
+| `EmailAddress` | `string` | No | User's email address. May differ from the UserID or EmailAddress in UserDetails. |
 | `AddressStreet1` | `string` | No | Primary street address line. |
 | `AddressStreet2` | `string` | No | Secondary street address line (apartment, suite, etc.). |
 | `AddressCity` | `string` | No | City name. |
