@@ -66,8 +66,6 @@ export interface SignedDocument {
     SignedAt: Date | undefined;
     /** MD5 checksum of the file that was signed */
     FileMD5SUM: string;
-    /** Transaction ID of the signed document (e.g. from the blockchain) */
-    TXID: string;
 }
 export declare const Document: {
     encode(message: Document, writer?: _m0.Writer): _m0.Writer;
@@ -679,7 +677,6 @@ export declare const UserDocumentCompliance: {
             DocumentState?: DocumentState | undefined;
             SignedAt?: Date | undefined;
             FileMD5SUM?: string | undefined;
-            TXID?: string | undefined;
         }[] | undefined;
     } & {
         SignedDocuments?: ({
@@ -688,28 +685,24 @@ export declare const UserDocumentCompliance: {
             DocumentState?: DocumentState | undefined;
             SignedAt?: Date | undefined;
             FileMD5SUM?: string | undefined;
-            TXID?: string | undefined;
         }[] & ({
             Name?: string | undefined;
             SignedVersion?: string | undefined;
             DocumentState?: DocumentState | undefined;
             SignedAt?: Date | undefined;
             FileMD5SUM?: string | undefined;
-            TXID?: string | undefined;
         } & {
             Name?: string | undefined;
             SignedVersion?: string | undefined;
             DocumentState?: DocumentState | undefined;
             SignedAt?: Date | undefined;
             FileMD5SUM?: string | undefined;
-            TXID?: string | undefined;
         } & { [K in Exclude<keyof I["SignedDocuments"][number], keyof SignedDocument>]: never; })[] & { [K_1 in Exclude<keyof I["SignedDocuments"], keyof {
             Name?: string | undefined;
             SignedVersion?: string | undefined;
             DocumentState?: DocumentState | undefined;
             SignedAt?: Date | undefined;
             FileMD5SUM?: string | undefined;
-            TXID?: string | undefined;
         }[]>]: never; }) | undefined;
     } & { [K_2 in Exclude<keyof I, "SignedDocuments">]: never; }>(base?: I | undefined): UserDocumentCompliance;
     fromPartial<I_1 extends {
@@ -719,7 +712,6 @@ export declare const UserDocumentCompliance: {
             DocumentState?: DocumentState | undefined;
             SignedAt?: Date | undefined;
             FileMD5SUM?: string | undefined;
-            TXID?: string | undefined;
         }[] | undefined;
     } & {
         SignedDocuments?: ({
@@ -728,28 +720,24 @@ export declare const UserDocumentCompliance: {
             DocumentState?: DocumentState | undefined;
             SignedAt?: Date | undefined;
             FileMD5SUM?: string | undefined;
-            TXID?: string | undefined;
         }[] & ({
             Name?: string | undefined;
             SignedVersion?: string | undefined;
             DocumentState?: DocumentState | undefined;
             SignedAt?: Date | undefined;
             FileMD5SUM?: string | undefined;
-            TXID?: string | undefined;
         } & {
             Name?: string | undefined;
             SignedVersion?: string | undefined;
             DocumentState?: DocumentState | undefined;
             SignedAt?: Date | undefined;
             FileMD5SUM?: string | undefined;
-            TXID?: string | undefined;
         } & { [K_3 in Exclude<keyof I_1["SignedDocuments"][number], keyof SignedDocument>]: never; })[] & { [K_4 in Exclude<keyof I_1["SignedDocuments"], keyof {
             Name?: string | undefined;
             SignedVersion?: string | undefined;
             DocumentState?: DocumentState | undefined;
             SignedAt?: Date | undefined;
             FileMD5SUM?: string | undefined;
-            TXID?: string | undefined;
         }[]>]: never; }) | undefined;
     } & { [K_5 in Exclude<keyof I_1, "SignedDocuments">]: never; }>(object: I_1): UserDocumentCompliance;
 };
@@ -764,14 +752,12 @@ export declare const SignedDocument: {
         DocumentState?: DocumentState | undefined;
         SignedAt?: Date | undefined;
         FileMD5SUM?: string | undefined;
-        TXID?: string | undefined;
     } & {
         Name?: string | undefined;
         SignedVersion?: string | undefined;
         DocumentState?: DocumentState | undefined;
         SignedAt?: Date | undefined;
         FileMD5SUM?: string | undefined;
-        TXID?: string | undefined;
     } & { [K in Exclude<keyof I, keyof SignedDocument>]: never; }>(base?: I | undefined): SignedDocument;
     fromPartial<I_1 extends {
         Name?: string | undefined;
@@ -779,14 +765,12 @@ export declare const SignedDocument: {
         DocumentState?: DocumentState | undefined;
         SignedAt?: Date | undefined;
         FileMD5SUM?: string | undefined;
-        TXID?: string | undefined;
     } & {
         Name?: string | undefined;
         SignedVersion?: string | undefined;
         DocumentState?: DocumentState | undefined;
         SignedAt?: Date | undefined;
         FileMD5SUM?: string | undefined;
-        TXID?: string | undefined;
     } & { [K_1 in Exclude<keyof I_1, keyof SignedDocument>]: never; }>(object: I_1): SignedDocument;
 };
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;

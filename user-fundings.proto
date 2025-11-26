@@ -12,6 +12,7 @@ message Wallet {
     WalletType Type = 3;
     SignerType SignerType = 4;
     repeated string Organizations = 5; // List of organizations linked to this wallet address
+    repeated string RegisteredSmartContracts = 6; // List of smart contract addresses registered to this wallet address
 }
 
 message BankAccount {

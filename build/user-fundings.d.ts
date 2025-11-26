@@ -27,6 +27,8 @@ export interface Wallet {
     SignerType: SignerType;
     /** List of organizations linked to this wallet address */
     Organizations: string[];
+    /** List of smart contract addresses registered to this wallet address */
+    RegisteredSmartContracts: string[];
 }
 export interface BankAccount {
     AccountName: string;
@@ -62,26 +64,30 @@ export declare const Wallet: {
         Type?: WalletType | undefined;
         SignerType?: SignerType | undefined;
         Organizations?: string[] | undefined;
+        RegisteredSmartContracts?: string[] | undefined;
     } & {
         Address?: string | undefined;
         Alias?: string | undefined;
         Type?: WalletType | undefined;
         SignerType?: SignerType | undefined;
         Organizations?: (string[] & string[] & { [K in Exclude<keyof I["Organizations"], keyof string[]>]: never; }) | undefined;
-    } & { [K_1 in Exclude<keyof I, keyof Wallet>]: never; }>(base?: I | undefined): Wallet;
+        RegisteredSmartContracts?: (string[] & string[] & { [K_1 in Exclude<keyof I["RegisteredSmartContracts"], keyof string[]>]: never; }) | undefined;
+    } & { [K_2 in Exclude<keyof I, keyof Wallet>]: never; }>(base?: I | undefined): Wallet;
     fromPartial<I_1 extends {
         Address?: string | undefined;
         Alias?: string | undefined;
         Type?: WalletType | undefined;
         SignerType?: SignerType | undefined;
         Organizations?: string[] | undefined;
+        RegisteredSmartContracts?: string[] | undefined;
     } & {
         Address?: string | undefined;
         Alias?: string | undefined;
         Type?: WalletType | undefined;
         SignerType?: SignerType | undefined;
-        Organizations?: (string[] & string[] & { [K_2 in Exclude<keyof I_1["Organizations"], keyof string[]>]: never; }) | undefined;
-    } & { [K_3 in Exclude<keyof I_1, keyof Wallet>]: never; }>(object: I_1): Wallet;
+        Organizations?: (string[] & string[] & { [K_3 in Exclude<keyof I_1["Organizations"], keyof string[]>]: never; }) | undefined;
+        RegisteredSmartContracts?: (string[] & string[] & { [K_4 in Exclude<keyof I_1["RegisteredSmartContracts"], keyof string[]>]: never; }) | undefined;
+    } & { [K_5 in Exclude<keyof I_1, keyof Wallet>]: never; }>(object: I_1): Wallet;
 };
 export declare const BankAccount: {
     encode(message: BankAccount, writer?: _m0.Writer): _m0.Writer;
