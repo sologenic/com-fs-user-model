@@ -41,6 +41,7 @@ Key features of the {model_name.lower()} model include:
 - **Identification**: Provides unique identifiers for user
 - **Organizational Context**: Links items to organizations via OrganizationID
 - **Metadata and Audit**: Includes metadata and audit trails for tracking changes
+- **Role-Based Access**: Supports role assignment for access control
 - **Pagination Support**: Provides offset-based pagination for collections
 
 ## user-compliance.proto
@@ -183,6 +184,10 @@ The `BankAccount` message provides bankaccount data and operations.
 | Field Name | Type | Required/Optional | Description |
 |------------|------|-------------------|-------------|
 | AccountName | `string` | Required | The accountname of this item |
+| BankName | `string` | Required | user's identifier in the bank account |
+| BankAddress | `string` | Required | bank address |
+| AccountNumber | `string` | Required | bank account number |
+| ABA | `string` | Required | bank routing number |
 | SWIFT | `string` | Required | SWIFT value |
 | IBAN | `string` | Required | IBAN value |
 
@@ -197,6 +202,25 @@ The `BankAccount` message provides bankaccount data and operations.
 #### BrokerAccount {#brokeraccount}
 
 The `BrokerAccount` message provides brokeraccount data and operations.
+
+**Field Table:**
+
+| Field Name | Type | Required/Optional | Description |
+|------------|------|-------------------|-------------|
+| AccountID | `string` | Required | user's identifier in the broker account |
+| Broker | `orderproperties.ClearingBroker` | Required | "RQD", etc. |
+| OrganizationID | `string` | Required | broker identifier |
+| Profiles | `string` | Optional | bank account profiles for the broker account |
+
+**Use Cases:**
+- Creating new brokeraccount records
+- Retrieving brokeraccount information
+- Updating brokeraccount data
+- Associating items with specific organizations
+
+**Important Notes:**
+- The `AccountID` field must match a valid identifier format
+- The `OrganizationID` must be a valid UUID format
 
 ## user-kyc.proto
 
@@ -251,6 +275,7 @@ The `Employment` message provides employment data and operations.
 | EmployerName | `string` | Required | The employername of this item |
 | JobTitle | `string` | Required | JobTitle value |
 | StartDate | `google.protobuf.Timestamp` | Required | StartDate field |
+| EndDate | `google.protobuf.Timestamp` | Required | Empty if still employed |
 | Type | `EmploymentType` | Required | Type classification for this item (see related enum) |
 | Industry | `string` | Optional | Industry value |
 | Income | `Income` | Required | Income field |
@@ -328,21 +353,30 @@ The `UserDetails` message contains all the core information about a user, includ
 
 | Field Name | Type | Required/Optional | Description |
 |------------|------|-------------------|-------------|
+| Role | `role.Role` | Required | A retail user will always have a role of "NORMAL_USER" |
+| TradeProfile | `tradeprofile.TradeProfileDetails` | Optional | Trade profile details |
+| KYCInquiries | `string` | Optional | Array of KYC integration IDs |
 | KYCDetails | `UserKYCDetails` | Required | KYCDetails field |
 | UserDocumentCompliance | `document.UserDocumentCompliance` | Required | UserDocumentCompliance field |
+| KYCStatus | `KYCStatus` | Required | Status of KYC verification, e.g., PENDING, APPROVED, REJECTED |
 | UserTradeProfile | `tradeprofile.UserTradeProfile` | Optional | UserTradeProfile field |
 | ComplianceQuestions | `ComplianceQuestions` | Optional | ComplianceQuestions field |
 | BrokerAccounts | `BrokerAccount` | Optional | BrokerAccounts field |
 | BankAccounts | `BankAccount` | Optional | BankAccounts field |
 | UISettings | `UISettings` | Required | UISettings field |
+| CommissionSettings | `commission.CommissionSettings` | Optional | Broker API specific commission fields for user level (overrrides organization level) |
 | DataFeedAccounts | `DataFeedAccounts` | Optional | DataFeedAccounts field |
+| AllowedJurisdictions | `string` | Optional | ISO 3166-1 alpha-3 code e.g. "USA", "CAD" |
+| EmailAddress | `string` | Required | Email address for the user, often retrieved from the authentication provider |
 
 **Use Cases:**
 - Creating new user records with complete information
 - Updating user information
+- Assigning roles for permission management
+- Tracking status for administrative purposes
 
 **Important Notes:**
-- This message provides the userdetails representation
+- The `KYCStatus` field determines the current state of this item
 
 #### User {#user}
 
@@ -355,14 +389,16 @@ The `User` message provides user data and operations.
 | User | `UserDetails` | Required | User field |
 | MetaData | `metadata.MetaData` | Required | Metadata information including network and version details |
 | Audit | `audit.Audit` | Required | Audit trail information for tracking changes and access |
+| OrganizationIDs | `string` | Optional | List of organizations where the user is part of (cloned into) |
 
 **Use Cases:**
 - Creating new user records
 - Retrieving user information
 - Updating user data
+- Associating items with specific organizations
 
 **Important Notes:**
-- This message provides the user representation
+- The `OrganizationIDs` must be a valid UUID format
 
 #### Social {#social}
 
