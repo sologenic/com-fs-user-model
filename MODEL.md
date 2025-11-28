@@ -41,7 +41,7 @@
 
 The User provides a comprehensive data structure for managing user within the system. This model supports identification: provides unique identifiers for user, metadata and audit: includes metadata and audit trails for tracking changes, organizational context: links items to organizations via organizationid, and more. 
 
-Key features of the {model_name.lower()} model include:
+Key features of the user model include:
 - **Identification**: Provides unique identifiers for user
 - **Metadata and Audit**: Includes metadata and audit trails for tracking changes
 - **Organizational Context**: Links items to organizations via OrganizationID
@@ -89,7 +89,7 @@ The `USA` message provides usa data and operations.
 
 | Field Name | Type | Required/Optional | Description |
 |------------|------|-------------------|-------------|
-| RecordedAt | `google.protobuf.Timestamp` | Required | RecordedAt field |
+| RecordedAt | `google.protobuf.Timestamp` | Required | Timestamp information |
 | YearsExperience | `int64` | Required | YearsExperience field |
 | AnnualIncome | `int64` | Required | AnnualIncome field |
 | NetWorth | `int64` | Required | NetWorth field |
@@ -113,7 +113,7 @@ The `AlpacaDisclosures` message represents a collection of alpacadisclosure with
 
 | Field Name | Type | Required/Optional | Description |
 |------------|------|-------------------|-------------|
-| RecordedAt | `google.protobuf.Timestamp` | Required | RecordedAt field |
+| RecordedAt | `google.protobuf.Timestamp` | Required | Timestamp information |
 | IsControlPerson | `bool` | Required | IsControlPerson field |
 | IsAffiliatedExchangeOrFinra | `bool` | Required | IsAffiliatedExchangeOrFinra field |
 | IsPoliticallyExposed | `bool` | Required | IsPoliticallyExposed field |
@@ -355,7 +355,7 @@ The `Employment` message provides employment data and operations.
 |------------|------|-------------------|-------------|
 | EmployerName | `string` | Required | The employername of this item |
 | JobTitle | `string` | Required | JobTitle value |
-| StartDate | `google.protobuf.Timestamp` | Required | StartDate field |
+| StartDate | `google.protobuf.Timestamp` | Required | Timestamp information |
 | EndDate | `google.protobuf.Timestamp` | Required | Empty if still employed |
 | Type | `EmploymentType` | Required | Type classification for this item (see related enum) |
 | Industry | `string` | Optional | Industry value |
@@ -444,7 +444,7 @@ The `UserDetails` message contains all the core information about a user, includ
 | Status | `UserStatus` | Required | Current status of this item (see related enum) |
 | Wallets | `Wallet` | Optional | Wallets field |
 | Socials | `Social` | Optional | Socials field |
-| Language | `language.Lang` | Required | Language field |
+| Language | `language.Lang` | Required | Lang information |
 | ExternalUserID | `string` | Required | UUID for the external user identifier for example to be used in communication with the KYC provider, or other places where an anonymous ID is required |
 | OrganizationID | `string` | Required | UUID of the current organization the user is cloned into |
 | Employment | `Employment` | Optional | Employment field |
@@ -452,9 +452,9 @@ The `UserDetails` message contains all the core information about a user, includ
 | TradeProfile | `tradeprofile.TradeProfileDetails` | Optional | Trade profile details |
 | KYCInquiries | `string` | Optional | Array of KYC integration IDs |
 | KYCDetails | `UserKYCDetails` | Required | KYCDetails field |
-| UserDocumentCompliance | `document.UserDocumentCompliance` | Required | UserDocumentCompliance field |
+| UserDocumentCompliance | `document.UserDocumentCompliance` | Required | UserDocumentCompliance information |
 | KYCStatus | `KYCStatus` | Required | Status of KYC verification, e.g., PENDING, APPROVED, REJECTED |
-| UserTradeProfile | `tradeprofile.UserTradeProfile` | Optional | UserTradeProfile field |
+| UserTradeProfile | `tradeprofile.UserTradeProfile` | Optional | UserTradeProfile information |
 | ComplianceQuestions | `ComplianceQuestions` | Optional | ComplianceQuestions field |
 | BrokerAccounts | `BrokerAccount` | Optional | BrokerAccounts field |
 | BankAccounts | `BankAccount` | Optional | BankAccounts field |
