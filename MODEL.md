@@ -8,6 +8,11 @@
     - [ComplianceQuestions](#compliancequestions)
     - [USA](#usa)
     - [AlpacaDisclosures](#alpacadisclosures)
+  - [Enums](#enums)
+    - [LiquidationImportance](#liquidationimportance)
+    - [RiskTolerance](#risktolerance)
+    - [InvestmentObjective](#investmentobjective)
+    - [FundingSource](#fundingsource)
 - [user-filters.proto](#user-filters)
   - [Messages](#messages)
     - [Filter](#filter)
@@ -17,6 +22,9 @@
     - [Wallet](#wallet)
     - [BankAccount](#bankaccount)
     - [BrokerAccount](#brokeraccount)
+  - [Enums](#enums)
+    - [SignerType](#signertype)
+    - [WalletType](#wallettype)
 - [user-kyc.proto](#user-kyc)
   - [Messages](#messages)
     - [IDNumber](#idnumber)
@@ -24,6 +32,10 @@
     - [Employment](#employment)
     - [Income](#income)
     - [EmployerContact](#employercontact)
+  - [Enums](#enums)
+    - [EmploymentType](#employmenttype)
+    - [IncomeFrequency](#incomefrequency)
+    - [KYCStatus](#kycstatus)
 - [user.proto](#user)
   - [Messages](#messages)
     - [UserDetails](#userdetails)
@@ -34,6 +46,10 @@
     - [UISettings](#uisettings)
     - [DataFeedAccounts](#datafeedaccounts)
     - [DxFeed](#dxfeed)
+  - [Enums](#enums)
+    - [UserStatus](#userstatus)
+    - [SocialType](#socialtype)
+    - [Theme](#theme)
 - [Version Information](#version-information)
 - [Support](#support)
 
@@ -127,6 +143,106 @@ The `AlpacaDisclosures` message represents a collection of alpacadisclosure with
 
 **Important Notes:**
 - This message provides the alpacadisclosures representation
+
+### Enums
+
+#### LiquidationImportance {#liquidationimportance}
+
+The `LiquidationImportance` enum defines the possible states or types for user, allowing for classification and state management.
+
+**Value Table:**
+
+| Value Name | Number | Description |
+|------------|--------|-------------|
+| VERY_IMPORTANT | 0 | Default/unused value (protobuf convention) |
+| SOMEWHAT_IMPORTANT | 1 | Somewhat Important state or type |
+| NOT_IMPORTANT | 2 | Not Important state or type |
+| NO_PREFERENCE | 3 | No Preference state or type |
+
+**Use Cases:**
+- Setting liquidationimportance for items
+- Filtering items by liquidationimportance in queries
+- Enforcing business logic based on liquidationimportance
+
+**Important Notes:**
+- Values with `NOT_USED` prefix or number 0 follow protobuf conventions for default enum values and should not be actively used
+- Only valid liquidationimportance values should be used in production code
+- LiquidationImportance changes should be tracked in audit trails for compliance purposes
+
+#### RiskTolerance {#risktolerance}
+
+The `RiskTolerance` enum defines the possible states or types for user, allowing for classification and state management.
+
+**Value Table:**
+
+| Value Name | Number | Description |
+|------------|--------|-------------|
+| CONSERVATIVE | 0 | Default/unused value (protobuf convention) |
+| MODERATELY_CONSERVATIVE | 1 | Moderately Conservative state or type |
+| MODERATE | 2 | Moderate state or type |
+| MODERATELY_AGGRESSIVE | 3 | Moderately Aggressive state or type |
+| SIGNIFICANT_RISK | 4 | Significant Risk state or type |
+
+**Use Cases:**
+- Setting risktolerance for items
+- Filtering items by risktolerance in queries
+- Enforcing business logic based on risktolerance
+
+**Important Notes:**
+- Values with `NOT_USED` prefix or number 0 follow protobuf conventions for default enum values and should not be actively used
+- Only valid risktolerance values should be used in production code
+- RiskTolerance changes should be tracked in audit trails for compliance purposes
+
+#### InvestmentObjective {#investmentobjective}
+
+The `InvestmentObjective` enum defines the possible states or types for user, allowing for classification and state management.
+
+**Value Table:**
+
+| Value Name | Number | Description |
+|------------|--------|-------------|
+| INCOME | 0 | Default/unused value (protobuf convention) |
+| BALANCED | 1 | Balanced state or type |
+| GROWTH_AND_INCOME | 2 | Growth And Income state or type |
+| SAFE_LONG_TERM_GROWTH | 3 | Safe Long Term Growth state or type |
+| GREATER_RISK_LONG_TERM_GROWTH | 4 | Greater Risk Long Term Growth state or type |
+| SPECULATION | 5 | Speculation state or type |
+
+**Use Cases:**
+- Setting investmentobjective for items
+- Filtering items by investmentobjective in queries
+- Enforcing business logic based on investmentobjective
+
+**Important Notes:**
+- Values with `NOT_USED` prefix or number 0 follow protobuf conventions for default enum values and should not be actively used
+- Only valid investmentobjective values should be used in production code
+- InvestmentObjective changes should be tracked in audit trails for compliance purposes
+
+#### FundingSource {#fundingsource}
+
+The `FundingSource` enum defines the possible states or types for user, allowing for classification and state management.
+
+**Value Table:**
+
+| Value Name | Number | Description |
+|------------|--------|-------------|
+| NOT_USED_FUNDING_SOURCE | 0 | Default/unused value (protobuf convention) |
+| EMPLOYMENT_INCOME | 1 | Employment Income state or type |
+| INVESTMENTS | 2 | Investments state or type |
+| INHERITANCE | 3 | Inheritance state or type |
+| BUSINESS_INCOME | 4 | Business Income state or type |
+| SAVINGS | 5 | Savings state or type |
+| FAMILY | 6 | Family state or type |
+
+**Use Cases:**
+- Setting fundingsource for items
+- Filtering items by fundingsource in queries
+- Enforcing business logic based on fundingsource
+
+**Important Notes:**
+- Values with `NOT_USED` prefix or number 0 follow protobuf conventions for default enum values and should not be actively used
+- Only valid fundingsource values should be used in production code
+- FundingSource changes should be tracked in audit trails for compliance purposes
 
 ## user-filters.proto
 
@@ -282,6 +398,55 @@ The `BrokerAccount` message provides brokeraccount data and operations.
 - The `AccountID` field must match a valid identifier format
 - The `OrganizationID` must be a valid UUID format
 
+### Enums
+
+#### SignerType {#signertype}
+
+The `SignerType` enum defines the possible states or types for user, allowing for classification and state management.
+
+**Value Table:**
+
+| Value Name | Number | Description |
+|------------|--------|-------------|
+| NOT_USER_SIGNETTYPE | 0 | Default/unused value (protobuf convention) |
+| MOBILE_APP | 1 | Mobile App state or type |
+| BROWSER_LEAP | 2 | Browser Leap state or type |
+| BROWSER_COSMOSTATION | 3 | Browser Cosmostation state or type |
+| BROWSER_KEPLR | 4 | Browser Keplr state or type |
+
+**Use Cases:**
+- Setting signertype for items
+- Filtering items by signertype in queries
+- Enforcing business logic based on signertype
+
+**Important Notes:**
+- Values with `NOT_USED` prefix or number 0 follow protobuf conventions for default enum values and should not be actively used
+- Only valid signertype values should be used in production code
+- SignerType changes should be tracked in audit trails for compliance purposes
+
+#### WalletType {#wallettype}
+
+The `WalletType` enum defines the possible states or types for user, allowing for classification and state management.
+
+**Value Table:**
+
+| Value Name | Number | Description |
+|------------|--------|-------------|
+| NOT_USED_WALLETTYPE | 0 | Default/unused value (protobuf convention) |
+| TFSA | 1 | Tfsa state or type |
+| RRSP | 2 | Rrsp state or type |
+| STANDARD | 3 | Standard state or type |
+
+**Use Cases:**
+- Setting wallettype for items
+- Filtering items by wallettype in queries
+- Enforcing business logic based on wallettype
+
+**Important Notes:**
+- Values with `NOT_USED` prefix or number 0 follow protobuf conventions for default enum values and should not be actively used
+- Only valid wallettype values should be used in production code
+- WalletType changes should be tracked in audit trails for compliance purposes
+
 ## user-kyc.proto
 
 ### Package Information
@@ -412,6 +577,85 @@ The `EmployerContact` message provides employercontact data and operations.
 
 **Important Notes:**
 - This message provides the employercontact representation
+
+### Enums
+
+#### EmploymentType {#employmenttype}
+
+The `EmploymentType` enum defines the possible states or types for user, allowing for classification and state management.
+
+**Value Table:**
+
+| Value Name | Number | Description |
+|------------|--------|-------------|
+| NOT_USED_EMPLOYMENTTYPE | 0 | Default/unused value (protobuf convention) |
+| FULL_TIME | 1 | Full Time state or type |
+| PART_TIME | 2 | Part Time state or type |
+| CONTRACT | 3 | Contract state or type |
+| FREELANCE | 4 | Freelance state or type |
+| SELF_EMPLOYED | 5 | Self Employed state or type |
+| INTERNSHIP | 6 | Internship state or type |
+
+**Use Cases:**
+- Setting employmenttype for items
+- Filtering items by employmenttype in queries
+- Enforcing business logic based on employmenttype
+
+**Important Notes:**
+- Values with `NOT_USED` prefix or number 0 follow protobuf conventions for default enum values and should not be actively used
+- Only valid employmenttype values should be used in production code
+- EmploymentType changes should be tracked in audit trails for compliance purposes
+
+#### IncomeFrequency {#incomefrequency}
+
+The `IncomeFrequency` enum defines the possible states or types for user, allowing for classification and state management.
+
+**Value Table:**
+
+| Value Name | Number | Description |
+|------------|--------|-------------|
+| NOT_USED_INCOMEFREQUENCY | 0 | Default/unused value (protobuf convention) |
+| HOURLY | 1 | Hourly state or type |
+| WEEKLY | 2 | Weekly state or type |
+| BI_WEEKLY | 3 | Bi Weekly state or type |
+| MONTHLY | 4 | Monthly state or type |
+| ANNUALLY | 5 | Annually state or type |
+
+**Use Cases:**
+- Setting incomefrequency for items
+- Filtering items by incomefrequency in queries
+- Enforcing business logic based on incomefrequency
+
+**Important Notes:**
+- Values with `NOT_USED` prefix or number 0 follow protobuf conventions for default enum values and should not be actively used
+- Only valid incomefrequency values should be used in production code
+- IncomeFrequency changes should be tracked in audit trails for compliance purposes
+
+#### KYCStatus {#kycstatus}
+
+The `KYCStatus` enum defines the possible states or types for user, allowing for classification and state management.
+
+**Value Table:**
+
+| Value Name | Number | Description |
+|------------|--------|-------------|
+| KYC_STATUS_UNSPECIFIED | 0 | Default/unused value (protobuf convention) |
+| KYC_STATUS_PENDING | 1 | Kyc Status Pending state or type |
+| KYC_STATUS_IN_REVIEW | 2 | Kyc Status In Review state or type |
+| KYC_STATUS_APPROVED | 3 | Kyc Status Approved state or type |
+| KYC_STATUS_REJECTED | 4 | Kyc Status Rejected state or type |
+| KYC_STATUS_FAILED | 5 | Kyc Status Failed state or type |
+| KYC_STATUS_EXPIRED | 6 | Kyc Status Expired state or type |
+
+**Use Cases:**
+- Setting kycstatus for items
+- Filtering items by kycstatus in queries
+- Enforcing business logic based on kycstatus
+
+**Important Notes:**
+- Values with `NOT_USED` prefix or number 0 follow protobuf conventions for default enum values and should not be actively used
+- Only valid kycstatus values should be used in production code
+- KYCStatus changes should be tracked in audit trails for compliance purposes
 
 ## user.proto
 
@@ -620,6 +864,82 @@ The `DxFeed` message provides dxfeed data and operations.
 
 **Important Notes:**
 - The `AccountID` field must match a valid identifier format
+
+### Enums
+
+#### UserStatus {#userstatus}
+
+The `UserStatus` enum defines the possible states or types for user, allowing for classification and state management.
+
+**Value Table:**
+
+| Value Name | Number | Description |
+|------------|--------|-------------|
+| NOT_USED_USERSTATUS | 0 | Default/unused value (protobuf convention) |
+| ACTIVE | 1 | Active state or type |
+| ADMIN_DEACTIVATED | 2 | Admin Deactivated state or type |
+| TO_BE_APPROVED | 3 | To Be Approved state or type |
+
+**Use Cases:**
+- Setting userstatus for items
+- Filtering items by userstatus in queries
+- Enforcing business logic based on userstatus
+
+**Important Notes:**
+- Values with `NOT_USED` prefix or number 0 follow protobuf conventions for default enum values and should not be actively used
+- Only valid userstatus values should be used in production code
+- UserStatus changes should be tracked in audit trails for compliance purposes
+
+#### SocialType {#socialtype}
+
+The `SocialType` enum defines the possible states or types for user, allowing for classification and state management.
+
+**Value Table:**
+
+| Value Name | Number | Description |
+|------------|--------|-------------|
+| NOT_USED_SOCIALTYPE | 0 | Default/unused value (protobuf convention) |
+| WEBSITE | 1 | Website state or type |
+| GITHUB | 2 | Github state or type |
+| REDDIT | 3 | Reddit state or type |
+| DISCORD | 4 | Discord state or type |
+| TWITTER | 5 | Twitter state or type |
+| FACEBOOK | 6 | Facebook state or type |
+| TELEGRAM | 7 | Telegram state or type |
+| INSTAGRAM | 8 | Instagram state or type |
+| LINKEDIN | 9 | Linkedin state or type |
+
+**Use Cases:**
+- Setting socialtype for items
+- Filtering items by socialtype in queries
+- Enforcing business logic based on socialtype
+
+**Important Notes:**
+- Values with `NOT_USED` prefix or number 0 follow protobuf conventions for default enum values and should not be actively used
+- Only valid socialtype values should be used in production code
+- SocialType changes should be tracked in audit trails for compliance purposes
+
+#### Theme {#theme}
+
+The `Theme` enum defines the possible states or types for user, allowing for classification and state management.
+
+**Value Table:**
+
+| Value Name | Number | Description |
+|------------|--------|-------------|
+| NOT_USED_THEME | 0 | Default/unused value (protobuf convention) |
+| DARK | 1 | Dark state or type |
+| LIGHT | 2 | Light state or type |
+
+**Use Cases:**
+- Setting theme for items
+- Filtering items by theme in queries
+- Enforcing business logic based on theme
+
+**Important Notes:**
+- Values with `NOT_USED` prefix or number 0 follow protobuf conventions for default enum values and should not be actively used
+- Only valid theme values should be used in production code
+- Theme changes should be tracked in audit trails for compliance purposes
 
 ## Version Information
 
