@@ -6,6 +6,7 @@
 - [user-compliance.proto](#user-compliance)
   - [Messages](#messages)
     - [ComplianceQuestions](#compliancequestions)
+    - [USA](#usa)
     - [AlpacaDisclosures](#alpacadisclosures)
 - [user-filters.proto](#user-filters)
   - [Messages](#messages)
@@ -19,6 +20,7 @@
 - [user-kyc.proto](#user-kyc)
   - [Messages](#messages)
     - [IDNumber](#idnumber)
+    - [UserKYCDetails](#userkycdetails)
     - [Employment](#employment)
     - [Income](#income)
     - [EmployerContact](#employercontact)
@@ -29,20 +31,23 @@
     - [Social](#social)
     - [UserList](#userlist)
     - [StatusMessage](#statusmessage)
+    - [UISettings](#uisettings)
+    - [DataFeedAccounts](#datafeedaccounts)
+    - [DxFeed](#dxfeed)
 - [Version Information](#version-information)
 - [Support](#support)
 
 ## Overview
 
-The User provides a comprehensive data structure for managing user within the system. This model supports status management: tracks status for administrative control, identification: provides unique identifiers for user, organizational context: links items to organizations via organizationid, and more. 
+The User provides a comprehensive data structure for managing user within the system. This model supports identification: provides unique identifiers for user, metadata and audit: includes metadata and audit trails for tracking changes, organizational context: links items to organizations via organizationid, and more. 
 
 Key features of the {model_name.lower()} model include:
-- **Status Management**: Tracks status for administrative control
 - **Identification**: Provides unique identifiers for user
-- **Organizational Context**: Links items to organizations via OrganizationID
 - **Metadata and Audit**: Includes metadata and audit trails for tracking changes
-- **Role-Based Access**: Supports role assignment for access control
+- **Organizational Context**: Links items to organizations via OrganizationID
 - **Pagination Support**: Provides offset-based pagination for collections
+- **Status Management**: Tracks status for administrative control
+- **Role-Based Access**: Supports role assignment for access control
 
 ## user-compliance.proto
 
@@ -65,8 +70,8 @@ The `ComplianceQuestions` message represents a collection of compliancequestion 
 
 | Field Name | Type | Required/Optional | Description |
 |------------|------|-------------------|-------------|
-| Tolerance | `RiskTolerance` | Required | Tolerance field |
-| Objective | `InvestmentObjective` | Required | Objective field |
+| USA | `USA` | Optional | USA field |
+| AlpacaDisclosures | `AlpacaDisclosures` | Optional | AlpacaDisclosures field |
 
 **Use Cases:**
 - Returning paginated lists of compliancequestion from queries or searches
@@ -75,6 +80,30 @@ The `ComplianceQuestions` message represents a collection of compliancequestion 
 
 **Important Notes:**
 - This message provides the compliancequestions representation
+
+#### USA {#usa}
+
+The `USA` message provides usa data and operations.
+
+**Field Table:**
+
+| Field Name | Type | Required/Optional | Description |
+|------------|------|-------------------|-------------|
+| RecordedAt | `google.protobuf.Timestamp` | Required | RecordedAt field |
+| YearsExperience | `int64` | Required | YearsExperience field |
+| AnnualIncome | `int64` | Required | AnnualIncome field |
+| NetWorth | `int64` | Required | NetWorth field |
+| ConversionImportance | `LiquidationImportance` | Required | ConversionImportance field |
+| Tolerance | `RiskTolerance` | Required | Tolerance field |
+| Objective | `InvestmentObjective` | Required | Objective field |
+
+**Use Cases:**
+- Creating new usa records
+- Retrieving usa information
+- Updating usa data
+
+**Important Notes:**
+- This message provides the usa representation
 
 #### AlpacaDisclosures {#alpacadisclosures}
 
@@ -120,6 +149,12 @@ The `Filter` message provides filter data and operations.
 
 | Field Name | Type | Required/Optional | Description |
 |------------|------|-------------------|-------------|
+| UserIDs | `string` | Optional | Unique identifier for the users |
+| Network | `metadata.Network` | Optional | Metadata information including network and version details |
+| OrganizationID | `string` | Required | UUID of the organization this item belongs to |
+| Offset | `int32` | Optional | Offset field |
+| Limit | `int32` | Optional | Limit field |
+| InquiryID | `string` | Optional | Unique identifier for the inquiry |
 | Status | `UserStatus` | Optional | Current status of this item (see related enum) |
 | ExternalUserIDs | `string` | Optional | Unique identifier for the externalusers |
 | WalletAddress | `string` | Optional | WalletAddress value |
@@ -129,9 +164,16 @@ The `Filter` message provides filter data and operations.
 - Creating new filter records
 - Retrieving filter information
 - Updating filter data
+- Associating items with specific organizations
+- Providing continuation tokens for subsequent page requests
 - Tracking status for administrative purposes
 
 **Important Notes:**
+- The `UserIDs` field must match a valid identifier format
+- The `OrganizationID` must be a valid UUID format
+- If `Offset` is not set (or is 0), it indicates that all available items have been returned
+- Clients should use the `Offset` value in subsequent requests to retrieve the next page of results
+- The `InquiryID` field must match a valid identifier format
 - The `Status` field determines the current state of this item
 - The `ExternalUserIDs` field must match a valid identifier format
 - The `BrokerAccountID` field must match a valid identifier format
@@ -174,6 +216,24 @@ The `user-fundings.proto` file defines the core user fundings model for user man
 #### Wallet {#wallet}
 
 The `Wallet` message provides wallet data and operations.
+
+**Field Table:**
+
+| Field Name | Type | Required/Optional | Description |
+|------------|------|-------------------|-------------|
+| Address | `string` | Required | Address value |
+| Alias | `string` | Required | Alias value |
+| Type | `WalletType` | Required | Type classification for this item (see related enum) |
+| SignerType | `SignerType` | Required | Type classification for this item (see related enum) |
+| Organizations | `string` | Optional | List of organizations linked to this wallet address |
+
+**Use Cases:**
+- Creating new wallet records
+- Retrieving wallet information
+- Updating wallet data
+
+**Important Notes:**
+- This message provides the wallet representation
 
 #### BankAccount {#bankaccount}
 
@@ -243,6 +303,28 @@ The `IDNumber` message provides idnumber data and operations.
 
 | Field Name | Type | Required/Optional | Description |
 |------------|------|-------------------|-------------|
+| IssuingCountry | `string` | Required | IssuingCountry value |
+| IdentificationClass | `string` | Required | Unique identifier for the identificationclass |
+| IdentificationNumber | `string` | Required | Unique identifier for the identificationnumber |
+
+**Use Cases:**
+- Creating new idnumber records
+- Retrieving idnumber information
+- Updating idnumber data
+
+**Important Notes:**
+- The `IdentificationClass` field must match a valid identifier format
+- The `IdentificationNumber` field must match a valid identifier format
+
+#### UserKYCDetails {#userkycdetails}
+
+The `UserKYCDetails` message contains all the core information about a userkyc, including essential details and metadata.
+
+**Field Table:**
+
+| Field Name | Type | Required/Optional | Description |
+|------------|------|-------------------|-------------|
+| Birthdate | `string` | Required | Birthdate value |
 | PhoneNumber | `string` | Required | PhoneNumber value |
 | EmailAddress | `string` | Required | EmailAddress value |
 | AddressStreet1 | `string` | Required | AddressStreet1 value |
@@ -257,9 +339,8 @@ The `IDNumber` message provides idnumber data and operations.
 | LastName | `string` | Required | The lastname of this item |
 
 **Use Cases:**
-- Creating new idnumber records
-- Retrieving idnumber information
-- Updating idnumber data
+- Creating new userkyc records with complete information
+- Updating userkyc information
 
 **Important Notes:**
 - The `IdentificationNumber` field must match a valid identifier format
@@ -353,6 +434,20 @@ The `UserDetails` message contains all the core information about a user, includ
 
 | Field Name | Type | Required/Optional | Description |
 |------------|------|-------------------|-------------|
+| UserID | `string` | Required | Firebase Auth UID |
+| FirstName | `string` | Required | The firstname of this item |
+| LastName | `string` | Required | The lastname of this item |
+| Address | `string` | Required | Address value |
+| Avatar | `string` | Required | Avatar value |
+| Alias | `string` | Required | "Nickname" |
+| Description | `string` | Required | Additional descriptive information about this item |
+| Status | `UserStatus` | Required | Current status of this item (see related enum) |
+| Wallets | `Wallet` | Optional | Wallets field |
+| Socials | `Social` | Optional | Socials field |
+| Language | `language.Lang` | Required | Language field |
+| ExternalUserID | `string` | Required | UUID for the external user identifier for example to be used in communication with the KYC provider, or other places where an anonymous ID is required |
+| OrganizationID | `string` | Required | UUID of the current organization the user is cloned into |
+| Employment | `Employment` | Optional | Employment field |
 | Role | `role.Role` | Required | A retail user will always have a role of "NORMAL_USER" |
 | TradeProfile | `tradeprofile.TradeProfileDetails` | Optional | Trade profile details |
 | KYCInquiries | `string` | Optional | Array of KYC integration IDs |
@@ -372,10 +467,16 @@ The `UserDetails` message contains all the core information about a user, includ
 **Use Cases:**
 - Creating new user records with complete information
 - Updating user information
+- Tracking status for administrative purposes
+- Associating items with specific organizations
 - Assigning roles for permission management
 - Tracking status for administrative purposes
 
 **Important Notes:**
+- The `UserID` field must match a valid identifier format
+- The `Status` field determines the current state of this item
+- The `ExternalUserID` field must match a valid identifier format
+- The `OrganizationID` must be a valid UUID format
 - The `KYCStatus` field determines the current state of this item
 
 #### User {#user}
@@ -465,6 +566,60 @@ The `StatusMessage` message provides statusmessage data and operations.
 - The `UserID` field must match a valid identifier format
 - The `OrganizationID` must be a valid UUID format
 - The `Status` field determines the current state of this item
+
+#### UISettings {#uisettings}
+
+The `UISettings` message represents a collection of uisetting with pagination support for handling large result sets.
+
+**Field Table:**
+
+| Field Name | Type | Required/Optional | Description |
+|------------|------|-------------------|-------------|
+| Theme | `Theme` | Required | Theme field |
+
+**Use Cases:**
+- Returning paginated lists of uisetting from queries or searches
+- Implementing pagination in uisetting listing APIs
+- Handling large uisettings efficiently
+
+**Important Notes:**
+- This message provides the uisettings representation
+
+#### DataFeedAccounts {#datafeedaccounts}
+
+The `DataFeedAccounts` message represents a collection of datafeedaccount with pagination support for handling large result sets.
+
+**Field Table:**
+
+| Field Name | Type | Required/Optional | Description |
+|------------|------|-------------------|-------------|
+| DxFeed | `DxFeed` | Optional | DxFeed field |
+
+**Use Cases:**
+- Returning paginated lists of datafeedaccount from queries or searches
+- Implementing pagination in datafeedaccount listing APIs
+- Handling large datafeedaccounts efficiently
+
+**Important Notes:**
+- This message provides the datafeedaccounts representation
+
+#### DxFeed {#dxfeed}
+
+The `DxFeed` message provides dxfeed data and operations.
+
+**Field Table:**
+
+| Field Name | Type | Required/Optional | Description |
+|------------|------|-------------------|-------------|
+| AccountID | `string` | Required | Unique identifier for the account |
+
+**Use Cases:**
+- Creating new dxfeed records
+- Retrieving dxfeed information
+- Updating dxfeed data
+
+**Important Notes:**
+- The `AccountID` field must match a valid identifier format
 
 ## Version Information
 
