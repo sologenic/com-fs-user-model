@@ -9,6 +9,7 @@ lib_dirs=(
     "../com-fs-document-model"
     "../com-fs-trade-profile-model"
     "../com-fs-utils-lib"
+    "../com-fs-compliance-model"
 )
 
 # Function to fetch and checkout appropriate branch

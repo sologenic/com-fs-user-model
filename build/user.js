@@ -5,6 +5,7 @@
 // source: user.proto
 /* eslint-disable */
 import _m0 from "protobufjs/minimal";
+import { ComplianceFormAnswer } from "./sologenic/com-fs-compliance-model/compliance";
 import { UserDocumentCompliance } from "./sologenic/com-fs-document-model/document";
 import { TradeProfileDetails, UserTradeProfile } from "./sologenic/com-fs-trade-profile-model/tradeprofile";
 import { Audit } from "./sologenic/com-fs-utils-lib/models/audit/audit";
@@ -206,6 +207,7 @@ function createBaseUserDetails() {
         DataFeedAccounts: undefined,
         AllowedJurisdictions: [],
         EmailAddress: "",
+        ComplianceFormAnswers: [],
     };
 }
 export const UserDetails = {
@@ -296,6 +298,9 @@ export const UserDetails = {
         }
         if (message.EmailAddress !== "") {
             writer.uint32(234).string(message.EmailAddress);
+        }
+        for (const v of message.ComplianceFormAnswers) {
+            ComplianceFormAnswer.encode(v, writer.uint32(242).fork()).ldelim();
         }
         return writer;
     },
@@ -480,6 +485,12 @@ export const UserDetails = {
                     }
                     message.EmailAddress = reader.string();
                     continue;
+                case 30:
+                    if (tag !== 242) {
+                        break;
+                    }
+                    message.ComplianceFormAnswers.push(ComplianceFormAnswer.decode(reader, reader.uint32()));
+                    continue;
             }
             if ((tag & 7) === 4 || tag === 0) {
                 break;
@@ -533,10 +544,13 @@ export const UserDetails = {
                 ? object.AllowedJurisdictions.map((e) => globalThis.String(e))
                 : [],
             EmailAddress: isSet(object.EmailAddress) ? globalThis.String(object.EmailAddress) : "",
+            ComplianceFormAnswers: globalThis.Array.isArray(object === null || object === void 0 ? void 0 : object.ComplianceFormAnswers)
+                ? object.ComplianceFormAnswers.map((e) => ComplianceFormAnswer.fromJSON(e))
+                : [],
         };
     },
     toJSON(message) {
-        var _a, _b, _c, _d, _e, _f, _g;
+        var _a, _b, _c, _d, _e, _f, _g, _h;
         const obj = {};
         if (message.UserID !== "") {
             obj.UserID = message.UserID;
@@ -625,13 +639,16 @@ export const UserDetails = {
         if (message.EmailAddress !== "") {
             obj.EmailAddress = message.EmailAddress;
         }
+        if ((_h = message.ComplianceFormAnswers) === null || _h === void 0 ? void 0 : _h.length) {
+            obj.ComplianceFormAnswers = message.ComplianceFormAnswers.map((e) => ComplianceFormAnswer.toJSON(e));
+        }
         return obj;
     },
     create(base) {
         return UserDetails.fromPartial(base !== null && base !== void 0 ? base : {});
     },
     fromPartial(object) {
-        var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q, _r, _s, _t, _u, _v, _w;
+        var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q, _r, _s, _t, _u, _v, _w, _x;
         const message = createBaseUserDetails();
         message.UserID = (_a = object.UserID) !== null && _a !== void 0 ? _a : "";
         message.FirstName = (_b = object.FirstName) !== null && _b !== void 0 ? _b : "";
@@ -679,6 +696,7 @@ export const UserDetails = {
             : undefined;
         message.AllowedJurisdictions = ((_v = object.AllowedJurisdictions) === null || _v === void 0 ? void 0 : _v.map((e) => e)) || [];
         message.EmailAddress = (_w = object.EmailAddress) !== null && _w !== void 0 ? _w : "";
+        message.ComplianceFormAnswers = ((_x = object.ComplianceFormAnswers) === null || _x === void 0 ? void 0 : _x.map((e) => ComplianceFormAnswer.fromPartial(e))) || [];
         return message;
     },
 };

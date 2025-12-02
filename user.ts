@@ -6,6 +6,7 @@
 
 /* eslint-disable */
 import _m0 from "protobufjs/minimal";
+import { ComplianceFormAnswer } from "./sologenic/com-fs-compliance-model/compliance";
 import { UserDocumentCompliance } from "./sologenic/com-fs-document-model/document";
 import { TradeProfileDetails, UserTradeProfile } from "./sologenic/com-fs-trade-profile-model/tradeprofile";
 import { Audit } from "./sologenic/com-fs-utils-lib/models/audit/audit";
@@ -240,6 +241,8 @@ export interface UserDetails {
   AllowedJurisdictions: string[];
   /** Email address for the user, often retrieved from the authentication provider */
   EmailAddress: string;
+  /** Compliance answers for the user */
+  ComplianceFormAnswers: ComplianceFormAnswer[];
 }
 
 export interface User {
@@ -313,6 +316,7 @@ function createBaseUserDetails(): UserDetails {
     DataFeedAccounts: undefined,
     AllowedJurisdictions: [],
     EmailAddress: "",
+    ComplianceFormAnswers: [],
   };
 }
 
@@ -404,6 +408,9 @@ export const UserDetails = {
     }
     if (message.EmailAddress !== "") {
       writer.uint32(234).string(message.EmailAddress);
+    }
+    for (const v of message.ComplianceFormAnswers) {
+      ComplianceFormAnswer.encode(v!, writer.uint32(242).fork()).ldelim();
     }
     return writer;
   },
@@ -618,6 +625,13 @@ export const UserDetails = {
 
           message.EmailAddress = reader.string();
           continue;
+        case 30:
+          if (tag !== 242) {
+            break;
+          }
+
+          message.ComplianceFormAnswers.push(ComplianceFormAnswer.decode(reader, reader.uint32()));
+          continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -672,6 +686,9 @@ export const UserDetails = {
         ? object.AllowedJurisdictions.map((e: any) => globalThis.String(e))
         : [],
       EmailAddress: isSet(object.EmailAddress) ? globalThis.String(object.EmailAddress) : "",
+      ComplianceFormAnswers: globalThis.Array.isArray(object?.ComplianceFormAnswers)
+        ? object.ComplianceFormAnswers.map((e: any) => ComplianceFormAnswer.fromJSON(e))
+        : [],
     };
   },
 
@@ -764,6 +781,9 @@ export const UserDetails = {
     if (message.EmailAddress !== "") {
       obj.EmailAddress = message.EmailAddress;
     }
+    if (message.ComplianceFormAnswers?.length) {
+      obj.ComplianceFormAnswers = message.ComplianceFormAnswers.map((e) => ComplianceFormAnswer.toJSON(e));
+    }
     return obj;
   },
 
@@ -818,6 +838,7 @@ export const UserDetails = {
       : undefined;
     message.AllowedJurisdictions = object.AllowedJurisdictions?.map((e) => e) || [];
     message.EmailAddress = object.EmailAddress ?? "";
+    message.ComplianceFormAnswers = object.ComplianceFormAnswers?.map((e) => ComplianceFormAnswer.fromPartial(e)) || [];
     return message;
   },
 };

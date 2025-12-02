@@ -14,6 +14,7 @@ import "user-kyc.proto";
 import "user-compliance.proto";
 import "user-fundings.proto";
 import "sologenic/com-fs-utils-lib/models/commission/commission.proto";
+import "sologenic/com-fs-compliance-model/compliance.proto";
 
 message UserDetails {
     string UserID = 1; // Firebase Auth UID
@@ -45,6 +46,7 @@ message UserDetails {
     optional DataFeedAccounts DataFeedAccounts = 27;
     repeated string AllowedJurisdictions = 28; // ISO 3166-1 alpha-3 code e.g. "USA", "CAD"
     string EmailAddress = 29; // Email address for the user, often retrieved from the authentication provider
+    repeated compliance.ComplianceFormAnswer ComplianceFormAnswers = 30; // Compliance answers for the user
 }
 
 message User {
