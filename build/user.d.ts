@@ -286,6 +286,8 @@ export declare const UserDetails: {
                     Hash?: string | undefined;
                 }[] | undefined;
             }[] | undefined;
+            FormStatus?: import("./sologenic/com-fs-compliance-model/compliance").FormStatus | undefined;
+            SubmittedAt?: Date | undefined;
         }[] | undefined;
     } & {
         UserID?: string | undefined;
@@ -711,6 +713,8 @@ export declare const UserDetails: {
                     Hash?: string | undefined;
                 }[] | undefined;
             }[] | undefined;
+            FormStatus?: import("./sologenic/com-fs-compliance-model/compliance").FormStatus | undefined;
+            SubmittedAt?: Date | undefined;
         }[] & ({
             ComplianceID?: string | undefined;
             Answers?: {
@@ -722,6 +726,8 @@ export declare const UserDetails: {
                     Hash?: string | undefined;
                 }[] | undefined;
             }[] | undefined;
+            FormStatus?: import("./sologenic/com-fs-compliance-model/compliance").FormStatus | undefined;
+            SubmittedAt?: Date | undefined;
         } & {
             ComplianceID?: string | undefined;
             Answers?: ({
@@ -769,6 +775,8 @@ export declare const UserDetails: {
                     Hash?: string | undefined;
                 }[] | undefined;
             }[]>]: never; }) | undefined;
+            FormStatus?: import("./sologenic/com-fs-compliance-model/compliance").FormStatus | undefined;
+            SubmittedAt?: Date | undefined;
         } & { [K_39 in Exclude<keyof I["ComplianceFormAnswers"][number], keyof ComplianceFormAnswer>]: never; })[] & { [K_40 in Exclude<keyof I["ComplianceFormAnswers"], keyof {
             ComplianceID?: string | undefined;
             Answers?: {
@@ -780,6 +788,8 @@ export declare const UserDetails: {
                     Hash?: string | undefined;
                 }[] | undefined;
             }[] | undefined;
+            FormStatus?: import("./sologenic/com-fs-compliance-model/compliance").FormStatus | undefined;
+            SubmittedAt?: Date | undefined;
         }[]>]: never; }) | undefined;
     } & { [K_41 in Exclude<keyof I, keyof UserDetails>]: never; }>(base?: I | undefined): UserDetails;
     fromPartial<I_1 extends {
@@ -945,6 +955,8 @@ export declare const UserDetails: {
                     Hash?: string | undefined;
                 }[] | undefined;
             }[] | undefined;
+            FormStatus?: import("./sologenic/com-fs-compliance-model/compliance").FormStatus | undefined;
+            SubmittedAt?: Date | undefined;
         }[] | undefined;
     } & {
         UserID?: string | undefined;
@@ -1370,6 +1382,8 @@ export declare const UserDetails: {
                     Hash?: string | undefined;
                 }[] | undefined;
             }[] | undefined;
+            FormStatus?: import("./sologenic/com-fs-compliance-model/compliance").FormStatus | undefined;
+            SubmittedAt?: Date | undefined;
         }[] & ({
             ComplianceID?: string | undefined;
             Answers?: {
@@ -1381,6 +1395,8 @@ export declare const UserDetails: {
                     Hash?: string | undefined;
                 }[] | undefined;
             }[] | undefined;
+            FormStatus?: import("./sologenic/com-fs-compliance-model/compliance").FormStatus | undefined;
+            SubmittedAt?: Date | undefined;
         } & {
             ComplianceID?: string | undefined;
             Answers?: ({
@@ -1428,6 +1444,8 @@ export declare const UserDetails: {
                     Hash?: string | undefined;
                 }[] | undefined;
             }[]>]: never; }) | undefined;
+            FormStatus?: import("./sologenic/com-fs-compliance-model/compliance").FormStatus | undefined;
+            SubmittedAt?: Date | undefined;
         } & { [K_81 in Exclude<keyof I_1["ComplianceFormAnswers"][number], keyof ComplianceFormAnswer>]: never; })[] & { [K_82 in Exclude<keyof I_1["ComplianceFormAnswers"], keyof {
             ComplianceID?: string | undefined;
             Answers?: {
@@ -1439,6 +1457,8 @@ export declare const UserDetails: {
                     Hash?: string | undefined;
                 }[] | undefined;
             }[] | undefined;
+            FormStatus?: import("./sologenic/com-fs-compliance-model/compliance").FormStatus | undefined;
+            SubmittedAt?: Date | undefined;
         }[]>]: never; }) | undefined;
     } & { [K_83 in Exclude<keyof I_1, keyof UserDetails>]: never; }>(object: I_1): UserDetails;
 };
@@ -1611,6 +1631,8 @@ export declare const User: {
                         Hash?: string | undefined;
                     }[] | undefined;
                 }[] | undefined;
+                FormStatus?: import("./sologenic/com-fs-compliance-model/compliance").FormStatus | undefined;
+                SubmittedAt?: Date | undefined;
             }[] | undefined;
         } | undefined;
         MetaData?: {
@@ -1789,6 +1811,8 @@ export declare const User: {
                         Hash?: string | undefined;
                     }[] | undefined;
                 }[] | undefined;
+                FormStatus?: import("./sologenic/com-fs-compliance-model/compliance").FormStatus | undefined;
+                SubmittedAt?: Date | undefined;
             }[] | undefined;
         } & {
             UserID?: string | undefined;
@@ -2214,6 +2238,8 @@ export declare const User: {
                         Hash?: string | undefined;
                     }[] | undefined;
                 }[] | undefined;
+                FormStatus?: import("./sologenic/com-fs-compliance-model/compliance").FormStatus | undefined;
+                SubmittedAt?: Date | undefined;
             }[] & ({
                 ComplianceID?: string | undefined;
                 Answers?: {
@@ -2225,6 +2251,8 @@ export declare const User: {
                         Hash?: string | undefined;
                     }[] | undefined;
                 }[] | undefined;
+                FormStatus?: import("./sologenic/com-fs-compliance-model/compliance").FormStatus | undefined;
+                SubmittedAt?: Date | undefined;
             } & {
                 ComplianceID?: string | undefined;
                 Answers?: ({
@@ -2272,6 +2300,8 @@ export declare const User: {
                         Hash?: string | undefined;
                     }[] | undefined;
                 }[]>]: never; }) | undefined;
+                FormStatus?: import("./sologenic/com-fs-compliance-model/compliance").FormStatus | undefined;
+                SubmittedAt?: Date | undefined;
             } & { [K_39 in Exclude<keyof I["User"]["ComplianceFormAnswers"][number], keyof ComplianceFormAnswer>]: never; })[] & { [K_40 in Exclude<keyof I["User"]["ComplianceFormAnswers"], keyof {
                 ComplianceID?: string | undefined;
                 Answers?: {
@@ -2283,6 +2313,8 @@ export declare const User: {
                         Hash?: string | undefined;
                     }[] | undefined;
                 }[] | undefined;
+                FormStatus?: import("./sologenic/com-fs-compliance-model/compliance").FormStatus | undefined;
+                SubmittedAt?: Date | undefined;
             }[]>]: never; }) | undefined;
         } & { [K_41 in Exclude<keyof I["User"], keyof UserDetails>]: never; }) | undefined;
         MetaData?: ({
@@ -2471,6 +2503,8 @@ export declare const User: {
                         Hash?: string | undefined;
                     }[] | undefined;
                 }[] | undefined;
+                FormStatus?: import("./sologenic/com-fs-compliance-model/compliance").FormStatus | undefined;
+                SubmittedAt?: Date | undefined;
             }[] | undefined;
         } | undefined;
         MetaData?: {
@@ -2649,6 +2683,8 @@ export declare const User: {
                         Hash?: string | undefined;
                     }[] | undefined;
                 }[] | undefined;
+                FormStatus?: import("./sologenic/com-fs-compliance-model/compliance").FormStatus | undefined;
+                SubmittedAt?: Date | undefined;
             }[] | undefined;
         } & {
             UserID?: string | undefined;
@@ -3074,6 +3110,8 @@ export declare const User: {
                         Hash?: string | undefined;
                     }[] | undefined;
                 }[] | undefined;
+                FormStatus?: import("./sologenic/com-fs-compliance-model/compliance").FormStatus | undefined;
+                SubmittedAt?: Date | undefined;
             }[] & ({
                 ComplianceID?: string | undefined;
                 Answers?: {
@@ -3085,6 +3123,8 @@ export declare const User: {
                         Hash?: string | undefined;
                     }[] | undefined;
                 }[] | undefined;
+                FormStatus?: import("./sologenic/com-fs-compliance-model/compliance").FormStatus | undefined;
+                SubmittedAt?: Date | undefined;
             } & {
                 ComplianceID?: string | undefined;
                 Answers?: ({
@@ -3132,6 +3172,8 @@ export declare const User: {
                         Hash?: string | undefined;
                     }[] | undefined;
                 }[]>]: never; }) | undefined;
+                FormStatus?: import("./sologenic/com-fs-compliance-model/compliance").FormStatus | undefined;
+                SubmittedAt?: Date | undefined;
             } & { [K_85 in Exclude<keyof I_1["User"]["ComplianceFormAnswers"][number], keyof ComplianceFormAnswer>]: never; })[] & { [K_86 in Exclude<keyof I_1["User"]["ComplianceFormAnswers"], keyof {
                 ComplianceID?: string | undefined;
                 Answers?: {
@@ -3143,6 +3185,8 @@ export declare const User: {
                         Hash?: string | undefined;
                     }[] | undefined;
                 }[] | undefined;
+                FormStatus?: import("./sologenic/com-fs-compliance-model/compliance").FormStatus | undefined;
+                SubmittedAt?: Date | undefined;
             }[]>]: never; }) | undefined;
         } & { [K_87 in Exclude<keyof I_1["User"], keyof UserDetails>]: never; }) | undefined;
         MetaData?: ({
@@ -3358,6 +3402,8 @@ export declare const UserList: {
                             Hash?: string | undefined;
                         }[] | undefined;
                     }[] | undefined;
+                    FormStatus?: import("./sologenic/com-fs-compliance-model/compliance").FormStatus | undefined;
+                    SubmittedAt?: Date | undefined;
                 }[] | undefined;
             } | undefined;
             MetaData?: {
@@ -3539,6 +3585,8 @@ export declare const UserList: {
                             Hash?: string | undefined;
                         }[] | undefined;
                     }[] | undefined;
+                    FormStatus?: import("./sologenic/com-fs-compliance-model/compliance").FormStatus | undefined;
+                    SubmittedAt?: Date | undefined;
                 }[] | undefined;
             } | undefined;
             MetaData?: {
@@ -3717,6 +3765,8 @@ export declare const UserList: {
                             Hash?: string | undefined;
                         }[] | undefined;
                     }[] | undefined;
+                    FormStatus?: import("./sologenic/com-fs-compliance-model/compliance").FormStatus | undefined;
+                    SubmittedAt?: Date | undefined;
                 }[] | undefined;
             } | undefined;
             MetaData?: {
@@ -3895,6 +3945,8 @@ export declare const UserList: {
                             Hash?: string | undefined;
                         }[] | undefined;
                     }[] | undefined;
+                    FormStatus?: import("./sologenic/com-fs-compliance-model/compliance").FormStatus | undefined;
+                    SubmittedAt?: Date | undefined;
                 }[] | undefined;
             } & {
                 UserID?: string | undefined;
@@ -4320,6 +4372,8 @@ export declare const UserList: {
                             Hash?: string | undefined;
                         }[] | undefined;
                     }[] | undefined;
+                    FormStatus?: import("./sologenic/com-fs-compliance-model/compliance").FormStatus | undefined;
+                    SubmittedAt?: Date | undefined;
                 }[] & ({
                     ComplianceID?: string | undefined;
                     Answers?: {
@@ -4331,6 +4385,8 @@ export declare const UserList: {
                             Hash?: string | undefined;
                         }[] | undefined;
                     }[] | undefined;
+                    FormStatus?: import("./sologenic/com-fs-compliance-model/compliance").FormStatus | undefined;
+                    SubmittedAt?: Date | undefined;
                 } & {
                     ComplianceID?: string | undefined;
                     Answers?: ({
@@ -4378,6 +4434,8 @@ export declare const UserList: {
                             Hash?: string | undefined;
                         }[] | undefined;
                     }[]>]: never; }) | undefined;
+                    FormStatus?: import("./sologenic/com-fs-compliance-model/compliance").FormStatus | undefined;
+                    SubmittedAt?: Date | undefined;
                 } & { [K_39 in Exclude<keyof I["Users"][number]["User"]["ComplianceFormAnswers"][number], keyof ComplianceFormAnswer>]: never; })[] & { [K_40 in Exclude<keyof I["Users"][number]["User"]["ComplianceFormAnswers"], keyof {
                     ComplianceID?: string | undefined;
                     Answers?: {
@@ -4389,6 +4447,8 @@ export declare const UserList: {
                             Hash?: string | undefined;
                         }[] | undefined;
                     }[] | undefined;
+                    FormStatus?: import("./sologenic/com-fs-compliance-model/compliance").FormStatus | undefined;
+                    SubmittedAt?: Date | undefined;
                 }[]>]: never; }) | undefined;
             } & { [K_41 in Exclude<keyof I["Users"][number]["User"], keyof UserDetails>]: never; }) | undefined;
             MetaData?: ({
@@ -4576,6 +4636,8 @@ export declare const UserList: {
                             Hash?: string | undefined;
                         }[] | undefined;
                     }[] | undefined;
+                    FormStatus?: import("./sologenic/com-fs-compliance-model/compliance").FormStatus | undefined;
+                    SubmittedAt?: Date | undefined;
                 }[] | undefined;
             } | undefined;
             MetaData?: {
@@ -4758,6 +4820,8 @@ export declare const UserList: {
                             Hash?: string | undefined;
                         }[] | undefined;
                     }[] | undefined;
+                    FormStatus?: import("./sologenic/com-fs-compliance-model/compliance").FormStatus | undefined;
+                    SubmittedAt?: Date | undefined;
                 }[] | undefined;
             } | undefined;
             MetaData?: {
@@ -4939,6 +5003,8 @@ export declare const UserList: {
                             Hash?: string | undefined;
                         }[] | undefined;
                     }[] | undefined;
+                    FormStatus?: import("./sologenic/com-fs-compliance-model/compliance").FormStatus | undefined;
+                    SubmittedAt?: Date | undefined;
                 }[] | undefined;
             } | undefined;
             MetaData?: {
@@ -5117,6 +5183,8 @@ export declare const UserList: {
                             Hash?: string | undefined;
                         }[] | undefined;
                     }[] | undefined;
+                    FormStatus?: import("./sologenic/com-fs-compliance-model/compliance").FormStatus | undefined;
+                    SubmittedAt?: Date | undefined;
                 }[] | undefined;
             } | undefined;
             MetaData?: {
@@ -5295,6 +5363,8 @@ export declare const UserList: {
                             Hash?: string | undefined;
                         }[] | undefined;
                     }[] | undefined;
+                    FormStatus?: import("./sologenic/com-fs-compliance-model/compliance").FormStatus | undefined;
+                    SubmittedAt?: Date | undefined;
                 }[] | undefined;
             } & {
                 UserID?: string | undefined;
@@ -5720,6 +5790,8 @@ export declare const UserList: {
                             Hash?: string | undefined;
                         }[] | undefined;
                     }[] | undefined;
+                    FormStatus?: import("./sologenic/com-fs-compliance-model/compliance").FormStatus | undefined;
+                    SubmittedAt?: Date | undefined;
                 }[] & ({
                     ComplianceID?: string | undefined;
                     Answers?: {
@@ -5731,6 +5803,8 @@ export declare const UserList: {
                             Hash?: string | undefined;
                         }[] | undefined;
                     }[] | undefined;
+                    FormStatus?: import("./sologenic/com-fs-compliance-model/compliance").FormStatus | undefined;
+                    SubmittedAt?: Date | undefined;
                 } & {
                     ComplianceID?: string | undefined;
                     Answers?: ({
@@ -5778,6 +5852,8 @@ export declare const UserList: {
                             Hash?: string | undefined;
                         }[] | undefined;
                     }[]>]: never; }) | undefined;
+                    FormStatus?: import("./sologenic/com-fs-compliance-model/compliance").FormStatus | undefined;
+                    SubmittedAt?: Date | undefined;
                 } & { [K_87 in Exclude<keyof I_1["Users"][number]["User"]["ComplianceFormAnswers"][number], keyof ComplianceFormAnswer>]: never; })[] & { [K_88 in Exclude<keyof I_1["Users"][number]["User"]["ComplianceFormAnswers"], keyof {
                     ComplianceID?: string | undefined;
                     Answers?: {
@@ -5789,6 +5865,8 @@ export declare const UserList: {
                             Hash?: string | undefined;
                         }[] | undefined;
                     }[] | undefined;
+                    FormStatus?: import("./sologenic/com-fs-compliance-model/compliance").FormStatus | undefined;
+                    SubmittedAt?: Date | undefined;
                 }[]>]: never; }) | undefined;
             } & { [K_89 in Exclude<keyof I_1["Users"][number]["User"], keyof UserDetails>]: never; }) | undefined;
             MetaData?: ({
@@ -5976,6 +6054,8 @@ export declare const UserList: {
                             Hash?: string | undefined;
                         }[] | undefined;
                     }[] | undefined;
+                    FormStatus?: import("./sologenic/com-fs-compliance-model/compliance").FormStatus | undefined;
+                    SubmittedAt?: Date | undefined;
                 }[] | undefined;
             } | undefined;
             MetaData?: {

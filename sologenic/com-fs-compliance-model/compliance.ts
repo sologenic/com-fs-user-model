@@ -6,6 +6,7 @@
 
 /* eslint-disable */
 import _m0 from "protobufjs/minimal";
+import { Timestamp } from "../../google/protobuf/timestamp";
 import { Audit } from "../com-fs-utils-lib/models/audit/audit";
 import { MetaData } from "../com-fs-utils-lib/models/metadata/metadata";
 
@@ -188,6 +189,54 @@ export function complianceStatusToJSON(object: ComplianceStatus): string {
   }
 }
 
+export enum FormStatus {
+  FORM_STATUS_DO_NOT_USE = 0,
+  /** FORM_STATUS_SUBMITTED - Form has been submitted by the user */
+  FORM_STATUS_SUBMITTED = 1,
+  /** FORM_STATUS_RE_VALIDATE - Form needs to be re-validated by the user */
+  FORM_STATUS_RE_VALIDATE = 2,
+  /** FORM_STATUS_REJECTED - Form has been rejected by the admin for any reason, the user will have to update the form and resubmit it */
+  FORM_STATUS_REJECTED = 3,
+  UNRECOGNIZED = -1,
+}
+
+export function formStatusFromJSON(object: any): FormStatus {
+  switch (object) {
+    case 0:
+    case "FORM_STATUS_DO_NOT_USE":
+      return FormStatus.FORM_STATUS_DO_NOT_USE;
+    case 1:
+    case "FORM_STATUS_SUBMITTED":
+      return FormStatus.FORM_STATUS_SUBMITTED;
+    case 2:
+    case "FORM_STATUS_RE_VALIDATE":
+      return FormStatus.FORM_STATUS_RE_VALIDATE;
+    case 3:
+    case "FORM_STATUS_REJECTED":
+      return FormStatus.FORM_STATUS_REJECTED;
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return FormStatus.UNRECOGNIZED;
+  }
+}
+
+export function formStatusToJSON(object: FormStatus): string {
+  switch (object) {
+    case FormStatus.FORM_STATUS_DO_NOT_USE:
+      return "FORM_STATUS_DO_NOT_USE";
+    case FormStatus.FORM_STATUS_SUBMITTED:
+      return "FORM_STATUS_SUBMITTED";
+    case FormStatus.FORM_STATUS_RE_VALIDATE:
+      return "FORM_STATUS_RE_VALIDATE";
+    case FormStatus.FORM_STATUS_REJECTED:
+      return "FORM_STATUS_REJECTED";
+    case FormStatus.UNRECOGNIZED:
+    default:
+      return "UNRECOGNIZED";
+  }
+}
+
 export interface Compliance {
   Compliance: ComplianceDetails | undefined;
   MetaData: MetaData | undefined;
@@ -248,6 +297,9 @@ export interface ComplianceFormAnswer {
   ComplianceID: string;
   /** Answers to individual questions */
   Answers: QuestionAnswer[];
+  FormStatus: FormStatus;
+  /** Timestamp of the submission, set by the backend when the form is submitted */
+  SubmittedAt?: Date | undefined;
 }
 
 export interface QuestionAnswer {
@@ -954,7 +1006,7 @@ export const QuestionOption = {
 };
 
 function createBaseComplianceFormAnswer(): ComplianceFormAnswer {
-  return { ComplianceID: "", Answers: [] };
+  return { ComplianceID: "", Answers: [], FormStatus: 0, SubmittedAt: undefined };
 }
 
 export const ComplianceFormAnswer = {
@@ -964,6 +1016,12 @@ export const ComplianceFormAnswer = {
     }
     for (const v of message.Answers) {
       QuestionAnswer.encode(v!, writer.uint32(18).fork()).ldelim();
+    }
+    if (message.FormStatus !== 0) {
+      writer.uint32(24).int32(message.FormStatus);
+    }
+    if (message.SubmittedAt !== undefined) {
+      Timestamp.encode(toTimestamp(message.SubmittedAt), writer.uint32(34).fork()).ldelim();
     }
     return writer;
   },
@@ -989,6 +1047,20 @@ export const ComplianceFormAnswer = {
 
           message.Answers.push(QuestionAnswer.decode(reader, reader.uint32()));
           continue;
+        case 3:
+          if (tag !== 24) {
+            break;
+          }
+
+          message.FormStatus = reader.int32() as any;
+          continue;
+        case 4:
+          if (tag !== 34) {
+            break;
+          }
+
+          message.SubmittedAt = fromTimestamp(Timestamp.decode(reader, reader.uint32()));
+          continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -1004,6 +1076,8 @@ export const ComplianceFormAnswer = {
       Answers: globalThis.Array.isArray(object?.Answers)
         ? object.Answers.map((e: any) => QuestionAnswer.fromJSON(e))
         : [],
+      FormStatus: isSet(object.FormStatus) ? formStatusFromJSON(object.FormStatus) : 0,
+      SubmittedAt: isSet(object.SubmittedAt) ? fromJsonTimestamp(object.SubmittedAt) : undefined,
     };
   },
 
@@ -1015,6 +1089,12 @@ export const ComplianceFormAnswer = {
     if (message.Answers?.length) {
       obj.Answers = message.Answers.map((e) => QuestionAnswer.toJSON(e));
     }
+    if (message.FormStatus !== 0) {
+      obj.FormStatus = formStatusToJSON(message.FormStatus);
+    }
+    if (message.SubmittedAt !== undefined) {
+      obj.SubmittedAt = message.SubmittedAt.toISOString();
+    }
     return obj;
   },
 
@@ -1025,6 +1105,8 @@ export const ComplianceFormAnswer = {
     const message = createBaseComplianceFormAnswer();
     message.ComplianceID = object.ComplianceID ?? "";
     message.Answers = object.Answers?.map((e) => QuestionAnswer.fromPartial(e)) || [];
+    message.FormStatus = object.FormStatus ?? 0;
+    message.SubmittedAt = object.SubmittedAt ?? undefined;
     return message;
   },
 };
@@ -1129,6 +1211,28 @@ export type DeepPartial<T> = T extends Builtin ? T
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin ? P
   : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P>>]: never };
+
+function toTimestamp(date: Date): Timestamp {
+  const seconds = Math.trunc(date.getTime() / 1_000);
+  const nanos = (date.getTime() % 1_000) * 1_000_000;
+  return { seconds, nanos };
+}
+
+function fromTimestamp(t: Timestamp): Date {
+  let millis = (t.seconds || 0) * 1_000;
+  millis += (t.nanos || 0) / 1_000_000;
+  return new globalThis.Date(millis);
+}
+
+function fromJsonTimestamp(o: any): Date {
+  if (o instanceof globalThis.Date) {
+    return o;
+  } else if (typeof o === "string") {
+    return new globalThis.Date(o);
+  } else {
+    return fromTimestamp(Timestamp.fromJSON(o));
+  }
+}
 
 function isSet(value: any): boolean {
   return value !== null && value !== undefined;

@@ -40,6 +40,18 @@ export declare enum ComplianceStatus {
 }
 export declare function complianceStatusFromJSON(object: any): ComplianceStatus;
 export declare function complianceStatusToJSON(object: ComplianceStatus): string;
+export declare enum FormStatus {
+    FORM_STATUS_DO_NOT_USE = 0,
+    /** FORM_STATUS_SUBMITTED - Form has been submitted by the user */
+    FORM_STATUS_SUBMITTED = 1,
+    /** FORM_STATUS_RE_VALIDATE - Form needs to be re-validated by the user */
+    FORM_STATUS_RE_VALIDATE = 2,
+    /** FORM_STATUS_REJECTED - Form has been rejected by the admin for any reason, the user will have to update the form and resubmit it */
+    FORM_STATUS_REJECTED = 3,
+    UNRECOGNIZED = -1
+}
+export declare function formStatusFromJSON(object: any): FormStatus;
+export declare function formStatusToJSON(object: FormStatus): string;
 export interface Compliance {
     Compliance: ComplianceDetails | undefined;
     MetaData: MetaData | undefined;
@@ -91,6 +103,9 @@ export interface ComplianceFormAnswer {
     ComplianceID: string;
     /** Answers to individual questions */
     Answers: QuestionAnswer[];
+    FormStatus: FormStatus;
+    /** Timestamp of the submission, set by the backend when the form is submitted */
+    SubmittedAt?: Date | undefined;
 }
 export interface QuestionAnswer {
     /** The question text (keeps structure consistent without the need to force static indexes of the question positions) */
@@ -1454,6 +1469,8 @@ export declare const ComplianceFormAnswer: {
                 Hash?: string | undefined;
             }[] | undefined;
         }[] | undefined;
+        FormStatus?: FormStatus | undefined;
+        SubmittedAt?: Date | undefined;
     } & {
         ComplianceID?: string | undefined;
         Answers?: ({
@@ -1501,6 +1518,8 @@ export declare const ComplianceFormAnswer: {
                 Hash?: string | undefined;
             }[] | undefined;
         }[]>]: never; }) | undefined;
+        FormStatus?: FormStatus | undefined;
+        SubmittedAt?: Date | undefined;
     } & { [K_5 in Exclude<keyof I, keyof ComplianceFormAnswer>]: never; }>(base?: I | undefined): ComplianceFormAnswer;
     fromPartial<I_1 extends {
         ComplianceID?: string | undefined;
@@ -1513,6 +1532,8 @@ export declare const ComplianceFormAnswer: {
                 Hash?: string | undefined;
             }[] | undefined;
         }[] | undefined;
+        FormStatus?: FormStatus | undefined;
+        SubmittedAt?: Date | undefined;
     } & {
         ComplianceID?: string | undefined;
         Answers?: ({
@@ -1560,6 +1581,8 @@ export declare const ComplianceFormAnswer: {
                 Hash?: string | undefined;
             }[] | undefined;
         }[]>]: never; }) | undefined;
+        FormStatus?: FormStatus | undefined;
+        SubmittedAt?: Date | undefined;
     } & { [K_11 in Exclude<keyof I_1, keyof ComplianceFormAnswer>]: never; }>(object: I_1): ComplianceFormAnswer;
 };
 export declare const QuestionAnswer: {

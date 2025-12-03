@@ -5,6 +5,7 @@
 // source: sologenic/com-fs-compliance-model/compliance.proto
 /* eslint-disable */
 import _m0 from "protobufjs/minimal";
+import { Timestamp } from "../../google/protobuf/timestamp";
 import { Audit } from "../com-fs-utils-lib/models/audit/audit";
 import { MetaData } from "../com-fs-utils-lib/models/metadata/metadata";
 export const protobufPackage = "compliance";
@@ -173,6 +174,52 @@ export function complianceStatusToJSON(object) {
         case ComplianceStatus.COMPLIANCE_STATUS_INACTIVE:
             return "COMPLIANCE_STATUS_INACTIVE";
         case ComplianceStatus.UNRECOGNIZED:
+        default:
+            return "UNRECOGNIZED";
+    }
+}
+export var FormStatus;
+(function (FormStatus) {
+    FormStatus[FormStatus["FORM_STATUS_DO_NOT_USE"] = 0] = "FORM_STATUS_DO_NOT_USE";
+    /** FORM_STATUS_SUBMITTED - Form has been submitted by the user */
+    FormStatus[FormStatus["FORM_STATUS_SUBMITTED"] = 1] = "FORM_STATUS_SUBMITTED";
+    /** FORM_STATUS_RE_VALIDATE - Form needs to be re-validated by the user */
+    FormStatus[FormStatus["FORM_STATUS_RE_VALIDATE"] = 2] = "FORM_STATUS_RE_VALIDATE";
+    /** FORM_STATUS_REJECTED - Form has been rejected by the admin for any reason, the user will have to update the form and resubmit it */
+    FormStatus[FormStatus["FORM_STATUS_REJECTED"] = 3] = "FORM_STATUS_REJECTED";
+    FormStatus[FormStatus["UNRECOGNIZED"] = -1] = "UNRECOGNIZED";
+})(FormStatus || (FormStatus = {}));
+export function formStatusFromJSON(object) {
+    switch (object) {
+        case 0:
+        case "FORM_STATUS_DO_NOT_USE":
+            return FormStatus.FORM_STATUS_DO_NOT_USE;
+        case 1:
+        case "FORM_STATUS_SUBMITTED":
+            return FormStatus.FORM_STATUS_SUBMITTED;
+        case 2:
+        case "FORM_STATUS_RE_VALIDATE":
+            return FormStatus.FORM_STATUS_RE_VALIDATE;
+        case 3:
+        case "FORM_STATUS_REJECTED":
+            return FormStatus.FORM_STATUS_REJECTED;
+        case -1:
+        case "UNRECOGNIZED":
+        default:
+            return FormStatus.UNRECOGNIZED;
+    }
+}
+export function formStatusToJSON(object) {
+    switch (object) {
+        case FormStatus.FORM_STATUS_DO_NOT_USE:
+            return "FORM_STATUS_DO_NOT_USE";
+        case FormStatus.FORM_STATUS_SUBMITTED:
+            return "FORM_STATUS_SUBMITTED";
+        case FormStatus.FORM_STATUS_RE_VALIDATE:
+            return "FORM_STATUS_RE_VALIDATE";
+        case FormStatus.FORM_STATUS_REJECTED:
+            return "FORM_STATUS_REJECTED";
+        case FormStatus.UNRECOGNIZED:
         default:
             return "UNRECOGNIZED";
     }
@@ -815,7 +862,7 @@ export const QuestionOption = {
     },
 };
 function createBaseComplianceFormAnswer() {
-    return { ComplianceID: "", Answers: [] };
+    return { ComplianceID: "", Answers: [], FormStatus: 0, SubmittedAt: undefined };
 }
 export const ComplianceFormAnswer = {
     encode(message, writer = _m0.Writer.create()) {
@@ -824,6 +871,12 @@ export const ComplianceFormAnswer = {
         }
         for (const v of message.Answers) {
             QuestionAnswer.encode(v, writer.uint32(18).fork()).ldelim();
+        }
+        if (message.FormStatus !== 0) {
+            writer.uint32(24).int32(message.FormStatus);
+        }
+        if (message.SubmittedAt !== undefined) {
+            Timestamp.encode(toTimestamp(message.SubmittedAt), writer.uint32(34).fork()).ldelim();
         }
         return writer;
     },
@@ -846,6 +899,18 @@ export const ComplianceFormAnswer = {
                     }
                     message.Answers.push(QuestionAnswer.decode(reader, reader.uint32()));
                     continue;
+                case 3:
+                    if (tag !== 24) {
+                        break;
+                    }
+                    message.FormStatus = reader.int32();
+                    continue;
+                case 4:
+                    if (tag !== 34) {
+                        break;
+                    }
+                    message.SubmittedAt = fromTimestamp(Timestamp.decode(reader, reader.uint32()));
+                    continue;
             }
             if ((tag & 7) === 4 || tag === 0) {
                 break;
@@ -860,6 +925,8 @@ export const ComplianceFormAnswer = {
             Answers: globalThis.Array.isArray(object === null || object === void 0 ? void 0 : object.Answers)
                 ? object.Answers.map((e) => QuestionAnswer.fromJSON(e))
                 : [],
+            FormStatus: isSet(object.FormStatus) ? formStatusFromJSON(object.FormStatus) : 0,
+            SubmittedAt: isSet(object.SubmittedAt) ? fromJsonTimestamp(object.SubmittedAt) : undefined,
         };
     },
     toJSON(message) {
@@ -871,16 +938,24 @@ export const ComplianceFormAnswer = {
         if ((_a = message.Answers) === null || _a === void 0 ? void 0 : _a.length) {
             obj.Answers = message.Answers.map((e) => QuestionAnswer.toJSON(e));
         }
+        if (message.FormStatus !== 0) {
+            obj.FormStatus = formStatusToJSON(message.FormStatus);
+        }
+        if (message.SubmittedAt !== undefined) {
+            obj.SubmittedAt = message.SubmittedAt.toISOString();
+        }
         return obj;
     },
     create(base) {
         return ComplianceFormAnswer.fromPartial(base !== null && base !== void 0 ? base : {});
     },
     fromPartial(object) {
-        var _a, _b;
+        var _a, _b, _c, _d;
         const message = createBaseComplianceFormAnswer();
         message.ComplianceID = (_a = object.ComplianceID) !== null && _a !== void 0 ? _a : "";
         message.Answers = ((_b = object.Answers) === null || _b === void 0 ? void 0 : _b.map((e) => QuestionAnswer.fromPartial(e))) || [];
+        message.FormStatus = (_c = object.FormStatus) !== null && _c !== void 0 ? _c : 0;
+        message.SubmittedAt = (_d = object.SubmittedAt) !== null && _d !== void 0 ? _d : undefined;
         return message;
     },
 };
@@ -966,6 +1041,27 @@ export const QuestionAnswer = {
         return message;
     },
 };
+function toTimestamp(date) {
+    const seconds = Math.trunc(date.getTime() / 1000);
+    const nanos = (date.getTime() % 1000) * 1000000;
+    return { seconds, nanos };
+}
+function fromTimestamp(t) {
+    let millis = (t.seconds || 0) * 1000;
+    millis += (t.nanos || 0) / 1000000;
+    return new globalThis.Date(millis);
+}
+function fromJsonTimestamp(o) {
+    if (o instanceof globalThis.Date) {
+        return o;
+    }
+    else if (typeof o === "string") {
+        return new globalThis.Date(o);
+    }
+    else {
+        return fromTimestamp(Timestamp.fromJSON(o));
+    }
+}
 function isSet(value) {
     return value !== null && value !== undefined;
 }

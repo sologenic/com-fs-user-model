@@ -82,7 +82,16 @@ Key features of the user model include:
 
 The `user.proto` file defines the core user model for user management. It provides message types for representing user data, status management, social profiles, UI settings, and data feed accounts. The file integrates with external utility libraries including metadata, audit, role, language, trade profile, document, commission, and compliance models.
 
-**Note on ComplianceFormAnswer**: The `ComplianceFormAnswers` field uses the `compliance.ComplianceFormAnswer` type from the compliance model. Each `ComplianceFormAnswer` contains `QuestionAnswer` messages, and each `QuestionAnswer` can include a `repeated File` field. This allows compliance form responses to include file attachments (e.g., documents, images) with each answer. The File structure includes a description, optionality setting, and hash for integrity verification. By storing file descriptions in answers, the admin interface can render answers even if the questionnaire structure is later updated.
+**Note on ComplianceFormAnswer**: The `ComplianceFormAnswers` field uses the `compliance.ComplianceFormAnswer` type from the compliance model. Each `ComplianceFormAnswer` contains:
+- `ComplianceID`: UUID reference to the compliance form
+- `Answers`: Array of `QuestionAnswer` messages, each containing:
+  - `Question`: The question text (for consistency without static indexes)
+  - `Values`: Answer values as strings (single value for radio/text, multiple for checkbox)
+  - `Files`: Repeated File field allowing file attachments (e.g., documents, images) with each answer
+- `FormStatus`: Status of the form (enum: FORM_STATUS_SUBMITTED = form submitted by user, FORM_STATUS_RE_VALIDATE = needs re-validation, FORM_STATUS_REJECTED = rejected by admin requiring resubmission)
+- `SubmittedAt`: Timestamp when the form was submitted (set by backend)
+
+The File structure includes a description, optionality setting, and hash for integrity verification. By storing file descriptions in answers, the admin interface can render answers even if the questionnaire structure is later updated. Answer values are stored as strings and should be parsed based on the question's ResponseType (INT, STRING, BOOLEAN) for validation.
 
 ### Messages
 
@@ -148,7 +157,12 @@ The `UserDetails` message contains all the core information about a user, includ
 - `AllowedJurisdictions` uses ISO 3166-1 alpha-3 format (3-letter country codes)
 - Retail users always have a role of "NORMAL_USER"
 - Commission settings at the user level override organization-level settings
-- `ComplianceFormAnswers` contains `QuestionAnswer` messages, each of which can have a `repeated File` field for file attachments. Files include a description, optionality setting, and hash for integrity verification. By repeating the file description in answers, the admin interface can render answers even if the questionnaire is later updated.
+- `ComplianceFormAnswers` contains `ComplianceFormAnswer` messages, each with:
+  - `ComplianceID`: Reference to the compliance form
+  - `Answers`: Array of `QuestionAnswer` messages with question text, values (as strings), and optional `repeated File` attachments
+  - `FormStatus`: Tracks form submission status (FORM_STATUS_SUBMITTED, FORM_STATUS_RE_VALIDATE, FORM_STATUS_REJECTED)
+  - `SubmittedAt`: Optional timestamp of form submission (set by backend when form is submitted)
+  - Files include a description, optionality setting, and hash for integrity verification. Answer values are stored as strings and should be parsed based on the question's ResponseType for validation.
 
 #### User {#user}
 
@@ -1113,5 +1127,5 @@ For additional information and support:
   - `sologenic/com-fs-trade-profile-model/tradeprofile.proto`
   - `sologenic/com-fs-document-model/document.proto`
   - `sologenic/com-fs-utils-lib/models/commission/commission.proto`
-  - `sologenic/com-fs-compliance-model/compliance.proto` - Note: The compliance model includes `ComplianceFormAnswer` with `QuestionAnswer` messages that support `repeated File` fields for file attachments in compliance responses
+  - `sologenic/com-fs-compliance-model/compliance.proto` - Note: The compliance model includes `ComplianceFormAnswer` with `QuestionAnswer` messages that support `repeated File` fields for file attachments. `ComplianceFormAnswer` also includes `FormStatus` (SUBMITTED, RE_VALIDATE, REJECTED) and `SubmittedAt` timestamp fields for tracking form submission status.
   - `sologenic/com-fs-utils-lib/models/order-properties/order-properties.proto`
