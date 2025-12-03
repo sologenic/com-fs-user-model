@@ -3,7 +3,7 @@ module github.com/sologenic/com-fs-user-model
 go 1.24.4
 
 require (
-	github.com/sologenic/com-fs-compliance-model v0.0.0-20251203155829-fcb6bd109c88
+	github.com/sologenic/com-fs-compliance-model v0.0.0-20251203163653-9c390dd2f399
 	github.com/sologenic/com-fs-document-model v0.0.0-20250625181251-d71adbf57803
 	github.com/sologenic/com-fs-trade-profile-model v0.0.0-20250710161722-4671f0a36c58
 	github.com/sologenic/com-fs-utils-lib/go/grpc-client v0.0.0-20251127233244-c92929c8f5dc

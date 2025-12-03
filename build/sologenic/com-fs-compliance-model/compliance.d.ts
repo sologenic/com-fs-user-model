@@ -89,8 +89,6 @@ export interface QuestionOption {
 export interface ComplianceFormAnswer {
     /** UUID - Reference to the compliance form */
     ComplianceID: string;
-    /** UUID - Reference to the questionnaire that was answered */
-    QuestionnaireID: string;
     /** Answers to individual questions */
     Answers: QuestionAnswer[];
 }
@@ -1447,7 +1445,6 @@ export declare const ComplianceFormAnswer: {
     toJSON(message: ComplianceFormAnswer): unknown;
     create<I extends {
         ComplianceID?: string | undefined;
-        QuestionnaireID?: string | undefined;
         Answers?: {
             Question?: string | undefined;
             Values?: string[] | undefined;
@@ -1459,7 +1456,6 @@ export declare const ComplianceFormAnswer: {
         }[] | undefined;
     } & {
         ComplianceID?: string | undefined;
-        QuestionnaireID?: string | undefined;
         Answers?: ({
             Question?: string | undefined;
             Values?: string[] | undefined;
@@ -1508,7 +1504,6 @@ export declare const ComplianceFormAnswer: {
     } & { [K_5 in Exclude<keyof I, keyof ComplianceFormAnswer>]: never; }>(base?: I | undefined): ComplianceFormAnswer;
     fromPartial<I_1 extends {
         ComplianceID?: string | undefined;
-        QuestionnaireID?: string | undefined;
         Answers?: {
             Question?: string | undefined;
             Values?: string[] | undefined;
@@ -1520,7 +1515,6 @@ export declare const ComplianceFormAnswer: {
         }[] | undefined;
     } & {
         ComplianceID?: string | undefined;
-        QuestionnaireID?: string | undefined;
         Answers?: ({
             Question?: string | undefined;
             Values?: string[] | undefined;

@@ -815,18 +815,15 @@ export const QuestionOption = {
     },
 };
 function createBaseComplianceFormAnswer() {
-    return { ComplianceID: "", QuestionnaireID: "", Answers: [] };
+    return { ComplianceID: "", Answers: [] };
 }
 export const ComplianceFormAnswer = {
     encode(message, writer = _m0.Writer.create()) {
         if (message.ComplianceID !== "") {
             writer.uint32(10).string(message.ComplianceID);
         }
-        if (message.QuestionnaireID !== "") {
-            writer.uint32(18).string(message.QuestionnaireID);
-        }
         for (const v of message.Answers) {
-            QuestionAnswer.encode(v, writer.uint32(26).fork()).ldelim();
+            QuestionAnswer.encode(v, writer.uint32(18).fork()).ldelim();
         }
         return writer;
     },
@@ -847,12 +844,6 @@ export const ComplianceFormAnswer = {
                     if (tag !== 18) {
                         break;
                     }
-                    message.QuestionnaireID = reader.string();
-                    continue;
-                case 3:
-                    if (tag !== 26) {
-                        break;
-                    }
                     message.Answers.push(QuestionAnswer.decode(reader, reader.uint32()));
                     continue;
             }
@@ -866,7 +857,6 @@ export const ComplianceFormAnswer = {
     fromJSON(object) {
         return {
             ComplianceID: isSet(object.ComplianceID) ? globalThis.String(object.ComplianceID) : "",
-            QuestionnaireID: isSet(object.QuestionnaireID) ? globalThis.String(object.QuestionnaireID) : "",
             Answers: globalThis.Array.isArray(object === null || object === void 0 ? void 0 : object.Answers)
                 ? object.Answers.map((e) => QuestionAnswer.fromJSON(e))
                 : [],
@@ -878,9 +868,6 @@ export const ComplianceFormAnswer = {
         if (message.ComplianceID !== "") {
             obj.ComplianceID = message.ComplianceID;
         }
-        if (message.QuestionnaireID !== "") {
-            obj.QuestionnaireID = message.QuestionnaireID;
-        }
         if ((_a = message.Answers) === null || _a === void 0 ? void 0 : _a.length) {
             obj.Answers = message.Answers.map((e) => QuestionAnswer.toJSON(e));
         }
@@ -890,11 +877,10 @@ export const ComplianceFormAnswer = {
         return ComplianceFormAnswer.fromPartial(base !== null && base !== void 0 ? base : {});
     },
     fromPartial(object) {
-        var _a, _b, _c;
+        var _a, _b;
         const message = createBaseComplianceFormAnswer();
         message.ComplianceID = (_a = object.ComplianceID) !== null && _a !== void 0 ? _a : "";
-        message.QuestionnaireID = (_b = object.QuestionnaireID) !== null && _b !== void 0 ? _b : "";
-        message.Answers = ((_c = object.Answers) === null || _c === void 0 ? void 0 : _c.map((e) => QuestionAnswer.fromPartial(e))) || [];
+        message.Answers = ((_b = object.Answers) === null || _b === void 0 ? void 0 : _b.map((e) => QuestionAnswer.fromPartial(e))) || [];
         return message;
     },
 };

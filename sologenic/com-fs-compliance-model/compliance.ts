@@ -246,8 +246,6 @@ export interface QuestionOption {
 export interface ComplianceFormAnswer {
   /** UUID - Reference to the compliance form */
   ComplianceID: string;
-  /** UUID - Reference to the questionnaire that was answered */
-  QuestionnaireID: string;
   /** Answers to individual questions */
   Answers: QuestionAnswer[];
 }
@@ -956,7 +954,7 @@ export const QuestionOption = {
 };
 
 function createBaseComplianceFormAnswer(): ComplianceFormAnswer {
-  return { ComplianceID: "", QuestionnaireID: "", Answers: [] };
+  return { ComplianceID: "", Answers: [] };
 }
 
 export const ComplianceFormAnswer = {
@@ -964,11 +962,8 @@ export const ComplianceFormAnswer = {
     if (message.ComplianceID !== "") {
       writer.uint32(10).string(message.ComplianceID);
     }
-    if (message.QuestionnaireID !== "") {
-      writer.uint32(18).string(message.QuestionnaireID);
-    }
     for (const v of message.Answers) {
-      QuestionAnswer.encode(v!, writer.uint32(26).fork()).ldelim();
+      QuestionAnswer.encode(v!, writer.uint32(18).fork()).ldelim();
     }
     return writer;
   },
@@ -992,13 +987,6 @@ export const ComplianceFormAnswer = {
             break;
           }
 
-          message.QuestionnaireID = reader.string();
-          continue;
-        case 3:
-          if (tag !== 26) {
-            break;
-          }
-
           message.Answers.push(QuestionAnswer.decode(reader, reader.uint32()));
           continue;
       }
@@ -1013,7 +1001,6 @@ export const ComplianceFormAnswer = {
   fromJSON(object: any): ComplianceFormAnswer {
     return {
       ComplianceID: isSet(object.ComplianceID) ? globalThis.String(object.ComplianceID) : "",
-      QuestionnaireID: isSet(object.QuestionnaireID) ? globalThis.String(object.QuestionnaireID) : "",
       Answers: globalThis.Array.isArray(object?.Answers)
         ? object.Answers.map((e: any) => QuestionAnswer.fromJSON(e))
         : [],
@@ -1024,9 +1011,6 @@ export const ComplianceFormAnswer = {
     const obj: any = {};
     if (message.ComplianceID !== "") {
       obj.ComplianceID = message.ComplianceID;
-    }
-    if (message.QuestionnaireID !== "") {
-      obj.QuestionnaireID = message.QuestionnaireID;
     }
     if (message.Answers?.length) {
       obj.Answers = message.Answers.map((e) => QuestionAnswer.toJSON(e));
@@ -1040,7 +1024,6 @@ export const ComplianceFormAnswer = {
   fromPartial<I extends Exact<DeepPartial<ComplianceFormAnswer>, I>>(object: I): ComplianceFormAnswer {
     const message = createBaseComplianceFormAnswer();
     message.ComplianceID = object.ComplianceID ?? "";
-    message.QuestionnaireID = object.QuestionnaireID ?? "";
     message.Answers = object.Answers?.map((e) => QuestionAnswer.fromPartial(e)) || [];
     return message;
   },
