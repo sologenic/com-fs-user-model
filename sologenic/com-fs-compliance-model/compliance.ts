@@ -103,6 +103,52 @@ export function responseTypeToJSON(object: ResponseType): string {
   }
 }
 
+export enum Optionality {
+  OPTIONALITY_NONE = 0,
+  OPTIONALITY_OPTIONAL = 1,
+  OPTIONALITY_REQUIRED = 2,
+  /** OPTIONALITY_ON_BOOLEAN_TRUE - If the response type used is boolean, setting this to ON_BOOLEAN_TRUE gives the form implementer clear information on what to do if the boolean is true. */
+  OPTIONALITY_ON_BOOLEAN_TRUE = 3,
+  UNRECOGNIZED = -1,
+}
+
+export function optionalityFromJSON(object: any): Optionality {
+  switch (object) {
+    case 0:
+    case "OPTIONALITY_NONE":
+      return Optionality.OPTIONALITY_NONE;
+    case 1:
+    case "OPTIONALITY_OPTIONAL":
+      return Optionality.OPTIONALITY_OPTIONAL;
+    case 2:
+    case "OPTIONALITY_REQUIRED":
+      return Optionality.OPTIONALITY_REQUIRED;
+    case 3:
+    case "OPTIONALITY_ON_BOOLEAN_TRUE":
+      return Optionality.OPTIONALITY_ON_BOOLEAN_TRUE;
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return Optionality.UNRECOGNIZED;
+  }
+}
+
+export function optionalityToJSON(object: Optionality): string {
+  switch (object) {
+    case Optionality.OPTIONALITY_NONE:
+      return "OPTIONALITY_NONE";
+    case Optionality.OPTIONALITY_OPTIONAL:
+      return "OPTIONALITY_OPTIONAL";
+    case Optionality.OPTIONALITY_REQUIRED:
+      return "OPTIONALITY_REQUIRED";
+    case Optionality.OPTIONALITY_ON_BOOLEAN_TRUE:
+      return "OPTIONALITY_ON_BOOLEAN_TRUE";
+    case Optionality.UNRECOGNIZED:
+    default:
+      return "UNRECOGNIZED";
+  }
+}
+
 export enum ComplianceStatus {
   COMPLIANCE_STATUS_DO_NOT_USE = 0,
   COMPLIANCE_STATUS_ACTIVE = 1,
@@ -180,6 +226,14 @@ export interface Question {
   Options: QuestionOption[];
   /** Order of the question in the questionnaire */
   QuestionIndex: number;
+  File?: File | undefined;
+}
+
+export interface File {
+  Description: string;
+  Optionality: Optionality;
+  /** Hash of the file content, used as file name in the file system */
+  Hash?: string | undefined;
 }
 
 export interface QuestionOption {
@@ -203,6 +257,8 @@ export interface QuestionAnswer {
   Question: string;
   /** Answer values - single value for radio/text, multiple for checkbox */
   Values: string[];
+  /** Files attached to the answer, by repeating the description here, the answers can be rendered in the admin interface even if there are later updates to the questionnaire. */
+  Files: File[];
 }
 
 function createBaseCompliance(): Compliance {
@@ -578,7 +634,15 @@ export const Condition = {
 };
 
 function createBaseQuestion(): Question {
-  return { Question: "", QuestionType: 0, Required: false, ResponseType: 0, Options: [], QuestionIndex: 0 };
+  return {
+    Question: "",
+    QuestionType: 0,
+    Required: false,
+    ResponseType: 0,
+    Options: [],
+    QuestionIndex: 0,
+    File: undefined,
+  };
 }
 
 export const Question = {
@@ -600,6 +664,9 @@ export const Question = {
     }
     if (message.QuestionIndex !== 0) {
       writer.uint32(48).int32(message.QuestionIndex);
+    }
+    if (message.File !== undefined) {
+      File.encode(message.File, writer.uint32(58).fork()).ldelim();
     }
     return writer;
   },
@@ -653,6 +720,13 @@ export const Question = {
 
           message.QuestionIndex = reader.int32();
           continue;
+        case 7:
+          if (tag !== 58) {
+            break;
+          }
+
+          message.File = File.decode(reader, reader.uint32());
+          continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -672,6 +746,7 @@ export const Question = {
         ? object.Options.map((e: any) => QuestionOption.fromJSON(e))
         : [],
       QuestionIndex: isSet(object.QuestionIndex) ? globalThis.Number(object.QuestionIndex) : 0,
+      File: isSet(object.File) ? File.fromJSON(object.File) : undefined,
     };
   },
 
@@ -695,6 +770,9 @@ export const Question = {
     if (message.QuestionIndex !== 0) {
       obj.QuestionIndex = Math.round(message.QuestionIndex);
     }
+    if (message.File !== undefined) {
+      obj.File = File.toJSON(message.File);
+    }
     return obj;
   },
 
@@ -709,6 +787,96 @@ export const Question = {
     message.ResponseType = object.ResponseType ?? 0;
     message.Options = object.Options?.map((e) => QuestionOption.fromPartial(e)) || [];
     message.QuestionIndex = object.QuestionIndex ?? 0;
+    message.File = (object.File !== undefined && object.File !== null) ? File.fromPartial(object.File) : undefined;
+    return message;
+  },
+};
+
+function createBaseFile(): File {
+  return { Description: "", Optionality: 0, Hash: undefined };
+}
+
+export const File = {
+  encode(message: File, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.Description !== "") {
+      writer.uint32(10).string(message.Description);
+    }
+    if (message.Optionality !== 0) {
+      writer.uint32(16).int32(message.Optionality);
+    }
+    if (message.Hash !== undefined) {
+      writer.uint32(26).string(message.Hash);
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): File {
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseFile();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          if (tag !== 10) {
+            break;
+          }
+
+          message.Description = reader.string();
+          continue;
+        case 2:
+          if (tag !== 16) {
+            break;
+          }
+
+          message.Optionality = reader.int32() as any;
+          continue;
+        case 3:
+          if (tag !== 26) {
+            break;
+          }
+
+          message.Hash = reader.string();
+          continue;
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): File {
+    return {
+      Description: isSet(object.Description) ? globalThis.String(object.Description) : "",
+      Optionality: isSet(object.Optionality) ? optionalityFromJSON(object.Optionality) : 0,
+      Hash: isSet(object.Hash) ? globalThis.String(object.Hash) : undefined,
+    };
+  },
+
+  toJSON(message: File): unknown {
+    const obj: any = {};
+    if (message.Description !== "") {
+      obj.Description = message.Description;
+    }
+    if (message.Optionality !== 0) {
+      obj.Optionality = optionalityToJSON(message.Optionality);
+    }
+    if (message.Hash !== undefined) {
+      obj.Hash = message.Hash;
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<File>, I>>(base?: I): File {
+    return File.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<File>, I>>(object: I): File {
+    const message = createBaseFile();
+    message.Description = object.Description ?? "";
+    message.Optionality = object.Optionality ?? 0;
+    message.Hash = object.Hash ?? undefined;
     return message;
   },
 };
@@ -879,7 +1047,7 @@ export const ComplianceFormAnswer = {
 };
 
 function createBaseQuestionAnswer(): QuestionAnswer {
-  return { Question: "", Values: [] };
+  return { Question: "", Values: [], Files: [] };
 }
 
 export const QuestionAnswer = {
@@ -889,6 +1057,9 @@ export const QuestionAnswer = {
     }
     for (const v of message.Values) {
       writer.uint32(26).string(v!);
+    }
+    for (const v of message.Files) {
+      File.encode(v!, writer.uint32(34).fork()).ldelim();
     }
     return writer;
   },
@@ -914,6 +1085,13 @@ export const QuestionAnswer = {
 
           message.Values.push(reader.string());
           continue;
+        case 4:
+          if (tag !== 34) {
+            break;
+          }
+
+          message.Files.push(File.decode(reader, reader.uint32()));
+          continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -927,6 +1105,7 @@ export const QuestionAnswer = {
     return {
       Question: isSet(object.Question) ? globalThis.String(object.Question) : "",
       Values: globalThis.Array.isArray(object?.Values) ? object.Values.map((e: any) => globalThis.String(e)) : [],
+      Files: globalThis.Array.isArray(object?.Files) ? object.Files.map((e: any) => File.fromJSON(e)) : [],
     };
   },
 
@@ -938,6 +1117,9 @@ export const QuestionAnswer = {
     if (message.Values?.length) {
       obj.Values = message.Values;
     }
+    if (message.Files?.length) {
+      obj.Files = message.Files.map((e) => File.toJSON(e));
+    }
     return obj;
   },
 
@@ -948,6 +1130,7 @@ export const QuestionAnswer = {
     const message = createBaseQuestionAnswer();
     message.Question = object.Question ?? "";
     message.Values = object.Values?.map((e) => e) || [];
+    message.Files = object.Files?.map((e) => File.fromPartial(e)) || [];
     return message;
   },
 };

@@ -22,6 +22,16 @@ export declare enum ResponseType {
 }
 export declare function responseTypeFromJSON(object: any): ResponseType;
 export declare function responseTypeToJSON(object: ResponseType): string;
+export declare enum Optionality {
+    OPTIONALITY_NONE = 0,
+    OPTIONALITY_OPTIONAL = 1,
+    OPTIONALITY_REQUIRED = 2,
+    /** OPTIONALITY_ON_BOOLEAN_TRUE - If the response type used is boolean, setting this to ON_BOOLEAN_TRUE gives the form implementer clear information on what to do if the boolean is true. */
+    OPTIONALITY_ON_BOOLEAN_TRUE = 3,
+    UNRECOGNIZED = -1
+}
+export declare function optionalityFromJSON(object: any): Optionality;
+export declare function optionalityToJSON(object: Optionality): string;
 export declare enum ComplianceStatus {
     COMPLIANCE_STATUS_DO_NOT_USE = 0,
     COMPLIANCE_STATUS_ACTIVE = 1,
@@ -62,6 +72,13 @@ export interface Question {
     Options: QuestionOption[];
     /** Order of the question in the questionnaire */
     QuestionIndex: number;
+    File?: File | undefined;
+}
+export interface File {
+    Description: string;
+    Optionality: Optionality;
+    /** Hash of the file content, used as file name in the file system */
+    Hash?: string | undefined;
 }
 export interface QuestionOption {
     Label: string;
@@ -82,6 +99,8 @@ export interface QuestionAnswer {
     Question: string;
     /** Answer values - single value for radio/text, multiple for checkbox */
     Values: string[];
+    /** Files attached to the answer, by repeating the description here, the answers can be rendered in the admin interface even if there are later updates to the questionnaire. */
+    Files: File[];
 }
 export declare const Compliance: {
     encode(message: Compliance, writer?: _m0.Writer): _m0.Writer;
@@ -108,6 +127,11 @@ export declare const Compliance: {
                     OptionIndex?: number | undefined;
                 }[] | undefined;
                 QuestionIndex?: number | undefined;
+                File?: {
+                    Description?: string | undefined;
+                    Optionality?: Optionality | undefined;
+                    Hash?: string | undefined;
+                } | undefined;
             }[] | undefined;
         } | undefined;
         MetaData?: {
@@ -141,6 +165,11 @@ export declare const Compliance: {
                     OptionIndex?: number | undefined;
                 }[] | undefined;
                 QuestionIndex?: number | undefined;
+                File?: {
+                    Description?: string | undefined;
+                    Optionality?: Optionality | undefined;
+                    Hash?: string | undefined;
+                } | undefined;
             }[] | undefined;
         } & {
             ComplianceID?: string | undefined;
@@ -167,6 +196,11 @@ export declare const Compliance: {
                     OptionIndex?: number | undefined;
                 }[] | undefined;
                 QuestionIndex?: number | undefined;
+                File?: {
+                    Description?: string | undefined;
+                    Optionality?: Optionality | undefined;
+                    Hash?: string | undefined;
+                } | undefined;
             }[] & ({
                 Question?: string | undefined;
                 QuestionType?: QuestionType | undefined;
@@ -177,6 +211,11 @@ export declare const Compliance: {
                     OptionIndex?: number | undefined;
                 }[] | undefined;
                 QuestionIndex?: number | undefined;
+                File?: {
+                    Description?: string | undefined;
+                    Optionality?: Optionality | undefined;
+                    Hash?: string | undefined;
+                } | undefined;
             } & {
                 Question?: string | undefined;
                 QuestionType?: QuestionType | undefined;
@@ -196,7 +235,16 @@ export declare const Compliance: {
                     OptionIndex?: number | undefined;
                 }[]>]: never; }) | undefined;
                 QuestionIndex?: number | undefined;
-            } & { [K_4 in Exclude<keyof I["Compliance"]["Questions"][number], keyof Question>]: never; })[] & { [K_5 in Exclude<keyof I["Compliance"]["Questions"], keyof {
+                File?: ({
+                    Description?: string | undefined;
+                    Optionality?: Optionality | undefined;
+                    Hash?: string | undefined;
+                } & {
+                    Description?: string | undefined;
+                    Optionality?: Optionality | undefined;
+                    Hash?: string | undefined;
+                } & { [K_4 in Exclude<keyof I["Compliance"]["Questions"][number]["File"], keyof File>]: never; }) | undefined;
+            } & { [K_5 in Exclude<keyof I["Compliance"]["Questions"][number], keyof Question>]: never; })[] & { [K_6 in Exclude<keyof I["Compliance"]["Questions"], keyof {
                 Question?: string | undefined;
                 QuestionType?: QuestionType | undefined;
                 Required?: boolean | undefined;
@@ -206,8 +254,13 @@ export declare const Compliance: {
                     OptionIndex?: number | undefined;
                 }[] | undefined;
                 QuestionIndex?: number | undefined;
+                File?: {
+                    Description?: string | undefined;
+                    Optionality?: Optionality | undefined;
+                    Hash?: string | undefined;
+                } | undefined;
             }[]>]: never; }) | undefined;
-        } & { [K_6 in Exclude<keyof I["Compliance"], keyof ComplianceDetails>]: never; }) | undefined;
+        } & { [K_7 in Exclude<keyof I["Compliance"], keyof ComplianceDetails>]: never; }) | undefined;
         MetaData?: ({
             Network?: import("../com-fs-utils-lib/models/metadata/metadata").Network | undefined;
             UpdatedAt?: Date | undefined;
@@ -218,7 +271,7 @@ export declare const Compliance: {
             UpdatedAt?: Date | undefined;
             CreatedAt?: Date | undefined;
             UpdatedByAccount?: string | undefined;
-        } & { [K_7 in Exclude<keyof I["MetaData"], keyof MetaData>]: never; }) | undefined;
+        } & { [K_8 in Exclude<keyof I["MetaData"], keyof MetaData>]: never; }) | undefined;
         Audit?: ({
             ChangedBy?: string | undefined;
             ChangedAt?: Date | undefined;
@@ -227,8 +280,8 @@ export declare const Compliance: {
             ChangedBy?: string | undefined;
             ChangedAt?: Date | undefined;
             Reason?: string | undefined;
-        } & { [K_8 in Exclude<keyof I["Audit"], keyof Audit>]: never; }) | undefined;
-    } & { [K_9 in Exclude<keyof I, keyof Compliance>]: never; }>(base?: I | undefined): Compliance;
+        } & { [K_9 in Exclude<keyof I["Audit"], keyof Audit>]: never; }) | undefined;
+    } & { [K_10 in Exclude<keyof I, keyof Compliance>]: never; }>(base?: I | undefined): Compliance;
     fromPartial<I_1 extends {
         Compliance?: {
             ComplianceID?: string | undefined;
@@ -249,6 +302,11 @@ export declare const Compliance: {
                     OptionIndex?: number | undefined;
                 }[] | undefined;
                 QuestionIndex?: number | undefined;
+                File?: {
+                    Description?: string | undefined;
+                    Optionality?: Optionality | undefined;
+                    Hash?: string | undefined;
+                } | undefined;
             }[] | undefined;
         } | undefined;
         MetaData?: {
@@ -282,6 +340,11 @@ export declare const Compliance: {
                     OptionIndex?: number | undefined;
                 }[] | undefined;
                 QuestionIndex?: number | undefined;
+                File?: {
+                    Description?: string | undefined;
+                    Optionality?: Optionality | undefined;
+                    Hash?: string | undefined;
+                } | undefined;
             }[] | undefined;
         } & {
             ComplianceID?: string | undefined;
@@ -295,7 +358,7 @@ export declare const Compliance: {
                 Jurisdiction?: string | undefined;
             } & {
                 Jurisdiction?: string | undefined;
-            } & { [K_10 in Exclude<keyof I_1["Compliance"]["Conditions"][number], "Jurisdiction">]: never; })[] & { [K_11 in Exclude<keyof I_1["Compliance"]["Conditions"], keyof {
+            } & { [K_11 in Exclude<keyof I_1["Compliance"]["Conditions"][number], "Jurisdiction">]: never; })[] & { [K_12 in Exclude<keyof I_1["Compliance"]["Conditions"], keyof {
                 Jurisdiction?: string | undefined;
             }[]>]: never; }) | undefined;
             Questions?: ({
@@ -308,6 +371,11 @@ export declare const Compliance: {
                     OptionIndex?: number | undefined;
                 }[] | undefined;
                 QuestionIndex?: number | undefined;
+                File?: {
+                    Description?: string | undefined;
+                    Optionality?: Optionality | undefined;
+                    Hash?: string | undefined;
+                } | undefined;
             }[] & ({
                 Question?: string | undefined;
                 QuestionType?: QuestionType | undefined;
@@ -318,6 +386,11 @@ export declare const Compliance: {
                     OptionIndex?: number | undefined;
                 }[] | undefined;
                 QuestionIndex?: number | undefined;
+                File?: {
+                    Description?: string | undefined;
+                    Optionality?: Optionality | undefined;
+                    Hash?: string | undefined;
+                } | undefined;
             } & {
                 Question?: string | undefined;
                 QuestionType?: QuestionType | undefined;
@@ -332,12 +405,21 @@ export declare const Compliance: {
                 } & {
                     Label?: string | undefined;
                     OptionIndex?: number | undefined;
-                } & { [K_12 in Exclude<keyof I_1["Compliance"]["Questions"][number]["Options"][number], keyof QuestionOption>]: never; })[] & { [K_13 in Exclude<keyof I_1["Compliance"]["Questions"][number]["Options"], keyof {
+                } & { [K_13 in Exclude<keyof I_1["Compliance"]["Questions"][number]["Options"][number], keyof QuestionOption>]: never; })[] & { [K_14 in Exclude<keyof I_1["Compliance"]["Questions"][number]["Options"], keyof {
                     Label?: string | undefined;
                     OptionIndex?: number | undefined;
                 }[]>]: never; }) | undefined;
                 QuestionIndex?: number | undefined;
-            } & { [K_14 in Exclude<keyof I_1["Compliance"]["Questions"][number], keyof Question>]: never; })[] & { [K_15 in Exclude<keyof I_1["Compliance"]["Questions"], keyof {
+                File?: ({
+                    Description?: string | undefined;
+                    Optionality?: Optionality | undefined;
+                    Hash?: string | undefined;
+                } & {
+                    Description?: string | undefined;
+                    Optionality?: Optionality | undefined;
+                    Hash?: string | undefined;
+                } & { [K_15 in Exclude<keyof I_1["Compliance"]["Questions"][number]["File"], keyof File>]: never; }) | undefined;
+            } & { [K_16 in Exclude<keyof I_1["Compliance"]["Questions"][number], keyof Question>]: never; })[] & { [K_17 in Exclude<keyof I_1["Compliance"]["Questions"], keyof {
                 Question?: string | undefined;
                 QuestionType?: QuestionType | undefined;
                 Required?: boolean | undefined;
@@ -347,8 +429,13 @@ export declare const Compliance: {
                     OptionIndex?: number | undefined;
                 }[] | undefined;
                 QuestionIndex?: number | undefined;
+                File?: {
+                    Description?: string | undefined;
+                    Optionality?: Optionality | undefined;
+                    Hash?: string | undefined;
+                } | undefined;
             }[]>]: never; }) | undefined;
-        } & { [K_16 in Exclude<keyof I_1["Compliance"], keyof ComplianceDetails>]: never; }) | undefined;
+        } & { [K_18 in Exclude<keyof I_1["Compliance"], keyof ComplianceDetails>]: never; }) | undefined;
         MetaData?: ({
             Network?: import("../com-fs-utils-lib/models/metadata/metadata").Network | undefined;
             UpdatedAt?: Date | undefined;
@@ -359,7 +446,7 @@ export declare const Compliance: {
             UpdatedAt?: Date | undefined;
             CreatedAt?: Date | undefined;
             UpdatedByAccount?: string | undefined;
-        } & { [K_17 in Exclude<keyof I_1["MetaData"], keyof MetaData>]: never; }) | undefined;
+        } & { [K_19 in Exclude<keyof I_1["MetaData"], keyof MetaData>]: never; }) | undefined;
         Audit?: ({
             ChangedBy?: string | undefined;
             ChangedAt?: Date | undefined;
@@ -368,8 +455,8 @@ export declare const Compliance: {
             ChangedBy?: string | undefined;
             ChangedAt?: Date | undefined;
             Reason?: string | undefined;
-        } & { [K_18 in Exclude<keyof I_1["Audit"], keyof Audit>]: never; }) | undefined;
-    } & { [K_19 in Exclude<keyof I_1, keyof Compliance>]: never; }>(object: I_1): Compliance;
+        } & { [K_20 in Exclude<keyof I_1["Audit"], keyof Audit>]: never; }) | undefined;
+    } & { [K_21 in Exclude<keyof I_1, keyof Compliance>]: never; }>(object: I_1): Compliance;
 };
 export declare const ComplianceDetails: {
     encode(message: ComplianceDetails, writer?: _m0.Writer): _m0.Writer;
@@ -395,6 +482,11 @@ export declare const ComplianceDetails: {
                 OptionIndex?: number | undefined;
             }[] | undefined;
             QuestionIndex?: number | undefined;
+            File?: {
+                Description?: string | undefined;
+                Optionality?: Optionality | undefined;
+                Hash?: string | undefined;
+            } | undefined;
         }[] | undefined;
     } & {
         ComplianceID?: string | undefined;
@@ -421,6 +513,11 @@ export declare const ComplianceDetails: {
                 OptionIndex?: number | undefined;
             }[] | undefined;
             QuestionIndex?: number | undefined;
+            File?: {
+                Description?: string | undefined;
+                Optionality?: Optionality | undefined;
+                Hash?: string | undefined;
+            } | undefined;
         }[] & ({
             Question?: string | undefined;
             QuestionType?: QuestionType | undefined;
@@ -431,6 +528,11 @@ export declare const ComplianceDetails: {
                 OptionIndex?: number | undefined;
             }[] | undefined;
             QuestionIndex?: number | undefined;
+            File?: {
+                Description?: string | undefined;
+                Optionality?: Optionality | undefined;
+                Hash?: string | undefined;
+            } | undefined;
         } & {
             Question?: string | undefined;
             QuestionType?: QuestionType | undefined;
@@ -450,7 +552,16 @@ export declare const ComplianceDetails: {
                 OptionIndex?: number | undefined;
             }[]>]: never; }) | undefined;
             QuestionIndex?: number | undefined;
-        } & { [K_4 in Exclude<keyof I["Questions"][number], keyof Question>]: never; })[] & { [K_5 in Exclude<keyof I["Questions"], keyof {
+            File?: ({
+                Description?: string | undefined;
+                Optionality?: Optionality | undefined;
+                Hash?: string | undefined;
+            } & {
+                Description?: string | undefined;
+                Optionality?: Optionality | undefined;
+                Hash?: string | undefined;
+            } & { [K_4 in Exclude<keyof I["Questions"][number]["File"], keyof File>]: never; }) | undefined;
+        } & { [K_5 in Exclude<keyof I["Questions"][number], keyof Question>]: never; })[] & { [K_6 in Exclude<keyof I["Questions"], keyof {
             Question?: string | undefined;
             QuestionType?: QuestionType | undefined;
             Required?: boolean | undefined;
@@ -460,8 +571,13 @@ export declare const ComplianceDetails: {
                 OptionIndex?: number | undefined;
             }[] | undefined;
             QuestionIndex?: number | undefined;
+            File?: {
+                Description?: string | undefined;
+                Optionality?: Optionality | undefined;
+                Hash?: string | undefined;
+            } | undefined;
         }[]>]: never; }) | undefined;
-    } & { [K_6 in Exclude<keyof I, keyof ComplianceDetails>]: never; }>(base?: I | undefined): ComplianceDetails;
+    } & { [K_7 in Exclude<keyof I, keyof ComplianceDetails>]: never; }>(base?: I | undefined): ComplianceDetails;
     fromPartial<I_1 extends {
         ComplianceID?: string | undefined;
         ComplianceName?: string | undefined;
@@ -481,6 +597,11 @@ export declare const ComplianceDetails: {
                 OptionIndex?: number | undefined;
             }[] | undefined;
             QuestionIndex?: number | undefined;
+            File?: {
+                Description?: string | undefined;
+                Optionality?: Optionality | undefined;
+                Hash?: string | undefined;
+            } | undefined;
         }[] | undefined;
     } & {
         ComplianceID?: string | undefined;
@@ -494,7 +615,7 @@ export declare const ComplianceDetails: {
             Jurisdiction?: string | undefined;
         } & {
             Jurisdiction?: string | undefined;
-        } & { [K_7 in Exclude<keyof I_1["Conditions"][number], "Jurisdiction">]: never; })[] & { [K_8 in Exclude<keyof I_1["Conditions"], keyof {
+        } & { [K_8 in Exclude<keyof I_1["Conditions"][number], "Jurisdiction">]: never; })[] & { [K_9 in Exclude<keyof I_1["Conditions"], keyof {
             Jurisdiction?: string | undefined;
         }[]>]: never; }) | undefined;
         Questions?: ({
@@ -507,6 +628,11 @@ export declare const ComplianceDetails: {
                 OptionIndex?: number | undefined;
             }[] | undefined;
             QuestionIndex?: number | undefined;
+            File?: {
+                Description?: string | undefined;
+                Optionality?: Optionality | undefined;
+                Hash?: string | undefined;
+            } | undefined;
         }[] & ({
             Question?: string | undefined;
             QuestionType?: QuestionType | undefined;
@@ -517,6 +643,11 @@ export declare const ComplianceDetails: {
                 OptionIndex?: number | undefined;
             }[] | undefined;
             QuestionIndex?: number | undefined;
+            File?: {
+                Description?: string | undefined;
+                Optionality?: Optionality | undefined;
+                Hash?: string | undefined;
+            } | undefined;
         } & {
             Question?: string | undefined;
             QuestionType?: QuestionType | undefined;
@@ -531,12 +662,21 @@ export declare const ComplianceDetails: {
             } & {
                 Label?: string | undefined;
                 OptionIndex?: number | undefined;
-            } & { [K_9 in Exclude<keyof I_1["Questions"][number]["Options"][number], keyof QuestionOption>]: never; })[] & { [K_10 in Exclude<keyof I_1["Questions"][number]["Options"], keyof {
+            } & { [K_10 in Exclude<keyof I_1["Questions"][number]["Options"][number], keyof QuestionOption>]: never; })[] & { [K_11 in Exclude<keyof I_1["Questions"][number]["Options"], keyof {
                 Label?: string | undefined;
                 OptionIndex?: number | undefined;
             }[]>]: never; }) | undefined;
             QuestionIndex?: number | undefined;
-        } & { [K_11 in Exclude<keyof I_1["Questions"][number], keyof Question>]: never; })[] & { [K_12 in Exclude<keyof I_1["Questions"], keyof {
+            File?: ({
+                Description?: string | undefined;
+                Optionality?: Optionality | undefined;
+                Hash?: string | undefined;
+            } & {
+                Description?: string | undefined;
+                Optionality?: Optionality | undefined;
+                Hash?: string | undefined;
+            } & { [K_12 in Exclude<keyof I_1["Questions"][number]["File"], keyof File>]: never; }) | undefined;
+        } & { [K_13 in Exclude<keyof I_1["Questions"][number], keyof Question>]: never; })[] & { [K_14 in Exclude<keyof I_1["Questions"], keyof {
             Question?: string | undefined;
             QuestionType?: QuestionType | undefined;
             Required?: boolean | undefined;
@@ -546,8 +686,13 @@ export declare const ComplianceDetails: {
                 OptionIndex?: number | undefined;
             }[] | undefined;
             QuestionIndex?: number | undefined;
+            File?: {
+                Description?: string | undefined;
+                Optionality?: Optionality | undefined;
+                Hash?: string | undefined;
+            } | undefined;
         }[]>]: never; }) | undefined;
-    } & { [K_13 in Exclude<keyof I_1, keyof ComplianceDetails>]: never; }>(object: I_1): ComplianceDetails;
+    } & { [K_15 in Exclude<keyof I_1, keyof ComplianceDetails>]: never; }>(object: I_1): ComplianceDetails;
 };
 export declare const ComplianceList: {
     encode(message: ComplianceList, writer?: _m0.Writer): _m0.Writer;
@@ -575,6 +720,11 @@ export declare const ComplianceList: {
                         OptionIndex?: number | undefined;
                     }[] | undefined;
                     QuestionIndex?: number | undefined;
+                    File?: {
+                        Description?: string | undefined;
+                        Optionality?: Optionality | undefined;
+                        Hash?: string | undefined;
+                    } | undefined;
                 }[] | undefined;
             } | undefined;
             MetaData?: {
@@ -610,6 +760,11 @@ export declare const ComplianceList: {
                         OptionIndex?: number | undefined;
                     }[] | undefined;
                     QuestionIndex?: number | undefined;
+                    File?: {
+                        Description?: string | undefined;
+                        Optionality?: Optionality | undefined;
+                        Hash?: string | undefined;
+                    } | undefined;
                 }[] | undefined;
             } | undefined;
             MetaData?: {
@@ -643,6 +798,11 @@ export declare const ComplianceList: {
                         OptionIndex?: number | undefined;
                     }[] | undefined;
                     QuestionIndex?: number | undefined;
+                    File?: {
+                        Description?: string | undefined;
+                        Optionality?: Optionality | undefined;
+                        Hash?: string | undefined;
+                    } | undefined;
                 }[] | undefined;
             } | undefined;
             MetaData?: {
@@ -676,6 +836,11 @@ export declare const ComplianceList: {
                         OptionIndex?: number | undefined;
                     }[] | undefined;
                     QuestionIndex?: number | undefined;
+                    File?: {
+                        Description?: string | undefined;
+                        Optionality?: Optionality | undefined;
+                        Hash?: string | undefined;
+                    } | undefined;
                 }[] | undefined;
             } & {
                 ComplianceID?: string | undefined;
@@ -702,6 +867,11 @@ export declare const ComplianceList: {
                         OptionIndex?: number | undefined;
                     }[] | undefined;
                     QuestionIndex?: number | undefined;
+                    File?: {
+                        Description?: string | undefined;
+                        Optionality?: Optionality | undefined;
+                        Hash?: string | undefined;
+                    } | undefined;
                 }[] & ({
                     Question?: string | undefined;
                     QuestionType?: QuestionType | undefined;
@@ -712,6 +882,11 @@ export declare const ComplianceList: {
                         OptionIndex?: number | undefined;
                     }[] | undefined;
                     QuestionIndex?: number | undefined;
+                    File?: {
+                        Description?: string | undefined;
+                        Optionality?: Optionality | undefined;
+                        Hash?: string | undefined;
+                    } | undefined;
                 } & {
                     Question?: string | undefined;
                     QuestionType?: QuestionType | undefined;
@@ -731,7 +906,16 @@ export declare const ComplianceList: {
                         OptionIndex?: number | undefined;
                     }[]>]: never; }) | undefined;
                     QuestionIndex?: number | undefined;
-                } & { [K_4 in Exclude<keyof I["ComplianceList"][number]["Compliance"]["Questions"][number], keyof Question>]: never; })[] & { [K_5 in Exclude<keyof I["ComplianceList"][number]["Compliance"]["Questions"], keyof {
+                    File?: ({
+                        Description?: string | undefined;
+                        Optionality?: Optionality | undefined;
+                        Hash?: string | undefined;
+                    } & {
+                        Description?: string | undefined;
+                        Optionality?: Optionality | undefined;
+                        Hash?: string | undefined;
+                    } & { [K_4 in Exclude<keyof I["ComplianceList"][number]["Compliance"]["Questions"][number]["File"], keyof File>]: never; }) | undefined;
+                } & { [K_5 in Exclude<keyof I["ComplianceList"][number]["Compliance"]["Questions"][number], keyof Question>]: never; })[] & { [K_6 in Exclude<keyof I["ComplianceList"][number]["Compliance"]["Questions"], keyof {
                     Question?: string | undefined;
                     QuestionType?: QuestionType | undefined;
                     Required?: boolean | undefined;
@@ -741,8 +925,13 @@ export declare const ComplianceList: {
                         OptionIndex?: number | undefined;
                     }[] | undefined;
                     QuestionIndex?: number | undefined;
+                    File?: {
+                        Description?: string | undefined;
+                        Optionality?: Optionality | undefined;
+                        Hash?: string | undefined;
+                    } | undefined;
                 }[]>]: never; }) | undefined;
-            } & { [K_6 in Exclude<keyof I["ComplianceList"][number]["Compliance"], keyof ComplianceDetails>]: never; }) | undefined;
+            } & { [K_7 in Exclude<keyof I["ComplianceList"][number]["Compliance"], keyof ComplianceDetails>]: never; }) | undefined;
             MetaData?: ({
                 Network?: import("../com-fs-utils-lib/models/metadata/metadata").Network | undefined;
                 UpdatedAt?: Date | undefined;
@@ -753,7 +942,7 @@ export declare const ComplianceList: {
                 UpdatedAt?: Date | undefined;
                 CreatedAt?: Date | undefined;
                 UpdatedByAccount?: string | undefined;
-            } & { [K_7 in Exclude<keyof I["ComplianceList"][number]["MetaData"], keyof MetaData>]: never; }) | undefined;
+            } & { [K_8 in Exclude<keyof I["ComplianceList"][number]["MetaData"], keyof MetaData>]: never; }) | undefined;
             Audit?: ({
                 ChangedBy?: string | undefined;
                 ChangedAt?: Date | undefined;
@@ -762,8 +951,8 @@ export declare const ComplianceList: {
                 ChangedBy?: string | undefined;
                 ChangedAt?: Date | undefined;
                 Reason?: string | undefined;
-            } & { [K_8 in Exclude<keyof I["ComplianceList"][number]["Audit"], keyof Audit>]: never; }) | undefined;
-        } & { [K_9 in Exclude<keyof I["ComplianceList"][number], keyof Compliance>]: never; })[] & { [K_10 in Exclude<keyof I["ComplianceList"], keyof {
+            } & { [K_9 in Exclude<keyof I["ComplianceList"][number]["Audit"], keyof Audit>]: never; }) | undefined;
+        } & { [K_10 in Exclude<keyof I["ComplianceList"][number], keyof Compliance>]: never; })[] & { [K_11 in Exclude<keyof I["ComplianceList"], keyof {
             Compliance?: {
                 ComplianceID?: string | undefined;
                 ComplianceName?: string | undefined;
@@ -783,6 +972,11 @@ export declare const ComplianceList: {
                         OptionIndex?: number | undefined;
                     }[] | undefined;
                     QuestionIndex?: number | undefined;
+                    File?: {
+                        Description?: string | undefined;
+                        Optionality?: Optionality | undefined;
+                        Hash?: string | undefined;
+                    } | undefined;
                 }[] | undefined;
             } | undefined;
             MetaData?: {
@@ -797,7 +991,7 @@ export declare const ComplianceList: {
                 Reason?: string | undefined;
             } | undefined;
         }[]>]: never; }) | undefined;
-    } & { [K_11 in Exclude<keyof I, "ComplianceList">]: never; }>(base?: I | undefined): ComplianceList;
+    } & { [K_12 in Exclude<keyof I, "ComplianceList">]: never; }>(base?: I | undefined): ComplianceList;
     fromPartial<I_1 extends {
         ComplianceList?: {
             Compliance?: {
@@ -819,6 +1013,11 @@ export declare const ComplianceList: {
                         OptionIndex?: number | undefined;
                     }[] | undefined;
                     QuestionIndex?: number | undefined;
+                    File?: {
+                        Description?: string | undefined;
+                        Optionality?: Optionality | undefined;
+                        Hash?: string | undefined;
+                    } | undefined;
                 }[] | undefined;
             } | undefined;
             MetaData?: {
@@ -854,6 +1053,11 @@ export declare const ComplianceList: {
                         OptionIndex?: number | undefined;
                     }[] | undefined;
                     QuestionIndex?: number | undefined;
+                    File?: {
+                        Description?: string | undefined;
+                        Optionality?: Optionality | undefined;
+                        Hash?: string | undefined;
+                    } | undefined;
                 }[] | undefined;
             } | undefined;
             MetaData?: {
@@ -887,6 +1091,11 @@ export declare const ComplianceList: {
                         OptionIndex?: number | undefined;
                     }[] | undefined;
                     QuestionIndex?: number | undefined;
+                    File?: {
+                        Description?: string | undefined;
+                        Optionality?: Optionality | undefined;
+                        Hash?: string | undefined;
+                    } | undefined;
                 }[] | undefined;
             } | undefined;
             MetaData?: {
@@ -920,6 +1129,11 @@ export declare const ComplianceList: {
                         OptionIndex?: number | undefined;
                     }[] | undefined;
                     QuestionIndex?: number | undefined;
+                    File?: {
+                        Description?: string | undefined;
+                        Optionality?: Optionality | undefined;
+                        Hash?: string | undefined;
+                    } | undefined;
                 }[] | undefined;
             } & {
                 ComplianceID?: string | undefined;
@@ -933,7 +1147,7 @@ export declare const ComplianceList: {
                     Jurisdiction?: string | undefined;
                 } & {
                     Jurisdiction?: string | undefined;
-                } & { [K_12 in Exclude<keyof I_1["ComplianceList"][number]["Compliance"]["Conditions"][number], "Jurisdiction">]: never; })[] & { [K_13 in Exclude<keyof I_1["ComplianceList"][number]["Compliance"]["Conditions"], keyof {
+                } & { [K_13 in Exclude<keyof I_1["ComplianceList"][number]["Compliance"]["Conditions"][number], "Jurisdiction">]: never; })[] & { [K_14 in Exclude<keyof I_1["ComplianceList"][number]["Compliance"]["Conditions"], keyof {
                     Jurisdiction?: string | undefined;
                 }[]>]: never; }) | undefined;
                 Questions?: ({
@@ -946,6 +1160,11 @@ export declare const ComplianceList: {
                         OptionIndex?: number | undefined;
                     }[] | undefined;
                     QuestionIndex?: number | undefined;
+                    File?: {
+                        Description?: string | undefined;
+                        Optionality?: Optionality | undefined;
+                        Hash?: string | undefined;
+                    } | undefined;
                 }[] & ({
                     Question?: string | undefined;
                     QuestionType?: QuestionType | undefined;
@@ -956,6 +1175,11 @@ export declare const ComplianceList: {
                         OptionIndex?: number | undefined;
                     }[] | undefined;
                     QuestionIndex?: number | undefined;
+                    File?: {
+                        Description?: string | undefined;
+                        Optionality?: Optionality | undefined;
+                        Hash?: string | undefined;
+                    } | undefined;
                 } & {
                     Question?: string | undefined;
                     QuestionType?: QuestionType | undefined;
@@ -970,12 +1194,21 @@ export declare const ComplianceList: {
                     } & {
                         Label?: string | undefined;
                         OptionIndex?: number | undefined;
-                    } & { [K_14 in Exclude<keyof I_1["ComplianceList"][number]["Compliance"]["Questions"][number]["Options"][number], keyof QuestionOption>]: never; })[] & { [K_15 in Exclude<keyof I_1["ComplianceList"][number]["Compliance"]["Questions"][number]["Options"], keyof {
+                    } & { [K_15 in Exclude<keyof I_1["ComplianceList"][number]["Compliance"]["Questions"][number]["Options"][number], keyof QuestionOption>]: never; })[] & { [K_16 in Exclude<keyof I_1["ComplianceList"][number]["Compliance"]["Questions"][number]["Options"], keyof {
                         Label?: string | undefined;
                         OptionIndex?: number | undefined;
                     }[]>]: never; }) | undefined;
                     QuestionIndex?: number | undefined;
-                } & { [K_16 in Exclude<keyof I_1["ComplianceList"][number]["Compliance"]["Questions"][number], keyof Question>]: never; })[] & { [K_17 in Exclude<keyof I_1["ComplianceList"][number]["Compliance"]["Questions"], keyof {
+                    File?: ({
+                        Description?: string | undefined;
+                        Optionality?: Optionality | undefined;
+                        Hash?: string | undefined;
+                    } & {
+                        Description?: string | undefined;
+                        Optionality?: Optionality | undefined;
+                        Hash?: string | undefined;
+                    } & { [K_17 in Exclude<keyof I_1["ComplianceList"][number]["Compliance"]["Questions"][number]["File"], keyof File>]: never; }) | undefined;
+                } & { [K_18 in Exclude<keyof I_1["ComplianceList"][number]["Compliance"]["Questions"][number], keyof Question>]: never; })[] & { [K_19 in Exclude<keyof I_1["ComplianceList"][number]["Compliance"]["Questions"], keyof {
                     Question?: string | undefined;
                     QuestionType?: QuestionType | undefined;
                     Required?: boolean | undefined;
@@ -985,8 +1218,13 @@ export declare const ComplianceList: {
                         OptionIndex?: number | undefined;
                     }[] | undefined;
                     QuestionIndex?: number | undefined;
+                    File?: {
+                        Description?: string | undefined;
+                        Optionality?: Optionality | undefined;
+                        Hash?: string | undefined;
+                    } | undefined;
                 }[]>]: never; }) | undefined;
-            } & { [K_18 in Exclude<keyof I_1["ComplianceList"][number]["Compliance"], keyof ComplianceDetails>]: never; }) | undefined;
+            } & { [K_20 in Exclude<keyof I_1["ComplianceList"][number]["Compliance"], keyof ComplianceDetails>]: never; }) | undefined;
             MetaData?: ({
                 Network?: import("../com-fs-utils-lib/models/metadata/metadata").Network | undefined;
                 UpdatedAt?: Date | undefined;
@@ -997,7 +1235,7 @@ export declare const ComplianceList: {
                 UpdatedAt?: Date | undefined;
                 CreatedAt?: Date | undefined;
                 UpdatedByAccount?: string | undefined;
-            } & { [K_19 in Exclude<keyof I_1["ComplianceList"][number]["MetaData"], keyof MetaData>]: never; }) | undefined;
+            } & { [K_21 in Exclude<keyof I_1["ComplianceList"][number]["MetaData"], keyof MetaData>]: never; }) | undefined;
             Audit?: ({
                 ChangedBy?: string | undefined;
                 ChangedAt?: Date | undefined;
@@ -1006,8 +1244,8 @@ export declare const ComplianceList: {
                 ChangedBy?: string | undefined;
                 ChangedAt?: Date | undefined;
                 Reason?: string | undefined;
-            } & { [K_20 in Exclude<keyof I_1["ComplianceList"][number]["Audit"], keyof Audit>]: never; }) | undefined;
-        } & { [K_21 in Exclude<keyof I_1["ComplianceList"][number], keyof Compliance>]: never; })[] & { [K_22 in Exclude<keyof I_1["ComplianceList"], keyof {
+            } & { [K_22 in Exclude<keyof I_1["ComplianceList"][number]["Audit"], keyof Audit>]: never; }) | undefined;
+        } & { [K_23 in Exclude<keyof I_1["ComplianceList"][number], keyof Compliance>]: never; })[] & { [K_24 in Exclude<keyof I_1["ComplianceList"], keyof {
             Compliance?: {
                 ComplianceID?: string | undefined;
                 ComplianceName?: string | undefined;
@@ -1027,6 +1265,11 @@ export declare const ComplianceList: {
                         OptionIndex?: number | undefined;
                     }[] | undefined;
                     QuestionIndex?: number | undefined;
+                    File?: {
+                        Description?: string | undefined;
+                        Optionality?: Optionality | undefined;
+                        Hash?: string | undefined;
+                    } | undefined;
                 }[] | undefined;
             } | undefined;
             MetaData?: {
@@ -1041,7 +1284,7 @@ export declare const ComplianceList: {
                 Reason?: string | undefined;
             } | undefined;
         }[]>]: never; }) | undefined;
-    } & { [K_23 in Exclude<keyof I_1, "ComplianceList">]: never; }>(object: I_1): ComplianceList;
+    } & { [K_25 in Exclude<keyof I_1, "ComplianceList">]: never; }>(object: I_1): ComplianceList;
 };
 export declare const Condition: {
     encode(message: Condition, writer?: _m0.Writer): _m0.Writer;
@@ -1074,6 +1317,11 @@ export declare const Question: {
             OptionIndex?: number | undefined;
         }[] | undefined;
         QuestionIndex?: number | undefined;
+        File?: {
+            Description?: string | undefined;
+            Optionality?: Optionality | undefined;
+            Hash?: string | undefined;
+        } | undefined;
     } & {
         Question?: string | undefined;
         QuestionType?: QuestionType | undefined;
@@ -1093,7 +1341,16 @@ export declare const Question: {
             OptionIndex?: number | undefined;
         }[]>]: never; }) | undefined;
         QuestionIndex?: number | undefined;
-    } & { [K_2 in Exclude<keyof I, keyof Question>]: never; }>(base?: I | undefined): Question;
+        File?: ({
+            Description?: string | undefined;
+            Optionality?: Optionality | undefined;
+            Hash?: string | undefined;
+        } & {
+            Description?: string | undefined;
+            Optionality?: Optionality | undefined;
+            Hash?: string | undefined;
+        } & { [K_2 in Exclude<keyof I["File"], keyof File>]: never; }) | undefined;
+    } & { [K_3 in Exclude<keyof I, keyof Question>]: never; }>(base?: I | undefined): Question;
     fromPartial<I_1 extends {
         Question?: string | undefined;
         QuestionType?: QuestionType | undefined;
@@ -1104,6 +1361,11 @@ export declare const Question: {
             OptionIndex?: number | undefined;
         }[] | undefined;
         QuestionIndex?: number | undefined;
+        File?: {
+            Description?: string | undefined;
+            Optionality?: Optionality | undefined;
+            Hash?: string | undefined;
+        } | undefined;
     } & {
         Question?: string | undefined;
         QuestionType?: QuestionType | undefined;
@@ -1118,12 +1380,45 @@ export declare const Question: {
         } & {
             Label?: string | undefined;
             OptionIndex?: number | undefined;
-        } & { [K_3 in Exclude<keyof I_1["Options"][number], keyof QuestionOption>]: never; })[] & { [K_4 in Exclude<keyof I_1["Options"], keyof {
+        } & { [K_4 in Exclude<keyof I_1["Options"][number], keyof QuestionOption>]: never; })[] & { [K_5 in Exclude<keyof I_1["Options"], keyof {
             Label?: string | undefined;
             OptionIndex?: number | undefined;
         }[]>]: never; }) | undefined;
         QuestionIndex?: number | undefined;
-    } & { [K_5 in Exclude<keyof I_1, keyof Question>]: never; }>(object: I_1): Question;
+        File?: ({
+            Description?: string | undefined;
+            Optionality?: Optionality | undefined;
+            Hash?: string | undefined;
+        } & {
+            Description?: string | undefined;
+            Optionality?: Optionality | undefined;
+            Hash?: string | undefined;
+        } & { [K_6 in Exclude<keyof I_1["File"], keyof File>]: never; }) | undefined;
+    } & { [K_7 in Exclude<keyof I_1, keyof Question>]: never; }>(object: I_1): Question;
+};
+export declare const File: {
+    encode(message: File, writer?: _m0.Writer): _m0.Writer;
+    decode(input: _m0.Reader | Uint8Array, length?: number): File;
+    fromJSON(object: any): File;
+    toJSON(message: File): unknown;
+    create<I extends {
+        Description?: string | undefined;
+        Optionality?: Optionality | undefined;
+        Hash?: string | undefined;
+    } & {
+        Description?: string | undefined;
+        Optionality?: Optionality | undefined;
+        Hash?: string | undefined;
+    } & { [K in Exclude<keyof I, keyof File>]: never; }>(base?: I | undefined): File;
+    fromPartial<I_1 extends {
+        Description?: string | undefined;
+        Optionality?: Optionality | undefined;
+        Hash?: string | undefined;
+    } & {
+        Description?: string | undefined;
+        Optionality?: Optionality | undefined;
+        Hash?: string | undefined;
+    } & { [K_1 in Exclude<keyof I_1, keyof File>]: never; }>(object: I_1): File;
 };
 export declare const QuestionOption: {
     encode(message: QuestionOption, writer?: _m0.Writer): _m0.Writer;
@@ -1156,6 +1451,11 @@ export declare const ComplianceFormAnswer: {
         Answers?: {
             Question?: string | undefined;
             Values?: string[] | undefined;
+            Files?: {
+                Description?: string | undefined;
+                Optionality?: Optionality | undefined;
+                Hash?: string | undefined;
+            }[] | undefined;
         }[] | undefined;
     } & {
         ComplianceID?: string | undefined;
@@ -1163,23 +1463,60 @@ export declare const ComplianceFormAnswer: {
         Answers?: ({
             Question?: string | undefined;
             Values?: string[] | undefined;
+            Files?: {
+                Description?: string | undefined;
+                Optionality?: Optionality | undefined;
+                Hash?: string | undefined;
+            }[] | undefined;
         }[] & ({
             Question?: string | undefined;
             Values?: string[] | undefined;
+            Files?: {
+                Description?: string | undefined;
+                Optionality?: Optionality | undefined;
+                Hash?: string | undefined;
+            }[] | undefined;
         } & {
             Question?: string | undefined;
             Values?: (string[] & string[] & { [K in Exclude<keyof I["Answers"][number]["Values"], keyof string[]>]: never; }) | undefined;
-        } & { [K_1 in Exclude<keyof I["Answers"][number], keyof QuestionAnswer>]: never; })[] & { [K_2 in Exclude<keyof I["Answers"], keyof {
+            Files?: ({
+                Description?: string | undefined;
+                Optionality?: Optionality | undefined;
+                Hash?: string | undefined;
+            }[] & ({
+                Description?: string | undefined;
+                Optionality?: Optionality | undefined;
+                Hash?: string | undefined;
+            } & {
+                Description?: string | undefined;
+                Optionality?: Optionality | undefined;
+                Hash?: string | undefined;
+            } & { [K_1 in Exclude<keyof I["Answers"][number]["Files"][number], keyof File>]: never; })[] & { [K_2 in Exclude<keyof I["Answers"][number]["Files"], keyof {
+                Description?: string | undefined;
+                Optionality?: Optionality | undefined;
+                Hash?: string | undefined;
+            }[]>]: never; }) | undefined;
+        } & { [K_3 in Exclude<keyof I["Answers"][number], keyof QuestionAnswer>]: never; })[] & { [K_4 in Exclude<keyof I["Answers"], keyof {
             Question?: string | undefined;
             Values?: string[] | undefined;
+            Files?: {
+                Description?: string | undefined;
+                Optionality?: Optionality | undefined;
+                Hash?: string | undefined;
+            }[] | undefined;
         }[]>]: never; }) | undefined;
-    } & { [K_3 in Exclude<keyof I, keyof ComplianceFormAnswer>]: never; }>(base?: I | undefined): ComplianceFormAnswer;
+    } & { [K_5 in Exclude<keyof I, keyof ComplianceFormAnswer>]: never; }>(base?: I | undefined): ComplianceFormAnswer;
     fromPartial<I_1 extends {
         ComplianceID?: string | undefined;
         QuestionnaireID?: string | undefined;
         Answers?: {
             Question?: string | undefined;
             Values?: string[] | undefined;
+            Files?: {
+                Description?: string | undefined;
+                Optionality?: Optionality | undefined;
+                Hash?: string | undefined;
+            }[] | undefined;
         }[] | undefined;
     } & {
         ComplianceID?: string | undefined;
@@ -1187,17 +1524,49 @@ export declare const ComplianceFormAnswer: {
         Answers?: ({
             Question?: string | undefined;
             Values?: string[] | undefined;
+            Files?: {
+                Description?: string | undefined;
+                Optionality?: Optionality | undefined;
+                Hash?: string | undefined;
+            }[] | undefined;
         }[] & ({
             Question?: string | undefined;
             Values?: string[] | undefined;
+            Files?: {
+                Description?: string | undefined;
+                Optionality?: Optionality | undefined;
+                Hash?: string | undefined;
+            }[] | undefined;
         } & {
             Question?: string | undefined;
-            Values?: (string[] & string[] & { [K_4 in Exclude<keyof I_1["Answers"][number]["Values"], keyof string[]>]: never; }) | undefined;
-        } & { [K_5 in Exclude<keyof I_1["Answers"][number], keyof QuestionAnswer>]: never; })[] & { [K_6 in Exclude<keyof I_1["Answers"], keyof {
+            Values?: (string[] & string[] & { [K_6 in Exclude<keyof I_1["Answers"][number]["Values"], keyof string[]>]: never; }) | undefined;
+            Files?: ({
+                Description?: string | undefined;
+                Optionality?: Optionality | undefined;
+                Hash?: string | undefined;
+            }[] & ({
+                Description?: string | undefined;
+                Optionality?: Optionality | undefined;
+                Hash?: string | undefined;
+            } & {
+                Description?: string | undefined;
+                Optionality?: Optionality | undefined;
+                Hash?: string | undefined;
+            } & { [K_7 in Exclude<keyof I_1["Answers"][number]["Files"][number], keyof File>]: never; })[] & { [K_8 in Exclude<keyof I_1["Answers"][number]["Files"], keyof {
+                Description?: string | undefined;
+                Optionality?: Optionality | undefined;
+                Hash?: string | undefined;
+            }[]>]: never; }) | undefined;
+        } & { [K_9 in Exclude<keyof I_1["Answers"][number], keyof QuestionAnswer>]: never; })[] & { [K_10 in Exclude<keyof I_1["Answers"], keyof {
             Question?: string | undefined;
             Values?: string[] | undefined;
+            Files?: {
+                Description?: string | undefined;
+                Optionality?: Optionality | undefined;
+                Hash?: string | undefined;
+            }[] | undefined;
         }[]>]: never; }) | undefined;
-    } & { [K_7 in Exclude<keyof I_1, keyof ComplianceFormAnswer>]: never; }>(object: I_1): ComplianceFormAnswer;
+    } & { [K_11 in Exclude<keyof I_1, keyof ComplianceFormAnswer>]: never; }>(object: I_1): ComplianceFormAnswer;
 };
 export declare const QuestionAnswer: {
     encode(message: QuestionAnswer, writer?: _m0.Writer): _m0.Writer;
@@ -1207,17 +1576,61 @@ export declare const QuestionAnswer: {
     create<I extends {
         Question?: string | undefined;
         Values?: string[] | undefined;
+        Files?: {
+            Description?: string | undefined;
+            Optionality?: Optionality | undefined;
+            Hash?: string | undefined;
+        }[] | undefined;
     } & {
         Question?: string | undefined;
         Values?: (string[] & string[] & { [K in Exclude<keyof I["Values"], keyof string[]>]: never; }) | undefined;
-    } & { [K_1 in Exclude<keyof I, keyof QuestionAnswer>]: never; }>(base?: I | undefined): QuestionAnswer;
+        Files?: ({
+            Description?: string | undefined;
+            Optionality?: Optionality | undefined;
+            Hash?: string | undefined;
+        }[] & ({
+            Description?: string | undefined;
+            Optionality?: Optionality | undefined;
+            Hash?: string | undefined;
+        } & {
+            Description?: string | undefined;
+            Optionality?: Optionality | undefined;
+            Hash?: string | undefined;
+        } & { [K_1 in Exclude<keyof I["Files"][number], keyof File>]: never; })[] & { [K_2 in Exclude<keyof I["Files"], keyof {
+            Description?: string | undefined;
+            Optionality?: Optionality | undefined;
+            Hash?: string | undefined;
+        }[]>]: never; }) | undefined;
+    } & { [K_3 in Exclude<keyof I, keyof QuestionAnswer>]: never; }>(base?: I | undefined): QuestionAnswer;
     fromPartial<I_1 extends {
         Question?: string | undefined;
         Values?: string[] | undefined;
+        Files?: {
+            Description?: string | undefined;
+            Optionality?: Optionality | undefined;
+            Hash?: string | undefined;
+        }[] | undefined;
     } & {
         Question?: string | undefined;
-        Values?: (string[] & string[] & { [K_2 in Exclude<keyof I_1["Values"], keyof string[]>]: never; }) | undefined;
-    } & { [K_3 in Exclude<keyof I_1, keyof QuestionAnswer>]: never; }>(object: I_1): QuestionAnswer;
+        Values?: (string[] & string[] & { [K_4 in Exclude<keyof I_1["Values"], keyof string[]>]: never; }) | undefined;
+        Files?: ({
+            Description?: string | undefined;
+            Optionality?: Optionality | undefined;
+            Hash?: string | undefined;
+        }[] & ({
+            Description?: string | undefined;
+            Optionality?: Optionality | undefined;
+            Hash?: string | undefined;
+        } & {
+            Description?: string | undefined;
+            Optionality?: Optionality | undefined;
+            Hash?: string | undefined;
+        } & { [K_5 in Exclude<keyof I_1["Files"][number], keyof File>]: never; })[] & { [K_6 in Exclude<keyof I_1["Files"], keyof {
+            Description?: string | undefined;
+            Optionality?: Optionality | undefined;
+            Hash?: string | undefined;
+        }[]>]: never; }) | undefined;
+    } & { [K_7 in Exclude<keyof I_1, keyof QuestionAnswer>]: never; }>(object: I_1): QuestionAnswer;
 };
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 export type DeepPartial<T> = T extends Builtin ? T : T extends globalThis.Array<infer U> ? globalThis.Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? {

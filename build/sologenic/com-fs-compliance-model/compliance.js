@@ -96,6 +96,50 @@ export function responseTypeToJSON(object) {
             return "UNRECOGNIZED";
     }
 }
+export var Optionality;
+(function (Optionality) {
+    Optionality[Optionality["OPTIONALITY_NONE"] = 0] = "OPTIONALITY_NONE";
+    Optionality[Optionality["OPTIONALITY_OPTIONAL"] = 1] = "OPTIONALITY_OPTIONAL";
+    Optionality[Optionality["OPTIONALITY_REQUIRED"] = 2] = "OPTIONALITY_REQUIRED";
+    /** OPTIONALITY_ON_BOOLEAN_TRUE - If the response type used is boolean, setting this to ON_BOOLEAN_TRUE gives the form implementer clear information on what to do if the boolean is true. */
+    Optionality[Optionality["OPTIONALITY_ON_BOOLEAN_TRUE"] = 3] = "OPTIONALITY_ON_BOOLEAN_TRUE";
+    Optionality[Optionality["UNRECOGNIZED"] = -1] = "UNRECOGNIZED";
+})(Optionality || (Optionality = {}));
+export function optionalityFromJSON(object) {
+    switch (object) {
+        case 0:
+        case "OPTIONALITY_NONE":
+            return Optionality.OPTIONALITY_NONE;
+        case 1:
+        case "OPTIONALITY_OPTIONAL":
+            return Optionality.OPTIONALITY_OPTIONAL;
+        case 2:
+        case "OPTIONALITY_REQUIRED":
+            return Optionality.OPTIONALITY_REQUIRED;
+        case 3:
+        case "OPTIONALITY_ON_BOOLEAN_TRUE":
+            return Optionality.OPTIONALITY_ON_BOOLEAN_TRUE;
+        case -1:
+        case "UNRECOGNIZED":
+        default:
+            return Optionality.UNRECOGNIZED;
+    }
+}
+export function optionalityToJSON(object) {
+    switch (object) {
+        case Optionality.OPTIONALITY_NONE:
+            return "OPTIONALITY_NONE";
+        case Optionality.OPTIONALITY_OPTIONAL:
+            return "OPTIONALITY_OPTIONAL";
+        case Optionality.OPTIONALITY_REQUIRED:
+            return "OPTIONALITY_REQUIRED";
+        case Optionality.OPTIONALITY_ON_BOOLEAN_TRUE:
+            return "OPTIONALITY_ON_BOOLEAN_TRUE";
+        case Optionality.UNRECOGNIZED:
+        default:
+            return "UNRECOGNIZED";
+    }
+}
 export var ComplianceStatus;
 (function (ComplianceStatus) {
     ComplianceStatus[ComplianceStatus["COMPLIANCE_STATUS_DO_NOT_USE"] = 0] = "COMPLIANCE_STATUS_DO_NOT_USE";
@@ -475,7 +519,15 @@ export const Condition = {
     },
 };
 function createBaseQuestion() {
-    return { Question: "", QuestionType: 0, Required: false, ResponseType: 0, Options: [], QuestionIndex: 0 };
+    return {
+        Question: "",
+        QuestionType: 0,
+        Required: false,
+        ResponseType: 0,
+        Options: [],
+        QuestionIndex: 0,
+        File: undefined,
+    };
 }
 export const Question = {
     encode(message, writer = _m0.Writer.create()) {
@@ -496,6 +548,9 @@ export const Question = {
         }
         if (message.QuestionIndex !== 0) {
             writer.uint32(48).int32(message.QuestionIndex);
+        }
+        if (message.File !== undefined) {
+            File.encode(message.File, writer.uint32(58).fork()).ldelim();
         }
         return writer;
     },
@@ -542,6 +597,12 @@ export const Question = {
                     }
                     message.QuestionIndex = reader.int32();
                     continue;
+                case 7:
+                    if (tag !== 58) {
+                        break;
+                    }
+                    message.File = File.decode(reader, reader.uint32());
+                    continue;
             }
             if ((tag & 7) === 4 || tag === 0) {
                 break;
@@ -560,6 +621,7 @@ export const Question = {
                 ? object.Options.map((e) => QuestionOption.fromJSON(e))
                 : [],
             QuestionIndex: isSet(object.QuestionIndex) ? globalThis.Number(object.QuestionIndex) : 0,
+            File: isSet(object.File) ? File.fromJSON(object.File) : undefined,
         };
     },
     toJSON(message) {
@@ -583,6 +645,9 @@ export const Question = {
         if (message.QuestionIndex !== 0) {
             obj.QuestionIndex = Math.round(message.QuestionIndex);
         }
+        if (message.File !== undefined) {
+            obj.File = File.toJSON(message.File);
+        }
         return obj;
     },
     create(base) {
@@ -597,6 +662,88 @@ export const Question = {
         message.ResponseType = (_d = object.ResponseType) !== null && _d !== void 0 ? _d : 0;
         message.Options = ((_e = object.Options) === null || _e === void 0 ? void 0 : _e.map((e) => QuestionOption.fromPartial(e))) || [];
         message.QuestionIndex = (_f = object.QuestionIndex) !== null && _f !== void 0 ? _f : 0;
+        message.File = (object.File !== undefined && object.File !== null) ? File.fromPartial(object.File) : undefined;
+        return message;
+    },
+};
+function createBaseFile() {
+    return { Description: "", Optionality: 0, Hash: undefined };
+}
+export const File = {
+    encode(message, writer = _m0.Writer.create()) {
+        if (message.Description !== "") {
+            writer.uint32(10).string(message.Description);
+        }
+        if (message.Optionality !== 0) {
+            writer.uint32(16).int32(message.Optionality);
+        }
+        if (message.Hash !== undefined) {
+            writer.uint32(26).string(message.Hash);
+        }
+        return writer;
+    },
+    decode(input, length) {
+        const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+        let end = length === undefined ? reader.len : reader.pos + length;
+        const message = createBaseFile();
+        while (reader.pos < end) {
+            const tag = reader.uint32();
+            switch (tag >>> 3) {
+                case 1:
+                    if (tag !== 10) {
+                        break;
+                    }
+                    message.Description = reader.string();
+                    continue;
+                case 2:
+                    if (tag !== 16) {
+                        break;
+                    }
+                    message.Optionality = reader.int32();
+                    continue;
+                case 3:
+                    if (tag !== 26) {
+                        break;
+                    }
+                    message.Hash = reader.string();
+                    continue;
+            }
+            if ((tag & 7) === 4 || tag === 0) {
+                break;
+            }
+            reader.skipType(tag & 7);
+        }
+        return message;
+    },
+    fromJSON(object) {
+        return {
+            Description: isSet(object.Description) ? globalThis.String(object.Description) : "",
+            Optionality: isSet(object.Optionality) ? optionalityFromJSON(object.Optionality) : 0,
+            Hash: isSet(object.Hash) ? globalThis.String(object.Hash) : undefined,
+        };
+    },
+    toJSON(message) {
+        const obj = {};
+        if (message.Description !== "") {
+            obj.Description = message.Description;
+        }
+        if (message.Optionality !== 0) {
+            obj.Optionality = optionalityToJSON(message.Optionality);
+        }
+        if (message.Hash !== undefined) {
+            obj.Hash = message.Hash;
+        }
+        return obj;
+    },
+    create(base) {
+        return File.fromPartial(base !== null && base !== void 0 ? base : {});
+    },
+    fromPartial(object) {
+        var _a, _b, _c;
+        const message = createBaseFile();
+        message.Description = (_a = object.Description) !== null && _a !== void 0 ? _a : "";
+        message.Optionality = (_b = object.Optionality) !== null && _b !== void 0 ? _b : 0;
+        message.Hash = (_c = object.Hash) !== null && _c !== void 0 ? _c : undefined;
         return message;
     },
 };
@@ -752,7 +899,7 @@ export const ComplianceFormAnswer = {
     },
 };
 function createBaseQuestionAnswer() {
-    return { Question: "", Values: [] };
+    return { Question: "", Values: [], Files: [] };
 }
 export const QuestionAnswer = {
     encode(message, writer = _m0.Writer.create()) {
@@ -761,6 +908,9 @@ export const QuestionAnswer = {
         }
         for (const v of message.Values) {
             writer.uint32(26).string(v);
+        }
+        for (const v of message.Files) {
+            File.encode(v, writer.uint32(34).fork()).ldelim();
         }
         return writer;
     },
@@ -783,6 +933,12 @@ export const QuestionAnswer = {
                     }
                     message.Values.push(reader.string());
                     continue;
+                case 4:
+                    if (tag !== 34) {
+                        break;
+                    }
+                    message.Files.push(File.decode(reader, reader.uint32()));
+                    continue;
             }
             if ((tag & 7) === 4 || tag === 0) {
                 break;
@@ -795,10 +951,11 @@ export const QuestionAnswer = {
         return {
             Question: isSet(object.Question) ? globalThis.String(object.Question) : "",
             Values: globalThis.Array.isArray(object === null || object === void 0 ? void 0 : object.Values) ? object.Values.map((e) => globalThis.String(e)) : [],
+            Files: globalThis.Array.isArray(object === null || object === void 0 ? void 0 : object.Files) ? object.Files.map((e) => File.fromJSON(e)) : [],
         };
     },
     toJSON(message) {
-        var _a;
+        var _a, _b;
         const obj = {};
         if (message.Question !== "") {
             obj.Question = message.Question;
@@ -806,16 +963,20 @@ export const QuestionAnswer = {
         if ((_a = message.Values) === null || _a === void 0 ? void 0 : _a.length) {
             obj.Values = message.Values;
         }
+        if ((_b = message.Files) === null || _b === void 0 ? void 0 : _b.length) {
+            obj.Files = message.Files.map((e) => File.toJSON(e));
+        }
         return obj;
     },
     create(base) {
         return QuestionAnswer.fromPartial(base !== null && base !== void 0 ? base : {});
     },
     fromPartial(object) {
-        var _a, _b;
+        var _a, _b, _c;
         const message = createBaseQuestionAnswer();
         message.Question = (_a = object.Question) !== null && _a !== void 0 ? _a : "";
         message.Values = ((_b = object.Values) === null || _b === void 0 ? void 0 : _b.map((e) => e)) || [];
+        message.Files = ((_c = object.Files) === null || _c === void 0 ? void 0 : _c.map((e) => File.fromPartial(e))) || [];
         return message;
     },
 };

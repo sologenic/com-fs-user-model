@@ -61,7 +61,7 @@ Key features of the user model include:
 
 - **User Identification**: Provides unique identifiers including Firebase Auth UID, external user IDs, and organization-specific identifiers
 - **KYC Management**: Comprehensive KYC details including personal information, employment data, and verification status tracking
-- **Compliance Support**: Multiple compliance questionnaires (USA, Alpaca Disclosures) with risk tolerance and investment objective tracking
+- **Compliance Support**: Multiple compliance questionnaires (USA, Alpaca Disclosures) with risk tolerance and investment objective tracking, plus file attachment support for compliance form answers
 - **Funding Sources**: Support for wallets, bank accounts, and broker accounts with multiple account types
 - **Organizational Context**: Multi-organization support allowing users to be cloned into different organizations
 - **Metadata and Audit**: Includes metadata and audit trails for tracking changes and access
@@ -81,6 +81,8 @@ Key features of the user model include:
 ### Overview
 
 The `user.proto` file defines the core user model for user management. It provides message types for representing user data, status management, social profiles, UI settings, and data feed accounts. The file integrates with external utility libraries including metadata, audit, role, language, trade profile, document, commission, and compliance models.
+
+**Note on ComplianceFormAnswer**: The `ComplianceFormAnswers` field uses the `compliance.ComplianceFormAnswer` type from the compliance model. Each `ComplianceFormAnswer` contains `QuestionAnswer` messages, and each `QuestionAnswer` can include a `repeated File` field. This allows compliance form responses to include file attachments (e.g., documents, images) with each answer. The File structure includes a description, optionality setting, and hash for integrity verification. By storing file descriptions in answers, the admin interface can render answers even if the questionnaire structure is later updated.
 
 ### Messages
 
@@ -121,7 +123,7 @@ The `UserDetails` message contains all the core information about a user, includ
 | DataFeedAccounts | `DataFeedAccounts` | Optional | Data feed account configurations |
 | AllowedJurisdictions | `repeated string` | Optional | ISO 3166-1 alpha-3 country codes (e.g., "USA", "CAD") indicating allowed jurisdictions |
 | EmailAddress | `string` | Required | Email address for the user, often retrieved from the authentication provider |
-| ComplianceFormAnswers | `repeated compliance.ComplianceFormAnswer` | Optional | Compliance form answers for the user |
+| ComplianceFormAnswers | `repeated compliance.ComplianceFormAnswer` | Optional | Compliance form answers for the user. Each answer can include multiple file attachments (see compliance model documentation) |
 
 **Use Cases:**
 
@@ -134,6 +136,7 @@ The `UserDetails` message contains all the core information about a user, includ
 - Tracking KYC and compliance status
 - Managing user funding sources (wallets, bank accounts, broker accounts)
 - Configuring user-specific commission settings
+- Storing compliance form responses with file attachments
 
 **Important Notes:**
 
@@ -145,6 +148,7 @@ The `UserDetails` message contains all the core information about a user, includ
 - `AllowedJurisdictions` uses ISO 3166-1 alpha-3 format (3-letter country codes)
 - Retail users always have a role of "NORMAL_USER"
 - Commission settings at the user level override organization-level settings
+- `ComplianceFormAnswers` contains `QuestionAnswer` messages, each of which can have a `repeated File` field for file attachments. Files include a description, optionality setting, and hash for integrity verification. By repeating the file description in answers, the admin interface can render answers even if the questionnaire is later updated.
 
 #### User {#user}
 
@@ -1109,5 +1113,5 @@ For additional information and support:
   - `sologenic/com-fs-trade-profile-model/tradeprofile.proto`
   - `sologenic/com-fs-document-model/document.proto`
   - `sologenic/com-fs-utils-lib/models/commission/commission.proto`
-  - `sologenic/com-fs-compliance-model/compliance.proto`
+  - `sologenic/com-fs-compliance-model/compliance.proto` - Note: The compliance model includes `ComplianceFormAnswer` with `QuestionAnswer` messages that support `repeated File` fields for file attachments in compliance responses
   - `sologenic/com-fs-utils-lib/models/order-properties/order-properties.proto`
