@@ -13,7 +13,6 @@ import { CommissionSettings } from "./sologenic/com-fs-utils-lib/models/commissi
 import { langFromJSON, langToJSON } from "./sologenic/com-fs-utils-lib/models/language/language";
 import { MetaData, networkFromJSON, networkToJSON, } from "./sologenic/com-fs-utils-lib/models/metadata/metadata";
 import { roleFromJSON, roleToJSON } from "./sologenic/com-fs-utils-lib/models/role/role";
-import { ComplianceQuestions } from "./user-compliance";
 import { BankAccount, BrokerAccount, Wallet } from "./user-fundings";
 import { Employment, kYCStatusFromJSON, kYCStatusToJSON, UserKYCDetails } from "./user-kyc";
 export const protobufPackage = "user";
@@ -199,7 +198,6 @@ function createBaseUserDetails() {
         UserDocumentCompliance: undefined,
         KYCStatus: 0,
         UserTradeProfile: undefined,
-        ComplianceQuestions: [],
         BrokerAccounts: [],
         BankAccounts: [],
         UISettings: undefined,
@@ -274,9 +272,6 @@ export const UserDetails = {
         }
         if (message.UserTradeProfile !== undefined) {
             UserTradeProfile.encode(message.UserTradeProfile, writer.uint32(170).fork()).ldelim();
-        }
-        for (const v of message.ComplianceQuestions) {
-            ComplianceQuestions.encode(v, writer.uint32(178).fork()).ldelim();
         }
         for (const v of message.BrokerAccounts) {
             BrokerAccount.encode(v, writer.uint32(186).fork()).ldelim();
@@ -437,12 +432,6 @@ export const UserDetails = {
                     }
                     message.UserTradeProfile = UserTradeProfile.decode(reader, reader.uint32());
                     continue;
-                case 22:
-                    if (tag !== 178) {
-                        break;
-                    }
-                    message.ComplianceQuestions.push(ComplianceQuestions.decode(reader, reader.uint32()));
-                    continue;
                 case 23:
                     if (tag !== 186) {
                         break;
@@ -526,9 +515,6 @@ export const UserDetails = {
                 : undefined,
             KYCStatus: isSet(object.KYCStatus) ? kYCStatusFromJSON(object.KYCStatus) : 0,
             UserTradeProfile: isSet(object.UserTradeProfile) ? UserTradeProfile.fromJSON(object.UserTradeProfile) : undefined,
-            ComplianceQuestions: globalThis.Array.isArray(object === null || object === void 0 ? void 0 : object.ComplianceQuestions)
-                ? object.ComplianceQuestions.map((e) => ComplianceQuestions.fromJSON(e))
-                : [],
             BrokerAccounts: globalThis.Array.isArray(object === null || object === void 0 ? void 0 : object.BrokerAccounts)
                 ? object.BrokerAccounts.map((e) => BrokerAccount.fromJSON(e))
                 : [],
@@ -550,7 +536,7 @@ export const UserDetails = {
         };
     },
     toJSON(message) {
-        var _a, _b, _c, _d, _e, _f, _g, _h;
+        var _a, _b, _c, _d, _e, _f, _g;
         const obj = {};
         if (message.UserID !== "") {
             obj.UserID = message.UserID;
@@ -615,13 +601,10 @@ export const UserDetails = {
         if (message.UserTradeProfile !== undefined) {
             obj.UserTradeProfile = UserTradeProfile.toJSON(message.UserTradeProfile);
         }
-        if ((_d = message.ComplianceQuestions) === null || _d === void 0 ? void 0 : _d.length) {
-            obj.ComplianceQuestions = message.ComplianceQuestions.map((e) => ComplianceQuestions.toJSON(e));
-        }
-        if ((_e = message.BrokerAccounts) === null || _e === void 0 ? void 0 : _e.length) {
+        if ((_d = message.BrokerAccounts) === null || _d === void 0 ? void 0 : _d.length) {
             obj.BrokerAccounts = message.BrokerAccounts.map((e) => BrokerAccount.toJSON(e));
         }
-        if ((_f = message.BankAccounts) === null || _f === void 0 ? void 0 : _f.length) {
+        if ((_e = message.BankAccounts) === null || _e === void 0 ? void 0 : _e.length) {
             obj.BankAccounts = message.BankAccounts.map((e) => BankAccount.toJSON(e));
         }
         if (message.UISettings !== undefined) {
@@ -633,13 +616,13 @@ export const UserDetails = {
         if (message.DataFeedAccounts !== undefined) {
             obj.DataFeedAccounts = DataFeedAccounts.toJSON(message.DataFeedAccounts);
         }
-        if ((_g = message.AllowedJurisdictions) === null || _g === void 0 ? void 0 : _g.length) {
+        if ((_f = message.AllowedJurisdictions) === null || _f === void 0 ? void 0 : _f.length) {
             obj.AllowedJurisdictions = message.AllowedJurisdictions;
         }
         if (message.EmailAddress !== "") {
             obj.EmailAddress = message.EmailAddress;
         }
-        if ((_h = message.ComplianceFormAnswers) === null || _h === void 0 ? void 0 : _h.length) {
+        if ((_g = message.ComplianceFormAnswers) === null || _g === void 0 ? void 0 : _g.length) {
             obj.ComplianceFormAnswers = message.ComplianceFormAnswers.map((e) => ComplianceFormAnswer.toJSON(e));
         }
         return obj;
@@ -648,7 +631,7 @@ export const UserDetails = {
         return UserDetails.fromPartial(base !== null && base !== void 0 ? base : {});
     },
     fromPartial(object) {
-        var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q, _r, _s, _t, _u, _v, _w, _x;
+        var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q, _r, _s, _t, _u, _v, _w;
         const message = createBaseUserDetails();
         message.UserID = (_a = object.UserID) !== null && _a !== void 0 ? _a : "";
         message.FirstName = (_b = object.FirstName) !== null && _b !== void 0 ? _b : "";
@@ -682,9 +665,8 @@ export const UserDetails = {
         message.UserTradeProfile = (object.UserTradeProfile !== undefined && object.UserTradeProfile !== null)
             ? UserTradeProfile.fromPartial(object.UserTradeProfile)
             : undefined;
-        message.ComplianceQuestions = ((_s = object.ComplianceQuestions) === null || _s === void 0 ? void 0 : _s.map((e) => ComplianceQuestions.fromPartial(e))) || [];
-        message.BrokerAccounts = ((_t = object.BrokerAccounts) === null || _t === void 0 ? void 0 : _t.map((e) => BrokerAccount.fromPartial(e))) || [];
-        message.BankAccounts = ((_u = object.BankAccounts) === null || _u === void 0 ? void 0 : _u.map((e) => BankAccount.fromPartial(e))) || [];
+        message.BrokerAccounts = ((_s = object.BrokerAccounts) === null || _s === void 0 ? void 0 : _s.map((e) => BrokerAccount.fromPartial(e))) || [];
+        message.BankAccounts = ((_t = object.BankAccounts) === null || _t === void 0 ? void 0 : _t.map((e) => BankAccount.fromPartial(e))) || [];
         message.UISettings = (object.UISettings !== undefined && object.UISettings !== null)
             ? UISettings.fromPartial(object.UISettings)
             : undefined;
@@ -694,9 +676,9 @@ export const UserDetails = {
         message.DataFeedAccounts = (object.DataFeedAccounts !== undefined && object.DataFeedAccounts !== null)
             ? DataFeedAccounts.fromPartial(object.DataFeedAccounts)
             : undefined;
-        message.AllowedJurisdictions = ((_v = object.AllowedJurisdictions) === null || _v === void 0 ? void 0 : _v.map((e) => e)) || [];
-        message.EmailAddress = (_w = object.EmailAddress) !== null && _w !== void 0 ? _w : "";
-        message.ComplianceFormAnswers = ((_x = object.ComplianceFormAnswers) === null || _x === void 0 ? void 0 : _x.map((e) => ComplianceFormAnswer.fromPartial(e))) || [];
+        message.AllowedJurisdictions = ((_u = object.AllowedJurisdictions) === null || _u === void 0 ? void 0 : _u.map((e) => e)) || [];
+        message.EmailAddress = (_v = object.EmailAddress) !== null && _v !== void 0 ? _v : "";
+        message.ComplianceFormAnswers = ((_w = object.ComplianceFormAnswers) === null || _w === void 0 ? void 0 : _w.map((e) => ComplianceFormAnswer.fromPartial(e))) || [];
         return message;
     },
 };

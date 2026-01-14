@@ -19,7 +19,6 @@ import {
   networkToJSON,
 } from "./sologenic/com-fs-utils-lib/models/metadata/metadata";
 import { Role, roleFromJSON, roleToJSON } from "./sologenic/com-fs-utils-lib/models/role/role";
-import { ComplianceQuestions } from "./user-compliance";
 import { BankAccount, BrokerAccount, Wallet } from "./user-fundings";
 import { Employment, KYCStatus, kYCStatusFromJSON, kYCStatusToJSON, UserKYCDetails } from "./user-kyc";
 
@@ -226,7 +225,6 @@ export interface UserDetails {
   /** Status of KYC verification, e.g., PENDING, APPROVED, REJECTED */
   KYCStatus: KYCStatus;
   UserTradeProfile?: UserTradeProfile | undefined;
-  ComplianceQuestions: ComplianceQuestions[];
   BrokerAccounts: BrokerAccount[];
   BankAccounts: BankAccount[];
   UISettings:
@@ -308,7 +306,6 @@ function createBaseUserDetails(): UserDetails {
     UserDocumentCompliance: undefined,
     KYCStatus: 0,
     UserTradeProfile: undefined,
-    ComplianceQuestions: [],
     BrokerAccounts: [],
     BankAccounts: [],
     UISettings: undefined,
@@ -384,9 +381,6 @@ export const UserDetails = {
     }
     if (message.UserTradeProfile !== undefined) {
       UserTradeProfile.encode(message.UserTradeProfile, writer.uint32(170).fork()).ldelim();
-    }
-    for (const v of message.ComplianceQuestions) {
-      ComplianceQuestions.encode(v!, writer.uint32(178).fork()).ldelim();
     }
     for (const v of message.BrokerAccounts) {
       BrokerAccount.encode(v!, writer.uint32(186).fork()).ldelim();
@@ -569,13 +563,6 @@ export const UserDetails = {
 
           message.UserTradeProfile = UserTradeProfile.decode(reader, reader.uint32());
           continue;
-        case 22:
-          if (tag !== 178) {
-            break;
-          }
-
-          message.ComplianceQuestions.push(ComplianceQuestions.decode(reader, reader.uint32()));
-          continue;
         case 23:
           if (tag !== 186) {
             break;
@@ -668,9 +655,6 @@ export const UserDetails = {
         : undefined,
       KYCStatus: isSet(object.KYCStatus) ? kYCStatusFromJSON(object.KYCStatus) : 0,
       UserTradeProfile: isSet(object.UserTradeProfile) ? UserTradeProfile.fromJSON(object.UserTradeProfile) : undefined,
-      ComplianceQuestions: globalThis.Array.isArray(object?.ComplianceQuestions)
-        ? object.ComplianceQuestions.map((e: any) => ComplianceQuestions.fromJSON(e))
-        : [],
       BrokerAccounts: globalThis.Array.isArray(object?.BrokerAccounts)
         ? object.BrokerAccounts.map((e: any) => BrokerAccount.fromJSON(e))
         : [],
@@ -757,9 +741,6 @@ export const UserDetails = {
     if (message.UserTradeProfile !== undefined) {
       obj.UserTradeProfile = UserTradeProfile.toJSON(message.UserTradeProfile);
     }
-    if (message.ComplianceQuestions?.length) {
-      obj.ComplianceQuestions = message.ComplianceQuestions.map((e) => ComplianceQuestions.toJSON(e));
-    }
     if (message.BrokerAccounts?.length) {
       obj.BrokerAccounts = message.BrokerAccounts.map((e) => BrokerAccount.toJSON(e));
     }
@@ -824,7 +805,6 @@ export const UserDetails = {
     message.UserTradeProfile = (object.UserTradeProfile !== undefined && object.UserTradeProfile !== null)
       ? UserTradeProfile.fromPartial(object.UserTradeProfile)
       : undefined;
-    message.ComplianceQuestions = object.ComplianceQuestions?.map((e) => ComplianceQuestions.fromPartial(e)) || [];
     message.BrokerAccounts = object.BrokerAccounts?.map((e) => BrokerAccount.fromPartial(e)) || [];
     message.BankAccounts = object.BankAccounts?.map((e) => BankAccount.fromPartial(e)) || [];
     message.UISettings = (object.UISettings !== undefined && object.UISettings !== null)

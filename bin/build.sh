@@ -66,11 +66,6 @@ protoc \
     "--go_out=." --go_opt=paths=source_relative
 
 protoc \
-    --proto_path=. "user-compliance.proto" \
-    --proto_path=$(dirname $(dirname "$rd")) \
-    "--go_out=." --go_opt=paths=source_relative
-
-protoc \
     --proto_path=. "user.proto" \
     --proto_path=$(dirname $(dirname "$rd")) \
     "--go_out=." --go_opt=paths=source_relative
@@ -111,13 +106,6 @@ protoc --plugin=./node_modules/.bin/protoc-gen-ts_proto \
     --ts_proto_out=. \
     --ts_proto_opt=esModuleInterop=true \
     user-fundings.proto
-
-protoc --plugin=./node_modules/.bin/protoc-gen-ts_proto \
-    --proto_path=. \
-    --proto_path=$(dirname $(dirname "$rd")) \
-    --ts_proto_out=. \
-    --ts_proto_opt=esModuleInterop=true \
-    user-compliance.proto
 
 protoc --plugin=./node_modules/.bin/protoc-gen-ts_proto \
     --proto_path=. \

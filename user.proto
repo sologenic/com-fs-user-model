@@ -11,7 +11,6 @@ import "sologenic/com-fs-utils-lib/models/language/language.proto";
 import "sologenic/com-fs-trade-profile-model/tradeprofile.proto";
 import "sologenic/com-fs-document-model/document.proto";
 import "user-kyc.proto";
-import "user-compliance.proto";
 import "user-fundings.proto";
 import "sologenic/com-fs-utils-lib/models/commission/commission.proto";
 import "sologenic/com-fs-compliance-model/compliance.proto";
@@ -38,7 +37,6 @@ message UserDetails {
     document.UserDocumentCompliance UserDocumentCompliance = 19;
     KYCStatus KYCStatus = 20; // Status of KYC verification, e.g., PENDING, APPROVED, REJECTED
     optional tradeprofile.UserTradeProfile UserTradeProfile = 21;
-    repeated ComplianceQuestions ComplianceQuestions = 22;
     repeated BrokerAccount BrokerAccounts = 23;
     repeated BankAccount BankAccounts = 24;
     UISettings UISettings = 25;
