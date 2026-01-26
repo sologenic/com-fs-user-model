@@ -8,6 +8,8 @@ export declare enum Role {
     BROKER_ASSET_VIEWER = 5,
     /** SOLOGENIC_ADMINISTRATOR - Highest level of administrator. Can only create new Organizations and assign an initial administrator in there */
     SOLOGENIC_ADMINISTRATOR = 6,
+    /** TX_ADMINISTRATOR - Alias for SOLOGENIC_ADMINISTRATOR */
+    TX_ADMINISTRATOR = 6,
     KYC_ADMINISTRATOR = 7,
     UNRECOGNIZED = -1
 }

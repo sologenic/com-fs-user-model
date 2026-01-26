@@ -18,6 +18,7 @@ message Filter {
     repeated string ExternalUserIDs = 8;
     optional string WalletAddress = 9;
     optional string BrokerAccountID = 10;
+    optional string Alias = 11;
 }
 
 message UserID {
