@@ -17,6 +17,7 @@ import (
 	role "github.com/sologenic/com-fs-utils-lib/models/role"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
+	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 	reflect "reflect"
 	sync "sync"
 	unsafe "unsafe"
@@ -228,10 +229,15 @@ type UserDetails struct {
 	UISettings             *UISettings                                     `protobuf:"bytes,25,opt,name=UISettings,proto3" json:"UISettings,omitempty"`
 	CommissionSettings     *commission.CommissionSettings                  `protobuf:"bytes,26,opt,name=CommissionSettings,proto3,oneof" json:"CommissionSettings,omitempty"` // Broker API specific commission fields for user level (overrrides organization level)
 	DataFeedAccounts       *DataFeedAccounts                               `protobuf:"bytes,27,opt,name=DataFeedAccounts,proto3,oneof" json:"DataFeedAccounts,omitempty"`
-	AllowedJurisdictions   []string                                        `protobuf:"bytes,28,rep,name=AllowedJurisdictions,proto3" json:"AllowedJurisdictions,omitempty"`   // ISO 3166-1 alpha-3 code e.g. "USA", "CAD"
-	EmailAddress           string                                          `protobuf:"bytes,29,opt,name=EmailAddress,proto3" json:"EmailAddress,omitempty"`                   // Email address for the user, often retrieved from the authentication provider
-	ComplianceFormAnswers  []*com_fs_compliance_model.ComplianceFormAnswer `protobuf:"bytes,30,rep,name=ComplianceFormAnswers,proto3" json:"ComplianceFormAnswers,omitempty"` // Compliance answers for the user
-	ReferredBy             *string                                         `protobuf:"bytes,31,opt,name=ReferredBy,proto3,oneof" json:"ReferredBy,omitempty"`                 // User ID of the referrer who referred this user during signup
+	AllowedJurisdictions   []string                                        `protobuf:"bytes,28,rep,name=AllowedJurisdictions,proto3" json:"AllowedJurisdictions,omitempty"`            // ISO 3166-1 alpha-3 code e.g. "USA", "CAD"
+	EmailAddress           string                                          `protobuf:"bytes,29,opt,name=EmailAddress,proto3" json:"EmailAddress,omitempty"`                            // Email address for the user, often retrieved from the authentication provider
+	ComplianceFormAnswers  []*com_fs_compliance_model.ComplianceFormAnswer `protobuf:"bytes,30,rep,name=ComplianceFormAnswers,proto3" json:"ComplianceFormAnswers,omitempty"`          // Compliance answers for the user
+	ReferredBy             *string                                         `protobuf:"bytes,31,opt,name=ReferredBy,proto3,oneof" json:"ReferredBy,omitempty"`                          // User ID of the referrer who referred this user during signup
+	ReferralCount          *int32                                          `protobuf:"varint,32,opt,name=ReferralCount,proto3,oneof" json:"ReferralCount,omitempty"`                   // Number of referrals made by this user
+	ReferralLimit          *int32                                          `protobuf:"varint,33,opt,name=ReferralLimit,proto3,oneof" json:"ReferralLimit,omitempty"`                   // Maximum number of referrals this user can receive (admin override only)
+	ReferralAmountReceived *int32                                          `protobuf:"varint,34,opt,name=ReferralAmountReceived,proto3,oneof" json:"ReferralAmountReceived,omitempty"` // Amount of TX the referring user received from referrals (non-mutable by user)
+	ReferralAmount         *int32                                          `protobuf:"varint,35,opt,name=ReferralAmount,proto3,oneof" json:"ReferralAmount,omitempty"`                 // Amount of TX associated with this user to be distributed to new users (admin override only)
+	ReferralPaidAt         *timestamppb.Timestamp                          `protobuf:"bytes,36,opt,name=ReferralPaidAt,proto3,oneof" json:"ReferralPaidAt,omitempty"`                  // Timestamp when the referral reward was paid
 	unknownFields          protoimpl.UnknownFields
 	sizeCache              protoimpl.SizeCache
 }
@@ -474,6 +480,41 @@ func (x *UserDetails) GetReferredBy() string {
 		return *x.ReferredBy
 	}
 	return ""
+}
+
+func (x *UserDetails) GetReferralCount() int32 {
+	if x != nil && x.ReferralCount != nil {
+		return *x.ReferralCount
+	}
+	return 0
+}
+
+func (x *UserDetails) GetReferralLimit() int32 {
+	if x != nil && x.ReferralLimit != nil {
+		return *x.ReferralLimit
+	}
+	return 0
+}
+
+func (x *UserDetails) GetReferralAmountReceived() int32 {
+	if x != nil && x.ReferralAmountReceived != nil {
+		return *x.ReferralAmountReceived
+	}
+	return 0
+}
+
+func (x *UserDetails) GetReferralAmount() int32 {
+	if x != nil && x.ReferralAmount != nil {
+		return *x.ReferralAmount
+	}
+	return 0
+}
+
+func (x *UserDetails) GetReferralPaidAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.ReferralPaidAt
+	}
+	return nil
 }
 
 type User struct {
@@ -861,7 +902,7 @@ var File_user_proto protoreflect.FileDescriptor
 const file_user_proto_rawDesc = "" +
 	"\n" +
 	"\n" +
-	"user.proto\x12\x04user\x1a9sologenic/com-fs-utils-lib/models/metadata/metadata.proto\x1a3sologenic/com-fs-utils-lib/models/audit/audit.proto\x1a1sologenic/com-fs-utils-lib/models/role/role.proto\x1a9sologenic/com-fs-utils-lib/models/language/language.proto\x1a7sologenic/com-fs-trade-profile-model/tradeprofile.proto\x1a.sologenic/com-fs-document-model/document.proto\x1a\x0euser-kyc.proto\x1a\x13user-fundings.proto\x1a=sologenic/com-fs-utils-lib/models/commission/commission.proto\x1a2sologenic/com-fs-compliance-model/compliance.proto\"\x9f\f\n" +
+	"user.proto\x12\x04user\x1a\x1fgoogle/protobuf/timestamp.proto\x1a9sologenic/com-fs-utils-lib/models/metadata/metadata.proto\x1a3sologenic/com-fs-utils-lib/models/audit/audit.proto\x1a1sologenic/com-fs-utils-lib/models/role/role.proto\x1a9sologenic/com-fs-utils-lib/models/language/language.proto\x1a7sologenic/com-fs-trade-profile-model/tradeprofile.proto\x1a.sologenic/com-fs-document-model/document.proto\x1a\x0euser-kyc.proto\x1a\x13user-fundings.proto\x1a=sologenic/com-fs-utils-lib/models/commission/commission.proto\x1a2sologenic/com-fs-compliance-model/compliance.proto\"\x8d\x0f\n" +
 	"\vUserDetails\x12\x16\n" +
 	"\x06UserID\x18\x01 \x01(\tR\x06UserID\x12\x1c\n" +
 	"\tFirstName\x18\x02 \x01(\tR\tFirstName\x12\x1a\n" +
@@ -902,13 +943,24 @@ const file_user_proto_rawDesc = "" +
 	"\x15ComplianceFormAnswers\x18\x1e \x03(\v2 .compliance.ComplianceFormAnswerR\x15ComplianceFormAnswers\x12#\n" +
 	"\n" +
 	"ReferredBy\x18\x1f \x01(\tH\x05R\n" +
-	"ReferredBy\x88\x01\x01B\r\n" +
+	"ReferredBy\x88\x01\x01\x12)\n" +
+	"\rReferralCount\x18  \x01(\x05H\x06R\rReferralCount\x88\x01\x01\x12)\n" +
+	"\rReferralLimit\x18! \x01(\x05H\aR\rReferralLimit\x88\x01\x01\x12;\n" +
+	"\x16ReferralAmountReceived\x18\" \x01(\x05H\bR\x16ReferralAmountReceived\x88\x01\x01\x12+\n" +
+	"\x0eReferralAmount\x18# \x01(\x05H\tR\x0eReferralAmount\x88\x01\x01\x12G\n" +
+	"\x0eReferralPaidAt\x18$ \x01(\v2\x1a.google.protobuf.TimestampH\n" +
+	"R\x0eReferralPaidAt\x88\x01\x01B\r\n" +
 	"\v_EmploymentB\x0f\n" +
 	"\r_TradeProfileB\x13\n" +
 	"\x11_UserTradeProfileB\x15\n" +
 	"\x13_CommissionSettingsB\x13\n" +
 	"\x11_DataFeedAccountsB\r\n" +
-	"\v_ReferredBy\"\xab\x01\n" +
+	"\v_ReferredByB\x10\n" +
+	"\x0e_ReferralCountB\x10\n" +
+	"\x0e_ReferralLimitB\x19\n" +
+	"\x17_ReferralAmountReceivedB\x11\n" +
+	"\x0f_ReferralAmountB\x11\n" +
+	"\x0f_ReferralPaidAt\"\xab\x01\n" +
 	"\x04User\x12%\n" +
 	"\x04User\x18\x01 \x01(\v2\x11.user.UserDetailsR\x04User\x12.\n" +
 	"\bMetaData\x18\x02 \x01(\v2\x12.metadata.MetaDataR\bMetaData\x12\"\n" +
@@ -1003,9 +1055,10 @@ var file_user_proto_goTypes = []any{
 	(*BankAccount)(nil),                                  // 21: user.BankAccount
 	(*commission.CommissionSettings)(nil),                // 22: commission.CommissionSettings
 	(*com_fs_compliance_model.ComplianceFormAnswer)(nil), // 23: compliance.ComplianceFormAnswer
-	(*metadata.MetaData)(nil),                            // 24: metadata.MetaData
-	(*audit.Audit)(nil),                                  // 25: audit.Audit
-	(metadata.Network)(0),                                // 26: metadata.Network
+	(*timestamppb.Timestamp)(nil),                        // 24: google.protobuf.Timestamp
+	(*metadata.MetaData)(nil),                            // 25: metadata.MetaData
+	(*audit.Audit)(nil),                                  // 26: audit.Audit
+	(metadata.Network)(0),                                // 27: metadata.Network
 }
 var file_user_proto_depIdxs = []int32{
 	0,  // 0: user.UserDetails.Status:type_name -> user.UserStatus
@@ -1025,21 +1078,22 @@ var file_user_proto_depIdxs = []int32{
 	22, // 14: user.UserDetails.CommissionSettings:type_name -> commission.CommissionSettings
 	9,  // 15: user.UserDetails.DataFeedAccounts:type_name -> user.DataFeedAccounts
 	23, // 16: user.UserDetails.ComplianceFormAnswers:type_name -> compliance.ComplianceFormAnswer
-	3,  // 17: user.User.User:type_name -> user.UserDetails
-	24, // 18: user.User.MetaData:type_name -> metadata.MetaData
-	25, // 19: user.User.Audit:type_name -> audit.Audit
-	1,  // 20: user.Social.Type:type_name -> user.SocialType
-	4,  // 21: user.UserList.Users:type_name -> user.User
-	0,  // 22: user.StatusMessage.Status:type_name -> user.UserStatus
-	26, // 23: user.StatusMessage.Network:type_name -> metadata.Network
-	25, // 24: user.StatusMessage.Audit:type_name -> audit.Audit
-	2,  // 25: user.UISettings.Theme:type_name -> user.Theme
-	10, // 26: user.DataFeedAccounts.DxFeed:type_name -> user.DxFeed
-	27, // [27:27] is the sub-list for method output_type
-	27, // [27:27] is the sub-list for method input_type
-	27, // [27:27] is the sub-list for extension type_name
-	27, // [27:27] is the sub-list for extension extendee
-	0,  // [0:27] is the sub-list for field type_name
+	24, // 17: user.UserDetails.ReferralPaidAt:type_name -> google.protobuf.Timestamp
+	3,  // 18: user.User.User:type_name -> user.UserDetails
+	25, // 19: user.User.MetaData:type_name -> metadata.MetaData
+	26, // 20: user.User.Audit:type_name -> audit.Audit
+	1,  // 21: user.Social.Type:type_name -> user.SocialType
+	4,  // 22: user.UserList.Users:type_name -> user.User
+	0,  // 23: user.StatusMessage.Status:type_name -> user.UserStatus
+	27, // 24: user.StatusMessage.Network:type_name -> metadata.Network
+	26, // 25: user.StatusMessage.Audit:type_name -> audit.Audit
+	2,  // 26: user.UISettings.Theme:type_name -> user.Theme
+	10, // 27: user.DataFeedAccounts.DxFeed:type_name -> user.DxFeed
+	28, // [28:28] is the sub-list for method output_type
+	28, // [28:28] is the sub-list for method input_type
+	28, // [28:28] is the sub-list for extension type_name
+	28, // [28:28] is the sub-list for extension extendee
+	0,  // [0:28] is the sub-list for field type_name
 }
 
 func init() { file_user_proto_init() }

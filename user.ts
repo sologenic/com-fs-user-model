@@ -6,6 +6,7 @@
 
 /* eslint-disable */
 import _m0 from "protobufjs/minimal";
+import { Timestamp } from "./google/protobuf/timestamp";
 import { ComplianceFormAnswer } from "./sologenic/com-fs-compliance-model/compliance";
 import { UserDocumentCompliance } from "./sologenic/com-fs-document-model/document";
 import { TradeProfileDetails, UserTradeProfile } from "./sologenic/com-fs-trade-profile-model/tradeprofile";
@@ -242,7 +243,27 @@ export interface UserDetails {
   /** Compliance answers for the user */
   ComplianceFormAnswers: ComplianceFormAnswer[];
   /** User ID of the referrer who referred this user during signup */
-  ReferredBy?: string | undefined;
+  ReferredBy?:
+    | string
+    | undefined;
+  /** Number of referrals made by this user */
+  ReferralCount?:
+    | number
+    | undefined;
+  /** Maximum number of referrals this user can receive (admin override only) */
+  ReferralLimit?:
+    | number
+    | undefined;
+  /** Amount of TX the referring user received from referrals (non-mutable by user) */
+  ReferralAmountReceived?:
+    | number
+    | undefined;
+  /** Amount of TX associated with this user to be distributed to new users (admin override only) */
+  ReferralAmount?:
+    | number
+    | undefined;
+  /** Timestamp when the referral reward was paid */
+  ReferralPaidAt?: Date | undefined;
 }
 
 export interface User {
@@ -317,6 +338,11 @@ function createBaseUserDetails(): UserDetails {
     EmailAddress: "",
     ComplianceFormAnswers: [],
     ReferredBy: undefined,
+    ReferralCount: undefined,
+    ReferralLimit: undefined,
+    ReferralAmountReceived: undefined,
+    ReferralAmount: undefined,
+    ReferralPaidAt: undefined,
   };
 }
 
@@ -411,6 +437,21 @@ export const UserDetails = {
     }
     if (message.ReferredBy !== undefined) {
       writer.uint32(250).string(message.ReferredBy);
+    }
+    if (message.ReferralCount !== undefined) {
+      writer.uint32(256).int32(message.ReferralCount);
+    }
+    if (message.ReferralLimit !== undefined) {
+      writer.uint32(264).int32(message.ReferralLimit);
+    }
+    if (message.ReferralAmountReceived !== undefined) {
+      writer.uint32(272).int32(message.ReferralAmountReceived);
+    }
+    if (message.ReferralAmount !== undefined) {
+      writer.uint32(280).int32(message.ReferralAmount);
+    }
+    if (message.ReferralPaidAt !== undefined) {
+      Timestamp.encode(toTimestamp(message.ReferralPaidAt), writer.uint32(290).fork()).ldelim();
     }
     return writer;
   },
@@ -632,6 +673,41 @@ export const UserDetails = {
 
           message.ReferredBy = reader.string();
           continue;
+        case 32:
+          if (tag !== 256) {
+            break;
+          }
+
+          message.ReferralCount = reader.int32();
+          continue;
+        case 33:
+          if (tag !== 264) {
+            break;
+          }
+
+          message.ReferralLimit = reader.int32();
+          continue;
+        case 34:
+          if (tag !== 272) {
+            break;
+          }
+
+          message.ReferralAmountReceived = reader.int32();
+          continue;
+        case 35:
+          if (tag !== 280) {
+            break;
+          }
+
+          message.ReferralAmount = reader.int32();
+          continue;
+        case 36:
+          if (tag !== 290) {
+            break;
+          }
+
+          message.ReferralPaidAt = fromTimestamp(Timestamp.decode(reader, reader.uint32()));
+          continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -687,6 +763,13 @@ export const UserDetails = {
         ? object.ComplianceFormAnswers.map((e: any) => ComplianceFormAnswer.fromJSON(e))
         : [],
       ReferredBy: isSet(object.ReferredBy) ? globalThis.String(object.ReferredBy) : undefined,
+      ReferralCount: isSet(object.ReferralCount) ? globalThis.Number(object.ReferralCount) : undefined,
+      ReferralLimit: isSet(object.ReferralLimit) ? globalThis.Number(object.ReferralLimit) : undefined,
+      ReferralAmountReceived: isSet(object.ReferralAmountReceived)
+        ? globalThis.Number(object.ReferralAmountReceived)
+        : undefined,
+      ReferralAmount: isSet(object.ReferralAmount) ? globalThis.Number(object.ReferralAmount) : undefined,
+      ReferralPaidAt: isSet(object.ReferralPaidAt) ? fromJsonTimestamp(object.ReferralPaidAt) : undefined,
     };
   },
 
@@ -782,6 +865,21 @@ export const UserDetails = {
     if (message.ReferredBy !== undefined) {
       obj.ReferredBy = message.ReferredBy;
     }
+    if (message.ReferralCount !== undefined) {
+      obj.ReferralCount = Math.round(message.ReferralCount);
+    }
+    if (message.ReferralLimit !== undefined) {
+      obj.ReferralLimit = Math.round(message.ReferralLimit);
+    }
+    if (message.ReferralAmountReceived !== undefined) {
+      obj.ReferralAmountReceived = Math.round(message.ReferralAmountReceived);
+    }
+    if (message.ReferralAmount !== undefined) {
+      obj.ReferralAmount = Math.round(message.ReferralAmount);
+    }
+    if (message.ReferralPaidAt !== undefined) {
+      obj.ReferralPaidAt = message.ReferralPaidAt.toISOString();
+    }
     return obj;
   },
 
@@ -837,6 +935,11 @@ export const UserDetails = {
     message.EmailAddress = object.EmailAddress ?? "";
     message.ComplianceFormAnswers = object.ComplianceFormAnswers?.map((e) => ComplianceFormAnswer.fromPartial(e)) || [];
     message.ReferredBy = object.ReferredBy ?? undefined;
+    message.ReferralCount = object.ReferralCount ?? undefined;
+    message.ReferralLimit = object.ReferralLimit ?? undefined;
+    message.ReferralAmountReceived = object.ReferralAmountReceived ?? undefined;
+    message.ReferralAmount = object.ReferralAmount ?? undefined;
+    message.ReferralPaidAt = object.ReferralPaidAt ?? undefined;
     return message;
   },
 };
@@ -1402,6 +1505,28 @@ export type DeepPartial<T> = T extends Builtin ? T
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin ? P
   : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P>>]: never };
+
+function toTimestamp(date: Date): Timestamp {
+  const seconds = Math.trunc(date.getTime() / 1_000);
+  const nanos = (date.getTime() % 1_000) * 1_000_000;
+  return { seconds, nanos };
+}
+
+function fromTimestamp(t: Timestamp): Date {
+  let millis = (t.seconds || 0) * 1_000;
+  millis += (t.nanos || 0) / 1_000_000;
+  return new globalThis.Date(millis);
+}
+
+function fromJsonTimestamp(o: any): Date {
+  if (o instanceof globalThis.Date) {
+    return o;
+  } else if (typeof o === "string") {
+    return new globalThis.Date(o);
+  } else {
+    return fromTimestamp(Timestamp.fromJSON(o));
+  }
+}
 
 function isSet(value: any): boolean {
   return value !== null && value !== undefined;

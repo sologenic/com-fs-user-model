@@ -5,6 +5,7 @@
 // source: user.proto
 /* eslint-disable */
 import _m0 from "protobufjs/minimal";
+import { Timestamp } from "./google/protobuf/timestamp";
 import { ComplianceFormAnswer } from "./sologenic/com-fs-compliance-model/compliance";
 import { UserDocumentCompliance } from "./sologenic/com-fs-document-model/document";
 import { TradeProfileDetails, UserTradeProfile } from "./sologenic/com-fs-trade-profile-model/tradeprofile";
@@ -207,6 +208,11 @@ function createBaseUserDetails() {
         EmailAddress: "",
         ComplianceFormAnswers: [],
         ReferredBy: undefined,
+        ReferralCount: undefined,
+        ReferralLimit: undefined,
+        ReferralAmountReceived: undefined,
+        ReferralAmount: undefined,
+        ReferralPaidAt: undefined,
     };
 }
 export const UserDetails = {
@@ -300,6 +306,21 @@ export const UserDetails = {
         }
         if (message.ReferredBy !== undefined) {
             writer.uint32(250).string(message.ReferredBy);
+        }
+        if (message.ReferralCount !== undefined) {
+            writer.uint32(256).int32(message.ReferralCount);
+        }
+        if (message.ReferralLimit !== undefined) {
+            writer.uint32(264).int32(message.ReferralLimit);
+        }
+        if (message.ReferralAmountReceived !== undefined) {
+            writer.uint32(272).int32(message.ReferralAmountReceived);
+        }
+        if (message.ReferralAmount !== undefined) {
+            writer.uint32(280).int32(message.ReferralAmount);
+        }
+        if (message.ReferralPaidAt !== undefined) {
+            Timestamp.encode(toTimestamp(message.ReferralPaidAt), writer.uint32(290).fork()).ldelim();
         }
         return writer;
     },
@@ -490,6 +511,36 @@ export const UserDetails = {
                     }
                     message.ReferredBy = reader.string();
                     continue;
+                case 32:
+                    if (tag !== 256) {
+                        break;
+                    }
+                    message.ReferralCount = reader.int32();
+                    continue;
+                case 33:
+                    if (tag !== 264) {
+                        break;
+                    }
+                    message.ReferralLimit = reader.int32();
+                    continue;
+                case 34:
+                    if (tag !== 272) {
+                        break;
+                    }
+                    message.ReferralAmountReceived = reader.int32();
+                    continue;
+                case 35:
+                    if (tag !== 280) {
+                        break;
+                    }
+                    message.ReferralAmount = reader.int32();
+                    continue;
+                case 36:
+                    if (tag !== 290) {
+                        break;
+                    }
+                    message.ReferralPaidAt = fromTimestamp(Timestamp.decode(reader, reader.uint32()));
+                    continue;
             }
             if ((tag & 7) === 4 || tag === 0) {
                 break;
@@ -544,6 +595,13 @@ export const UserDetails = {
                 ? object.ComplianceFormAnswers.map((e) => ComplianceFormAnswer.fromJSON(e))
                 : [],
             ReferredBy: isSet(object.ReferredBy) ? globalThis.String(object.ReferredBy) : undefined,
+            ReferralCount: isSet(object.ReferralCount) ? globalThis.Number(object.ReferralCount) : undefined,
+            ReferralLimit: isSet(object.ReferralLimit) ? globalThis.Number(object.ReferralLimit) : undefined,
+            ReferralAmountReceived: isSet(object.ReferralAmountReceived)
+                ? globalThis.Number(object.ReferralAmountReceived)
+                : undefined,
+            ReferralAmount: isSet(object.ReferralAmount) ? globalThis.Number(object.ReferralAmount) : undefined,
+            ReferralPaidAt: isSet(object.ReferralPaidAt) ? fromJsonTimestamp(object.ReferralPaidAt) : undefined,
         };
     },
     toJSON(message) {
@@ -639,13 +697,28 @@ export const UserDetails = {
         if (message.ReferredBy !== undefined) {
             obj.ReferredBy = message.ReferredBy;
         }
+        if (message.ReferralCount !== undefined) {
+            obj.ReferralCount = Math.round(message.ReferralCount);
+        }
+        if (message.ReferralLimit !== undefined) {
+            obj.ReferralLimit = Math.round(message.ReferralLimit);
+        }
+        if (message.ReferralAmountReceived !== undefined) {
+            obj.ReferralAmountReceived = Math.round(message.ReferralAmountReceived);
+        }
+        if (message.ReferralAmount !== undefined) {
+            obj.ReferralAmount = Math.round(message.ReferralAmount);
+        }
+        if (message.ReferralPaidAt !== undefined) {
+            obj.ReferralPaidAt = message.ReferralPaidAt.toISOString();
+        }
         return obj;
     },
     create(base) {
         return UserDetails.fromPartial(base !== null && base !== void 0 ? base : {});
     },
     fromPartial(object) {
-        var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q, _r, _s, _t, _u, _v, _w, _x;
+        var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q, _r, _s, _t, _u, _v, _w, _x, _y, _z, _0, _1, _2;
         const message = createBaseUserDetails();
         message.UserID = (_a = object.UserID) !== null && _a !== void 0 ? _a : "";
         message.FirstName = (_b = object.FirstName) !== null && _b !== void 0 ? _b : "";
@@ -694,6 +767,11 @@ export const UserDetails = {
         message.EmailAddress = (_v = object.EmailAddress) !== null && _v !== void 0 ? _v : "";
         message.ComplianceFormAnswers = ((_w = object.ComplianceFormAnswers) === null || _w === void 0 ? void 0 : _w.map((e) => ComplianceFormAnswer.fromPartial(e))) || [];
         message.ReferredBy = (_x = object.ReferredBy) !== null && _x !== void 0 ? _x : undefined;
+        message.ReferralCount = (_y = object.ReferralCount) !== null && _y !== void 0 ? _y : undefined;
+        message.ReferralLimit = (_z = object.ReferralLimit) !== null && _z !== void 0 ? _z : undefined;
+        message.ReferralAmountReceived = (_0 = object.ReferralAmountReceived) !== null && _0 !== void 0 ? _0 : undefined;
+        message.ReferralAmount = (_1 = object.ReferralAmount) !== null && _1 !== void 0 ? _1 : undefined;
+        message.ReferralPaidAt = (_2 = object.ReferralPaidAt) !== null && _2 !== void 0 ? _2 : undefined;
         return message;
     },
 };
@@ -1197,6 +1275,27 @@ export const DxFeed = {
         return message;
     },
 };
+function toTimestamp(date) {
+    const seconds = Math.trunc(date.getTime() / 1000);
+    const nanos = (date.getTime() % 1000) * 1000000;
+    return { seconds, nanos };
+}
+function fromTimestamp(t) {
+    let millis = (t.seconds || 0) * 1000;
+    millis += (t.nanos || 0) / 1000000;
+    return new globalThis.Date(millis);
+}
+function fromJsonTimestamp(o) {
+    if (o instanceof globalThis.Date) {
+        return o;
+    }
+    else if (typeof o === "string") {
+        return new globalThis.Date(o);
+    }
+    else {
+        return fromTimestamp(Timestamp.fromJSON(o));
+    }
+}
 function isSet(value) {
     return value !== null && value !== undefined;
 }

@@ -86,6 +86,16 @@ export interface UserDetails {
     ComplianceFormAnswers: ComplianceFormAnswer[];
     /** User ID of the referrer who referred this user during signup */
     ReferredBy?: string | undefined;
+    /** Number of referrals made by this user */
+    ReferralCount?: number | undefined;
+    /** Maximum number of referrals this user can receive (admin override only) */
+    ReferralLimit?: number | undefined;
+    /** Amount of TX the referring user received from referrals (non-mutable by user) */
+    ReferralAmountReceived?: number | undefined;
+    /** Amount of TX associated with this user to be distributed to new users (admin override only) */
+    ReferralAmount?: number | undefined;
+    /** Timestamp when the referral reward was paid */
+    ReferralPaidAt?: Date | undefined;
 }
 export interface User {
     User: UserDetails | undefined;
@@ -271,6 +281,11 @@ export declare const UserDetails: {
             SubmittedAt?: Date | undefined;
         }[] | undefined;
         ReferredBy?: string | undefined;
+        ReferralCount?: number | undefined;
+        ReferralLimit?: number | undefined;
+        ReferralAmountReceived?: number | undefined;
+        ReferralAmount?: number | undefined;
+        ReferralPaidAt?: Date | undefined;
     } & {
         UserID?: string | undefined;
         FirstName?: string | undefined;
@@ -686,6 +701,11 @@ export declare const UserDetails: {
             SubmittedAt?: Date | undefined;
         }[]>]: never; }) | undefined;
         ReferredBy?: string | undefined;
+        ReferralCount?: number | undefined;
+        ReferralLimit?: number | undefined;
+        ReferralAmountReceived?: number | undefined;
+        ReferralAmount?: number | undefined;
+        ReferralPaidAt?: Date | undefined;
     } & { [K_36 in Exclude<keyof I, keyof UserDetails>]: never; }>(base?: I | undefined): UserDetails;
     fromPartial<I_1 extends {
         UserID?: string | undefined;
@@ -835,6 +855,11 @@ export declare const UserDetails: {
             SubmittedAt?: Date | undefined;
         }[] | undefined;
         ReferredBy?: string | undefined;
+        ReferralCount?: number | undefined;
+        ReferralLimit?: number | undefined;
+        ReferralAmountReceived?: number | undefined;
+        ReferralAmount?: number | undefined;
+        ReferralPaidAt?: Date | undefined;
     } & {
         UserID?: string | undefined;
         FirstName?: string | undefined;
@@ -1250,6 +1275,11 @@ export declare const UserDetails: {
             SubmittedAt?: Date | undefined;
         }[]>]: never; }) | undefined;
         ReferredBy?: string | undefined;
+        ReferralCount?: number | undefined;
+        ReferralLimit?: number | undefined;
+        ReferralAmountReceived?: number | undefined;
+        ReferralAmount?: number | undefined;
+        ReferralPaidAt?: Date | undefined;
     } & { [K_73 in Exclude<keyof I_1, keyof UserDetails>]: never; }>(object: I_1): UserDetails;
 };
 export declare const User: {
@@ -1406,6 +1436,11 @@ export declare const User: {
                 SubmittedAt?: Date | undefined;
             }[] | undefined;
             ReferredBy?: string | undefined;
+            ReferralCount?: number | undefined;
+            ReferralLimit?: number | undefined;
+            ReferralAmountReceived?: number | undefined;
+            ReferralAmount?: number | undefined;
+            ReferralPaidAt?: Date | undefined;
         } | undefined;
         MetaData?: {
             Network?: Network | undefined;
@@ -1568,6 +1603,11 @@ export declare const User: {
                 SubmittedAt?: Date | undefined;
             }[] | undefined;
             ReferredBy?: string | undefined;
+            ReferralCount?: number | undefined;
+            ReferralLimit?: number | undefined;
+            ReferralAmountReceived?: number | undefined;
+            ReferralAmount?: number | undefined;
+            ReferralPaidAt?: Date | undefined;
         } & {
             UserID?: string | undefined;
             FirstName?: string | undefined;
@@ -1983,6 +2023,11 @@ export declare const User: {
                 SubmittedAt?: Date | undefined;
             }[]>]: never; }) | undefined;
             ReferredBy?: string | undefined;
+            ReferralCount?: number | undefined;
+            ReferralLimit?: number | undefined;
+            ReferralAmountReceived?: number | undefined;
+            ReferralAmount?: number | undefined;
+            ReferralPaidAt?: Date | undefined;
         } & { [K_36 in Exclude<keyof I["User"], keyof UserDetails>]: never; }) | undefined;
         MetaData?: ({
             Network?: Network | undefined;
@@ -2155,6 +2200,11 @@ export declare const User: {
                 SubmittedAt?: Date | undefined;
             }[] | undefined;
             ReferredBy?: string | undefined;
+            ReferralCount?: number | undefined;
+            ReferralLimit?: number | undefined;
+            ReferralAmountReceived?: number | undefined;
+            ReferralAmount?: number | undefined;
+            ReferralPaidAt?: Date | undefined;
         } | undefined;
         MetaData?: {
             Network?: Network | undefined;
@@ -2317,6 +2367,11 @@ export declare const User: {
                 SubmittedAt?: Date | undefined;
             }[] | undefined;
             ReferredBy?: string | undefined;
+            ReferralCount?: number | undefined;
+            ReferralLimit?: number | undefined;
+            ReferralAmountReceived?: number | undefined;
+            ReferralAmount?: number | undefined;
+            ReferralPaidAt?: Date | undefined;
         } & {
             UserID?: string | undefined;
             FirstName?: string | undefined;
@@ -2732,6 +2787,11 @@ export declare const User: {
                 SubmittedAt?: Date | undefined;
             }[]>]: never; }) | undefined;
             ReferredBy?: string | undefined;
+            ReferralCount?: number | undefined;
+            ReferralLimit?: number | undefined;
+            ReferralAmountReceived?: number | undefined;
+            ReferralAmount?: number | undefined;
+            ReferralPaidAt?: Date | undefined;
         } & { [K_77 in Exclude<keyof I_1["User"], keyof UserDetails>]: never; }) | undefined;
         MetaData?: ({
             Network?: Network | undefined;
@@ -2931,6 +2991,11 @@ export declare const UserList: {
                     SubmittedAt?: Date | undefined;
                 }[] | undefined;
                 ReferredBy?: string | undefined;
+                ReferralCount?: number | undefined;
+                ReferralLimit?: number | undefined;
+                ReferralAmountReceived?: number | undefined;
+                ReferralAmount?: number | undefined;
+                ReferralPaidAt?: Date | undefined;
             } | undefined;
             MetaData?: {
                 Network?: Network | undefined;
@@ -3096,6 +3161,11 @@ export declare const UserList: {
                     SubmittedAt?: Date | undefined;
                 }[] | undefined;
                 ReferredBy?: string | undefined;
+                ReferralCount?: number | undefined;
+                ReferralLimit?: number | undefined;
+                ReferralAmountReceived?: number | undefined;
+                ReferralAmount?: number | undefined;
+                ReferralPaidAt?: Date | undefined;
             } | undefined;
             MetaData?: {
                 Network?: Network | undefined;
@@ -3258,6 +3328,11 @@ export declare const UserList: {
                     SubmittedAt?: Date | undefined;
                 }[] | undefined;
                 ReferredBy?: string | undefined;
+                ReferralCount?: number | undefined;
+                ReferralLimit?: number | undefined;
+                ReferralAmountReceived?: number | undefined;
+                ReferralAmount?: number | undefined;
+                ReferralPaidAt?: Date | undefined;
             } | undefined;
             MetaData?: {
                 Network?: Network | undefined;
@@ -3420,6 +3495,11 @@ export declare const UserList: {
                     SubmittedAt?: Date | undefined;
                 }[] | undefined;
                 ReferredBy?: string | undefined;
+                ReferralCount?: number | undefined;
+                ReferralLimit?: number | undefined;
+                ReferralAmountReceived?: number | undefined;
+                ReferralAmount?: number | undefined;
+                ReferralPaidAt?: Date | undefined;
             } & {
                 UserID?: string | undefined;
                 FirstName?: string | undefined;
@@ -3835,6 +3915,11 @@ export declare const UserList: {
                     SubmittedAt?: Date | undefined;
                 }[]>]: never; }) | undefined;
                 ReferredBy?: string | undefined;
+                ReferralCount?: number | undefined;
+                ReferralLimit?: number | undefined;
+                ReferralAmountReceived?: number | undefined;
+                ReferralAmount?: number | undefined;
+                ReferralPaidAt?: Date | undefined;
             } & { [K_36 in Exclude<keyof I["Users"][number]["User"], keyof UserDetails>]: never; }) | undefined;
             MetaData?: ({
                 Network?: Network | undefined;
@@ -4006,6 +4091,11 @@ export declare const UserList: {
                     SubmittedAt?: Date | undefined;
                 }[] | undefined;
                 ReferredBy?: string | undefined;
+                ReferralCount?: number | undefined;
+                ReferralLimit?: number | undefined;
+                ReferralAmountReceived?: number | undefined;
+                ReferralAmount?: number | undefined;
+                ReferralPaidAt?: Date | undefined;
             } | undefined;
             MetaData?: {
                 Network?: Network | undefined;
@@ -4172,6 +4262,11 @@ export declare const UserList: {
                     SubmittedAt?: Date | undefined;
                 }[] | undefined;
                 ReferredBy?: string | undefined;
+                ReferralCount?: number | undefined;
+                ReferralLimit?: number | undefined;
+                ReferralAmountReceived?: number | undefined;
+                ReferralAmount?: number | undefined;
+                ReferralPaidAt?: Date | undefined;
             } | undefined;
             MetaData?: {
                 Network?: Network | undefined;
@@ -4337,6 +4432,11 @@ export declare const UserList: {
                     SubmittedAt?: Date | undefined;
                 }[] | undefined;
                 ReferredBy?: string | undefined;
+                ReferralCount?: number | undefined;
+                ReferralLimit?: number | undefined;
+                ReferralAmountReceived?: number | undefined;
+                ReferralAmount?: number | undefined;
+                ReferralPaidAt?: Date | undefined;
             } | undefined;
             MetaData?: {
                 Network?: Network | undefined;
@@ -4499,6 +4599,11 @@ export declare const UserList: {
                     SubmittedAt?: Date | undefined;
                 }[] | undefined;
                 ReferredBy?: string | undefined;
+                ReferralCount?: number | undefined;
+                ReferralLimit?: number | undefined;
+                ReferralAmountReceived?: number | undefined;
+                ReferralAmount?: number | undefined;
+                ReferralPaidAt?: Date | undefined;
             } | undefined;
             MetaData?: {
                 Network?: Network | undefined;
@@ -4661,6 +4766,11 @@ export declare const UserList: {
                     SubmittedAt?: Date | undefined;
                 }[] | undefined;
                 ReferredBy?: string | undefined;
+                ReferralCount?: number | undefined;
+                ReferralLimit?: number | undefined;
+                ReferralAmountReceived?: number | undefined;
+                ReferralAmount?: number | undefined;
+                ReferralPaidAt?: Date | undefined;
             } & {
                 UserID?: string | undefined;
                 FirstName?: string | undefined;
@@ -5076,6 +5186,11 @@ export declare const UserList: {
                     SubmittedAt?: Date | undefined;
                 }[]>]: never; }) | undefined;
                 ReferredBy?: string | undefined;
+                ReferralCount?: number | undefined;
+                ReferralLimit?: number | undefined;
+                ReferralAmountReceived?: number | undefined;
+                ReferralAmount?: number | undefined;
+                ReferralPaidAt?: Date | undefined;
             } & { [K_79 in Exclude<keyof I_1["Users"][number]["User"], keyof UserDetails>]: never; }) | undefined;
             MetaData?: ({
                 Network?: Network | undefined;
@@ -5247,6 +5362,11 @@ export declare const UserList: {
                     SubmittedAt?: Date | undefined;
                 }[] | undefined;
                 ReferredBy?: string | undefined;
+                ReferralCount?: number | undefined;
+                ReferralLimit?: number | undefined;
+                ReferralAmountReceived?: number | undefined;
+                ReferralAmount?: number | undefined;
+                ReferralPaidAt?: Date | undefined;
             } | undefined;
             MetaData?: {
                 Network?: Network | undefined;

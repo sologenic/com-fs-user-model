@@ -4,6 +4,7 @@ package user;
 
 option go_package = "github.com/sologenic/com-fs-user-model;user";
 
+import "google/protobuf/timestamp.proto";
 import "sologenic/com-fs-utils-lib/models/metadata/metadata.proto";
 import "sologenic/com-fs-utils-lib/models/audit/audit.proto";
 import "sologenic/com-fs-utils-lib/models/role/role.proto";
@@ -46,6 +47,11 @@ message UserDetails {
     string EmailAddress = 29; // Email address for the user, often retrieved from the authentication provider
     repeated compliance.ComplianceFormAnswer ComplianceFormAnswers = 30; // Compliance answers for the user
     optional string ReferredBy = 31; // User ID of the referrer who referred this user during signup
+    optional int32 ReferralCount = 32; // Number of referrals made by this user
+    optional int32 ReferralLimit = 33; // Maximum number of referrals this user can receive (admin override only)
+    optional int32 ReferralAmountReceived = 34; // Amount of TX the referring user received from referrals (non-mutable by user)
+    optional int32 ReferralAmount = 35; // Amount of TX associated with this user to be distributed to new users (admin override only)
+    optional google.protobuf.Timestamp ReferralPaidAt = 36; // Timestamp when the referral reward was paid
 }
 
 message User {
