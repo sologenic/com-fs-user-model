@@ -84,6 +84,8 @@ export interface UserDetails {
     EmailAddress: string;
     /** Compliance answers for the user */
     ComplianceFormAnswers: ComplianceFormAnswer[];
+    /** User ID of the referrer who referred this user during signup */
+    ReferredBy?: string | undefined;
 }
 export interface User {
     User: UserDetails | undefined;
@@ -268,6 +270,7 @@ export declare const UserDetails: {
             FormStatus?: import("./sologenic/com-fs-compliance-model/compliance").FormStatus | undefined;
             SubmittedAt?: Date | undefined;
         }[] | undefined;
+        ReferredBy?: string | undefined;
     } & {
         UserID?: string | undefined;
         FirstName?: string | undefined;
@@ -682,6 +685,7 @@ export declare const UserDetails: {
             FormStatus?: import("./sologenic/com-fs-compliance-model/compliance").FormStatus | undefined;
             SubmittedAt?: Date | undefined;
         }[]>]: never; }) | undefined;
+        ReferredBy?: string | undefined;
     } & { [K_36 in Exclude<keyof I, keyof UserDetails>]: never; }>(base?: I | undefined): UserDetails;
     fromPartial<I_1 extends {
         UserID?: string | undefined;
@@ -830,6 +834,7 @@ export declare const UserDetails: {
             FormStatus?: import("./sologenic/com-fs-compliance-model/compliance").FormStatus | undefined;
             SubmittedAt?: Date | undefined;
         }[] | undefined;
+        ReferredBy?: string | undefined;
     } & {
         UserID?: string | undefined;
         FirstName?: string | undefined;
@@ -1244,6 +1249,7 @@ export declare const UserDetails: {
             FormStatus?: import("./sologenic/com-fs-compliance-model/compliance").FormStatus | undefined;
             SubmittedAt?: Date | undefined;
         }[]>]: never; }) | undefined;
+        ReferredBy?: string | undefined;
     } & { [K_73 in Exclude<keyof I_1, keyof UserDetails>]: never; }>(object: I_1): UserDetails;
 };
 export declare const User: {
@@ -1399,6 +1405,7 @@ export declare const User: {
                 FormStatus?: import("./sologenic/com-fs-compliance-model/compliance").FormStatus | undefined;
                 SubmittedAt?: Date | undefined;
             }[] | undefined;
+            ReferredBy?: string | undefined;
         } | undefined;
         MetaData?: {
             Network?: Network | undefined;
@@ -1560,6 +1567,7 @@ export declare const User: {
                 FormStatus?: import("./sologenic/com-fs-compliance-model/compliance").FormStatus | undefined;
                 SubmittedAt?: Date | undefined;
             }[] | undefined;
+            ReferredBy?: string | undefined;
         } & {
             UserID?: string | undefined;
             FirstName?: string | undefined;
@@ -1974,6 +1982,7 @@ export declare const User: {
                 FormStatus?: import("./sologenic/com-fs-compliance-model/compliance").FormStatus | undefined;
                 SubmittedAt?: Date | undefined;
             }[]>]: never; }) | undefined;
+            ReferredBy?: string | undefined;
         } & { [K_36 in Exclude<keyof I["User"], keyof UserDetails>]: never; }) | undefined;
         MetaData?: ({
             Network?: Network | undefined;
@@ -2145,6 +2154,7 @@ export declare const User: {
                 FormStatus?: import("./sologenic/com-fs-compliance-model/compliance").FormStatus | undefined;
                 SubmittedAt?: Date | undefined;
             }[] | undefined;
+            ReferredBy?: string | undefined;
         } | undefined;
         MetaData?: {
             Network?: Network | undefined;
@@ -2306,6 +2316,7 @@ export declare const User: {
                 FormStatus?: import("./sologenic/com-fs-compliance-model/compliance").FormStatus | undefined;
                 SubmittedAt?: Date | undefined;
             }[] | undefined;
+            ReferredBy?: string | undefined;
         } & {
             UserID?: string | undefined;
             FirstName?: string | undefined;
@@ -2720,6 +2731,7 @@ export declare const User: {
                 FormStatus?: import("./sologenic/com-fs-compliance-model/compliance").FormStatus | undefined;
                 SubmittedAt?: Date | undefined;
             }[]>]: never; }) | undefined;
+            ReferredBy?: string | undefined;
         } & { [K_77 in Exclude<keyof I_1["User"], keyof UserDetails>]: never; }) | undefined;
         MetaData?: ({
             Network?: Network | undefined;
@@ -2918,6 +2930,7 @@ export declare const UserList: {
                     FormStatus?: import("./sologenic/com-fs-compliance-model/compliance").FormStatus | undefined;
                     SubmittedAt?: Date | undefined;
                 }[] | undefined;
+                ReferredBy?: string | undefined;
             } | undefined;
             MetaData?: {
                 Network?: Network | undefined;
@@ -3082,6 +3095,7 @@ export declare const UserList: {
                     FormStatus?: import("./sologenic/com-fs-compliance-model/compliance").FormStatus | undefined;
                     SubmittedAt?: Date | undefined;
                 }[] | undefined;
+                ReferredBy?: string | undefined;
             } | undefined;
             MetaData?: {
                 Network?: Network | undefined;
@@ -3243,6 +3257,7 @@ export declare const UserList: {
                     FormStatus?: import("./sologenic/com-fs-compliance-model/compliance").FormStatus | undefined;
                     SubmittedAt?: Date | undefined;
                 }[] | undefined;
+                ReferredBy?: string | undefined;
             } | undefined;
             MetaData?: {
                 Network?: Network | undefined;
@@ -3404,6 +3419,7 @@ export declare const UserList: {
                     FormStatus?: import("./sologenic/com-fs-compliance-model/compliance").FormStatus | undefined;
                     SubmittedAt?: Date | undefined;
                 }[] | undefined;
+                ReferredBy?: string | undefined;
             } & {
                 UserID?: string | undefined;
                 FirstName?: string | undefined;
@@ -3818,6 +3834,7 @@ export declare const UserList: {
                     FormStatus?: import("./sologenic/com-fs-compliance-model/compliance").FormStatus | undefined;
                     SubmittedAt?: Date | undefined;
                 }[]>]: never; }) | undefined;
+                ReferredBy?: string | undefined;
             } & { [K_36 in Exclude<keyof I["Users"][number]["User"], keyof UserDetails>]: never; }) | undefined;
             MetaData?: ({
                 Network?: Network | undefined;
@@ -3988,6 +4005,7 @@ export declare const UserList: {
                     FormStatus?: import("./sologenic/com-fs-compliance-model/compliance").FormStatus | undefined;
                     SubmittedAt?: Date | undefined;
                 }[] | undefined;
+                ReferredBy?: string | undefined;
             } | undefined;
             MetaData?: {
                 Network?: Network | undefined;
@@ -4153,6 +4171,7 @@ export declare const UserList: {
                     FormStatus?: import("./sologenic/com-fs-compliance-model/compliance").FormStatus | undefined;
                     SubmittedAt?: Date | undefined;
                 }[] | undefined;
+                ReferredBy?: string | undefined;
             } | undefined;
             MetaData?: {
                 Network?: Network | undefined;
@@ -4317,6 +4336,7 @@ export declare const UserList: {
                     FormStatus?: import("./sologenic/com-fs-compliance-model/compliance").FormStatus | undefined;
                     SubmittedAt?: Date | undefined;
                 }[] | undefined;
+                ReferredBy?: string | undefined;
             } | undefined;
             MetaData?: {
                 Network?: Network | undefined;
@@ -4478,6 +4498,7 @@ export declare const UserList: {
                     FormStatus?: import("./sologenic/com-fs-compliance-model/compliance").FormStatus | undefined;
                     SubmittedAt?: Date | undefined;
                 }[] | undefined;
+                ReferredBy?: string | undefined;
             } | undefined;
             MetaData?: {
                 Network?: Network | undefined;
@@ -4639,6 +4660,7 @@ export declare const UserList: {
                     FormStatus?: import("./sologenic/com-fs-compliance-model/compliance").FormStatus | undefined;
                     SubmittedAt?: Date | undefined;
                 }[] | undefined;
+                ReferredBy?: string | undefined;
             } & {
                 UserID?: string | undefined;
                 FirstName?: string | undefined;
@@ -5053,6 +5075,7 @@ export declare const UserList: {
                     FormStatus?: import("./sologenic/com-fs-compliance-model/compliance").FormStatus | undefined;
                     SubmittedAt?: Date | undefined;
                 }[]>]: never; }) | undefined;
+                ReferredBy?: string | undefined;
             } & { [K_79 in Exclude<keyof I_1["Users"][number]["User"], keyof UserDetails>]: never; }) | undefined;
             MetaData?: ({
                 Network?: Network | undefined;
@@ -5223,6 +5246,7 @@ export declare const UserList: {
                     FormStatus?: import("./sologenic/com-fs-compliance-model/compliance").FormStatus | undefined;
                     SubmittedAt?: Date | undefined;
                 }[] | undefined;
+                ReferredBy?: string | undefined;
             } | undefined;
             MetaData?: {
                 Network?: Network | undefined;

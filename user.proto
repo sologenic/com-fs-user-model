@@ -45,6 +45,7 @@ message UserDetails {
     repeated string AllowedJurisdictions = 28; // ISO 3166-1 alpha-3 code e.g. "USA", "CAD"
     string EmailAddress = 29; // Email address for the user, often retrieved from the authentication provider
     repeated compliance.ComplianceFormAnswer ComplianceFormAnswers = 30; // Compliance answers for the user
+    optional string ReferredBy = 31; // User ID of the referrer who referred this user during signup
 }
 
 message User {
