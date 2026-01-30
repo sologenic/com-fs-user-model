@@ -595,7 +595,7 @@ export declare const UserDetails: {
             } & {
                 Value?: number | undefined;
                 Exp?: number | undefined;
-            } & { [K_24 in Exclude<keyof I["CommissionSettings"]["Commission"], keyof import("./sologenic/com-fs-utils-lib/go/decimal/decimal").Decimal>]: never; }) | undefined;
+            } & { [K_24 in Exclude<keyof I["CommissionSettings"]["Commission"], keyof import("./sologenic/com-fs-utils-lib/models/decimal/decimal").Decimal>]: never; }) | undefined;
             CommissionType?: import("./sologenic/com-fs-utils-lib/models/commission/commission").CommissionType | undefined;
         } & { [K_25 in Exclude<keyof I["CommissionSettings"], keyof CommissionSettings>]: never; }) | undefined;
         DataFeedAccounts?: ({
@@ -1169,7 +1169,7 @@ export declare const UserDetails: {
             } & {
                 Value?: number | undefined;
                 Exp?: number | undefined;
-            } & { [K_61 in Exclude<keyof I_1["CommissionSettings"]["Commission"], keyof import("./sologenic/com-fs-utils-lib/go/decimal/decimal").Decimal>]: never; }) | undefined;
+            } & { [K_61 in Exclude<keyof I_1["CommissionSettings"]["Commission"], keyof import("./sologenic/com-fs-utils-lib/models/decimal/decimal").Decimal>]: never; }) | undefined;
             CommissionType?: import("./sologenic/com-fs-utils-lib/models/commission/commission").CommissionType | undefined;
         } & { [K_62 in Exclude<keyof I_1["CommissionSettings"], keyof CommissionSettings>]: never; }) | undefined;
         DataFeedAccounts?: ({
@@ -1917,7 +1917,7 @@ export declare const User: {
                 } & {
                     Value?: number | undefined;
                     Exp?: number | undefined;
-                } & { [K_24 in Exclude<keyof I["User"]["CommissionSettings"]["Commission"], keyof import("./sologenic/com-fs-utils-lib/go/decimal/decimal").Decimal>]: never; }) | undefined;
+                } & { [K_24 in Exclude<keyof I["User"]["CommissionSettings"]["Commission"], keyof import("./sologenic/com-fs-utils-lib/models/decimal/decimal").Decimal>]: never; }) | undefined;
                 CommissionType?: import("./sologenic/com-fs-utils-lib/models/commission/commission").CommissionType | undefined;
             } & { [K_25 in Exclude<keyof I["User"]["CommissionSettings"], keyof CommissionSettings>]: never; }) | undefined;
             DataFeedAccounts?: ({
@@ -2681,7 +2681,7 @@ export declare const User: {
                 } & {
                     Value?: number | undefined;
                     Exp?: number | undefined;
-                } & { [K_65 in Exclude<keyof I_1["User"]["CommissionSettings"]["Commission"], keyof import("./sologenic/com-fs-utils-lib/go/decimal/decimal").Decimal>]: never; }) | undefined;
+                } & { [K_65 in Exclude<keyof I_1["User"]["CommissionSettings"]["Commission"], keyof import("./sologenic/com-fs-utils-lib/models/decimal/decimal").Decimal>]: never; }) | undefined;
                 CommissionType?: import("./sologenic/com-fs-utils-lib/models/commission/commission").CommissionType | undefined;
             } & { [K_66 in Exclude<keyof I_1["User"]["CommissionSettings"], keyof CommissionSettings>]: never; }) | undefined;
             DataFeedAccounts?: ({
@@ -3809,7 +3809,7 @@ export declare const UserList: {
                     } & {
                         Value?: number | undefined;
                         Exp?: number | undefined;
-                    } & { [K_24 in Exclude<keyof I["Users"][number]["User"]["CommissionSettings"]["Commission"], keyof import("./sologenic/com-fs-utils-lib/go/decimal/decimal").Decimal>]: never; }) | undefined;
+                    } & { [K_24 in Exclude<keyof I["Users"][number]["User"]["CommissionSettings"]["Commission"], keyof import("./sologenic/com-fs-utils-lib/models/decimal/decimal").Decimal>]: never; }) | undefined;
                     CommissionType?: import("./sologenic/com-fs-utils-lib/models/commission/commission").CommissionType | undefined;
                 } & { [K_25 in Exclude<keyof I["Users"][number]["User"]["CommissionSettings"], keyof CommissionSettings>]: never; }) | undefined;
                 DataFeedAccounts?: ({
@@ -5080,7 +5080,7 @@ export declare const UserList: {
                     } & {
                         Value?: number | undefined;
                         Exp?: number | undefined;
-                    } & { [K_67 in Exclude<keyof I_1["Users"][number]["User"]["CommissionSettings"]["Commission"], keyof import("./sologenic/com-fs-utils-lib/go/decimal/decimal").Decimal>]: never; }) | undefined;
+                    } & { [K_67 in Exclude<keyof I_1["Users"][number]["User"]["CommissionSettings"]["Commission"], keyof import("./sologenic/com-fs-utils-lib/models/decimal/decimal").Decimal>]: never; }) | undefined;
                     CommissionType?: import("./sologenic/com-fs-utils-lib/models/commission/commission").CommissionType | undefined;
                 } & { [K_68 in Exclude<keyof I_1["Users"][number]["User"]["CommissionSettings"], keyof CommissionSettings>]: never; }) | undefined;
                 DataFeedAccounts?: ({
