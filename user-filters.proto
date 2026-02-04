@@ -26,3 +26,18 @@ message UserID {
     string OrganizationID = 2;
     optional metadata.Network Network = 3; 
 }
+
+message GetByAddressesRequest {
+    repeated string Addresses = 1;
+    string OrganizationID = 2;
+    optional metadata.Network Network = 3;
+}
+
+message AddressUserPair {
+    string Address = 1;
+    optional User User = 2;  // null if address not found
+}
+
+message GetByAddressesResponse {
+    repeated AddressUserPair Results = 1;
+}

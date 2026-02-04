@@ -15,6 +15,7 @@ service AdminUserService {
     rpc Update (User) returns (UserID) {}
     rpc SetStatus (StatusMessage) returns (google.protobuf.Empty) {}
     rpc ListAudit (AuditFilter) returns (UserList) {}
+    rpc GetByAddresses (GetByAddressesRequest) returns (GetByAddressesResponse) {}
 }
 
 message AuditFilter {
