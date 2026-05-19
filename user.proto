@@ -39,7 +39,7 @@ message UserDetails {
     KYCStatus KYCStatus = 20; // Status of KYC verification, e.g., PENDING, APPROVED, REJECTED
     optional tradeprofile.UserTradeProfile UserTradeProfile = 21;
     repeated BrokerAccount BrokerAccounts = 23;
-    repeated BankAccount BankAccounts = 24;
+    repeated BankAccount BankAccounts = 24 [deprecated = true];
     UISettings UISettings = 25;
     optional commission.CommissionSettings CommissionSettings = 26; // Broker API specific commission fields for user level (overrrides organization level)
     optional DataFeedAccounts DataFeedAccounts = 27;
@@ -58,7 +58,7 @@ message User {
     UserDetails User = 1;
     metadata.MetaData MetaData = 2;
     audit.Audit Audit = 3;
-    repeated string OrganizationIDs = 4; // List of organizations where the user is part of (cloned into)
+    repeated string OrganizationIDs = 4; // If root user: list of organization IDs to which user was cloned. If child user: nil or empty.
 } 
 
 message Social {
