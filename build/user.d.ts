@@ -74,6 +74,7 @@ export interface UserDetails {
     KYCStatus: KYCStatus;
     UserTradeProfile?: UserTradeProfile | undefined;
     BrokerAccounts: BrokerAccount[];
+    /** @deprecated */
     BankAccounts: BankAccount[];
     UISettings: UISettings | undefined;
     /** Broker API specific commission fields for user level (overrrides organization level) */
@@ -102,7 +103,7 @@ export interface User {
     User: UserDetails | undefined;
     MetaData: MetaData | undefined;
     Audit: Audit | undefined;
-    /** List of organizations where the user is part of (cloned into) */
+    /** If root user: list of organization IDs to which user was cloned. If child user: nil or empty. */
     OrganizationIDs: string[];
 }
 export interface Social {
