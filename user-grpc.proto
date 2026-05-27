@@ -5,6 +5,8 @@ package user;
 option go_package = "github.com/sologenic/com-fs-user-model;user";
 
 import "google/protobuf/empty.proto";
+import "google/protobuf/timestamp.proto";
+import "sologenic/com-fs-utils-lib/models/metadata/metadata.proto";
 import "user.proto";
 import "user-filters.proto";
 
@@ -13,4 +15,15 @@ service UserService {
     rpc List (Filter) returns (UserList) {}
     rpc Upsert (User) returns (UserID) {}
     rpc SetStatus (StatusMessage) returns (google.protobuf.Empty) {}
+    rpc UpdateReferralStats (ReferralStatsUpdate) returns (google.protobuf.Empty) {}
+}
+
+message ReferralStatsUpdate {
+    string UserID = 1;
+    string OrganizationID = 2;
+    metadata.Network Network = 3;
+    optional int32 ReferralCount = 4;
+    optional int32 ReferralAmountReceived = 5;
+    optional google.protobuf.Timestamp ReferralPaidAt = 6;
+    optional string ReferredBy = 7;
 }
