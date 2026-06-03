@@ -1,6 +1,9 @@
 #!/bin/bash
 set -e
 
+mkdir -p vendor/buf/validate
+curl https://raw.githubusercontent.com/bufbuild/protovalidate/refs/heads/main/proto/protovalidate/buf/validate/validate.proto > vendor/buf/validate/validate.proto
+
 # move to the root dir of the package
 rd=$(git rev-parse --show-toplevel)
 
@@ -37,7 +40,7 @@ for lib_dir in "${lib_dirs[@]}"; do
     # Extract directory name from path (e.g., "../com-fs-utils-lib" -> "com-fs-utils-lib")
     lib_name=$(basename "$lib_dir")
     lib_repo="git@github.com:sologenic/${lib_name}.git"
-    
+
     if [ -d "$lib_dir" ] && [ -d "$lib_dir/.git" ]; then
         echo "Updating ${lib_name} repository..."
         cd "$lib_dir"
@@ -67,6 +70,7 @@ PROTO_PATH_ARGS=(
   --proto_path=.
   --proto_path="$proto_parent"
   --proto_path="$proto_parent/sologenic/com-fs-utils-lib/models"
+  --proto_path="$rd/vendor"
 )
 
 protoc "${PROTO_PATH_ARGS[@]}" "user-kyc.proto" \

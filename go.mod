@@ -3,6 +3,7 @@ module github.com/sologenic/com-fs-user-model
 go 1.26.2
 
 require (
+	buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go v1.36.11-20260415201107-50325440f8f2.1
 	github.com/sologenic/com-fs-compliance-model v0.0.0-20260508212734-ae7a1abedba0
 	github.com/sologenic/com-fs-document-model v0.0.0-20260508212839-20ac63bcee92
 	github.com/sologenic/com-fs-trade-profile-model v0.0.0-20260508211308-27520933ecd2
@@ -13,7 +14,7 @@ require (
 	github.com/sologenic/com-fs-utils-lib/models/metadata v0.0.0-20260501113306-8b02db1b65e4
 	github.com/sologenic/com-fs-utils-lib/models/order-properties v0.0.0-20260501113306-8b02db1b65e4
 	github.com/sologenic/com-fs-utils-lib/models/role v0.0.0-20260501113306-8b02db1b65e4
-	google.golang.org/grpc v1.79.1
+	google.golang.org/grpc v1.81.1
 	google.golang.org/protobuf v1.36.11
 )
 
@@ -37,14 +38,14 @@ require (
 	github.com/sologenic/com-fs-utils-lib/models/decimal v0.0.0-20260501113306-8b02db1b65e4 // indirect
 	go.opentelemetry.io/auto/sdk v1.2.1 // indirect
 	go.opentelemetry.io/contrib/instrumentation/net/http/otelhttp v0.65.0 // indirect
-	go.opentelemetry.io/otel v1.40.0 // indirect
-	go.opentelemetry.io/otel/metric v1.40.0 // indirect
-	go.opentelemetry.io/otel/trace v1.40.0 // indirect
-	golang.org/x/crypto v0.48.0 // indirect
-	golang.org/x/net v0.50.0 // indirect
-	golang.org/x/oauth2 v0.35.0 // indirect
-	golang.org/x/sys v0.44.0 // indirect
-	golang.org/x/text v0.34.0 // indirect
+	go.opentelemetry.io/otel v1.43.0 // indirect
+	go.opentelemetry.io/otel/metric v1.43.0 // indirect
+	go.opentelemetry.io/otel/trace v1.43.0 // indirect
+	golang.org/x/crypto v0.51.0 // indirect
+	golang.org/x/net v0.55.0 // indirect
+	golang.org/x/oauth2 v0.36.0 // indirect
+	golang.org/x/sys v0.45.0 // indirect
+	golang.org/x/text v0.37.0 // indirect
 	google.golang.org/api v0.267.0 // indirect
-	google.golang.org/genproto/googleapis/rpc v0.0.0-20260217215200-42d3e9bedb6d // indirect
+	google.golang.org/genproto/googleapis/rpc v0.0.0-20260526163538-3dc84a4a5aaa // indirect
 )

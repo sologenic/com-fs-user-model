@@ -15,6 +15,7 @@ import "user-kyc.proto";
 import "user-fundings.proto";
 import "sologenic/com-fs-utils-lib/models/commission/commission.proto";
 import "sologenic/com-fs-compliance-model/compliance.proto";
+import "buf/validate/validate.proto";
 
 message UserDetails {
     string UserID = 1; // Firebase Auth UID
