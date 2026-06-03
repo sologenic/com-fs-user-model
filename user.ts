@@ -192,13 +192,13 @@ export function themeToJSON(object: Theme): string {
 }
 
 export interface UserDetails {
-  /** Firebase Auth UID */
+  /** Firebase User ID */
   UserID: string;
   FirstName: string;
   LastName: string;
   Address: string;
   Avatar: string;
-  /** "Nickname" */
+  /** Nickname */
   Alias: string;
   Description: string;
   Status: UserStatus;
@@ -207,7 +207,7 @@ export interface UserDetails {
   Language: Lang;
   /** UUID for the external user identifier for example to be used in communication with the KYC provider, or other places where an anonymous ID is required */
   ExternalUserID: string;
-  /** UUID of the current organization the user is cloned into */
+  /** UUID of the current organization the user belongs to */
   OrganizationID: string;
   Employment?:
     | Employment
@@ -218,7 +218,7 @@ export interface UserDetails {
   TradeProfile?:
     | TradeProfileDetails
     | undefined;
-  /** Array of KYC integration IDs */
+  /** Array of Persona Inquiry IDs */
   KYCInquiries: string[];
   KYCDetails: UserKYCDetails | undefined;
   UserDocumentCompliance:
@@ -238,13 +238,13 @@ export interface UserDetails {
   DataFeedAccounts?:
     | DataFeedAccounts
     | undefined;
-  /** ISO 3166-1 alpha-3 code e.g. "USA", "CAD" */
+  /** ISO 3166-1 alpha-3 code e.g. "USA", "CAN" */
   AllowedJurisdictions: string[];
   /** Email address for the user, often retrieved from the authentication provider */
   EmailAddress: string;
   /** Compliance answers for the user */
   ComplianceFormAnswers: ComplianceFormAnswer[];
-  /** User ID of the referrer who referred this user during signup */
+  /** User ID of the referrer who referred this user during signup or partner code */
   ReferredBy?:
     | string
     | undefined;
