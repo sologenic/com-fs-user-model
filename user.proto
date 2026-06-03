@@ -18,23 +18,101 @@ import "sologenic/com-fs-compliance-model/compliance.proto";
 import "buf/validate/validate.proto";
 
 message UserDetails {
-    string UserID = 1; // Firebase Auth UID
-    string FirstName = 2; 
-    string LastName = 3;
-    string Address = 4;
-    string Avatar = 5;
-    string Alias = 6; // "Nickname"
-    string Description = 7;
+    // Firebase User ID
+    string UserID = 1 [
+      (buf.validate.field).string = {
+        min_len: 28,
+        max_len: 128,
+        pattern: "^[a-zA-Z0-9]+$"
+      }
+    ];
+
+    string FirstName = 2 [
+      (buf.validate.field).string = {
+        min_len: 2,
+        max_len: 64,
+        // 1. ^[\\p{L}] – First character must be alpha
+        // 2. [\\p{L}\\s\\-']* – Allow alpha, dash (O'Connor), space (Anna Maria), dash (Jean-Baptiste)
+        // 3. [\\p{L}]$ – Last character must be alpha
+        pattern: "^[\\p{L}][\\p{L}\\s\\-']*[\\p{L}]$"
+      }
+    ];
+
+    string LastName = 3 [
+      // Same logic as for first name
+      (buf.validate.field).string = {
+        min_len: 2,
+        max_len: 64,
+        pattern: "^[\\p{L}][\\p{L}\\s\\-']*[\\p{L}]$"
+      }
+    ];
+
+    string Address = 4 [
+      (buf.validate.field).string = {
+        max_len: 128
+      }
+    ];
+
+    string Avatar = 5 [
+      (buf.validate.field).ignore = IGNORE_IF_ZERO_VALUE,
+      (buf.validate.field).string = {
+        uri: true,
+        max_len: 256
+      }
+    ];
+
+    // Nickname
+    string Alias = 6 [
+      (buf.validate.field).string = {
+        min_len: 5,
+        max_len: 32,
+        pattern: "^[a-zA-Z][a-zA-Z0-9_]*[a-zA-Z0-9]$"
+      }
+    ];
+
+    string Description = 7 [
+      (buf.validate.field).string = {
+        max_len: 512
+      }
+    ];
+
     UserStatus Status = 8;
     repeated Wallet Wallets = 9;
     repeated Social Socials = 10;
     language.Lang Language = 11;
-    string ExternalUserID = 12; // UUID for the external user identifier for example to be used in communication with the KYC provider, or other places where an anonymous ID is required
-    string OrganizationID = 13; // UUID of the current organization the user is cloned into
+
+    // UUID for the external user identifier for example to be used in communication with the KYC provider, or other places where an anonymous ID is required
+    string ExternalUserID = 12 [
+      (buf.validate.field).string = {
+        uuid: true
+      }
+    ];
+
+    // UUID of the current organization the user belongs to
+    string OrganizationID = 13 [
+      (buf.validate.field).string = {
+        uuid: true
+      }
+    ];
+
     optional Employment Employment = 14;
     role.Role Role = 15; // A retail user will always have a role of "NORMAL_USER"
     optional tradeprofile.TradeProfileDetails TradeProfile = 16; // Trade profile details
-    repeated string KYCInquiries = 17; // Array of KYC integration IDs
+
+    // Array of Persona Inquiry IDs
+    repeated string KYCInquiries = 17 [
+      (buf.validate.field).repeated = {
+        max_items: 10,
+        items: {
+          string: {
+            pattern: "^inq_[a-zA-Z0-9]+$",
+            min_len: 32,
+            max_len: 64
+          }
+        }
+      }
+    ];
+
     UserKYCDetails KYCDetails = 18;
     document.UserDocumentCompliance UserDocumentCompliance = 19;
     KYCStatus KYCStatus = 20; // Status of KYC verification, e.g., PENDING, APPROVED, REJECTED
@@ -44,14 +122,69 @@ message UserDetails {
     UISettings UISettings = 25;
     optional commission.CommissionSettings CommissionSettings = 26; // Broker API specific commission fields for user level (overrrides organization level)
     optional DataFeedAccounts DataFeedAccounts = 27;
-    repeated string AllowedJurisdictions = 28; // ISO 3166-1 alpha-3 code e.g. "USA", "CAD"
-    string EmailAddress = 29; // Email address for the user, often retrieved from the authentication provider
+
+    // ISO 3166-1 alpha-3 code e.g. "USA", "CAN"
+    repeated string AllowedJurisdictions = 28 [
+      (buf.validate.field).repeated = {
+        max_items: 256,
+        items: {
+          string: {
+            len: 3,
+            pattern: "^[A-Z]{3}$"
+          }
+        }
+      }
+    ];
+
+    // Email address for the user, often retrieved from the authentication provider
+    string EmailAddress = 29 [
+      (buf.validate.field).string = {
+        email: true,
+        max_len: 254
+      },
+      (buf.validate.field).ignore = IGNORE_IF_ZERO_VALUE
+    ];
+
     repeated compliance.ComplianceFormAnswer ComplianceFormAnswers = 30; // Compliance answers for the user
-    optional string ReferredBy = 31; // User ID of the referrer who referred this user during signup
-    optional int32 ReferralCount = 32; // Number of referrals made by this user
-    optional int32 ReferralLimit = 33; // Maximum number of referrals this user can receive (admin override only)
-    optional int32 ReferralAmountReceived = 34; // Amount of TX the referring user received from referrals (non-mutable by user)
-    optional int32 ReferralAmount = 35; // Amount of TX associated with this user to be distributed to new users (admin override only)
+
+    // User ID of the referrer who referred this user during signup or partner code
+    optional string ReferredBy = 31 [
+      (buf.validate.field).ignore = IGNORE_IF_ZERO_VALUE,
+      (buf.validate.field).string = {
+        min_len: 3,
+        max_len: 128,
+        pattern: "^[a-zA-Z0-9_\\-]+$"
+      }
+    ];
+
+    // Number of referrals made by this user
+    optional int32 ReferralCount = 32 [
+      (buf.validate.field).int32 = {
+        gte: 0
+      }
+    ];
+
+    // Maximum number of referrals this user can receive (admin override only)
+    optional int32 ReferralLimit = 33 [
+      (buf.validate.field).int32 = {
+        gte: 0
+      }
+    ];
+
+    // Amount of TX the referring user received from referrals (non-mutable by user)
+    optional int32 ReferralAmountReceived = 34 [
+      (buf.validate.field).int32 = {
+        gte: 0
+      }
+    ];
+
+    // Amount of TX associated with this user to be distributed to new users (admin override only)
+    optional int32 ReferralAmount = 35 [
+      (buf.validate.field).int32 = {
+        gte: 0
+      }
+    ];
+
     optional google.protobuf.Timestamp ReferralPaidAt = 36; // Timestamp when the referral reward was paid
 }
 
@@ -59,8 +192,18 @@ message User {
     UserDetails User = 1;
     metadata.MetaData MetaData = 2;
     audit.Audit Audit = 3;
-    repeated string OrganizationIDs = 4; // If root user: list of organization IDs to which user was cloned. If child user: nil or empty.
-} 
+
+    // If root user: list of organization IDs to which user was cloned. If child user: nil or empty.
+    repeated string OrganizationIDs = 4 [
+      (buf.validate.field).repeated = {
+        items: {
+          string: {
+            uuid: true
+          }
+        }
+      }
+    ];
+}
 
 message Social {
     string URL = 1;
