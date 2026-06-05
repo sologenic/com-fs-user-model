@@ -77,8 +77,19 @@ message UserDetails {
     ];
 
     UserStatus Status = 8;
-    repeated Wallet Wallets = 9;
-    repeated Social Socials = 10;
+
+    repeated Wallet Wallets = 9 [
+      (buf.validate.field).repeated = {
+        max_items: 10,
+      }
+    ];
+
+    repeated Social Socials = 10 [
+      (buf.validate.field).repeated = {
+        max_items: 10,
+      }
+    ];
+
     language.Lang Language = 11;
 
     // UUID for the external user identifier for example to be used in communication with the KYC provider, or other places where an anonymous ID is required
@@ -145,7 +156,12 @@ message UserDetails {
       (buf.validate.field).ignore = IGNORE_IF_ZERO_VALUE
     ];
 
-    repeated compliance.ComplianceFormAnswer ComplianceFormAnswers = 30; // Compliance answers for the user
+    // Compliance answers for the user
+    repeated compliance.ComplianceFormAnswer ComplianceFormAnswers = 30 [
+      (buf.validate.field).repeated = {
+        max_items: 32,
+      }
+    ];
 
     // User ID of the referrer who referred this user during signup or partner code
     optional string ReferredBy = 31 [
@@ -196,6 +212,7 @@ message User {
     // If root user: list of organization IDs to which user was cloned. If child user: nil or empty.
     repeated string OrganizationIDs = 4 [
       (buf.validate.field).repeated = {
+        max_items: 256,
         items: {
           string: {
             uuid: true
@@ -206,7 +223,13 @@ message User {
 }
 
 message Social {
-    string URL = 1;
+    string URL = 1 [
+      (buf.validate.field).ignore = IGNORE_IF_ZERO_VALUE,
+      (buf.validate.field).string = {
+        uri: true,
+        max_len: 256
+      }
+    ];
     SocialType Type = 2;
 }
 

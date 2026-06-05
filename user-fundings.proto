@@ -5,13 +5,35 @@ package user;
 option go_package = "github.com/sologenic/com-fs-user-model;user";
 
 import "sologenic/com-fs-utils-lib/models/order-properties/order-properties.proto";
+import "buf/validate/validate.proto";
 
 message Wallet {
-    string Address = 1;
-    string Alias = 2;
+    string Address = 1 [
+      (buf.validate.field).string.pattern = "^(?:test)?core1[02-9ac-hj-np-z]{38}$"
+    ];
+
+    string Alias = 2 [
+      (buf.validate.field).string = {
+        min_len: 5,
+        max_len: 32,
+        pattern: "^[a-zA-Z][a-zA-Z0-9_]*[a-zA-Z0-9]$"
+      }
+    ];
+
     WalletType Type = 3;
     SignerType SignerType = 4;
-    repeated string Organizations = 5; // List of organizations linked to this wallet address
+
+    // List of organizations linked to this wallet address
+    repeated string Organizations = 5 [
+      (buf.validate.field).repeated = {
+        max_items: 256,
+        items: {
+          string: {
+            uuid: true
+          }
+        }
+      }
+    ];
 }
 
 message BankAccount {
@@ -27,7 +49,11 @@ message BankAccount {
 message BrokerAccount {
   string AccountID = 1; // user's identifier in the broker account
   orderproperties.ClearingBroker Broker = 2; // "RQD", etc.
-  string OrganizationID = 3; // broker identifier
+  string OrganizationID = 3 [
+    (buf.validate.field).string = {
+      uuid: true
+    }
+  ]; // broker identifier
   repeated string Profiles = 4; // bank account profiles for the broker account
 }
 
