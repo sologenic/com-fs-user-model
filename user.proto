@@ -76,7 +76,10 @@ message UserDetails {
       }
     ];
 
-    UserStatus Status = 8;
+    UserStatus Status = 8 [
+      (buf.validate.field).required = true,
+      (buf.validate.field).enum.defined_only = true
+    ];
 
     repeated Wallet Wallets = 9 [
       (buf.validate.field).repeated = {
@@ -107,8 +110,16 @@ message UserDetails {
     ];
 
     optional Employment Employment = 14;
-    role.Role Role = 15; // A retail user will always have a role of "NORMAL_USER"
-    optional tradeprofile.TradeProfileDetails TradeProfile = 16; // Trade profile details
+
+    // A retail user will always have a role of "NORMAL_USER"
+    role.Role Role = 15 [
+      (buf.validate.field).required = true,
+      (buf.validate.field).enum.defined_only = true
+    ];
+
+    tradeprofile.TradeProfileDetails TradeProfile = 16 [
+      (buf.validate.field).required = true
+    ];
 
     // Array of Persona Inquiry IDs
     repeated string KYCInquiries = 17 [
@@ -126,8 +137,16 @@ message UserDetails {
 
     UserKYCDetails KYCDetails = 18;
     document.UserDocumentCompliance UserDocumentCompliance = 19;
-    KYCStatus KYCStatus = 20; // Status of KYC verification, e.g., PENDING, APPROVED, REJECTED
-    optional tradeprofile.UserTradeProfile UserTradeProfile = 21;
+
+    // Status of KYC verification, e.g., PENDING, APPROVED, REJECTED
+    KYCStatus KYCStatus = 20 [
+      (buf.validate.field).enum.defined_only = true
+    ];
+
+    tradeprofile.UserTradeProfile UserTradeProfile = 21 [
+      (buf.validate.field).required = true
+    ];
+
     repeated BrokerAccount BrokerAccounts = 23;
     repeated BankAccount BankAccounts = 24 [deprecated = true];
     UISettings UISettings = 25;
