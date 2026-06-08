@@ -64,15 +64,14 @@ export interface UserDetails {
     Employment?: Employment | undefined;
     /** A retail user will always have a role of "NORMAL_USER" */
     Role: Role;
-    /** Trade profile details */
-    TradeProfile?: TradeProfileDetails | undefined;
+    TradeProfile: TradeProfileDetails | undefined;
     /** Array of Persona Inquiry IDs */
     KYCInquiries: string[];
     KYCDetails: UserKYCDetails | undefined;
     UserDocumentCompliance: UserDocumentCompliance | undefined;
     /** Status of KYC verification, e.g., PENDING, APPROVED, REJECTED */
     KYCStatus: KYCStatus;
-    UserTradeProfile?: UserTradeProfile | undefined;
+    UserTradeProfile: UserTradeProfile | undefined;
     BrokerAccounts: BrokerAccount[];
     /** @deprecated */
     BankAccounts: BankAccount[];

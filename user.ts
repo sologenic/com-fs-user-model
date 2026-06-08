@@ -214,8 +214,7 @@ export interface UserDetails {
     | undefined;
   /** A retail user will always have a role of "NORMAL_USER" */
   Role: Role;
-  /** Trade profile details */
-  TradeProfile?:
+  TradeProfile:
     | TradeProfileDetails
     | undefined;
   /** Array of Persona Inquiry IDs */
@@ -226,7 +225,7 @@ export interface UserDetails {
     | undefined;
   /** Status of KYC verification, e.g., PENDING, APPROVED, REJECTED */
   KYCStatus: KYCStatus;
-  UserTradeProfile?: UserTradeProfile | undefined;
+  UserTradeProfile: UserTradeProfile | undefined;
   BrokerAccounts: BrokerAccount[];
   /** @deprecated */
   BankAccounts: BankAccount[];
