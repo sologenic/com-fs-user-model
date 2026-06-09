@@ -87,6 +87,12 @@ message UserDetails {
       }
     ];
 
+    repeated Social Socials = 10 [
+      (buf.validate.field).repeated = {
+        max_items: 10,
+      }
+    ];
+
     language.Lang Language = 11;
 
     // UUID for the external user identifier for example to be used in communication with the KYC provider, or other places where an anonymous ID is required
@@ -232,6 +238,20 @@ message User {
     ];
 }
 
+message Social {
+  string URL = 1 [
+    (buf.validate.field).ignore = IGNORE_IF_ZERO_VALUE,
+    (buf.validate.field).string = {
+      uri: true,
+      max_len: 256
+    }
+  ];
+  SocialType Type = 2 [
+    (buf.validate.field).required = true,
+    (buf.validate.field).enum.defined_only = true
+  ];
+}
+
 message UserList {
     repeated User Users = 1;
     optional int32 Offset = 2;
@@ -240,7 +260,10 @@ message UserList {
 message StatusMessage {
     string UserID = 1;
     string OrganizationID = 2;
-    UserStatus Status = 3;
+    UserStatus Status = 3 [
+      (buf.validate.field).required = true,
+      (buf.validate.field).enum.defined_only = true
+    ];
     optional metadata.Network Network = 4;
     audit.Audit Audit = 5;
 }
@@ -251,8 +274,24 @@ enum UserStatus {
     DEACTIVATED = 2;
 }
 
+enum SocialType {
+  NOT_USED_SOCIALTYPE = 0;
+  WEBSITE = 1;
+  GITHUB = 2;
+  REDDIT = 3;
+  DISCORD = 4;
+  TWITTER = 5;
+  FACEBOOK = 6;
+  TELEGRAM = 7;
+  INSTAGRAM = 8;
+  LINKEDIN = 9;
+}
+
 message UISettings {
-    Theme Theme = 1;
+    Theme Theme = 1 [
+      (buf.validate.field).required = true,
+      (buf.validate.field).enum.defined_only = true
+    ];
 }
 
 enum Theme {
