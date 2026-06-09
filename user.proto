@@ -93,7 +93,9 @@ message UserDetails {
       }
     ];
 
-    language.Lang Language = 11;
+    language.Lang Language = 11 [
+      (buf.validate.field).enum.defined_only = true
+    ];
 
     // UUID for the external user identifier for example to be used in communication with the KYC provider, or other places where an anonymous ID is required
     string ExternalUserID = 12 [
