@@ -8,8 +8,7 @@ The proto has been split into multiple files to make it easier to maintain and u
 
 - `user.proto` - User details and related information
 - `user-kyc.proto` - KYC details
-- `user-fundings.proto` - Fundings details (wallet, bank accounts, broker accounts)
-- `user-compliance.proto` - Compliance details (compliance questions, compliance answers)
+- `user-fundings.proto` - Fundings details (wallet, broker accounts)
 
 And grpc related files are:
 - `user-filters.proto` - Filters for the user and adminuser
@@ -41,7 +40,7 @@ Parts which are never cloned are:
 
 A typical initial clone will contain:
 
-- UserDetails except `BrokerAccount`, `BankAccount`, `ComplianceQuestions`, `TradeProfile`, `Wallets`, `KYCDetails`
+- UserDetails except `BrokerAccount`, `ComplianceQuestions`, `TradeProfile`, `Wallets`, `KYCDetails`
 - From `UserDetails.Wallets` the TX wallet is cloned (always)
 - From `UserDetails.UserDocumentCompliance` the signed TX documents are cloned (always)
 
