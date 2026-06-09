@@ -87,12 +87,6 @@ message UserDetails {
       }
     ];
 
-    repeated Social Socials = 10 [
-      (buf.validate.field).repeated = {
-        max_items: 10,
-      }
-    ];
-
     language.Lang Language = 11;
 
     // UUID for the external user identifier for example to be used in communication with the KYC provider, or other places where an anonymous ID is required
@@ -108,8 +102,6 @@ message UserDetails {
         uuid: true
       }
     ];
-
-    optional Employment Employment = 14;
 
     // A retail user will always have a role of "NORMAL_USER"
     role.Role Role = 15 [
@@ -148,7 +140,6 @@ message UserDetails {
     ];
 
     repeated BrokerAccount BrokerAccounts = 23;
-    repeated BankAccount BankAccounts = 24 [deprecated = true];
     UISettings UISettings = 25;
     optional commission.CommissionSettings CommissionSettings = 26; // Broker API specific commission fields for user level (overrrides organization level)
     optional DataFeedAccounts DataFeedAccounts = 27;
@@ -241,17 +232,6 @@ message User {
     ];
 }
 
-message Social {
-    string URL = 1 [
-      (buf.validate.field).ignore = IGNORE_IF_ZERO_VALUE,
-      (buf.validate.field).string = {
-        uri: true,
-        max_len: 256
-      }
-    ];
-    SocialType Type = 2;
-}
-
 message UserList {
     repeated User Users = 1;
     optional int32 Offset = 2;
@@ -268,21 +248,7 @@ message StatusMessage {
 enum UserStatus {
     NOT_USED_USERSTATUS = 0;
     ACTIVE = 1;
-    ADMIN_DEACTIVATED = 2;
-    TO_BE_APPROVED = 3 [deprecated = true];
-}
-
-enum SocialType {
-    NOT_USED_SOCIALTYPE = 0;
-    WEBSITE = 1;
-    GITHUB = 2;
-    REDDIT = 3;
-    DISCORD = 4;
-    TWITTER = 5;
-    FACEBOOK = 6;
-    TELEGRAM = 7;
-    INSTAGRAM = 8;
-    LINKEDIN = 9;
+    DEACTIVATED = 2;
 }
 
 message UISettings {

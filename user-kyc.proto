@@ -4,14 +4,6 @@ package user;
 
 option go_package = "github.com/sologenic/com-fs-user-model;user";
 
-import "google/protobuf/timestamp.proto";
-
-message IDNumber {
-    string IssuingCountry = 1;
-    string IdentificationClass = 2;
-    string IdentificationNumber = 3;
-}
-
 message UserKYCDetails {
     string Birthdate = 1;
     string PhoneNumber = 2;
@@ -26,51 +18,16 @@ message UserKYCDetails {
     string IdentificationNumber = 11;
     string FirstName = 12;
     string LastName = 13;
-}
-
-message Employment {
-    string EmployerName = 1;
-    string JobTitle = 2;
-    google.protobuf.Timestamp StartDate = 3; 
-    google.protobuf.Timestamp EndDate = 4; // Empty if still employed
-    EmploymentType Type = 5;
-    optional string Industry = 6;
-    Income Income = 7;
-    EmployerContact Contact = 8;
-    bool IsVerified = 9;
-    string VerifiedAt = 10;
-}
-
-message Income {
-    float Amount = 1;
-    string Currency = 2;
-    IncomeFrequency Frequency = 3;
-}
-
-message EmployerContact {
-    string Name = 1;
-    string Email = 2;
-    string Phone = 3;
-    string Address = 4;
-}
-
-enum EmploymentType {
-    NOT_USED_EMPLOYMENTTYPE = 0;
-    FULL_TIME = 1;
-    PART_TIME = 2;
-    CONTRACT = 3;
-    FREELANCE = 4;
-    SELF_EMPLOYED = 5;
-    INTERNSHIP = 6;
-}
-
-enum IncomeFrequency {
-    NOT_USED_INCOMEFREQUENCY = 0;
-    HOURLY = 1;
-    WEEKLY = 2;
-    BI_WEEKLY = 3;
-    MONTHLY = 4;
-    ANNUALLY = 5;
+    string MiddleName = 14;
+    string AddressCountryCode = 15;
+    string SelectedCountryCode = 16;
+    string SelectedIDClass = 17;
+    string ExpirationDate = 18;
+    string IdentificationClass = 19;
+    string CardAccessNumber = 20;
+    string IssueDate = 21;
+    string IssuingAuthority = 22;
+    string CollectedEmailAddress = 23;
 }
 
 enum KYCStatus {
