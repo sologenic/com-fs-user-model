@@ -28,19 +28,6 @@ export interface Wallet {
     /** List of organizations linked to this wallet address */
     Organizations: string[];
 }
-export interface BankAccount {
-    AccountName: string;
-    /** user's identifier in the bank account */
-    BankName: string;
-    /** bank address */
-    BankAddress: string;
-    /** bank account number */
-    AccountNumber: string;
-    /** bank routing number */
-    ABA: string;
-    SWIFT: string;
-    IBAN: string;
-}
 export interface BrokerAccount {
     /** user's identifier in the broker account */
     AccountID: string;
@@ -82,46 +69,6 @@ export declare const Wallet: {
         SignerType?: SignerType | undefined;
         Organizations?: (string[] & string[] & { [K_2 in Exclude<keyof I_1["Organizations"], keyof string[]>]: never; }) | undefined;
     } & { [K_3 in Exclude<keyof I_1, keyof Wallet>]: never; }>(object: I_1): Wallet;
-};
-export declare const BankAccount: {
-    encode(message: BankAccount, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): BankAccount;
-    fromJSON(object: any): BankAccount;
-    toJSON(message: BankAccount): unknown;
-    create<I extends {
-        AccountName?: string | undefined;
-        BankName?: string | undefined;
-        BankAddress?: string | undefined;
-        AccountNumber?: string | undefined;
-        ABA?: string | undefined;
-        SWIFT?: string | undefined;
-        IBAN?: string | undefined;
-    } & {
-        AccountName?: string | undefined;
-        BankName?: string | undefined;
-        BankAddress?: string | undefined;
-        AccountNumber?: string | undefined;
-        ABA?: string | undefined;
-        SWIFT?: string | undefined;
-        IBAN?: string | undefined;
-    } & { [K in Exclude<keyof I, keyof BankAccount>]: never; }>(base?: I | undefined): BankAccount;
-    fromPartial<I_1 extends {
-        AccountName?: string | undefined;
-        BankName?: string | undefined;
-        BankAddress?: string | undefined;
-        AccountNumber?: string | undefined;
-        ABA?: string | undefined;
-        SWIFT?: string | undefined;
-        IBAN?: string | undefined;
-    } & {
-        AccountName?: string | undefined;
-        BankName?: string | undefined;
-        BankAddress?: string | undefined;
-        AccountNumber?: string | undefined;
-        ABA?: string | undefined;
-        SWIFT?: string | undefined;
-        IBAN?: string | undefined;
-    } & { [K_1 in Exclude<keyof I_1, keyof BankAccount>]: never; }>(object: I_1): BankAccount;
 };
 export declare const BrokerAccount: {
     encode(message: BrokerAccount, writer?: _m0.Writer): _m0.Writer;
