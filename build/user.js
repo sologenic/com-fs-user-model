@@ -14,16 +14,14 @@ import { CommissionSettings } from "./sologenic/com-fs-utils-lib/models/commissi
 import { langFromJSON, langToJSON } from "./sologenic/com-fs-utils-lib/models/language/language";
 import { MetaData, networkFromJSON, networkToJSON, } from "./sologenic/com-fs-utils-lib/models/metadata/metadata";
 import { roleFromJSON, roleToJSON } from "./sologenic/com-fs-utils-lib/models/role/role";
-import { BankAccount, BrokerAccount, Wallet } from "./user-fundings";
-import { Employment, kYCStatusFromJSON, kYCStatusToJSON, UserKYCDetails } from "./user-kyc";
+import { BrokerAccount, Wallet } from "./user-fundings";
+import { kYCStatusFromJSON, kYCStatusToJSON, UserKYCDetails } from "./user-kyc";
 export const protobufPackage = "user";
 export var UserStatus;
 (function (UserStatus) {
     UserStatus[UserStatus["NOT_USED_USERSTATUS"] = 0] = "NOT_USED_USERSTATUS";
     UserStatus[UserStatus["ACTIVE"] = 1] = "ACTIVE";
-    UserStatus[UserStatus["ADMIN_DEACTIVATED"] = 2] = "ADMIN_DEACTIVATED";
-    /** @deprecated */
-    UserStatus[UserStatus["TO_BE_APPROVED"] = 3] = "TO_BE_APPROVED";
+    UserStatus[UserStatus["DEACTIVATED"] = 2] = "DEACTIVATED";
     UserStatus[UserStatus["UNRECOGNIZED"] = -1] = "UNRECOGNIZED";
 })(UserStatus || (UserStatus = {}));
 export function userStatusFromJSON(object) {
@@ -35,11 +33,8 @@ export function userStatusFromJSON(object) {
         case "ACTIVE":
             return UserStatus.ACTIVE;
         case 2:
-        case "ADMIN_DEACTIVATED":
-            return UserStatus.ADMIN_DEACTIVATED;
-        case 3:
-        case "TO_BE_APPROVED":
-            return UserStatus.TO_BE_APPROVED;
+        case "DEACTIVATED":
+            return UserStatus.DEACTIVATED;
         case -1:
         case "UNRECOGNIZED":
         default:
@@ -52,90 +47,9 @@ export function userStatusToJSON(object) {
             return "NOT_USED_USERSTATUS";
         case UserStatus.ACTIVE:
             return "ACTIVE";
-        case UserStatus.ADMIN_DEACTIVATED:
-            return "ADMIN_DEACTIVATED";
-        case UserStatus.TO_BE_APPROVED:
-            return "TO_BE_APPROVED";
+        case UserStatus.DEACTIVATED:
+            return "DEACTIVATED";
         case UserStatus.UNRECOGNIZED:
-        default:
-            return "UNRECOGNIZED";
-    }
-}
-export var SocialType;
-(function (SocialType) {
-    SocialType[SocialType["NOT_USED_SOCIALTYPE"] = 0] = "NOT_USED_SOCIALTYPE";
-    SocialType[SocialType["WEBSITE"] = 1] = "WEBSITE";
-    SocialType[SocialType["GITHUB"] = 2] = "GITHUB";
-    SocialType[SocialType["REDDIT"] = 3] = "REDDIT";
-    SocialType[SocialType["DISCORD"] = 4] = "DISCORD";
-    SocialType[SocialType["TWITTER"] = 5] = "TWITTER";
-    SocialType[SocialType["FACEBOOK"] = 6] = "FACEBOOK";
-    SocialType[SocialType["TELEGRAM"] = 7] = "TELEGRAM";
-    SocialType[SocialType["INSTAGRAM"] = 8] = "INSTAGRAM";
-    SocialType[SocialType["LINKEDIN"] = 9] = "LINKEDIN";
-    SocialType[SocialType["UNRECOGNIZED"] = -1] = "UNRECOGNIZED";
-})(SocialType || (SocialType = {}));
-export function socialTypeFromJSON(object) {
-    switch (object) {
-        case 0:
-        case "NOT_USED_SOCIALTYPE":
-            return SocialType.NOT_USED_SOCIALTYPE;
-        case 1:
-        case "WEBSITE":
-            return SocialType.WEBSITE;
-        case 2:
-        case "GITHUB":
-            return SocialType.GITHUB;
-        case 3:
-        case "REDDIT":
-            return SocialType.REDDIT;
-        case 4:
-        case "DISCORD":
-            return SocialType.DISCORD;
-        case 5:
-        case "TWITTER":
-            return SocialType.TWITTER;
-        case 6:
-        case "FACEBOOK":
-            return SocialType.FACEBOOK;
-        case 7:
-        case "TELEGRAM":
-            return SocialType.TELEGRAM;
-        case 8:
-        case "INSTAGRAM":
-            return SocialType.INSTAGRAM;
-        case 9:
-        case "LINKEDIN":
-            return SocialType.LINKEDIN;
-        case -1:
-        case "UNRECOGNIZED":
-        default:
-            return SocialType.UNRECOGNIZED;
-    }
-}
-export function socialTypeToJSON(object) {
-    switch (object) {
-        case SocialType.NOT_USED_SOCIALTYPE:
-            return "NOT_USED_SOCIALTYPE";
-        case SocialType.WEBSITE:
-            return "WEBSITE";
-        case SocialType.GITHUB:
-            return "GITHUB";
-        case SocialType.REDDIT:
-            return "REDDIT";
-        case SocialType.DISCORD:
-            return "DISCORD";
-        case SocialType.TWITTER:
-            return "TWITTER";
-        case SocialType.FACEBOOK:
-            return "FACEBOOK";
-        case SocialType.TELEGRAM:
-            return "TELEGRAM";
-        case SocialType.INSTAGRAM:
-            return "INSTAGRAM";
-        case SocialType.LINKEDIN:
-            return "LINKEDIN";
-        case SocialType.UNRECOGNIZED:
         default:
             return "UNRECOGNIZED";
     }
@@ -188,11 +102,9 @@ function createBaseUserDetails() {
         Description: "",
         Status: 0,
         Wallets: [],
-        Socials: [],
         Language: 0,
         ExternalUserID: "",
         OrganizationID: "",
-        Employment: undefined,
         Role: 0,
         TradeProfile: undefined,
         KYCInquiries: [],
@@ -201,7 +113,6 @@ function createBaseUserDetails() {
         KYCStatus: 0,
         UserTradeProfile: undefined,
         BrokerAccounts: [],
-        BankAccounts: [],
         UISettings: undefined,
         CommissionSettings: undefined,
         DataFeedAccounts: undefined,
@@ -245,9 +156,6 @@ export const UserDetails = {
         for (const v of message.Wallets) {
             Wallet.encode(v, writer.uint32(74).fork()).ldelim();
         }
-        for (const v of message.Socials) {
-            Social.encode(v, writer.uint32(82).fork()).ldelim();
-        }
         if (message.Language !== 0) {
             writer.uint32(88).int32(message.Language);
         }
@@ -256,9 +164,6 @@ export const UserDetails = {
         }
         if (message.OrganizationID !== "") {
             writer.uint32(106).string(message.OrganizationID);
-        }
-        if (message.Employment !== undefined) {
-            Employment.encode(message.Employment, writer.uint32(114).fork()).ldelim();
         }
         if (message.Role !== 0) {
             writer.uint32(120).int32(message.Role);
@@ -283,9 +188,6 @@ export const UserDetails = {
         }
         for (const v of message.BrokerAccounts) {
             BrokerAccount.encode(v, writer.uint32(186).fork()).ldelim();
-        }
-        for (const v of message.BankAccounts) {
-            BankAccount.encode(v, writer.uint32(194).fork()).ldelim();
         }
         if (message.UISettings !== undefined) {
             UISettings.encode(message.UISettings, writer.uint32(202).fork()).ldelim();
@@ -386,12 +288,6 @@ export const UserDetails = {
                     }
                     message.Wallets.push(Wallet.decode(reader, reader.uint32()));
                     continue;
-                case 10:
-                    if (tag !== 82) {
-                        break;
-                    }
-                    message.Socials.push(Social.decode(reader, reader.uint32()));
-                    continue;
                 case 11:
                     if (tag !== 88) {
                         break;
@@ -409,12 +305,6 @@ export const UserDetails = {
                         break;
                     }
                     message.OrganizationID = reader.string();
-                    continue;
-                case 14:
-                    if (tag !== 114) {
-                        break;
-                    }
-                    message.Employment = Employment.decode(reader, reader.uint32());
                     continue;
                 case 15:
                     if (tag !== 120) {
@@ -463,12 +353,6 @@ export const UserDetails = {
                         break;
                     }
                     message.BrokerAccounts.push(BrokerAccount.decode(reader, reader.uint32()));
-                    continue;
-                case 24:
-                    if (tag !== 194) {
-                        break;
-                    }
-                    message.BankAccounts.push(BankAccount.decode(reader, reader.uint32()));
                     continue;
                 case 25:
                     if (tag !== 202) {
@@ -561,11 +445,9 @@ export const UserDetails = {
             Description: isSet(object.Description) ? globalThis.String(object.Description) : "",
             Status: isSet(object.Status) ? userStatusFromJSON(object.Status) : 0,
             Wallets: globalThis.Array.isArray(object === null || object === void 0 ? void 0 : object.Wallets) ? object.Wallets.map((e) => Wallet.fromJSON(e)) : [],
-            Socials: globalThis.Array.isArray(object === null || object === void 0 ? void 0 : object.Socials) ? object.Socials.map((e) => Social.fromJSON(e)) : [],
             Language: isSet(object.Language) ? langFromJSON(object.Language) : 0,
             ExternalUserID: isSet(object.ExternalUserID) ? globalThis.String(object.ExternalUserID) : "",
             OrganizationID: isSet(object.OrganizationID) ? globalThis.String(object.OrganizationID) : "",
-            Employment: isSet(object.Employment) ? Employment.fromJSON(object.Employment) : undefined,
             Role: isSet(object.Role) ? roleFromJSON(object.Role) : 0,
             TradeProfile: isSet(object.TradeProfile) ? TradeProfileDetails.fromJSON(object.TradeProfile) : undefined,
             KYCInquiries: globalThis.Array.isArray(object === null || object === void 0 ? void 0 : object.KYCInquiries)
@@ -579,9 +461,6 @@ export const UserDetails = {
             UserTradeProfile: isSet(object.UserTradeProfile) ? UserTradeProfile.fromJSON(object.UserTradeProfile) : undefined,
             BrokerAccounts: globalThis.Array.isArray(object === null || object === void 0 ? void 0 : object.BrokerAccounts)
                 ? object.BrokerAccounts.map((e) => BrokerAccount.fromJSON(e))
-                : [],
-            BankAccounts: globalThis.Array.isArray(object === null || object === void 0 ? void 0 : object.BankAccounts)
-                ? object.BankAccounts.map((e) => BankAccount.fromJSON(e))
                 : [],
             UISettings: isSet(object.UISettings) ? UISettings.fromJSON(object.UISettings) : undefined,
             CommissionSettings: isSet(object.CommissionSettings)
@@ -606,7 +485,7 @@ export const UserDetails = {
         };
     },
     toJSON(message) {
-        var _a, _b, _c, _d, _e, _f, _g;
+        var _a, _b, _c, _d, _e;
         const obj = {};
         if (message.UserID !== "") {
             obj.UserID = message.UserID;
@@ -635,9 +514,6 @@ export const UserDetails = {
         if ((_a = message.Wallets) === null || _a === void 0 ? void 0 : _a.length) {
             obj.Wallets = message.Wallets.map((e) => Wallet.toJSON(e));
         }
-        if ((_b = message.Socials) === null || _b === void 0 ? void 0 : _b.length) {
-            obj.Socials = message.Socials.map((e) => Social.toJSON(e));
-        }
         if (message.Language !== 0) {
             obj.Language = langToJSON(message.Language);
         }
@@ -647,16 +523,13 @@ export const UserDetails = {
         if (message.OrganizationID !== "") {
             obj.OrganizationID = message.OrganizationID;
         }
-        if (message.Employment !== undefined) {
-            obj.Employment = Employment.toJSON(message.Employment);
-        }
         if (message.Role !== 0) {
             obj.Role = roleToJSON(message.Role);
         }
         if (message.TradeProfile !== undefined) {
             obj.TradeProfile = TradeProfileDetails.toJSON(message.TradeProfile);
         }
-        if ((_c = message.KYCInquiries) === null || _c === void 0 ? void 0 : _c.length) {
+        if ((_b = message.KYCInquiries) === null || _b === void 0 ? void 0 : _b.length) {
             obj.KYCInquiries = message.KYCInquiries;
         }
         if (message.KYCDetails !== undefined) {
@@ -671,11 +544,8 @@ export const UserDetails = {
         if (message.UserTradeProfile !== undefined) {
             obj.UserTradeProfile = UserTradeProfile.toJSON(message.UserTradeProfile);
         }
-        if ((_d = message.BrokerAccounts) === null || _d === void 0 ? void 0 : _d.length) {
+        if ((_c = message.BrokerAccounts) === null || _c === void 0 ? void 0 : _c.length) {
             obj.BrokerAccounts = message.BrokerAccounts.map((e) => BrokerAccount.toJSON(e));
-        }
-        if ((_e = message.BankAccounts) === null || _e === void 0 ? void 0 : _e.length) {
-            obj.BankAccounts = message.BankAccounts.map((e) => BankAccount.toJSON(e));
         }
         if (message.UISettings !== undefined) {
             obj.UISettings = UISettings.toJSON(message.UISettings);
@@ -686,13 +556,13 @@ export const UserDetails = {
         if (message.DataFeedAccounts !== undefined) {
             obj.DataFeedAccounts = DataFeedAccounts.toJSON(message.DataFeedAccounts);
         }
-        if ((_f = message.AllowedJurisdictions) === null || _f === void 0 ? void 0 : _f.length) {
+        if ((_d = message.AllowedJurisdictions) === null || _d === void 0 ? void 0 : _d.length) {
             obj.AllowedJurisdictions = message.AllowedJurisdictions;
         }
         if (message.EmailAddress !== "") {
             obj.EmailAddress = message.EmailAddress;
         }
-        if ((_g = message.ComplianceFormAnswers) === null || _g === void 0 ? void 0 : _g.length) {
+        if ((_e = message.ComplianceFormAnswers) === null || _e === void 0 ? void 0 : _e.length) {
             obj.ComplianceFormAnswers = message.ComplianceFormAnswers.map((e) => ComplianceFormAnswer.toJSON(e));
         }
         if (message.ReferredBy !== undefined) {
@@ -719,7 +589,7 @@ export const UserDetails = {
         return UserDetails.fromPartial(base !== null && base !== void 0 ? base : {});
     },
     fromPartial(object) {
-        var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q, _r, _s, _t, _u, _v, _w, _x, _y, _z, _0, _1, _2;
+        var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q, _r, _s, _t, _u, _v, _w, _x, _y, _z, _0;
         const message = createBaseUserDetails();
         message.UserID = (_a = object.UserID) !== null && _a !== void 0 ? _a : "";
         message.FirstName = (_b = object.FirstName) !== null && _b !== void 0 ? _b : "";
@@ -730,18 +600,14 @@ export const UserDetails = {
         message.Description = (_g = object.Description) !== null && _g !== void 0 ? _g : "";
         message.Status = (_h = object.Status) !== null && _h !== void 0 ? _h : 0;
         message.Wallets = ((_j = object.Wallets) === null || _j === void 0 ? void 0 : _j.map((e) => Wallet.fromPartial(e))) || [];
-        message.Socials = ((_k = object.Socials) === null || _k === void 0 ? void 0 : _k.map((e) => Social.fromPartial(e))) || [];
-        message.Language = (_l = object.Language) !== null && _l !== void 0 ? _l : 0;
-        message.ExternalUserID = (_m = object.ExternalUserID) !== null && _m !== void 0 ? _m : "";
-        message.OrganizationID = (_o = object.OrganizationID) !== null && _o !== void 0 ? _o : "";
-        message.Employment = (object.Employment !== undefined && object.Employment !== null)
-            ? Employment.fromPartial(object.Employment)
-            : undefined;
-        message.Role = (_p = object.Role) !== null && _p !== void 0 ? _p : 0;
+        message.Language = (_k = object.Language) !== null && _k !== void 0 ? _k : 0;
+        message.ExternalUserID = (_l = object.ExternalUserID) !== null && _l !== void 0 ? _l : "";
+        message.OrganizationID = (_m = object.OrganizationID) !== null && _m !== void 0 ? _m : "";
+        message.Role = (_o = object.Role) !== null && _o !== void 0 ? _o : 0;
         message.TradeProfile = (object.TradeProfile !== undefined && object.TradeProfile !== null)
             ? TradeProfileDetails.fromPartial(object.TradeProfile)
             : undefined;
-        message.KYCInquiries = ((_q = object.KYCInquiries) === null || _q === void 0 ? void 0 : _q.map((e) => e)) || [];
+        message.KYCInquiries = ((_p = object.KYCInquiries) === null || _p === void 0 ? void 0 : _p.map((e) => e)) || [];
         message.KYCDetails = (object.KYCDetails !== undefined && object.KYCDetails !== null)
             ? UserKYCDetails.fromPartial(object.KYCDetails)
             : undefined;
@@ -749,12 +615,11 @@ export const UserDetails = {
             (object.UserDocumentCompliance !== undefined && object.UserDocumentCompliance !== null)
                 ? UserDocumentCompliance.fromPartial(object.UserDocumentCompliance)
                 : undefined;
-        message.KYCStatus = (_r = object.KYCStatus) !== null && _r !== void 0 ? _r : 0;
+        message.KYCStatus = (_q = object.KYCStatus) !== null && _q !== void 0 ? _q : 0;
         message.UserTradeProfile = (object.UserTradeProfile !== undefined && object.UserTradeProfile !== null)
             ? UserTradeProfile.fromPartial(object.UserTradeProfile)
             : undefined;
-        message.BrokerAccounts = ((_s = object.BrokerAccounts) === null || _s === void 0 ? void 0 : _s.map((e) => BrokerAccount.fromPartial(e))) || [];
-        message.BankAccounts = ((_t = object.BankAccounts) === null || _t === void 0 ? void 0 : _t.map((e) => BankAccount.fromPartial(e))) || [];
+        message.BrokerAccounts = ((_r = object.BrokerAccounts) === null || _r === void 0 ? void 0 : _r.map((e) => BrokerAccount.fromPartial(e))) || [];
         message.UISettings = (object.UISettings !== undefined && object.UISettings !== null)
             ? UISettings.fromPartial(object.UISettings)
             : undefined;
@@ -764,15 +629,15 @@ export const UserDetails = {
         message.DataFeedAccounts = (object.DataFeedAccounts !== undefined && object.DataFeedAccounts !== null)
             ? DataFeedAccounts.fromPartial(object.DataFeedAccounts)
             : undefined;
-        message.AllowedJurisdictions = ((_u = object.AllowedJurisdictions) === null || _u === void 0 ? void 0 : _u.map((e) => e)) || [];
-        message.EmailAddress = (_v = object.EmailAddress) !== null && _v !== void 0 ? _v : "";
-        message.ComplianceFormAnswers = ((_w = object.ComplianceFormAnswers) === null || _w === void 0 ? void 0 : _w.map((e) => ComplianceFormAnswer.fromPartial(e))) || [];
-        message.ReferredBy = (_x = object.ReferredBy) !== null && _x !== void 0 ? _x : undefined;
-        message.ReferralCount = (_y = object.ReferralCount) !== null && _y !== void 0 ? _y : undefined;
-        message.ReferralLimit = (_z = object.ReferralLimit) !== null && _z !== void 0 ? _z : undefined;
-        message.ReferralAmountReceived = (_0 = object.ReferralAmountReceived) !== null && _0 !== void 0 ? _0 : undefined;
-        message.ReferralAmount = (_1 = object.ReferralAmount) !== null && _1 !== void 0 ? _1 : undefined;
-        message.ReferralPaidAt = (_2 = object.ReferralPaidAt) !== null && _2 !== void 0 ? _2 : undefined;
+        message.AllowedJurisdictions = ((_s = object.AllowedJurisdictions) === null || _s === void 0 ? void 0 : _s.map((e) => e)) || [];
+        message.EmailAddress = (_t = object.EmailAddress) !== null && _t !== void 0 ? _t : "";
+        message.ComplianceFormAnswers = ((_u = object.ComplianceFormAnswers) === null || _u === void 0 ? void 0 : _u.map((e) => ComplianceFormAnswer.fromPartial(e))) || [];
+        message.ReferredBy = (_v = object.ReferredBy) !== null && _v !== void 0 ? _v : undefined;
+        message.ReferralCount = (_w = object.ReferralCount) !== null && _w !== void 0 ? _w : undefined;
+        message.ReferralLimit = (_x = object.ReferralLimit) !== null && _x !== void 0 ? _x : undefined;
+        message.ReferralAmountReceived = (_y = object.ReferralAmountReceived) !== null && _y !== void 0 ? _y : undefined;
+        message.ReferralAmount = (_z = object.ReferralAmount) !== null && _z !== void 0 ? _z : undefined;
+        message.ReferralPaidAt = (_0 = object.ReferralPaidAt) !== null && _0 !== void 0 ? _0 : undefined;
         return message;
     },
 };
@@ -875,73 +740,6 @@ export const User = {
             : undefined;
         message.Audit = (object.Audit !== undefined && object.Audit !== null) ? Audit.fromPartial(object.Audit) : undefined;
         message.OrganizationIDs = ((_a = object.OrganizationIDs) === null || _a === void 0 ? void 0 : _a.map((e) => e)) || [];
-        return message;
-    },
-};
-function createBaseSocial() {
-    return { URL: "", Type: 0 };
-}
-export const Social = {
-    encode(message, writer = _m0.Writer.create()) {
-        if (message.URL !== "") {
-            writer.uint32(10).string(message.URL);
-        }
-        if (message.Type !== 0) {
-            writer.uint32(16).int32(message.Type);
-        }
-        return writer;
-    },
-    decode(input, length) {
-        const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
-        let end = length === undefined ? reader.len : reader.pos + length;
-        const message = createBaseSocial();
-        while (reader.pos < end) {
-            const tag = reader.uint32();
-            switch (tag >>> 3) {
-                case 1:
-                    if (tag !== 10) {
-                        break;
-                    }
-                    message.URL = reader.string();
-                    continue;
-                case 2:
-                    if (tag !== 16) {
-                        break;
-                    }
-                    message.Type = reader.int32();
-                    continue;
-            }
-            if ((tag & 7) === 4 || tag === 0) {
-                break;
-            }
-            reader.skipType(tag & 7);
-        }
-        return message;
-    },
-    fromJSON(object) {
-        return {
-            URL: isSet(object.URL) ? globalThis.String(object.URL) : "",
-            Type: isSet(object.Type) ? socialTypeFromJSON(object.Type) : 0,
-        };
-    },
-    toJSON(message) {
-        const obj = {};
-        if (message.URL !== "") {
-            obj.URL = message.URL;
-        }
-        if (message.Type !== 0) {
-            obj.Type = socialTypeToJSON(message.Type);
-        }
-        return obj;
-    },
-    create(base) {
-        return Social.fromPartial(base !== null && base !== void 0 ? base : {});
-    },
-    fromPartial(object) {
-        var _a, _b;
-        const message = createBaseSocial();
-        message.URL = (_a = object.URL) !== null && _a !== void 0 ? _a : "";
-        message.Type = (_b = object.Type) !== null && _b !== void 0 ? _b : 0;
         return message;
     },
 };

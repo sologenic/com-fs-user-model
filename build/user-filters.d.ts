@@ -161,34 +161,9 @@ export declare const AddressUserPair: {
                     SignerType?: import("./user-fundings").SignerType | undefined;
                     Organizations?: string[] | undefined;
                 }[] | undefined;
-                Socials?: {
-                    URL?: string | undefined;
-                    Type?: import("./user").SocialType | undefined;
-                }[] | undefined;
                 Language?: import("./sologenic/com-fs-utils-lib/models/language/language").Lang | undefined;
                 ExternalUserID?: string | undefined;
                 OrganizationID?: string | undefined;
-                Employment?: {
-                    EmployerName?: string | undefined;
-                    JobTitle?: string | undefined;
-                    StartDate?: Date | undefined;
-                    EndDate?: Date | undefined;
-                    Type?: import("./user-kyc").EmploymentType | undefined;
-                    Industry?: string | undefined;
-                    Income?: {
-                        Amount?: number | undefined;
-                        Currency?: string | undefined;
-                        Frequency?: import("./user-kyc").IncomeFrequency | undefined;
-                    } | undefined;
-                    Contact?: {
-                        Name?: string | undefined;
-                        Email?: string | undefined;
-                        Phone?: string | undefined;
-                        Address?: string | undefined;
-                    } | undefined;
-                    IsVerified?: boolean | undefined;
-                    VerifiedAt?: string | undefined;
-                } | undefined;
                 Role?: import("./sologenic/com-fs-utils-lib/models/role/role").Role | undefined;
                 TradeProfile?: {
                     IsTradingEnabled?: boolean | undefined;
@@ -228,6 +203,16 @@ export declare const AddressUserPair: {
                     IdentificationNumber?: string | undefined;
                     FirstName?: string | undefined;
                     LastName?: string | undefined;
+                    MiddleName?: string | undefined;
+                    AddressCountryCode?: string | undefined;
+                    SelectedCountryCode?: string | undefined;
+                    SelectedIDClass?: string | undefined;
+                    ExpirationDate?: string | undefined;
+                    IdentificationClass?: string | undefined;
+                    CardAccessNumber?: string | undefined;
+                    IssueDate?: string | undefined;
+                    IssuingAuthority?: string | undefined;
+                    CollectedEmailAddress?: string | undefined;
                 } | undefined;
                 UserDocumentCompliance?: {
                     SignedDocuments?: {
@@ -251,15 +236,6 @@ export declare const AddressUserPair: {
                     Broker?: import("./sologenic/com-fs-utils-lib/models/order-properties/order-properties").ClearingBroker | undefined;
                     OrganizationID?: string | undefined;
                     Profiles?: string[] | undefined;
-                }[] | undefined;
-                BankAccounts?: {
-                    AccountName?: string | undefined;
-                    BankName?: string | undefined;
-                    BankAddress?: string | undefined;
-                    AccountNumber?: string | undefined;
-                    ABA?: string | undefined;
-                    SWIFT?: string | undefined;
-                    IBAN?: string | undefined;
                 }[] | undefined;
                 UISettings?: {
                     Theme?: import("./user").Theme | undefined;
@@ -331,34 +307,9 @@ export declare const AddressUserPair: {
                     SignerType?: import("./user-fundings").SignerType | undefined;
                     Organizations?: string[] | undefined;
                 }[] | undefined;
-                Socials?: {
-                    URL?: string | undefined;
-                    Type?: import("./user").SocialType | undefined;
-                }[] | undefined;
                 Language?: import("./sologenic/com-fs-utils-lib/models/language/language").Lang | undefined;
                 ExternalUserID?: string | undefined;
                 OrganizationID?: string | undefined;
-                Employment?: {
-                    EmployerName?: string | undefined;
-                    JobTitle?: string | undefined;
-                    StartDate?: Date | undefined;
-                    EndDate?: Date | undefined;
-                    Type?: import("./user-kyc").EmploymentType | undefined;
-                    Industry?: string | undefined;
-                    Income?: {
-                        Amount?: number | undefined;
-                        Currency?: string | undefined;
-                        Frequency?: import("./user-kyc").IncomeFrequency | undefined;
-                    } | undefined;
-                    Contact?: {
-                        Name?: string | undefined;
-                        Email?: string | undefined;
-                        Phone?: string | undefined;
-                        Address?: string | undefined;
-                    } | undefined;
-                    IsVerified?: boolean | undefined;
-                    VerifiedAt?: string | undefined;
-                } | undefined;
                 Role?: import("./sologenic/com-fs-utils-lib/models/role/role").Role | undefined;
                 TradeProfile?: {
                     IsTradingEnabled?: boolean | undefined;
@@ -398,6 +349,16 @@ export declare const AddressUserPair: {
                     IdentificationNumber?: string | undefined;
                     FirstName?: string | undefined;
                     LastName?: string | undefined;
+                    MiddleName?: string | undefined;
+                    AddressCountryCode?: string | undefined;
+                    SelectedCountryCode?: string | undefined;
+                    SelectedIDClass?: string | undefined;
+                    ExpirationDate?: string | undefined;
+                    IdentificationClass?: string | undefined;
+                    CardAccessNumber?: string | undefined;
+                    IssueDate?: string | undefined;
+                    IssuingAuthority?: string | undefined;
+                    CollectedEmailAddress?: string | undefined;
                 } | undefined;
                 UserDocumentCompliance?: {
                     SignedDocuments?: {
@@ -421,15 +382,6 @@ export declare const AddressUserPair: {
                     Broker?: import("./sologenic/com-fs-utils-lib/models/order-properties/order-properties").ClearingBroker | undefined;
                     OrganizationID?: string | undefined;
                     Profiles?: string[] | undefined;
-                }[] | undefined;
-                BankAccounts?: {
-                    AccountName?: string | undefined;
-                    BankName?: string | undefined;
-                    BankAddress?: string | undefined;
-                    AccountNumber?: string | undefined;
-                    ABA?: string | undefined;
-                    SWIFT?: string | undefined;
-                    IBAN?: string | undefined;
                 }[] | undefined;
                 UISettings?: {
                     Theme?: import("./user").Theme | undefined;
@@ -498,34 +450,9 @@ export declare const AddressUserPair: {
                     SignerType?: import("./user-fundings").SignerType | undefined;
                     Organizations?: string[] | undefined;
                 }[] | undefined;
-                Socials?: {
-                    URL?: string | undefined;
-                    Type?: import("./user").SocialType | undefined;
-                }[] | undefined;
                 Language?: import("./sologenic/com-fs-utils-lib/models/language/language").Lang | undefined;
                 ExternalUserID?: string | undefined;
                 OrganizationID?: string | undefined;
-                Employment?: {
-                    EmployerName?: string | undefined;
-                    JobTitle?: string | undefined;
-                    StartDate?: Date | undefined;
-                    EndDate?: Date | undefined;
-                    Type?: import("./user-kyc").EmploymentType | undefined;
-                    Industry?: string | undefined;
-                    Income?: {
-                        Amount?: number | undefined;
-                        Currency?: string | undefined;
-                        Frequency?: import("./user-kyc").IncomeFrequency | undefined;
-                    } | undefined;
-                    Contact?: {
-                        Name?: string | undefined;
-                        Email?: string | undefined;
-                        Phone?: string | undefined;
-                        Address?: string | undefined;
-                    } | undefined;
-                    IsVerified?: boolean | undefined;
-                    VerifiedAt?: string | undefined;
-                } | undefined;
                 Role?: import("./sologenic/com-fs-utils-lib/models/role/role").Role | undefined;
                 TradeProfile?: {
                     IsTradingEnabled?: boolean | undefined;
@@ -565,6 +492,16 @@ export declare const AddressUserPair: {
                     IdentificationNumber?: string | undefined;
                     FirstName?: string | undefined;
                     LastName?: string | undefined;
+                    MiddleName?: string | undefined;
+                    AddressCountryCode?: string | undefined;
+                    SelectedCountryCode?: string | undefined;
+                    SelectedIDClass?: string | undefined;
+                    ExpirationDate?: string | undefined;
+                    IdentificationClass?: string | undefined;
+                    CardAccessNumber?: string | undefined;
+                    IssueDate?: string | undefined;
+                    IssuingAuthority?: string | undefined;
+                    CollectedEmailAddress?: string | undefined;
                 } | undefined;
                 UserDocumentCompliance?: {
                     SignedDocuments?: {
@@ -588,15 +525,6 @@ export declare const AddressUserPair: {
                     Broker?: import("./sologenic/com-fs-utils-lib/models/order-properties/order-properties").ClearingBroker | undefined;
                     OrganizationID?: string | undefined;
                     Profiles?: string[] | undefined;
-                }[] | undefined;
-                BankAccounts?: {
-                    AccountName?: string | undefined;
-                    BankName?: string | undefined;
-                    BankAddress?: string | undefined;
-                    AccountNumber?: string | undefined;
-                    ABA?: string | undefined;
-                    SWIFT?: string | undefined;
-                    IBAN?: string | undefined;
                 }[] | undefined;
                 UISettings?: {
                     Theme?: import("./user").Theme | undefined;
@@ -669,72 +597,9 @@ export declare const AddressUserPair: {
                     SignerType?: import("./user-fundings").SignerType | undefined;
                     Organizations?: string[] | undefined;
                 }[]>]: never; }) | undefined;
-                Socials?: ({
-                    URL?: string | undefined;
-                    Type?: import("./user").SocialType | undefined;
-                }[] & ({
-                    URL?: string | undefined;
-                    Type?: import("./user").SocialType | undefined;
-                } & {
-                    URL?: string | undefined;
-                    Type?: import("./user").SocialType | undefined;
-                } & { [K_3 in Exclude<keyof I["User"]["User"]["Socials"][number], keyof import("./user").Social>]: never; })[] & { [K_4 in Exclude<keyof I["User"]["User"]["Socials"], keyof {
-                    URL?: string | undefined;
-                    Type?: import("./user").SocialType | undefined;
-                }[]>]: never; }) | undefined;
                 Language?: import("./sologenic/com-fs-utils-lib/models/language/language").Lang | undefined;
                 ExternalUserID?: string | undefined;
                 OrganizationID?: string | undefined;
-                Employment?: ({
-                    EmployerName?: string | undefined;
-                    JobTitle?: string | undefined;
-                    StartDate?: Date | undefined;
-                    EndDate?: Date | undefined;
-                    Type?: import("./user-kyc").EmploymentType | undefined;
-                    Industry?: string | undefined;
-                    Income?: {
-                        Amount?: number | undefined;
-                        Currency?: string | undefined;
-                        Frequency?: import("./user-kyc").IncomeFrequency | undefined;
-                    } | undefined;
-                    Contact?: {
-                        Name?: string | undefined;
-                        Email?: string | undefined;
-                        Phone?: string | undefined;
-                        Address?: string | undefined;
-                    } | undefined;
-                    IsVerified?: boolean | undefined;
-                    VerifiedAt?: string | undefined;
-                } & {
-                    EmployerName?: string | undefined;
-                    JobTitle?: string | undefined;
-                    StartDate?: Date | undefined;
-                    EndDate?: Date | undefined;
-                    Type?: import("./user-kyc").EmploymentType | undefined;
-                    Industry?: string | undefined;
-                    Income?: ({
-                        Amount?: number | undefined;
-                        Currency?: string | undefined;
-                        Frequency?: import("./user-kyc").IncomeFrequency | undefined;
-                    } & {
-                        Amount?: number | undefined;
-                        Currency?: string | undefined;
-                        Frequency?: import("./user-kyc").IncomeFrequency | undefined;
-                    } & { [K_5 in Exclude<keyof I["User"]["User"]["Employment"]["Income"], keyof import("./user-kyc").Income>]: never; }) | undefined;
-                    Contact?: ({
-                        Name?: string | undefined;
-                        Email?: string | undefined;
-                        Phone?: string | undefined;
-                        Address?: string | undefined;
-                    } & {
-                        Name?: string | undefined;
-                        Email?: string | undefined;
-                        Phone?: string | undefined;
-                        Address?: string | undefined;
-                    } & { [K_6 in Exclude<keyof I["User"]["User"]["Employment"]["Contact"], keyof import("./user-kyc").EmployerContact>]: never; }) | undefined;
-                    IsVerified?: boolean | undefined;
-                    VerifiedAt?: string | undefined;
-                } & { [K_7 in Exclude<keyof I["User"]["User"]["Employment"], keyof import("./user-kyc").Employment>]: never; }) | undefined;
                 Role?: import("./sologenic/com-fs-utils-lib/models/role/role").Role | undefined;
                 TradeProfile?: ({
                     IsTradingEnabled?: boolean | undefined;
@@ -769,28 +634,28 @@ export declare const AddressUserPair: {
                     } & {
                         Value?: number | undefined;
                         IsGreaterThan?: boolean | undefined;
-                    } & { [K_8 in Exclude<keyof I["User"]["User"]["TradeProfile"]["AggregateNotionalLimit"], keyof import("./sologenic/com-fs-trade-profile-model/tradeprofile").DropdownNumericValue>]: never; }) | undefined;
+                    } & { [K_3 in Exclude<keyof I["User"]["User"]["TradeProfile"]["AggregateNotionalLimit"], keyof import("./sologenic/com-fs-trade-profile-model/tradeprofile").DropdownNumericValue>]: never; }) | undefined;
                     SingleOrderLimit?: ({
                         Value?: number | undefined;
                         IsGreaterThan?: boolean | undefined;
                     } & {
                         Value?: number | undefined;
                         IsGreaterThan?: boolean | undefined;
-                    } & { [K_9 in Exclude<keyof I["User"]["User"]["TradeProfile"]["SingleOrderLimit"], keyof import("./sologenic/com-fs-trade-profile-model/tradeprofile").DropdownNumericValue>]: never; }) | undefined;
+                    } & { [K_4 in Exclude<keyof I["User"]["User"]["TradeProfile"]["SingleOrderLimit"], keyof import("./sologenic/com-fs-trade-profile-model/tradeprofile").DropdownNumericValue>]: never; }) | undefined;
                     MaxOrderQuantity?: ({
                         Value?: number | undefined;
                         IsGreaterThan?: boolean | undefined;
                     } & {
                         Value?: number | undefined;
                         IsGreaterThan?: boolean | undefined;
-                    } & { [K_10 in Exclude<keyof I["User"]["User"]["TradeProfile"]["MaxOrderQuantity"], keyof import("./sologenic/com-fs-trade-profile-model/tradeprofile").DropdownNumericValue>]: never; }) | undefined;
+                    } & { [K_5 in Exclude<keyof I["User"]["User"]["TradeProfile"]["MaxOrderQuantity"], keyof import("./sologenic/com-fs-trade-profile-model/tradeprofile").DropdownNumericValue>]: never; }) | undefined;
                     AggressivePercentage?: number | undefined;
                     SymbolGrossADVPercent?: number | undefined;
                     PriceCheckDeviation?: number | undefined;
                     DuplicateOrderLimit?: number | undefined;
                     RiskMultiplier?: number | undefined;
-                } & { [K_11 in Exclude<keyof I["User"]["User"]["TradeProfile"], keyof import("./sologenic/com-fs-trade-profile-model/tradeprofile").TradeProfileDetails>]: never; }) | undefined;
-                KYCInquiries?: (string[] & string[] & { [K_12 in Exclude<keyof I["User"]["User"]["KYCInquiries"], keyof string[]>]: never; }) | undefined;
+                } & { [K_6 in Exclude<keyof I["User"]["User"]["TradeProfile"], keyof import("./sologenic/com-fs-trade-profile-model/tradeprofile").TradeProfileDetails>]: never; }) | undefined;
+                KYCInquiries?: (string[] & string[] & { [K_7 in Exclude<keyof I["User"]["User"]["KYCInquiries"], keyof string[]>]: never; }) | undefined;
                 KYCDetails?: ({
                     Birthdate?: string | undefined;
                     PhoneNumber?: string | undefined;
@@ -805,6 +670,16 @@ export declare const AddressUserPair: {
                     IdentificationNumber?: string | undefined;
                     FirstName?: string | undefined;
                     LastName?: string | undefined;
+                    MiddleName?: string | undefined;
+                    AddressCountryCode?: string | undefined;
+                    SelectedCountryCode?: string | undefined;
+                    SelectedIDClass?: string | undefined;
+                    ExpirationDate?: string | undefined;
+                    IdentificationClass?: string | undefined;
+                    CardAccessNumber?: string | undefined;
+                    IssueDate?: string | undefined;
+                    IssuingAuthority?: string | undefined;
+                    CollectedEmailAddress?: string | undefined;
                 } & {
                     Birthdate?: string | undefined;
                     PhoneNumber?: string | undefined;
@@ -819,7 +694,17 @@ export declare const AddressUserPair: {
                     IdentificationNumber?: string | undefined;
                     FirstName?: string | undefined;
                     LastName?: string | undefined;
-                } & { [K_13 in Exclude<keyof I["User"]["User"]["KYCDetails"], keyof import("./user-kyc").UserKYCDetails>]: never; }) | undefined;
+                    MiddleName?: string | undefined;
+                    AddressCountryCode?: string | undefined;
+                    SelectedCountryCode?: string | undefined;
+                    SelectedIDClass?: string | undefined;
+                    ExpirationDate?: string | undefined;
+                    IdentificationClass?: string | undefined;
+                    CardAccessNumber?: string | undefined;
+                    IssueDate?: string | undefined;
+                    IssuingAuthority?: string | undefined;
+                    CollectedEmailAddress?: string | undefined;
+                } & { [K_8 in Exclude<keyof I["User"]["User"]["KYCDetails"], keyof import("./user-kyc").UserKYCDetails>]: never; }) | undefined;
                 UserDocumentCompliance?: ({
                     SignedDocuments?: {
                         Name?: string | undefined;
@@ -851,7 +736,7 @@ export declare const AddressUserPair: {
                         SignedAt?: Date | undefined;
                         FileMD5SUM?: string | undefined;
                         TXID?: string | undefined;
-                    } & { [K_14 in Exclude<keyof I["User"]["User"]["UserDocumentCompliance"]["SignedDocuments"][number], keyof import("./sologenic/com-fs-document-model/document").SignedDocument>]: never; })[] & { [K_15 in Exclude<keyof I["User"]["User"]["UserDocumentCompliance"]["SignedDocuments"], keyof {
+                    } & { [K_9 in Exclude<keyof I["User"]["User"]["UserDocumentCompliance"]["SignedDocuments"][number], keyof import("./sologenic/com-fs-document-model/document").SignedDocument>]: never; })[] & { [K_10 in Exclude<keyof I["User"]["User"]["UserDocumentCompliance"]["SignedDocuments"], keyof {
                         Name?: string | undefined;
                         SignedVersion?: string | undefined;
                         DocumentState?: import("./sologenic/com-fs-document-model/document").DocumentState | undefined;
@@ -859,7 +744,7 @@ export declare const AddressUserPair: {
                         FileMD5SUM?: string | undefined;
                         TXID?: string | undefined;
                     }[]>]: never; }) | undefined;
-                } & { [K_16 in Exclude<keyof I["User"]["User"]["UserDocumentCompliance"], "SignedDocuments">]: never; }) | undefined;
+                } & { [K_11 in Exclude<keyof I["User"]["User"]["UserDocumentCompliance"], "SignedDocuments">]: never; }) | undefined;
                 KYCStatus?: import("./user-kyc").KYCStatus | undefined;
                 UserTradeProfile?: ({
                     IsMarginTradingEnabled?: boolean | undefined;
@@ -871,7 +756,7 @@ export declare const AddressUserPair: {
                     IsShortSellingEnabled?: boolean | undefined;
                     SingleOrderLimit?: number | undefined;
                     MaxOrderQuantity?: number | undefined;
-                } & { [K_17 in Exclude<keyof I["User"]["User"]["UserTradeProfile"], keyof import("./sologenic/com-fs-trade-profile-model/tradeprofile").UserTradeProfile>]: never; }) | undefined;
+                } & { [K_12 in Exclude<keyof I["User"]["User"]["UserTradeProfile"], keyof import("./sologenic/com-fs-trade-profile-model/tradeprofile").UserTradeProfile>]: never; }) | undefined;
                 BrokerAccounts?: ({
                     AccountID?: string | undefined;
                     Broker?: import("./sologenic/com-fs-utils-lib/models/order-properties/order-properties").ClearingBroker | undefined;
@@ -886,51 +771,18 @@ export declare const AddressUserPair: {
                     AccountID?: string | undefined;
                     Broker?: import("./sologenic/com-fs-utils-lib/models/order-properties/order-properties").ClearingBroker | undefined;
                     OrganizationID?: string | undefined;
-                    Profiles?: (string[] & string[] & { [K_18 in Exclude<keyof I["User"]["User"]["BrokerAccounts"][number]["Profiles"], keyof string[]>]: never; }) | undefined;
-                } & { [K_19 in Exclude<keyof I["User"]["User"]["BrokerAccounts"][number], keyof import("./user-fundings").BrokerAccount>]: never; })[] & { [K_20 in Exclude<keyof I["User"]["User"]["BrokerAccounts"], keyof {
+                    Profiles?: (string[] & string[] & { [K_13 in Exclude<keyof I["User"]["User"]["BrokerAccounts"][number]["Profiles"], keyof string[]>]: never; }) | undefined;
+                } & { [K_14 in Exclude<keyof I["User"]["User"]["BrokerAccounts"][number], keyof import("./user-fundings").BrokerAccount>]: never; })[] & { [K_15 in Exclude<keyof I["User"]["User"]["BrokerAccounts"], keyof {
                     AccountID?: string | undefined;
                     Broker?: import("./sologenic/com-fs-utils-lib/models/order-properties/order-properties").ClearingBroker | undefined;
                     OrganizationID?: string | undefined;
                     Profiles?: string[] | undefined;
                 }[]>]: never; }) | undefined;
-                BankAccounts?: ({
-                    AccountName?: string | undefined;
-                    BankName?: string | undefined;
-                    BankAddress?: string | undefined;
-                    AccountNumber?: string | undefined;
-                    ABA?: string | undefined;
-                    SWIFT?: string | undefined;
-                    IBAN?: string | undefined;
-                }[] & ({
-                    AccountName?: string | undefined;
-                    BankName?: string | undefined;
-                    BankAddress?: string | undefined;
-                    AccountNumber?: string | undefined;
-                    ABA?: string | undefined;
-                    SWIFT?: string | undefined;
-                    IBAN?: string | undefined;
-                } & {
-                    AccountName?: string | undefined;
-                    BankName?: string | undefined;
-                    BankAddress?: string | undefined;
-                    AccountNumber?: string | undefined;
-                    ABA?: string | undefined;
-                    SWIFT?: string | undefined;
-                    IBAN?: string | undefined;
-                } & { [K_21 in Exclude<keyof I["User"]["User"]["BankAccounts"][number], keyof import("./user-fundings").BankAccount>]: never; })[] & { [K_22 in Exclude<keyof I["User"]["User"]["BankAccounts"], keyof {
-                    AccountName?: string | undefined;
-                    BankName?: string | undefined;
-                    BankAddress?: string | undefined;
-                    AccountNumber?: string | undefined;
-                    ABA?: string | undefined;
-                    SWIFT?: string | undefined;
-                    IBAN?: string | undefined;
-                }[]>]: never; }) | undefined;
                 UISettings?: ({
                     Theme?: import("./user").Theme | undefined;
                 } & {
                     Theme?: import("./user").Theme | undefined;
-                } & { [K_23 in Exclude<keyof I["User"]["User"]["UISettings"], "Theme">]: never; }) | undefined;
+                } & { [K_16 in Exclude<keyof I["User"]["User"]["UISettings"], "Theme">]: never; }) | undefined;
                 CommissionSettings?: ({
                     Commission?: {
                         Value?: number | undefined;
@@ -944,9 +796,9 @@ export declare const AddressUserPair: {
                     } & {
                         Value?: number | undefined;
                         Exp?: number | undefined;
-                    } & { [K_24 in Exclude<keyof I["User"]["User"]["CommissionSettings"]["Commission"], keyof import("./sologenic/com-fs-utils-lib/models/decimal/decimal").Decimal>]: never; }) | undefined;
+                    } & { [K_17 in Exclude<keyof I["User"]["User"]["CommissionSettings"]["Commission"], keyof import("./sologenic/com-fs-utils-lib/models/decimal/decimal").Decimal>]: never; }) | undefined;
                     CommissionType?: import("./sologenic/com-fs-utils-lib/models/commission/commission").CommissionType | undefined;
-                } & { [K_25 in Exclude<keyof I["User"]["User"]["CommissionSettings"], keyof import("./sologenic/com-fs-utils-lib/models/commission/commission").CommissionSettings>]: never; }) | undefined;
+                } & { [K_18 in Exclude<keyof I["User"]["User"]["CommissionSettings"], keyof import("./sologenic/com-fs-utils-lib/models/commission/commission").CommissionSettings>]: never; }) | undefined;
                 DataFeedAccounts?: ({
                     DxFeed?: {
                         AccountID?: string | undefined;
@@ -956,9 +808,9 @@ export declare const AddressUserPair: {
                         AccountID?: string | undefined;
                     } & {
                         AccountID?: string | undefined;
-                    } & { [K_26 in Exclude<keyof I["User"]["User"]["DataFeedAccounts"]["DxFeed"], "AccountID">]: never; }) | undefined;
-                } & { [K_27 in Exclude<keyof I["User"]["User"]["DataFeedAccounts"], "DxFeed">]: never; }) | undefined;
-                AllowedJurisdictions?: (string[] & string[] & { [K_28 in Exclude<keyof I["User"]["User"]["AllowedJurisdictions"], keyof string[]>]: never; }) | undefined;
+                    } & { [K_19 in Exclude<keyof I["User"]["User"]["DataFeedAccounts"]["DxFeed"], "AccountID">]: never; }) | undefined;
+                } & { [K_20 in Exclude<keyof I["User"]["User"]["DataFeedAccounts"], "DxFeed">]: never; }) | undefined;
+                AllowedJurisdictions?: (string[] & string[] & { [K_21 in Exclude<keyof I["User"]["User"]["AllowedJurisdictions"], keyof string[]>]: never; }) | undefined;
                 EmailAddress?: string | undefined;
                 ComplianceFormAnswers?: ({
                     ComplianceID?: string | undefined;
@@ -1006,7 +858,7 @@ export declare const AddressUserPair: {
                         }[] | undefined;
                     } & {
                         Question?: string | undefined;
-                        Values?: (string[] & string[] & { [K_29 in Exclude<keyof I["User"]["User"]["ComplianceFormAnswers"][number]["Answers"][number]["Values"], keyof string[]>]: never; }) | undefined;
+                        Values?: (string[] & string[] & { [K_22 in Exclude<keyof I["User"]["User"]["ComplianceFormAnswers"][number]["Answers"][number]["Values"], keyof string[]>]: never; }) | undefined;
                         Files?: ({
                             Description?: string | undefined;
                             Optionality?: import("./sologenic/com-fs-compliance-model/compliance").Optionality | undefined;
@@ -1019,12 +871,12 @@ export declare const AddressUserPair: {
                             Description?: string | undefined;
                             Optionality?: import("./sologenic/com-fs-compliance-model/compliance").Optionality | undefined;
                             Hash?: string | undefined;
-                        } & { [K_30 in Exclude<keyof I["User"]["User"]["ComplianceFormAnswers"][number]["Answers"][number]["Files"][number], keyof import("./sologenic/com-fs-compliance-model/compliance").File>]: never; })[] & { [K_31 in Exclude<keyof I["User"]["User"]["ComplianceFormAnswers"][number]["Answers"][number]["Files"], keyof {
+                        } & { [K_23 in Exclude<keyof I["User"]["User"]["ComplianceFormAnswers"][number]["Answers"][number]["Files"][number], keyof import("./sologenic/com-fs-compliance-model/compliance").File>]: never; })[] & { [K_24 in Exclude<keyof I["User"]["User"]["ComplianceFormAnswers"][number]["Answers"][number]["Files"], keyof {
                             Description?: string | undefined;
                             Optionality?: import("./sologenic/com-fs-compliance-model/compliance").Optionality | undefined;
                             Hash?: string | undefined;
                         }[]>]: never; }) | undefined;
-                    } & { [K_32 in Exclude<keyof I["User"]["User"]["ComplianceFormAnswers"][number]["Answers"][number], keyof import("./sologenic/com-fs-compliance-model/compliance").QuestionAnswer>]: never; })[] & { [K_33 in Exclude<keyof I["User"]["User"]["ComplianceFormAnswers"][number]["Answers"], keyof {
+                    } & { [K_25 in Exclude<keyof I["User"]["User"]["ComplianceFormAnswers"][number]["Answers"][number], keyof import("./sologenic/com-fs-compliance-model/compliance").QuestionAnswer>]: never; })[] & { [K_26 in Exclude<keyof I["User"]["User"]["ComplianceFormAnswers"][number]["Answers"], keyof {
                         Question?: string | undefined;
                         Values?: string[] | undefined;
                         Files?: {
@@ -1035,7 +887,7 @@ export declare const AddressUserPair: {
                     }[]>]: never; }) | undefined;
                     FormStatus?: import("./sologenic/com-fs-compliance-model/compliance").FormStatus | undefined;
                     SubmittedAt?: Date | undefined;
-                } & { [K_34 in Exclude<keyof I["User"]["User"]["ComplianceFormAnswers"][number], keyof import("./sologenic/com-fs-compliance-model/compliance").ComplianceFormAnswer>]: never; })[] & { [K_35 in Exclude<keyof I["User"]["User"]["ComplianceFormAnswers"], keyof {
+                } & { [K_27 in Exclude<keyof I["User"]["User"]["ComplianceFormAnswers"][number], keyof import("./sologenic/com-fs-compliance-model/compliance").ComplianceFormAnswer>]: never; })[] & { [K_28 in Exclude<keyof I["User"]["User"]["ComplianceFormAnswers"], keyof {
                     ComplianceID?: string | undefined;
                     Answers?: {
                         Question?: string | undefined;
@@ -1055,7 +907,7 @@ export declare const AddressUserPair: {
                 ReferralAmountReceived?: number | undefined;
                 ReferralAmount?: number | undefined;
                 ReferralPaidAt?: Date | undefined;
-            } & { [K_36 in Exclude<keyof I["User"]["User"], keyof import("./user").UserDetails>]: never; }) | undefined;
+            } & { [K_29 in Exclude<keyof I["User"]["User"], keyof import("./user").UserDetails>]: never; }) | undefined;
             MetaData?: ({
                 Network?: Network | undefined;
                 UpdatedAt?: Date | undefined;
@@ -1066,7 +918,7 @@ export declare const AddressUserPair: {
                 UpdatedAt?: Date | undefined;
                 CreatedAt?: Date | undefined;
                 UpdatedByAccount?: string | undefined;
-            } & { [K_37 in Exclude<keyof I["User"]["MetaData"], keyof import("./sologenic/com-fs-utils-lib/models/metadata/metadata").MetaData>]: never; }) | undefined;
+            } & { [K_30 in Exclude<keyof I["User"]["MetaData"], keyof import("./sologenic/com-fs-utils-lib/models/metadata/metadata").MetaData>]: never; }) | undefined;
             Audit?: ({
                 ChangedBy?: string | undefined;
                 ChangedAt?: Date | undefined;
@@ -1075,10 +927,10 @@ export declare const AddressUserPair: {
                 ChangedBy?: string | undefined;
                 ChangedAt?: Date | undefined;
                 Reason?: string | undefined;
-            } & { [K_38 in Exclude<keyof I["User"]["Audit"], keyof import("./sologenic/com-fs-utils-lib/models/audit/audit").Audit>]: never; }) | undefined;
-            OrganizationIDs?: (string[] & string[] & { [K_39 in Exclude<keyof I["User"]["OrganizationIDs"], keyof string[]>]: never; }) | undefined;
-        } & { [K_40 in Exclude<keyof I["User"], keyof User>]: never; }) | undefined;
-    } & { [K_41 in Exclude<keyof I, keyof AddressUserPair>]: never; }>(base?: I | undefined): AddressUserPair;
+            } & { [K_31 in Exclude<keyof I["User"]["Audit"], keyof import("./sologenic/com-fs-utils-lib/models/audit/audit").Audit>]: never; }) | undefined;
+            OrganizationIDs?: (string[] & string[] & { [K_32 in Exclude<keyof I["User"]["OrganizationIDs"], keyof string[]>]: never; }) | undefined;
+        } & { [K_33 in Exclude<keyof I["User"], keyof User>]: never; }) | undefined;
+    } & { [K_34 in Exclude<keyof I, keyof AddressUserPair>]: never; }>(base?: I | undefined): AddressUserPair;
     fromPartial<I_1 extends {
         Address?: string | undefined;
         User?: {
@@ -1098,34 +950,9 @@ export declare const AddressUserPair: {
                     SignerType?: import("./user-fundings").SignerType | undefined;
                     Organizations?: string[] | undefined;
                 }[] | undefined;
-                Socials?: {
-                    URL?: string | undefined;
-                    Type?: import("./user").SocialType | undefined;
-                }[] | undefined;
                 Language?: import("./sologenic/com-fs-utils-lib/models/language/language").Lang | undefined;
                 ExternalUserID?: string | undefined;
                 OrganizationID?: string | undefined;
-                Employment?: {
-                    EmployerName?: string | undefined;
-                    JobTitle?: string | undefined;
-                    StartDate?: Date | undefined;
-                    EndDate?: Date | undefined;
-                    Type?: import("./user-kyc").EmploymentType | undefined;
-                    Industry?: string | undefined;
-                    Income?: {
-                        Amount?: number | undefined;
-                        Currency?: string | undefined;
-                        Frequency?: import("./user-kyc").IncomeFrequency | undefined;
-                    } | undefined;
-                    Contact?: {
-                        Name?: string | undefined;
-                        Email?: string | undefined;
-                        Phone?: string | undefined;
-                        Address?: string | undefined;
-                    } | undefined;
-                    IsVerified?: boolean | undefined;
-                    VerifiedAt?: string | undefined;
-                } | undefined;
                 Role?: import("./sologenic/com-fs-utils-lib/models/role/role").Role | undefined;
                 TradeProfile?: {
                     IsTradingEnabled?: boolean | undefined;
@@ -1165,6 +992,16 @@ export declare const AddressUserPair: {
                     IdentificationNumber?: string | undefined;
                     FirstName?: string | undefined;
                     LastName?: string | undefined;
+                    MiddleName?: string | undefined;
+                    AddressCountryCode?: string | undefined;
+                    SelectedCountryCode?: string | undefined;
+                    SelectedIDClass?: string | undefined;
+                    ExpirationDate?: string | undefined;
+                    IdentificationClass?: string | undefined;
+                    CardAccessNumber?: string | undefined;
+                    IssueDate?: string | undefined;
+                    IssuingAuthority?: string | undefined;
+                    CollectedEmailAddress?: string | undefined;
                 } | undefined;
                 UserDocumentCompliance?: {
                     SignedDocuments?: {
@@ -1188,15 +1025,6 @@ export declare const AddressUserPair: {
                     Broker?: import("./sologenic/com-fs-utils-lib/models/order-properties/order-properties").ClearingBroker | undefined;
                     OrganizationID?: string | undefined;
                     Profiles?: string[] | undefined;
-                }[] | undefined;
-                BankAccounts?: {
-                    AccountName?: string | undefined;
-                    BankName?: string | undefined;
-                    BankAddress?: string | undefined;
-                    AccountNumber?: string | undefined;
-                    ABA?: string | undefined;
-                    SWIFT?: string | undefined;
-                    IBAN?: string | undefined;
                 }[] | undefined;
                 UISettings?: {
                     Theme?: import("./user").Theme | undefined;
@@ -1268,34 +1096,9 @@ export declare const AddressUserPair: {
                     SignerType?: import("./user-fundings").SignerType | undefined;
                     Organizations?: string[] | undefined;
                 }[] | undefined;
-                Socials?: {
-                    URL?: string | undefined;
-                    Type?: import("./user").SocialType | undefined;
-                }[] | undefined;
                 Language?: import("./sologenic/com-fs-utils-lib/models/language/language").Lang | undefined;
                 ExternalUserID?: string | undefined;
                 OrganizationID?: string | undefined;
-                Employment?: {
-                    EmployerName?: string | undefined;
-                    JobTitle?: string | undefined;
-                    StartDate?: Date | undefined;
-                    EndDate?: Date | undefined;
-                    Type?: import("./user-kyc").EmploymentType | undefined;
-                    Industry?: string | undefined;
-                    Income?: {
-                        Amount?: number | undefined;
-                        Currency?: string | undefined;
-                        Frequency?: import("./user-kyc").IncomeFrequency | undefined;
-                    } | undefined;
-                    Contact?: {
-                        Name?: string | undefined;
-                        Email?: string | undefined;
-                        Phone?: string | undefined;
-                        Address?: string | undefined;
-                    } | undefined;
-                    IsVerified?: boolean | undefined;
-                    VerifiedAt?: string | undefined;
-                } | undefined;
                 Role?: import("./sologenic/com-fs-utils-lib/models/role/role").Role | undefined;
                 TradeProfile?: {
                     IsTradingEnabled?: boolean | undefined;
@@ -1335,6 +1138,16 @@ export declare const AddressUserPair: {
                     IdentificationNumber?: string | undefined;
                     FirstName?: string | undefined;
                     LastName?: string | undefined;
+                    MiddleName?: string | undefined;
+                    AddressCountryCode?: string | undefined;
+                    SelectedCountryCode?: string | undefined;
+                    SelectedIDClass?: string | undefined;
+                    ExpirationDate?: string | undefined;
+                    IdentificationClass?: string | undefined;
+                    CardAccessNumber?: string | undefined;
+                    IssueDate?: string | undefined;
+                    IssuingAuthority?: string | undefined;
+                    CollectedEmailAddress?: string | undefined;
                 } | undefined;
                 UserDocumentCompliance?: {
                     SignedDocuments?: {
@@ -1358,15 +1171,6 @@ export declare const AddressUserPair: {
                     Broker?: import("./sologenic/com-fs-utils-lib/models/order-properties/order-properties").ClearingBroker | undefined;
                     OrganizationID?: string | undefined;
                     Profiles?: string[] | undefined;
-                }[] | undefined;
-                BankAccounts?: {
-                    AccountName?: string | undefined;
-                    BankName?: string | undefined;
-                    BankAddress?: string | undefined;
-                    AccountNumber?: string | undefined;
-                    ABA?: string | undefined;
-                    SWIFT?: string | undefined;
-                    IBAN?: string | undefined;
                 }[] | undefined;
                 UISettings?: {
                     Theme?: import("./user").Theme | undefined;
@@ -1435,34 +1239,9 @@ export declare const AddressUserPair: {
                     SignerType?: import("./user-fundings").SignerType | undefined;
                     Organizations?: string[] | undefined;
                 }[] | undefined;
-                Socials?: {
-                    URL?: string | undefined;
-                    Type?: import("./user").SocialType | undefined;
-                }[] | undefined;
                 Language?: import("./sologenic/com-fs-utils-lib/models/language/language").Lang | undefined;
                 ExternalUserID?: string | undefined;
                 OrganizationID?: string | undefined;
-                Employment?: {
-                    EmployerName?: string | undefined;
-                    JobTitle?: string | undefined;
-                    StartDate?: Date | undefined;
-                    EndDate?: Date | undefined;
-                    Type?: import("./user-kyc").EmploymentType | undefined;
-                    Industry?: string | undefined;
-                    Income?: {
-                        Amount?: number | undefined;
-                        Currency?: string | undefined;
-                        Frequency?: import("./user-kyc").IncomeFrequency | undefined;
-                    } | undefined;
-                    Contact?: {
-                        Name?: string | undefined;
-                        Email?: string | undefined;
-                        Phone?: string | undefined;
-                        Address?: string | undefined;
-                    } | undefined;
-                    IsVerified?: boolean | undefined;
-                    VerifiedAt?: string | undefined;
-                } | undefined;
                 Role?: import("./sologenic/com-fs-utils-lib/models/role/role").Role | undefined;
                 TradeProfile?: {
                     IsTradingEnabled?: boolean | undefined;
@@ -1502,6 +1281,16 @@ export declare const AddressUserPair: {
                     IdentificationNumber?: string | undefined;
                     FirstName?: string | undefined;
                     LastName?: string | undefined;
+                    MiddleName?: string | undefined;
+                    AddressCountryCode?: string | undefined;
+                    SelectedCountryCode?: string | undefined;
+                    SelectedIDClass?: string | undefined;
+                    ExpirationDate?: string | undefined;
+                    IdentificationClass?: string | undefined;
+                    CardAccessNumber?: string | undefined;
+                    IssueDate?: string | undefined;
+                    IssuingAuthority?: string | undefined;
+                    CollectedEmailAddress?: string | undefined;
                 } | undefined;
                 UserDocumentCompliance?: {
                     SignedDocuments?: {
@@ -1525,15 +1314,6 @@ export declare const AddressUserPair: {
                     Broker?: import("./sologenic/com-fs-utils-lib/models/order-properties/order-properties").ClearingBroker | undefined;
                     OrganizationID?: string | undefined;
                     Profiles?: string[] | undefined;
-                }[] | undefined;
-                BankAccounts?: {
-                    AccountName?: string | undefined;
-                    BankName?: string | undefined;
-                    BankAddress?: string | undefined;
-                    AccountNumber?: string | undefined;
-                    ABA?: string | undefined;
-                    SWIFT?: string | undefined;
-                    IBAN?: string | undefined;
                 }[] | undefined;
                 UISettings?: {
                     Theme?: import("./user").Theme | undefined;
@@ -1598,80 +1378,17 @@ export declare const AddressUserPair: {
                     Alias?: string | undefined;
                     Type?: import("./user-fundings").WalletType | undefined;
                     SignerType?: import("./user-fundings").SignerType | undefined;
-                    Organizations?: (string[] & string[] & { [K_42 in Exclude<keyof I_1["User"]["User"]["Wallets"][number]["Organizations"], keyof string[]>]: never; }) | undefined;
-                } & { [K_43 in Exclude<keyof I_1["User"]["User"]["Wallets"][number], keyof import("./user-fundings").Wallet>]: never; })[] & { [K_44 in Exclude<keyof I_1["User"]["User"]["Wallets"], keyof {
+                    Organizations?: (string[] & string[] & { [K_35 in Exclude<keyof I_1["User"]["User"]["Wallets"][number]["Organizations"], keyof string[]>]: never; }) | undefined;
+                } & { [K_36 in Exclude<keyof I_1["User"]["User"]["Wallets"][number], keyof import("./user-fundings").Wallet>]: never; })[] & { [K_37 in Exclude<keyof I_1["User"]["User"]["Wallets"], keyof {
                     Address?: string | undefined;
                     Alias?: string | undefined;
                     Type?: import("./user-fundings").WalletType | undefined;
                     SignerType?: import("./user-fundings").SignerType | undefined;
                     Organizations?: string[] | undefined;
                 }[]>]: never; }) | undefined;
-                Socials?: ({
-                    URL?: string | undefined;
-                    Type?: import("./user").SocialType | undefined;
-                }[] & ({
-                    URL?: string | undefined;
-                    Type?: import("./user").SocialType | undefined;
-                } & {
-                    URL?: string | undefined;
-                    Type?: import("./user").SocialType | undefined;
-                } & { [K_45 in Exclude<keyof I_1["User"]["User"]["Socials"][number], keyof import("./user").Social>]: never; })[] & { [K_46 in Exclude<keyof I_1["User"]["User"]["Socials"], keyof {
-                    URL?: string | undefined;
-                    Type?: import("./user").SocialType | undefined;
-                }[]>]: never; }) | undefined;
                 Language?: import("./sologenic/com-fs-utils-lib/models/language/language").Lang | undefined;
                 ExternalUserID?: string | undefined;
                 OrganizationID?: string | undefined;
-                Employment?: ({
-                    EmployerName?: string | undefined;
-                    JobTitle?: string | undefined;
-                    StartDate?: Date | undefined;
-                    EndDate?: Date | undefined;
-                    Type?: import("./user-kyc").EmploymentType | undefined;
-                    Industry?: string | undefined;
-                    Income?: {
-                        Amount?: number | undefined;
-                        Currency?: string | undefined;
-                        Frequency?: import("./user-kyc").IncomeFrequency | undefined;
-                    } | undefined;
-                    Contact?: {
-                        Name?: string | undefined;
-                        Email?: string | undefined;
-                        Phone?: string | undefined;
-                        Address?: string | undefined;
-                    } | undefined;
-                    IsVerified?: boolean | undefined;
-                    VerifiedAt?: string | undefined;
-                } & {
-                    EmployerName?: string | undefined;
-                    JobTitle?: string | undefined;
-                    StartDate?: Date | undefined;
-                    EndDate?: Date | undefined;
-                    Type?: import("./user-kyc").EmploymentType | undefined;
-                    Industry?: string | undefined;
-                    Income?: ({
-                        Amount?: number | undefined;
-                        Currency?: string | undefined;
-                        Frequency?: import("./user-kyc").IncomeFrequency | undefined;
-                    } & {
-                        Amount?: number | undefined;
-                        Currency?: string | undefined;
-                        Frequency?: import("./user-kyc").IncomeFrequency | undefined;
-                    } & { [K_47 in Exclude<keyof I_1["User"]["User"]["Employment"]["Income"], keyof import("./user-kyc").Income>]: never; }) | undefined;
-                    Contact?: ({
-                        Name?: string | undefined;
-                        Email?: string | undefined;
-                        Phone?: string | undefined;
-                        Address?: string | undefined;
-                    } & {
-                        Name?: string | undefined;
-                        Email?: string | undefined;
-                        Phone?: string | undefined;
-                        Address?: string | undefined;
-                    } & { [K_48 in Exclude<keyof I_1["User"]["User"]["Employment"]["Contact"], keyof import("./user-kyc").EmployerContact>]: never; }) | undefined;
-                    IsVerified?: boolean | undefined;
-                    VerifiedAt?: string | undefined;
-                } & { [K_49 in Exclude<keyof I_1["User"]["User"]["Employment"], keyof import("./user-kyc").Employment>]: never; }) | undefined;
                 Role?: import("./sologenic/com-fs-utils-lib/models/role/role").Role | undefined;
                 TradeProfile?: ({
                     IsTradingEnabled?: boolean | undefined;
@@ -1706,28 +1423,28 @@ export declare const AddressUserPair: {
                     } & {
                         Value?: number | undefined;
                         IsGreaterThan?: boolean | undefined;
-                    } & { [K_50 in Exclude<keyof I_1["User"]["User"]["TradeProfile"]["AggregateNotionalLimit"], keyof import("./sologenic/com-fs-trade-profile-model/tradeprofile").DropdownNumericValue>]: never; }) | undefined;
+                    } & { [K_38 in Exclude<keyof I_1["User"]["User"]["TradeProfile"]["AggregateNotionalLimit"], keyof import("./sologenic/com-fs-trade-profile-model/tradeprofile").DropdownNumericValue>]: never; }) | undefined;
                     SingleOrderLimit?: ({
                         Value?: number | undefined;
                         IsGreaterThan?: boolean | undefined;
                     } & {
                         Value?: number | undefined;
                         IsGreaterThan?: boolean | undefined;
-                    } & { [K_51 in Exclude<keyof I_1["User"]["User"]["TradeProfile"]["SingleOrderLimit"], keyof import("./sologenic/com-fs-trade-profile-model/tradeprofile").DropdownNumericValue>]: never; }) | undefined;
+                    } & { [K_39 in Exclude<keyof I_1["User"]["User"]["TradeProfile"]["SingleOrderLimit"], keyof import("./sologenic/com-fs-trade-profile-model/tradeprofile").DropdownNumericValue>]: never; }) | undefined;
                     MaxOrderQuantity?: ({
                         Value?: number | undefined;
                         IsGreaterThan?: boolean | undefined;
                     } & {
                         Value?: number | undefined;
                         IsGreaterThan?: boolean | undefined;
-                    } & { [K_52 in Exclude<keyof I_1["User"]["User"]["TradeProfile"]["MaxOrderQuantity"], keyof import("./sologenic/com-fs-trade-profile-model/tradeprofile").DropdownNumericValue>]: never; }) | undefined;
+                    } & { [K_40 in Exclude<keyof I_1["User"]["User"]["TradeProfile"]["MaxOrderQuantity"], keyof import("./sologenic/com-fs-trade-profile-model/tradeprofile").DropdownNumericValue>]: never; }) | undefined;
                     AggressivePercentage?: number | undefined;
                     SymbolGrossADVPercent?: number | undefined;
                     PriceCheckDeviation?: number | undefined;
                     DuplicateOrderLimit?: number | undefined;
                     RiskMultiplier?: number | undefined;
-                } & { [K_53 in Exclude<keyof I_1["User"]["User"]["TradeProfile"], keyof import("./sologenic/com-fs-trade-profile-model/tradeprofile").TradeProfileDetails>]: never; }) | undefined;
-                KYCInquiries?: (string[] & string[] & { [K_54 in Exclude<keyof I_1["User"]["User"]["KYCInquiries"], keyof string[]>]: never; }) | undefined;
+                } & { [K_41 in Exclude<keyof I_1["User"]["User"]["TradeProfile"], keyof import("./sologenic/com-fs-trade-profile-model/tradeprofile").TradeProfileDetails>]: never; }) | undefined;
+                KYCInquiries?: (string[] & string[] & { [K_42 in Exclude<keyof I_1["User"]["User"]["KYCInquiries"], keyof string[]>]: never; }) | undefined;
                 KYCDetails?: ({
                     Birthdate?: string | undefined;
                     PhoneNumber?: string | undefined;
@@ -1742,6 +1459,16 @@ export declare const AddressUserPair: {
                     IdentificationNumber?: string | undefined;
                     FirstName?: string | undefined;
                     LastName?: string | undefined;
+                    MiddleName?: string | undefined;
+                    AddressCountryCode?: string | undefined;
+                    SelectedCountryCode?: string | undefined;
+                    SelectedIDClass?: string | undefined;
+                    ExpirationDate?: string | undefined;
+                    IdentificationClass?: string | undefined;
+                    CardAccessNumber?: string | undefined;
+                    IssueDate?: string | undefined;
+                    IssuingAuthority?: string | undefined;
+                    CollectedEmailAddress?: string | undefined;
                 } & {
                     Birthdate?: string | undefined;
                     PhoneNumber?: string | undefined;
@@ -1756,7 +1483,17 @@ export declare const AddressUserPair: {
                     IdentificationNumber?: string | undefined;
                     FirstName?: string | undefined;
                     LastName?: string | undefined;
-                } & { [K_55 in Exclude<keyof I_1["User"]["User"]["KYCDetails"], keyof import("./user-kyc").UserKYCDetails>]: never; }) | undefined;
+                    MiddleName?: string | undefined;
+                    AddressCountryCode?: string | undefined;
+                    SelectedCountryCode?: string | undefined;
+                    SelectedIDClass?: string | undefined;
+                    ExpirationDate?: string | undefined;
+                    IdentificationClass?: string | undefined;
+                    CardAccessNumber?: string | undefined;
+                    IssueDate?: string | undefined;
+                    IssuingAuthority?: string | undefined;
+                    CollectedEmailAddress?: string | undefined;
+                } & { [K_43 in Exclude<keyof I_1["User"]["User"]["KYCDetails"], keyof import("./user-kyc").UserKYCDetails>]: never; }) | undefined;
                 UserDocumentCompliance?: ({
                     SignedDocuments?: {
                         Name?: string | undefined;
@@ -1788,7 +1525,7 @@ export declare const AddressUserPair: {
                         SignedAt?: Date | undefined;
                         FileMD5SUM?: string | undefined;
                         TXID?: string | undefined;
-                    } & { [K_56 in Exclude<keyof I_1["User"]["User"]["UserDocumentCompliance"]["SignedDocuments"][number], keyof import("./sologenic/com-fs-document-model/document").SignedDocument>]: never; })[] & { [K_57 in Exclude<keyof I_1["User"]["User"]["UserDocumentCompliance"]["SignedDocuments"], keyof {
+                    } & { [K_44 in Exclude<keyof I_1["User"]["User"]["UserDocumentCompliance"]["SignedDocuments"][number], keyof import("./sologenic/com-fs-document-model/document").SignedDocument>]: never; })[] & { [K_45 in Exclude<keyof I_1["User"]["User"]["UserDocumentCompliance"]["SignedDocuments"], keyof {
                         Name?: string | undefined;
                         SignedVersion?: string | undefined;
                         DocumentState?: import("./sologenic/com-fs-document-model/document").DocumentState | undefined;
@@ -1796,7 +1533,7 @@ export declare const AddressUserPair: {
                         FileMD5SUM?: string | undefined;
                         TXID?: string | undefined;
                     }[]>]: never; }) | undefined;
-                } & { [K_58 in Exclude<keyof I_1["User"]["User"]["UserDocumentCompliance"], "SignedDocuments">]: never; }) | undefined;
+                } & { [K_46 in Exclude<keyof I_1["User"]["User"]["UserDocumentCompliance"], "SignedDocuments">]: never; }) | undefined;
                 KYCStatus?: import("./user-kyc").KYCStatus | undefined;
                 UserTradeProfile?: ({
                     IsMarginTradingEnabled?: boolean | undefined;
@@ -1808,7 +1545,7 @@ export declare const AddressUserPair: {
                     IsShortSellingEnabled?: boolean | undefined;
                     SingleOrderLimit?: number | undefined;
                     MaxOrderQuantity?: number | undefined;
-                } & { [K_59 in Exclude<keyof I_1["User"]["User"]["UserTradeProfile"], keyof import("./sologenic/com-fs-trade-profile-model/tradeprofile").UserTradeProfile>]: never; }) | undefined;
+                } & { [K_47 in Exclude<keyof I_1["User"]["User"]["UserTradeProfile"], keyof import("./sologenic/com-fs-trade-profile-model/tradeprofile").UserTradeProfile>]: never; }) | undefined;
                 BrokerAccounts?: ({
                     AccountID?: string | undefined;
                     Broker?: import("./sologenic/com-fs-utils-lib/models/order-properties/order-properties").ClearingBroker | undefined;
@@ -1823,51 +1560,18 @@ export declare const AddressUserPair: {
                     AccountID?: string | undefined;
                     Broker?: import("./sologenic/com-fs-utils-lib/models/order-properties/order-properties").ClearingBroker | undefined;
                     OrganizationID?: string | undefined;
-                    Profiles?: (string[] & string[] & { [K_60 in Exclude<keyof I_1["User"]["User"]["BrokerAccounts"][number]["Profiles"], keyof string[]>]: never; }) | undefined;
-                } & { [K_61 in Exclude<keyof I_1["User"]["User"]["BrokerAccounts"][number], keyof import("./user-fundings").BrokerAccount>]: never; })[] & { [K_62 in Exclude<keyof I_1["User"]["User"]["BrokerAccounts"], keyof {
+                    Profiles?: (string[] & string[] & { [K_48 in Exclude<keyof I_1["User"]["User"]["BrokerAccounts"][number]["Profiles"], keyof string[]>]: never; }) | undefined;
+                } & { [K_49 in Exclude<keyof I_1["User"]["User"]["BrokerAccounts"][number], keyof import("./user-fundings").BrokerAccount>]: never; })[] & { [K_50 in Exclude<keyof I_1["User"]["User"]["BrokerAccounts"], keyof {
                     AccountID?: string | undefined;
                     Broker?: import("./sologenic/com-fs-utils-lib/models/order-properties/order-properties").ClearingBroker | undefined;
                     OrganizationID?: string | undefined;
                     Profiles?: string[] | undefined;
                 }[]>]: never; }) | undefined;
-                BankAccounts?: ({
-                    AccountName?: string | undefined;
-                    BankName?: string | undefined;
-                    BankAddress?: string | undefined;
-                    AccountNumber?: string | undefined;
-                    ABA?: string | undefined;
-                    SWIFT?: string | undefined;
-                    IBAN?: string | undefined;
-                }[] & ({
-                    AccountName?: string | undefined;
-                    BankName?: string | undefined;
-                    BankAddress?: string | undefined;
-                    AccountNumber?: string | undefined;
-                    ABA?: string | undefined;
-                    SWIFT?: string | undefined;
-                    IBAN?: string | undefined;
-                } & {
-                    AccountName?: string | undefined;
-                    BankName?: string | undefined;
-                    BankAddress?: string | undefined;
-                    AccountNumber?: string | undefined;
-                    ABA?: string | undefined;
-                    SWIFT?: string | undefined;
-                    IBAN?: string | undefined;
-                } & { [K_63 in Exclude<keyof I_1["User"]["User"]["BankAccounts"][number], keyof import("./user-fundings").BankAccount>]: never; })[] & { [K_64 in Exclude<keyof I_1["User"]["User"]["BankAccounts"], keyof {
-                    AccountName?: string | undefined;
-                    BankName?: string | undefined;
-                    BankAddress?: string | undefined;
-                    AccountNumber?: string | undefined;
-                    ABA?: string | undefined;
-                    SWIFT?: string | undefined;
-                    IBAN?: string | undefined;
-                }[]>]: never; }) | undefined;
                 UISettings?: ({
                     Theme?: import("./user").Theme | undefined;
                 } & {
                     Theme?: import("./user").Theme | undefined;
-                } & { [K_65 in Exclude<keyof I_1["User"]["User"]["UISettings"], "Theme">]: never; }) | undefined;
+                } & { [K_51 in Exclude<keyof I_1["User"]["User"]["UISettings"], "Theme">]: never; }) | undefined;
                 CommissionSettings?: ({
                     Commission?: {
                         Value?: number | undefined;
@@ -1881,9 +1585,9 @@ export declare const AddressUserPair: {
                     } & {
                         Value?: number | undefined;
                         Exp?: number | undefined;
-                    } & { [K_66 in Exclude<keyof I_1["User"]["User"]["CommissionSettings"]["Commission"], keyof import("./sologenic/com-fs-utils-lib/models/decimal/decimal").Decimal>]: never; }) | undefined;
+                    } & { [K_52 in Exclude<keyof I_1["User"]["User"]["CommissionSettings"]["Commission"], keyof import("./sologenic/com-fs-utils-lib/models/decimal/decimal").Decimal>]: never; }) | undefined;
                     CommissionType?: import("./sologenic/com-fs-utils-lib/models/commission/commission").CommissionType | undefined;
-                } & { [K_67 in Exclude<keyof I_1["User"]["User"]["CommissionSettings"], keyof import("./sologenic/com-fs-utils-lib/models/commission/commission").CommissionSettings>]: never; }) | undefined;
+                } & { [K_53 in Exclude<keyof I_1["User"]["User"]["CommissionSettings"], keyof import("./sologenic/com-fs-utils-lib/models/commission/commission").CommissionSettings>]: never; }) | undefined;
                 DataFeedAccounts?: ({
                     DxFeed?: {
                         AccountID?: string | undefined;
@@ -1893,9 +1597,9 @@ export declare const AddressUserPair: {
                         AccountID?: string | undefined;
                     } & {
                         AccountID?: string | undefined;
-                    } & { [K_68 in Exclude<keyof I_1["User"]["User"]["DataFeedAccounts"]["DxFeed"], "AccountID">]: never; }) | undefined;
-                } & { [K_69 in Exclude<keyof I_1["User"]["User"]["DataFeedAccounts"], "DxFeed">]: never; }) | undefined;
-                AllowedJurisdictions?: (string[] & string[] & { [K_70 in Exclude<keyof I_1["User"]["User"]["AllowedJurisdictions"], keyof string[]>]: never; }) | undefined;
+                    } & { [K_54 in Exclude<keyof I_1["User"]["User"]["DataFeedAccounts"]["DxFeed"], "AccountID">]: never; }) | undefined;
+                } & { [K_55 in Exclude<keyof I_1["User"]["User"]["DataFeedAccounts"], "DxFeed">]: never; }) | undefined;
+                AllowedJurisdictions?: (string[] & string[] & { [K_56 in Exclude<keyof I_1["User"]["User"]["AllowedJurisdictions"], keyof string[]>]: never; }) | undefined;
                 EmailAddress?: string | undefined;
                 ComplianceFormAnswers?: ({
                     ComplianceID?: string | undefined;
@@ -1943,7 +1647,7 @@ export declare const AddressUserPair: {
                         }[] | undefined;
                     } & {
                         Question?: string | undefined;
-                        Values?: (string[] & string[] & { [K_71 in Exclude<keyof I_1["User"]["User"]["ComplianceFormAnswers"][number]["Answers"][number]["Values"], keyof string[]>]: never; }) | undefined;
+                        Values?: (string[] & string[] & { [K_57 in Exclude<keyof I_1["User"]["User"]["ComplianceFormAnswers"][number]["Answers"][number]["Values"], keyof string[]>]: never; }) | undefined;
                         Files?: ({
                             Description?: string | undefined;
                             Optionality?: import("./sologenic/com-fs-compliance-model/compliance").Optionality | undefined;
@@ -1956,12 +1660,12 @@ export declare const AddressUserPair: {
                             Description?: string | undefined;
                             Optionality?: import("./sologenic/com-fs-compliance-model/compliance").Optionality | undefined;
                             Hash?: string | undefined;
-                        } & { [K_72 in Exclude<keyof I_1["User"]["User"]["ComplianceFormAnswers"][number]["Answers"][number]["Files"][number], keyof import("./sologenic/com-fs-compliance-model/compliance").File>]: never; })[] & { [K_73 in Exclude<keyof I_1["User"]["User"]["ComplianceFormAnswers"][number]["Answers"][number]["Files"], keyof {
+                        } & { [K_58 in Exclude<keyof I_1["User"]["User"]["ComplianceFormAnswers"][number]["Answers"][number]["Files"][number], keyof import("./sologenic/com-fs-compliance-model/compliance").File>]: never; })[] & { [K_59 in Exclude<keyof I_1["User"]["User"]["ComplianceFormAnswers"][number]["Answers"][number]["Files"], keyof {
                             Description?: string | undefined;
                             Optionality?: import("./sologenic/com-fs-compliance-model/compliance").Optionality | undefined;
                             Hash?: string | undefined;
                         }[]>]: never; }) | undefined;
-                    } & { [K_74 in Exclude<keyof I_1["User"]["User"]["ComplianceFormAnswers"][number]["Answers"][number], keyof import("./sologenic/com-fs-compliance-model/compliance").QuestionAnswer>]: never; })[] & { [K_75 in Exclude<keyof I_1["User"]["User"]["ComplianceFormAnswers"][number]["Answers"], keyof {
+                    } & { [K_60 in Exclude<keyof I_1["User"]["User"]["ComplianceFormAnswers"][number]["Answers"][number], keyof import("./sologenic/com-fs-compliance-model/compliance").QuestionAnswer>]: never; })[] & { [K_61 in Exclude<keyof I_1["User"]["User"]["ComplianceFormAnswers"][number]["Answers"], keyof {
                         Question?: string | undefined;
                         Values?: string[] | undefined;
                         Files?: {
@@ -1972,7 +1676,7 @@ export declare const AddressUserPair: {
                     }[]>]: never; }) | undefined;
                     FormStatus?: import("./sologenic/com-fs-compliance-model/compliance").FormStatus | undefined;
                     SubmittedAt?: Date | undefined;
-                } & { [K_76 in Exclude<keyof I_1["User"]["User"]["ComplianceFormAnswers"][number], keyof import("./sologenic/com-fs-compliance-model/compliance").ComplianceFormAnswer>]: never; })[] & { [K_77 in Exclude<keyof I_1["User"]["User"]["ComplianceFormAnswers"], keyof {
+                } & { [K_62 in Exclude<keyof I_1["User"]["User"]["ComplianceFormAnswers"][number], keyof import("./sologenic/com-fs-compliance-model/compliance").ComplianceFormAnswer>]: never; })[] & { [K_63 in Exclude<keyof I_1["User"]["User"]["ComplianceFormAnswers"], keyof {
                     ComplianceID?: string | undefined;
                     Answers?: {
                         Question?: string | undefined;
@@ -1992,7 +1696,7 @@ export declare const AddressUserPair: {
                 ReferralAmountReceived?: number | undefined;
                 ReferralAmount?: number | undefined;
                 ReferralPaidAt?: Date | undefined;
-            } & { [K_78 in Exclude<keyof I_1["User"]["User"], keyof import("./user").UserDetails>]: never; }) | undefined;
+            } & { [K_64 in Exclude<keyof I_1["User"]["User"], keyof import("./user").UserDetails>]: never; }) | undefined;
             MetaData?: ({
                 Network?: Network | undefined;
                 UpdatedAt?: Date | undefined;
@@ -2003,7 +1707,7 @@ export declare const AddressUserPair: {
                 UpdatedAt?: Date | undefined;
                 CreatedAt?: Date | undefined;
                 UpdatedByAccount?: string | undefined;
-            } & { [K_79 in Exclude<keyof I_1["User"]["MetaData"], keyof import("./sologenic/com-fs-utils-lib/models/metadata/metadata").MetaData>]: never; }) | undefined;
+            } & { [K_65 in Exclude<keyof I_1["User"]["MetaData"], keyof import("./sologenic/com-fs-utils-lib/models/metadata/metadata").MetaData>]: never; }) | undefined;
             Audit?: ({
                 ChangedBy?: string | undefined;
                 ChangedAt?: Date | undefined;
@@ -2012,10 +1716,10 @@ export declare const AddressUserPair: {
                 ChangedBy?: string | undefined;
                 ChangedAt?: Date | undefined;
                 Reason?: string | undefined;
-            } & { [K_80 in Exclude<keyof I_1["User"]["Audit"], keyof import("./sologenic/com-fs-utils-lib/models/audit/audit").Audit>]: never; }) | undefined;
-            OrganizationIDs?: (string[] & string[] & { [K_81 in Exclude<keyof I_1["User"]["OrganizationIDs"], keyof string[]>]: never; }) | undefined;
-        } & { [K_82 in Exclude<keyof I_1["User"], keyof User>]: never; }) | undefined;
-    } & { [K_83 in Exclude<keyof I_1, keyof AddressUserPair>]: never; }>(object: I_1): AddressUserPair;
+            } & { [K_66 in Exclude<keyof I_1["User"]["Audit"], keyof import("./sologenic/com-fs-utils-lib/models/audit/audit").Audit>]: never; }) | undefined;
+            OrganizationIDs?: (string[] & string[] & { [K_67 in Exclude<keyof I_1["User"]["OrganizationIDs"], keyof string[]>]: never; }) | undefined;
+        } & { [K_68 in Exclude<keyof I_1["User"], keyof User>]: never; }) | undefined;
+    } & { [K_69 in Exclude<keyof I_1, keyof AddressUserPair>]: never; }>(object: I_1): AddressUserPair;
 };
 export declare const GetByAddressesResponse: {
     encode(message: GetByAddressesResponse, writer?: _m0.Writer): _m0.Writer;
@@ -2042,34 +1746,9 @@ export declare const GetByAddressesResponse: {
                         SignerType?: import("./user-fundings").SignerType | undefined;
                         Organizations?: string[] | undefined;
                     }[] | undefined;
-                    Socials?: {
-                        URL?: string | undefined;
-                        Type?: import("./user").SocialType | undefined;
-                    }[] | undefined;
                     Language?: import("./sologenic/com-fs-utils-lib/models/language/language").Lang | undefined;
                     ExternalUserID?: string | undefined;
                     OrganizationID?: string | undefined;
-                    Employment?: {
-                        EmployerName?: string | undefined;
-                        JobTitle?: string | undefined;
-                        StartDate?: Date | undefined;
-                        EndDate?: Date | undefined;
-                        Type?: import("./user-kyc").EmploymentType | undefined;
-                        Industry?: string | undefined;
-                        Income?: {
-                            Amount?: number | undefined;
-                            Currency?: string | undefined;
-                            Frequency?: import("./user-kyc").IncomeFrequency | undefined;
-                        } | undefined;
-                        Contact?: {
-                            Name?: string | undefined;
-                            Email?: string | undefined;
-                            Phone?: string | undefined;
-                            Address?: string | undefined;
-                        } | undefined;
-                        IsVerified?: boolean | undefined;
-                        VerifiedAt?: string | undefined;
-                    } | undefined;
                     Role?: import("./sologenic/com-fs-utils-lib/models/role/role").Role | undefined;
                     TradeProfile?: {
                         IsTradingEnabled?: boolean | undefined;
@@ -2109,6 +1788,16 @@ export declare const GetByAddressesResponse: {
                         IdentificationNumber?: string | undefined;
                         FirstName?: string | undefined;
                         LastName?: string | undefined;
+                        MiddleName?: string | undefined;
+                        AddressCountryCode?: string | undefined;
+                        SelectedCountryCode?: string | undefined;
+                        SelectedIDClass?: string | undefined;
+                        ExpirationDate?: string | undefined;
+                        IdentificationClass?: string | undefined;
+                        CardAccessNumber?: string | undefined;
+                        IssueDate?: string | undefined;
+                        IssuingAuthority?: string | undefined;
+                        CollectedEmailAddress?: string | undefined;
                     } | undefined;
                     UserDocumentCompliance?: {
                         SignedDocuments?: {
@@ -2132,15 +1821,6 @@ export declare const GetByAddressesResponse: {
                         Broker?: import("./sologenic/com-fs-utils-lib/models/order-properties/order-properties").ClearingBroker | undefined;
                         OrganizationID?: string | undefined;
                         Profiles?: string[] | undefined;
-                    }[] | undefined;
-                    BankAccounts?: {
-                        AccountName?: string | undefined;
-                        BankName?: string | undefined;
-                        BankAddress?: string | undefined;
-                        AccountNumber?: string | undefined;
-                        ABA?: string | undefined;
-                        SWIFT?: string | undefined;
-                        IBAN?: string | undefined;
                     }[] | undefined;
                     UISettings?: {
                         Theme?: import("./user").Theme | undefined;
@@ -2214,34 +1894,9 @@ export declare const GetByAddressesResponse: {
                         SignerType?: import("./user-fundings").SignerType | undefined;
                         Organizations?: string[] | undefined;
                     }[] | undefined;
-                    Socials?: {
-                        URL?: string | undefined;
-                        Type?: import("./user").SocialType | undefined;
-                    }[] | undefined;
                     Language?: import("./sologenic/com-fs-utils-lib/models/language/language").Lang | undefined;
                     ExternalUserID?: string | undefined;
                     OrganizationID?: string | undefined;
-                    Employment?: {
-                        EmployerName?: string | undefined;
-                        JobTitle?: string | undefined;
-                        StartDate?: Date | undefined;
-                        EndDate?: Date | undefined;
-                        Type?: import("./user-kyc").EmploymentType | undefined;
-                        Industry?: string | undefined;
-                        Income?: {
-                            Amount?: number | undefined;
-                            Currency?: string | undefined;
-                            Frequency?: import("./user-kyc").IncomeFrequency | undefined;
-                        } | undefined;
-                        Contact?: {
-                            Name?: string | undefined;
-                            Email?: string | undefined;
-                            Phone?: string | undefined;
-                            Address?: string | undefined;
-                        } | undefined;
-                        IsVerified?: boolean | undefined;
-                        VerifiedAt?: string | undefined;
-                    } | undefined;
                     Role?: import("./sologenic/com-fs-utils-lib/models/role/role").Role | undefined;
                     TradeProfile?: {
                         IsTradingEnabled?: boolean | undefined;
@@ -2281,6 +1936,16 @@ export declare const GetByAddressesResponse: {
                         IdentificationNumber?: string | undefined;
                         FirstName?: string | undefined;
                         LastName?: string | undefined;
+                        MiddleName?: string | undefined;
+                        AddressCountryCode?: string | undefined;
+                        SelectedCountryCode?: string | undefined;
+                        SelectedIDClass?: string | undefined;
+                        ExpirationDate?: string | undefined;
+                        IdentificationClass?: string | undefined;
+                        CardAccessNumber?: string | undefined;
+                        IssueDate?: string | undefined;
+                        IssuingAuthority?: string | undefined;
+                        CollectedEmailAddress?: string | undefined;
                     } | undefined;
                     UserDocumentCompliance?: {
                         SignedDocuments?: {
@@ -2304,15 +1969,6 @@ export declare const GetByAddressesResponse: {
                         Broker?: import("./sologenic/com-fs-utils-lib/models/order-properties/order-properties").ClearingBroker | undefined;
                         OrganizationID?: string | undefined;
                         Profiles?: string[] | undefined;
-                    }[] | undefined;
-                    BankAccounts?: {
-                        AccountName?: string | undefined;
-                        BankName?: string | undefined;
-                        BankAddress?: string | undefined;
-                        AccountNumber?: string | undefined;
-                        ABA?: string | undefined;
-                        SWIFT?: string | undefined;
-                        IBAN?: string | undefined;
                     }[] | undefined;
                     UISettings?: {
                         Theme?: import("./user").Theme | undefined;
@@ -2384,34 +2040,9 @@ export declare const GetByAddressesResponse: {
                         SignerType?: import("./user-fundings").SignerType | undefined;
                         Organizations?: string[] | undefined;
                     }[] | undefined;
-                    Socials?: {
-                        URL?: string | undefined;
-                        Type?: import("./user").SocialType | undefined;
-                    }[] | undefined;
                     Language?: import("./sologenic/com-fs-utils-lib/models/language/language").Lang | undefined;
                     ExternalUserID?: string | undefined;
                     OrganizationID?: string | undefined;
-                    Employment?: {
-                        EmployerName?: string | undefined;
-                        JobTitle?: string | undefined;
-                        StartDate?: Date | undefined;
-                        EndDate?: Date | undefined;
-                        Type?: import("./user-kyc").EmploymentType | undefined;
-                        Industry?: string | undefined;
-                        Income?: {
-                            Amount?: number | undefined;
-                            Currency?: string | undefined;
-                            Frequency?: import("./user-kyc").IncomeFrequency | undefined;
-                        } | undefined;
-                        Contact?: {
-                            Name?: string | undefined;
-                            Email?: string | undefined;
-                            Phone?: string | undefined;
-                            Address?: string | undefined;
-                        } | undefined;
-                        IsVerified?: boolean | undefined;
-                        VerifiedAt?: string | undefined;
-                    } | undefined;
                     Role?: import("./sologenic/com-fs-utils-lib/models/role/role").Role | undefined;
                     TradeProfile?: {
                         IsTradingEnabled?: boolean | undefined;
@@ -2451,6 +2082,16 @@ export declare const GetByAddressesResponse: {
                         IdentificationNumber?: string | undefined;
                         FirstName?: string | undefined;
                         LastName?: string | undefined;
+                        MiddleName?: string | undefined;
+                        AddressCountryCode?: string | undefined;
+                        SelectedCountryCode?: string | undefined;
+                        SelectedIDClass?: string | undefined;
+                        ExpirationDate?: string | undefined;
+                        IdentificationClass?: string | undefined;
+                        CardAccessNumber?: string | undefined;
+                        IssueDate?: string | undefined;
+                        IssuingAuthority?: string | undefined;
+                        CollectedEmailAddress?: string | undefined;
                     } | undefined;
                     UserDocumentCompliance?: {
                         SignedDocuments?: {
@@ -2474,15 +2115,6 @@ export declare const GetByAddressesResponse: {
                         Broker?: import("./sologenic/com-fs-utils-lib/models/order-properties/order-properties").ClearingBroker | undefined;
                         OrganizationID?: string | undefined;
                         Profiles?: string[] | undefined;
-                    }[] | undefined;
-                    BankAccounts?: {
-                        AccountName?: string | undefined;
-                        BankName?: string | undefined;
-                        BankAddress?: string | undefined;
-                        AccountNumber?: string | undefined;
-                        ABA?: string | undefined;
-                        SWIFT?: string | undefined;
-                        IBAN?: string | undefined;
                     }[] | undefined;
                     UISettings?: {
                         Theme?: import("./user").Theme | undefined;
@@ -2554,34 +2186,9 @@ export declare const GetByAddressesResponse: {
                         SignerType?: import("./user-fundings").SignerType | undefined;
                         Organizations?: string[] | undefined;
                     }[] | undefined;
-                    Socials?: {
-                        URL?: string | undefined;
-                        Type?: import("./user").SocialType | undefined;
-                    }[] | undefined;
                     Language?: import("./sologenic/com-fs-utils-lib/models/language/language").Lang | undefined;
                     ExternalUserID?: string | undefined;
                     OrganizationID?: string | undefined;
-                    Employment?: {
-                        EmployerName?: string | undefined;
-                        JobTitle?: string | undefined;
-                        StartDate?: Date | undefined;
-                        EndDate?: Date | undefined;
-                        Type?: import("./user-kyc").EmploymentType | undefined;
-                        Industry?: string | undefined;
-                        Income?: {
-                            Amount?: number | undefined;
-                            Currency?: string | undefined;
-                            Frequency?: import("./user-kyc").IncomeFrequency | undefined;
-                        } | undefined;
-                        Contact?: {
-                            Name?: string | undefined;
-                            Email?: string | undefined;
-                            Phone?: string | undefined;
-                            Address?: string | undefined;
-                        } | undefined;
-                        IsVerified?: boolean | undefined;
-                        VerifiedAt?: string | undefined;
-                    } | undefined;
                     Role?: import("./sologenic/com-fs-utils-lib/models/role/role").Role | undefined;
                     TradeProfile?: {
                         IsTradingEnabled?: boolean | undefined;
@@ -2621,6 +2228,16 @@ export declare const GetByAddressesResponse: {
                         IdentificationNumber?: string | undefined;
                         FirstName?: string | undefined;
                         LastName?: string | undefined;
+                        MiddleName?: string | undefined;
+                        AddressCountryCode?: string | undefined;
+                        SelectedCountryCode?: string | undefined;
+                        SelectedIDClass?: string | undefined;
+                        ExpirationDate?: string | undefined;
+                        IdentificationClass?: string | undefined;
+                        CardAccessNumber?: string | undefined;
+                        IssueDate?: string | undefined;
+                        IssuingAuthority?: string | undefined;
+                        CollectedEmailAddress?: string | undefined;
                     } | undefined;
                     UserDocumentCompliance?: {
                         SignedDocuments?: {
@@ -2644,15 +2261,6 @@ export declare const GetByAddressesResponse: {
                         Broker?: import("./sologenic/com-fs-utils-lib/models/order-properties/order-properties").ClearingBroker | undefined;
                         OrganizationID?: string | undefined;
                         Profiles?: string[] | undefined;
-                    }[] | undefined;
-                    BankAccounts?: {
-                        AccountName?: string | undefined;
-                        BankName?: string | undefined;
-                        BankAddress?: string | undefined;
-                        AccountNumber?: string | undefined;
-                        ABA?: string | undefined;
-                        SWIFT?: string | undefined;
-                        IBAN?: string | undefined;
                     }[] | undefined;
                     UISettings?: {
                         Theme?: import("./user").Theme | undefined;
@@ -2721,34 +2329,9 @@ export declare const GetByAddressesResponse: {
                         SignerType?: import("./user-fundings").SignerType | undefined;
                         Organizations?: string[] | undefined;
                     }[] | undefined;
-                    Socials?: {
-                        URL?: string | undefined;
-                        Type?: import("./user").SocialType | undefined;
-                    }[] | undefined;
                     Language?: import("./sologenic/com-fs-utils-lib/models/language/language").Lang | undefined;
                     ExternalUserID?: string | undefined;
                     OrganizationID?: string | undefined;
-                    Employment?: {
-                        EmployerName?: string | undefined;
-                        JobTitle?: string | undefined;
-                        StartDate?: Date | undefined;
-                        EndDate?: Date | undefined;
-                        Type?: import("./user-kyc").EmploymentType | undefined;
-                        Industry?: string | undefined;
-                        Income?: {
-                            Amount?: number | undefined;
-                            Currency?: string | undefined;
-                            Frequency?: import("./user-kyc").IncomeFrequency | undefined;
-                        } | undefined;
-                        Contact?: {
-                            Name?: string | undefined;
-                            Email?: string | undefined;
-                            Phone?: string | undefined;
-                            Address?: string | undefined;
-                        } | undefined;
-                        IsVerified?: boolean | undefined;
-                        VerifiedAt?: string | undefined;
-                    } | undefined;
                     Role?: import("./sologenic/com-fs-utils-lib/models/role/role").Role | undefined;
                     TradeProfile?: {
                         IsTradingEnabled?: boolean | undefined;
@@ -2788,6 +2371,16 @@ export declare const GetByAddressesResponse: {
                         IdentificationNumber?: string | undefined;
                         FirstName?: string | undefined;
                         LastName?: string | undefined;
+                        MiddleName?: string | undefined;
+                        AddressCountryCode?: string | undefined;
+                        SelectedCountryCode?: string | undefined;
+                        SelectedIDClass?: string | undefined;
+                        ExpirationDate?: string | undefined;
+                        IdentificationClass?: string | undefined;
+                        CardAccessNumber?: string | undefined;
+                        IssueDate?: string | undefined;
+                        IssuingAuthority?: string | undefined;
+                        CollectedEmailAddress?: string | undefined;
                     } | undefined;
                     UserDocumentCompliance?: {
                         SignedDocuments?: {
@@ -2811,15 +2404,6 @@ export declare const GetByAddressesResponse: {
                         Broker?: import("./sologenic/com-fs-utils-lib/models/order-properties/order-properties").ClearingBroker | undefined;
                         OrganizationID?: string | undefined;
                         Profiles?: string[] | undefined;
-                    }[] | undefined;
-                    BankAccounts?: {
-                        AccountName?: string | undefined;
-                        BankName?: string | undefined;
-                        BankAddress?: string | undefined;
-                        AccountNumber?: string | undefined;
-                        ABA?: string | undefined;
-                        SWIFT?: string | undefined;
-                        IBAN?: string | undefined;
                     }[] | undefined;
                     UISettings?: {
                         Theme?: import("./user").Theme | undefined;
@@ -2892,72 +2476,9 @@ export declare const GetByAddressesResponse: {
                         SignerType?: import("./user-fundings").SignerType | undefined;
                         Organizations?: string[] | undefined;
                     }[]>]: never; }) | undefined;
-                    Socials?: ({
-                        URL?: string | undefined;
-                        Type?: import("./user").SocialType | undefined;
-                    }[] & ({
-                        URL?: string | undefined;
-                        Type?: import("./user").SocialType | undefined;
-                    } & {
-                        URL?: string | undefined;
-                        Type?: import("./user").SocialType | undefined;
-                    } & { [K_3 in Exclude<keyof I["Results"][number]["User"]["User"]["Socials"][number], keyof import("./user").Social>]: never; })[] & { [K_4 in Exclude<keyof I["Results"][number]["User"]["User"]["Socials"], keyof {
-                        URL?: string | undefined;
-                        Type?: import("./user").SocialType | undefined;
-                    }[]>]: never; }) | undefined;
                     Language?: import("./sologenic/com-fs-utils-lib/models/language/language").Lang | undefined;
                     ExternalUserID?: string | undefined;
                     OrganizationID?: string | undefined;
-                    Employment?: ({
-                        EmployerName?: string | undefined;
-                        JobTitle?: string | undefined;
-                        StartDate?: Date | undefined;
-                        EndDate?: Date | undefined;
-                        Type?: import("./user-kyc").EmploymentType | undefined;
-                        Industry?: string | undefined;
-                        Income?: {
-                            Amount?: number | undefined;
-                            Currency?: string | undefined;
-                            Frequency?: import("./user-kyc").IncomeFrequency | undefined;
-                        } | undefined;
-                        Contact?: {
-                            Name?: string | undefined;
-                            Email?: string | undefined;
-                            Phone?: string | undefined;
-                            Address?: string | undefined;
-                        } | undefined;
-                        IsVerified?: boolean | undefined;
-                        VerifiedAt?: string | undefined;
-                    } & {
-                        EmployerName?: string | undefined;
-                        JobTitle?: string | undefined;
-                        StartDate?: Date | undefined;
-                        EndDate?: Date | undefined;
-                        Type?: import("./user-kyc").EmploymentType | undefined;
-                        Industry?: string | undefined;
-                        Income?: ({
-                            Amount?: number | undefined;
-                            Currency?: string | undefined;
-                            Frequency?: import("./user-kyc").IncomeFrequency | undefined;
-                        } & {
-                            Amount?: number | undefined;
-                            Currency?: string | undefined;
-                            Frequency?: import("./user-kyc").IncomeFrequency | undefined;
-                        } & { [K_5 in Exclude<keyof I["Results"][number]["User"]["User"]["Employment"]["Income"], keyof import("./user-kyc").Income>]: never; }) | undefined;
-                        Contact?: ({
-                            Name?: string | undefined;
-                            Email?: string | undefined;
-                            Phone?: string | undefined;
-                            Address?: string | undefined;
-                        } & {
-                            Name?: string | undefined;
-                            Email?: string | undefined;
-                            Phone?: string | undefined;
-                            Address?: string | undefined;
-                        } & { [K_6 in Exclude<keyof I["Results"][number]["User"]["User"]["Employment"]["Contact"], keyof import("./user-kyc").EmployerContact>]: never; }) | undefined;
-                        IsVerified?: boolean | undefined;
-                        VerifiedAt?: string | undefined;
-                    } & { [K_7 in Exclude<keyof I["Results"][number]["User"]["User"]["Employment"], keyof import("./user-kyc").Employment>]: never; }) | undefined;
                     Role?: import("./sologenic/com-fs-utils-lib/models/role/role").Role | undefined;
                     TradeProfile?: ({
                         IsTradingEnabled?: boolean | undefined;
@@ -2992,28 +2513,28 @@ export declare const GetByAddressesResponse: {
                         } & {
                             Value?: number | undefined;
                             IsGreaterThan?: boolean | undefined;
-                        } & { [K_8 in Exclude<keyof I["Results"][number]["User"]["User"]["TradeProfile"]["AggregateNotionalLimit"], keyof import("./sologenic/com-fs-trade-profile-model/tradeprofile").DropdownNumericValue>]: never; }) | undefined;
+                        } & { [K_3 in Exclude<keyof I["Results"][number]["User"]["User"]["TradeProfile"]["AggregateNotionalLimit"], keyof import("./sologenic/com-fs-trade-profile-model/tradeprofile").DropdownNumericValue>]: never; }) | undefined;
                         SingleOrderLimit?: ({
                             Value?: number | undefined;
                             IsGreaterThan?: boolean | undefined;
                         } & {
                             Value?: number | undefined;
                             IsGreaterThan?: boolean | undefined;
-                        } & { [K_9 in Exclude<keyof I["Results"][number]["User"]["User"]["TradeProfile"]["SingleOrderLimit"], keyof import("./sologenic/com-fs-trade-profile-model/tradeprofile").DropdownNumericValue>]: never; }) | undefined;
+                        } & { [K_4 in Exclude<keyof I["Results"][number]["User"]["User"]["TradeProfile"]["SingleOrderLimit"], keyof import("./sologenic/com-fs-trade-profile-model/tradeprofile").DropdownNumericValue>]: never; }) | undefined;
                         MaxOrderQuantity?: ({
                             Value?: number | undefined;
                             IsGreaterThan?: boolean | undefined;
                         } & {
                             Value?: number | undefined;
                             IsGreaterThan?: boolean | undefined;
-                        } & { [K_10 in Exclude<keyof I["Results"][number]["User"]["User"]["TradeProfile"]["MaxOrderQuantity"], keyof import("./sologenic/com-fs-trade-profile-model/tradeprofile").DropdownNumericValue>]: never; }) | undefined;
+                        } & { [K_5 in Exclude<keyof I["Results"][number]["User"]["User"]["TradeProfile"]["MaxOrderQuantity"], keyof import("./sologenic/com-fs-trade-profile-model/tradeprofile").DropdownNumericValue>]: never; }) | undefined;
                         AggressivePercentage?: number | undefined;
                         SymbolGrossADVPercent?: number | undefined;
                         PriceCheckDeviation?: number | undefined;
                         DuplicateOrderLimit?: number | undefined;
                         RiskMultiplier?: number | undefined;
-                    } & { [K_11 in Exclude<keyof I["Results"][number]["User"]["User"]["TradeProfile"], keyof import("./sologenic/com-fs-trade-profile-model/tradeprofile").TradeProfileDetails>]: never; }) | undefined;
-                    KYCInquiries?: (string[] & string[] & { [K_12 in Exclude<keyof I["Results"][number]["User"]["User"]["KYCInquiries"], keyof string[]>]: never; }) | undefined;
+                    } & { [K_6 in Exclude<keyof I["Results"][number]["User"]["User"]["TradeProfile"], keyof import("./sologenic/com-fs-trade-profile-model/tradeprofile").TradeProfileDetails>]: never; }) | undefined;
+                    KYCInquiries?: (string[] & string[] & { [K_7 in Exclude<keyof I["Results"][number]["User"]["User"]["KYCInquiries"], keyof string[]>]: never; }) | undefined;
                     KYCDetails?: ({
                         Birthdate?: string | undefined;
                         PhoneNumber?: string | undefined;
@@ -3028,6 +2549,16 @@ export declare const GetByAddressesResponse: {
                         IdentificationNumber?: string | undefined;
                         FirstName?: string | undefined;
                         LastName?: string | undefined;
+                        MiddleName?: string | undefined;
+                        AddressCountryCode?: string | undefined;
+                        SelectedCountryCode?: string | undefined;
+                        SelectedIDClass?: string | undefined;
+                        ExpirationDate?: string | undefined;
+                        IdentificationClass?: string | undefined;
+                        CardAccessNumber?: string | undefined;
+                        IssueDate?: string | undefined;
+                        IssuingAuthority?: string | undefined;
+                        CollectedEmailAddress?: string | undefined;
                     } & {
                         Birthdate?: string | undefined;
                         PhoneNumber?: string | undefined;
@@ -3042,7 +2573,17 @@ export declare const GetByAddressesResponse: {
                         IdentificationNumber?: string | undefined;
                         FirstName?: string | undefined;
                         LastName?: string | undefined;
-                    } & { [K_13 in Exclude<keyof I["Results"][number]["User"]["User"]["KYCDetails"], keyof import("./user-kyc").UserKYCDetails>]: never; }) | undefined;
+                        MiddleName?: string | undefined;
+                        AddressCountryCode?: string | undefined;
+                        SelectedCountryCode?: string | undefined;
+                        SelectedIDClass?: string | undefined;
+                        ExpirationDate?: string | undefined;
+                        IdentificationClass?: string | undefined;
+                        CardAccessNumber?: string | undefined;
+                        IssueDate?: string | undefined;
+                        IssuingAuthority?: string | undefined;
+                        CollectedEmailAddress?: string | undefined;
+                    } & { [K_8 in Exclude<keyof I["Results"][number]["User"]["User"]["KYCDetails"], keyof import("./user-kyc").UserKYCDetails>]: never; }) | undefined;
                     UserDocumentCompliance?: ({
                         SignedDocuments?: {
                             Name?: string | undefined;
@@ -3074,7 +2615,7 @@ export declare const GetByAddressesResponse: {
                             SignedAt?: Date | undefined;
                             FileMD5SUM?: string | undefined;
                             TXID?: string | undefined;
-                        } & { [K_14 in Exclude<keyof I["Results"][number]["User"]["User"]["UserDocumentCompliance"]["SignedDocuments"][number], keyof import("./sologenic/com-fs-document-model/document").SignedDocument>]: never; })[] & { [K_15 in Exclude<keyof I["Results"][number]["User"]["User"]["UserDocumentCompliance"]["SignedDocuments"], keyof {
+                        } & { [K_9 in Exclude<keyof I["Results"][number]["User"]["User"]["UserDocumentCompliance"]["SignedDocuments"][number], keyof import("./sologenic/com-fs-document-model/document").SignedDocument>]: never; })[] & { [K_10 in Exclude<keyof I["Results"][number]["User"]["User"]["UserDocumentCompliance"]["SignedDocuments"], keyof {
                             Name?: string | undefined;
                             SignedVersion?: string | undefined;
                             DocumentState?: import("./sologenic/com-fs-document-model/document").DocumentState | undefined;
@@ -3082,7 +2623,7 @@ export declare const GetByAddressesResponse: {
                             FileMD5SUM?: string | undefined;
                             TXID?: string | undefined;
                         }[]>]: never; }) | undefined;
-                    } & { [K_16 in Exclude<keyof I["Results"][number]["User"]["User"]["UserDocumentCompliance"], "SignedDocuments">]: never; }) | undefined;
+                    } & { [K_11 in Exclude<keyof I["Results"][number]["User"]["User"]["UserDocumentCompliance"], "SignedDocuments">]: never; }) | undefined;
                     KYCStatus?: import("./user-kyc").KYCStatus | undefined;
                     UserTradeProfile?: ({
                         IsMarginTradingEnabled?: boolean | undefined;
@@ -3094,7 +2635,7 @@ export declare const GetByAddressesResponse: {
                         IsShortSellingEnabled?: boolean | undefined;
                         SingleOrderLimit?: number | undefined;
                         MaxOrderQuantity?: number | undefined;
-                    } & { [K_17 in Exclude<keyof I["Results"][number]["User"]["User"]["UserTradeProfile"], keyof import("./sologenic/com-fs-trade-profile-model/tradeprofile").UserTradeProfile>]: never; }) | undefined;
+                    } & { [K_12 in Exclude<keyof I["Results"][number]["User"]["User"]["UserTradeProfile"], keyof import("./sologenic/com-fs-trade-profile-model/tradeprofile").UserTradeProfile>]: never; }) | undefined;
                     BrokerAccounts?: ({
                         AccountID?: string | undefined;
                         Broker?: import("./sologenic/com-fs-utils-lib/models/order-properties/order-properties").ClearingBroker | undefined;
@@ -3109,51 +2650,18 @@ export declare const GetByAddressesResponse: {
                         AccountID?: string | undefined;
                         Broker?: import("./sologenic/com-fs-utils-lib/models/order-properties/order-properties").ClearingBroker | undefined;
                         OrganizationID?: string | undefined;
-                        Profiles?: (string[] & string[] & { [K_18 in Exclude<keyof I["Results"][number]["User"]["User"]["BrokerAccounts"][number]["Profiles"], keyof string[]>]: never; }) | undefined;
-                    } & { [K_19 in Exclude<keyof I["Results"][number]["User"]["User"]["BrokerAccounts"][number], keyof import("./user-fundings").BrokerAccount>]: never; })[] & { [K_20 in Exclude<keyof I["Results"][number]["User"]["User"]["BrokerAccounts"], keyof {
+                        Profiles?: (string[] & string[] & { [K_13 in Exclude<keyof I["Results"][number]["User"]["User"]["BrokerAccounts"][number]["Profiles"], keyof string[]>]: never; }) | undefined;
+                    } & { [K_14 in Exclude<keyof I["Results"][number]["User"]["User"]["BrokerAccounts"][number], keyof import("./user-fundings").BrokerAccount>]: never; })[] & { [K_15 in Exclude<keyof I["Results"][number]["User"]["User"]["BrokerAccounts"], keyof {
                         AccountID?: string | undefined;
                         Broker?: import("./sologenic/com-fs-utils-lib/models/order-properties/order-properties").ClearingBroker | undefined;
                         OrganizationID?: string | undefined;
                         Profiles?: string[] | undefined;
                     }[]>]: never; }) | undefined;
-                    BankAccounts?: ({
-                        AccountName?: string | undefined;
-                        BankName?: string | undefined;
-                        BankAddress?: string | undefined;
-                        AccountNumber?: string | undefined;
-                        ABA?: string | undefined;
-                        SWIFT?: string | undefined;
-                        IBAN?: string | undefined;
-                    }[] & ({
-                        AccountName?: string | undefined;
-                        BankName?: string | undefined;
-                        BankAddress?: string | undefined;
-                        AccountNumber?: string | undefined;
-                        ABA?: string | undefined;
-                        SWIFT?: string | undefined;
-                        IBAN?: string | undefined;
-                    } & {
-                        AccountName?: string | undefined;
-                        BankName?: string | undefined;
-                        BankAddress?: string | undefined;
-                        AccountNumber?: string | undefined;
-                        ABA?: string | undefined;
-                        SWIFT?: string | undefined;
-                        IBAN?: string | undefined;
-                    } & { [K_21 in Exclude<keyof I["Results"][number]["User"]["User"]["BankAccounts"][number], keyof import("./user-fundings").BankAccount>]: never; })[] & { [K_22 in Exclude<keyof I["Results"][number]["User"]["User"]["BankAccounts"], keyof {
-                        AccountName?: string | undefined;
-                        BankName?: string | undefined;
-                        BankAddress?: string | undefined;
-                        AccountNumber?: string | undefined;
-                        ABA?: string | undefined;
-                        SWIFT?: string | undefined;
-                        IBAN?: string | undefined;
-                    }[]>]: never; }) | undefined;
                     UISettings?: ({
                         Theme?: import("./user").Theme | undefined;
                     } & {
                         Theme?: import("./user").Theme | undefined;
-                    } & { [K_23 in Exclude<keyof I["Results"][number]["User"]["User"]["UISettings"], "Theme">]: never; }) | undefined;
+                    } & { [K_16 in Exclude<keyof I["Results"][number]["User"]["User"]["UISettings"], "Theme">]: never; }) | undefined;
                     CommissionSettings?: ({
                         Commission?: {
                             Value?: number | undefined;
@@ -3167,9 +2675,9 @@ export declare const GetByAddressesResponse: {
                         } & {
                             Value?: number | undefined;
                             Exp?: number | undefined;
-                        } & { [K_24 in Exclude<keyof I["Results"][number]["User"]["User"]["CommissionSettings"]["Commission"], keyof import("./sologenic/com-fs-utils-lib/models/decimal/decimal").Decimal>]: never; }) | undefined;
+                        } & { [K_17 in Exclude<keyof I["Results"][number]["User"]["User"]["CommissionSettings"]["Commission"], keyof import("./sologenic/com-fs-utils-lib/models/decimal/decimal").Decimal>]: never; }) | undefined;
                         CommissionType?: import("./sologenic/com-fs-utils-lib/models/commission/commission").CommissionType | undefined;
-                    } & { [K_25 in Exclude<keyof I["Results"][number]["User"]["User"]["CommissionSettings"], keyof import("./sologenic/com-fs-utils-lib/models/commission/commission").CommissionSettings>]: never; }) | undefined;
+                    } & { [K_18 in Exclude<keyof I["Results"][number]["User"]["User"]["CommissionSettings"], keyof import("./sologenic/com-fs-utils-lib/models/commission/commission").CommissionSettings>]: never; }) | undefined;
                     DataFeedAccounts?: ({
                         DxFeed?: {
                             AccountID?: string | undefined;
@@ -3179,9 +2687,9 @@ export declare const GetByAddressesResponse: {
                             AccountID?: string | undefined;
                         } & {
                             AccountID?: string | undefined;
-                        } & { [K_26 in Exclude<keyof I["Results"][number]["User"]["User"]["DataFeedAccounts"]["DxFeed"], "AccountID">]: never; }) | undefined;
-                    } & { [K_27 in Exclude<keyof I["Results"][number]["User"]["User"]["DataFeedAccounts"], "DxFeed">]: never; }) | undefined;
-                    AllowedJurisdictions?: (string[] & string[] & { [K_28 in Exclude<keyof I["Results"][number]["User"]["User"]["AllowedJurisdictions"], keyof string[]>]: never; }) | undefined;
+                        } & { [K_19 in Exclude<keyof I["Results"][number]["User"]["User"]["DataFeedAccounts"]["DxFeed"], "AccountID">]: never; }) | undefined;
+                    } & { [K_20 in Exclude<keyof I["Results"][number]["User"]["User"]["DataFeedAccounts"], "DxFeed">]: never; }) | undefined;
+                    AllowedJurisdictions?: (string[] & string[] & { [K_21 in Exclude<keyof I["Results"][number]["User"]["User"]["AllowedJurisdictions"], keyof string[]>]: never; }) | undefined;
                     EmailAddress?: string | undefined;
                     ComplianceFormAnswers?: ({
                         ComplianceID?: string | undefined;
@@ -3229,7 +2737,7 @@ export declare const GetByAddressesResponse: {
                             }[] | undefined;
                         } & {
                             Question?: string | undefined;
-                            Values?: (string[] & string[] & { [K_29 in Exclude<keyof I["Results"][number]["User"]["User"]["ComplianceFormAnswers"][number]["Answers"][number]["Values"], keyof string[]>]: never; }) | undefined;
+                            Values?: (string[] & string[] & { [K_22 in Exclude<keyof I["Results"][number]["User"]["User"]["ComplianceFormAnswers"][number]["Answers"][number]["Values"], keyof string[]>]: never; }) | undefined;
                             Files?: ({
                                 Description?: string | undefined;
                                 Optionality?: import("./sologenic/com-fs-compliance-model/compliance").Optionality | undefined;
@@ -3242,12 +2750,12 @@ export declare const GetByAddressesResponse: {
                                 Description?: string | undefined;
                                 Optionality?: import("./sologenic/com-fs-compliance-model/compliance").Optionality | undefined;
                                 Hash?: string | undefined;
-                            } & { [K_30 in Exclude<keyof I["Results"][number]["User"]["User"]["ComplianceFormAnswers"][number]["Answers"][number]["Files"][number], keyof import("./sologenic/com-fs-compliance-model/compliance").File>]: never; })[] & { [K_31 in Exclude<keyof I["Results"][number]["User"]["User"]["ComplianceFormAnswers"][number]["Answers"][number]["Files"], keyof {
+                            } & { [K_23 in Exclude<keyof I["Results"][number]["User"]["User"]["ComplianceFormAnswers"][number]["Answers"][number]["Files"][number], keyof import("./sologenic/com-fs-compliance-model/compliance").File>]: never; })[] & { [K_24 in Exclude<keyof I["Results"][number]["User"]["User"]["ComplianceFormAnswers"][number]["Answers"][number]["Files"], keyof {
                                 Description?: string | undefined;
                                 Optionality?: import("./sologenic/com-fs-compliance-model/compliance").Optionality | undefined;
                                 Hash?: string | undefined;
                             }[]>]: never; }) | undefined;
-                        } & { [K_32 in Exclude<keyof I["Results"][number]["User"]["User"]["ComplianceFormAnswers"][number]["Answers"][number], keyof import("./sologenic/com-fs-compliance-model/compliance").QuestionAnswer>]: never; })[] & { [K_33 in Exclude<keyof I["Results"][number]["User"]["User"]["ComplianceFormAnswers"][number]["Answers"], keyof {
+                        } & { [K_25 in Exclude<keyof I["Results"][number]["User"]["User"]["ComplianceFormAnswers"][number]["Answers"][number], keyof import("./sologenic/com-fs-compliance-model/compliance").QuestionAnswer>]: never; })[] & { [K_26 in Exclude<keyof I["Results"][number]["User"]["User"]["ComplianceFormAnswers"][number]["Answers"], keyof {
                             Question?: string | undefined;
                             Values?: string[] | undefined;
                             Files?: {
@@ -3258,7 +2766,7 @@ export declare const GetByAddressesResponse: {
                         }[]>]: never; }) | undefined;
                         FormStatus?: import("./sologenic/com-fs-compliance-model/compliance").FormStatus | undefined;
                         SubmittedAt?: Date | undefined;
-                    } & { [K_34 in Exclude<keyof I["Results"][number]["User"]["User"]["ComplianceFormAnswers"][number], keyof import("./sologenic/com-fs-compliance-model/compliance").ComplianceFormAnswer>]: never; })[] & { [K_35 in Exclude<keyof I["Results"][number]["User"]["User"]["ComplianceFormAnswers"], keyof {
+                    } & { [K_27 in Exclude<keyof I["Results"][number]["User"]["User"]["ComplianceFormAnswers"][number], keyof import("./sologenic/com-fs-compliance-model/compliance").ComplianceFormAnswer>]: never; })[] & { [K_28 in Exclude<keyof I["Results"][number]["User"]["User"]["ComplianceFormAnswers"], keyof {
                         ComplianceID?: string | undefined;
                         Answers?: {
                             Question?: string | undefined;
@@ -3278,7 +2786,7 @@ export declare const GetByAddressesResponse: {
                     ReferralAmountReceived?: number | undefined;
                     ReferralAmount?: number | undefined;
                     ReferralPaidAt?: Date | undefined;
-                } & { [K_36 in Exclude<keyof I["Results"][number]["User"]["User"], keyof import("./user").UserDetails>]: never; }) | undefined;
+                } & { [K_29 in Exclude<keyof I["Results"][number]["User"]["User"], keyof import("./user").UserDetails>]: never; }) | undefined;
                 MetaData?: ({
                     Network?: Network | undefined;
                     UpdatedAt?: Date | undefined;
@@ -3289,7 +2797,7 @@ export declare const GetByAddressesResponse: {
                     UpdatedAt?: Date | undefined;
                     CreatedAt?: Date | undefined;
                     UpdatedByAccount?: string | undefined;
-                } & { [K_37 in Exclude<keyof I["Results"][number]["User"]["MetaData"], keyof import("./sologenic/com-fs-utils-lib/models/metadata/metadata").MetaData>]: never; }) | undefined;
+                } & { [K_30 in Exclude<keyof I["Results"][number]["User"]["MetaData"], keyof import("./sologenic/com-fs-utils-lib/models/metadata/metadata").MetaData>]: never; }) | undefined;
                 Audit?: ({
                     ChangedBy?: string | undefined;
                     ChangedAt?: Date | undefined;
@@ -3298,10 +2806,10 @@ export declare const GetByAddressesResponse: {
                     ChangedBy?: string | undefined;
                     ChangedAt?: Date | undefined;
                     Reason?: string | undefined;
-                } & { [K_38 in Exclude<keyof I["Results"][number]["User"]["Audit"], keyof import("./sologenic/com-fs-utils-lib/models/audit/audit").Audit>]: never; }) | undefined;
-                OrganizationIDs?: (string[] & string[] & { [K_39 in Exclude<keyof I["Results"][number]["User"]["OrganizationIDs"], keyof string[]>]: never; }) | undefined;
-            } & { [K_40 in Exclude<keyof I["Results"][number]["User"], keyof User>]: never; }) | undefined;
-        } & { [K_41 in Exclude<keyof I["Results"][number], keyof AddressUserPair>]: never; })[] & { [K_42 in Exclude<keyof I["Results"], keyof {
+                } & { [K_31 in Exclude<keyof I["Results"][number]["User"]["Audit"], keyof import("./sologenic/com-fs-utils-lib/models/audit/audit").Audit>]: never; }) | undefined;
+                OrganizationIDs?: (string[] & string[] & { [K_32 in Exclude<keyof I["Results"][number]["User"]["OrganizationIDs"], keyof string[]>]: never; }) | undefined;
+            } & { [K_33 in Exclude<keyof I["Results"][number]["User"], keyof User>]: never; }) | undefined;
+        } & { [K_34 in Exclude<keyof I["Results"][number], keyof AddressUserPair>]: never; })[] & { [K_35 in Exclude<keyof I["Results"], keyof {
             Address?: string | undefined;
             User?: {
                 User?: {
@@ -3320,34 +2828,9 @@ export declare const GetByAddressesResponse: {
                         SignerType?: import("./user-fundings").SignerType | undefined;
                         Organizations?: string[] | undefined;
                     }[] | undefined;
-                    Socials?: {
-                        URL?: string | undefined;
-                        Type?: import("./user").SocialType | undefined;
-                    }[] | undefined;
                     Language?: import("./sologenic/com-fs-utils-lib/models/language/language").Lang | undefined;
                     ExternalUserID?: string | undefined;
                     OrganizationID?: string | undefined;
-                    Employment?: {
-                        EmployerName?: string | undefined;
-                        JobTitle?: string | undefined;
-                        StartDate?: Date | undefined;
-                        EndDate?: Date | undefined;
-                        Type?: import("./user-kyc").EmploymentType | undefined;
-                        Industry?: string | undefined;
-                        Income?: {
-                            Amount?: number | undefined;
-                            Currency?: string | undefined;
-                            Frequency?: import("./user-kyc").IncomeFrequency | undefined;
-                        } | undefined;
-                        Contact?: {
-                            Name?: string | undefined;
-                            Email?: string | undefined;
-                            Phone?: string | undefined;
-                            Address?: string | undefined;
-                        } | undefined;
-                        IsVerified?: boolean | undefined;
-                        VerifiedAt?: string | undefined;
-                    } | undefined;
                     Role?: import("./sologenic/com-fs-utils-lib/models/role/role").Role | undefined;
                     TradeProfile?: {
                         IsTradingEnabled?: boolean | undefined;
@@ -3387,6 +2870,16 @@ export declare const GetByAddressesResponse: {
                         IdentificationNumber?: string | undefined;
                         FirstName?: string | undefined;
                         LastName?: string | undefined;
+                        MiddleName?: string | undefined;
+                        AddressCountryCode?: string | undefined;
+                        SelectedCountryCode?: string | undefined;
+                        SelectedIDClass?: string | undefined;
+                        ExpirationDate?: string | undefined;
+                        IdentificationClass?: string | undefined;
+                        CardAccessNumber?: string | undefined;
+                        IssueDate?: string | undefined;
+                        IssuingAuthority?: string | undefined;
+                        CollectedEmailAddress?: string | undefined;
                     } | undefined;
                     UserDocumentCompliance?: {
                         SignedDocuments?: {
@@ -3410,15 +2903,6 @@ export declare const GetByAddressesResponse: {
                         Broker?: import("./sologenic/com-fs-utils-lib/models/order-properties/order-properties").ClearingBroker | undefined;
                         OrganizationID?: string | undefined;
                         Profiles?: string[] | undefined;
-                    }[] | undefined;
-                    BankAccounts?: {
-                        AccountName?: string | undefined;
-                        BankName?: string | undefined;
-                        BankAddress?: string | undefined;
-                        AccountNumber?: string | undefined;
-                        ABA?: string | undefined;
-                        SWIFT?: string | undefined;
-                        IBAN?: string | undefined;
                     }[] | undefined;
                     UISettings?: {
                         Theme?: import("./user").Theme | undefined;
@@ -3472,7 +2956,7 @@ export declare const GetByAddressesResponse: {
                 OrganizationIDs?: string[] | undefined;
             } | undefined;
         }[]>]: never; }) | undefined;
-    } & { [K_43 in Exclude<keyof I, "Results">]: never; }>(base?: I | undefined): GetByAddressesResponse;
+    } & { [K_36 in Exclude<keyof I, "Results">]: never; }>(base?: I | undefined): GetByAddressesResponse;
     fromPartial<I_1 extends {
         Results?: {
             Address?: string | undefined;
@@ -3493,34 +2977,9 @@ export declare const GetByAddressesResponse: {
                         SignerType?: import("./user-fundings").SignerType | undefined;
                         Organizations?: string[] | undefined;
                     }[] | undefined;
-                    Socials?: {
-                        URL?: string | undefined;
-                        Type?: import("./user").SocialType | undefined;
-                    }[] | undefined;
                     Language?: import("./sologenic/com-fs-utils-lib/models/language/language").Lang | undefined;
                     ExternalUserID?: string | undefined;
                     OrganizationID?: string | undefined;
-                    Employment?: {
-                        EmployerName?: string | undefined;
-                        JobTitle?: string | undefined;
-                        StartDate?: Date | undefined;
-                        EndDate?: Date | undefined;
-                        Type?: import("./user-kyc").EmploymentType | undefined;
-                        Industry?: string | undefined;
-                        Income?: {
-                            Amount?: number | undefined;
-                            Currency?: string | undefined;
-                            Frequency?: import("./user-kyc").IncomeFrequency | undefined;
-                        } | undefined;
-                        Contact?: {
-                            Name?: string | undefined;
-                            Email?: string | undefined;
-                            Phone?: string | undefined;
-                            Address?: string | undefined;
-                        } | undefined;
-                        IsVerified?: boolean | undefined;
-                        VerifiedAt?: string | undefined;
-                    } | undefined;
                     Role?: import("./sologenic/com-fs-utils-lib/models/role/role").Role | undefined;
                     TradeProfile?: {
                         IsTradingEnabled?: boolean | undefined;
@@ -3560,6 +3019,16 @@ export declare const GetByAddressesResponse: {
                         IdentificationNumber?: string | undefined;
                         FirstName?: string | undefined;
                         LastName?: string | undefined;
+                        MiddleName?: string | undefined;
+                        AddressCountryCode?: string | undefined;
+                        SelectedCountryCode?: string | undefined;
+                        SelectedIDClass?: string | undefined;
+                        ExpirationDate?: string | undefined;
+                        IdentificationClass?: string | undefined;
+                        CardAccessNumber?: string | undefined;
+                        IssueDate?: string | undefined;
+                        IssuingAuthority?: string | undefined;
+                        CollectedEmailAddress?: string | undefined;
                     } | undefined;
                     UserDocumentCompliance?: {
                         SignedDocuments?: {
@@ -3583,15 +3052,6 @@ export declare const GetByAddressesResponse: {
                         Broker?: import("./sologenic/com-fs-utils-lib/models/order-properties/order-properties").ClearingBroker | undefined;
                         OrganizationID?: string | undefined;
                         Profiles?: string[] | undefined;
-                    }[] | undefined;
-                    BankAccounts?: {
-                        AccountName?: string | undefined;
-                        BankName?: string | undefined;
-                        BankAddress?: string | undefined;
-                        AccountNumber?: string | undefined;
-                        ABA?: string | undefined;
-                        SWIFT?: string | undefined;
-                        IBAN?: string | undefined;
                     }[] | undefined;
                     UISettings?: {
                         Theme?: import("./user").Theme | undefined;
@@ -3665,34 +3125,9 @@ export declare const GetByAddressesResponse: {
                         SignerType?: import("./user-fundings").SignerType | undefined;
                         Organizations?: string[] | undefined;
                     }[] | undefined;
-                    Socials?: {
-                        URL?: string | undefined;
-                        Type?: import("./user").SocialType | undefined;
-                    }[] | undefined;
                     Language?: import("./sologenic/com-fs-utils-lib/models/language/language").Lang | undefined;
                     ExternalUserID?: string | undefined;
                     OrganizationID?: string | undefined;
-                    Employment?: {
-                        EmployerName?: string | undefined;
-                        JobTitle?: string | undefined;
-                        StartDate?: Date | undefined;
-                        EndDate?: Date | undefined;
-                        Type?: import("./user-kyc").EmploymentType | undefined;
-                        Industry?: string | undefined;
-                        Income?: {
-                            Amount?: number | undefined;
-                            Currency?: string | undefined;
-                            Frequency?: import("./user-kyc").IncomeFrequency | undefined;
-                        } | undefined;
-                        Contact?: {
-                            Name?: string | undefined;
-                            Email?: string | undefined;
-                            Phone?: string | undefined;
-                            Address?: string | undefined;
-                        } | undefined;
-                        IsVerified?: boolean | undefined;
-                        VerifiedAt?: string | undefined;
-                    } | undefined;
                     Role?: import("./sologenic/com-fs-utils-lib/models/role/role").Role | undefined;
                     TradeProfile?: {
                         IsTradingEnabled?: boolean | undefined;
@@ -3732,6 +3167,16 @@ export declare const GetByAddressesResponse: {
                         IdentificationNumber?: string | undefined;
                         FirstName?: string | undefined;
                         LastName?: string | undefined;
+                        MiddleName?: string | undefined;
+                        AddressCountryCode?: string | undefined;
+                        SelectedCountryCode?: string | undefined;
+                        SelectedIDClass?: string | undefined;
+                        ExpirationDate?: string | undefined;
+                        IdentificationClass?: string | undefined;
+                        CardAccessNumber?: string | undefined;
+                        IssueDate?: string | undefined;
+                        IssuingAuthority?: string | undefined;
+                        CollectedEmailAddress?: string | undefined;
                     } | undefined;
                     UserDocumentCompliance?: {
                         SignedDocuments?: {
@@ -3755,15 +3200,6 @@ export declare const GetByAddressesResponse: {
                         Broker?: import("./sologenic/com-fs-utils-lib/models/order-properties/order-properties").ClearingBroker | undefined;
                         OrganizationID?: string | undefined;
                         Profiles?: string[] | undefined;
-                    }[] | undefined;
-                    BankAccounts?: {
-                        AccountName?: string | undefined;
-                        BankName?: string | undefined;
-                        BankAddress?: string | undefined;
-                        AccountNumber?: string | undefined;
-                        ABA?: string | undefined;
-                        SWIFT?: string | undefined;
-                        IBAN?: string | undefined;
                     }[] | undefined;
                     UISettings?: {
                         Theme?: import("./user").Theme | undefined;
@@ -3835,34 +3271,9 @@ export declare const GetByAddressesResponse: {
                         SignerType?: import("./user-fundings").SignerType | undefined;
                         Organizations?: string[] | undefined;
                     }[] | undefined;
-                    Socials?: {
-                        URL?: string | undefined;
-                        Type?: import("./user").SocialType | undefined;
-                    }[] | undefined;
                     Language?: import("./sologenic/com-fs-utils-lib/models/language/language").Lang | undefined;
                     ExternalUserID?: string | undefined;
                     OrganizationID?: string | undefined;
-                    Employment?: {
-                        EmployerName?: string | undefined;
-                        JobTitle?: string | undefined;
-                        StartDate?: Date | undefined;
-                        EndDate?: Date | undefined;
-                        Type?: import("./user-kyc").EmploymentType | undefined;
-                        Industry?: string | undefined;
-                        Income?: {
-                            Amount?: number | undefined;
-                            Currency?: string | undefined;
-                            Frequency?: import("./user-kyc").IncomeFrequency | undefined;
-                        } | undefined;
-                        Contact?: {
-                            Name?: string | undefined;
-                            Email?: string | undefined;
-                            Phone?: string | undefined;
-                            Address?: string | undefined;
-                        } | undefined;
-                        IsVerified?: boolean | undefined;
-                        VerifiedAt?: string | undefined;
-                    } | undefined;
                     Role?: import("./sologenic/com-fs-utils-lib/models/role/role").Role | undefined;
                     TradeProfile?: {
                         IsTradingEnabled?: boolean | undefined;
@@ -3902,6 +3313,16 @@ export declare const GetByAddressesResponse: {
                         IdentificationNumber?: string | undefined;
                         FirstName?: string | undefined;
                         LastName?: string | undefined;
+                        MiddleName?: string | undefined;
+                        AddressCountryCode?: string | undefined;
+                        SelectedCountryCode?: string | undefined;
+                        SelectedIDClass?: string | undefined;
+                        ExpirationDate?: string | undefined;
+                        IdentificationClass?: string | undefined;
+                        CardAccessNumber?: string | undefined;
+                        IssueDate?: string | undefined;
+                        IssuingAuthority?: string | undefined;
+                        CollectedEmailAddress?: string | undefined;
                     } | undefined;
                     UserDocumentCompliance?: {
                         SignedDocuments?: {
@@ -3925,15 +3346,6 @@ export declare const GetByAddressesResponse: {
                         Broker?: import("./sologenic/com-fs-utils-lib/models/order-properties/order-properties").ClearingBroker | undefined;
                         OrganizationID?: string | undefined;
                         Profiles?: string[] | undefined;
-                    }[] | undefined;
-                    BankAccounts?: {
-                        AccountName?: string | undefined;
-                        BankName?: string | undefined;
-                        BankAddress?: string | undefined;
-                        AccountNumber?: string | undefined;
-                        ABA?: string | undefined;
-                        SWIFT?: string | undefined;
-                        IBAN?: string | undefined;
                     }[] | undefined;
                     UISettings?: {
                         Theme?: import("./user").Theme | undefined;
@@ -4005,34 +3417,9 @@ export declare const GetByAddressesResponse: {
                         SignerType?: import("./user-fundings").SignerType | undefined;
                         Organizations?: string[] | undefined;
                     }[] | undefined;
-                    Socials?: {
-                        URL?: string | undefined;
-                        Type?: import("./user").SocialType | undefined;
-                    }[] | undefined;
                     Language?: import("./sologenic/com-fs-utils-lib/models/language/language").Lang | undefined;
                     ExternalUserID?: string | undefined;
                     OrganizationID?: string | undefined;
-                    Employment?: {
-                        EmployerName?: string | undefined;
-                        JobTitle?: string | undefined;
-                        StartDate?: Date | undefined;
-                        EndDate?: Date | undefined;
-                        Type?: import("./user-kyc").EmploymentType | undefined;
-                        Industry?: string | undefined;
-                        Income?: {
-                            Amount?: number | undefined;
-                            Currency?: string | undefined;
-                            Frequency?: import("./user-kyc").IncomeFrequency | undefined;
-                        } | undefined;
-                        Contact?: {
-                            Name?: string | undefined;
-                            Email?: string | undefined;
-                            Phone?: string | undefined;
-                            Address?: string | undefined;
-                        } | undefined;
-                        IsVerified?: boolean | undefined;
-                        VerifiedAt?: string | undefined;
-                    } | undefined;
                     Role?: import("./sologenic/com-fs-utils-lib/models/role/role").Role | undefined;
                     TradeProfile?: {
                         IsTradingEnabled?: boolean | undefined;
@@ -4072,6 +3459,16 @@ export declare const GetByAddressesResponse: {
                         IdentificationNumber?: string | undefined;
                         FirstName?: string | undefined;
                         LastName?: string | undefined;
+                        MiddleName?: string | undefined;
+                        AddressCountryCode?: string | undefined;
+                        SelectedCountryCode?: string | undefined;
+                        SelectedIDClass?: string | undefined;
+                        ExpirationDate?: string | undefined;
+                        IdentificationClass?: string | undefined;
+                        CardAccessNumber?: string | undefined;
+                        IssueDate?: string | undefined;
+                        IssuingAuthority?: string | undefined;
+                        CollectedEmailAddress?: string | undefined;
                     } | undefined;
                     UserDocumentCompliance?: {
                         SignedDocuments?: {
@@ -4095,15 +3492,6 @@ export declare const GetByAddressesResponse: {
                         Broker?: import("./sologenic/com-fs-utils-lib/models/order-properties/order-properties").ClearingBroker | undefined;
                         OrganizationID?: string | undefined;
                         Profiles?: string[] | undefined;
-                    }[] | undefined;
-                    BankAccounts?: {
-                        AccountName?: string | undefined;
-                        BankName?: string | undefined;
-                        BankAddress?: string | undefined;
-                        AccountNumber?: string | undefined;
-                        ABA?: string | undefined;
-                        SWIFT?: string | undefined;
-                        IBAN?: string | undefined;
                     }[] | undefined;
                     UISettings?: {
                         Theme?: import("./user").Theme | undefined;
@@ -4172,34 +3560,9 @@ export declare const GetByAddressesResponse: {
                         SignerType?: import("./user-fundings").SignerType | undefined;
                         Organizations?: string[] | undefined;
                     }[] | undefined;
-                    Socials?: {
-                        URL?: string | undefined;
-                        Type?: import("./user").SocialType | undefined;
-                    }[] | undefined;
                     Language?: import("./sologenic/com-fs-utils-lib/models/language/language").Lang | undefined;
                     ExternalUserID?: string | undefined;
                     OrganizationID?: string | undefined;
-                    Employment?: {
-                        EmployerName?: string | undefined;
-                        JobTitle?: string | undefined;
-                        StartDate?: Date | undefined;
-                        EndDate?: Date | undefined;
-                        Type?: import("./user-kyc").EmploymentType | undefined;
-                        Industry?: string | undefined;
-                        Income?: {
-                            Amount?: number | undefined;
-                            Currency?: string | undefined;
-                            Frequency?: import("./user-kyc").IncomeFrequency | undefined;
-                        } | undefined;
-                        Contact?: {
-                            Name?: string | undefined;
-                            Email?: string | undefined;
-                            Phone?: string | undefined;
-                            Address?: string | undefined;
-                        } | undefined;
-                        IsVerified?: boolean | undefined;
-                        VerifiedAt?: string | undefined;
-                    } | undefined;
                     Role?: import("./sologenic/com-fs-utils-lib/models/role/role").Role | undefined;
                     TradeProfile?: {
                         IsTradingEnabled?: boolean | undefined;
@@ -4239,6 +3602,16 @@ export declare const GetByAddressesResponse: {
                         IdentificationNumber?: string | undefined;
                         FirstName?: string | undefined;
                         LastName?: string | undefined;
+                        MiddleName?: string | undefined;
+                        AddressCountryCode?: string | undefined;
+                        SelectedCountryCode?: string | undefined;
+                        SelectedIDClass?: string | undefined;
+                        ExpirationDate?: string | undefined;
+                        IdentificationClass?: string | undefined;
+                        CardAccessNumber?: string | undefined;
+                        IssueDate?: string | undefined;
+                        IssuingAuthority?: string | undefined;
+                        CollectedEmailAddress?: string | undefined;
                     } | undefined;
                     UserDocumentCompliance?: {
                         SignedDocuments?: {
@@ -4262,15 +3635,6 @@ export declare const GetByAddressesResponse: {
                         Broker?: import("./sologenic/com-fs-utils-lib/models/order-properties/order-properties").ClearingBroker | undefined;
                         OrganizationID?: string | undefined;
                         Profiles?: string[] | undefined;
-                    }[] | undefined;
-                    BankAccounts?: {
-                        AccountName?: string | undefined;
-                        BankName?: string | undefined;
-                        BankAddress?: string | undefined;
-                        AccountNumber?: string | undefined;
-                        ABA?: string | undefined;
-                        SWIFT?: string | undefined;
-                        IBAN?: string | undefined;
                     }[] | undefined;
                     UISettings?: {
                         Theme?: import("./user").Theme | undefined;
@@ -4335,80 +3699,17 @@ export declare const GetByAddressesResponse: {
                         Alias?: string | undefined;
                         Type?: import("./user-fundings").WalletType | undefined;
                         SignerType?: import("./user-fundings").SignerType | undefined;
-                        Organizations?: (string[] & string[] & { [K_44 in Exclude<keyof I_1["Results"][number]["User"]["User"]["Wallets"][number]["Organizations"], keyof string[]>]: never; }) | undefined;
-                    } & { [K_45 in Exclude<keyof I_1["Results"][number]["User"]["User"]["Wallets"][number], keyof import("./user-fundings").Wallet>]: never; })[] & { [K_46 in Exclude<keyof I_1["Results"][number]["User"]["User"]["Wallets"], keyof {
+                        Organizations?: (string[] & string[] & { [K_37 in Exclude<keyof I_1["Results"][number]["User"]["User"]["Wallets"][number]["Organizations"], keyof string[]>]: never; }) | undefined;
+                    } & { [K_38 in Exclude<keyof I_1["Results"][number]["User"]["User"]["Wallets"][number], keyof import("./user-fundings").Wallet>]: never; })[] & { [K_39 in Exclude<keyof I_1["Results"][number]["User"]["User"]["Wallets"], keyof {
                         Address?: string | undefined;
                         Alias?: string | undefined;
                         Type?: import("./user-fundings").WalletType | undefined;
                         SignerType?: import("./user-fundings").SignerType | undefined;
                         Organizations?: string[] | undefined;
                     }[]>]: never; }) | undefined;
-                    Socials?: ({
-                        URL?: string | undefined;
-                        Type?: import("./user").SocialType | undefined;
-                    }[] & ({
-                        URL?: string | undefined;
-                        Type?: import("./user").SocialType | undefined;
-                    } & {
-                        URL?: string | undefined;
-                        Type?: import("./user").SocialType | undefined;
-                    } & { [K_47 in Exclude<keyof I_1["Results"][number]["User"]["User"]["Socials"][number], keyof import("./user").Social>]: never; })[] & { [K_48 in Exclude<keyof I_1["Results"][number]["User"]["User"]["Socials"], keyof {
-                        URL?: string | undefined;
-                        Type?: import("./user").SocialType | undefined;
-                    }[]>]: never; }) | undefined;
                     Language?: import("./sologenic/com-fs-utils-lib/models/language/language").Lang | undefined;
                     ExternalUserID?: string | undefined;
                     OrganizationID?: string | undefined;
-                    Employment?: ({
-                        EmployerName?: string | undefined;
-                        JobTitle?: string | undefined;
-                        StartDate?: Date | undefined;
-                        EndDate?: Date | undefined;
-                        Type?: import("./user-kyc").EmploymentType | undefined;
-                        Industry?: string | undefined;
-                        Income?: {
-                            Amount?: number | undefined;
-                            Currency?: string | undefined;
-                            Frequency?: import("./user-kyc").IncomeFrequency | undefined;
-                        } | undefined;
-                        Contact?: {
-                            Name?: string | undefined;
-                            Email?: string | undefined;
-                            Phone?: string | undefined;
-                            Address?: string | undefined;
-                        } | undefined;
-                        IsVerified?: boolean | undefined;
-                        VerifiedAt?: string | undefined;
-                    } & {
-                        EmployerName?: string | undefined;
-                        JobTitle?: string | undefined;
-                        StartDate?: Date | undefined;
-                        EndDate?: Date | undefined;
-                        Type?: import("./user-kyc").EmploymentType | undefined;
-                        Industry?: string | undefined;
-                        Income?: ({
-                            Amount?: number | undefined;
-                            Currency?: string | undefined;
-                            Frequency?: import("./user-kyc").IncomeFrequency | undefined;
-                        } & {
-                            Amount?: number | undefined;
-                            Currency?: string | undefined;
-                            Frequency?: import("./user-kyc").IncomeFrequency | undefined;
-                        } & { [K_49 in Exclude<keyof I_1["Results"][number]["User"]["User"]["Employment"]["Income"], keyof import("./user-kyc").Income>]: never; }) | undefined;
-                        Contact?: ({
-                            Name?: string | undefined;
-                            Email?: string | undefined;
-                            Phone?: string | undefined;
-                            Address?: string | undefined;
-                        } & {
-                            Name?: string | undefined;
-                            Email?: string | undefined;
-                            Phone?: string | undefined;
-                            Address?: string | undefined;
-                        } & { [K_50 in Exclude<keyof I_1["Results"][number]["User"]["User"]["Employment"]["Contact"], keyof import("./user-kyc").EmployerContact>]: never; }) | undefined;
-                        IsVerified?: boolean | undefined;
-                        VerifiedAt?: string | undefined;
-                    } & { [K_51 in Exclude<keyof I_1["Results"][number]["User"]["User"]["Employment"], keyof import("./user-kyc").Employment>]: never; }) | undefined;
                     Role?: import("./sologenic/com-fs-utils-lib/models/role/role").Role | undefined;
                     TradeProfile?: ({
                         IsTradingEnabled?: boolean | undefined;
@@ -4443,28 +3744,28 @@ export declare const GetByAddressesResponse: {
                         } & {
                             Value?: number | undefined;
                             IsGreaterThan?: boolean | undefined;
-                        } & { [K_52 in Exclude<keyof I_1["Results"][number]["User"]["User"]["TradeProfile"]["AggregateNotionalLimit"], keyof import("./sologenic/com-fs-trade-profile-model/tradeprofile").DropdownNumericValue>]: never; }) | undefined;
+                        } & { [K_40 in Exclude<keyof I_1["Results"][number]["User"]["User"]["TradeProfile"]["AggregateNotionalLimit"], keyof import("./sologenic/com-fs-trade-profile-model/tradeprofile").DropdownNumericValue>]: never; }) | undefined;
                         SingleOrderLimit?: ({
                             Value?: number | undefined;
                             IsGreaterThan?: boolean | undefined;
                         } & {
                             Value?: number | undefined;
                             IsGreaterThan?: boolean | undefined;
-                        } & { [K_53 in Exclude<keyof I_1["Results"][number]["User"]["User"]["TradeProfile"]["SingleOrderLimit"], keyof import("./sologenic/com-fs-trade-profile-model/tradeprofile").DropdownNumericValue>]: never; }) | undefined;
+                        } & { [K_41 in Exclude<keyof I_1["Results"][number]["User"]["User"]["TradeProfile"]["SingleOrderLimit"], keyof import("./sologenic/com-fs-trade-profile-model/tradeprofile").DropdownNumericValue>]: never; }) | undefined;
                         MaxOrderQuantity?: ({
                             Value?: number | undefined;
                             IsGreaterThan?: boolean | undefined;
                         } & {
                             Value?: number | undefined;
                             IsGreaterThan?: boolean | undefined;
-                        } & { [K_54 in Exclude<keyof I_1["Results"][number]["User"]["User"]["TradeProfile"]["MaxOrderQuantity"], keyof import("./sologenic/com-fs-trade-profile-model/tradeprofile").DropdownNumericValue>]: never; }) | undefined;
+                        } & { [K_42 in Exclude<keyof I_1["Results"][number]["User"]["User"]["TradeProfile"]["MaxOrderQuantity"], keyof import("./sologenic/com-fs-trade-profile-model/tradeprofile").DropdownNumericValue>]: never; }) | undefined;
                         AggressivePercentage?: number | undefined;
                         SymbolGrossADVPercent?: number | undefined;
                         PriceCheckDeviation?: number | undefined;
                         DuplicateOrderLimit?: number | undefined;
                         RiskMultiplier?: number | undefined;
-                    } & { [K_55 in Exclude<keyof I_1["Results"][number]["User"]["User"]["TradeProfile"], keyof import("./sologenic/com-fs-trade-profile-model/tradeprofile").TradeProfileDetails>]: never; }) | undefined;
-                    KYCInquiries?: (string[] & string[] & { [K_56 in Exclude<keyof I_1["Results"][number]["User"]["User"]["KYCInquiries"], keyof string[]>]: never; }) | undefined;
+                    } & { [K_43 in Exclude<keyof I_1["Results"][number]["User"]["User"]["TradeProfile"], keyof import("./sologenic/com-fs-trade-profile-model/tradeprofile").TradeProfileDetails>]: never; }) | undefined;
+                    KYCInquiries?: (string[] & string[] & { [K_44 in Exclude<keyof I_1["Results"][number]["User"]["User"]["KYCInquiries"], keyof string[]>]: never; }) | undefined;
                     KYCDetails?: ({
                         Birthdate?: string | undefined;
                         PhoneNumber?: string | undefined;
@@ -4479,6 +3780,16 @@ export declare const GetByAddressesResponse: {
                         IdentificationNumber?: string | undefined;
                         FirstName?: string | undefined;
                         LastName?: string | undefined;
+                        MiddleName?: string | undefined;
+                        AddressCountryCode?: string | undefined;
+                        SelectedCountryCode?: string | undefined;
+                        SelectedIDClass?: string | undefined;
+                        ExpirationDate?: string | undefined;
+                        IdentificationClass?: string | undefined;
+                        CardAccessNumber?: string | undefined;
+                        IssueDate?: string | undefined;
+                        IssuingAuthority?: string | undefined;
+                        CollectedEmailAddress?: string | undefined;
                     } & {
                         Birthdate?: string | undefined;
                         PhoneNumber?: string | undefined;
@@ -4493,7 +3804,17 @@ export declare const GetByAddressesResponse: {
                         IdentificationNumber?: string | undefined;
                         FirstName?: string | undefined;
                         LastName?: string | undefined;
-                    } & { [K_57 in Exclude<keyof I_1["Results"][number]["User"]["User"]["KYCDetails"], keyof import("./user-kyc").UserKYCDetails>]: never; }) | undefined;
+                        MiddleName?: string | undefined;
+                        AddressCountryCode?: string | undefined;
+                        SelectedCountryCode?: string | undefined;
+                        SelectedIDClass?: string | undefined;
+                        ExpirationDate?: string | undefined;
+                        IdentificationClass?: string | undefined;
+                        CardAccessNumber?: string | undefined;
+                        IssueDate?: string | undefined;
+                        IssuingAuthority?: string | undefined;
+                        CollectedEmailAddress?: string | undefined;
+                    } & { [K_45 in Exclude<keyof I_1["Results"][number]["User"]["User"]["KYCDetails"], keyof import("./user-kyc").UserKYCDetails>]: never; }) | undefined;
                     UserDocumentCompliance?: ({
                         SignedDocuments?: {
                             Name?: string | undefined;
@@ -4525,7 +3846,7 @@ export declare const GetByAddressesResponse: {
                             SignedAt?: Date | undefined;
                             FileMD5SUM?: string | undefined;
                             TXID?: string | undefined;
-                        } & { [K_58 in Exclude<keyof I_1["Results"][number]["User"]["User"]["UserDocumentCompliance"]["SignedDocuments"][number], keyof import("./sologenic/com-fs-document-model/document").SignedDocument>]: never; })[] & { [K_59 in Exclude<keyof I_1["Results"][number]["User"]["User"]["UserDocumentCompliance"]["SignedDocuments"], keyof {
+                        } & { [K_46 in Exclude<keyof I_1["Results"][number]["User"]["User"]["UserDocumentCompliance"]["SignedDocuments"][number], keyof import("./sologenic/com-fs-document-model/document").SignedDocument>]: never; })[] & { [K_47 in Exclude<keyof I_1["Results"][number]["User"]["User"]["UserDocumentCompliance"]["SignedDocuments"], keyof {
                             Name?: string | undefined;
                             SignedVersion?: string | undefined;
                             DocumentState?: import("./sologenic/com-fs-document-model/document").DocumentState | undefined;
@@ -4533,7 +3854,7 @@ export declare const GetByAddressesResponse: {
                             FileMD5SUM?: string | undefined;
                             TXID?: string | undefined;
                         }[]>]: never; }) | undefined;
-                    } & { [K_60 in Exclude<keyof I_1["Results"][number]["User"]["User"]["UserDocumentCompliance"], "SignedDocuments">]: never; }) | undefined;
+                    } & { [K_48 in Exclude<keyof I_1["Results"][number]["User"]["User"]["UserDocumentCompliance"], "SignedDocuments">]: never; }) | undefined;
                     KYCStatus?: import("./user-kyc").KYCStatus | undefined;
                     UserTradeProfile?: ({
                         IsMarginTradingEnabled?: boolean | undefined;
@@ -4545,7 +3866,7 @@ export declare const GetByAddressesResponse: {
                         IsShortSellingEnabled?: boolean | undefined;
                         SingleOrderLimit?: number | undefined;
                         MaxOrderQuantity?: number | undefined;
-                    } & { [K_61 in Exclude<keyof I_1["Results"][number]["User"]["User"]["UserTradeProfile"], keyof import("./sologenic/com-fs-trade-profile-model/tradeprofile").UserTradeProfile>]: never; }) | undefined;
+                    } & { [K_49 in Exclude<keyof I_1["Results"][number]["User"]["User"]["UserTradeProfile"], keyof import("./sologenic/com-fs-trade-profile-model/tradeprofile").UserTradeProfile>]: never; }) | undefined;
                     BrokerAccounts?: ({
                         AccountID?: string | undefined;
                         Broker?: import("./sologenic/com-fs-utils-lib/models/order-properties/order-properties").ClearingBroker | undefined;
@@ -4560,51 +3881,18 @@ export declare const GetByAddressesResponse: {
                         AccountID?: string | undefined;
                         Broker?: import("./sologenic/com-fs-utils-lib/models/order-properties/order-properties").ClearingBroker | undefined;
                         OrganizationID?: string | undefined;
-                        Profiles?: (string[] & string[] & { [K_62 in Exclude<keyof I_1["Results"][number]["User"]["User"]["BrokerAccounts"][number]["Profiles"], keyof string[]>]: never; }) | undefined;
-                    } & { [K_63 in Exclude<keyof I_1["Results"][number]["User"]["User"]["BrokerAccounts"][number], keyof import("./user-fundings").BrokerAccount>]: never; })[] & { [K_64 in Exclude<keyof I_1["Results"][number]["User"]["User"]["BrokerAccounts"], keyof {
+                        Profiles?: (string[] & string[] & { [K_50 in Exclude<keyof I_1["Results"][number]["User"]["User"]["BrokerAccounts"][number]["Profiles"], keyof string[]>]: never; }) | undefined;
+                    } & { [K_51 in Exclude<keyof I_1["Results"][number]["User"]["User"]["BrokerAccounts"][number], keyof import("./user-fundings").BrokerAccount>]: never; })[] & { [K_52 in Exclude<keyof I_1["Results"][number]["User"]["User"]["BrokerAccounts"], keyof {
                         AccountID?: string | undefined;
                         Broker?: import("./sologenic/com-fs-utils-lib/models/order-properties/order-properties").ClearingBroker | undefined;
                         OrganizationID?: string | undefined;
                         Profiles?: string[] | undefined;
                     }[]>]: never; }) | undefined;
-                    BankAccounts?: ({
-                        AccountName?: string | undefined;
-                        BankName?: string | undefined;
-                        BankAddress?: string | undefined;
-                        AccountNumber?: string | undefined;
-                        ABA?: string | undefined;
-                        SWIFT?: string | undefined;
-                        IBAN?: string | undefined;
-                    }[] & ({
-                        AccountName?: string | undefined;
-                        BankName?: string | undefined;
-                        BankAddress?: string | undefined;
-                        AccountNumber?: string | undefined;
-                        ABA?: string | undefined;
-                        SWIFT?: string | undefined;
-                        IBAN?: string | undefined;
-                    } & {
-                        AccountName?: string | undefined;
-                        BankName?: string | undefined;
-                        BankAddress?: string | undefined;
-                        AccountNumber?: string | undefined;
-                        ABA?: string | undefined;
-                        SWIFT?: string | undefined;
-                        IBAN?: string | undefined;
-                    } & { [K_65 in Exclude<keyof I_1["Results"][number]["User"]["User"]["BankAccounts"][number], keyof import("./user-fundings").BankAccount>]: never; })[] & { [K_66 in Exclude<keyof I_1["Results"][number]["User"]["User"]["BankAccounts"], keyof {
-                        AccountName?: string | undefined;
-                        BankName?: string | undefined;
-                        BankAddress?: string | undefined;
-                        AccountNumber?: string | undefined;
-                        ABA?: string | undefined;
-                        SWIFT?: string | undefined;
-                        IBAN?: string | undefined;
-                    }[]>]: never; }) | undefined;
                     UISettings?: ({
                         Theme?: import("./user").Theme | undefined;
                     } & {
                         Theme?: import("./user").Theme | undefined;
-                    } & { [K_67 in Exclude<keyof I_1["Results"][number]["User"]["User"]["UISettings"], "Theme">]: never; }) | undefined;
+                    } & { [K_53 in Exclude<keyof I_1["Results"][number]["User"]["User"]["UISettings"], "Theme">]: never; }) | undefined;
                     CommissionSettings?: ({
                         Commission?: {
                             Value?: number | undefined;
@@ -4618,9 +3906,9 @@ export declare const GetByAddressesResponse: {
                         } & {
                             Value?: number | undefined;
                             Exp?: number | undefined;
-                        } & { [K_68 in Exclude<keyof I_1["Results"][number]["User"]["User"]["CommissionSettings"]["Commission"], keyof import("./sologenic/com-fs-utils-lib/models/decimal/decimal").Decimal>]: never; }) | undefined;
+                        } & { [K_54 in Exclude<keyof I_1["Results"][number]["User"]["User"]["CommissionSettings"]["Commission"], keyof import("./sologenic/com-fs-utils-lib/models/decimal/decimal").Decimal>]: never; }) | undefined;
                         CommissionType?: import("./sologenic/com-fs-utils-lib/models/commission/commission").CommissionType | undefined;
-                    } & { [K_69 in Exclude<keyof I_1["Results"][number]["User"]["User"]["CommissionSettings"], keyof import("./sologenic/com-fs-utils-lib/models/commission/commission").CommissionSettings>]: never; }) | undefined;
+                    } & { [K_55 in Exclude<keyof I_1["Results"][number]["User"]["User"]["CommissionSettings"], keyof import("./sologenic/com-fs-utils-lib/models/commission/commission").CommissionSettings>]: never; }) | undefined;
                     DataFeedAccounts?: ({
                         DxFeed?: {
                             AccountID?: string | undefined;
@@ -4630,9 +3918,9 @@ export declare const GetByAddressesResponse: {
                             AccountID?: string | undefined;
                         } & {
                             AccountID?: string | undefined;
-                        } & { [K_70 in Exclude<keyof I_1["Results"][number]["User"]["User"]["DataFeedAccounts"]["DxFeed"], "AccountID">]: never; }) | undefined;
-                    } & { [K_71 in Exclude<keyof I_1["Results"][number]["User"]["User"]["DataFeedAccounts"], "DxFeed">]: never; }) | undefined;
-                    AllowedJurisdictions?: (string[] & string[] & { [K_72 in Exclude<keyof I_1["Results"][number]["User"]["User"]["AllowedJurisdictions"], keyof string[]>]: never; }) | undefined;
+                        } & { [K_56 in Exclude<keyof I_1["Results"][number]["User"]["User"]["DataFeedAccounts"]["DxFeed"], "AccountID">]: never; }) | undefined;
+                    } & { [K_57 in Exclude<keyof I_1["Results"][number]["User"]["User"]["DataFeedAccounts"], "DxFeed">]: never; }) | undefined;
+                    AllowedJurisdictions?: (string[] & string[] & { [K_58 in Exclude<keyof I_1["Results"][number]["User"]["User"]["AllowedJurisdictions"], keyof string[]>]: never; }) | undefined;
                     EmailAddress?: string | undefined;
                     ComplianceFormAnswers?: ({
                         ComplianceID?: string | undefined;
@@ -4680,7 +3968,7 @@ export declare const GetByAddressesResponse: {
                             }[] | undefined;
                         } & {
                             Question?: string | undefined;
-                            Values?: (string[] & string[] & { [K_73 in Exclude<keyof I_1["Results"][number]["User"]["User"]["ComplianceFormAnswers"][number]["Answers"][number]["Values"], keyof string[]>]: never; }) | undefined;
+                            Values?: (string[] & string[] & { [K_59 in Exclude<keyof I_1["Results"][number]["User"]["User"]["ComplianceFormAnswers"][number]["Answers"][number]["Values"], keyof string[]>]: never; }) | undefined;
                             Files?: ({
                                 Description?: string | undefined;
                                 Optionality?: import("./sologenic/com-fs-compliance-model/compliance").Optionality | undefined;
@@ -4693,12 +3981,12 @@ export declare const GetByAddressesResponse: {
                                 Description?: string | undefined;
                                 Optionality?: import("./sologenic/com-fs-compliance-model/compliance").Optionality | undefined;
                                 Hash?: string | undefined;
-                            } & { [K_74 in Exclude<keyof I_1["Results"][number]["User"]["User"]["ComplianceFormAnswers"][number]["Answers"][number]["Files"][number], keyof import("./sologenic/com-fs-compliance-model/compliance").File>]: never; })[] & { [K_75 in Exclude<keyof I_1["Results"][number]["User"]["User"]["ComplianceFormAnswers"][number]["Answers"][number]["Files"], keyof {
+                            } & { [K_60 in Exclude<keyof I_1["Results"][number]["User"]["User"]["ComplianceFormAnswers"][number]["Answers"][number]["Files"][number], keyof import("./sologenic/com-fs-compliance-model/compliance").File>]: never; })[] & { [K_61 in Exclude<keyof I_1["Results"][number]["User"]["User"]["ComplianceFormAnswers"][number]["Answers"][number]["Files"], keyof {
                                 Description?: string | undefined;
                                 Optionality?: import("./sologenic/com-fs-compliance-model/compliance").Optionality | undefined;
                                 Hash?: string | undefined;
                             }[]>]: never; }) | undefined;
-                        } & { [K_76 in Exclude<keyof I_1["Results"][number]["User"]["User"]["ComplianceFormAnswers"][number]["Answers"][number], keyof import("./sologenic/com-fs-compliance-model/compliance").QuestionAnswer>]: never; })[] & { [K_77 in Exclude<keyof I_1["Results"][number]["User"]["User"]["ComplianceFormAnswers"][number]["Answers"], keyof {
+                        } & { [K_62 in Exclude<keyof I_1["Results"][number]["User"]["User"]["ComplianceFormAnswers"][number]["Answers"][number], keyof import("./sologenic/com-fs-compliance-model/compliance").QuestionAnswer>]: never; })[] & { [K_63 in Exclude<keyof I_1["Results"][number]["User"]["User"]["ComplianceFormAnswers"][number]["Answers"], keyof {
                             Question?: string | undefined;
                             Values?: string[] | undefined;
                             Files?: {
@@ -4709,7 +3997,7 @@ export declare const GetByAddressesResponse: {
                         }[]>]: never; }) | undefined;
                         FormStatus?: import("./sologenic/com-fs-compliance-model/compliance").FormStatus | undefined;
                         SubmittedAt?: Date | undefined;
-                    } & { [K_78 in Exclude<keyof I_1["Results"][number]["User"]["User"]["ComplianceFormAnswers"][number], keyof import("./sologenic/com-fs-compliance-model/compliance").ComplianceFormAnswer>]: never; })[] & { [K_79 in Exclude<keyof I_1["Results"][number]["User"]["User"]["ComplianceFormAnswers"], keyof {
+                    } & { [K_64 in Exclude<keyof I_1["Results"][number]["User"]["User"]["ComplianceFormAnswers"][number], keyof import("./sologenic/com-fs-compliance-model/compliance").ComplianceFormAnswer>]: never; })[] & { [K_65 in Exclude<keyof I_1["Results"][number]["User"]["User"]["ComplianceFormAnswers"], keyof {
                         ComplianceID?: string | undefined;
                         Answers?: {
                             Question?: string | undefined;
@@ -4729,7 +4017,7 @@ export declare const GetByAddressesResponse: {
                     ReferralAmountReceived?: number | undefined;
                     ReferralAmount?: number | undefined;
                     ReferralPaidAt?: Date | undefined;
-                } & { [K_80 in Exclude<keyof I_1["Results"][number]["User"]["User"], keyof import("./user").UserDetails>]: never; }) | undefined;
+                } & { [K_66 in Exclude<keyof I_1["Results"][number]["User"]["User"], keyof import("./user").UserDetails>]: never; }) | undefined;
                 MetaData?: ({
                     Network?: Network | undefined;
                     UpdatedAt?: Date | undefined;
@@ -4740,7 +4028,7 @@ export declare const GetByAddressesResponse: {
                     UpdatedAt?: Date | undefined;
                     CreatedAt?: Date | undefined;
                     UpdatedByAccount?: string | undefined;
-                } & { [K_81 in Exclude<keyof I_1["Results"][number]["User"]["MetaData"], keyof import("./sologenic/com-fs-utils-lib/models/metadata/metadata").MetaData>]: never; }) | undefined;
+                } & { [K_67 in Exclude<keyof I_1["Results"][number]["User"]["MetaData"], keyof import("./sologenic/com-fs-utils-lib/models/metadata/metadata").MetaData>]: never; }) | undefined;
                 Audit?: ({
                     ChangedBy?: string | undefined;
                     ChangedAt?: Date | undefined;
@@ -4749,10 +4037,10 @@ export declare const GetByAddressesResponse: {
                     ChangedBy?: string | undefined;
                     ChangedAt?: Date | undefined;
                     Reason?: string | undefined;
-                } & { [K_82 in Exclude<keyof I_1["Results"][number]["User"]["Audit"], keyof import("./sologenic/com-fs-utils-lib/models/audit/audit").Audit>]: never; }) | undefined;
-                OrganizationIDs?: (string[] & string[] & { [K_83 in Exclude<keyof I_1["Results"][number]["User"]["OrganizationIDs"], keyof string[]>]: never; }) | undefined;
-            } & { [K_84 in Exclude<keyof I_1["Results"][number]["User"], keyof User>]: never; }) | undefined;
-        } & { [K_85 in Exclude<keyof I_1["Results"][number], keyof AddressUserPair>]: never; })[] & { [K_86 in Exclude<keyof I_1["Results"], keyof {
+                } & { [K_68 in Exclude<keyof I_1["Results"][number]["User"]["Audit"], keyof import("./sologenic/com-fs-utils-lib/models/audit/audit").Audit>]: never; }) | undefined;
+                OrganizationIDs?: (string[] & string[] & { [K_69 in Exclude<keyof I_1["Results"][number]["User"]["OrganizationIDs"], keyof string[]>]: never; }) | undefined;
+            } & { [K_70 in Exclude<keyof I_1["Results"][number]["User"], keyof User>]: never; }) | undefined;
+        } & { [K_71 in Exclude<keyof I_1["Results"][number], keyof AddressUserPair>]: never; })[] & { [K_72 in Exclude<keyof I_1["Results"], keyof {
             Address?: string | undefined;
             User?: {
                 User?: {
@@ -4771,34 +4059,9 @@ export declare const GetByAddressesResponse: {
                         SignerType?: import("./user-fundings").SignerType | undefined;
                         Organizations?: string[] | undefined;
                     }[] | undefined;
-                    Socials?: {
-                        URL?: string | undefined;
-                        Type?: import("./user").SocialType | undefined;
-                    }[] | undefined;
                     Language?: import("./sologenic/com-fs-utils-lib/models/language/language").Lang | undefined;
                     ExternalUserID?: string | undefined;
                     OrganizationID?: string | undefined;
-                    Employment?: {
-                        EmployerName?: string | undefined;
-                        JobTitle?: string | undefined;
-                        StartDate?: Date | undefined;
-                        EndDate?: Date | undefined;
-                        Type?: import("./user-kyc").EmploymentType | undefined;
-                        Industry?: string | undefined;
-                        Income?: {
-                            Amount?: number | undefined;
-                            Currency?: string | undefined;
-                            Frequency?: import("./user-kyc").IncomeFrequency | undefined;
-                        } | undefined;
-                        Contact?: {
-                            Name?: string | undefined;
-                            Email?: string | undefined;
-                            Phone?: string | undefined;
-                            Address?: string | undefined;
-                        } | undefined;
-                        IsVerified?: boolean | undefined;
-                        VerifiedAt?: string | undefined;
-                    } | undefined;
                     Role?: import("./sologenic/com-fs-utils-lib/models/role/role").Role | undefined;
                     TradeProfile?: {
                         IsTradingEnabled?: boolean | undefined;
@@ -4838,6 +4101,16 @@ export declare const GetByAddressesResponse: {
                         IdentificationNumber?: string | undefined;
                         FirstName?: string | undefined;
                         LastName?: string | undefined;
+                        MiddleName?: string | undefined;
+                        AddressCountryCode?: string | undefined;
+                        SelectedCountryCode?: string | undefined;
+                        SelectedIDClass?: string | undefined;
+                        ExpirationDate?: string | undefined;
+                        IdentificationClass?: string | undefined;
+                        CardAccessNumber?: string | undefined;
+                        IssueDate?: string | undefined;
+                        IssuingAuthority?: string | undefined;
+                        CollectedEmailAddress?: string | undefined;
                     } | undefined;
                     UserDocumentCompliance?: {
                         SignedDocuments?: {
@@ -4861,15 +4134,6 @@ export declare const GetByAddressesResponse: {
                         Broker?: import("./sologenic/com-fs-utils-lib/models/order-properties/order-properties").ClearingBroker | undefined;
                         OrganizationID?: string | undefined;
                         Profiles?: string[] | undefined;
-                    }[] | undefined;
-                    BankAccounts?: {
-                        AccountName?: string | undefined;
-                        BankName?: string | undefined;
-                        BankAddress?: string | undefined;
-                        AccountNumber?: string | undefined;
-                        ABA?: string | undefined;
-                        SWIFT?: string | undefined;
-                        IBAN?: string | undefined;
                     }[] | undefined;
                     UISettings?: {
                         Theme?: import("./user").Theme | undefined;
@@ -4923,7 +4187,7 @@ export declare const GetByAddressesResponse: {
                 OrganizationIDs?: string[] | undefined;
             } | undefined;
         }[]>]: never; }) | undefined;
-    } & { [K_87 in Exclude<keyof I_1, "Results">]: never; }>(object: I_1): GetByAddressesResponse;
+    } & { [K_73 in Exclude<keyof I_1, "Results">]: never; }>(object: I_1): GetByAddressesResponse;
 };
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 export type DeepPartial<T> = T extends Builtin ? T : T extends globalThis.Array<infer U> ? globalThis.Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? {

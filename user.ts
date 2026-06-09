@@ -20,17 +20,15 @@ import {
   networkToJSON,
 } from "./sologenic/com-fs-utils-lib/models/metadata/metadata";
 import { Role, roleFromJSON, roleToJSON } from "./sologenic/com-fs-utils-lib/models/role/role";
-import { BankAccount, BrokerAccount, Wallet } from "./user-fundings";
-import { Employment, KYCStatus, kYCStatusFromJSON, kYCStatusToJSON, UserKYCDetails } from "./user-kyc";
+import { BrokerAccount, Wallet } from "./user-fundings";
+import { KYCStatus, kYCStatusFromJSON, kYCStatusToJSON, UserKYCDetails } from "./user-kyc";
 
 export const protobufPackage = "user";
 
 export enum UserStatus {
   NOT_USED_USERSTATUS = 0,
   ACTIVE = 1,
-  ADMIN_DEACTIVATED = 2,
-  /** @deprecated */
-  TO_BE_APPROVED = 3,
+  DEACTIVATED = 2,
   UNRECOGNIZED = -1,
 }
 
@@ -43,11 +41,8 @@ export function userStatusFromJSON(object: any): UserStatus {
     case "ACTIVE":
       return UserStatus.ACTIVE;
     case 2:
-    case "ADMIN_DEACTIVATED":
-      return UserStatus.ADMIN_DEACTIVATED;
-    case 3:
-    case "TO_BE_APPROVED":
-      return UserStatus.TO_BE_APPROVED;
+    case "DEACTIVATED":
+      return UserStatus.DEACTIVATED;
     case -1:
     case "UNRECOGNIZED":
     default:
@@ -61,92 +56,9 @@ export function userStatusToJSON(object: UserStatus): string {
       return "NOT_USED_USERSTATUS";
     case UserStatus.ACTIVE:
       return "ACTIVE";
-    case UserStatus.ADMIN_DEACTIVATED:
-      return "ADMIN_DEACTIVATED";
-    case UserStatus.TO_BE_APPROVED:
-      return "TO_BE_APPROVED";
+    case UserStatus.DEACTIVATED:
+      return "DEACTIVATED";
     case UserStatus.UNRECOGNIZED:
-    default:
-      return "UNRECOGNIZED";
-  }
-}
-
-export enum SocialType {
-  NOT_USED_SOCIALTYPE = 0,
-  WEBSITE = 1,
-  GITHUB = 2,
-  REDDIT = 3,
-  DISCORD = 4,
-  TWITTER = 5,
-  FACEBOOK = 6,
-  TELEGRAM = 7,
-  INSTAGRAM = 8,
-  LINKEDIN = 9,
-  UNRECOGNIZED = -1,
-}
-
-export function socialTypeFromJSON(object: any): SocialType {
-  switch (object) {
-    case 0:
-    case "NOT_USED_SOCIALTYPE":
-      return SocialType.NOT_USED_SOCIALTYPE;
-    case 1:
-    case "WEBSITE":
-      return SocialType.WEBSITE;
-    case 2:
-    case "GITHUB":
-      return SocialType.GITHUB;
-    case 3:
-    case "REDDIT":
-      return SocialType.REDDIT;
-    case 4:
-    case "DISCORD":
-      return SocialType.DISCORD;
-    case 5:
-    case "TWITTER":
-      return SocialType.TWITTER;
-    case 6:
-    case "FACEBOOK":
-      return SocialType.FACEBOOK;
-    case 7:
-    case "TELEGRAM":
-      return SocialType.TELEGRAM;
-    case 8:
-    case "INSTAGRAM":
-      return SocialType.INSTAGRAM;
-    case 9:
-    case "LINKEDIN":
-      return SocialType.LINKEDIN;
-    case -1:
-    case "UNRECOGNIZED":
-    default:
-      return SocialType.UNRECOGNIZED;
-  }
-}
-
-export function socialTypeToJSON(object: SocialType): string {
-  switch (object) {
-    case SocialType.NOT_USED_SOCIALTYPE:
-      return "NOT_USED_SOCIALTYPE";
-    case SocialType.WEBSITE:
-      return "WEBSITE";
-    case SocialType.GITHUB:
-      return "GITHUB";
-    case SocialType.REDDIT:
-      return "REDDIT";
-    case SocialType.DISCORD:
-      return "DISCORD";
-    case SocialType.TWITTER:
-      return "TWITTER";
-    case SocialType.FACEBOOK:
-      return "FACEBOOK";
-    case SocialType.TELEGRAM:
-      return "TELEGRAM";
-    case SocialType.INSTAGRAM:
-      return "INSTAGRAM";
-    case SocialType.LINKEDIN:
-      return "LINKEDIN";
-    case SocialType.UNRECOGNIZED:
     default:
       return "UNRECOGNIZED";
   }
@@ -203,15 +115,11 @@ export interface UserDetails {
   Description: string;
   Status: UserStatus;
   Wallets: Wallet[];
-  Socials: Social[];
   Language: Lang;
   /** UUID for the external user identifier for example to be used in communication with the KYC provider, or other places where an anonymous ID is required */
   ExternalUserID: string;
   /** UUID of the current organization the user belongs to */
   OrganizationID: string;
-  Employment?:
-    | Employment
-    | undefined;
   /** A retail user will always have a role of "NORMAL_USER" */
   Role: Role;
   TradeProfile:
@@ -227,8 +135,6 @@ export interface UserDetails {
   KYCStatus: KYCStatus;
   UserTradeProfile: UserTradeProfile | undefined;
   BrokerAccounts: BrokerAccount[];
-  /** @deprecated */
-  BankAccounts: BankAccount[];
   UISettings:
     | UISettings
     | undefined;
@@ -277,11 +183,6 @@ export interface User {
   OrganizationIDs: string[];
 }
 
-export interface Social {
-  URL: string;
-  Type: SocialType;
-}
-
 export interface UserList {
   Users: User[];
   Offset?: number | undefined;
@@ -318,11 +219,9 @@ function createBaseUserDetails(): UserDetails {
     Description: "",
     Status: 0,
     Wallets: [],
-    Socials: [],
     Language: 0,
     ExternalUserID: "",
     OrganizationID: "",
-    Employment: undefined,
     Role: 0,
     TradeProfile: undefined,
     KYCInquiries: [],
@@ -331,7 +230,6 @@ function createBaseUserDetails(): UserDetails {
     KYCStatus: 0,
     UserTradeProfile: undefined,
     BrokerAccounts: [],
-    BankAccounts: [],
     UISettings: undefined,
     CommissionSettings: undefined,
     DataFeedAccounts: undefined,
@@ -376,9 +274,6 @@ export const UserDetails = {
     for (const v of message.Wallets) {
       Wallet.encode(v!, writer.uint32(74).fork()).ldelim();
     }
-    for (const v of message.Socials) {
-      Social.encode(v!, writer.uint32(82).fork()).ldelim();
-    }
     if (message.Language !== 0) {
       writer.uint32(88).int32(message.Language);
     }
@@ -387,9 +282,6 @@ export const UserDetails = {
     }
     if (message.OrganizationID !== "") {
       writer.uint32(106).string(message.OrganizationID);
-    }
-    if (message.Employment !== undefined) {
-      Employment.encode(message.Employment, writer.uint32(114).fork()).ldelim();
     }
     if (message.Role !== 0) {
       writer.uint32(120).int32(message.Role);
@@ -414,9 +306,6 @@ export const UserDetails = {
     }
     for (const v of message.BrokerAccounts) {
       BrokerAccount.encode(v!, writer.uint32(186).fork()).ldelim();
-    }
-    for (const v of message.BankAccounts) {
-      BankAccount.encode(v!, writer.uint32(194).fork()).ldelim();
     }
     if (message.UISettings !== undefined) {
       UISettings.encode(message.UISettings, writer.uint32(202).fork()).ldelim();
@@ -527,13 +416,6 @@ export const UserDetails = {
 
           message.Wallets.push(Wallet.decode(reader, reader.uint32()));
           continue;
-        case 10:
-          if (tag !== 82) {
-            break;
-          }
-
-          message.Socials.push(Social.decode(reader, reader.uint32()));
-          continue;
         case 11:
           if (tag !== 88) {
             break;
@@ -554,13 +436,6 @@ export const UserDetails = {
           }
 
           message.OrganizationID = reader.string();
-          continue;
-        case 14:
-          if (tag !== 114) {
-            break;
-          }
-
-          message.Employment = Employment.decode(reader, reader.uint32());
           continue;
         case 15:
           if (tag !== 120) {
@@ -617,13 +492,6 @@ export const UserDetails = {
           }
 
           message.BrokerAccounts.push(BrokerAccount.decode(reader, reader.uint32()));
-          continue;
-        case 24:
-          if (tag !== 194) {
-            break;
-          }
-
-          message.BankAccounts.push(BankAccount.decode(reader, reader.uint32()));
           continue;
         case 25:
           if (tag !== 202) {
@@ -729,11 +597,9 @@ export const UserDetails = {
       Description: isSet(object.Description) ? globalThis.String(object.Description) : "",
       Status: isSet(object.Status) ? userStatusFromJSON(object.Status) : 0,
       Wallets: globalThis.Array.isArray(object?.Wallets) ? object.Wallets.map((e: any) => Wallet.fromJSON(e)) : [],
-      Socials: globalThis.Array.isArray(object?.Socials) ? object.Socials.map((e: any) => Social.fromJSON(e)) : [],
       Language: isSet(object.Language) ? langFromJSON(object.Language) : 0,
       ExternalUserID: isSet(object.ExternalUserID) ? globalThis.String(object.ExternalUserID) : "",
       OrganizationID: isSet(object.OrganizationID) ? globalThis.String(object.OrganizationID) : "",
-      Employment: isSet(object.Employment) ? Employment.fromJSON(object.Employment) : undefined,
       Role: isSet(object.Role) ? roleFromJSON(object.Role) : 0,
       TradeProfile: isSet(object.TradeProfile) ? TradeProfileDetails.fromJSON(object.TradeProfile) : undefined,
       KYCInquiries: globalThis.Array.isArray(object?.KYCInquiries)
@@ -747,9 +613,6 @@ export const UserDetails = {
       UserTradeProfile: isSet(object.UserTradeProfile) ? UserTradeProfile.fromJSON(object.UserTradeProfile) : undefined,
       BrokerAccounts: globalThis.Array.isArray(object?.BrokerAccounts)
         ? object.BrokerAccounts.map((e: any) => BrokerAccount.fromJSON(e))
-        : [],
-      BankAccounts: globalThis.Array.isArray(object?.BankAccounts)
-        ? object.BankAccounts.map((e: any) => BankAccount.fromJSON(e))
         : [],
       UISettings: isSet(object.UISettings) ? UISettings.fromJSON(object.UISettings) : undefined,
       CommissionSettings: isSet(object.CommissionSettings)
@@ -803,9 +666,6 @@ export const UserDetails = {
     if (message.Wallets?.length) {
       obj.Wallets = message.Wallets.map((e) => Wallet.toJSON(e));
     }
-    if (message.Socials?.length) {
-      obj.Socials = message.Socials.map((e) => Social.toJSON(e));
-    }
     if (message.Language !== 0) {
       obj.Language = langToJSON(message.Language);
     }
@@ -814,9 +674,6 @@ export const UserDetails = {
     }
     if (message.OrganizationID !== "") {
       obj.OrganizationID = message.OrganizationID;
-    }
-    if (message.Employment !== undefined) {
-      obj.Employment = Employment.toJSON(message.Employment);
     }
     if (message.Role !== 0) {
       obj.Role = roleToJSON(message.Role);
@@ -841,9 +698,6 @@ export const UserDetails = {
     }
     if (message.BrokerAccounts?.length) {
       obj.BrokerAccounts = message.BrokerAccounts.map((e) => BrokerAccount.toJSON(e));
-    }
-    if (message.BankAccounts?.length) {
-      obj.BankAccounts = message.BankAccounts.map((e) => BankAccount.toJSON(e));
     }
     if (message.UISettings !== undefined) {
       obj.UISettings = UISettings.toJSON(message.UISettings);
@@ -898,13 +752,9 @@ export const UserDetails = {
     message.Description = object.Description ?? "";
     message.Status = object.Status ?? 0;
     message.Wallets = object.Wallets?.map((e) => Wallet.fromPartial(e)) || [];
-    message.Socials = object.Socials?.map((e) => Social.fromPartial(e)) || [];
     message.Language = object.Language ?? 0;
     message.ExternalUserID = object.ExternalUserID ?? "";
     message.OrganizationID = object.OrganizationID ?? "";
-    message.Employment = (object.Employment !== undefined && object.Employment !== null)
-      ? Employment.fromPartial(object.Employment)
-      : undefined;
     message.Role = object.Role ?? 0;
     message.TradeProfile = (object.TradeProfile !== undefined && object.TradeProfile !== null)
       ? TradeProfileDetails.fromPartial(object.TradeProfile)
@@ -922,7 +772,6 @@ export const UserDetails = {
       ? UserTradeProfile.fromPartial(object.UserTradeProfile)
       : undefined;
     message.BrokerAccounts = object.BrokerAccounts?.map((e) => BrokerAccount.fromPartial(e)) || [];
-    message.BankAccounts = object.BankAccounts?.map((e) => BankAccount.fromPartial(e)) || [];
     message.UISettings = (object.UISettings !== undefined && object.UISettings !== null)
       ? UISettings.fromPartial(object.UISettings)
       : undefined;
@@ -1051,80 +900,6 @@ export const User = {
       : undefined;
     message.Audit = (object.Audit !== undefined && object.Audit !== null) ? Audit.fromPartial(object.Audit) : undefined;
     message.OrganizationIDs = object.OrganizationIDs?.map((e) => e) || [];
-    return message;
-  },
-};
-
-function createBaseSocial(): Social {
-  return { URL: "", Type: 0 };
-}
-
-export const Social = {
-  encode(message: Social, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.URL !== "") {
-      writer.uint32(10).string(message.URL);
-    }
-    if (message.Type !== 0) {
-      writer.uint32(16).int32(message.Type);
-    }
-    return writer;
-  },
-
-  decode(input: _m0.Reader | Uint8Array, length?: number): Social {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseSocial();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1:
-          if (tag !== 10) {
-            break;
-          }
-
-          message.URL = reader.string();
-          continue;
-        case 2:
-          if (tag !== 16) {
-            break;
-          }
-
-          message.Type = reader.int32() as any;
-          continue;
-      }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
-      }
-      reader.skipType(tag & 7);
-    }
-    return message;
-  },
-
-  fromJSON(object: any): Social {
-    return {
-      URL: isSet(object.URL) ? globalThis.String(object.URL) : "",
-      Type: isSet(object.Type) ? socialTypeFromJSON(object.Type) : 0,
-    };
-  },
-
-  toJSON(message: Social): unknown {
-    const obj: any = {};
-    if (message.URL !== "") {
-      obj.URL = message.URL;
-    }
-    if (message.Type !== 0) {
-      obj.Type = socialTypeToJSON(message.Type);
-    }
-    return obj;
-  },
-
-  create<I extends Exact<DeepPartial<Social>, I>>(base?: I): Social {
-    return Social.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<Social>, I>>(object: I): Social {
-    const message = createBaseSocial();
-    message.URL = object.URL ?? "";
-    message.Type = object.Type ?? 0;
     return message;
   },
 };

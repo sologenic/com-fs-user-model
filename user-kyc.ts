@@ -6,129 +6,8 @@
 
 /* eslint-disable */
 import _m0 from "protobufjs/minimal";
-import { Timestamp } from "./google/protobuf/timestamp";
 
 export const protobufPackage = "user";
-
-export enum EmploymentType {
-  NOT_USED_EMPLOYMENTTYPE = 0,
-  FULL_TIME = 1,
-  PART_TIME = 2,
-  CONTRACT = 3,
-  FREELANCE = 4,
-  SELF_EMPLOYED = 5,
-  INTERNSHIP = 6,
-  UNRECOGNIZED = -1,
-}
-
-export function employmentTypeFromJSON(object: any): EmploymentType {
-  switch (object) {
-    case 0:
-    case "NOT_USED_EMPLOYMENTTYPE":
-      return EmploymentType.NOT_USED_EMPLOYMENTTYPE;
-    case 1:
-    case "FULL_TIME":
-      return EmploymentType.FULL_TIME;
-    case 2:
-    case "PART_TIME":
-      return EmploymentType.PART_TIME;
-    case 3:
-    case "CONTRACT":
-      return EmploymentType.CONTRACT;
-    case 4:
-    case "FREELANCE":
-      return EmploymentType.FREELANCE;
-    case 5:
-    case "SELF_EMPLOYED":
-      return EmploymentType.SELF_EMPLOYED;
-    case 6:
-    case "INTERNSHIP":
-      return EmploymentType.INTERNSHIP;
-    case -1:
-    case "UNRECOGNIZED":
-    default:
-      return EmploymentType.UNRECOGNIZED;
-  }
-}
-
-export function employmentTypeToJSON(object: EmploymentType): string {
-  switch (object) {
-    case EmploymentType.NOT_USED_EMPLOYMENTTYPE:
-      return "NOT_USED_EMPLOYMENTTYPE";
-    case EmploymentType.FULL_TIME:
-      return "FULL_TIME";
-    case EmploymentType.PART_TIME:
-      return "PART_TIME";
-    case EmploymentType.CONTRACT:
-      return "CONTRACT";
-    case EmploymentType.FREELANCE:
-      return "FREELANCE";
-    case EmploymentType.SELF_EMPLOYED:
-      return "SELF_EMPLOYED";
-    case EmploymentType.INTERNSHIP:
-      return "INTERNSHIP";
-    case EmploymentType.UNRECOGNIZED:
-    default:
-      return "UNRECOGNIZED";
-  }
-}
-
-export enum IncomeFrequency {
-  NOT_USED_INCOMEFREQUENCY = 0,
-  HOURLY = 1,
-  WEEKLY = 2,
-  BI_WEEKLY = 3,
-  MONTHLY = 4,
-  ANNUALLY = 5,
-  UNRECOGNIZED = -1,
-}
-
-export function incomeFrequencyFromJSON(object: any): IncomeFrequency {
-  switch (object) {
-    case 0:
-    case "NOT_USED_INCOMEFREQUENCY":
-      return IncomeFrequency.NOT_USED_INCOMEFREQUENCY;
-    case 1:
-    case "HOURLY":
-      return IncomeFrequency.HOURLY;
-    case 2:
-    case "WEEKLY":
-      return IncomeFrequency.WEEKLY;
-    case 3:
-    case "BI_WEEKLY":
-      return IncomeFrequency.BI_WEEKLY;
-    case 4:
-    case "MONTHLY":
-      return IncomeFrequency.MONTHLY;
-    case 5:
-    case "ANNUALLY":
-      return IncomeFrequency.ANNUALLY;
-    case -1:
-    case "UNRECOGNIZED":
-    default:
-      return IncomeFrequency.UNRECOGNIZED;
-  }
-}
-
-export function incomeFrequencyToJSON(object: IncomeFrequency): string {
-  switch (object) {
-    case IncomeFrequency.NOT_USED_INCOMEFREQUENCY:
-      return "NOT_USED_INCOMEFREQUENCY";
-    case IncomeFrequency.HOURLY:
-      return "HOURLY";
-    case IncomeFrequency.WEEKLY:
-      return "WEEKLY";
-    case IncomeFrequency.BI_WEEKLY:
-      return "BI_WEEKLY";
-    case IncomeFrequency.MONTHLY:
-      return "MONTHLY";
-    case IncomeFrequency.ANNUALLY:
-      return "ANNUALLY";
-    case IncomeFrequency.UNRECOGNIZED:
-    default:
-      return "UNRECOGNIZED";
-  }
-}
 
 export enum KYCStatus {
   /** KYC_STATUS_UNSPECIFIED - Default value, should not be used */
@@ -200,12 +79,6 @@ export function kYCStatusToJSON(object: KYCStatus): string {
   }
 }
 
-export interface IDNumber {
-  IssuingCountry: string;
-  IdentificationClass: string;
-  IdentificationNumber: string;
-}
-
 export interface UserKYCDetails {
   Birthdate: string;
   PhoneNumber: string;
@@ -220,125 +93,17 @@ export interface UserKYCDetails {
   IdentificationNumber: string;
   FirstName: string;
   LastName: string;
+  MiddleName: string;
+  AddressCountryCode: string;
+  SelectedCountryCode: string;
+  SelectedIDClass: string;
+  ExpirationDate: string;
+  IdentificationClass: string;
+  CardAccessNumber: string;
+  IssueDate: string;
+  IssuingAuthority: string;
+  CollectedEmailAddress: string;
 }
-
-export interface Employment {
-  EmployerName: string;
-  JobTitle: string;
-  StartDate:
-    | Date
-    | undefined;
-  /** Empty if still employed */
-  EndDate: Date | undefined;
-  Type: EmploymentType;
-  Industry?: string | undefined;
-  Income: Income | undefined;
-  Contact: EmployerContact | undefined;
-  IsVerified: boolean;
-  VerifiedAt: string;
-}
-
-export interface Income {
-  Amount: number;
-  Currency: string;
-  Frequency: IncomeFrequency;
-}
-
-export interface EmployerContact {
-  Name: string;
-  Email: string;
-  Phone: string;
-  Address: string;
-}
-
-function createBaseIDNumber(): IDNumber {
-  return { IssuingCountry: "", IdentificationClass: "", IdentificationNumber: "" };
-}
-
-export const IDNumber = {
-  encode(message: IDNumber, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.IssuingCountry !== "") {
-      writer.uint32(10).string(message.IssuingCountry);
-    }
-    if (message.IdentificationClass !== "") {
-      writer.uint32(18).string(message.IdentificationClass);
-    }
-    if (message.IdentificationNumber !== "") {
-      writer.uint32(26).string(message.IdentificationNumber);
-    }
-    return writer;
-  },
-
-  decode(input: _m0.Reader | Uint8Array, length?: number): IDNumber {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseIDNumber();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1:
-          if (tag !== 10) {
-            break;
-          }
-
-          message.IssuingCountry = reader.string();
-          continue;
-        case 2:
-          if (tag !== 18) {
-            break;
-          }
-
-          message.IdentificationClass = reader.string();
-          continue;
-        case 3:
-          if (tag !== 26) {
-            break;
-          }
-
-          message.IdentificationNumber = reader.string();
-          continue;
-      }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
-      }
-      reader.skipType(tag & 7);
-    }
-    return message;
-  },
-
-  fromJSON(object: any): IDNumber {
-    return {
-      IssuingCountry: isSet(object.IssuingCountry) ? globalThis.String(object.IssuingCountry) : "",
-      IdentificationClass: isSet(object.IdentificationClass) ? globalThis.String(object.IdentificationClass) : "",
-      IdentificationNumber: isSet(object.IdentificationNumber) ? globalThis.String(object.IdentificationNumber) : "",
-    };
-  },
-
-  toJSON(message: IDNumber): unknown {
-    const obj: any = {};
-    if (message.IssuingCountry !== "") {
-      obj.IssuingCountry = message.IssuingCountry;
-    }
-    if (message.IdentificationClass !== "") {
-      obj.IdentificationClass = message.IdentificationClass;
-    }
-    if (message.IdentificationNumber !== "") {
-      obj.IdentificationNumber = message.IdentificationNumber;
-    }
-    return obj;
-  },
-
-  create<I extends Exact<DeepPartial<IDNumber>, I>>(base?: I): IDNumber {
-    return IDNumber.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<IDNumber>, I>>(object: I): IDNumber {
-    const message = createBaseIDNumber();
-    message.IssuingCountry = object.IssuingCountry ?? "";
-    message.IdentificationClass = object.IdentificationClass ?? "";
-    message.IdentificationNumber = object.IdentificationNumber ?? "";
-    return message;
-  },
-};
 
 function createBaseUserKYCDetails(): UserKYCDetails {
   return {
@@ -355,6 +120,16 @@ function createBaseUserKYCDetails(): UserKYCDetails {
     IdentificationNumber: "",
     FirstName: "",
     LastName: "",
+    MiddleName: "",
+    AddressCountryCode: "",
+    SelectedCountryCode: "",
+    SelectedIDClass: "",
+    ExpirationDate: "",
+    IdentificationClass: "",
+    CardAccessNumber: "",
+    IssueDate: "",
+    IssuingAuthority: "",
+    CollectedEmailAddress: "",
   };
 }
 
@@ -398,6 +173,36 @@ export const UserKYCDetails = {
     }
     if (message.LastName !== "") {
       writer.uint32(106).string(message.LastName);
+    }
+    if (message.MiddleName !== "") {
+      writer.uint32(114).string(message.MiddleName);
+    }
+    if (message.AddressCountryCode !== "") {
+      writer.uint32(122).string(message.AddressCountryCode);
+    }
+    if (message.SelectedCountryCode !== "") {
+      writer.uint32(130).string(message.SelectedCountryCode);
+    }
+    if (message.SelectedIDClass !== "") {
+      writer.uint32(138).string(message.SelectedIDClass);
+    }
+    if (message.ExpirationDate !== "") {
+      writer.uint32(146).string(message.ExpirationDate);
+    }
+    if (message.IdentificationClass !== "") {
+      writer.uint32(154).string(message.IdentificationClass);
+    }
+    if (message.CardAccessNumber !== "") {
+      writer.uint32(162).string(message.CardAccessNumber);
+    }
+    if (message.IssueDate !== "") {
+      writer.uint32(170).string(message.IssueDate);
+    }
+    if (message.IssuingAuthority !== "") {
+      writer.uint32(178).string(message.IssuingAuthority);
+    }
+    if (message.CollectedEmailAddress !== "") {
+      writer.uint32(186).string(message.CollectedEmailAddress);
     }
     return writer;
   },
@@ -500,6 +305,76 @@ export const UserKYCDetails = {
 
           message.LastName = reader.string();
           continue;
+        case 14:
+          if (tag !== 114) {
+            break;
+          }
+
+          message.MiddleName = reader.string();
+          continue;
+        case 15:
+          if (tag !== 122) {
+            break;
+          }
+
+          message.AddressCountryCode = reader.string();
+          continue;
+        case 16:
+          if (tag !== 130) {
+            break;
+          }
+
+          message.SelectedCountryCode = reader.string();
+          continue;
+        case 17:
+          if (tag !== 138) {
+            break;
+          }
+
+          message.SelectedIDClass = reader.string();
+          continue;
+        case 18:
+          if (tag !== 146) {
+            break;
+          }
+
+          message.ExpirationDate = reader.string();
+          continue;
+        case 19:
+          if (tag !== 154) {
+            break;
+          }
+
+          message.IdentificationClass = reader.string();
+          continue;
+        case 20:
+          if (tag !== 162) {
+            break;
+          }
+
+          message.CardAccessNumber = reader.string();
+          continue;
+        case 21:
+          if (tag !== 170) {
+            break;
+          }
+
+          message.IssueDate = reader.string();
+          continue;
+        case 22:
+          if (tag !== 178) {
+            break;
+          }
+
+          message.IssuingAuthority = reader.string();
+          continue;
+        case 23:
+          if (tag !== 186) {
+            break;
+          }
+
+          message.CollectedEmailAddress = reader.string();
+          continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -524,6 +399,16 @@ export const UserKYCDetails = {
       IdentificationNumber: isSet(object.IdentificationNumber) ? globalThis.String(object.IdentificationNumber) : "",
       FirstName: isSet(object.FirstName) ? globalThis.String(object.FirstName) : "",
       LastName: isSet(object.LastName) ? globalThis.String(object.LastName) : "",
+      MiddleName: isSet(object.MiddleName) ? globalThis.String(object.MiddleName) : "",
+      AddressCountryCode: isSet(object.AddressCountryCode) ? globalThis.String(object.AddressCountryCode) : "",
+      SelectedCountryCode: isSet(object.SelectedCountryCode) ? globalThis.String(object.SelectedCountryCode) : "",
+      SelectedIDClass: isSet(object.SelectedIDClass) ? globalThis.String(object.SelectedIDClass) : "",
+      ExpirationDate: isSet(object.ExpirationDate) ? globalThis.String(object.ExpirationDate) : "",
+      IdentificationClass: isSet(object.IdentificationClass) ? globalThis.String(object.IdentificationClass) : "",
+      CardAccessNumber: isSet(object.CardAccessNumber) ? globalThis.String(object.CardAccessNumber) : "",
+      IssueDate: isSet(object.IssueDate) ? globalThis.String(object.IssueDate) : "",
+      IssuingAuthority: isSet(object.IssuingAuthority) ? globalThis.String(object.IssuingAuthority) : "",
+      CollectedEmailAddress: isSet(object.CollectedEmailAddress) ? globalThis.String(object.CollectedEmailAddress) : "",
     };
   },
 
@@ -568,6 +453,36 @@ export const UserKYCDetails = {
     if (message.LastName !== "") {
       obj.LastName = message.LastName;
     }
+    if (message.MiddleName !== "") {
+      obj.MiddleName = message.MiddleName;
+    }
+    if (message.AddressCountryCode !== "") {
+      obj.AddressCountryCode = message.AddressCountryCode;
+    }
+    if (message.SelectedCountryCode !== "") {
+      obj.SelectedCountryCode = message.SelectedCountryCode;
+    }
+    if (message.SelectedIDClass !== "") {
+      obj.SelectedIDClass = message.SelectedIDClass;
+    }
+    if (message.ExpirationDate !== "") {
+      obj.ExpirationDate = message.ExpirationDate;
+    }
+    if (message.IdentificationClass !== "") {
+      obj.IdentificationClass = message.IdentificationClass;
+    }
+    if (message.CardAccessNumber !== "") {
+      obj.CardAccessNumber = message.CardAccessNumber;
+    }
+    if (message.IssueDate !== "") {
+      obj.IssueDate = message.IssueDate;
+    }
+    if (message.IssuingAuthority !== "") {
+      obj.IssuingAuthority = message.IssuingAuthority;
+    }
+    if (message.CollectedEmailAddress !== "") {
+      obj.CollectedEmailAddress = message.CollectedEmailAddress;
+    }
     return obj;
   },
 
@@ -589,408 +504,16 @@ export const UserKYCDetails = {
     message.IdentificationNumber = object.IdentificationNumber ?? "";
     message.FirstName = object.FirstName ?? "";
     message.LastName = object.LastName ?? "";
-    return message;
-  },
-};
-
-function createBaseEmployment(): Employment {
-  return {
-    EmployerName: "",
-    JobTitle: "",
-    StartDate: undefined,
-    EndDate: undefined,
-    Type: 0,
-    Industry: undefined,
-    Income: undefined,
-    Contact: undefined,
-    IsVerified: false,
-    VerifiedAt: "",
-  };
-}
-
-export const Employment = {
-  encode(message: Employment, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.EmployerName !== "") {
-      writer.uint32(10).string(message.EmployerName);
-    }
-    if (message.JobTitle !== "") {
-      writer.uint32(18).string(message.JobTitle);
-    }
-    if (message.StartDate !== undefined) {
-      Timestamp.encode(toTimestamp(message.StartDate), writer.uint32(26).fork()).ldelim();
-    }
-    if (message.EndDate !== undefined) {
-      Timestamp.encode(toTimestamp(message.EndDate), writer.uint32(34).fork()).ldelim();
-    }
-    if (message.Type !== 0) {
-      writer.uint32(40).int32(message.Type);
-    }
-    if (message.Industry !== undefined) {
-      writer.uint32(50).string(message.Industry);
-    }
-    if (message.Income !== undefined) {
-      Income.encode(message.Income, writer.uint32(58).fork()).ldelim();
-    }
-    if (message.Contact !== undefined) {
-      EmployerContact.encode(message.Contact, writer.uint32(66).fork()).ldelim();
-    }
-    if (message.IsVerified !== false) {
-      writer.uint32(72).bool(message.IsVerified);
-    }
-    if (message.VerifiedAt !== "") {
-      writer.uint32(82).string(message.VerifiedAt);
-    }
-    return writer;
-  },
-
-  decode(input: _m0.Reader | Uint8Array, length?: number): Employment {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseEmployment();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1:
-          if (tag !== 10) {
-            break;
-          }
-
-          message.EmployerName = reader.string();
-          continue;
-        case 2:
-          if (tag !== 18) {
-            break;
-          }
-
-          message.JobTitle = reader.string();
-          continue;
-        case 3:
-          if (tag !== 26) {
-            break;
-          }
-
-          message.StartDate = fromTimestamp(Timestamp.decode(reader, reader.uint32()));
-          continue;
-        case 4:
-          if (tag !== 34) {
-            break;
-          }
-
-          message.EndDate = fromTimestamp(Timestamp.decode(reader, reader.uint32()));
-          continue;
-        case 5:
-          if (tag !== 40) {
-            break;
-          }
-
-          message.Type = reader.int32() as any;
-          continue;
-        case 6:
-          if (tag !== 50) {
-            break;
-          }
-
-          message.Industry = reader.string();
-          continue;
-        case 7:
-          if (tag !== 58) {
-            break;
-          }
-
-          message.Income = Income.decode(reader, reader.uint32());
-          continue;
-        case 8:
-          if (tag !== 66) {
-            break;
-          }
-
-          message.Contact = EmployerContact.decode(reader, reader.uint32());
-          continue;
-        case 9:
-          if (tag !== 72) {
-            break;
-          }
-
-          message.IsVerified = reader.bool();
-          continue;
-        case 10:
-          if (tag !== 82) {
-            break;
-          }
-
-          message.VerifiedAt = reader.string();
-          continue;
-      }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
-      }
-      reader.skipType(tag & 7);
-    }
-    return message;
-  },
-
-  fromJSON(object: any): Employment {
-    return {
-      EmployerName: isSet(object.EmployerName) ? globalThis.String(object.EmployerName) : "",
-      JobTitle: isSet(object.JobTitle) ? globalThis.String(object.JobTitle) : "",
-      StartDate: isSet(object.StartDate) ? fromJsonTimestamp(object.StartDate) : undefined,
-      EndDate: isSet(object.EndDate) ? fromJsonTimestamp(object.EndDate) : undefined,
-      Type: isSet(object.Type) ? employmentTypeFromJSON(object.Type) : 0,
-      Industry: isSet(object.Industry) ? globalThis.String(object.Industry) : undefined,
-      Income: isSet(object.Income) ? Income.fromJSON(object.Income) : undefined,
-      Contact: isSet(object.Contact) ? EmployerContact.fromJSON(object.Contact) : undefined,
-      IsVerified: isSet(object.IsVerified) ? globalThis.Boolean(object.IsVerified) : false,
-      VerifiedAt: isSet(object.VerifiedAt) ? globalThis.String(object.VerifiedAt) : "",
-    };
-  },
-
-  toJSON(message: Employment): unknown {
-    const obj: any = {};
-    if (message.EmployerName !== "") {
-      obj.EmployerName = message.EmployerName;
-    }
-    if (message.JobTitle !== "") {
-      obj.JobTitle = message.JobTitle;
-    }
-    if (message.StartDate !== undefined) {
-      obj.StartDate = message.StartDate.toISOString();
-    }
-    if (message.EndDate !== undefined) {
-      obj.EndDate = message.EndDate.toISOString();
-    }
-    if (message.Type !== 0) {
-      obj.Type = employmentTypeToJSON(message.Type);
-    }
-    if (message.Industry !== undefined) {
-      obj.Industry = message.Industry;
-    }
-    if (message.Income !== undefined) {
-      obj.Income = Income.toJSON(message.Income);
-    }
-    if (message.Contact !== undefined) {
-      obj.Contact = EmployerContact.toJSON(message.Contact);
-    }
-    if (message.IsVerified !== false) {
-      obj.IsVerified = message.IsVerified;
-    }
-    if (message.VerifiedAt !== "") {
-      obj.VerifiedAt = message.VerifiedAt;
-    }
-    return obj;
-  },
-
-  create<I extends Exact<DeepPartial<Employment>, I>>(base?: I): Employment {
-    return Employment.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<Employment>, I>>(object: I): Employment {
-    const message = createBaseEmployment();
-    message.EmployerName = object.EmployerName ?? "";
-    message.JobTitle = object.JobTitle ?? "";
-    message.StartDate = object.StartDate ?? undefined;
-    message.EndDate = object.EndDate ?? undefined;
-    message.Type = object.Type ?? 0;
-    message.Industry = object.Industry ?? undefined;
-    message.Income = (object.Income !== undefined && object.Income !== null)
-      ? Income.fromPartial(object.Income)
-      : undefined;
-    message.Contact = (object.Contact !== undefined && object.Contact !== null)
-      ? EmployerContact.fromPartial(object.Contact)
-      : undefined;
-    message.IsVerified = object.IsVerified ?? false;
-    message.VerifiedAt = object.VerifiedAt ?? "";
-    return message;
-  },
-};
-
-function createBaseIncome(): Income {
-  return { Amount: 0, Currency: "", Frequency: 0 };
-}
-
-export const Income = {
-  encode(message: Income, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.Amount !== 0) {
-      writer.uint32(13).float(message.Amount);
-    }
-    if (message.Currency !== "") {
-      writer.uint32(18).string(message.Currency);
-    }
-    if (message.Frequency !== 0) {
-      writer.uint32(24).int32(message.Frequency);
-    }
-    return writer;
-  },
-
-  decode(input: _m0.Reader | Uint8Array, length?: number): Income {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseIncome();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1:
-          if (tag !== 13) {
-            break;
-          }
-
-          message.Amount = reader.float();
-          continue;
-        case 2:
-          if (tag !== 18) {
-            break;
-          }
-
-          message.Currency = reader.string();
-          continue;
-        case 3:
-          if (tag !== 24) {
-            break;
-          }
-
-          message.Frequency = reader.int32() as any;
-          continue;
-      }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
-      }
-      reader.skipType(tag & 7);
-    }
-    return message;
-  },
-
-  fromJSON(object: any): Income {
-    return {
-      Amount: isSet(object.Amount) ? globalThis.Number(object.Amount) : 0,
-      Currency: isSet(object.Currency) ? globalThis.String(object.Currency) : "",
-      Frequency: isSet(object.Frequency) ? incomeFrequencyFromJSON(object.Frequency) : 0,
-    };
-  },
-
-  toJSON(message: Income): unknown {
-    const obj: any = {};
-    if (message.Amount !== 0) {
-      obj.Amount = message.Amount;
-    }
-    if (message.Currency !== "") {
-      obj.Currency = message.Currency;
-    }
-    if (message.Frequency !== 0) {
-      obj.Frequency = incomeFrequencyToJSON(message.Frequency);
-    }
-    return obj;
-  },
-
-  create<I extends Exact<DeepPartial<Income>, I>>(base?: I): Income {
-    return Income.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<Income>, I>>(object: I): Income {
-    const message = createBaseIncome();
-    message.Amount = object.Amount ?? 0;
-    message.Currency = object.Currency ?? "";
-    message.Frequency = object.Frequency ?? 0;
-    return message;
-  },
-};
-
-function createBaseEmployerContact(): EmployerContact {
-  return { Name: "", Email: "", Phone: "", Address: "" };
-}
-
-export const EmployerContact = {
-  encode(message: EmployerContact, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.Name !== "") {
-      writer.uint32(10).string(message.Name);
-    }
-    if (message.Email !== "") {
-      writer.uint32(18).string(message.Email);
-    }
-    if (message.Phone !== "") {
-      writer.uint32(26).string(message.Phone);
-    }
-    if (message.Address !== "") {
-      writer.uint32(34).string(message.Address);
-    }
-    return writer;
-  },
-
-  decode(input: _m0.Reader | Uint8Array, length?: number): EmployerContact {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseEmployerContact();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1:
-          if (tag !== 10) {
-            break;
-          }
-
-          message.Name = reader.string();
-          continue;
-        case 2:
-          if (tag !== 18) {
-            break;
-          }
-
-          message.Email = reader.string();
-          continue;
-        case 3:
-          if (tag !== 26) {
-            break;
-          }
-
-          message.Phone = reader.string();
-          continue;
-        case 4:
-          if (tag !== 34) {
-            break;
-          }
-
-          message.Address = reader.string();
-          continue;
-      }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
-      }
-      reader.skipType(tag & 7);
-    }
-    return message;
-  },
-
-  fromJSON(object: any): EmployerContact {
-    return {
-      Name: isSet(object.Name) ? globalThis.String(object.Name) : "",
-      Email: isSet(object.Email) ? globalThis.String(object.Email) : "",
-      Phone: isSet(object.Phone) ? globalThis.String(object.Phone) : "",
-      Address: isSet(object.Address) ? globalThis.String(object.Address) : "",
-    };
-  },
-
-  toJSON(message: EmployerContact): unknown {
-    const obj: any = {};
-    if (message.Name !== "") {
-      obj.Name = message.Name;
-    }
-    if (message.Email !== "") {
-      obj.Email = message.Email;
-    }
-    if (message.Phone !== "") {
-      obj.Phone = message.Phone;
-    }
-    if (message.Address !== "") {
-      obj.Address = message.Address;
-    }
-    return obj;
-  },
-
-  create<I extends Exact<DeepPartial<EmployerContact>, I>>(base?: I): EmployerContact {
-    return EmployerContact.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<EmployerContact>, I>>(object: I): EmployerContact {
-    const message = createBaseEmployerContact();
-    message.Name = object.Name ?? "";
-    message.Email = object.Email ?? "";
-    message.Phone = object.Phone ?? "";
-    message.Address = object.Address ?? "";
+    message.MiddleName = object.MiddleName ?? "";
+    message.AddressCountryCode = object.AddressCountryCode ?? "";
+    message.SelectedCountryCode = object.SelectedCountryCode ?? "";
+    message.SelectedIDClass = object.SelectedIDClass ?? "";
+    message.ExpirationDate = object.ExpirationDate ?? "";
+    message.IdentificationClass = object.IdentificationClass ?? "";
+    message.CardAccessNumber = object.CardAccessNumber ?? "";
+    message.IssueDate = object.IssueDate ?? "";
+    message.IssuingAuthority = object.IssuingAuthority ?? "";
+    message.CollectedEmailAddress = object.CollectedEmailAddress ?? "";
     return message;
   },
 };
@@ -1006,28 +529,6 @@ export type DeepPartial<T> = T extends Builtin ? T
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin ? P
   : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P>>]: never };
-
-function toTimestamp(date: Date): Timestamp {
-  const seconds = Math.trunc(date.getTime() / 1_000);
-  const nanos = (date.getTime() % 1_000) * 1_000_000;
-  return { seconds, nanos };
-}
-
-function fromTimestamp(t: Timestamp): Date {
-  let millis = (t.seconds || 0) * 1_000;
-  millis += (t.nanos || 0) / 1_000_000;
-  return new globalThis.Date(millis);
-}
-
-function fromJsonTimestamp(o: any): Date {
-  if (o instanceof globalThis.Date) {
-    return o;
-  } else if (typeof o === "string") {
-    return new globalThis.Date(o);
-  } else {
-    return fromTimestamp(Timestamp.fromJSON(o));
-  }
-}
 
 function isSet(value: any): boolean {
   return value !== null && value !== undefined;
