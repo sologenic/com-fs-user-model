@@ -64,6 +64,87 @@ export function userStatusToJSON(object: UserStatus): string {
   }
 }
 
+export enum SocialType {
+  NOT_USED_SOCIALTYPE = 0,
+  WEBSITE = 1,
+  GITHUB = 2,
+  REDDIT = 3,
+  DISCORD = 4,
+  TWITTER = 5,
+  FACEBOOK = 6,
+  TELEGRAM = 7,
+  INSTAGRAM = 8,
+  LINKEDIN = 9,
+  UNRECOGNIZED = -1,
+}
+
+export function socialTypeFromJSON(object: any): SocialType {
+  switch (object) {
+    case 0:
+    case "NOT_USED_SOCIALTYPE":
+      return SocialType.NOT_USED_SOCIALTYPE;
+    case 1:
+    case "WEBSITE":
+      return SocialType.WEBSITE;
+    case 2:
+    case "GITHUB":
+      return SocialType.GITHUB;
+    case 3:
+    case "REDDIT":
+      return SocialType.REDDIT;
+    case 4:
+    case "DISCORD":
+      return SocialType.DISCORD;
+    case 5:
+    case "TWITTER":
+      return SocialType.TWITTER;
+    case 6:
+    case "FACEBOOK":
+      return SocialType.FACEBOOK;
+    case 7:
+    case "TELEGRAM":
+      return SocialType.TELEGRAM;
+    case 8:
+    case "INSTAGRAM":
+      return SocialType.INSTAGRAM;
+    case 9:
+    case "LINKEDIN":
+      return SocialType.LINKEDIN;
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return SocialType.UNRECOGNIZED;
+  }
+}
+
+export function socialTypeToJSON(object: SocialType): string {
+  switch (object) {
+    case SocialType.NOT_USED_SOCIALTYPE:
+      return "NOT_USED_SOCIALTYPE";
+    case SocialType.WEBSITE:
+      return "WEBSITE";
+    case SocialType.GITHUB:
+      return "GITHUB";
+    case SocialType.REDDIT:
+      return "REDDIT";
+    case SocialType.DISCORD:
+      return "DISCORD";
+    case SocialType.TWITTER:
+      return "TWITTER";
+    case SocialType.FACEBOOK:
+      return "FACEBOOK";
+    case SocialType.TELEGRAM:
+      return "TELEGRAM";
+    case SocialType.INSTAGRAM:
+      return "INSTAGRAM";
+    case SocialType.LINKEDIN:
+      return "LINKEDIN";
+    case SocialType.UNRECOGNIZED:
+    default:
+      return "UNRECOGNIZED";
+  }
+}
+
 export enum Theme {
   NOT_USED_THEME = 0,
   DARK = 1,
@@ -115,6 +196,7 @@ export interface UserDetails {
   Description: string;
   Status: UserStatus;
   Wallets: Wallet[];
+  Socials: Social[];
   Language: Lang;
   /** UUID for the external user identifier for example to be used in communication with the KYC provider, or other places where an anonymous ID is required */
   ExternalUserID: string;
@@ -183,6 +265,11 @@ export interface User {
   OrganizationIDs: string[];
 }
 
+export interface Social {
+  URL: string;
+  Type: SocialType;
+}
+
 export interface UserList {
   Users: User[];
   Offset?: number | undefined;
@@ -219,6 +306,7 @@ function createBaseUserDetails(): UserDetails {
     Description: "",
     Status: 0,
     Wallets: [],
+    Socials: [],
     Language: 0,
     ExternalUserID: "",
     OrganizationID: "",
@@ -273,6 +361,9 @@ export const UserDetails = {
     }
     for (const v of message.Wallets) {
       Wallet.encode(v!, writer.uint32(74).fork()).ldelim();
+    }
+    for (const v of message.Socials) {
+      Social.encode(v!, writer.uint32(82).fork()).ldelim();
     }
     if (message.Language !== 0) {
       writer.uint32(88).int32(message.Language);
@@ -415,6 +506,13 @@ export const UserDetails = {
           }
 
           message.Wallets.push(Wallet.decode(reader, reader.uint32()));
+          continue;
+        case 10:
+          if (tag !== 82) {
+            break;
+          }
+
+          message.Socials.push(Social.decode(reader, reader.uint32()));
           continue;
         case 11:
           if (tag !== 88) {
@@ -597,6 +695,7 @@ export const UserDetails = {
       Description: isSet(object.Description) ? globalThis.String(object.Description) : "",
       Status: isSet(object.Status) ? userStatusFromJSON(object.Status) : 0,
       Wallets: globalThis.Array.isArray(object?.Wallets) ? object.Wallets.map((e: any) => Wallet.fromJSON(e)) : [],
+      Socials: globalThis.Array.isArray(object?.Socials) ? object.Socials.map((e: any) => Social.fromJSON(e)) : [],
       Language: isSet(object.Language) ? langFromJSON(object.Language) : 0,
       ExternalUserID: isSet(object.ExternalUserID) ? globalThis.String(object.ExternalUserID) : "",
       OrganizationID: isSet(object.OrganizationID) ? globalThis.String(object.OrganizationID) : "",
@@ -665,6 +764,9 @@ export const UserDetails = {
     }
     if (message.Wallets?.length) {
       obj.Wallets = message.Wallets.map((e) => Wallet.toJSON(e));
+    }
+    if (message.Socials?.length) {
+      obj.Socials = message.Socials.map((e) => Social.toJSON(e));
     }
     if (message.Language !== 0) {
       obj.Language = langToJSON(message.Language);
@@ -752,6 +854,7 @@ export const UserDetails = {
     message.Description = object.Description ?? "";
     message.Status = object.Status ?? 0;
     message.Wallets = object.Wallets?.map((e) => Wallet.fromPartial(e)) || [];
+    message.Socials = object.Socials?.map((e) => Social.fromPartial(e)) || [];
     message.Language = object.Language ?? 0;
     message.ExternalUserID = object.ExternalUserID ?? "";
     message.OrganizationID = object.OrganizationID ?? "";
@@ -900,6 +1003,80 @@ export const User = {
       : undefined;
     message.Audit = (object.Audit !== undefined && object.Audit !== null) ? Audit.fromPartial(object.Audit) : undefined;
     message.OrganizationIDs = object.OrganizationIDs?.map((e) => e) || [];
+    return message;
+  },
+};
+
+function createBaseSocial(): Social {
+  return { URL: "", Type: 0 };
+}
+
+export const Social = {
+  encode(message: Social, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.URL !== "") {
+      writer.uint32(10).string(message.URL);
+    }
+    if (message.Type !== 0) {
+      writer.uint32(16).int32(message.Type);
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): Social {
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseSocial();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          if (tag !== 10) {
+            break;
+          }
+
+          message.URL = reader.string();
+          continue;
+        case 2:
+          if (tag !== 16) {
+            break;
+          }
+
+          message.Type = reader.int32() as any;
+          continue;
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): Social {
+    return {
+      URL: isSet(object.URL) ? globalThis.String(object.URL) : "",
+      Type: isSet(object.Type) ? socialTypeFromJSON(object.Type) : 0,
+    };
+  },
+
+  toJSON(message: Social): unknown {
+    const obj: any = {};
+    if (message.URL !== "") {
+      obj.URL = message.URL;
+    }
+    if (message.Type !== 0) {
+      obj.Type = socialTypeToJSON(message.Type);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<Social>, I>>(base?: I): Social {
+    return Social.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<Social>, I>>(object: I): Social {
+    const message = createBaseSocial();
+    message.URL = object.URL ?? "";
+    message.Type = object.Type ?? 0;
     return message;
   },
 };
