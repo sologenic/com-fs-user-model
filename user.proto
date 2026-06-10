@@ -125,6 +125,7 @@ message UserDetails {
     repeated string KYCInquiries = 17 [
       (buf.validate.field).repeated = {
         max_items: 10,
+        unique: true,
         items: {
           string: {
             pattern: "^inq_[a-zA-Z0-9]+$",
@@ -156,6 +157,7 @@ message UserDetails {
     repeated string AllowedJurisdictions = 28 [
       (buf.validate.field).repeated = {
         max_items: 256,
+        unique: true,
         items: {
           string: {
             len: 3,
@@ -220,6 +222,41 @@ message UserDetails {
     ];
 
     optional google.protobuf.Timestamp ReferralPaidAt = 36; // Timestamp when the referral reward was paid
+
+    // x.com handle (must start with @)
+    optional string XHandle = 37 [
+      (buf.validate.field).string = {
+        pattern: "^@[A-Za-z0-9_]{1,15}$"
+      },
+      (buf.validate.field).ignore = IGNORE_IF_ZERO_VALUE
+    ];
+
+    EliteClubMembershipStatus EliteClubMembershipStatus = 38 [
+      (buf.validate.field).required = true,
+      (buf.validate.field).enum.defined_only = true
+    ];
+
+    // Firebase Cloud Messaging (FCM) push tokens for iOS/Android devices
+    repeated string FCMPushTokens = 39 [
+      (buf.validate.field).repeated = {
+        max_items: 5,
+        unique: true
+      },
+      (buf.validate.field).repeated.items.string = {
+        min_len: 64,
+        max_len: 512,
+        pattern: "^[a-zA-Z0-9_:-]+$"
+      }
+    ];
+
+    // Referral program reward multiplier represented in hundredths (basis points)
+    // Example: 15 = 0.15x, 100 = 1.0x (default), 250 = 2.5x, 999 = 9.99x (maximum)
+    uint32 ReferralProgramRewardMultiplier = 40 [
+      (buf.validate.field).uint32 = {
+        gt: 0,
+        lt: 1000
+      }
+    ];
 }
 
 message User {
@@ -231,6 +268,7 @@ message User {
     repeated string OrganizationIDs = 4 [
       (buf.validate.field).repeated = {
         max_items: 256,
+        unique: true,
         items: {
           string: {
             uuid: true
@@ -308,4 +346,11 @@ message DataFeedAccounts {
 
 message DxFeed {
     string AccountID = 1;
+}
+
+enum EliteClubMembershipStatus {
+  ELITE_CLUB_MEMBERSHIP_STATUS_NONE = 0; // No request to add to the club submitted
+  ELITE_CLUB_MEMBERSHIP_STATUS_PENDING = 1; // Request to add to the club submitted, pending administrator decision
+  ELITE_CLUB_MEMBERSHIP_STATUS_ACTIVE = 2; // Request has been approved by administrator, it is not allowed to resubmit application
+  ELITE_CLUB_MEMBERSHIP_STATUS_REJECTED = 3; // Request has been rejected by administrator, it is allowed to resubmit application
 }
