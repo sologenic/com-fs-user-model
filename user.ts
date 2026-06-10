@@ -509,7 +509,7 @@ export const UserDetails = {
       writer.uint32(314).string(v!);
     }
     if (message.ReferralProgramRewardMultiplier !== 0) {
-      writer.uint32(320).uint32(message.ReferralProgramRewardMultiplier);
+      writer.uint32(320).int32(message.ReferralProgramRewardMultiplier);
     }
     return writer;
   },
@@ -778,7 +778,7 @@ export const UserDetails = {
             break;
           }
 
-          message.ReferralProgramRewardMultiplier = reader.uint32();
+          message.ReferralProgramRewardMultiplier = reader.int32();
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
