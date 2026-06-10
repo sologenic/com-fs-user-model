@@ -248,8 +248,8 @@ message UserDetails {
 
     // Referral program reward multiplier represented in hundredths (basis points)
     // Example: 15 = 0.15x, 100 = 1.0x (default), 250 = 2.5x, 999 = 9.99x (maximum)
-    uint32 ReferralProgramRewardMultiplier = 40 [
-      (buf.validate.field).uint32 = {
+    int32 ReferralProgramRewardMultiplier = 40 [
+      (buf.validate.field).int32 = {
         gt: 0,
         lt: 1000
       }
