@@ -184,6 +184,55 @@ export function themeToJSON(object: Theme): string {
   }
 }
 
+export enum EliteClubMembershipStatus {
+  /** ELITE_CLUB_MEMBERSHIP_STATUS_NONE - No request to add to the club submitted */
+  ELITE_CLUB_MEMBERSHIP_STATUS_NONE = 0,
+  /** ELITE_CLUB_MEMBERSHIP_STATUS_PENDING - Request to add to the club submitted, pending administrator decision */
+  ELITE_CLUB_MEMBERSHIP_STATUS_PENDING = 1,
+  /** ELITE_CLUB_MEMBERSHIP_STATUS_ACTIVE - Request has been approved by administrator, it is not allowed to resubmit application */
+  ELITE_CLUB_MEMBERSHIP_STATUS_ACTIVE = 2,
+  /** ELITE_CLUB_MEMBERSHIP_STATUS_REJECTED - Request has been rejected by administrator, it is allowed to resubmit application */
+  ELITE_CLUB_MEMBERSHIP_STATUS_REJECTED = 3,
+  UNRECOGNIZED = -1,
+}
+
+export function eliteClubMembershipStatusFromJSON(object: any): EliteClubMembershipStatus {
+  switch (object) {
+    case 0:
+    case "ELITE_CLUB_MEMBERSHIP_STATUS_NONE":
+      return EliteClubMembershipStatus.ELITE_CLUB_MEMBERSHIP_STATUS_NONE;
+    case 1:
+    case "ELITE_CLUB_MEMBERSHIP_STATUS_PENDING":
+      return EliteClubMembershipStatus.ELITE_CLUB_MEMBERSHIP_STATUS_PENDING;
+    case 2:
+    case "ELITE_CLUB_MEMBERSHIP_STATUS_ACTIVE":
+      return EliteClubMembershipStatus.ELITE_CLUB_MEMBERSHIP_STATUS_ACTIVE;
+    case 3:
+    case "ELITE_CLUB_MEMBERSHIP_STATUS_REJECTED":
+      return EliteClubMembershipStatus.ELITE_CLUB_MEMBERSHIP_STATUS_REJECTED;
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return EliteClubMembershipStatus.UNRECOGNIZED;
+  }
+}
+
+export function eliteClubMembershipStatusToJSON(object: EliteClubMembershipStatus): string {
+  switch (object) {
+    case EliteClubMembershipStatus.ELITE_CLUB_MEMBERSHIP_STATUS_NONE:
+      return "ELITE_CLUB_MEMBERSHIP_STATUS_NONE";
+    case EliteClubMembershipStatus.ELITE_CLUB_MEMBERSHIP_STATUS_PENDING:
+      return "ELITE_CLUB_MEMBERSHIP_STATUS_PENDING";
+    case EliteClubMembershipStatus.ELITE_CLUB_MEMBERSHIP_STATUS_ACTIVE:
+      return "ELITE_CLUB_MEMBERSHIP_STATUS_ACTIVE";
+    case EliteClubMembershipStatus.ELITE_CLUB_MEMBERSHIP_STATUS_REJECTED:
+      return "ELITE_CLUB_MEMBERSHIP_STATUS_REJECTED";
+    case EliteClubMembershipStatus.UNRECOGNIZED:
+    default:
+      return "UNRECOGNIZED";
+  }
+}
+
 export interface UserDetails {
   /** Firebase User ID */
   UserID: string;
@@ -252,7 +301,19 @@ export interface UserDetails {
     | number
     | undefined;
   /** Timestamp when the referral reward was paid */
-  ReferralPaidAt?: Date | undefined;
+  ReferralPaidAt?:
+    | Date
+    | undefined;
+  /** x.com handle (must start with @) */
+  XHandle?: string | undefined;
+  EliteClubMembershipStatus: EliteClubMembershipStatus;
+  /** Firebase Cloud Messaging (FCM) push tokens for iOS/Android devices */
+  FCMPushTokens: string[];
+  /**
+   * Referral program reward multiplier represented in hundredths (basis points)
+   * Example: 15 = 0.15x, 100 = 1.0x (default), 250 = 2.5x, 999 = 9.99x (maximum)
+   */
+  ReferralProgramRewardMultiplier: number;
 }
 
 export interface User {
@@ -330,6 +391,10 @@ function createBaseUserDetails(): UserDetails {
     ReferralAmountReceived: undefined,
     ReferralAmount: undefined,
     ReferralPaidAt: undefined,
+    XHandle: undefined,
+    EliteClubMembershipStatus: 0,
+    FCMPushTokens: [],
+    ReferralProgramRewardMultiplier: 0,
   };
 }
 
@@ -433,6 +498,18 @@ export const UserDetails = {
     }
     if (message.ReferralPaidAt !== undefined) {
       Timestamp.encode(toTimestamp(message.ReferralPaidAt), writer.uint32(290).fork()).ldelim();
+    }
+    if (message.XHandle !== undefined) {
+      writer.uint32(298).string(message.XHandle);
+    }
+    if (message.EliteClubMembershipStatus !== 0) {
+      writer.uint32(304).int32(message.EliteClubMembershipStatus);
+    }
+    for (const v of message.FCMPushTokens) {
+      writer.uint32(314).string(v!);
+    }
+    if (message.ReferralProgramRewardMultiplier !== 0) {
+      writer.uint32(320).uint32(message.ReferralProgramRewardMultiplier);
     }
     return writer;
   },
@@ -675,6 +752,34 @@ export const UserDetails = {
 
           message.ReferralPaidAt = fromTimestamp(Timestamp.decode(reader, reader.uint32()));
           continue;
+        case 37:
+          if (tag !== 298) {
+            break;
+          }
+
+          message.XHandle = reader.string();
+          continue;
+        case 38:
+          if (tag !== 304) {
+            break;
+          }
+
+          message.EliteClubMembershipStatus = reader.int32() as any;
+          continue;
+        case 39:
+          if (tag !== 314) {
+            break;
+          }
+
+          message.FCMPushTokens.push(reader.string());
+          continue;
+        case 40:
+          if (tag !== 320) {
+            break;
+          }
+
+          message.ReferralProgramRewardMultiplier = reader.uint32();
+          continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -733,6 +838,16 @@ export const UserDetails = {
         : undefined,
       ReferralAmount: isSet(object.ReferralAmount) ? globalThis.Number(object.ReferralAmount) : undefined,
       ReferralPaidAt: isSet(object.ReferralPaidAt) ? fromJsonTimestamp(object.ReferralPaidAt) : undefined,
+      XHandle: isSet(object.XHandle) ? globalThis.String(object.XHandle) : undefined,
+      EliteClubMembershipStatus: isSet(object.EliteClubMembershipStatus)
+        ? eliteClubMembershipStatusFromJSON(object.EliteClubMembershipStatus)
+        : 0,
+      FCMPushTokens: globalThis.Array.isArray(object?.FCMPushTokens)
+        ? object.FCMPushTokens.map((e: any) => globalThis.String(e))
+        : [],
+      ReferralProgramRewardMultiplier: isSet(object.ReferralProgramRewardMultiplier)
+        ? globalThis.Number(object.ReferralProgramRewardMultiplier)
+        : 0,
     };
   },
 
@@ -837,6 +952,18 @@ export const UserDetails = {
     if (message.ReferralPaidAt !== undefined) {
       obj.ReferralPaidAt = message.ReferralPaidAt.toISOString();
     }
+    if (message.XHandle !== undefined) {
+      obj.XHandle = message.XHandle;
+    }
+    if (message.EliteClubMembershipStatus !== 0) {
+      obj.EliteClubMembershipStatus = eliteClubMembershipStatusToJSON(message.EliteClubMembershipStatus);
+    }
+    if (message.FCMPushTokens?.length) {
+      obj.FCMPushTokens = message.FCMPushTokens;
+    }
+    if (message.ReferralProgramRewardMultiplier !== 0) {
+      obj.ReferralProgramRewardMultiplier = Math.round(message.ReferralProgramRewardMultiplier);
+    }
     return obj;
   },
 
@@ -893,6 +1020,10 @@ export const UserDetails = {
     message.ReferralAmountReceived = object.ReferralAmountReceived ?? undefined;
     message.ReferralAmount = object.ReferralAmount ?? undefined;
     message.ReferralPaidAt = object.ReferralPaidAt ?? undefined;
+    message.XHandle = object.XHandle ?? undefined;
+    message.EliteClubMembershipStatus = object.EliteClubMembershipStatus ?? 0;
+    message.FCMPushTokens = object.FCMPushTokens?.map((e) => e) || [];
+    message.ReferralProgramRewardMultiplier = object.ReferralProgramRewardMultiplier ?? 0;
     return message;
   },
 };

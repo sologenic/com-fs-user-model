@@ -170,6 +170,53 @@ export function themeToJSON(object) {
             return "UNRECOGNIZED";
     }
 }
+export var EliteClubMembershipStatus;
+(function (EliteClubMembershipStatus) {
+    /** ELITE_CLUB_MEMBERSHIP_STATUS_NONE - No request to add to the club submitted */
+    EliteClubMembershipStatus[EliteClubMembershipStatus["ELITE_CLUB_MEMBERSHIP_STATUS_NONE"] = 0] = "ELITE_CLUB_MEMBERSHIP_STATUS_NONE";
+    /** ELITE_CLUB_MEMBERSHIP_STATUS_PENDING - Request to add to the club submitted, pending administrator decision */
+    EliteClubMembershipStatus[EliteClubMembershipStatus["ELITE_CLUB_MEMBERSHIP_STATUS_PENDING"] = 1] = "ELITE_CLUB_MEMBERSHIP_STATUS_PENDING";
+    /** ELITE_CLUB_MEMBERSHIP_STATUS_ACTIVE - Request has been approved by administrator, it is not allowed to resubmit application */
+    EliteClubMembershipStatus[EliteClubMembershipStatus["ELITE_CLUB_MEMBERSHIP_STATUS_ACTIVE"] = 2] = "ELITE_CLUB_MEMBERSHIP_STATUS_ACTIVE";
+    /** ELITE_CLUB_MEMBERSHIP_STATUS_REJECTED - Request has been rejected by administrator, it is allowed to resubmit application */
+    EliteClubMembershipStatus[EliteClubMembershipStatus["ELITE_CLUB_MEMBERSHIP_STATUS_REJECTED"] = 3] = "ELITE_CLUB_MEMBERSHIP_STATUS_REJECTED";
+    EliteClubMembershipStatus[EliteClubMembershipStatus["UNRECOGNIZED"] = -1] = "UNRECOGNIZED";
+})(EliteClubMembershipStatus || (EliteClubMembershipStatus = {}));
+export function eliteClubMembershipStatusFromJSON(object) {
+    switch (object) {
+        case 0:
+        case "ELITE_CLUB_MEMBERSHIP_STATUS_NONE":
+            return EliteClubMembershipStatus.ELITE_CLUB_MEMBERSHIP_STATUS_NONE;
+        case 1:
+        case "ELITE_CLUB_MEMBERSHIP_STATUS_PENDING":
+            return EliteClubMembershipStatus.ELITE_CLUB_MEMBERSHIP_STATUS_PENDING;
+        case 2:
+        case "ELITE_CLUB_MEMBERSHIP_STATUS_ACTIVE":
+            return EliteClubMembershipStatus.ELITE_CLUB_MEMBERSHIP_STATUS_ACTIVE;
+        case 3:
+        case "ELITE_CLUB_MEMBERSHIP_STATUS_REJECTED":
+            return EliteClubMembershipStatus.ELITE_CLUB_MEMBERSHIP_STATUS_REJECTED;
+        case -1:
+        case "UNRECOGNIZED":
+        default:
+            return EliteClubMembershipStatus.UNRECOGNIZED;
+    }
+}
+export function eliteClubMembershipStatusToJSON(object) {
+    switch (object) {
+        case EliteClubMembershipStatus.ELITE_CLUB_MEMBERSHIP_STATUS_NONE:
+            return "ELITE_CLUB_MEMBERSHIP_STATUS_NONE";
+        case EliteClubMembershipStatus.ELITE_CLUB_MEMBERSHIP_STATUS_PENDING:
+            return "ELITE_CLUB_MEMBERSHIP_STATUS_PENDING";
+        case EliteClubMembershipStatus.ELITE_CLUB_MEMBERSHIP_STATUS_ACTIVE:
+            return "ELITE_CLUB_MEMBERSHIP_STATUS_ACTIVE";
+        case EliteClubMembershipStatus.ELITE_CLUB_MEMBERSHIP_STATUS_REJECTED:
+            return "ELITE_CLUB_MEMBERSHIP_STATUS_REJECTED";
+        case EliteClubMembershipStatus.UNRECOGNIZED:
+        default:
+            return "UNRECOGNIZED";
+    }
+}
 function createBaseUserDetails() {
     return {
         UserID: "",
@@ -205,6 +252,10 @@ function createBaseUserDetails() {
         ReferralAmountReceived: undefined,
         ReferralAmount: undefined,
         ReferralPaidAt: undefined,
+        XHandle: undefined,
+        EliteClubMembershipStatus: 0,
+        FCMPushTokens: [],
+        ReferralProgramRewardMultiplier: 0,
     };
 }
 export const UserDetails = {
@@ -307,6 +358,18 @@ export const UserDetails = {
         }
         if (message.ReferralPaidAt !== undefined) {
             Timestamp.encode(toTimestamp(message.ReferralPaidAt), writer.uint32(290).fork()).ldelim();
+        }
+        if (message.XHandle !== undefined) {
+            writer.uint32(298).string(message.XHandle);
+        }
+        if (message.EliteClubMembershipStatus !== 0) {
+            writer.uint32(304).int32(message.EliteClubMembershipStatus);
+        }
+        for (const v of message.FCMPushTokens) {
+            writer.uint32(314).string(v);
+        }
+        if (message.ReferralProgramRewardMultiplier !== 0) {
+            writer.uint32(320).uint32(message.ReferralProgramRewardMultiplier);
         }
         return writer;
     },
@@ -515,6 +578,30 @@ export const UserDetails = {
                     }
                     message.ReferralPaidAt = fromTimestamp(Timestamp.decode(reader, reader.uint32()));
                     continue;
+                case 37:
+                    if (tag !== 298) {
+                        break;
+                    }
+                    message.XHandle = reader.string();
+                    continue;
+                case 38:
+                    if (tag !== 304) {
+                        break;
+                    }
+                    message.EliteClubMembershipStatus = reader.int32();
+                    continue;
+                case 39:
+                    if (tag !== 314) {
+                        break;
+                    }
+                    message.FCMPushTokens.push(reader.string());
+                    continue;
+                case 40:
+                    if (tag !== 320) {
+                        break;
+                    }
+                    message.ReferralProgramRewardMultiplier = reader.uint32();
+                    continue;
             }
             if ((tag & 7) === 4 || tag === 0) {
                 break;
@@ -572,10 +659,20 @@ export const UserDetails = {
                 : undefined,
             ReferralAmount: isSet(object.ReferralAmount) ? globalThis.Number(object.ReferralAmount) : undefined,
             ReferralPaidAt: isSet(object.ReferralPaidAt) ? fromJsonTimestamp(object.ReferralPaidAt) : undefined,
+            XHandle: isSet(object.XHandle) ? globalThis.String(object.XHandle) : undefined,
+            EliteClubMembershipStatus: isSet(object.EliteClubMembershipStatus)
+                ? eliteClubMembershipStatusFromJSON(object.EliteClubMembershipStatus)
+                : 0,
+            FCMPushTokens: globalThis.Array.isArray(object === null || object === void 0 ? void 0 : object.FCMPushTokens)
+                ? object.FCMPushTokens.map((e) => globalThis.String(e))
+                : [],
+            ReferralProgramRewardMultiplier: isSet(object.ReferralProgramRewardMultiplier)
+                ? globalThis.Number(object.ReferralProgramRewardMultiplier)
+                : 0,
         };
     },
     toJSON(message) {
-        var _a, _b, _c, _d, _e, _f;
+        var _a, _b, _c, _d, _e, _f, _g;
         const obj = {};
         if (message.UserID !== "") {
             obj.UserID = message.UserID;
@@ -676,13 +773,25 @@ export const UserDetails = {
         if (message.ReferralPaidAt !== undefined) {
             obj.ReferralPaidAt = message.ReferralPaidAt.toISOString();
         }
+        if (message.XHandle !== undefined) {
+            obj.XHandle = message.XHandle;
+        }
+        if (message.EliteClubMembershipStatus !== 0) {
+            obj.EliteClubMembershipStatus = eliteClubMembershipStatusToJSON(message.EliteClubMembershipStatus);
+        }
+        if ((_g = message.FCMPushTokens) === null || _g === void 0 ? void 0 : _g.length) {
+            obj.FCMPushTokens = message.FCMPushTokens;
+        }
+        if (message.ReferralProgramRewardMultiplier !== 0) {
+            obj.ReferralProgramRewardMultiplier = Math.round(message.ReferralProgramRewardMultiplier);
+        }
         return obj;
     },
     create(base) {
         return UserDetails.fromPartial(base !== null && base !== void 0 ? base : {});
     },
     fromPartial(object) {
-        var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q, _r, _s, _t, _u, _v, _w, _x, _y, _z, _0, _1;
+        var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q, _r, _s, _t, _u, _v, _w, _x, _y, _z, _0, _1, _2, _3, _4, _5;
         const message = createBaseUserDetails();
         message.UserID = (_a = object.UserID) !== null && _a !== void 0 ? _a : "";
         message.FirstName = (_b = object.FirstName) !== null && _b !== void 0 ? _b : "";
@@ -732,6 +841,10 @@ export const UserDetails = {
         message.ReferralAmountReceived = (_z = object.ReferralAmountReceived) !== null && _z !== void 0 ? _z : undefined;
         message.ReferralAmount = (_0 = object.ReferralAmount) !== null && _0 !== void 0 ? _0 : undefined;
         message.ReferralPaidAt = (_1 = object.ReferralPaidAt) !== null && _1 !== void 0 ? _1 : undefined;
+        message.XHandle = (_2 = object.XHandle) !== null && _2 !== void 0 ? _2 : undefined;
+        message.EliteClubMembershipStatus = (_3 = object.EliteClubMembershipStatus) !== null && _3 !== void 0 ? _3 : 0;
+        message.FCMPushTokens = ((_4 = object.FCMPushTokens) === null || _4 === void 0 ? void 0 : _4.map((e) => e)) || [];
+        message.ReferralProgramRewardMultiplier = (_5 = object.ReferralProgramRewardMultiplier) !== null && _5 !== void 0 ? _5 : 0;
         return message;
     },
 };
