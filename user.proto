@@ -77,7 +77,6 @@ message UserDetails {
     ];
 
     UserStatus Status = 8 [
-      (buf.validate.field).required = true,
       (buf.validate.field).enum.defined_only = true
     ];
 
@@ -113,7 +112,6 @@ message UserDetails {
 
     // A retail user will always have a role of "NORMAL_USER"
     role.Role Role = 15 [
-      (buf.validate.field).required = true,
       (buf.validate.field).enum.defined_only = true
     ];
 
@@ -232,7 +230,6 @@ message UserDetails {
     ];
 
     EliteClubMembershipStatus EliteClubMembershipStatus = 38 [
-      (buf.validate.field).required = true,
       (buf.validate.field).enum.defined_only = true
     ];
 
@@ -287,7 +284,6 @@ message Social {
     }
   ];
   SocialType Type = 2 [
-    (buf.validate.field).required = true,
     (buf.validate.field).enum.defined_only = true
   ];
 }
@@ -301,7 +297,6 @@ message StatusMessage {
     string UserID = 1;
     string OrganizationID = 2;
     UserStatus Status = 3 [
-      (buf.validate.field).required = true,
       (buf.validate.field).enum.defined_only = true
     ];
     optional metadata.Network Network = 4;
@@ -329,7 +324,6 @@ enum SocialType {
 
 message UISettings {
     Theme Theme = 1 [
-      (buf.validate.field).required = true,
       (buf.validate.field).enum.defined_only = true
     ];
 }
