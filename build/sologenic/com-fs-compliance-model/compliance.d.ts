@@ -58,13 +58,11 @@ export interface Compliance {
     Audit: Audit | undefined;
 }
 export interface ComplianceDetails {
-    /** UUID */
     ComplianceID: string;
     ComplianceName: string;
     ComplianceDescription: string;
     /** UUID, if set the compliance is specific to an organization, otherwise it is global */
     OrganizationID?: string | undefined;
-    /** Status of the compliance */
     Status: ComplianceStatus;
     Conditions: Condition[];
     Questions: Question[];
@@ -89,7 +87,6 @@ export interface Question {
 export interface File {
     Description: string;
     Optionality: Optionality;
-    /** Hash of the file content, used as file name in the file system */
     Hash?: string | undefined;
 }
 export interface QuestionOption {
