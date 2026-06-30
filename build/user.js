@@ -4,6 +4,7 @@
 //   protoc               v6.33.6
 // source: user.proto
 /* eslint-disable */
+import Long from "long";
 import _m0 from "protobufjs/minimal";
 import { Timestamp } from "./google/protobuf/timestamp";
 import { ComplianceFormAnswer } from "./sologenic/com-fs-compliance-model/compliance";
@@ -351,7 +352,7 @@ export const UserDetails = {
             writer.uint32(264).int32(message.ReferralLimit);
         }
         if (message.ReferralAmountReceived !== undefined) {
-            writer.uint32(272).int32(message.ReferralAmountReceived);
+            writer.uint32(272).int64(message.ReferralAmountReceived);
         }
         if (message.ReferralAmount !== undefined) {
             writer.uint32(280).int32(message.ReferralAmount);
@@ -564,7 +565,7 @@ export const UserDetails = {
                     if (tag !== 272) {
                         break;
                     }
-                    message.ReferralAmountReceived = reader.int32();
+                    message.ReferralAmountReceived = longToNumber(reader.int64());
                     continue;
                 case 35:
                     if (tag !== 280) {
@@ -1368,6 +1369,19 @@ function fromJsonTimestamp(o) {
     else {
         return fromTimestamp(Timestamp.fromJSON(o));
     }
+}
+function longToNumber(long) {
+    if (long.gt(globalThis.Number.MAX_SAFE_INTEGER)) {
+        throw new globalThis.Error("Value is larger than Number.MAX_SAFE_INTEGER");
+    }
+    if (long.lt(globalThis.Number.MIN_SAFE_INTEGER)) {
+        throw new globalThis.Error("Value is smaller than Number.MIN_SAFE_INTEGER");
+    }
+    return long.toNumber();
+}
+if (_m0.util.Long !== Long) {
+    _m0.util.Long = Long;
+    _m0.configure();
 }
 function isSet(value) {
     return value !== null && value !== undefined;
