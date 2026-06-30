@@ -23,7 +23,7 @@ message ReferralStatsUpdate {
     string OrganizationID = 2;
     metadata.Network Network = 3;
     optional int32 ReferralCount = 4;
-    optional int32 ReferralAmountReceived = 5;
+    optional int64 ReferralAmountReceived = 5;
     optional google.protobuf.Timestamp ReferralPaidAt = 6;
     optional string ReferredBy = 7;
 }

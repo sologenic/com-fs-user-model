@@ -206,8 +206,8 @@ message UserDetails {
     ];
 
     // Amount of TX the referring user received from referrals (non-mutable by user)
-    optional int32 ReferralAmountReceived = 34 [
-      (buf.validate.field).int32 = {
+    optional int64 ReferralAmountReceived = 34 [
+      (buf.validate.field).int64 = {
         gte: 0
       }
     ];
