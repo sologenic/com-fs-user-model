@@ -36,32 +36,32 @@ checkout_lib_branch() {
     fi
 }
 
-for lib_dir in "${lib_dirs[@]}"; do
-    # Extract directory name from path (e.g., "../com-fs-utils-lib" -> "com-fs-utils-lib")
-    lib_name=$(basename "$lib_dir")
-    lib_repo="git@github.com:sologenic/${lib_name}.git"
-
-    if [ -d "$lib_dir" ] && [ -d "$lib_dir/.git" ]; then
-        echo "Updating ${lib_name} repository..."
-        cd "$lib_dir"
-        checkout_lib_branch
-        # Pull latest changes
-        git pull
-        # Return to original directory
-        cd "$rd"
-    elif [ ! -d "$lib_dir" ]; then
-        echo "${lib_name} repository not found. Cloning..."
-        parent_dir=$(dirname "$rd")
-        cd "$parent_dir"
-        git clone "$lib_repo" "$lib_name"
-        cd "$lib_name"
-        checkout_lib_branch
-        # Return to original directory
-        cd "$rd"
-    else
-        echo "Warning: ${lib_name} directory exists but is not a git repository at $lib_dir"
-    fi
-done
+#for lib_dir in "${lib_dirs[@]}"; do
+#    # Extract directory name from path (e.g., "../com-fs-utils-lib" -> "com-fs-utils-lib")
+#    lib_name=$(basename "$lib_dir")
+#    lib_repo="git@github.com:sologenic/${lib_name}.git"
+#
+#    if [ -d "$lib_dir" ] && [ -d "$lib_dir/.git" ]; then
+#        echo "Updating ${lib_name} repository..."
+#        cd "$lib_dir"
+#        checkout_lib_branch
+#        # Pull latest changes
+#        git pull
+#        # Return to original directory
+#        cd "$rd"
+#    elif [ ! -d "$lib_dir" ]; then
+#        echo "${lib_name} repository not found. Cloning..."
+#        parent_dir=$(dirname "$rd")
+#        cd "$parent_dir"
+#        git clone "$lib_repo" "$lib_name"
+#        cd "$lib_name"
+#        checkout_lib_branch
+#        # Return to original directory
+#        cd "$rd"
+#    else
+#        echo "Warning: ${lib_name} directory exists but is not a git repository at $lib_dir"
+#    fi
+#done
 cd $rd
 
 # Proto include paths: repo root, parent (for sologenic/*), and utils-lib models (for decimal etc.)
