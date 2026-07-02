@@ -112,7 +112,10 @@ message UserDetails {
 
     // A retail user will always have a role of "NORMAL_USER"
     role.Role Role = 15 [
-      (buf.validate.field).enum.defined_only = true
+      (buf.validate.field).enum = {
+        defined_only: true
+        in: [1]
+      }
     ];
 
     tradeprofile.TradeProfileDetails TradeProfile = 16 [
