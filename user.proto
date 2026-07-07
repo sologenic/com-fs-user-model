@@ -218,8 +218,8 @@ message UserDetails {
     ];
 
     // Amount of TX associated with this user to be distributed to new users (admin override only)
-    optional int32 ReferralAmount = 35 [
-      (buf.validate.field).int32 = {
+    optional int64 ReferralAmount = 35 [
+      (buf.validate.field).int64 = {
         gte: 0
       }
     ];
