@@ -145,7 +145,7 @@ message UserDetails {
       (buf.validate.field).enum.defined_only = true
     ];
 
-    google.protobuf.Timestamp KYCUpdatedAt = 41;
+    google.protobuf.Timestamp KYCStatusUpdatedAt = 41;
 
     tradeprofile.UserTradeProfile UserTradeProfile = 21 [
       (buf.validate.field).required = true
