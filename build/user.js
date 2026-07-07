@@ -239,6 +239,7 @@ function createBaseUserDetails() {
         KYCDetails: undefined,
         UserDocumentCompliance: undefined,
         KYCStatus: 0,
+        KYCUpdatedAt: undefined,
         UserTradeProfile: undefined,
         BrokerAccounts: [],
         UISettings: undefined,
@@ -317,6 +318,9 @@ export const UserDetails = {
         }
         if (message.KYCStatus !== 0) {
             writer.uint32(160).int32(message.KYCStatus);
+        }
+        if (message.KYCUpdatedAt !== undefined) {
+            Timestamp.encode(toTimestamp(message.KYCUpdatedAt), writer.uint32(330).fork()).ldelim();
         }
         if (message.UserTradeProfile !== undefined) {
             UserTradeProfile.encode(message.UserTradeProfile, writer.uint32(170).fork()).ldelim();
@@ -495,6 +499,12 @@ export const UserDetails = {
                     }
                     message.KYCStatus = reader.int32();
                     continue;
+                case 41:
+                    if (tag !== 330) {
+                        break;
+                    }
+                    message.KYCUpdatedAt = fromTimestamp(Timestamp.decode(reader, reader.uint32()));
+                    continue;
                 case 21:
                     if (tag !== 170) {
                         break;
@@ -636,6 +646,7 @@ export const UserDetails = {
                 ? UserDocumentCompliance.fromJSON(object.UserDocumentCompliance)
                 : undefined,
             KYCStatus: isSet(object.KYCStatus) ? kYCStatusFromJSON(object.KYCStatus) : 0,
+            KYCUpdatedAt: isSet(object.KYCUpdatedAt) ? fromJsonTimestamp(object.KYCUpdatedAt) : undefined,
             UserTradeProfile: isSet(object.UserTradeProfile) ? UserTradeProfile.fromJSON(object.UserTradeProfile) : undefined,
             BrokerAccounts: globalThis.Array.isArray(object === null || object === void 0 ? void 0 : object.BrokerAccounts)
                 ? object.BrokerAccounts.map((e) => BrokerAccount.fromJSON(e))
@@ -732,6 +743,9 @@ export const UserDetails = {
         if (message.KYCStatus !== 0) {
             obj.KYCStatus = kYCStatusToJSON(message.KYCStatus);
         }
+        if (message.KYCUpdatedAt !== undefined) {
+            obj.KYCUpdatedAt = message.KYCUpdatedAt.toISOString();
+        }
         if (message.UserTradeProfile !== undefined) {
             obj.UserTradeProfile = UserTradeProfile.toJSON(message.UserTradeProfile);
         }
@@ -792,7 +806,7 @@ export const UserDetails = {
         return UserDetails.fromPartial(base !== null && base !== void 0 ? base : {});
     },
     fromPartial(object) {
-        var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q, _r, _s, _t, _u, _v, _w, _x, _y, _z, _0, _1, _2, _3, _4, _5;
+        var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q, _r, _s, _t, _u, _v, _w, _x, _y, _z, _0, _1, _2, _3, _4, _5, _6;
         const message = createBaseUserDetails();
         message.UserID = (_a = object.UserID) !== null && _a !== void 0 ? _a : "";
         message.FirstName = (_b = object.FirstName) !== null && _b !== void 0 ? _b : "";
@@ -820,10 +834,11 @@ export const UserDetails = {
                 ? UserDocumentCompliance.fromPartial(object.UserDocumentCompliance)
                 : undefined;
         message.KYCStatus = (_r = object.KYCStatus) !== null && _r !== void 0 ? _r : 0;
+        message.KYCUpdatedAt = (_s = object.KYCUpdatedAt) !== null && _s !== void 0 ? _s : undefined;
         message.UserTradeProfile = (object.UserTradeProfile !== undefined && object.UserTradeProfile !== null)
             ? UserTradeProfile.fromPartial(object.UserTradeProfile)
             : undefined;
-        message.BrokerAccounts = ((_s = object.BrokerAccounts) === null || _s === void 0 ? void 0 : _s.map((e) => BrokerAccount.fromPartial(e))) || [];
+        message.BrokerAccounts = ((_t = object.BrokerAccounts) === null || _t === void 0 ? void 0 : _t.map((e) => BrokerAccount.fromPartial(e))) || [];
         message.UISettings = (object.UISettings !== undefined && object.UISettings !== null)
             ? UISettings.fromPartial(object.UISettings)
             : undefined;
@@ -833,19 +848,19 @@ export const UserDetails = {
         message.DataFeedAccounts = (object.DataFeedAccounts !== undefined && object.DataFeedAccounts !== null)
             ? DataFeedAccounts.fromPartial(object.DataFeedAccounts)
             : undefined;
-        message.AllowedJurisdictions = ((_t = object.AllowedJurisdictions) === null || _t === void 0 ? void 0 : _t.map((e) => e)) || [];
-        message.EmailAddress = (_u = object.EmailAddress) !== null && _u !== void 0 ? _u : "";
-        message.ComplianceFormAnswers = ((_v = object.ComplianceFormAnswers) === null || _v === void 0 ? void 0 : _v.map((e) => ComplianceFormAnswer.fromPartial(e))) || [];
-        message.ReferredBy = (_w = object.ReferredBy) !== null && _w !== void 0 ? _w : undefined;
-        message.ReferralCount = (_x = object.ReferralCount) !== null && _x !== void 0 ? _x : undefined;
-        message.ReferralLimit = (_y = object.ReferralLimit) !== null && _y !== void 0 ? _y : undefined;
-        message.ReferralAmountReceived = (_z = object.ReferralAmountReceived) !== null && _z !== void 0 ? _z : undefined;
-        message.ReferralAmount = (_0 = object.ReferralAmount) !== null && _0 !== void 0 ? _0 : undefined;
-        message.ReferralPaidAt = (_1 = object.ReferralPaidAt) !== null && _1 !== void 0 ? _1 : undefined;
-        message.XHandle = (_2 = object.XHandle) !== null && _2 !== void 0 ? _2 : undefined;
-        message.EliteClubMembershipStatus = (_3 = object.EliteClubMembershipStatus) !== null && _3 !== void 0 ? _3 : 0;
-        message.FCMPushTokens = ((_4 = object.FCMPushTokens) === null || _4 === void 0 ? void 0 : _4.map((e) => e)) || [];
-        message.ReferralProgramRewardMultiplier = (_5 = object.ReferralProgramRewardMultiplier) !== null && _5 !== void 0 ? _5 : 0;
+        message.AllowedJurisdictions = ((_u = object.AllowedJurisdictions) === null || _u === void 0 ? void 0 : _u.map((e) => e)) || [];
+        message.EmailAddress = (_v = object.EmailAddress) !== null && _v !== void 0 ? _v : "";
+        message.ComplianceFormAnswers = ((_w = object.ComplianceFormAnswers) === null || _w === void 0 ? void 0 : _w.map((e) => ComplianceFormAnswer.fromPartial(e))) || [];
+        message.ReferredBy = (_x = object.ReferredBy) !== null && _x !== void 0 ? _x : undefined;
+        message.ReferralCount = (_y = object.ReferralCount) !== null && _y !== void 0 ? _y : undefined;
+        message.ReferralLimit = (_z = object.ReferralLimit) !== null && _z !== void 0 ? _z : undefined;
+        message.ReferralAmountReceived = (_0 = object.ReferralAmountReceived) !== null && _0 !== void 0 ? _0 : undefined;
+        message.ReferralAmount = (_1 = object.ReferralAmount) !== null && _1 !== void 0 ? _1 : undefined;
+        message.ReferralPaidAt = (_2 = object.ReferralPaidAt) !== null && _2 !== void 0 ? _2 : undefined;
+        message.XHandle = (_3 = object.XHandle) !== null && _3 !== void 0 ? _3 : undefined;
+        message.EliteClubMembershipStatus = (_4 = object.EliteClubMembershipStatus) !== null && _4 !== void 0 ? _4 : 0;
+        message.FCMPushTokens = ((_5 = object.FCMPushTokens) === null || _5 === void 0 ? void 0 : _5.map((e) => e)) || [];
+        message.ReferralProgramRewardMultiplier = (_6 = object.ReferralProgramRewardMultiplier) !== null && _6 !== void 0 ? _6 : 0;
         return message;
     },
 };

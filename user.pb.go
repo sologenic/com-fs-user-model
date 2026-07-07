@@ -281,6 +281,7 @@ type UserDetails struct {
 	UserDocumentCompliance *com_fs_document_model.UserDocumentCompliance `protobuf:"bytes,19,opt,name=UserDocumentCompliance,proto3" json:"UserDocumentCompliance,omitempty"`
 	// Status of KYC verification, e.g., PENDING, APPROVED, REJECTED
 	KYCStatus          KYCStatus                                    `protobuf:"varint,20,opt,name=KYCStatus,proto3,enum=user.KYCStatus" json:"KYCStatus,omitempty"`
+	KYCUpdatedAt       *timestamppb.Timestamp                       `protobuf:"bytes,41,opt,name=KYCUpdatedAt,proto3" json:"KYCUpdatedAt,omitempty"`
 	UserTradeProfile   *com_fs_trade_profile_model.UserTradeProfile `protobuf:"bytes,21,opt,name=UserTradeProfile,proto3" json:"UserTradeProfile,omitempty"`
 	BrokerAccounts     []*BrokerAccount                             `protobuf:"bytes,23,rep,name=BrokerAccounts,proto3" json:"BrokerAccounts,omitempty"`
 	UISettings         *UISettings                                  `protobuf:"bytes,25,opt,name=UISettings,proto3" json:"UISettings,omitempty"`
@@ -476,6 +477,13 @@ func (x *UserDetails) GetKYCStatus() KYCStatus {
 		return x.KYCStatus
 	}
 	return KYCStatus_KYC_STATUS_UNSPECIFIED
+}
+
+func (x *UserDetails) GetKYCUpdatedAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.KYCUpdatedAt
+	}
+	return nil
 }
 
 func (x *UserDetails) GetUserTradeProfile() *com_fs_trade_profile_model.UserTradeProfile {
@@ -1044,7 +1052,7 @@ var file_user_proto_rawDesc = []byte{
 	0x6c, 0x2f, 0x63, 0x6f, 0x6d, 0x70, 0x6c, 0x69, 0x61, 0x6e, 0x63, 0x65, 0x2e, 0x70, 0x72, 0x6f,
 	0x74, 0x6f, 0x1a, 0x1b, 0x62, 0x75, 0x66, 0x2f, 0x76, 0x61, 0x6c, 0x69, 0x64, 0x61, 0x74, 0x65,
 	0x2f, 0x76, 0x61, 0x6c, 0x69, 0x64, 0x61, 0x74, 0x65, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x22,
-	0x85, 0x14, 0x0a, 0x0b, 0x55, 0x73, 0x65, 0x72, 0x44, 0x65, 0x74, 0x61, 0x69, 0x6c, 0x73, 0x12,
+	0xc5, 0x14, 0x0a, 0x0b, 0x55, 0x73, 0x65, 0x72, 0x44, 0x65, 0x74, 0x61, 0x69, 0x6c, 0x73, 0x12,
 	0x32, 0x0a, 0x06, 0x55, 0x73, 0x65, 0x72, 0x49, 0x44, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x42,
 	0x1a, 0xba, 0x48, 0x17, 0x72, 0x15, 0x10, 0x1c, 0x18, 0x80, 0x01, 0x32, 0x0e, 0x5e, 0x5b, 0x61,
 	0x2d, 0x7a, 0x41, 0x2d, 0x5a, 0x30, 0x2d, 0x39, 0x5d, 0x2b, 0x24, 0x52, 0x06, 0x55, 0x73, 0x65,
@@ -1113,6 +1121,10 @@ var file_user_proto_rawDesc = []byte{
 	0x61, 0x74, 0x75, 0x73, 0x18, 0x14, 0x20, 0x01, 0x28, 0x0e, 0x32, 0x0f, 0x2e, 0x75, 0x73, 0x65,
 	0x72, 0x2e, 0x4b, 0x59, 0x43, 0x53, 0x74, 0x61, 0x74, 0x75, 0x73, 0x42, 0x08, 0xba, 0x48, 0x05,
 	0x82, 0x01, 0x02, 0x10, 0x01, 0x52, 0x09, 0x4b, 0x59, 0x43, 0x53, 0x74, 0x61, 0x74, 0x75, 0x73,
+	0x12, 0x3e, 0x0a, 0x0c, 0x4b, 0x59, 0x43, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x64, 0x41, 0x74,
+	0x18, 0x29, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x1a, 0x2e, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x2e,
+	0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2e, 0x54, 0x69, 0x6d, 0x65, 0x73, 0x74, 0x61,
+	0x6d, 0x70, 0x52, 0x0c, 0x4b, 0x59, 0x43, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x64, 0x41, 0x74,
 	0x12, 0x52, 0x0a, 0x10, 0x55, 0x73, 0x65, 0x72, 0x54, 0x72, 0x61, 0x64, 0x65, 0x50, 0x72, 0x6f,
 	0x66, 0x69, 0x6c, 0x65, 0x18, 0x15, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x1e, 0x2e, 0x74, 0x72, 0x61,
 	0x64, 0x65, 0x70, 0x72, 0x6f, 0x66, 0x69, 0x6c, 0x65, 0x2e, 0x55, 0x73, 0x65, 0x72, 0x54, 0x72,
@@ -1321,12 +1333,12 @@ var file_user_proto_goTypes = []interface{}{
 	(*com_fs_trade_profile_model.TradeProfileDetails)(nil), // 15: tradeprofile.TradeProfileDetails
 	(*UserKYCDetails)(nil),                                 // 16: user.UserKYCDetails
 	(*com_fs_document_model.UserDocumentCompliance)(nil),   // 17: document.UserDocumentCompliance
-	(KYCStatus)(0), // 18: user.KYCStatus
-	(*com_fs_trade_profile_model.UserTradeProfile)(nil),  // 19: tradeprofile.UserTradeProfile
-	(*BrokerAccount)(nil),                                // 20: user.BrokerAccount
-	(*commission.CommissionSettings)(nil),                // 21: commission.CommissionSettings
-	(*com_fs_compliance_model.ComplianceFormAnswer)(nil), // 22: compliance.ComplianceFormAnswer
-	(*timestamppb.Timestamp)(nil),                        // 23: google.protobuf.Timestamp
+	(KYCStatus)(0),                // 18: user.KYCStatus
+	(*timestamppb.Timestamp)(nil), // 19: google.protobuf.Timestamp
+	(*com_fs_trade_profile_model.UserTradeProfile)(nil),  // 20: tradeprofile.UserTradeProfile
+	(*BrokerAccount)(nil),                                // 21: user.BrokerAccount
+	(*commission.CommissionSettings)(nil),                // 22: commission.CommissionSettings
+	(*com_fs_compliance_model.ComplianceFormAnswer)(nil), // 23: compliance.ComplianceFormAnswer
 	(*metadata.MetaData)(nil),                            // 24: metadata.MetaData
 	(*audit.Audit)(nil),                                  // 25: audit.Audit
 	(metadata.Network)(0),                                // 26: metadata.Network
@@ -1341,29 +1353,30 @@ var file_user_proto_depIdxs = []int32{
 	16, // 6: user.UserDetails.KYCDetails:type_name -> user.UserKYCDetails
 	17, // 7: user.UserDetails.UserDocumentCompliance:type_name -> document.UserDocumentCompliance
 	18, // 8: user.UserDetails.KYCStatus:type_name -> user.KYCStatus
-	19, // 9: user.UserDetails.UserTradeProfile:type_name -> tradeprofile.UserTradeProfile
-	20, // 10: user.UserDetails.BrokerAccounts:type_name -> user.BrokerAccount
-	9,  // 11: user.UserDetails.UISettings:type_name -> user.UISettings
-	21, // 12: user.UserDetails.CommissionSettings:type_name -> commission.CommissionSettings
-	10, // 13: user.UserDetails.DataFeedAccounts:type_name -> user.DataFeedAccounts
-	22, // 14: user.UserDetails.ComplianceFormAnswers:type_name -> compliance.ComplianceFormAnswer
-	23, // 15: user.UserDetails.ReferralPaidAt:type_name -> google.protobuf.Timestamp
-	3,  // 16: user.UserDetails.EliteClubMembershipStatus:type_name -> user.EliteClubMembershipStatus
-	4,  // 17: user.User.User:type_name -> user.UserDetails
-	24, // 18: user.User.MetaData:type_name -> metadata.MetaData
-	25, // 19: user.User.Audit:type_name -> audit.Audit
-	1,  // 20: user.Social.Type:type_name -> user.SocialType
-	5,  // 21: user.UserList.Users:type_name -> user.User
-	0,  // 22: user.StatusMessage.Status:type_name -> user.UserStatus
-	26, // 23: user.StatusMessage.Network:type_name -> metadata.Network
-	25, // 24: user.StatusMessage.Audit:type_name -> audit.Audit
-	2,  // 25: user.UISettings.Theme:type_name -> user.Theme
-	11, // 26: user.DataFeedAccounts.DxFeed:type_name -> user.DxFeed
-	27, // [27:27] is the sub-list for method output_type
-	27, // [27:27] is the sub-list for method input_type
-	27, // [27:27] is the sub-list for extension type_name
-	27, // [27:27] is the sub-list for extension extendee
-	0,  // [0:27] is the sub-list for field type_name
+	19, // 9: user.UserDetails.KYCUpdatedAt:type_name -> google.protobuf.Timestamp
+	20, // 10: user.UserDetails.UserTradeProfile:type_name -> tradeprofile.UserTradeProfile
+	21, // 11: user.UserDetails.BrokerAccounts:type_name -> user.BrokerAccount
+	9,  // 12: user.UserDetails.UISettings:type_name -> user.UISettings
+	22, // 13: user.UserDetails.CommissionSettings:type_name -> commission.CommissionSettings
+	10, // 14: user.UserDetails.DataFeedAccounts:type_name -> user.DataFeedAccounts
+	23, // 15: user.UserDetails.ComplianceFormAnswers:type_name -> compliance.ComplianceFormAnswer
+	19, // 16: user.UserDetails.ReferralPaidAt:type_name -> google.protobuf.Timestamp
+	3,  // 17: user.UserDetails.EliteClubMembershipStatus:type_name -> user.EliteClubMembershipStatus
+	4,  // 18: user.User.User:type_name -> user.UserDetails
+	24, // 19: user.User.MetaData:type_name -> metadata.MetaData
+	25, // 20: user.User.Audit:type_name -> audit.Audit
+	1,  // 21: user.Social.Type:type_name -> user.SocialType
+	5,  // 22: user.UserList.Users:type_name -> user.User
+	0,  // 23: user.StatusMessage.Status:type_name -> user.UserStatus
+	26, // 24: user.StatusMessage.Network:type_name -> metadata.Network
+	25, // 25: user.StatusMessage.Audit:type_name -> audit.Audit
+	2,  // 26: user.UISettings.Theme:type_name -> user.Theme
+	11, // 27: user.DataFeedAccounts.DxFeed:type_name -> user.DxFeed
+	28, // [28:28] is the sub-list for method output_type
+	28, // [28:28] is the sub-list for method input_type
+	28, // [28:28] is the sub-list for extension type_name
+	28, // [28:28] is the sub-list for extension extendee
+	0,  // [0:28] is the sub-list for field type_name
 }
 
 func init() { file_user_proto_init() }
