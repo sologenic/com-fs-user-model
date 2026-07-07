@@ -81,7 +81,7 @@ export interface UserDetails {
     UserDocumentCompliance: UserDocumentCompliance | undefined;
     /** Status of KYC verification, e.g., PENDING, APPROVED, REJECTED */
     KYCStatus: KYCStatus;
-    KYCUpdatedAt: Date | undefined;
+    KYCStatusUpdatedAt: Date | undefined;
     UserTradeProfile: UserTradeProfile | undefined;
     BrokerAccounts: BrokerAccount[];
     UISettings: UISettings | undefined;
@@ -237,7 +237,7 @@ export declare const UserDetails: {
             }[] | undefined;
         } | undefined;
         KYCStatus?: KYCStatus | undefined;
-        KYCUpdatedAt?: Date | undefined;
+        KYCStatusUpdatedAt?: Date | undefined;
         UserTradeProfile?: {
             IsMarginTradingEnabled?: boolean | undefined;
             IsShortSellingEnabled?: boolean | undefined;
@@ -487,7 +487,7 @@ export declare const UserDetails: {
             }[]>]: never; }) | undefined;
         } & { [K_13 in Exclude<keyof I["UserDocumentCompliance"], "SignedDocuments">]: never; }) | undefined;
         KYCStatus?: KYCStatus | undefined;
-        KYCUpdatedAt?: Date | undefined;
+        KYCStatusUpdatedAt?: Date | undefined;
         UserTradeProfile?: ({
             IsMarginTradingEnabled?: boolean | undefined;
             IsShortSellingEnabled?: boolean | undefined;
@@ -738,7 +738,7 @@ export declare const UserDetails: {
             }[] | undefined;
         } | undefined;
         KYCStatus?: KYCStatus | undefined;
-        KYCUpdatedAt?: Date | undefined;
+        KYCStatusUpdatedAt?: Date | undefined;
         UserTradeProfile?: {
             IsMarginTradingEnabled?: boolean | undefined;
             IsShortSellingEnabled?: boolean | undefined;
@@ -988,7 +988,7 @@ export declare const UserDetails: {
             }[]>]: never; }) | undefined;
         } & { [K_46 in Exclude<keyof I_1["UserDocumentCompliance"], "SignedDocuments">]: never; }) | undefined;
         KYCStatus?: KYCStatus | undefined;
-        KYCUpdatedAt?: Date | undefined;
+        KYCStatusUpdatedAt?: Date | undefined;
         UserTradeProfile?: ({
             IsMarginTradingEnabled?: boolean | undefined;
             IsShortSellingEnabled?: boolean | undefined;
@@ -1246,7 +1246,7 @@ export declare const User: {
                 }[] | undefined;
             } | undefined;
             KYCStatus?: KYCStatus | undefined;
-            KYCUpdatedAt?: Date | undefined;
+            KYCStatusUpdatedAt?: Date | undefined;
             UserTradeProfile?: {
                 IsMarginTradingEnabled?: boolean | undefined;
                 IsShortSellingEnabled?: boolean | undefined;
@@ -1398,7 +1398,7 @@ export declare const User: {
                 }[] | undefined;
             } | undefined;
             KYCStatus?: KYCStatus | undefined;
-            KYCUpdatedAt?: Date | undefined;
+            KYCStatusUpdatedAt?: Date | undefined;
             UserTradeProfile?: {
                 IsMarginTradingEnabled?: boolean | undefined;
                 IsShortSellingEnabled?: boolean | undefined;
@@ -1648,7 +1648,7 @@ export declare const User: {
                 }[]>]: never; }) | undefined;
             } & { [K_13 in Exclude<keyof I["User"]["UserDocumentCompliance"], "SignedDocuments">]: never; }) | undefined;
             KYCStatus?: KYCStatus | undefined;
-            KYCUpdatedAt?: Date | undefined;
+            KYCStatusUpdatedAt?: Date | undefined;
             UserTradeProfile?: ({
                 IsMarginTradingEnabled?: boolean | undefined;
                 IsShortSellingEnabled?: boolean | undefined;
@@ -1922,7 +1922,7 @@ export declare const User: {
                 }[] | undefined;
             } | undefined;
             KYCStatus?: KYCStatus | undefined;
-            KYCUpdatedAt?: Date | undefined;
+            KYCStatusUpdatedAt?: Date | undefined;
             UserTradeProfile?: {
                 IsMarginTradingEnabled?: boolean | undefined;
                 IsShortSellingEnabled?: boolean | undefined;
@@ -2074,7 +2074,7 @@ export declare const User: {
                 }[] | undefined;
             } | undefined;
             KYCStatus?: KYCStatus | undefined;
-            KYCUpdatedAt?: Date | undefined;
+            KYCStatusUpdatedAt?: Date | undefined;
             UserTradeProfile?: {
                 IsMarginTradingEnabled?: boolean | undefined;
                 IsShortSellingEnabled?: boolean | undefined;
@@ -2324,7 +2324,7 @@ export declare const User: {
                 }[]>]: never; }) | undefined;
             } & { [K_50 in Exclude<keyof I_1["User"]["UserDocumentCompliance"], "SignedDocuments">]: never; }) | undefined;
             KYCStatus?: KYCStatus | undefined;
-            KYCUpdatedAt?: Date | undefined;
+            KYCStatusUpdatedAt?: Date | undefined;
             UserTradeProfile?: ({
                 IsMarginTradingEnabled?: boolean | undefined;
                 IsShortSellingEnabled?: boolean | undefined;
@@ -2625,7 +2625,7 @@ export declare const UserList: {
                     }[] | undefined;
                 } | undefined;
                 KYCStatus?: KYCStatus | undefined;
-                KYCUpdatedAt?: Date | undefined;
+                KYCStatusUpdatedAt?: Date | undefined;
                 UserTradeProfile?: {
                     IsMarginTradingEnabled?: boolean | undefined;
                     IsShortSellingEnabled?: boolean | undefined;
@@ -2780,7 +2780,7 @@ export declare const UserList: {
                     }[] | undefined;
                 } | undefined;
                 KYCStatus?: KYCStatus | undefined;
-                KYCUpdatedAt?: Date | undefined;
+                KYCStatusUpdatedAt?: Date | undefined;
                 UserTradeProfile?: {
                     IsMarginTradingEnabled?: boolean | undefined;
                     IsShortSellingEnabled?: boolean | undefined;
@@ -2932,7 +2932,7 @@ export declare const UserList: {
                     }[] | undefined;
                 } | undefined;
                 KYCStatus?: KYCStatus | undefined;
-                KYCUpdatedAt?: Date | undefined;
+                KYCStatusUpdatedAt?: Date | undefined;
                 UserTradeProfile?: {
                     IsMarginTradingEnabled?: boolean | undefined;
                     IsShortSellingEnabled?: boolean | undefined;
@@ -3084,7 +3084,7 @@ export declare const UserList: {
                     }[] | undefined;
                 } | undefined;
                 KYCStatus?: KYCStatus | undefined;
-                KYCUpdatedAt?: Date | undefined;
+                KYCStatusUpdatedAt?: Date | undefined;
                 UserTradeProfile?: {
                     IsMarginTradingEnabled?: boolean | undefined;
                     IsShortSellingEnabled?: boolean | undefined;
@@ -3334,7 +3334,7 @@ export declare const UserList: {
                     }[]>]: never; }) | undefined;
                 } & { [K_13 in Exclude<keyof I["Users"][number]["User"]["UserDocumentCompliance"], "SignedDocuments">]: never; }) | undefined;
                 KYCStatus?: KYCStatus | undefined;
-                KYCUpdatedAt?: Date | undefined;
+                KYCStatusUpdatedAt?: Date | undefined;
                 UserTradeProfile?: ({
                     IsMarginTradingEnabled?: boolean | undefined;
                     IsShortSellingEnabled?: boolean | undefined;
@@ -3607,7 +3607,7 @@ export declare const UserList: {
                     }[] | undefined;
                 } | undefined;
                 KYCStatus?: KYCStatus | undefined;
-                KYCUpdatedAt?: Date | undefined;
+                KYCStatusUpdatedAt?: Date | undefined;
                 UserTradeProfile?: {
                     IsMarginTradingEnabled?: boolean | undefined;
                     IsShortSellingEnabled?: boolean | undefined;
@@ -3763,7 +3763,7 @@ export declare const UserList: {
                     }[] | undefined;
                 } | undefined;
                 KYCStatus?: KYCStatus | undefined;
-                KYCUpdatedAt?: Date | undefined;
+                KYCStatusUpdatedAt?: Date | undefined;
                 UserTradeProfile?: {
                     IsMarginTradingEnabled?: boolean | undefined;
                     IsShortSellingEnabled?: boolean | undefined;
@@ -3918,7 +3918,7 @@ export declare const UserList: {
                     }[] | undefined;
                 } | undefined;
                 KYCStatus?: KYCStatus | undefined;
-                KYCUpdatedAt?: Date | undefined;
+                KYCStatusUpdatedAt?: Date | undefined;
                 UserTradeProfile?: {
                     IsMarginTradingEnabled?: boolean | undefined;
                     IsShortSellingEnabled?: boolean | undefined;
@@ -4070,7 +4070,7 @@ export declare const UserList: {
                     }[] | undefined;
                 } | undefined;
                 KYCStatus?: KYCStatus | undefined;
-                KYCUpdatedAt?: Date | undefined;
+                KYCStatusUpdatedAt?: Date | undefined;
                 UserTradeProfile?: {
                     IsMarginTradingEnabled?: boolean | undefined;
                     IsShortSellingEnabled?: boolean | undefined;
@@ -4222,7 +4222,7 @@ export declare const UserList: {
                     }[] | undefined;
                 } | undefined;
                 KYCStatus?: KYCStatus | undefined;
-                KYCUpdatedAt?: Date | undefined;
+                KYCStatusUpdatedAt?: Date | undefined;
                 UserTradeProfile?: {
                     IsMarginTradingEnabled?: boolean | undefined;
                     IsShortSellingEnabled?: boolean | undefined;
@@ -4472,7 +4472,7 @@ export declare const UserList: {
                     }[]>]: never; }) | undefined;
                 } & { [K_52 in Exclude<keyof I_1["Users"][number]["User"]["UserDocumentCompliance"], "SignedDocuments">]: never; }) | undefined;
                 KYCStatus?: KYCStatus | undefined;
-                KYCUpdatedAt?: Date | undefined;
+                KYCStatusUpdatedAt?: Date | undefined;
                 UserTradeProfile?: ({
                     IsMarginTradingEnabled?: boolean | undefined;
                     IsShortSellingEnabled?: boolean | undefined;
@@ -4745,7 +4745,7 @@ export declare const UserList: {
                     }[] | undefined;
                 } | undefined;
                 KYCStatus?: KYCStatus | undefined;
-                KYCUpdatedAt?: Date | undefined;
+                KYCStatusUpdatedAt?: Date | undefined;
                 UserTradeProfile?: {
                     IsMarginTradingEnabled?: boolean | undefined;
                     IsShortSellingEnabled?: boolean | undefined;
