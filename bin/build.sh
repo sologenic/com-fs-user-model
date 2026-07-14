@@ -1,8 +1,8 @@
 #!/bin/bash
 set -e
 
-mkdir -p vendor/buf/validate
-curl https://raw.githubusercontent.com/bufbuild/protovalidate/refs/heads/main/proto/protovalidate/buf/validate/validate.proto > vendor/buf/validate/validate.proto
+mkdir -p dependencies/buf/validate
+curl https://raw.githubusercontent.com/bufbuild/protovalidate/refs/heads/main/proto/protovalidate/buf/validate/validate.proto > dependencies/buf/validate/validate.proto
 
 # move to the root dir of the package
 rd=$(git rev-parse --show-toplevel)
@@ -70,7 +70,7 @@ PROTO_PATH_ARGS=(
   --proto_path=.
   --proto_path="$proto_parent"
   --proto_path="$proto_parent/sologenic/com-fs-utils-lib/models"
-  --proto_path="$rd/vendor"
+  --proto_path="$rd/dependencies"
 )
 
 protoc "${PROTO_PATH_ARGS[@]}" "user-kyc.proto" \
