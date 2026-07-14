@@ -103,3 +103,88 @@ func TestGetCountryAlpha3(t *testing.T) {
 		})
 	}
 }
+
+func TestGetUSSubdivisionUSPSAlpha2(t *testing.T) {
+	tests := []struct {
+		name        string
+		user        *User
+		want        string
+		expectPanic bool
+	}{
+		{"nil user", nil, "", true},
+		{"nil inner user", &User{User: nil}, "", true},
+
+		{"no kyc details", &User{User: &UserDetails{KYCDetails: nil}}, "", false},
+
+		{"valid 2-letter code uppercase", &User{User: &UserDetails{
+			KYCDetails: &UserKYCDetails{AddressSubdivision: "CA"},
+		}}, "CA", false},
+		{"valid 2-letter code lowercase", &User{User: &UserDetails{
+			KYCDetails: &UserKYCDetails{AddressSubdivision: "ny"},
+		}}, "NY", false},
+		{"2-letter code with spaces", &User{User: &UserDetails{
+			KYCDetails: &UserKYCDetails{AddressSubdivision: " TX "},
+		}}, "TX", false},
+		{"invalid 2-letter code", &User{User: &UserDetails{
+			KYCDetails: &UserKYCDetails{AddressSubdivision: "XX"},
+		}}, "", false},
+
+		{"valid full name uppercase", &User{User: &UserDetails{
+			KYCDetails: &UserKYCDetails{AddressSubdivision: "CALIFORNIA"},
+		}}, "CA", false},
+		{"valid full name mixed case", &User{User: &UserDetails{
+			KYCDetails: &UserKYCDetails{AddressSubdivision: "New York"},
+		}}, "NY", false},
+		{"full name with spaces", &User{User: &UserDetails{
+			KYCDetails: &UserKYCDetails{AddressSubdivision: "  florida  "},
+		}}, "FL", false},
+		{"invalid full name", &User{User: &UserDetails{
+			KYCDetails: &UserKYCDetails{AddressSubdivision: "Ontario"},
+		}}, "", false},
+
+		{"valid territory", &User{User: &UserDetails{
+			KYCDetails: &UserKYCDetails{AddressSubdivision: "PUERTO RICO"},
+		}}, "PR", false},
+		{"valid historical territory", &User{User: &UserDetails{
+			KYCDetails: &UserKYCDetails{AddressSubdivision: "PANAMA CANAL ZONE"},
+		}}, "CZ", false},
+
+		{"empty string", &User{User: &UserDetails{
+			KYCDetails: &UserKYCDetails{AddressSubdivision: ""},
+		}}, "", false},
+		{"string with only spaces", &User{User: &UserDetails{
+			KYCDetails: &UserKYCDetails{AddressSubdivision: "   "},
+		}}, "", false},
+	}
+
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			defer func() {
+				r := recover()
+				if tt.expectPanic && r == nil {
+					t.Errorf("expected panic, but got none")
+				}
+				if !tt.expectPanic && r != nil {
+					t.Errorf("unexpected panic: %v", r)
+				}
+			}()
+
+			got := GetUSSubdivisionUSPSAlpha2(tt.user)
+
+			if !tt.expectPanic && got != tt.want {
+				t.Errorf("GetUSSubdivisionUSPSAlpha2() = %q, want %q", got, tt.want)
+			}
+		})
+	}
+}
+
+func TestUSSubdivisionMapsInit(t *testing.T) {
+	if len(usSubdivisionNameToUSPSAlpha2) != len(usSubdivisionUSPSAlpha2ToName) {
+		t.Errorf("Map sizes do not match: NameToCode has %d, CodeToName has %d",
+			len(usSubdivisionNameToUSPSAlpha2), len(usSubdivisionUSPSAlpha2ToName))
+	}
+
+	if name, exists := usSubdivisionUSPSAlpha2ToName["CA"]; !exists || name != "CALIFORNIA" {
+		t.Errorf("Expected 'CA' to map to 'CALIFORNIA', got %q", name)
+	}
+}
