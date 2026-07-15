@@ -1,6 +1,7 @@
 package user
 
 import (
+	"regexp"
 	"strings"
 
 	"github.com/flaticols/countrycodes"
@@ -47,6 +48,38 @@ func GetUSSubdivisionUSPSAlpha2(user *User) string {
 	}
 
 	return ""
+}
+
+func GetUSSocialSecurityNumber(user *User) string {
+	if user.User.KYCDetails == nil {
+		return ""
+	}
+
+	value := strings.TrimSpace(user.User.KYCDetails.SocialSecurityNumber)
+	if value == "" {
+		return ""
+	}
+
+	if IsValidUSSocialSecurityNumber(value) {
+		return value
+	}
+
+	return ""
+}
+
+var ssnRegex = regexp.MustCompile(`^(\d{3})-(\d{2})-(\d{4})$`)
+
+func IsValidUSSocialSecurityNumber(ssn string) bool {
+	matches := ssnRegex.FindStringSubmatch(ssn)
+	if matches == nil {
+		return false
+	}
+
+	area := matches[1]
+	group := matches[2]
+	serial := matches[3]
+
+	return area != "000" && area != "666" && area < "900" && group != "00" && serial != "0000"
 }
 
 var usSubdivisionNameToUSPSAlpha2 = map[string]string{

@@ -188,3 +188,97 @@ func TestUSSubdivisionMapsInit(t *testing.T) {
 		t.Errorf("Expected 'CA' to map to 'CALIFORNIA', got %q", name)
 	}
 }
+
+func TestGetUSSocialSecurityNumber(t *testing.T) {
+	tests := []struct {
+		name        string
+		user        *User
+		want        string
+		expectPanic bool
+	}{
+		{"nil user", nil, "", true},
+		{"nil inner user", &User{User: nil}, "", true},
+
+		{"no kyc details", &User{User: &UserDetails{KYCDetails: nil}}, "", false},
+
+		{"empty string", &User{User: &UserDetails{
+			KYCDetails: &UserKYCDetails{SocialSecurityNumber: ""},
+		}}, "", false},
+		{"spaces only", &User{User: &UserDetails{
+			KYCDetails: &UserKYCDetails{SocialSecurityNumber: "   "},
+		}}, "", false},
+
+		{"valid SSN", &User{User: &UserDetails{
+			KYCDetails: &UserKYCDetails{SocialSecurityNumber: "123-45-6789"},
+		}}, "123-45-6789", false},
+		{"valid SSN with surrounding spaces", &User{User: &UserDetails{
+			KYCDetails: &UserKYCDetails{SocialSecurityNumber: "  123-45-6789  "},
+		}}, "123-45-6789", false},
+
+		{"invalid SSN (no hyphens)", &User{User: &UserDetails{
+			KYCDetails: &UserKYCDetails{SocialSecurityNumber: "123456789"},
+		}}, "", false},
+		{"invalid SSN (bad area)", &User{User: &UserDetails{
+			KYCDetails: &UserKYCDetails{SocialSecurityNumber: "900-45-6789"},
+		}}, "", false},
+	}
+
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			defer func() {
+				r := recover()
+				if tt.expectPanic && r == nil {
+					t.Errorf("expected panic, but got none")
+				}
+				if !tt.expectPanic && r != nil {
+					t.Errorf("unexpected panic: %v", r)
+				}
+			}()
+
+			got := GetUSSocialSecurityNumber(tt.user)
+
+			if !tt.expectPanic && got != tt.want {
+				t.Errorf("GetUSSocialSecurityNumber() = %q, want %q", got, tt.want)
+			}
+		})
+	}
+}
+
+func TestIsValidUSSocialSecurityNumber(t *testing.T) {
+	tests := []struct {
+		name string
+		ssn  string
+		want bool
+	}{
+		// Valid cases
+		{"valid standard SSN", "123-45-6789", true},
+		{"valid high area code", "899-99-9999", true},
+
+		// Missing or misplaced hyphens (strict format check)
+		{"missing hyphens", "123456789", false},
+		{"hyphens in wrong place", "12-345-6789", false},
+		{"only one hyphen", "123-456789", false},
+
+		// Invalid Length / Chars
+		{"too long", "123-45-67890", false},
+		{"too short", "12-45-6789", false},
+		{"contains letters", "ABC-45-6789", false},
+
+		// SSA Rule checks
+		{"invalid area 000", "000-45-6789", false},
+		{"invalid area 666", "666-45-6789", false},
+		{"invalid area 900", "900-45-6789", false},
+		{"invalid area 999", "999-45-6789", false},
+		{"invalid group 00", "123-00-6789", false},
+		{"invalid serial 0000", "123-45-0000", false},
+	}
+
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			got := IsValidUSSocialSecurityNumber(tt.ssn)
+			if got != tt.want {
+				t.Errorf("IsValidUSSocialSecurityNumber() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
