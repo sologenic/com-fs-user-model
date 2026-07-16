@@ -79,7 +79,24 @@ func IsValidUSSocialSecurityNumber(ssn string) bool {
 	group := matches[2]
 	serial := matches[3]
 
-	return area != "000" && area != "666" && area < "900" && group != "00" && serial != "0000"
+	if area == "000" || area == "666" || area >= "900" || group == "00" || serial == "0000" {
+		return false
+	}
+
+	invalid := true
+	first := ssn[0]
+	for i := 1; i < len(ssn); i++ {
+		if ssn[i] != '-' && ssn[i] != first {
+			invalid = false
+			break
+		}
+	}
+
+	if invalid {
+		return false
+	}
+
+	return true
 }
 
 // https://en.wikipedia.org/wiki/List_of_U.S._state_and_territory_abbreviations

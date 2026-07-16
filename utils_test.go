@@ -271,6 +271,9 @@ func TestIsValidUSSocialSecurityNumber(t *testing.T) {
 		{"invalid area 999", "999-45-6789", false},
 		{"invalid group 00", "123-00-6789", false},
 		{"invalid serial 0000", "123-45-0000", false},
+
+		// Invalid format
+		{"cannot have all the same digits", "111-11-1111", false},
 	}
 
 	for _, tt := range tests {
