@@ -82,6 +82,7 @@ func IsValidUSSocialSecurityNumber(ssn string) bool {
 	return area != "000" && area != "666" && area < "900" && group != "00" && serial != "0000"
 }
 
+// https://en.wikipedia.org/wiki/List_of_U.S._state_and_territory_abbreviations
 var usSubdivisionNameToUSPSAlpha2 = map[string]string{
 	"ALABAMA":                                "AL",
 	"ALASKA":                                 "AK",
