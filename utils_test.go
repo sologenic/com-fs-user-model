@@ -253,6 +253,7 @@ func TestIsValidUSSocialSecurityNumber(t *testing.T) {
 		// Valid cases
 		{"valid standard SSN", "123-45-6789", true},
 		{"valid high area code", "899-99-9999", true},
+		{"valid", "272-17-3891", true},
 
 		// Missing or misplaced hyphens (strict format check)
 		{"missing hyphens", "123456789", false},
@@ -272,6 +273,7 @@ func TestIsValidUSSocialSecurityNumber(t *testing.T) {
 		{"invalid group 00", "123-00-6789", false},
 		{"invalid serial 0000", "123-45-0000", false},
 		{"invalid", "926-49-1738", false},
+		{"invalid", "272-17-389", false},
 
 		// Invalid format
 		{"cannot have all the same digits", "111-11-1111", false},
