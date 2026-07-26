@@ -1,6 +1,7 @@
 package user
 
 import (
+	"fmt"
 	"regexp"
 	"strings"
 
@@ -100,13 +101,16 @@ func IsValidUSSocialSecurityNumber(ssn string) bool {
 	return true
 }
 
-func GetAlpacaAccountID(user *User) string {
+func GetAlpacaAccountID(user *User) (id string) {
 	for _, item := range user.User.BrokerAccounts {
 		if item.Broker == orderproperties.ClearingBroker_ALPACA {
-			return item.AccountID
+			if id != "" {
+				panic(fmt.Sprintf("User %s has too many Alpaca accounts", user.User.UserID))
+			}
+			id = item.AccountID // UUID
 		}
 	}
-	return ""
+	return id
 }
 
 // https://en.wikipedia.org/wiki/List_of_U.S._state_and_territory_abbreviations
