@@ -102,6 +102,9 @@ func IsValidUSSocialSecurityNumber(ssn string) bool {
 }
 
 func GetAlpacaAccountID(user *User) (id string) {
+	if len(user.User.BrokerAccounts) == 0 {
+		return id
+	}
 	for _, item := range user.User.BrokerAccounts {
 		if item.Broker == orderproperties.ClearingBroker_ALPACA {
 			if id != "" {
