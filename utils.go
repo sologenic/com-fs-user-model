@@ -5,6 +5,7 @@ import (
 	"strings"
 
 	"github.com/flaticols/countrycodes"
+	orderproperties "github.com/sologenic/com-fs-utils-lib/models/order-properties"
 )
 
 // GetCountryAlpha2 returns the user's KYC country as ISO alpha-2, or "" if unset/invalid
@@ -97,6 +98,15 @@ func IsValidUSSocialSecurityNumber(ssn string) bool {
 	}
 
 	return true
+}
+
+func GetAlpacaAccountID(user *User) string {
+	for _, item := range user.User.BrokerAccounts {
+		if item.Broker == orderproperties.ClearingBroker_ALPACA {
+			return item.AccountID
+		}
+	}
+	return ""
 }
 
 // https://en.wikipedia.org/wiki/List_of_U.S._state_and_territory_abbreviations
