@@ -264,7 +264,6 @@ message UserDetails {
     repeated AlpacaCryptoKeychain AlpacaCryptoKeychains = 42 [
         (buf.validate.field).repeated = {
             max_items: 5,
-            unique: true
         }
     ];
 }

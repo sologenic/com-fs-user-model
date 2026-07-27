@@ -1076,7 +1076,7 @@ var File_user_proto protoreflect.FileDescriptor
 const file_user_proto_rawDesc = "" +
 	"\n" +
 	"\n" +
-	"user.proto\x12\x04user\x1a\x1fgoogle/protobuf/timestamp.proto\x1a9sologenic/com-fs-utils-lib/models/metadata/metadata.proto\x1a3sologenic/com-fs-utils-lib/models/audit/audit.proto\x1a1sologenic/com-fs-utils-lib/models/role/role.proto\x1a9sologenic/com-fs-utils-lib/models/language/language.proto\x1a7sologenic/com-fs-trade-profile-model/tradeprofile.proto\x1a.sologenic/com-fs-document-model/document.proto\x1a\x0euser-kyc.proto\x1a\x13user-fundings.proto\x1a=sologenic/com-fs-utils-lib/models/commission/commission.proto\x1a2sologenic/com-fs-compliance-model/compliance.proto\x1a\x1bbuf/validate/validate.proto\"\xaf\x15\n" +
+	"user.proto\x12\x04user\x1a\x1fgoogle/protobuf/timestamp.proto\x1a9sologenic/com-fs-utils-lib/models/metadata/metadata.proto\x1a3sologenic/com-fs-utils-lib/models/audit/audit.proto\x1a1sologenic/com-fs-utils-lib/models/role/role.proto\x1a9sologenic/com-fs-utils-lib/models/language/language.proto\x1a7sologenic/com-fs-trade-profile-model/tradeprofile.proto\x1a.sologenic/com-fs-document-model/document.proto\x1a\x0euser-kyc.proto\x1a\x13user-fundings.proto\x1a=sologenic/com-fs-utils-lib/models/commission/commission.proto\x1a2sologenic/com-fs-compliance-model/compliance.proto\x1a\x1bbuf/validate/validate.proto\"\xad\x15\n" +
 	"\vUserDetails\x122\n" +
 	"\x06UserID\x18\x01 \x01(\tB\x1a\xbaH\x17r\x15\x10\x1c\x18\x80\x012\x0e^[a-zA-Z0-9]+$R\x06UserID\x12F\n" +
 	"\tFirstName\x18\x02 \x01(\tB(\xbaH%r#\x10\x02\x18@2\x1d^[\\p{L}][\\p{L}\\s\\-']*[\\p{L}]$R\tFirstName\x12D\n" +
@@ -1130,9 +1130,8 @@ const file_user_proto_rawDesc = "" +
 	"\x19EliteClubMembershipStatus\x18& \x01(\x0e2\x1f.user.EliteClubMembershipStatusB\b\xbaH\x05\x82\x01\x02\x10\x01R\x19EliteClubMembershipStatus\x12L\n" +
 	"\rFCMPushTokens\x18' \x03(\tB&\xbaH#\x92\x01 \x10\x05\x18\x01\"\x1ar\x18\x10@\x18\x80\x042\x11^[a-zA-Z0-9_:-]+$R\rFCMPushTokens\x12T\n" +
 	"\x1fReferralProgramRewardMultiplier\x18( \x01(\x05B\n" +
-	"\xbaH\a\x1a\x05\x10\xe8\a \x00R\x1fReferralProgramRewardMultiplier\x12\\\n" +
-	"\x15AlpacaCryptoKeychains\x18* \x03(\v2\x1a.user.AlpacaCryptoKeychainB\n" +
-	"\xbaH\a\x92\x01\x04\x10\x05\x18\x01R\x15AlpacaCryptoKeychainsB\x15\n" +
+	"\xbaH\a\x1a\x05\x10\xe8\a \x00R\x1fReferralProgramRewardMultiplier\x12Z\n" +
+	"\x15AlpacaCryptoKeychains\x18* \x03(\v2\x1a.user.AlpacaCryptoKeychainB\b\xbaH\x05\x92\x01\x02\x10\x05R\x15AlpacaCryptoKeychainsB\x15\n" +
 	"\x13_CommissionSettingsB\x13\n" +
 	"\x11_DataFeedAccountsB\r\n" +
 	"\v_ReferredByB\x10\n" +
