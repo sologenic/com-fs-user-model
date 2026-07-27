@@ -259,6 +259,14 @@ message UserDetails {
         lt: 1000
       }
     ];
+
+    // Cryptographic keychain for encryption/decrypting/verifying Alpaca order envelope
+    repeated AlpacaCryptoKeychain AlpacaCryptoKeychains = 42 [
+        (buf.validate.field).repeated = {
+            max_items: 5,
+            unique: true
+        }
+    ];
 }
 
 message User {
@@ -352,4 +360,34 @@ enum EliteClubMembershipStatus {
   ELITE_CLUB_MEMBERSHIP_STATUS_PENDING = 1; // Request to add to the club submitted, pending administrator decision
   ELITE_CLUB_MEMBERSHIP_STATUS_ACTIVE = 2; // Request has been approved by administrator, it is not allowed to resubmit application
   ELITE_CLUB_MEMBERSHIP_STATUS_REJECTED = 3; // Request has been rejected by administrator, it is allowed to resubmit application
+}
+
+message AlpacaCryptoKeychain {
+    int32 Version = 1 [
+        (buf.validate.field).int32 = { gt: 0 }
+    ];
+
+    // Ed25519 key for server signature check
+    string PublicKeyHex = 2 [
+        (buf.validate.field).string = {
+            len: 64,
+            pattern: "^[0-9a-fA-F]{64}$"
+        }
+    ];
+
+    // Ed25519 key for server signature generation
+    string PrivateKeyHex = 3 [
+        (buf.validate.field).string = {
+            len: 128,
+            pattern: "^[0-9a-fA-F]{128}$"
+        }
+    ];
+
+    // AES key for encryption/decrypting data (shared with user)
+    string SymmetricKeyHex = 4 [
+        (buf.validate.field).string = {
+            len: 64,
+            pattern: "^[0-9a-fA-F]{64}$"
+        }
+    ];
 }
