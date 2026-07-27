@@ -283,6 +283,12 @@ export declare const AddressUserPair: {
                 EliteClubMembershipStatus?: import("./user").EliteClubMembershipStatus | undefined;
                 FCMPushTokens?: string[] | undefined;
                 ReferralProgramRewardMultiplier?: number | undefined;
+                AlpacaCryptoKeychains?: {
+                    Version?: number | undefined;
+                    PublicKeyHex?: string | undefined;
+                    PrivateKeyHex?: string | undefined;
+                    SymmetricKeyHex?: string | undefined;
+                }[] | undefined;
             } | undefined;
             MetaData?: {
                 Network?: Network | undefined;
@@ -438,6 +444,12 @@ export declare const AddressUserPair: {
                 EliteClubMembershipStatus?: import("./user").EliteClubMembershipStatus | undefined;
                 FCMPushTokens?: string[] | undefined;
                 ReferralProgramRewardMultiplier?: number | undefined;
+                AlpacaCryptoKeychains?: {
+                    Version?: number | undefined;
+                    PublicKeyHex?: string | undefined;
+                    PrivateKeyHex?: string | undefined;
+                    SymmetricKeyHex?: string | undefined;
+                }[] | undefined;
             } | undefined;
             MetaData?: {
                 Network?: Network | undefined;
@@ -590,6 +602,12 @@ export declare const AddressUserPair: {
                 EliteClubMembershipStatus?: import("./user").EliteClubMembershipStatus | undefined;
                 FCMPushTokens?: string[] | undefined;
                 ReferralProgramRewardMultiplier?: number | undefined;
+                AlpacaCryptoKeychains?: {
+                    Version?: number | undefined;
+                    PublicKeyHex?: string | undefined;
+                    PrivateKeyHex?: string | undefined;
+                    SymmetricKeyHex?: string | undefined;
+                }[] | undefined;
             } & {
                 UserID?: string | undefined;
                 FirstName?: string | undefined;
@@ -952,7 +970,28 @@ export declare const AddressUserPair: {
                 EliteClubMembershipStatus?: import("./user").EliteClubMembershipStatus | undefined;
                 FCMPushTokens?: (string[] & string[] & { [K_31 in Exclude<keyof I["User"]["User"]["FCMPushTokens"], keyof string[]>]: never; }) | undefined;
                 ReferralProgramRewardMultiplier?: number | undefined;
-            } & { [K_32 in Exclude<keyof I["User"]["User"], keyof import("./user").UserDetails>]: never; }) | undefined;
+                AlpacaCryptoKeychains?: ({
+                    Version?: number | undefined;
+                    PublicKeyHex?: string | undefined;
+                    PrivateKeyHex?: string | undefined;
+                    SymmetricKeyHex?: string | undefined;
+                }[] & ({
+                    Version?: number | undefined;
+                    PublicKeyHex?: string | undefined;
+                    PrivateKeyHex?: string | undefined;
+                    SymmetricKeyHex?: string | undefined;
+                } & {
+                    Version?: number | undefined;
+                    PublicKeyHex?: string | undefined;
+                    PrivateKeyHex?: string | undefined;
+                    SymmetricKeyHex?: string | undefined;
+                } & { [K_32 in Exclude<keyof I["User"]["User"]["AlpacaCryptoKeychains"][number], keyof import("./user").AlpacaCryptoKeychain>]: never; })[] & { [K_33 in Exclude<keyof I["User"]["User"]["AlpacaCryptoKeychains"], keyof {
+                    Version?: number | undefined;
+                    PublicKeyHex?: string | undefined;
+                    PrivateKeyHex?: string | undefined;
+                    SymmetricKeyHex?: string | undefined;
+                }[]>]: never; }) | undefined;
+            } & { [K_34 in Exclude<keyof I["User"]["User"], keyof import("./user").UserDetails>]: never; }) | undefined;
             MetaData?: ({
                 Network?: Network | undefined;
                 UpdatedAt?: Date | undefined;
@@ -963,7 +1002,7 @@ export declare const AddressUserPair: {
                 UpdatedAt?: Date | undefined;
                 CreatedAt?: Date | undefined;
                 UpdatedByAccount?: string | undefined;
-            } & { [K_33 in Exclude<keyof I["User"]["MetaData"], keyof import("./sologenic/com-fs-utils-lib/models/metadata/metadata").MetaData>]: never; }) | undefined;
+            } & { [K_35 in Exclude<keyof I["User"]["MetaData"], keyof import("./sologenic/com-fs-utils-lib/models/metadata/metadata").MetaData>]: never; }) | undefined;
             Audit?: ({
                 ChangedBy?: string | undefined;
                 ChangedAt?: Date | undefined;
@@ -972,10 +1011,10 @@ export declare const AddressUserPair: {
                 ChangedBy?: string | undefined;
                 ChangedAt?: Date | undefined;
                 Reason?: string | undefined;
-            } & { [K_34 in Exclude<keyof I["User"]["Audit"], keyof import("./sologenic/com-fs-utils-lib/models/audit/audit").Audit>]: never; }) | undefined;
-            OrganizationIDs?: (string[] & string[] & { [K_35 in Exclude<keyof I["User"]["OrganizationIDs"], keyof string[]>]: never; }) | undefined;
-        } & { [K_36 in Exclude<keyof I["User"], keyof User>]: never; }) | undefined;
-    } & { [K_37 in Exclude<keyof I, keyof AddressUserPair>]: never; }>(base?: I | undefined): AddressUserPair;
+            } & { [K_36 in Exclude<keyof I["User"]["Audit"], keyof import("./sologenic/com-fs-utils-lib/models/audit/audit").Audit>]: never; }) | undefined;
+            OrganizationIDs?: (string[] & string[] & { [K_37 in Exclude<keyof I["User"]["OrganizationIDs"], keyof string[]>]: never; }) | undefined;
+        } & { [K_38 in Exclude<keyof I["User"], keyof User>]: never; }) | undefined;
+    } & { [K_39 in Exclude<keyof I, keyof AddressUserPair>]: never; }>(base?: I | undefined): AddressUserPair;
     fromPartial<I_1 extends {
         Address?: string | undefined;
         User?: {
@@ -1117,6 +1156,12 @@ export declare const AddressUserPair: {
                 EliteClubMembershipStatus?: import("./user").EliteClubMembershipStatus | undefined;
                 FCMPushTokens?: string[] | undefined;
                 ReferralProgramRewardMultiplier?: number | undefined;
+                AlpacaCryptoKeychains?: {
+                    Version?: number | undefined;
+                    PublicKeyHex?: string | undefined;
+                    PrivateKeyHex?: string | undefined;
+                    SymmetricKeyHex?: string | undefined;
+                }[] | undefined;
             } | undefined;
             MetaData?: {
                 Network?: Network | undefined;
@@ -1272,6 +1317,12 @@ export declare const AddressUserPair: {
                 EliteClubMembershipStatus?: import("./user").EliteClubMembershipStatus | undefined;
                 FCMPushTokens?: string[] | undefined;
                 ReferralProgramRewardMultiplier?: number | undefined;
+                AlpacaCryptoKeychains?: {
+                    Version?: number | undefined;
+                    PublicKeyHex?: string | undefined;
+                    PrivateKeyHex?: string | undefined;
+                    SymmetricKeyHex?: string | undefined;
+                }[] | undefined;
             } | undefined;
             MetaData?: {
                 Network?: Network | undefined;
@@ -1424,6 +1475,12 @@ export declare const AddressUserPair: {
                 EliteClubMembershipStatus?: import("./user").EliteClubMembershipStatus | undefined;
                 FCMPushTokens?: string[] | undefined;
                 ReferralProgramRewardMultiplier?: number | undefined;
+                AlpacaCryptoKeychains?: {
+                    Version?: number | undefined;
+                    PublicKeyHex?: string | undefined;
+                    PrivateKeyHex?: string | undefined;
+                    SymmetricKeyHex?: string | undefined;
+                }[] | undefined;
             } & {
                 UserID?: string | undefined;
                 FirstName?: string | undefined;
@@ -1450,8 +1507,8 @@ export declare const AddressUserPair: {
                     Alias?: string | undefined;
                     Type?: import("./user-fundings").WalletType | undefined;
                     SignerType?: import("./user-fundings").SignerType | undefined;
-                    Organizations?: (string[] & string[] & { [K_38 in Exclude<keyof I_1["User"]["User"]["Wallets"][number]["Organizations"], keyof string[]>]: never; }) | undefined;
-                } & { [K_39 in Exclude<keyof I_1["User"]["User"]["Wallets"][number], keyof import("./user-fundings").Wallet>]: never; })[] & { [K_40 in Exclude<keyof I_1["User"]["User"]["Wallets"], keyof {
+                    Organizations?: (string[] & string[] & { [K_40 in Exclude<keyof I_1["User"]["User"]["Wallets"][number]["Organizations"], keyof string[]>]: never; }) | undefined;
+                } & { [K_41 in Exclude<keyof I_1["User"]["User"]["Wallets"][number], keyof import("./user-fundings").Wallet>]: never; })[] & { [K_42 in Exclude<keyof I_1["User"]["User"]["Wallets"], keyof {
                     Address?: string | undefined;
                     Alias?: string | undefined;
                     Type?: import("./user-fundings").WalletType | undefined;
@@ -1467,7 +1524,7 @@ export declare const AddressUserPair: {
                 } & {
                     URL?: string | undefined;
                     Type?: import("./user").SocialType | undefined;
-                } & { [K_41 in Exclude<keyof I_1["User"]["User"]["Socials"][number], keyof import("./user").Social>]: never; })[] & { [K_42 in Exclude<keyof I_1["User"]["User"]["Socials"], keyof {
+                } & { [K_43 in Exclude<keyof I_1["User"]["User"]["Socials"][number], keyof import("./user").Social>]: never; })[] & { [K_44 in Exclude<keyof I_1["User"]["User"]["Socials"], keyof {
                     URL?: string | undefined;
                     Type?: import("./user").SocialType | undefined;
                 }[]>]: never; }) | undefined;
@@ -1508,28 +1565,28 @@ export declare const AddressUserPair: {
                     } & {
                         Value?: number | undefined;
                         IsGreaterThan?: boolean | undefined;
-                    } & { [K_43 in Exclude<keyof I_1["User"]["User"]["TradeProfile"]["AggregateNotionalLimit"], keyof import("./sologenic/com-fs-trade-profile-model/tradeprofile").DropdownNumericValue>]: never; }) | undefined;
+                    } & { [K_45 in Exclude<keyof I_1["User"]["User"]["TradeProfile"]["AggregateNotionalLimit"], keyof import("./sologenic/com-fs-trade-profile-model/tradeprofile").DropdownNumericValue>]: never; }) | undefined;
                     SingleOrderLimit?: ({
                         Value?: number | undefined;
                         IsGreaterThan?: boolean | undefined;
                     } & {
                         Value?: number | undefined;
                         IsGreaterThan?: boolean | undefined;
-                    } & { [K_44 in Exclude<keyof I_1["User"]["User"]["TradeProfile"]["SingleOrderLimit"], keyof import("./sologenic/com-fs-trade-profile-model/tradeprofile").DropdownNumericValue>]: never; }) | undefined;
+                    } & { [K_46 in Exclude<keyof I_1["User"]["User"]["TradeProfile"]["SingleOrderLimit"], keyof import("./sologenic/com-fs-trade-profile-model/tradeprofile").DropdownNumericValue>]: never; }) | undefined;
                     MaxOrderQuantity?: ({
                         Value?: number | undefined;
                         IsGreaterThan?: boolean | undefined;
                     } & {
                         Value?: number | undefined;
                         IsGreaterThan?: boolean | undefined;
-                    } & { [K_45 in Exclude<keyof I_1["User"]["User"]["TradeProfile"]["MaxOrderQuantity"], keyof import("./sologenic/com-fs-trade-profile-model/tradeprofile").DropdownNumericValue>]: never; }) | undefined;
+                    } & { [K_47 in Exclude<keyof I_1["User"]["User"]["TradeProfile"]["MaxOrderQuantity"], keyof import("./sologenic/com-fs-trade-profile-model/tradeprofile").DropdownNumericValue>]: never; }) | undefined;
                     AggressivePercentage?: number | undefined;
                     SymbolGrossADVPercent?: number | undefined;
                     PriceCheckDeviation?: number | undefined;
                     DuplicateOrderLimit?: number | undefined;
                     RiskMultiplier?: number | undefined;
-                } & { [K_46 in Exclude<keyof I_1["User"]["User"]["TradeProfile"], keyof import("./sologenic/com-fs-trade-profile-model/tradeprofile").TradeProfileDetails>]: never; }) | undefined;
-                KYCInquiries?: (string[] & string[] & { [K_47 in Exclude<keyof I_1["User"]["User"]["KYCInquiries"], keyof string[]>]: never; }) | undefined;
+                } & { [K_48 in Exclude<keyof I_1["User"]["User"]["TradeProfile"], keyof import("./sologenic/com-fs-trade-profile-model/tradeprofile").TradeProfileDetails>]: never; }) | undefined;
+                KYCInquiries?: (string[] & string[] & { [K_49 in Exclude<keyof I_1["User"]["User"]["KYCInquiries"], keyof string[]>]: never; }) | undefined;
                 KYCDetails?: ({
                     Birthdate?: string | undefined;
                     PhoneNumber?: string | undefined;
@@ -1578,7 +1635,7 @@ export declare const AddressUserPair: {
                     IssueDate?: string | undefined;
                     IssuingAuthority?: string | undefined;
                     CollectedEmailAddress?: string | undefined;
-                } & { [K_48 in Exclude<keyof I_1["User"]["User"]["KYCDetails"], keyof import("./user-kyc").UserKYCDetails>]: never; }) | undefined;
+                } & { [K_50 in Exclude<keyof I_1["User"]["User"]["KYCDetails"], keyof import("./user-kyc").UserKYCDetails>]: never; }) | undefined;
                 UserDocumentCompliance?: ({
                     SignedDocuments?: {
                         Name?: string | undefined;
@@ -1610,7 +1667,7 @@ export declare const AddressUserPair: {
                         SignedAt?: Date | undefined;
                         FileMD5SUM?: string | undefined;
                         TXID?: string | undefined;
-                    } & { [K_49 in Exclude<keyof I_1["User"]["User"]["UserDocumentCompliance"]["SignedDocuments"][number], keyof import("./sologenic/com-fs-document-model/document").SignedDocument>]: never; })[] & { [K_50 in Exclude<keyof I_1["User"]["User"]["UserDocumentCompliance"]["SignedDocuments"], keyof {
+                    } & { [K_51 in Exclude<keyof I_1["User"]["User"]["UserDocumentCompliance"]["SignedDocuments"][number], keyof import("./sologenic/com-fs-document-model/document").SignedDocument>]: never; })[] & { [K_52 in Exclude<keyof I_1["User"]["User"]["UserDocumentCompliance"]["SignedDocuments"], keyof {
                         Name?: string | undefined;
                         SignedVersion?: string | undefined;
                         DocumentState?: import("./sologenic/com-fs-document-model/document").DocumentState | undefined;
@@ -1618,7 +1675,7 @@ export declare const AddressUserPair: {
                         FileMD5SUM?: string | undefined;
                         TXID?: string | undefined;
                     }[]>]: never; }) | undefined;
-                } & { [K_51 in Exclude<keyof I_1["User"]["User"]["UserDocumentCompliance"], "SignedDocuments">]: never; }) | undefined;
+                } & { [K_53 in Exclude<keyof I_1["User"]["User"]["UserDocumentCompliance"], "SignedDocuments">]: never; }) | undefined;
                 KYCStatus?: import("./user-kyc").KYCStatus | undefined;
                 KYCStatusUpdatedAt?: Date | undefined;
                 UserTradeProfile?: ({
@@ -1631,7 +1688,7 @@ export declare const AddressUserPair: {
                     IsShortSellingEnabled?: boolean | undefined;
                     SingleOrderLimit?: number | undefined;
                     MaxOrderQuantity?: number | undefined;
-                } & { [K_52 in Exclude<keyof I_1["User"]["User"]["UserTradeProfile"], keyof import("./sologenic/com-fs-trade-profile-model/tradeprofile").UserTradeProfile>]: never; }) | undefined;
+                } & { [K_54 in Exclude<keyof I_1["User"]["User"]["UserTradeProfile"], keyof import("./sologenic/com-fs-trade-profile-model/tradeprofile").UserTradeProfile>]: never; }) | undefined;
                 BrokerAccounts?: ({
                     AccountID?: string | undefined;
                     Broker?: import("./sologenic/com-fs-utils-lib/models/order-properties/order-properties").ClearingBroker | undefined;
@@ -1646,8 +1703,8 @@ export declare const AddressUserPair: {
                     AccountID?: string | undefined;
                     Broker?: import("./sologenic/com-fs-utils-lib/models/order-properties/order-properties").ClearingBroker | undefined;
                     OrganizationID?: string | undefined;
-                    Profiles?: (string[] & string[] & { [K_53 in Exclude<keyof I_1["User"]["User"]["BrokerAccounts"][number]["Profiles"], keyof string[]>]: never; }) | undefined;
-                } & { [K_54 in Exclude<keyof I_1["User"]["User"]["BrokerAccounts"][number], keyof import("./user-fundings").BrokerAccount>]: never; })[] & { [K_55 in Exclude<keyof I_1["User"]["User"]["BrokerAccounts"], keyof {
+                    Profiles?: (string[] & string[] & { [K_55 in Exclude<keyof I_1["User"]["User"]["BrokerAccounts"][number]["Profiles"], keyof string[]>]: never; }) | undefined;
+                } & { [K_56 in Exclude<keyof I_1["User"]["User"]["BrokerAccounts"][number], keyof import("./user-fundings").BrokerAccount>]: never; })[] & { [K_57 in Exclude<keyof I_1["User"]["User"]["BrokerAccounts"], keyof {
                     AccountID?: string | undefined;
                     Broker?: import("./sologenic/com-fs-utils-lib/models/order-properties/order-properties").ClearingBroker | undefined;
                     OrganizationID?: string | undefined;
@@ -1657,7 +1714,7 @@ export declare const AddressUserPair: {
                     Theme?: import("./user").Theme | undefined;
                 } & {
                     Theme?: import("./user").Theme | undefined;
-                } & { [K_56 in Exclude<keyof I_1["User"]["User"]["UISettings"], "Theme">]: never; }) | undefined;
+                } & { [K_58 in Exclude<keyof I_1["User"]["User"]["UISettings"], "Theme">]: never; }) | undefined;
                 CommissionSettings?: ({
                     Commission?: {
                         Value?: number | undefined;
@@ -1671,9 +1728,9 @@ export declare const AddressUserPair: {
                     } & {
                         Value?: number | undefined;
                         Exp?: number | undefined;
-                    } & { [K_57 in Exclude<keyof I_1["User"]["User"]["CommissionSettings"]["Commission"], keyof import("./sologenic/com-fs-utils-lib/models/decimal/decimal").Decimal>]: never; }) | undefined;
+                    } & { [K_59 in Exclude<keyof I_1["User"]["User"]["CommissionSettings"]["Commission"], keyof import("./sologenic/com-fs-utils-lib/models/decimal/decimal").Decimal>]: never; }) | undefined;
                     CommissionType?: import("./sologenic/com-fs-utils-lib/models/commission/commission").CommissionType | undefined;
-                } & { [K_58 in Exclude<keyof I_1["User"]["User"]["CommissionSettings"], keyof import("./sologenic/com-fs-utils-lib/models/commission/commission").CommissionSettings>]: never; }) | undefined;
+                } & { [K_60 in Exclude<keyof I_1["User"]["User"]["CommissionSettings"], keyof import("./sologenic/com-fs-utils-lib/models/commission/commission").CommissionSettings>]: never; }) | undefined;
                 DataFeedAccounts?: ({
                     DxFeed?: {
                         AccountID?: string | undefined;
@@ -1683,9 +1740,9 @@ export declare const AddressUserPair: {
                         AccountID?: string | undefined;
                     } & {
                         AccountID?: string | undefined;
-                    } & { [K_59 in Exclude<keyof I_1["User"]["User"]["DataFeedAccounts"]["DxFeed"], "AccountID">]: never; }) | undefined;
-                } & { [K_60 in Exclude<keyof I_1["User"]["User"]["DataFeedAccounts"], "DxFeed">]: never; }) | undefined;
-                AllowedJurisdictions?: (string[] & string[] & { [K_61 in Exclude<keyof I_1["User"]["User"]["AllowedJurisdictions"], keyof string[]>]: never; }) | undefined;
+                    } & { [K_61 in Exclude<keyof I_1["User"]["User"]["DataFeedAccounts"]["DxFeed"], "AccountID">]: never; }) | undefined;
+                } & { [K_62 in Exclude<keyof I_1["User"]["User"]["DataFeedAccounts"], "DxFeed">]: never; }) | undefined;
+                AllowedJurisdictions?: (string[] & string[] & { [K_63 in Exclude<keyof I_1["User"]["User"]["AllowedJurisdictions"], keyof string[]>]: never; }) | undefined;
                 EmailAddress?: string | undefined;
                 ComplianceFormAnswers?: ({
                     ComplianceID?: string | undefined;
@@ -1733,7 +1790,7 @@ export declare const AddressUserPair: {
                         }[] | undefined;
                     } & {
                         Question?: string | undefined;
-                        Values?: (string[] & string[] & { [K_62 in Exclude<keyof I_1["User"]["User"]["ComplianceFormAnswers"][number]["Answers"][number]["Values"], keyof string[]>]: never; }) | undefined;
+                        Values?: (string[] & string[] & { [K_64 in Exclude<keyof I_1["User"]["User"]["ComplianceFormAnswers"][number]["Answers"][number]["Values"], keyof string[]>]: never; }) | undefined;
                         Files?: ({
                             Description?: string | undefined;
                             Optionality?: import("./sologenic/com-fs-compliance-model/compliance").Optionality | undefined;
@@ -1746,12 +1803,12 @@ export declare const AddressUserPair: {
                             Description?: string | undefined;
                             Optionality?: import("./sologenic/com-fs-compliance-model/compliance").Optionality | undefined;
                             Hash?: string | undefined;
-                        } & { [K_63 in Exclude<keyof I_1["User"]["User"]["ComplianceFormAnswers"][number]["Answers"][number]["Files"][number], keyof import("./sologenic/com-fs-compliance-model/compliance").File>]: never; })[] & { [K_64 in Exclude<keyof I_1["User"]["User"]["ComplianceFormAnswers"][number]["Answers"][number]["Files"], keyof {
+                        } & { [K_65 in Exclude<keyof I_1["User"]["User"]["ComplianceFormAnswers"][number]["Answers"][number]["Files"][number], keyof import("./sologenic/com-fs-compliance-model/compliance").File>]: never; })[] & { [K_66 in Exclude<keyof I_1["User"]["User"]["ComplianceFormAnswers"][number]["Answers"][number]["Files"], keyof {
                             Description?: string | undefined;
                             Optionality?: import("./sologenic/com-fs-compliance-model/compliance").Optionality | undefined;
                             Hash?: string | undefined;
                         }[]>]: never; }) | undefined;
-                    } & { [K_65 in Exclude<keyof I_1["User"]["User"]["ComplianceFormAnswers"][number]["Answers"][number], keyof import("./sologenic/com-fs-compliance-model/compliance").QuestionAnswer>]: never; })[] & { [K_66 in Exclude<keyof I_1["User"]["User"]["ComplianceFormAnswers"][number]["Answers"], keyof {
+                    } & { [K_67 in Exclude<keyof I_1["User"]["User"]["ComplianceFormAnswers"][number]["Answers"][number], keyof import("./sologenic/com-fs-compliance-model/compliance").QuestionAnswer>]: never; })[] & { [K_68 in Exclude<keyof I_1["User"]["User"]["ComplianceFormAnswers"][number]["Answers"], keyof {
                         Question?: string | undefined;
                         Values?: string[] | undefined;
                         Files?: {
@@ -1762,7 +1819,7 @@ export declare const AddressUserPair: {
                     }[]>]: never; }) | undefined;
                     FormStatus?: import("./sologenic/com-fs-compliance-model/compliance").FormStatus | undefined;
                     SubmittedAt?: Date | undefined;
-                } & { [K_67 in Exclude<keyof I_1["User"]["User"]["ComplianceFormAnswers"][number], keyof import("./sologenic/com-fs-compliance-model/compliance").ComplianceFormAnswer>]: never; })[] & { [K_68 in Exclude<keyof I_1["User"]["User"]["ComplianceFormAnswers"], keyof {
+                } & { [K_69 in Exclude<keyof I_1["User"]["User"]["ComplianceFormAnswers"][number], keyof import("./sologenic/com-fs-compliance-model/compliance").ComplianceFormAnswer>]: never; })[] & { [K_70 in Exclude<keyof I_1["User"]["User"]["ComplianceFormAnswers"], keyof {
                     ComplianceID?: string | undefined;
                     Answers?: {
                         Question?: string | undefined;
@@ -1784,9 +1841,30 @@ export declare const AddressUserPair: {
                 ReferralPaidAt?: Date | undefined;
                 XHandle?: string | undefined;
                 EliteClubMembershipStatus?: import("./user").EliteClubMembershipStatus | undefined;
-                FCMPushTokens?: (string[] & string[] & { [K_69 in Exclude<keyof I_1["User"]["User"]["FCMPushTokens"], keyof string[]>]: never; }) | undefined;
+                FCMPushTokens?: (string[] & string[] & { [K_71 in Exclude<keyof I_1["User"]["User"]["FCMPushTokens"], keyof string[]>]: never; }) | undefined;
                 ReferralProgramRewardMultiplier?: number | undefined;
-            } & { [K_70 in Exclude<keyof I_1["User"]["User"], keyof import("./user").UserDetails>]: never; }) | undefined;
+                AlpacaCryptoKeychains?: ({
+                    Version?: number | undefined;
+                    PublicKeyHex?: string | undefined;
+                    PrivateKeyHex?: string | undefined;
+                    SymmetricKeyHex?: string | undefined;
+                }[] & ({
+                    Version?: number | undefined;
+                    PublicKeyHex?: string | undefined;
+                    PrivateKeyHex?: string | undefined;
+                    SymmetricKeyHex?: string | undefined;
+                } & {
+                    Version?: number | undefined;
+                    PublicKeyHex?: string | undefined;
+                    PrivateKeyHex?: string | undefined;
+                    SymmetricKeyHex?: string | undefined;
+                } & { [K_72 in Exclude<keyof I_1["User"]["User"]["AlpacaCryptoKeychains"][number], keyof import("./user").AlpacaCryptoKeychain>]: never; })[] & { [K_73 in Exclude<keyof I_1["User"]["User"]["AlpacaCryptoKeychains"], keyof {
+                    Version?: number | undefined;
+                    PublicKeyHex?: string | undefined;
+                    PrivateKeyHex?: string | undefined;
+                    SymmetricKeyHex?: string | undefined;
+                }[]>]: never; }) | undefined;
+            } & { [K_74 in Exclude<keyof I_1["User"]["User"], keyof import("./user").UserDetails>]: never; }) | undefined;
             MetaData?: ({
                 Network?: Network | undefined;
                 UpdatedAt?: Date | undefined;
@@ -1797,7 +1875,7 @@ export declare const AddressUserPair: {
                 UpdatedAt?: Date | undefined;
                 CreatedAt?: Date | undefined;
                 UpdatedByAccount?: string | undefined;
-            } & { [K_71 in Exclude<keyof I_1["User"]["MetaData"], keyof import("./sologenic/com-fs-utils-lib/models/metadata/metadata").MetaData>]: never; }) | undefined;
+            } & { [K_75 in Exclude<keyof I_1["User"]["MetaData"], keyof import("./sologenic/com-fs-utils-lib/models/metadata/metadata").MetaData>]: never; }) | undefined;
             Audit?: ({
                 ChangedBy?: string | undefined;
                 ChangedAt?: Date | undefined;
@@ -1806,10 +1884,10 @@ export declare const AddressUserPair: {
                 ChangedBy?: string | undefined;
                 ChangedAt?: Date | undefined;
                 Reason?: string | undefined;
-            } & { [K_72 in Exclude<keyof I_1["User"]["Audit"], keyof import("./sologenic/com-fs-utils-lib/models/audit/audit").Audit>]: never; }) | undefined;
-            OrganizationIDs?: (string[] & string[] & { [K_73 in Exclude<keyof I_1["User"]["OrganizationIDs"], keyof string[]>]: never; }) | undefined;
-        } & { [K_74 in Exclude<keyof I_1["User"], keyof User>]: never; }) | undefined;
-    } & { [K_75 in Exclude<keyof I_1, keyof AddressUserPair>]: never; }>(object: I_1): AddressUserPair;
+            } & { [K_76 in Exclude<keyof I_1["User"]["Audit"], keyof import("./sologenic/com-fs-utils-lib/models/audit/audit").Audit>]: never; }) | undefined;
+            OrganizationIDs?: (string[] & string[] & { [K_77 in Exclude<keyof I_1["User"]["OrganizationIDs"], keyof string[]>]: never; }) | undefined;
+        } & { [K_78 in Exclude<keyof I_1["User"], keyof User>]: never; }) | undefined;
+    } & { [K_79 in Exclude<keyof I_1, keyof AddressUserPair>]: never; }>(object: I_1): AddressUserPair;
 };
 export declare const GetByAddressesResponse: {
     encode(message: GetByAddressesResponse, writer?: _m0.Writer): _m0.Writer;
@@ -1958,6 +2036,12 @@ export declare const GetByAddressesResponse: {
                     EliteClubMembershipStatus?: import("./user").EliteClubMembershipStatus | undefined;
                     FCMPushTokens?: string[] | undefined;
                     ReferralProgramRewardMultiplier?: number | undefined;
+                    AlpacaCryptoKeychains?: {
+                        Version?: number | undefined;
+                        PublicKeyHex?: string | undefined;
+                        PrivateKeyHex?: string | undefined;
+                        SymmetricKeyHex?: string | undefined;
+                    }[] | undefined;
                 } | undefined;
                 MetaData?: {
                     Network?: Network | undefined;
@@ -2115,6 +2199,12 @@ export declare const GetByAddressesResponse: {
                     EliteClubMembershipStatus?: import("./user").EliteClubMembershipStatus | undefined;
                     FCMPushTokens?: string[] | undefined;
                     ReferralProgramRewardMultiplier?: number | undefined;
+                    AlpacaCryptoKeychains?: {
+                        Version?: number | undefined;
+                        PublicKeyHex?: string | undefined;
+                        PrivateKeyHex?: string | undefined;
+                        SymmetricKeyHex?: string | undefined;
+                    }[] | undefined;
                 } | undefined;
                 MetaData?: {
                     Network?: Network | undefined;
@@ -2270,6 +2360,12 @@ export declare const GetByAddressesResponse: {
                     EliteClubMembershipStatus?: import("./user").EliteClubMembershipStatus | undefined;
                     FCMPushTokens?: string[] | undefined;
                     ReferralProgramRewardMultiplier?: number | undefined;
+                    AlpacaCryptoKeychains?: {
+                        Version?: number | undefined;
+                        PublicKeyHex?: string | undefined;
+                        PrivateKeyHex?: string | undefined;
+                        SymmetricKeyHex?: string | undefined;
+                    }[] | undefined;
                 } | undefined;
                 MetaData?: {
                     Network?: Network | undefined;
@@ -2425,6 +2521,12 @@ export declare const GetByAddressesResponse: {
                     EliteClubMembershipStatus?: import("./user").EliteClubMembershipStatus | undefined;
                     FCMPushTokens?: string[] | undefined;
                     ReferralProgramRewardMultiplier?: number | undefined;
+                    AlpacaCryptoKeychains?: {
+                        Version?: number | undefined;
+                        PublicKeyHex?: string | undefined;
+                        PrivateKeyHex?: string | undefined;
+                        SymmetricKeyHex?: string | undefined;
+                    }[] | undefined;
                 } | undefined;
                 MetaData?: {
                     Network?: Network | undefined;
@@ -2577,6 +2679,12 @@ export declare const GetByAddressesResponse: {
                     EliteClubMembershipStatus?: import("./user").EliteClubMembershipStatus | undefined;
                     FCMPushTokens?: string[] | undefined;
                     ReferralProgramRewardMultiplier?: number | undefined;
+                    AlpacaCryptoKeychains?: {
+                        Version?: number | undefined;
+                        PublicKeyHex?: string | undefined;
+                        PrivateKeyHex?: string | undefined;
+                        SymmetricKeyHex?: string | undefined;
+                    }[] | undefined;
                 } & {
                     UserID?: string | undefined;
                     FirstName?: string | undefined;
@@ -2939,7 +3047,28 @@ export declare const GetByAddressesResponse: {
                     EliteClubMembershipStatus?: import("./user").EliteClubMembershipStatus | undefined;
                     FCMPushTokens?: (string[] & string[] & { [K_31 in Exclude<keyof I["Results"][number]["User"]["User"]["FCMPushTokens"], keyof string[]>]: never; }) | undefined;
                     ReferralProgramRewardMultiplier?: number | undefined;
-                } & { [K_32 in Exclude<keyof I["Results"][number]["User"]["User"], keyof import("./user").UserDetails>]: never; }) | undefined;
+                    AlpacaCryptoKeychains?: ({
+                        Version?: number | undefined;
+                        PublicKeyHex?: string | undefined;
+                        PrivateKeyHex?: string | undefined;
+                        SymmetricKeyHex?: string | undefined;
+                    }[] & ({
+                        Version?: number | undefined;
+                        PublicKeyHex?: string | undefined;
+                        PrivateKeyHex?: string | undefined;
+                        SymmetricKeyHex?: string | undefined;
+                    } & {
+                        Version?: number | undefined;
+                        PublicKeyHex?: string | undefined;
+                        PrivateKeyHex?: string | undefined;
+                        SymmetricKeyHex?: string | undefined;
+                    } & { [K_32 in Exclude<keyof I["Results"][number]["User"]["User"]["AlpacaCryptoKeychains"][number], keyof import("./user").AlpacaCryptoKeychain>]: never; })[] & { [K_33 in Exclude<keyof I["Results"][number]["User"]["User"]["AlpacaCryptoKeychains"], keyof {
+                        Version?: number | undefined;
+                        PublicKeyHex?: string | undefined;
+                        PrivateKeyHex?: string | undefined;
+                        SymmetricKeyHex?: string | undefined;
+                    }[]>]: never; }) | undefined;
+                } & { [K_34 in Exclude<keyof I["Results"][number]["User"]["User"], keyof import("./user").UserDetails>]: never; }) | undefined;
                 MetaData?: ({
                     Network?: Network | undefined;
                     UpdatedAt?: Date | undefined;
@@ -2950,7 +3079,7 @@ export declare const GetByAddressesResponse: {
                     UpdatedAt?: Date | undefined;
                     CreatedAt?: Date | undefined;
                     UpdatedByAccount?: string | undefined;
-                } & { [K_33 in Exclude<keyof I["Results"][number]["User"]["MetaData"], keyof import("./sologenic/com-fs-utils-lib/models/metadata/metadata").MetaData>]: never; }) | undefined;
+                } & { [K_35 in Exclude<keyof I["Results"][number]["User"]["MetaData"], keyof import("./sologenic/com-fs-utils-lib/models/metadata/metadata").MetaData>]: never; }) | undefined;
                 Audit?: ({
                     ChangedBy?: string | undefined;
                     ChangedAt?: Date | undefined;
@@ -2959,10 +3088,10 @@ export declare const GetByAddressesResponse: {
                     ChangedBy?: string | undefined;
                     ChangedAt?: Date | undefined;
                     Reason?: string | undefined;
-                } & { [K_34 in Exclude<keyof I["Results"][number]["User"]["Audit"], keyof import("./sologenic/com-fs-utils-lib/models/audit/audit").Audit>]: never; }) | undefined;
-                OrganizationIDs?: (string[] & string[] & { [K_35 in Exclude<keyof I["Results"][number]["User"]["OrganizationIDs"], keyof string[]>]: never; }) | undefined;
-            } & { [K_36 in Exclude<keyof I["Results"][number]["User"], keyof User>]: never; }) | undefined;
-        } & { [K_37 in Exclude<keyof I["Results"][number], keyof AddressUserPair>]: never; })[] & { [K_38 in Exclude<keyof I["Results"], keyof {
+                } & { [K_36 in Exclude<keyof I["Results"][number]["User"]["Audit"], keyof import("./sologenic/com-fs-utils-lib/models/audit/audit").Audit>]: never; }) | undefined;
+                OrganizationIDs?: (string[] & string[] & { [K_37 in Exclude<keyof I["Results"][number]["User"]["OrganizationIDs"], keyof string[]>]: never; }) | undefined;
+            } & { [K_38 in Exclude<keyof I["Results"][number]["User"], keyof User>]: never; }) | undefined;
+        } & { [K_39 in Exclude<keyof I["Results"][number], keyof AddressUserPair>]: never; })[] & { [K_40 in Exclude<keyof I["Results"], keyof {
             Address?: string | undefined;
             User?: {
                 User?: {
@@ -3103,6 +3232,12 @@ export declare const GetByAddressesResponse: {
                     EliteClubMembershipStatus?: import("./user").EliteClubMembershipStatus | undefined;
                     FCMPushTokens?: string[] | undefined;
                     ReferralProgramRewardMultiplier?: number | undefined;
+                    AlpacaCryptoKeychains?: {
+                        Version?: number | undefined;
+                        PublicKeyHex?: string | undefined;
+                        PrivateKeyHex?: string | undefined;
+                        SymmetricKeyHex?: string | undefined;
+                    }[] | undefined;
                 } | undefined;
                 MetaData?: {
                     Network?: Network | undefined;
@@ -3118,7 +3253,7 @@ export declare const GetByAddressesResponse: {
                 OrganizationIDs?: string[] | undefined;
             } | undefined;
         }[]>]: never; }) | undefined;
-    } & { [K_39 in Exclude<keyof I, "Results">]: never; }>(base?: I | undefined): GetByAddressesResponse;
+    } & { [K_41 in Exclude<keyof I, "Results">]: never; }>(base?: I | undefined): GetByAddressesResponse;
     fromPartial<I_1 extends {
         Results?: {
             Address?: string | undefined;
@@ -3261,6 +3396,12 @@ export declare const GetByAddressesResponse: {
                     EliteClubMembershipStatus?: import("./user").EliteClubMembershipStatus | undefined;
                     FCMPushTokens?: string[] | undefined;
                     ReferralProgramRewardMultiplier?: number | undefined;
+                    AlpacaCryptoKeychains?: {
+                        Version?: number | undefined;
+                        PublicKeyHex?: string | undefined;
+                        PrivateKeyHex?: string | undefined;
+                        SymmetricKeyHex?: string | undefined;
+                    }[] | undefined;
                 } | undefined;
                 MetaData?: {
                     Network?: Network | undefined;
@@ -3418,6 +3559,12 @@ export declare const GetByAddressesResponse: {
                     EliteClubMembershipStatus?: import("./user").EliteClubMembershipStatus | undefined;
                     FCMPushTokens?: string[] | undefined;
                     ReferralProgramRewardMultiplier?: number | undefined;
+                    AlpacaCryptoKeychains?: {
+                        Version?: number | undefined;
+                        PublicKeyHex?: string | undefined;
+                        PrivateKeyHex?: string | undefined;
+                        SymmetricKeyHex?: string | undefined;
+                    }[] | undefined;
                 } | undefined;
                 MetaData?: {
                     Network?: Network | undefined;
@@ -3573,6 +3720,12 @@ export declare const GetByAddressesResponse: {
                     EliteClubMembershipStatus?: import("./user").EliteClubMembershipStatus | undefined;
                     FCMPushTokens?: string[] | undefined;
                     ReferralProgramRewardMultiplier?: number | undefined;
+                    AlpacaCryptoKeychains?: {
+                        Version?: number | undefined;
+                        PublicKeyHex?: string | undefined;
+                        PrivateKeyHex?: string | undefined;
+                        SymmetricKeyHex?: string | undefined;
+                    }[] | undefined;
                 } | undefined;
                 MetaData?: {
                     Network?: Network | undefined;
@@ -3728,6 +3881,12 @@ export declare const GetByAddressesResponse: {
                     EliteClubMembershipStatus?: import("./user").EliteClubMembershipStatus | undefined;
                     FCMPushTokens?: string[] | undefined;
                     ReferralProgramRewardMultiplier?: number | undefined;
+                    AlpacaCryptoKeychains?: {
+                        Version?: number | undefined;
+                        PublicKeyHex?: string | undefined;
+                        PrivateKeyHex?: string | undefined;
+                        SymmetricKeyHex?: string | undefined;
+                    }[] | undefined;
                 } | undefined;
                 MetaData?: {
                     Network?: Network | undefined;
@@ -3880,6 +4039,12 @@ export declare const GetByAddressesResponse: {
                     EliteClubMembershipStatus?: import("./user").EliteClubMembershipStatus | undefined;
                     FCMPushTokens?: string[] | undefined;
                     ReferralProgramRewardMultiplier?: number | undefined;
+                    AlpacaCryptoKeychains?: {
+                        Version?: number | undefined;
+                        PublicKeyHex?: string | undefined;
+                        PrivateKeyHex?: string | undefined;
+                        SymmetricKeyHex?: string | undefined;
+                    }[] | undefined;
                 } & {
                     UserID?: string | undefined;
                     FirstName?: string | undefined;
@@ -3906,8 +4071,8 @@ export declare const GetByAddressesResponse: {
                         Alias?: string | undefined;
                         Type?: import("./user-fundings").WalletType | undefined;
                         SignerType?: import("./user-fundings").SignerType | undefined;
-                        Organizations?: (string[] & string[] & { [K_40 in Exclude<keyof I_1["Results"][number]["User"]["User"]["Wallets"][number]["Organizations"], keyof string[]>]: never; }) | undefined;
-                    } & { [K_41 in Exclude<keyof I_1["Results"][number]["User"]["User"]["Wallets"][number], keyof import("./user-fundings").Wallet>]: never; })[] & { [K_42 in Exclude<keyof I_1["Results"][number]["User"]["User"]["Wallets"], keyof {
+                        Organizations?: (string[] & string[] & { [K_42 in Exclude<keyof I_1["Results"][number]["User"]["User"]["Wallets"][number]["Organizations"], keyof string[]>]: never; }) | undefined;
+                    } & { [K_43 in Exclude<keyof I_1["Results"][number]["User"]["User"]["Wallets"][number], keyof import("./user-fundings").Wallet>]: never; })[] & { [K_44 in Exclude<keyof I_1["Results"][number]["User"]["User"]["Wallets"], keyof {
                         Address?: string | undefined;
                         Alias?: string | undefined;
                         Type?: import("./user-fundings").WalletType | undefined;
@@ -3923,7 +4088,7 @@ export declare const GetByAddressesResponse: {
                     } & {
                         URL?: string | undefined;
                         Type?: import("./user").SocialType | undefined;
-                    } & { [K_43 in Exclude<keyof I_1["Results"][number]["User"]["User"]["Socials"][number], keyof import("./user").Social>]: never; })[] & { [K_44 in Exclude<keyof I_1["Results"][number]["User"]["User"]["Socials"], keyof {
+                    } & { [K_45 in Exclude<keyof I_1["Results"][number]["User"]["User"]["Socials"][number], keyof import("./user").Social>]: never; })[] & { [K_46 in Exclude<keyof I_1["Results"][number]["User"]["User"]["Socials"], keyof {
                         URL?: string | undefined;
                         Type?: import("./user").SocialType | undefined;
                     }[]>]: never; }) | undefined;
@@ -3964,28 +4129,28 @@ export declare const GetByAddressesResponse: {
                         } & {
                             Value?: number | undefined;
                             IsGreaterThan?: boolean | undefined;
-                        } & { [K_45 in Exclude<keyof I_1["Results"][number]["User"]["User"]["TradeProfile"]["AggregateNotionalLimit"], keyof import("./sologenic/com-fs-trade-profile-model/tradeprofile").DropdownNumericValue>]: never; }) | undefined;
+                        } & { [K_47 in Exclude<keyof I_1["Results"][number]["User"]["User"]["TradeProfile"]["AggregateNotionalLimit"], keyof import("./sologenic/com-fs-trade-profile-model/tradeprofile").DropdownNumericValue>]: never; }) | undefined;
                         SingleOrderLimit?: ({
                             Value?: number | undefined;
                             IsGreaterThan?: boolean | undefined;
                         } & {
                             Value?: number | undefined;
                             IsGreaterThan?: boolean | undefined;
-                        } & { [K_46 in Exclude<keyof I_1["Results"][number]["User"]["User"]["TradeProfile"]["SingleOrderLimit"], keyof import("./sologenic/com-fs-trade-profile-model/tradeprofile").DropdownNumericValue>]: never; }) | undefined;
+                        } & { [K_48 in Exclude<keyof I_1["Results"][number]["User"]["User"]["TradeProfile"]["SingleOrderLimit"], keyof import("./sologenic/com-fs-trade-profile-model/tradeprofile").DropdownNumericValue>]: never; }) | undefined;
                         MaxOrderQuantity?: ({
                             Value?: number | undefined;
                             IsGreaterThan?: boolean | undefined;
                         } & {
                             Value?: number | undefined;
                             IsGreaterThan?: boolean | undefined;
-                        } & { [K_47 in Exclude<keyof I_1["Results"][number]["User"]["User"]["TradeProfile"]["MaxOrderQuantity"], keyof import("./sologenic/com-fs-trade-profile-model/tradeprofile").DropdownNumericValue>]: never; }) | undefined;
+                        } & { [K_49 in Exclude<keyof I_1["Results"][number]["User"]["User"]["TradeProfile"]["MaxOrderQuantity"], keyof import("./sologenic/com-fs-trade-profile-model/tradeprofile").DropdownNumericValue>]: never; }) | undefined;
                         AggressivePercentage?: number | undefined;
                         SymbolGrossADVPercent?: number | undefined;
                         PriceCheckDeviation?: number | undefined;
                         DuplicateOrderLimit?: number | undefined;
                         RiskMultiplier?: number | undefined;
-                    } & { [K_48 in Exclude<keyof I_1["Results"][number]["User"]["User"]["TradeProfile"], keyof import("./sologenic/com-fs-trade-profile-model/tradeprofile").TradeProfileDetails>]: never; }) | undefined;
-                    KYCInquiries?: (string[] & string[] & { [K_49 in Exclude<keyof I_1["Results"][number]["User"]["User"]["KYCInquiries"], keyof string[]>]: never; }) | undefined;
+                    } & { [K_50 in Exclude<keyof I_1["Results"][number]["User"]["User"]["TradeProfile"], keyof import("./sologenic/com-fs-trade-profile-model/tradeprofile").TradeProfileDetails>]: never; }) | undefined;
+                    KYCInquiries?: (string[] & string[] & { [K_51 in Exclude<keyof I_1["Results"][number]["User"]["User"]["KYCInquiries"], keyof string[]>]: never; }) | undefined;
                     KYCDetails?: ({
                         Birthdate?: string | undefined;
                         PhoneNumber?: string | undefined;
@@ -4034,7 +4199,7 @@ export declare const GetByAddressesResponse: {
                         IssueDate?: string | undefined;
                         IssuingAuthority?: string | undefined;
                         CollectedEmailAddress?: string | undefined;
-                    } & { [K_50 in Exclude<keyof I_1["Results"][number]["User"]["User"]["KYCDetails"], keyof import("./user-kyc").UserKYCDetails>]: never; }) | undefined;
+                    } & { [K_52 in Exclude<keyof I_1["Results"][number]["User"]["User"]["KYCDetails"], keyof import("./user-kyc").UserKYCDetails>]: never; }) | undefined;
                     UserDocumentCompliance?: ({
                         SignedDocuments?: {
                             Name?: string | undefined;
@@ -4066,7 +4231,7 @@ export declare const GetByAddressesResponse: {
                             SignedAt?: Date | undefined;
                             FileMD5SUM?: string | undefined;
                             TXID?: string | undefined;
-                        } & { [K_51 in Exclude<keyof I_1["Results"][number]["User"]["User"]["UserDocumentCompliance"]["SignedDocuments"][number], keyof import("./sologenic/com-fs-document-model/document").SignedDocument>]: never; })[] & { [K_52 in Exclude<keyof I_1["Results"][number]["User"]["User"]["UserDocumentCompliance"]["SignedDocuments"], keyof {
+                        } & { [K_53 in Exclude<keyof I_1["Results"][number]["User"]["User"]["UserDocumentCompliance"]["SignedDocuments"][number], keyof import("./sologenic/com-fs-document-model/document").SignedDocument>]: never; })[] & { [K_54 in Exclude<keyof I_1["Results"][number]["User"]["User"]["UserDocumentCompliance"]["SignedDocuments"], keyof {
                             Name?: string | undefined;
                             SignedVersion?: string | undefined;
                             DocumentState?: import("./sologenic/com-fs-document-model/document").DocumentState | undefined;
@@ -4074,7 +4239,7 @@ export declare const GetByAddressesResponse: {
                             FileMD5SUM?: string | undefined;
                             TXID?: string | undefined;
                         }[]>]: never; }) | undefined;
-                    } & { [K_53 in Exclude<keyof I_1["Results"][number]["User"]["User"]["UserDocumentCompliance"], "SignedDocuments">]: never; }) | undefined;
+                    } & { [K_55 in Exclude<keyof I_1["Results"][number]["User"]["User"]["UserDocumentCompliance"], "SignedDocuments">]: never; }) | undefined;
                     KYCStatus?: import("./user-kyc").KYCStatus | undefined;
                     KYCStatusUpdatedAt?: Date | undefined;
                     UserTradeProfile?: ({
@@ -4087,7 +4252,7 @@ export declare const GetByAddressesResponse: {
                         IsShortSellingEnabled?: boolean | undefined;
                         SingleOrderLimit?: number | undefined;
                         MaxOrderQuantity?: number | undefined;
-                    } & { [K_54 in Exclude<keyof I_1["Results"][number]["User"]["User"]["UserTradeProfile"], keyof import("./sologenic/com-fs-trade-profile-model/tradeprofile").UserTradeProfile>]: never; }) | undefined;
+                    } & { [K_56 in Exclude<keyof I_1["Results"][number]["User"]["User"]["UserTradeProfile"], keyof import("./sologenic/com-fs-trade-profile-model/tradeprofile").UserTradeProfile>]: never; }) | undefined;
                     BrokerAccounts?: ({
                         AccountID?: string | undefined;
                         Broker?: import("./sologenic/com-fs-utils-lib/models/order-properties/order-properties").ClearingBroker | undefined;
@@ -4102,8 +4267,8 @@ export declare const GetByAddressesResponse: {
                         AccountID?: string | undefined;
                         Broker?: import("./sologenic/com-fs-utils-lib/models/order-properties/order-properties").ClearingBroker | undefined;
                         OrganizationID?: string | undefined;
-                        Profiles?: (string[] & string[] & { [K_55 in Exclude<keyof I_1["Results"][number]["User"]["User"]["BrokerAccounts"][number]["Profiles"], keyof string[]>]: never; }) | undefined;
-                    } & { [K_56 in Exclude<keyof I_1["Results"][number]["User"]["User"]["BrokerAccounts"][number], keyof import("./user-fundings").BrokerAccount>]: never; })[] & { [K_57 in Exclude<keyof I_1["Results"][number]["User"]["User"]["BrokerAccounts"], keyof {
+                        Profiles?: (string[] & string[] & { [K_57 in Exclude<keyof I_1["Results"][number]["User"]["User"]["BrokerAccounts"][number]["Profiles"], keyof string[]>]: never; }) | undefined;
+                    } & { [K_58 in Exclude<keyof I_1["Results"][number]["User"]["User"]["BrokerAccounts"][number], keyof import("./user-fundings").BrokerAccount>]: never; })[] & { [K_59 in Exclude<keyof I_1["Results"][number]["User"]["User"]["BrokerAccounts"], keyof {
                         AccountID?: string | undefined;
                         Broker?: import("./sologenic/com-fs-utils-lib/models/order-properties/order-properties").ClearingBroker | undefined;
                         OrganizationID?: string | undefined;
@@ -4113,7 +4278,7 @@ export declare const GetByAddressesResponse: {
                         Theme?: import("./user").Theme | undefined;
                     } & {
                         Theme?: import("./user").Theme | undefined;
-                    } & { [K_58 in Exclude<keyof I_1["Results"][number]["User"]["User"]["UISettings"], "Theme">]: never; }) | undefined;
+                    } & { [K_60 in Exclude<keyof I_1["Results"][number]["User"]["User"]["UISettings"], "Theme">]: never; }) | undefined;
                     CommissionSettings?: ({
                         Commission?: {
                             Value?: number | undefined;
@@ -4127,9 +4292,9 @@ export declare const GetByAddressesResponse: {
                         } & {
                             Value?: number | undefined;
                             Exp?: number | undefined;
-                        } & { [K_59 in Exclude<keyof I_1["Results"][number]["User"]["User"]["CommissionSettings"]["Commission"], keyof import("./sologenic/com-fs-utils-lib/models/decimal/decimal").Decimal>]: never; }) | undefined;
+                        } & { [K_61 in Exclude<keyof I_1["Results"][number]["User"]["User"]["CommissionSettings"]["Commission"], keyof import("./sologenic/com-fs-utils-lib/models/decimal/decimal").Decimal>]: never; }) | undefined;
                         CommissionType?: import("./sologenic/com-fs-utils-lib/models/commission/commission").CommissionType | undefined;
-                    } & { [K_60 in Exclude<keyof I_1["Results"][number]["User"]["User"]["CommissionSettings"], keyof import("./sologenic/com-fs-utils-lib/models/commission/commission").CommissionSettings>]: never; }) | undefined;
+                    } & { [K_62 in Exclude<keyof I_1["Results"][number]["User"]["User"]["CommissionSettings"], keyof import("./sologenic/com-fs-utils-lib/models/commission/commission").CommissionSettings>]: never; }) | undefined;
                     DataFeedAccounts?: ({
                         DxFeed?: {
                             AccountID?: string | undefined;
@@ -4139,9 +4304,9 @@ export declare const GetByAddressesResponse: {
                             AccountID?: string | undefined;
                         } & {
                             AccountID?: string | undefined;
-                        } & { [K_61 in Exclude<keyof I_1["Results"][number]["User"]["User"]["DataFeedAccounts"]["DxFeed"], "AccountID">]: never; }) | undefined;
-                    } & { [K_62 in Exclude<keyof I_1["Results"][number]["User"]["User"]["DataFeedAccounts"], "DxFeed">]: never; }) | undefined;
-                    AllowedJurisdictions?: (string[] & string[] & { [K_63 in Exclude<keyof I_1["Results"][number]["User"]["User"]["AllowedJurisdictions"], keyof string[]>]: never; }) | undefined;
+                        } & { [K_63 in Exclude<keyof I_1["Results"][number]["User"]["User"]["DataFeedAccounts"]["DxFeed"], "AccountID">]: never; }) | undefined;
+                    } & { [K_64 in Exclude<keyof I_1["Results"][number]["User"]["User"]["DataFeedAccounts"], "DxFeed">]: never; }) | undefined;
+                    AllowedJurisdictions?: (string[] & string[] & { [K_65 in Exclude<keyof I_1["Results"][number]["User"]["User"]["AllowedJurisdictions"], keyof string[]>]: never; }) | undefined;
                     EmailAddress?: string | undefined;
                     ComplianceFormAnswers?: ({
                         ComplianceID?: string | undefined;
@@ -4189,7 +4354,7 @@ export declare const GetByAddressesResponse: {
                             }[] | undefined;
                         } & {
                             Question?: string | undefined;
-                            Values?: (string[] & string[] & { [K_64 in Exclude<keyof I_1["Results"][number]["User"]["User"]["ComplianceFormAnswers"][number]["Answers"][number]["Values"], keyof string[]>]: never; }) | undefined;
+                            Values?: (string[] & string[] & { [K_66 in Exclude<keyof I_1["Results"][number]["User"]["User"]["ComplianceFormAnswers"][number]["Answers"][number]["Values"], keyof string[]>]: never; }) | undefined;
                             Files?: ({
                                 Description?: string | undefined;
                                 Optionality?: import("./sologenic/com-fs-compliance-model/compliance").Optionality | undefined;
@@ -4202,12 +4367,12 @@ export declare const GetByAddressesResponse: {
                                 Description?: string | undefined;
                                 Optionality?: import("./sologenic/com-fs-compliance-model/compliance").Optionality | undefined;
                                 Hash?: string | undefined;
-                            } & { [K_65 in Exclude<keyof I_1["Results"][number]["User"]["User"]["ComplianceFormAnswers"][number]["Answers"][number]["Files"][number], keyof import("./sologenic/com-fs-compliance-model/compliance").File>]: never; })[] & { [K_66 in Exclude<keyof I_1["Results"][number]["User"]["User"]["ComplianceFormAnswers"][number]["Answers"][number]["Files"], keyof {
+                            } & { [K_67 in Exclude<keyof I_1["Results"][number]["User"]["User"]["ComplianceFormAnswers"][number]["Answers"][number]["Files"][number], keyof import("./sologenic/com-fs-compliance-model/compliance").File>]: never; })[] & { [K_68 in Exclude<keyof I_1["Results"][number]["User"]["User"]["ComplianceFormAnswers"][number]["Answers"][number]["Files"], keyof {
                                 Description?: string | undefined;
                                 Optionality?: import("./sologenic/com-fs-compliance-model/compliance").Optionality | undefined;
                                 Hash?: string | undefined;
                             }[]>]: never; }) | undefined;
-                        } & { [K_67 in Exclude<keyof I_1["Results"][number]["User"]["User"]["ComplianceFormAnswers"][number]["Answers"][number], keyof import("./sologenic/com-fs-compliance-model/compliance").QuestionAnswer>]: never; })[] & { [K_68 in Exclude<keyof I_1["Results"][number]["User"]["User"]["ComplianceFormAnswers"][number]["Answers"], keyof {
+                        } & { [K_69 in Exclude<keyof I_1["Results"][number]["User"]["User"]["ComplianceFormAnswers"][number]["Answers"][number], keyof import("./sologenic/com-fs-compliance-model/compliance").QuestionAnswer>]: never; })[] & { [K_70 in Exclude<keyof I_1["Results"][number]["User"]["User"]["ComplianceFormAnswers"][number]["Answers"], keyof {
                             Question?: string | undefined;
                             Values?: string[] | undefined;
                             Files?: {
@@ -4218,7 +4383,7 @@ export declare const GetByAddressesResponse: {
                         }[]>]: never; }) | undefined;
                         FormStatus?: import("./sologenic/com-fs-compliance-model/compliance").FormStatus | undefined;
                         SubmittedAt?: Date | undefined;
-                    } & { [K_69 in Exclude<keyof I_1["Results"][number]["User"]["User"]["ComplianceFormAnswers"][number], keyof import("./sologenic/com-fs-compliance-model/compliance").ComplianceFormAnswer>]: never; })[] & { [K_70 in Exclude<keyof I_1["Results"][number]["User"]["User"]["ComplianceFormAnswers"], keyof {
+                    } & { [K_71 in Exclude<keyof I_1["Results"][number]["User"]["User"]["ComplianceFormAnswers"][number], keyof import("./sologenic/com-fs-compliance-model/compliance").ComplianceFormAnswer>]: never; })[] & { [K_72 in Exclude<keyof I_1["Results"][number]["User"]["User"]["ComplianceFormAnswers"], keyof {
                         ComplianceID?: string | undefined;
                         Answers?: {
                             Question?: string | undefined;
@@ -4240,9 +4405,30 @@ export declare const GetByAddressesResponse: {
                     ReferralPaidAt?: Date | undefined;
                     XHandle?: string | undefined;
                     EliteClubMembershipStatus?: import("./user").EliteClubMembershipStatus | undefined;
-                    FCMPushTokens?: (string[] & string[] & { [K_71 in Exclude<keyof I_1["Results"][number]["User"]["User"]["FCMPushTokens"], keyof string[]>]: never; }) | undefined;
+                    FCMPushTokens?: (string[] & string[] & { [K_73 in Exclude<keyof I_1["Results"][number]["User"]["User"]["FCMPushTokens"], keyof string[]>]: never; }) | undefined;
                     ReferralProgramRewardMultiplier?: number | undefined;
-                } & { [K_72 in Exclude<keyof I_1["Results"][number]["User"]["User"], keyof import("./user").UserDetails>]: never; }) | undefined;
+                    AlpacaCryptoKeychains?: ({
+                        Version?: number | undefined;
+                        PublicKeyHex?: string | undefined;
+                        PrivateKeyHex?: string | undefined;
+                        SymmetricKeyHex?: string | undefined;
+                    }[] & ({
+                        Version?: number | undefined;
+                        PublicKeyHex?: string | undefined;
+                        PrivateKeyHex?: string | undefined;
+                        SymmetricKeyHex?: string | undefined;
+                    } & {
+                        Version?: number | undefined;
+                        PublicKeyHex?: string | undefined;
+                        PrivateKeyHex?: string | undefined;
+                        SymmetricKeyHex?: string | undefined;
+                    } & { [K_74 in Exclude<keyof I_1["Results"][number]["User"]["User"]["AlpacaCryptoKeychains"][number], keyof import("./user").AlpacaCryptoKeychain>]: never; })[] & { [K_75 in Exclude<keyof I_1["Results"][number]["User"]["User"]["AlpacaCryptoKeychains"], keyof {
+                        Version?: number | undefined;
+                        PublicKeyHex?: string | undefined;
+                        PrivateKeyHex?: string | undefined;
+                        SymmetricKeyHex?: string | undefined;
+                    }[]>]: never; }) | undefined;
+                } & { [K_76 in Exclude<keyof I_1["Results"][number]["User"]["User"], keyof import("./user").UserDetails>]: never; }) | undefined;
                 MetaData?: ({
                     Network?: Network | undefined;
                     UpdatedAt?: Date | undefined;
@@ -4253,7 +4439,7 @@ export declare const GetByAddressesResponse: {
                     UpdatedAt?: Date | undefined;
                     CreatedAt?: Date | undefined;
                     UpdatedByAccount?: string | undefined;
-                } & { [K_73 in Exclude<keyof I_1["Results"][number]["User"]["MetaData"], keyof import("./sologenic/com-fs-utils-lib/models/metadata/metadata").MetaData>]: never; }) | undefined;
+                } & { [K_77 in Exclude<keyof I_1["Results"][number]["User"]["MetaData"], keyof import("./sologenic/com-fs-utils-lib/models/metadata/metadata").MetaData>]: never; }) | undefined;
                 Audit?: ({
                     ChangedBy?: string | undefined;
                     ChangedAt?: Date | undefined;
@@ -4262,10 +4448,10 @@ export declare const GetByAddressesResponse: {
                     ChangedBy?: string | undefined;
                     ChangedAt?: Date | undefined;
                     Reason?: string | undefined;
-                } & { [K_74 in Exclude<keyof I_1["Results"][number]["User"]["Audit"], keyof import("./sologenic/com-fs-utils-lib/models/audit/audit").Audit>]: never; }) | undefined;
-                OrganizationIDs?: (string[] & string[] & { [K_75 in Exclude<keyof I_1["Results"][number]["User"]["OrganizationIDs"], keyof string[]>]: never; }) | undefined;
-            } & { [K_76 in Exclude<keyof I_1["Results"][number]["User"], keyof User>]: never; }) | undefined;
-        } & { [K_77 in Exclude<keyof I_1["Results"][number], keyof AddressUserPair>]: never; })[] & { [K_78 in Exclude<keyof I_1["Results"], keyof {
+                } & { [K_78 in Exclude<keyof I_1["Results"][number]["User"]["Audit"], keyof import("./sologenic/com-fs-utils-lib/models/audit/audit").Audit>]: never; }) | undefined;
+                OrganizationIDs?: (string[] & string[] & { [K_79 in Exclude<keyof I_1["Results"][number]["User"]["OrganizationIDs"], keyof string[]>]: never; }) | undefined;
+            } & { [K_80 in Exclude<keyof I_1["Results"][number]["User"], keyof User>]: never; }) | undefined;
+        } & { [K_81 in Exclude<keyof I_1["Results"][number], keyof AddressUserPair>]: never; })[] & { [K_82 in Exclude<keyof I_1["Results"], keyof {
             Address?: string | undefined;
             User?: {
                 User?: {
@@ -4406,6 +4592,12 @@ export declare const GetByAddressesResponse: {
                     EliteClubMembershipStatus?: import("./user").EliteClubMembershipStatus | undefined;
                     FCMPushTokens?: string[] | undefined;
                     ReferralProgramRewardMultiplier?: number | undefined;
+                    AlpacaCryptoKeychains?: {
+                        Version?: number | undefined;
+                        PublicKeyHex?: string | undefined;
+                        PrivateKeyHex?: string | undefined;
+                        SymmetricKeyHex?: string | undefined;
+                    }[] | undefined;
                 } | undefined;
                 MetaData?: {
                     Network?: Network | undefined;
@@ -4421,7 +4613,7 @@ export declare const GetByAddressesResponse: {
                 OrganizationIDs?: string[] | undefined;
             } | undefined;
         }[]>]: never; }) | undefined;
-    } & { [K_79 in Exclude<keyof I_1, "Results">]: never; }>(object: I_1): GetByAddressesResponse;
+    } & { [K_83 in Exclude<keyof I_1, "Results">]: never; }>(object: I_1): GetByAddressesResponse;
 };
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 export type DeepPartial<T> = T extends Builtin ? T : T extends globalThis.Array<infer U> ? globalThis.Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? {
