@@ -151,12 +151,12 @@ export interface DxFeed {
     AccountID: string;
 }
 export interface AlpacaCryptoKeychain {
-    Version: number;
+    ID: number;
     /** Ed25519 key for server signature check */
     PublicKeyHex: string;
     /** Ed25519 key for server signature generation */
     PrivateKeyHex: string;
-    /** AES key for encryption/decrypting data (shared with user) */
+    /** AES key used for encrypting/decrypting data (shared with user) */
     SymmetricKeyHex: string;
 }
 export declare const UserDetails: {
@@ -303,7 +303,7 @@ export declare const UserDetails: {
         FCMPushTokens?: string[] | undefined;
         ReferralProgramRewardMultiplier?: number | undefined;
         AlpacaCryptoKeychains?: {
-            Version?: number | undefined;
+            ID?: number | undefined;
             PublicKeyHex?: string | undefined;
             PrivateKeyHex?: string | undefined;
             SymmetricKeyHex?: string | undefined;
@@ -671,22 +671,22 @@ export declare const UserDetails: {
         FCMPushTokens?: (string[] & string[] & { [K_31 in Exclude<keyof I["FCMPushTokens"], keyof string[]>]: never; }) | undefined;
         ReferralProgramRewardMultiplier?: number | undefined;
         AlpacaCryptoKeychains?: ({
-            Version?: number | undefined;
+            ID?: number | undefined;
             PublicKeyHex?: string | undefined;
             PrivateKeyHex?: string | undefined;
             SymmetricKeyHex?: string | undefined;
         }[] & ({
-            Version?: number | undefined;
+            ID?: number | undefined;
             PublicKeyHex?: string | undefined;
             PrivateKeyHex?: string | undefined;
             SymmetricKeyHex?: string | undefined;
         } & {
-            Version?: number | undefined;
+            ID?: number | undefined;
             PublicKeyHex?: string | undefined;
             PrivateKeyHex?: string | undefined;
             SymmetricKeyHex?: string | undefined;
         } & { [K_32 in Exclude<keyof I["AlpacaCryptoKeychains"][number], keyof AlpacaCryptoKeychain>]: never; })[] & { [K_33 in Exclude<keyof I["AlpacaCryptoKeychains"], keyof {
-            Version?: number | undefined;
+            ID?: number | undefined;
             PublicKeyHex?: string | undefined;
             PrivateKeyHex?: string | undefined;
             SymmetricKeyHex?: string | undefined;
@@ -831,7 +831,7 @@ export declare const UserDetails: {
         FCMPushTokens?: string[] | undefined;
         ReferralProgramRewardMultiplier?: number | undefined;
         AlpacaCryptoKeychains?: {
-            Version?: number | undefined;
+            ID?: number | undefined;
             PublicKeyHex?: string | undefined;
             PrivateKeyHex?: string | undefined;
             SymmetricKeyHex?: string | undefined;
@@ -1199,22 +1199,22 @@ export declare const UserDetails: {
         FCMPushTokens?: (string[] & string[] & { [K_66 in Exclude<keyof I_1["FCMPushTokens"], keyof string[]>]: never; }) | undefined;
         ReferralProgramRewardMultiplier?: number | undefined;
         AlpacaCryptoKeychains?: ({
-            Version?: number | undefined;
+            ID?: number | undefined;
             PublicKeyHex?: string | undefined;
             PrivateKeyHex?: string | undefined;
             SymmetricKeyHex?: string | undefined;
         }[] & ({
-            Version?: number | undefined;
+            ID?: number | undefined;
             PublicKeyHex?: string | undefined;
             PrivateKeyHex?: string | undefined;
             SymmetricKeyHex?: string | undefined;
         } & {
-            Version?: number | undefined;
+            ID?: number | undefined;
             PublicKeyHex?: string | undefined;
             PrivateKeyHex?: string | undefined;
             SymmetricKeyHex?: string | undefined;
         } & { [K_67 in Exclude<keyof I_1["AlpacaCryptoKeychains"][number], keyof AlpacaCryptoKeychain>]: never; })[] & { [K_68 in Exclude<keyof I_1["AlpacaCryptoKeychains"], keyof {
-            Version?: number | undefined;
+            ID?: number | undefined;
             PublicKeyHex?: string | undefined;
             PrivateKeyHex?: string | undefined;
             SymmetricKeyHex?: string | undefined;
@@ -1366,7 +1366,7 @@ export declare const User: {
             FCMPushTokens?: string[] | undefined;
             ReferralProgramRewardMultiplier?: number | undefined;
             AlpacaCryptoKeychains?: {
-                Version?: number | undefined;
+                ID?: number | undefined;
                 PublicKeyHex?: string | undefined;
                 PrivateKeyHex?: string | undefined;
                 SymmetricKeyHex?: string | undefined;
@@ -1524,7 +1524,7 @@ export declare const User: {
             FCMPushTokens?: string[] | undefined;
             ReferralProgramRewardMultiplier?: number | undefined;
             AlpacaCryptoKeychains?: {
-                Version?: number | undefined;
+                ID?: number | undefined;
                 PublicKeyHex?: string | undefined;
                 PrivateKeyHex?: string | undefined;
                 SymmetricKeyHex?: string | undefined;
@@ -1892,22 +1892,22 @@ export declare const User: {
             FCMPushTokens?: (string[] & string[] & { [K_31 in Exclude<keyof I["User"]["FCMPushTokens"], keyof string[]>]: never; }) | undefined;
             ReferralProgramRewardMultiplier?: number | undefined;
             AlpacaCryptoKeychains?: ({
-                Version?: number | undefined;
+                ID?: number | undefined;
                 PublicKeyHex?: string | undefined;
                 PrivateKeyHex?: string | undefined;
                 SymmetricKeyHex?: string | undefined;
             }[] & ({
-                Version?: number | undefined;
+                ID?: number | undefined;
                 PublicKeyHex?: string | undefined;
                 PrivateKeyHex?: string | undefined;
                 SymmetricKeyHex?: string | undefined;
             } & {
-                Version?: number | undefined;
+                ID?: number | undefined;
                 PublicKeyHex?: string | undefined;
                 PrivateKeyHex?: string | undefined;
                 SymmetricKeyHex?: string | undefined;
             } & { [K_32 in Exclude<keyof I["User"]["AlpacaCryptoKeychains"][number], keyof AlpacaCryptoKeychain>]: never; })[] & { [K_33 in Exclude<keyof I["User"]["AlpacaCryptoKeychains"], keyof {
-                Version?: number | undefined;
+                ID?: number | undefined;
                 PublicKeyHex?: string | undefined;
                 PrivateKeyHex?: string | undefined;
                 SymmetricKeyHex?: string | undefined;
@@ -2075,7 +2075,7 @@ export declare const User: {
             FCMPushTokens?: string[] | undefined;
             ReferralProgramRewardMultiplier?: number | undefined;
             AlpacaCryptoKeychains?: {
-                Version?: number | undefined;
+                ID?: number | undefined;
                 PublicKeyHex?: string | undefined;
                 PrivateKeyHex?: string | undefined;
                 SymmetricKeyHex?: string | undefined;
@@ -2233,7 +2233,7 @@ export declare const User: {
             FCMPushTokens?: string[] | undefined;
             ReferralProgramRewardMultiplier?: number | undefined;
             AlpacaCryptoKeychains?: {
-                Version?: number | undefined;
+                ID?: number | undefined;
                 PublicKeyHex?: string | undefined;
                 PrivateKeyHex?: string | undefined;
                 SymmetricKeyHex?: string | undefined;
@@ -2601,22 +2601,22 @@ export declare const User: {
             FCMPushTokens?: (string[] & string[] & { [K_70 in Exclude<keyof I_1["User"]["FCMPushTokens"], keyof string[]>]: never; }) | undefined;
             ReferralProgramRewardMultiplier?: number | undefined;
             AlpacaCryptoKeychains?: ({
-                Version?: number | undefined;
+                ID?: number | undefined;
                 PublicKeyHex?: string | undefined;
                 PrivateKeyHex?: string | undefined;
                 SymmetricKeyHex?: string | undefined;
             }[] & ({
-                Version?: number | undefined;
+                ID?: number | undefined;
                 PublicKeyHex?: string | undefined;
                 PrivateKeyHex?: string | undefined;
                 SymmetricKeyHex?: string | undefined;
             } & {
-                Version?: number | undefined;
+                ID?: number | undefined;
                 PublicKeyHex?: string | undefined;
                 PrivateKeyHex?: string | undefined;
                 SymmetricKeyHex?: string | undefined;
             } & { [K_71 in Exclude<keyof I_1["User"]["AlpacaCryptoKeychains"][number], keyof AlpacaCryptoKeychain>]: never; })[] & { [K_72 in Exclude<keyof I_1["User"]["AlpacaCryptoKeychains"], keyof {
-                Version?: number | undefined;
+                ID?: number | undefined;
                 PublicKeyHex?: string | undefined;
                 PrivateKeyHex?: string | undefined;
                 SymmetricKeyHex?: string | undefined;
@@ -2811,7 +2811,7 @@ export declare const UserList: {
                 FCMPushTokens?: string[] | undefined;
                 ReferralProgramRewardMultiplier?: number | undefined;
                 AlpacaCryptoKeychains?: {
-                    Version?: number | undefined;
+                    ID?: number | undefined;
                     PublicKeyHex?: string | undefined;
                     PrivateKeyHex?: string | undefined;
                     SymmetricKeyHex?: string | undefined;
@@ -2972,7 +2972,7 @@ export declare const UserList: {
                 FCMPushTokens?: string[] | undefined;
                 ReferralProgramRewardMultiplier?: number | undefined;
                 AlpacaCryptoKeychains?: {
-                    Version?: number | undefined;
+                    ID?: number | undefined;
                     PublicKeyHex?: string | undefined;
                     PrivateKeyHex?: string | undefined;
                     SymmetricKeyHex?: string | undefined;
@@ -3130,7 +3130,7 @@ export declare const UserList: {
                 FCMPushTokens?: string[] | undefined;
                 ReferralProgramRewardMultiplier?: number | undefined;
                 AlpacaCryptoKeychains?: {
-                    Version?: number | undefined;
+                    ID?: number | undefined;
                     PublicKeyHex?: string | undefined;
                     PrivateKeyHex?: string | undefined;
                     SymmetricKeyHex?: string | undefined;
@@ -3288,7 +3288,7 @@ export declare const UserList: {
                 FCMPushTokens?: string[] | undefined;
                 ReferralProgramRewardMultiplier?: number | undefined;
                 AlpacaCryptoKeychains?: {
-                    Version?: number | undefined;
+                    ID?: number | undefined;
                     PublicKeyHex?: string | undefined;
                     PrivateKeyHex?: string | undefined;
                     SymmetricKeyHex?: string | undefined;
@@ -3656,22 +3656,22 @@ export declare const UserList: {
                 FCMPushTokens?: (string[] & string[] & { [K_31 in Exclude<keyof I["Users"][number]["User"]["FCMPushTokens"], keyof string[]>]: never; }) | undefined;
                 ReferralProgramRewardMultiplier?: number | undefined;
                 AlpacaCryptoKeychains?: ({
-                    Version?: number | undefined;
+                    ID?: number | undefined;
                     PublicKeyHex?: string | undefined;
                     PrivateKeyHex?: string | undefined;
                     SymmetricKeyHex?: string | undefined;
                 }[] & ({
-                    Version?: number | undefined;
+                    ID?: number | undefined;
                     PublicKeyHex?: string | undefined;
                     PrivateKeyHex?: string | undefined;
                     SymmetricKeyHex?: string | undefined;
                 } & {
-                    Version?: number | undefined;
+                    ID?: number | undefined;
                     PublicKeyHex?: string | undefined;
                     PrivateKeyHex?: string | undefined;
                     SymmetricKeyHex?: string | undefined;
                 } & { [K_32 in Exclude<keyof I["Users"][number]["User"]["AlpacaCryptoKeychains"][number], keyof AlpacaCryptoKeychain>]: never; })[] & { [K_33 in Exclude<keyof I["Users"][number]["User"]["AlpacaCryptoKeychains"], keyof {
-                    Version?: number | undefined;
+                    ID?: number | undefined;
                     PublicKeyHex?: string | undefined;
                     PrivateKeyHex?: string | undefined;
                     SymmetricKeyHex?: string | undefined;
@@ -3838,7 +3838,7 @@ export declare const UserList: {
                 FCMPushTokens?: string[] | undefined;
                 ReferralProgramRewardMultiplier?: number | undefined;
                 AlpacaCryptoKeychains?: {
-                    Version?: number | undefined;
+                    ID?: number | undefined;
                     PublicKeyHex?: string | undefined;
                     PrivateKeyHex?: string | undefined;
                     SymmetricKeyHex?: string | undefined;
@@ -4000,7 +4000,7 @@ export declare const UserList: {
                 FCMPushTokens?: string[] | undefined;
                 ReferralProgramRewardMultiplier?: number | undefined;
                 AlpacaCryptoKeychains?: {
-                    Version?: number | undefined;
+                    ID?: number | undefined;
                     PublicKeyHex?: string | undefined;
                     PrivateKeyHex?: string | undefined;
                     SymmetricKeyHex?: string | undefined;
@@ -4161,7 +4161,7 @@ export declare const UserList: {
                 FCMPushTokens?: string[] | undefined;
                 ReferralProgramRewardMultiplier?: number | undefined;
                 AlpacaCryptoKeychains?: {
-                    Version?: number | undefined;
+                    ID?: number | undefined;
                     PublicKeyHex?: string | undefined;
                     PrivateKeyHex?: string | undefined;
                     SymmetricKeyHex?: string | undefined;
@@ -4319,7 +4319,7 @@ export declare const UserList: {
                 FCMPushTokens?: string[] | undefined;
                 ReferralProgramRewardMultiplier?: number | undefined;
                 AlpacaCryptoKeychains?: {
-                    Version?: number | undefined;
+                    ID?: number | undefined;
                     PublicKeyHex?: string | undefined;
                     PrivateKeyHex?: string | undefined;
                     SymmetricKeyHex?: string | undefined;
@@ -4477,7 +4477,7 @@ export declare const UserList: {
                 FCMPushTokens?: string[] | undefined;
                 ReferralProgramRewardMultiplier?: number | undefined;
                 AlpacaCryptoKeychains?: {
-                    Version?: number | undefined;
+                    ID?: number | undefined;
                     PublicKeyHex?: string | undefined;
                     PrivateKeyHex?: string | undefined;
                     SymmetricKeyHex?: string | undefined;
@@ -4845,22 +4845,22 @@ export declare const UserList: {
                 FCMPushTokens?: (string[] & string[] & { [K_72 in Exclude<keyof I_1["Users"][number]["User"]["FCMPushTokens"], keyof string[]>]: never; }) | undefined;
                 ReferralProgramRewardMultiplier?: number | undefined;
                 AlpacaCryptoKeychains?: ({
-                    Version?: number | undefined;
+                    ID?: number | undefined;
                     PublicKeyHex?: string | undefined;
                     PrivateKeyHex?: string | undefined;
                     SymmetricKeyHex?: string | undefined;
                 }[] & ({
-                    Version?: number | undefined;
+                    ID?: number | undefined;
                     PublicKeyHex?: string | undefined;
                     PrivateKeyHex?: string | undefined;
                     SymmetricKeyHex?: string | undefined;
                 } & {
-                    Version?: number | undefined;
+                    ID?: number | undefined;
                     PublicKeyHex?: string | undefined;
                     PrivateKeyHex?: string | undefined;
                     SymmetricKeyHex?: string | undefined;
                 } & { [K_73 in Exclude<keyof I_1["Users"][number]["User"]["AlpacaCryptoKeychains"][number], keyof AlpacaCryptoKeychain>]: never; })[] & { [K_74 in Exclude<keyof I_1["Users"][number]["User"]["AlpacaCryptoKeychains"], keyof {
-                    Version?: number | undefined;
+                    ID?: number | undefined;
                     PublicKeyHex?: string | undefined;
                     PrivateKeyHex?: string | undefined;
                     SymmetricKeyHex?: string | undefined;
@@ -5027,7 +5027,7 @@ export declare const UserList: {
                 FCMPushTokens?: string[] | undefined;
                 ReferralProgramRewardMultiplier?: number | undefined;
                 AlpacaCryptoKeychains?: {
-                    Version?: number | undefined;
+                    ID?: number | undefined;
                     PublicKeyHex?: string | undefined;
                     PrivateKeyHex?: string | undefined;
                     SymmetricKeyHex?: string | undefined;
@@ -5171,23 +5171,23 @@ export declare const AlpacaCryptoKeychain: {
     fromJSON(object: any): AlpacaCryptoKeychain;
     toJSON(message: AlpacaCryptoKeychain): unknown;
     create<I extends {
-        Version?: number | undefined;
+        ID?: number | undefined;
         PublicKeyHex?: string | undefined;
         PrivateKeyHex?: string | undefined;
         SymmetricKeyHex?: string | undefined;
     } & {
-        Version?: number | undefined;
+        ID?: number | undefined;
         PublicKeyHex?: string | undefined;
         PrivateKeyHex?: string | undefined;
         SymmetricKeyHex?: string | undefined;
     } & { [K in Exclude<keyof I, keyof AlpacaCryptoKeychain>]: never; }>(base?: I | undefined): AlpacaCryptoKeychain;
     fromPartial<I_1 extends {
-        Version?: number | undefined;
+        ID?: number | undefined;
         PublicKeyHex?: string | undefined;
         PrivateKeyHex?: string | undefined;
         SymmetricKeyHex?: string | undefined;
     } & {
-        Version?: number | undefined;
+        ID?: number | undefined;
         PublicKeyHex?: string | undefined;
         PrivateKeyHex?: string | undefined;
         SymmetricKeyHex?: string | undefined;

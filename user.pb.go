@@ -1001,13 +1001,13 @@ func (x *DxFeed) GetAccountID() string {
 }
 
 type AlpacaCryptoKeychain struct {
-	state   protoimpl.MessageState `protogen:"open.v1"`
-	Version int32                  `protobuf:"varint,1,opt,name=Version,proto3" json:"Version,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	ID    int32                  `protobuf:"varint,1,opt,name=ID,proto3" json:"ID,omitempty"`
 	// Ed25519 key for server signature check
 	PublicKeyHex string `protobuf:"bytes,2,opt,name=PublicKeyHex,proto3" json:"PublicKeyHex,omitempty"`
 	// Ed25519 key for server signature generation
 	PrivateKeyHex string `protobuf:"bytes,3,opt,name=PrivateKeyHex,proto3" json:"PrivateKeyHex,omitempty"`
-	// AES key for encryption/decrypting data (shared with user)
+	// AES key used for encrypting/decrypting data (shared with user)
 	SymmetricKeyHex string `protobuf:"bytes,4,opt,name=SymmetricKeyHex,proto3" json:"SymmetricKeyHex,omitempty"`
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
@@ -1043,9 +1043,9 @@ func (*AlpacaCryptoKeychain) Descriptor() ([]byte, []int) {
 	return file_user_proto_rawDescGZIP(), []int{8}
 }
 
-func (x *AlpacaCryptoKeychain) GetVersion() int32 {
+func (x *AlpacaCryptoKeychain) GetID() int32 {
 	if x != nil {
-		return x.Version
+		return x.ID
 	}
 	return 0
 }
@@ -1170,9 +1170,9 @@ const file_user_proto_rawDesc = "" +
 	"\x06DxFeed\x18\x01 \x01(\v2\f.user.DxFeedH\x00R\x06DxFeed\x88\x01\x01B\t\n" +
 	"\a_DxFeed\"&\n" +
 	"\x06DxFeed\x12\x1c\n" +
-	"\tAccountID\x18\x01 \x01(\tR\tAccountID\"\x86\x02\n" +
-	"\x14AlpacaCryptoKeychain\x12!\n" +
-	"\aVersion\x18\x01 \x01(\x05B\a\xbaH\x04\x1a\x02 \x00R\aVersion\x12?\n" +
+	"\tAccountID\x18\x01 \x01(\tR\tAccountID\"\xfc\x01\n" +
+	"\x14AlpacaCryptoKeychain\x12\x17\n" +
+	"\x02ID\x18\x01 \x01(\x05B\a\xbaH\x04\x1a\x02 \x00R\x02ID\x12?\n" +
 	"\fPublicKeyHex\x18\x02 \x01(\tB\x1b\xbaH\x18r\x162\x11^[0-9a-fA-F]{64}$\x98\x01@R\fPublicKeyHex\x12C\n" +
 	"\rPrivateKeyHex\x18\x03 \x01(\tB\x1d\xbaH\x1ar\x182\x12^[0-9a-fA-F]{128}$\x98\x01\x80\x01R\rPrivateKeyHex\x12E\n" +
 	"\x0fSymmetricKeyHex\x18\x04 \x01(\tB\x1b\xbaH\x18r\x162\x11^[0-9a-fA-F]{64}$\x98\x01@R\x0fSymmetricKeyHex*B\n" +

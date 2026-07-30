@@ -361,12 +361,12 @@ export interface DxFeed {
 }
 
 export interface AlpacaCryptoKeychain {
-  Version: number;
+  ID: number;
   /** Ed25519 key for server signature check */
   PublicKeyHex: string;
   /** Ed25519 key for server signature generation */
   PrivateKeyHex: string;
-  /** AES key for encryption/decrypting data (shared with user) */
+  /** AES key used for encrypting/decrypting data (shared with user) */
   SymmetricKeyHex: string;
 }
 
@@ -1627,13 +1627,13 @@ export const DxFeed = {
 };
 
 function createBaseAlpacaCryptoKeychain(): AlpacaCryptoKeychain {
-  return { Version: 0, PublicKeyHex: "", PrivateKeyHex: "", SymmetricKeyHex: "" };
+  return { ID: 0, PublicKeyHex: "", PrivateKeyHex: "", SymmetricKeyHex: "" };
 }
 
 export const AlpacaCryptoKeychain = {
   encode(message: AlpacaCryptoKeychain, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.Version !== 0) {
-      writer.uint32(8).int32(message.Version);
+    if (message.ID !== 0) {
+      writer.uint32(8).int32(message.ID);
     }
     if (message.PublicKeyHex !== "") {
       writer.uint32(18).string(message.PublicKeyHex);
@@ -1659,7 +1659,7 @@ export const AlpacaCryptoKeychain = {
             break;
           }
 
-          message.Version = reader.int32();
+          message.ID = reader.int32();
           continue;
         case 2:
           if (tag !== 18) {
@@ -1693,7 +1693,7 @@ export const AlpacaCryptoKeychain = {
 
   fromJSON(object: any): AlpacaCryptoKeychain {
     return {
-      Version: isSet(object.Version) ? globalThis.Number(object.Version) : 0,
+      ID: isSet(object.ID) ? globalThis.Number(object.ID) : 0,
       PublicKeyHex: isSet(object.PublicKeyHex) ? globalThis.String(object.PublicKeyHex) : "",
       PrivateKeyHex: isSet(object.PrivateKeyHex) ? globalThis.String(object.PrivateKeyHex) : "",
       SymmetricKeyHex: isSet(object.SymmetricKeyHex) ? globalThis.String(object.SymmetricKeyHex) : "",
@@ -1702,8 +1702,8 @@ export const AlpacaCryptoKeychain = {
 
   toJSON(message: AlpacaCryptoKeychain): unknown {
     const obj: any = {};
-    if (message.Version !== 0) {
-      obj.Version = Math.round(message.Version);
+    if (message.ID !== 0) {
+      obj.ID = Math.round(message.ID);
     }
     if (message.PublicKeyHex !== "") {
       obj.PublicKeyHex = message.PublicKeyHex;
@@ -1722,7 +1722,7 @@ export const AlpacaCryptoKeychain = {
   },
   fromPartial<I extends Exact<DeepPartial<AlpacaCryptoKeychain>, I>>(object: I): AlpacaCryptoKeychain {
     const message = createBaseAlpacaCryptoKeychain();
-    message.Version = object.Version ?? 0;
+    message.ID = object.ID ?? 0;
     message.PublicKeyHex = object.PublicKeyHex ?? "";
     message.PrivateKeyHex = object.PrivateKeyHex ?? "";
     message.SymmetricKeyHex = object.SymmetricKeyHex ?? "";

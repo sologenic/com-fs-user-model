@@ -1382,12 +1382,12 @@ export const DxFeed = {
     },
 };
 function createBaseAlpacaCryptoKeychain() {
-    return { Version: 0, PublicKeyHex: "", PrivateKeyHex: "", SymmetricKeyHex: "" };
+    return { ID: 0, PublicKeyHex: "", PrivateKeyHex: "", SymmetricKeyHex: "" };
 }
 export const AlpacaCryptoKeychain = {
     encode(message, writer = _m0.Writer.create()) {
-        if (message.Version !== 0) {
-            writer.uint32(8).int32(message.Version);
+        if (message.ID !== 0) {
+            writer.uint32(8).int32(message.ID);
         }
         if (message.PublicKeyHex !== "") {
             writer.uint32(18).string(message.PublicKeyHex);
@@ -1411,7 +1411,7 @@ export const AlpacaCryptoKeychain = {
                     if (tag !== 8) {
                         break;
                     }
-                    message.Version = reader.int32();
+                    message.ID = reader.int32();
                     continue;
                 case 2:
                     if (tag !== 18) {
@@ -1441,7 +1441,7 @@ export const AlpacaCryptoKeychain = {
     },
     fromJSON(object) {
         return {
-            Version: isSet(object.Version) ? globalThis.Number(object.Version) : 0,
+            ID: isSet(object.ID) ? globalThis.Number(object.ID) : 0,
             PublicKeyHex: isSet(object.PublicKeyHex) ? globalThis.String(object.PublicKeyHex) : "",
             PrivateKeyHex: isSet(object.PrivateKeyHex) ? globalThis.String(object.PrivateKeyHex) : "",
             SymmetricKeyHex: isSet(object.SymmetricKeyHex) ? globalThis.String(object.SymmetricKeyHex) : "",
@@ -1449,8 +1449,8 @@ export const AlpacaCryptoKeychain = {
     },
     toJSON(message) {
         const obj = {};
-        if (message.Version !== 0) {
-            obj.Version = Math.round(message.Version);
+        if (message.ID !== 0) {
+            obj.ID = Math.round(message.ID);
         }
         if (message.PublicKeyHex !== "") {
             obj.PublicKeyHex = message.PublicKeyHex;
@@ -1469,7 +1469,7 @@ export const AlpacaCryptoKeychain = {
     fromPartial(object) {
         var _a, _b, _c, _d;
         const message = createBaseAlpacaCryptoKeychain();
-        message.Version = (_a = object.Version) !== null && _a !== void 0 ? _a : 0;
+        message.ID = (_a = object.ID) !== null && _a !== void 0 ? _a : 0;
         message.PublicKeyHex = (_b = object.PublicKeyHex) !== null && _b !== void 0 ? _b : "";
         message.PrivateKeyHex = (_c = object.PrivateKeyHex) !== null && _c !== void 0 ? _c : "";
         message.SymmetricKeyHex = (_d = object.SymmetricKeyHex) !== null && _d !== void 0 ? _d : "";
