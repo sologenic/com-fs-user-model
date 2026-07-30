@@ -362,7 +362,7 @@ enum EliteClubMembershipStatus {
 }
 
 message AlpacaCryptoKeychain {
-    int32 Version = 1 [
+    int32 ID = 1 [
         (buf.validate.field).int32 = { gt: 0 }
     ];
 
@@ -382,7 +382,7 @@ message AlpacaCryptoKeychain {
         }
     ];
 
-    // AES key for encryption/decrypting data (shared with user)
+    // AES key used for encrypting/decrypting data (shared with user)
     string SymmetricKeyHex = 4 [
         (buf.validate.field).string = {
             len: 64,
