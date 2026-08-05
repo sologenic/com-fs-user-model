@@ -266,6 +266,12 @@ message UserDetails {
             max_items: 5,
         }
     ];
+
+    // Indicates user has requested a KYC sharing to Banxa if not nil
+    optional google.protobuf.Timestamp BanxaSetupRequestedAt = 43;
+
+    // Indicates KYC has been shared to Banxa at least once if not nil
+    optional google.protobuf.Timestamp BanxaSetupCompletedAt = 44;
 }
 
 message User {
