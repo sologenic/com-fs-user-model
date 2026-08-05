@@ -318,6 +318,12 @@ export interface UserDetails {
   ReferralProgramRewardMultiplier: number;
   /** Cryptographic keychain for encryption/decrypting/verifying Alpaca order envelope */
   AlpacaCryptoKeychains: AlpacaCryptoKeychain[];
+  /** Indicates user has requested a KYC sharing to Banxa if not nil */
+  BanxaSetupRequestedAt?:
+    | Date
+    | undefined;
+  /** Indicates KYC has been shared to Banxa at least once if not nil */
+  BanxaSetupCompletedAt?: Date | undefined;
 }
 
 export interface User {
@@ -411,6 +417,8 @@ function createBaseUserDetails(): UserDetails {
     FCMPushTokens: [],
     ReferralProgramRewardMultiplier: 0,
     AlpacaCryptoKeychains: [],
+    BanxaSetupRequestedAt: undefined,
+    BanxaSetupCompletedAt: undefined,
   };
 }
 
@@ -532,6 +540,12 @@ export const UserDetails = {
     }
     for (const v of message.AlpacaCryptoKeychains) {
       AlpacaCryptoKeychain.encode(v!, writer.uint32(338).fork()).ldelim();
+    }
+    if (message.BanxaSetupRequestedAt !== undefined) {
+      Timestamp.encode(toTimestamp(message.BanxaSetupRequestedAt), writer.uint32(346).fork()).ldelim();
+    }
+    if (message.BanxaSetupCompletedAt !== undefined) {
+      Timestamp.encode(toTimestamp(message.BanxaSetupCompletedAt), writer.uint32(354).fork()).ldelim();
     }
     return writer;
   },
@@ -816,6 +830,20 @@ export const UserDetails = {
 
           message.AlpacaCryptoKeychains.push(AlpacaCryptoKeychain.decode(reader, reader.uint32()));
           continue;
+        case 43:
+          if (tag !== 346) {
+            break;
+          }
+
+          message.BanxaSetupRequestedAt = fromTimestamp(Timestamp.decode(reader, reader.uint32()));
+          continue;
+        case 44:
+          if (tag !== 354) {
+            break;
+          }
+
+          message.BanxaSetupCompletedAt = fromTimestamp(Timestamp.decode(reader, reader.uint32()));
+          continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -888,6 +916,12 @@ export const UserDetails = {
       AlpacaCryptoKeychains: globalThis.Array.isArray(object?.AlpacaCryptoKeychains)
         ? object.AlpacaCryptoKeychains.map((e: any) => AlpacaCryptoKeychain.fromJSON(e))
         : [],
+      BanxaSetupRequestedAt: isSet(object.BanxaSetupRequestedAt)
+        ? fromJsonTimestamp(object.BanxaSetupRequestedAt)
+        : undefined,
+      BanxaSetupCompletedAt: isSet(object.BanxaSetupCompletedAt)
+        ? fromJsonTimestamp(object.BanxaSetupCompletedAt)
+        : undefined,
     };
   },
 
@@ -1010,6 +1044,12 @@ export const UserDetails = {
     if (message.AlpacaCryptoKeychains?.length) {
       obj.AlpacaCryptoKeychains = message.AlpacaCryptoKeychains.map((e) => AlpacaCryptoKeychain.toJSON(e));
     }
+    if (message.BanxaSetupRequestedAt !== undefined) {
+      obj.BanxaSetupRequestedAt = message.BanxaSetupRequestedAt.toISOString();
+    }
+    if (message.BanxaSetupCompletedAt !== undefined) {
+      obj.BanxaSetupCompletedAt = message.BanxaSetupCompletedAt.toISOString();
+    }
     return obj;
   },
 
@@ -1072,6 +1112,8 @@ export const UserDetails = {
     message.FCMPushTokens = object.FCMPushTokens?.map((e) => e) || [];
     message.ReferralProgramRewardMultiplier = object.ReferralProgramRewardMultiplier ?? 0;
     message.AlpacaCryptoKeychains = object.AlpacaCryptoKeychains?.map((e) => AlpacaCryptoKeychain.fromPartial(e)) || [];
+    message.BanxaSetupRequestedAt = object.BanxaSetupRequestedAt ?? undefined;
+    message.BanxaSetupCompletedAt = object.BanxaSetupCompletedAt ?? undefined;
     return message;
   },
 };

@@ -312,6 +312,10 @@ type UserDetails struct {
 	ReferralProgramRewardMultiplier int32 `protobuf:"varint,40,opt,name=ReferralProgramRewardMultiplier,proto3" json:"ReferralProgramRewardMultiplier,omitempty"`
 	// Cryptographic keychain for encryption/decrypting/verifying Alpaca order envelope
 	AlpacaCryptoKeychains []*AlpacaCryptoKeychain `protobuf:"bytes,42,rep,name=AlpacaCryptoKeychains,proto3" json:"AlpacaCryptoKeychains,omitempty"`
+	// Indicates user has requested a KYC sharing to Banxa if not nil
+	BanxaSetupRequestedAt *timestamppb.Timestamp `protobuf:"bytes,43,opt,name=BanxaSetupRequestedAt,proto3,oneof" json:"BanxaSetupRequestedAt,omitempty"`
+	// Indicates KYC has been shared to Banxa at least once if not nil
+	BanxaSetupCompletedAt *timestamppb.Timestamp `protobuf:"bytes,44,opt,name=BanxaSetupCompletedAt,proto3,oneof" json:"BanxaSetupCompletedAt,omitempty"`
 	unknownFields         protoimpl.UnknownFields
 	sizeCache             protoimpl.SizeCache
 }
@@ -615,6 +619,20 @@ func (x *UserDetails) GetReferralProgramRewardMultiplier() int32 {
 func (x *UserDetails) GetAlpacaCryptoKeychains() []*AlpacaCryptoKeychain {
 	if x != nil {
 		return x.AlpacaCryptoKeychains
+	}
+	return nil
+}
+
+func (x *UserDetails) GetBanxaSetupRequestedAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.BanxaSetupRequestedAt
+	}
+	return nil
+}
+
+func (x *UserDetails) GetBanxaSetupCompletedAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.BanxaSetupCompletedAt
 	}
 	return nil
 }
@@ -1076,7 +1094,7 @@ var File_user_proto protoreflect.FileDescriptor
 const file_user_proto_rawDesc = "" +
 	"\n" +
 	"\n" +
-	"user.proto\x12\x04user\x1a\x1fgoogle/protobuf/timestamp.proto\x1a9sologenic/com-fs-utils-lib/models/metadata/metadata.proto\x1a3sologenic/com-fs-utils-lib/models/audit/audit.proto\x1a1sologenic/com-fs-utils-lib/models/role/role.proto\x1a9sologenic/com-fs-utils-lib/models/language/language.proto\x1a7sologenic/com-fs-trade-profile-model/tradeprofile.proto\x1a.sologenic/com-fs-document-model/document.proto\x1a\x0euser-kyc.proto\x1a\x13user-fundings.proto\x1a=sologenic/com-fs-utils-lib/models/commission/commission.proto\x1a2sologenic/com-fs-compliance-model/compliance.proto\x1a\x1bbuf/validate/validate.proto\"\xad\x15\n" +
+	"user.proto\x12\x04user\x1a\x1fgoogle/protobuf/timestamp.proto\x1a9sologenic/com-fs-utils-lib/models/metadata/metadata.proto\x1a3sologenic/com-fs-utils-lib/models/audit/audit.proto\x1a1sologenic/com-fs-utils-lib/models/role/role.proto\x1a9sologenic/com-fs-utils-lib/models/language/language.proto\x1a7sologenic/com-fs-trade-profile-model/tradeprofile.proto\x1a.sologenic/com-fs-document-model/document.proto\x1a\x0euser-kyc.proto\x1a\x13user-fundings.proto\x1a=sologenic/com-fs-utils-lib/models/commission/commission.proto\x1a2sologenic/com-fs-compliance-model/compliance.proto\x1a\x1bbuf/validate/validate.proto\"\x8f\x17\n" +
 	"\vUserDetails\x122\n" +
 	"\x06UserID\x18\x01 \x01(\tB\x1a\xbaH\x17r\x15\x10\x1c\x18\x80\x012\x0e^[a-zA-Z0-9]+$R\x06UserID\x12F\n" +
 	"\tFirstName\x18\x02 \x01(\tB(\xbaH%r#\x10\x02\x18@2\x1d^[\\p{L}][\\p{L}\\s\\-']*[\\p{L}]$R\tFirstName\x12D\n" +
@@ -1131,7 +1149,10 @@ const file_user_proto_rawDesc = "" +
 	"\rFCMPushTokens\x18' \x03(\tB&\xbaH#\x92\x01 \x10\x05\x18\x01\"\x1ar\x18\x10@\x18\x80\x042\x11^[a-zA-Z0-9_:-]+$R\rFCMPushTokens\x12T\n" +
 	"\x1fReferralProgramRewardMultiplier\x18( \x01(\x05B\n" +
 	"\xbaH\a\x1a\x05\x10\xe8\a \x00R\x1fReferralProgramRewardMultiplier\x12Z\n" +
-	"\x15AlpacaCryptoKeychains\x18* \x03(\v2\x1a.user.AlpacaCryptoKeychainB\b\xbaH\x05\x92\x01\x02\x10\x05R\x15AlpacaCryptoKeychainsB\x15\n" +
+	"\x15AlpacaCryptoKeychains\x18* \x03(\v2\x1a.user.AlpacaCryptoKeychainB\b\xbaH\x05\x92\x01\x02\x10\x05R\x15AlpacaCryptoKeychains\x12U\n" +
+	"\x15BanxaSetupRequestedAt\x18+ \x01(\v2\x1a.google.protobuf.TimestampH\tR\x15BanxaSetupRequestedAt\x88\x01\x01\x12U\n" +
+	"\x15BanxaSetupCompletedAt\x18, \x01(\v2\x1a.google.protobuf.TimestampH\n" +
+	"R\x15BanxaSetupCompletedAt\x88\x01\x01B\x15\n" +
 	"\x13_CommissionSettingsB\x13\n" +
 	"\x11_DataFeedAccountsB\r\n" +
 	"\v_ReferredByB\x10\n" +
@@ -1141,7 +1162,9 @@ const file_user_proto_rawDesc = "" +
 	"\x0f_ReferralAmountB\x11\n" +
 	"\x0f_ReferralPaidAtB\n" +
 	"\n" +
-	"\b_XHandle\"\xbf\x01\n" +
+	"\b_XHandleB\x18\n" +
+	"\x16_BanxaSetupRequestedAtB\x18\n" +
+	"\x16_BanxaSetupCompletedAt\"\xbf\x01\n" +
 	"\x04User\x12%\n" +
 	"\x04User\x18\x01 \x01(\v2\x11.user.UserDetailsR\x04User\x12.\n" +
 	"\bMetaData\x18\x02 \x01(\v2\x12.metadata.MetaDataR\bMetaData\x12\"\n" +
@@ -1270,21 +1293,23 @@ var file_user_proto_depIdxs = []int32{
 	20, // 16: user.UserDetails.ReferralPaidAt:type_name -> google.protobuf.Timestamp
 	3,  // 17: user.UserDetails.EliteClubMembershipStatus:type_name -> user.EliteClubMembershipStatus
 	12, // 18: user.UserDetails.AlpacaCryptoKeychains:type_name -> user.AlpacaCryptoKeychain
-	4,  // 19: user.User.User:type_name -> user.UserDetails
-	25, // 20: user.User.MetaData:type_name -> metadata.MetaData
-	26, // 21: user.User.Audit:type_name -> audit.Audit
-	1,  // 22: user.Social.Type:type_name -> user.SocialType
-	5,  // 23: user.UserList.Users:type_name -> user.User
-	0,  // 24: user.StatusMessage.Status:type_name -> user.UserStatus
-	27, // 25: user.StatusMessage.Network:type_name -> metadata.Network
-	26, // 26: user.StatusMessage.Audit:type_name -> audit.Audit
-	2,  // 27: user.UISettings.Theme:type_name -> user.Theme
-	11, // 28: user.DataFeedAccounts.DxFeed:type_name -> user.DxFeed
-	29, // [29:29] is the sub-list for method output_type
-	29, // [29:29] is the sub-list for method input_type
-	29, // [29:29] is the sub-list for extension type_name
-	29, // [29:29] is the sub-list for extension extendee
-	0,  // [0:29] is the sub-list for field type_name
+	20, // 19: user.UserDetails.BanxaSetupRequestedAt:type_name -> google.protobuf.Timestamp
+	20, // 20: user.UserDetails.BanxaSetupCompletedAt:type_name -> google.protobuf.Timestamp
+	4,  // 21: user.User.User:type_name -> user.UserDetails
+	25, // 22: user.User.MetaData:type_name -> metadata.MetaData
+	26, // 23: user.User.Audit:type_name -> audit.Audit
+	1,  // 24: user.Social.Type:type_name -> user.SocialType
+	5,  // 25: user.UserList.Users:type_name -> user.User
+	0,  // 26: user.StatusMessage.Status:type_name -> user.UserStatus
+	27, // 27: user.StatusMessage.Network:type_name -> metadata.Network
+	26, // 28: user.StatusMessage.Audit:type_name -> audit.Audit
+	2,  // 29: user.UISettings.Theme:type_name -> user.Theme
+	11, // 30: user.DataFeedAccounts.DxFeed:type_name -> user.DxFeed
+	31, // [31:31] is the sub-list for method output_type
+	31, // [31:31] is the sub-list for method input_type
+	31, // [31:31] is the sub-list for extension type_name
+	31, // [31:31] is the sub-list for extension extendee
+	0,  // [0:31] is the sub-list for field type_name
 }
 
 func init() { file_user_proto_init() }

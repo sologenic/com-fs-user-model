@@ -289,6 +289,8 @@ export declare const AddressUserPair: {
                     PrivateKeyHex?: string | undefined;
                     SymmetricKeyHex?: string | undefined;
                 }[] | undefined;
+                BanxaSetupRequestedAt?: Date | undefined;
+                BanxaSetupCompletedAt?: Date | undefined;
             } | undefined;
             MetaData?: {
                 Network?: Network | undefined;
@@ -450,6 +452,8 @@ export declare const AddressUserPair: {
                     PrivateKeyHex?: string | undefined;
                     SymmetricKeyHex?: string | undefined;
                 }[] | undefined;
+                BanxaSetupRequestedAt?: Date | undefined;
+                BanxaSetupCompletedAt?: Date | undefined;
             } | undefined;
             MetaData?: {
                 Network?: Network | undefined;
@@ -608,6 +612,8 @@ export declare const AddressUserPair: {
                     PrivateKeyHex?: string | undefined;
                     SymmetricKeyHex?: string | undefined;
                 }[] | undefined;
+                BanxaSetupRequestedAt?: Date | undefined;
+                BanxaSetupCompletedAt?: Date | undefined;
             } & {
                 UserID?: string | undefined;
                 FirstName?: string | undefined;
@@ -991,6 +997,8 @@ export declare const AddressUserPair: {
                     PrivateKeyHex?: string | undefined;
                     SymmetricKeyHex?: string | undefined;
                 }[]>]: never; }) | undefined;
+                BanxaSetupRequestedAt?: Date | undefined;
+                BanxaSetupCompletedAt?: Date | undefined;
             } & { [K_34 in Exclude<keyof I["User"]["User"], keyof import("./user").UserDetails>]: never; }) | undefined;
             MetaData?: ({
                 Network?: Network | undefined;
@@ -1162,6 +1170,8 @@ export declare const AddressUserPair: {
                     PrivateKeyHex?: string | undefined;
                     SymmetricKeyHex?: string | undefined;
                 }[] | undefined;
+                BanxaSetupRequestedAt?: Date | undefined;
+                BanxaSetupCompletedAt?: Date | undefined;
             } | undefined;
             MetaData?: {
                 Network?: Network | undefined;
@@ -1323,6 +1333,8 @@ export declare const AddressUserPair: {
                     PrivateKeyHex?: string | undefined;
                     SymmetricKeyHex?: string | undefined;
                 }[] | undefined;
+                BanxaSetupRequestedAt?: Date | undefined;
+                BanxaSetupCompletedAt?: Date | undefined;
             } | undefined;
             MetaData?: {
                 Network?: Network | undefined;
@@ -1481,6 +1493,8 @@ export declare const AddressUserPair: {
                     PrivateKeyHex?: string | undefined;
                     SymmetricKeyHex?: string | undefined;
                 }[] | undefined;
+                BanxaSetupRequestedAt?: Date | undefined;
+                BanxaSetupCompletedAt?: Date | undefined;
             } & {
                 UserID?: string | undefined;
                 FirstName?: string | undefined;
@@ -1864,6 +1878,8 @@ export declare const AddressUserPair: {
                     PrivateKeyHex?: string | undefined;
                     SymmetricKeyHex?: string | undefined;
                 }[]>]: never; }) | undefined;
+                BanxaSetupRequestedAt?: Date | undefined;
+                BanxaSetupCompletedAt?: Date | undefined;
             } & { [K_74 in Exclude<keyof I_1["User"]["User"], keyof import("./user").UserDetails>]: never; }) | undefined;
             MetaData?: ({
                 Network?: Network | undefined;
@@ -2042,6 +2058,8 @@ export declare const GetByAddressesResponse: {
                         PrivateKeyHex?: string | undefined;
                         SymmetricKeyHex?: string | undefined;
                     }[] | undefined;
+                    BanxaSetupRequestedAt?: Date | undefined;
+                    BanxaSetupCompletedAt?: Date | undefined;
                 } | undefined;
                 MetaData?: {
                     Network?: Network | undefined;
@@ -2205,6 +2223,8 @@ export declare const GetByAddressesResponse: {
                         PrivateKeyHex?: string | undefined;
                         SymmetricKeyHex?: string | undefined;
                     }[] | undefined;
+                    BanxaSetupRequestedAt?: Date | undefined;
+                    BanxaSetupCompletedAt?: Date | undefined;
                 } | undefined;
                 MetaData?: {
                     Network?: Network | undefined;
@@ -2366,6 +2386,8 @@ export declare const GetByAddressesResponse: {
                         PrivateKeyHex?: string | undefined;
                         SymmetricKeyHex?: string | undefined;
                     }[] | undefined;
+                    BanxaSetupRequestedAt?: Date | undefined;
+                    BanxaSetupCompletedAt?: Date | undefined;
                 } | undefined;
                 MetaData?: {
                     Network?: Network | undefined;
@@ -2527,6 +2549,8 @@ export declare const GetByAddressesResponse: {
                         PrivateKeyHex?: string | undefined;
                         SymmetricKeyHex?: string | undefined;
                     }[] | undefined;
+                    BanxaSetupRequestedAt?: Date | undefined;
+                    BanxaSetupCompletedAt?: Date | undefined;
                 } | undefined;
                 MetaData?: {
                     Network?: Network | undefined;
@@ -2685,6 +2709,8 @@ export declare const GetByAddressesResponse: {
                         PrivateKeyHex?: string | undefined;
                         SymmetricKeyHex?: string | undefined;
                     }[] | undefined;
+                    BanxaSetupRequestedAt?: Date | undefined;
+                    BanxaSetupCompletedAt?: Date | undefined;
                 } & {
                     UserID?: string | undefined;
                     FirstName?: string | undefined;
@@ -3068,6 +3094,8 @@ export declare const GetByAddressesResponse: {
                         PrivateKeyHex?: string | undefined;
                         SymmetricKeyHex?: string | undefined;
                     }[]>]: never; }) | undefined;
+                    BanxaSetupRequestedAt?: Date | undefined;
+                    BanxaSetupCompletedAt?: Date | undefined;
                 } & { [K_34 in Exclude<keyof I["Results"][number]["User"]["User"], keyof import("./user").UserDetails>]: never; }) | undefined;
                 MetaData?: ({
                     Network?: Network | undefined;
@@ -3238,6 +3266,8 @@ export declare const GetByAddressesResponse: {
                         PrivateKeyHex?: string | undefined;
                         SymmetricKeyHex?: string | undefined;
                     }[] | undefined;
+                    BanxaSetupRequestedAt?: Date | undefined;
+                    BanxaSetupCompletedAt?: Date | undefined;
                 } | undefined;
                 MetaData?: {
                     Network?: Network | undefined;
@@ -3402,6 +3432,8 @@ export declare const GetByAddressesResponse: {
                         PrivateKeyHex?: string | undefined;
                         SymmetricKeyHex?: string | undefined;
                     }[] | undefined;
+                    BanxaSetupRequestedAt?: Date | undefined;
+                    BanxaSetupCompletedAt?: Date | undefined;
                 } | undefined;
                 MetaData?: {
                     Network?: Network | undefined;
@@ -3565,6 +3597,8 @@ export declare const GetByAddressesResponse: {
                         PrivateKeyHex?: string | undefined;
                         SymmetricKeyHex?: string | undefined;
                     }[] | undefined;
+                    BanxaSetupRequestedAt?: Date | undefined;
+                    BanxaSetupCompletedAt?: Date | undefined;
                 } | undefined;
                 MetaData?: {
                     Network?: Network | undefined;
@@ -3726,6 +3760,8 @@ export declare const GetByAddressesResponse: {
                         PrivateKeyHex?: string | undefined;
                         SymmetricKeyHex?: string | undefined;
                     }[] | undefined;
+                    BanxaSetupRequestedAt?: Date | undefined;
+                    BanxaSetupCompletedAt?: Date | undefined;
                 } | undefined;
                 MetaData?: {
                     Network?: Network | undefined;
@@ -3887,6 +3923,8 @@ export declare const GetByAddressesResponse: {
                         PrivateKeyHex?: string | undefined;
                         SymmetricKeyHex?: string | undefined;
                     }[] | undefined;
+                    BanxaSetupRequestedAt?: Date | undefined;
+                    BanxaSetupCompletedAt?: Date | undefined;
                 } | undefined;
                 MetaData?: {
                     Network?: Network | undefined;
@@ -4045,6 +4083,8 @@ export declare const GetByAddressesResponse: {
                         PrivateKeyHex?: string | undefined;
                         SymmetricKeyHex?: string | undefined;
                     }[] | undefined;
+                    BanxaSetupRequestedAt?: Date | undefined;
+                    BanxaSetupCompletedAt?: Date | undefined;
                 } & {
                     UserID?: string | undefined;
                     FirstName?: string | undefined;
@@ -4428,6 +4468,8 @@ export declare const GetByAddressesResponse: {
                         PrivateKeyHex?: string | undefined;
                         SymmetricKeyHex?: string | undefined;
                     }[]>]: never; }) | undefined;
+                    BanxaSetupRequestedAt?: Date | undefined;
+                    BanxaSetupCompletedAt?: Date | undefined;
                 } & { [K_76 in Exclude<keyof I_1["Results"][number]["User"]["User"], keyof import("./user").UserDetails>]: never; }) | undefined;
                 MetaData?: ({
                     Network?: Network | undefined;
@@ -4598,6 +4640,8 @@ export declare const GetByAddressesResponse: {
                         PrivateKeyHex?: string | undefined;
                         SymmetricKeyHex?: string | undefined;
                     }[] | undefined;
+                    BanxaSetupRequestedAt?: Date | undefined;
+                    BanxaSetupCompletedAt?: Date | undefined;
                 } | undefined;
                 MetaData?: {
                     Network?: Network | undefined;
