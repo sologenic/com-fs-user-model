@@ -318,7 +318,7 @@ type UserDetails struct {
 	BanxaSetupCompletedAt *timestamppb.Timestamp `protobuf:"bytes,44,opt,name=BanxaSetupCompletedAt,proto3,oneof" json:"BanxaSetupCompletedAt,omitempty"`
 	// Firebase Installation IDs (FIDs) used to target FCM push delivery
 	// (Admin SDK MulticastMessage.Fids). Typically 22 chars; legacy Instance IDs ~11.
-	FCMPushFids   []string `protobuf:"bytes,45,rep,name=FCMPushFids,proto3" json:"FCMPushFids,omitempty"`
+	FCMPushFIDs   []string `protobuf:"bytes,45,rep,name=FCMPushFIDs,proto3" json:"FCMPushFIDs,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -640,9 +640,9 @@ func (x *UserDetails) GetBanxaSetupCompletedAt() *timestamppb.Timestamp {
 	return nil
 }
 
-func (x *UserDetails) GetFCMPushFids() []string {
+func (x *UserDetails) GetFCMPushFIDs() []string {
 	if x != nil {
-		return x.FCMPushFids
+		return x.FCMPushFIDs
 	}
 	return nil
 }
@@ -1163,7 +1163,7 @@ const file_user_proto_rawDesc = "" +
 	"\x15BanxaSetupRequestedAt\x18+ \x01(\v2\x1a.google.protobuf.TimestampH\tR\x15BanxaSetupRequestedAt\x88\x01\x01\x12U\n" +
 	"\x15BanxaSetupCompletedAt\x18, \x01(\v2\x1a.google.protobuf.TimestampH\n" +
 	"R\x15BanxaSetupCompletedAt\x88\x01\x01\x12G\n" +
-	"\vFCMPushFids\x18- \x03(\tB%\xbaH\"\x92\x01\x1f\x10\x05\x18\x01\"\x19r\x17\x10\v\x18@2\x11^[a-zA-Z0-9_:-]+$R\vFCMPushFidsB\x15\n" +
+	"\vFCMPushFIDs\x18- \x03(\tB%\xbaH\"\x92\x01\x1f\x10\x05\x18\x01\"\x19r\x17\x10\v\x18@2\x11^[a-zA-Z0-9_:-]+$R\vFCMPushFIDsB\x15\n" +
 	"\x13_CommissionSettingsB\x13\n" +
 	"\x11_DataFeedAccountsB\r\n" +
 	"\v_ReferredByB\x10\n" +

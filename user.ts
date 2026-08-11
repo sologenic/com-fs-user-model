@@ -330,7 +330,7 @@ export interface UserDetails {
    * Firebase Installation IDs (FIDs) used to target FCM push delivery
    * (Admin SDK MulticastMessage.Fids). Typically 22 chars; legacy Instance IDs ~11.
    */
-  FCMPushFids: string[];
+  FCMPushFIDs: string[];
 }
 
 export interface User {
@@ -426,7 +426,7 @@ function createBaseUserDetails(): UserDetails {
     AlpacaCryptoKeychains: [],
     BanxaSetupRequestedAt: undefined,
     BanxaSetupCompletedAt: undefined,
-    FCMPushFids: [],
+    FCMPushFIDs: [],
   };
 }
 
@@ -555,7 +555,7 @@ export const UserDetails = {
     if (message.BanxaSetupCompletedAt !== undefined) {
       Timestamp.encode(toTimestamp(message.BanxaSetupCompletedAt), writer.uint32(354).fork()).ldelim();
     }
-    for (const v of message.FCMPushFids) {
+    for (const v of message.FCMPushFIDs) {
       writer.uint32(362).string(v!);
     }
     return writer;
@@ -860,7 +860,7 @@ export const UserDetails = {
             break;
           }
 
-          message.FCMPushFids.push(reader.string());
+          message.FCMPushFIDs.push(reader.string());
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -940,8 +940,8 @@ export const UserDetails = {
       BanxaSetupCompletedAt: isSet(object.BanxaSetupCompletedAt)
         ? fromJsonTimestamp(object.BanxaSetupCompletedAt)
         : undefined,
-      FCMPushFids: globalThis.Array.isArray(object?.FCMPushFids)
-        ? object.FCMPushFids.map((e: any) => globalThis.String(e))
+      FCMPushFIDs: globalThis.Array.isArray(object?.FCMPushFIDs)
+        ? object.FCMPushFIDs.map((e: any) => globalThis.String(e))
         : [],
     };
   },
@@ -1071,8 +1071,8 @@ export const UserDetails = {
     if (message.BanxaSetupCompletedAt !== undefined) {
       obj.BanxaSetupCompletedAt = message.BanxaSetupCompletedAt.toISOString();
     }
-    if (message.FCMPushFids?.length) {
-      obj.FCMPushFids = message.FCMPushFids;
+    if (message.FCMPushFIDs?.length) {
+      obj.FCMPushFIDs = message.FCMPushFIDs;
     }
     return obj;
   },
@@ -1138,7 +1138,7 @@ export const UserDetails = {
     message.AlpacaCryptoKeychains = object.AlpacaCryptoKeychains?.map((e) => AlpacaCryptoKeychain.fromPartial(e)) || [];
     message.BanxaSetupRequestedAt = object.BanxaSetupRequestedAt ?? undefined;
     message.BanxaSetupCompletedAt = object.BanxaSetupCompletedAt ?? undefined;
-    message.FCMPushFids = object.FCMPushFids?.map((e) => e) || [];
+    message.FCMPushFIDs = object.FCMPushFIDs?.map((e) => e) || [];
     return message;
   },
 };

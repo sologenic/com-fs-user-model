@@ -275,7 +275,7 @@ message UserDetails {
 
     // Firebase Installation IDs (FIDs) used to target FCM push delivery
     // (Admin SDK MulticastMessage.Fids). Typically 22 chars; legacy Instance IDs ~11.
-    repeated string FCMPushFids = 45 [
+    repeated string FCMPushFIDs = 45 [
       (buf.validate.field).repeated = {
         max_items: 5,
         unique: true

@@ -126,7 +126,7 @@ export interface UserDetails {
      * Firebase Installation IDs (FIDs) used to target FCM push delivery
      * (Admin SDK MulticastMessage.Fids). Typically 22 chars; legacy Instance IDs ~11.
      */
-    FCMPushFids: string[];
+    FCMPushFIDs: string[];
 }
 export interface User {
     User: UserDetails | undefined;
@@ -319,7 +319,7 @@ export declare const UserDetails: {
         }[] | undefined;
         BanxaSetupRequestedAt?: Date | undefined;
         BanxaSetupCompletedAt?: Date | undefined;
-        FCMPushFids?: string[] | undefined;
+        FCMPushFIDs?: string[] | undefined;
     } & {
         UserID?: string | undefined;
         FirstName?: string | undefined;
@@ -705,7 +705,7 @@ export declare const UserDetails: {
         }[]>]: never; }) | undefined;
         BanxaSetupRequestedAt?: Date | undefined;
         BanxaSetupCompletedAt?: Date | undefined;
-        FCMPushFids?: (string[] & string[] & { [K_34 in Exclude<keyof I["FCMPushFids"], keyof string[]>]: never; }) | undefined;
+        FCMPushFIDs?: (string[] & string[] & { [K_34 in Exclude<keyof I["FCMPushFIDs"], keyof string[]>]: never; }) | undefined;
     } & { [K_35 in Exclude<keyof I, keyof UserDetails>]: never; }>(base?: I | undefined): UserDetails;
     fromPartial<I_1 extends {
         UserID?: string | undefined;
@@ -853,7 +853,7 @@ export declare const UserDetails: {
         }[] | undefined;
         BanxaSetupRequestedAt?: Date | undefined;
         BanxaSetupCompletedAt?: Date | undefined;
-        FCMPushFids?: string[] | undefined;
+        FCMPushFIDs?: string[] | undefined;
     } & {
         UserID?: string | undefined;
         FirstName?: string | undefined;
@@ -1239,7 +1239,7 @@ export declare const UserDetails: {
         }[]>]: never; }) | undefined;
         BanxaSetupRequestedAt?: Date | undefined;
         BanxaSetupCompletedAt?: Date | undefined;
-        FCMPushFids?: (string[] & string[] & { [K_70 in Exclude<keyof I_1["FCMPushFids"], keyof string[]>]: never; }) | undefined;
+        FCMPushFIDs?: (string[] & string[] & { [K_70 in Exclude<keyof I_1["FCMPushFIDs"], keyof string[]>]: never; }) | undefined;
     } & { [K_71 in Exclude<keyof I_1, keyof UserDetails>]: never; }>(object: I_1): UserDetails;
 };
 export declare const User: {
@@ -1394,7 +1394,7 @@ export declare const User: {
             }[] | undefined;
             BanxaSetupRequestedAt?: Date | undefined;
             BanxaSetupCompletedAt?: Date | undefined;
-            FCMPushFids?: string[] | undefined;
+            FCMPushFIDs?: string[] | undefined;
         } | undefined;
         MetaData?: {
             Network?: Network | undefined;
@@ -1555,7 +1555,7 @@ export declare const User: {
             }[] | undefined;
             BanxaSetupRequestedAt?: Date | undefined;
             BanxaSetupCompletedAt?: Date | undefined;
-            FCMPushFids?: string[] | undefined;
+            FCMPushFIDs?: string[] | undefined;
         } & {
             UserID?: string | undefined;
             FirstName?: string | undefined;
@@ -1941,7 +1941,7 @@ export declare const User: {
             }[]>]: never; }) | undefined;
             BanxaSetupRequestedAt?: Date | undefined;
             BanxaSetupCompletedAt?: Date | undefined;
-            FCMPushFids?: (string[] & string[] & { [K_34 in Exclude<keyof I["User"]["FCMPushFids"], keyof string[]>]: never; }) | undefined;
+            FCMPushFIDs?: (string[] & string[] & { [K_34 in Exclude<keyof I["User"]["FCMPushFIDs"], keyof string[]>]: never; }) | undefined;
         } & { [K_35 in Exclude<keyof I["User"], keyof UserDetails>]: never; }) | undefined;
         MetaData?: ({
             Network?: Network | undefined;
@@ -2112,7 +2112,7 @@ export declare const User: {
             }[] | undefined;
             BanxaSetupRequestedAt?: Date | undefined;
             BanxaSetupCompletedAt?: Date | undefined;
-            FCMPushFids?: string[] | undefined;
+            FCMPushFIDs?: string[] | undefined;
         } | undefined;
         MetaData?: {
             Network?: Network | undefined;
@@ -2273,7 +2273,7 @@ export declare const User: {
             }[] | undefined;
             BanxaSetupRequestedAt?: Date | undefined;
             BanxaSetupCompletedAt?: Date | undefined;
-            FCMPushFids?: string[] | undefined;
+            FCMPushFIDs?: string[] | undefined;
         } & {
             UserID?: string | undefined;
             FirstName?: string | undefined;
@@ -2659,7 +2659,7 @@ export declare const User: {
             }[]>]: never; }) | undefined;
             BanxaSetupRequestedAt?: Date | undefined;
             BanxaSetupCompletedAt?: Date | undefined;
-            FCMPushFids?: (string[] & string[] & { [K_74 in Exclude<keyof I_1["User"]["FCMPushFids"], keyof string[]>]: never; }) | undefined;
+            FCMPushFIDs?: (string[] & string[] & { [K_74 in Exclude<keyof I_1["User"]["FCMPushFIDs"], keyof string[]>]: never; }) | undefined;
         } & { [K_75 in Exclude<keyof I_1["User"], keyof UserDetails>]: never; }) | undefined;
         MetaData?: ({
             Network?: Network | undefined;
@@ -2857,7 +2857,7 @@ export declare const UserList: {
                 }[] | undefined;
                 BanxaSetupRequestedAt?: Date | undefined;
                 BanxaSetupCompletedAt?: Date | undefined;
-                FCMPushFids?: string[] | undefined;
+                FCMPushFIDs?: string[] | undefined;
             } | undefined;
             MetaData?: {
                 Network?: Network | undefined;
@@ -3021,7 +3021,7 @@ export declare const UserList: {
                 }[] | undefined;
                 BanxaSetupRequestedAt?: Date | undefined;
                 BanxaSetupCompletedAt?: Date | undefined;
-                FCMPushFids?: string[] | undefined;
+                FCMPushFIDs?: string[] | undefined;
             } | undefined;
             MetaData?: {
                 Network?: Network | undefined;
@@ -3182,7 +3182,7 @@ export declare const UserList: {
                 }[] | undefined;
                 BanxaSetupRequestedAt?: Date | undefined;
                 BanxaSetupCompletedAt?: Date | undefined;
-                FCMPushFids?: string[] | undefined;
+                FCMPushFIDs?: string[] | undefined;
             } | undefined;
             MetaData?: {
                 Network?: Network | undefined;
@@ -3343,7 +3343,7 @@ export declare const UserList: {
                 }[] | undefined;
                 BanxaSetupRequestedAt?: Date | undefined;
                 BanxaSetupCompletedAt?: Date | undefined;
-                FCMPushFids?: string[] | undefined;
+                FCMPushFIDs?: string[] | undefined;
             } & {
                 UserID?: string | undefined;
                 FirstName?: string | undefined;
@@ -3729,7 +3729,7 @@ export declare const UserList: {
                 }[]>]: never; }) | undefined;
                 BanxaSetupRequestedAt?: Date | undefined;
                 BanxaSetupCompletedAt?: Date | undefined;
-                FCMPushFids?: (string[] & string[] & { [K_34 in Exclude<keyof I["Users"][number]["User"]["FCMPushFids"], keyof string[]>]: never; }) | undefined;
+                FCMPushFIDs?: (string[] & string[] & { [K_34 in Exclude<keyof I["Users"][number]["User"]["FCMPushFIDs"], keyof string[]>]: never; }) | undefined;
             } & { [K_35 in Exclude<keyof I["Users"][number]["User"], keyof UserDetails>]: never; }) | undefined;
             MetaData?: ({
                 Network?: Network | undefined;
@@ -3899,7 +3899,7 @@ export declare const UserList: {
                 }[] | undefined;
                 BanxaSetupRequestedAt?: Date | undefined;
                 BanxaSetupCompletedAt?: Date | undefined;
-                FCMPushFids?: string[] | undefined;
+                FCMPushFIDs?: string[] | undefined;
             } | undefined;
             MetaData?: {
                 Network?: Network | undefined;
@@ -4064,7 +4064,7 @@ export declare const UserList: {
                 }[] | undefined;
                 BanxaSetupRequestedAt?: Date | undefined;
                 BanxaSetupCompletedAt?: Date | undefined;
-                FCMPushFids?: string[] | undefined;
+                FCMPushFIDs?: string[] | undefined;
             } | undefined;
             MetaData?: {
                 Network?: Network | undefined;
@@ -4228,7 +4228,7 @@ export declare const UserList: {
                 }[] | undefined;
                 BanxaSetupRequestedAt?: Date | undefined;
                 BanxaSetupCompletedAt?: Date | undefined;
-                FCMPushFids?: string[] | undefined;
+                FCMPushFIDs?: string[] | undefined;
             } | undefined;
             MetaData?: {
                 Network?: Network | undefined;
@@ -4389,7 +4389,7 @@ export declare const UserList: {
                 }[] | undefined;
                 BanxaSetupRequestedAt?: Date | undefined;
                 BanxaSetupCompletedAt?: Date | undefined;
-                FCMPushFids?: string[] | undefined;
+                FCMPushFIDs?: string[] | undefined;
             } | undefined;
             MetaData?: {
                 Network?: Network | undefined;
@@ -4550,7 +4550,7 @@ export declare const UserList: {
                 }[] | undefined;
                 BanxaSetupRequestedAt?: Date | undefined;
                 BanxaSetupCompletedAt?: Date | undefined;
-                FCMPushFids?: string[] | undefined;
+                FCMPushFIDs?: string[] | undefined;
             } & {
                 UserID?: string | undefined;
                 FirstName?: string | undefined;
@@ -4936,7 +4936,7 @@ export declare const UserList: {
                 }[]>]: never; }) | undefined;
                 BanxaSetupRequestedAt?: Date | undefined;
                 BanxaSetupCompletedAt?: Date | undefined;
-                FCMPushFids?: (string[] & string[] & { [K_76 in Exclude<keyof I_1["Users"][number]["User"]["FCMPushFids"], keyof string[]>]: never; }) | undefined;
+                FCMPushFIDs?: (string[] & string[] & { [K_76 in Exclude<keyof I_1["Users"][number]["User"]["FCMPushFIDs"], keyof string[]>]: never; }) | undefined;
             } & { [K_77 in Exclude<keyof I_1["Users"][number]["User"], keyof UserDetails>]: never; }) | undefined;
             MetaData?: ({
                 Network?: Network | undefined;
@@ -5106,7 +5106,7 @@ export declare const UserList: {
                 }[] | undefined;
                 BanxaSetupRequestedAt?: Date | undefined;
                 BanxaSetupCompletedAt?: Date | undefined;
-                FCMPushFids?: string[] | undefined;
+                FCMPushFIDs?: string[] | undefined;
             } | undefined;
             MetaData?: {
                 Network?: Network | undefined;
