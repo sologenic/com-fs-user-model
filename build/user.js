@@ -261,6 +261,7 @@ function createBaseUserDetails() {
         AlpacaCryptoKeychains: [],
         BanxaSetupRequestedAt: undefined,
         BanxaSetupCompletedAt: undefined,
+        FCMPushFIDs: [],
     };
 }
 export const UserDetails = {
@@ -387,6 +388,9 @@ export const UserDetails = {
         }
         if (message.BanxaSetupCompletedAt !== undefined) {
             Timestamp.encode(toTimestamp(message.BanxaSetupCompletedAt), writer.uint32(354).fork()).ldelim();
+        }
+        for (const v of message.FCMPushFIDs) {
+            writer.uint32(362).string(v);
         }
         return writer;
     },
@@ -643,6 +647,12 @@ export const UserDetails = {
                     }
                     message.BanxaSetupCompletedAt = fromTimestamp(Timestamp.decode(reader, reader.uint32()));
                     continue;
+                case 45:
+                    if (tag !== 362) {
+                        break;
+                    }
+                    message.FCMPushFIDs.push(reader.string());
+                    continue;
             }
             if ((tag & 7) === 4 || tag === 0) {
                 break;
@@ -720,10 +730,13 @@ export const UserDetails = {
             BanxaSetupCompletedAt: isSet(object.BanxaSetupCompletedAt)
                 ? fromJsonTimestamp(object.BanxaSetupCompletedAt)
                 : undefined,
+            FCMPushFIDs: globalThis.Array.isArray(object === null || object === void 0 ? void 0 : object.FCMPushFIDs)
+                ? object.FCMPushFIDs.map((e) => globalThis.String(e))
+                : [],
         };
     },
     toJSON(message) {
-        var _a, _b, _c, _d, _e, _f, _g, _h;
+        var _a, _b, _c, _d, _e, _f, _g, _h, _j;
         const obj = {};
         if (message.UserID !== "") {
             obj.UserID = message.UserID;
@@ -848,13 +861,16 @@ export const UserDetails = {
         if (message.BanxaSetupCompletedAt !== undefined) {
             obj.BanxaSetupCompletedAt = message.BanxaSetupCompletedAt.toISOString();
         }
+        if ((_j = message.FCMPushFIDs) === null || _j === void 0 ? void 0 : _j.length) {
+            obj.FCMPushFIDs = message.FCMPushFIDs;
+        }
         return obj;
     },
     create(base) {
         return UserDetails.fromPartial(base !== null && base !== void 0 ? base : {});
     },
     fromPartial(object) {
-        var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q, _r, _s, _t, _u, _v, _w, _x, _y, _z, _0, _1, _2, _3, _4, _5, _6, _7, _8, _9;
+        var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q, _r, _s, _t, _u, _v, _w, _x, _y, _z, _0, _1, _2, _3, _4, _5, _6, _7, _8, _9, _10;
         const message = createBaseUserDetails();
         message.UserID = (_a = object.UserID) !== null && _a !== void 0 ? _a : "";
         message.FirstName = (_b = object.FirstName) !== null && _b !== void 0 ? _b : "";
@@ -912,6 +928,7 @@ export const UserDetails = {
         message.AlpacaCryptoKeychains = ((_7 = object.AlpacaCryptoKeychains) === null || _7 === void 0 ? void 0 : _7.map((e) => AlpacaCryptoKeychain.fromPartial(e))) || [];
         message.BanxaSetupRequestedAt = (_8 = object.BanxaSetupRequestedAt) !== null && _8 !== void 0 ? _8 : undefined;
         message.BanxaSetupCompletedAt = (_9 = object.BanxaSetupCompletedAt) !== null && _9 !== void 0 ? _9 : undefined;
+        message.FCMPushFIDs = ((_10 = object.FCMPushFIDs) === null || _10 === void 0 ? void 0 : _10.map((e) => e)) || [];
         return message;
     },
 };
