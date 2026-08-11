@@ -109,7 +109,7 @@ export interface UserDetails {
     /** x.com handle (must start with @) */
     XHandle?: string | undefined;
     EliteClubMembershipStatus: EliteClubMembershipStatus;
-    /** Firebase Cloud Messaging (FCM) push tokens for iOS/Android devices */
+    /** Firebase Installation IDs (FIDs) used to target FCM push delivery */
     FCMPushTokens: string[];
     /**
      * Referral program reward multiplier represented in hundredths (basis points)

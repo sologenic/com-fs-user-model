@@ -238,15 +238,16 @@ message UserDetails {
       (buf.validate.field).enum.defined_only = true
     ];
 
-    // Firebase Cloud Messaging (FCM) push tokens for iOS/Android devices
+    // Firebase Installation IDs (FIDs) used to target FCM push delivery
+    // (Admin SDK MulticastMessage.Fids). Typically 22 chars; legacy Instance IDs ~11.
     repeated string FCMPushTokens = 39 [
       (buf.validate.field).repeated = {
         max_items: 5,
         unique: true
       },
       (buf.validate.field).repeated.items.string = {
-        min_len: 64,
-        max_len: 512,
+        min_len: 11,
+        max_len: 64,
         pattern: "^[a-zA-Z0-9_:-]+$"
       }
     ];
