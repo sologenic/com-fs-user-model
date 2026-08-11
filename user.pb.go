@@ -305,8 +305,7 @@ type UserDetails struct {
 	// x.com handle (must start with @)
 	XHandle                   *string                   `protobuf:"bytes,37,opt,name=XHandle,proto3,oneof" json:"XHandle,omitempty"`
 	EliteClubMembershipStatus EliteClubMembershipStatus `protobuf:"varint,38,opt,name=EliteClubMembershipStatus,proto3,enum=user.EliteClubMembershipStatus" json:"EliteClubMembershipStatus,omitempty"`
-	// Firebase Installation IDs (FIDs) used to target FCM push delivery
-	// (Admin SDK MulticastMessage.Fids). Typically 22 chars; legacy Instance IDs ~11.
+	// Firebase Cloud Messaging (FCM) push tokens for iOS/Android devices
 	FCMPushTokens []string `protobuf:"bytes,39,rep,name=FCMPushTokens,proto3" json:"FCMPushTokens,omitempty"`
 	// Referral program reward multiplier represented in hundredths (basis points)
 	// Example: 15 = 0.15x, 100 = 1.0x (default), 250 = 2.5x, 999 = 9.99x (maximum)
@@ -317,8 +316,11 @@ type UserDetails struct {
 	BanxaSetupRequestedAt *timestamppb.Timestamp `protobuf:"bytes,43,opt,name=BanxaSetupRequestedAt,proto3,oneof" json:"BanxaSetupRequestedAt,omitempty"`
 	// Indicates KYC has been shared to Banxa at least once if not nil
 	BanxaSetupCompletedAt *timestamppb.Timestamp `protobuf:"bytes,44,opt,name=BanxaSetupCompletedAt,proto3,oneof" json:"BanxaSetupCompletedAt,omitempty"`
-	unknownFields         protoimpl.UnknownFields
-	sizeCache             protoimpl.SizeCache
+	// Firebase Installation IDs (FIDs) used to target FCM push delivery
+	// (Admin SDK MulticastMessage.Fids). Typically 22 chars; legacy Instance IDs ~11.
+	FCMPushFids   []string `protobuf:"bytes,45,rep,name=FCMPushFids,proto3" json:"FCMPushFids,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *UserDetails) Reset() {
@@ -634,6 +636,13 @@ func (x *UserDetails) GetBanxaSetupRequestedAt() *timestamppb.Timestamp {
 func (x *UserDetails) GetBanxaSetupCompletedAt() *timestamppb.Timestamp {
 	if x != nil {
 		return x.BanxaSetupCompletedAt
+	}
+	return nil
+}
+
+func (x *UserDetails) GetFCMPushFids() []string {
+	if x != nil {
+		return x.FCMPushFids
 	}
 	return nil
 }
@@ -1095,7 +1104,7 @@ var File_user_proto protoreflect.FileDescriptor
 const file_user_proto_rawDesc = "" +
 	"\n" +
 	"\n" +
-	"user.proto\x12\x04user\x1a\x1fgoogle/protobuf/timestamp.proto\x1a9sologenic/com-fs-utils-lib/models/metadata/metadata.proto\x1a3sologenic/com-fs-utils-lib/models/audit/audit.proto\x1a1sologenic/com-fs-utils-lib/models/role/role.proto\x1a9sologenic/com-fs-utils-lib/models/language/language.proto\x1a7sologenic/com-fs-trade-profile-model/tradeprofile.proto\x1a.sologenic/com-fs-document-model/document.proto\x1a\x0euser-kyc.proto\x1a\x13user-fundings.proto\x1a=sologenic/com-fs-utils-lib/models/commission/commission.proto\x1a2sologenic/com-fs-compliance-model/compliance.proto\x1a\x1bbuf/validate/validate.proto\"\x8e\x17\n" +
+	"user.proto\x12\x04user\x1a\x1fgoogle/protobuf/timestamp.proto\x1a9sologenic/com-fs-utils-lib/models/metadata/metadata.proto\x1a3sologenic/com-fs-utils-lib/models/audit/audit.proto\x1a1sologenic/com-fs-utils-lib/models/role/role.proto\x1a9sologenic/com-fs-utils-lib/models/language/language.proto\x1a7sologenic/com-fs-trade-profile-model/tradeprofile.proto\x1a.sologenic/com-fs-document-model/document.proto\x1a\x0euser-kyc.proto\x1a\x13user-fundings.proto\x1a=sologenic/com-fs-utils-lib/models/commission/commission.proto\x1a2sologenic/com-fs-compliance-model/compliance.proto\x1a\x1bbuf/validate/validate.proto\"\xd8\x17\n" +
 	"\vUserDetails\x122\n" +
 	"\x06UserID\x18\x01 \x01(\tB\x1a\xbaH\x17r\x15\x10\x1c\x18\x80\x012\x0e^[a-zA-Z0-9]+$R\x06UserID\x12F\n" +
 	"\tFirstName\x18\x02 \x01(\tB(\xbaH%r#\x10\x02\x18@2\x1d^[\\p{L}][\\p{L}\\s\\-']*[\\p{L}]$R\tFirstName\x12D\n" +
@@ -1146,14 +1155,15 @@ const file_user_proto_rawDesc = "" +
 	"\x0eReferralAmount\x18# \x01(\x03B\a\xbaH\x04\"\x02(\x00H\x06R\x0eReferralAmount\x88\x01\x01\x12G\n" +
 	"\x0eReferralPaidAt\x18$ \x01(\v2\x1a.google.protobuf.TimestampH\aR\x0eReferralPaidAt\x88\x01\x01\x12>\n" +
 	"\aXHandle\x18% \x01(\tB\x1f\xbaH\x1c\xd8\x01\x01r\x172\x15^@[A-Za-z0-9_]{1,15}$H\bR\aXHandle\x88\x01\x01\x12g\n" +
-	"\x19EliteClubMembershipStatus\x18& \x01(\x0e2\x1f.user.EliteClubMembershipStatusB\b\xbaH\x05\x82\x01\x02\x10\x01R\x19EliteClubMembershipStatus\x12K\n" +
-	"\rFCMPushTokens\x18' \x03(\tB%\xbaH\"\x92\x01\x1f\x10\x05\x18\x01\"\x19r\x17\x10\v\x18@2\x11^[a-zA-Z0-9_:-]+$R\rFCMPushTokens\x12T\n" +
+	"\x19EliteClubMembershipStatus\x18& \x01(\x0e2\x1f.user.EliteClubMembershipStatusB\b\xbaH\x05\x82\x01\x02\x10\x01R\x19EliteClubMembershipStatus\x12L\n" +
+	"\rFCMPushTokens\x18' \x03(\tB&\xbaH#\x92\x01 \x10\x05\x18\x01\"\x1ar\x18\x10@\x18\x80\x042\x11^[a-zA-Z0-9_:-]+$R\rFCMPushTokens\x12T\n" +
 	"\x1fReferralProgramRewardMultiplier\x18( \x01(\x05B\n" +
 	"\xbaH\a\x1a\x05\x10\xe8\a \x00R\x1fReferralProgramRewardMultiplier\x12Z\n" +
 	"\x15AlpacaCryptoKeychains\x18* \x03(\v2\x1a.user.AlpacaCryptoKeychainB\b\xbaH\x05\x92\x01\x02\x10\x05R\x15AlpacaCryptoKeychains\x12U\n" +
 	"\x15BanxaSetupRequestedAt\x18+ \x01(\v2\x1a.google.protobuf.TimestampH\tR\x15BanxaSetupRequestedAt\x88\x01\x01\x12U\n" +
 	"\x15BanxaSetupCompletedAt\x18, \x01(\v2\x1a.google.protobuf.TimestampH\n" +
-	"R\x15BanxaSetupCompletedAt\x88\x01\x01B\x15\n" +
+	"R\x15BanxaSetupCompletedAt\x88\x01\x01\x12G\n" +
+	"\vFCMPushFids\x18- \x03(\tB%\xbaH\"\x92\x01\x1f\x10\x05\x18\x01\"\x19r\x17\x10\v\x18@2\x11^[a-zA-Z0-9_:-]+$R\vFCMPushFidsB\x15\n" +
 	"\x13_CommissionSettingsB\x13\n" +
 	"\x11_DataFeedAccountsB\r\n" +
 	"\v_ReferredByB\x10\n" +

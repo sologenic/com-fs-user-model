@@ -238,16 +238,15 @@ message UserDetails {
       (buf.validate.field).enum.defined_only = true
     ];
 
-    // Firebase Installation IDs (FIDs) used to target FCM push delivery
-    // (Admin SDK MulticastMessage.Fids). Typically 22 chars; legacy Instance IDs ~11.
+    // Firebase Cloud Messaging (FCM) push tokens for iOS/Android devices
     repeated string FCMPushTokens = 39 [
       (buf.validate.field).repeated = {
         max_items: 5,
         unique: true
       },
       (buf.validate.field).repeated.items.string = {
-        min_len: 11,
-        max_len: 64,
+        min_len: 64,
+        max_len: 512,
         pattern: "^[a-zA-Z0-9_:-]+$"
       }
     ];
@@ -273,6 +272,20 @@ message UserDetails {
 
     // Indicates KYC has been shared to Banxa at least once if not nil
     optional google.protobuf.Timestamp BanxaSetupCompletedAt = 44;
+
+    // Firebase Installation IDs (FIDs) used to target FCM push delivery
+    // (Admin SDK MulticastMessage.Fids). Typically 22 chars; legacy Instance IDs ~11.
+    repeated string FCMPushFids = 45 [
+      (buf.validate.field).repeated = {
+        max_items: 5,
+        unique: true
+      },
+      (buf.validate.field).repeated.items.string = {
+        min_len: 11,
+        max_len: 64,
+        pattern: "^[a-zA-Z0-9_:-]+$"
+      }
+    ];
 }
 
 message User {
