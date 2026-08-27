@@ -10,13 +10,50 @@ import { Decimal } from "../decimal/decimal";
 
 export const protobufPackage = "commission";
 
+/**
+ * CommissionType defines the specific method used to interpret and calculate
+ * the commission charged to the end user for a given order.
+ *
+ * SUBMISSION GUIDELINES:
+ * When submitting an order, the actual commission value must be provided alongside
+ * this enum as a string representing a numeric value (e.g., "1.50") to prevent
+ * floating-point precision loss.
+ */
 export enum CommissionType {
   NOT_USED_COMMISSION_TYPE = 0,
-  /** NOTIONAL - Charge commission on a per order basis (default) */
+  /**
+   * NOTIONAL - Charge commission on a fixed per-order basis.
+   * The submitted string value is applied as a flat fee for the entire order,
+   * regardless of the quantity of shares or contracts executed.
+   *
+   * Example Submission:
+   * - Submitted Value: "2.50"
+   * - Result: A flat $2.50 commission is collected for the order.
+   */
   NOTIONAL = 1,
-  /** QTY - Charge commission on a per qty/contract basis, pro rated */
+  /**
+   * QTY - Charge commission on a per-quantity or per-contract basis, pro-rated.
+   * The total commission is calculated by multiplying the executed order quantity
+   * by the submitted string value.
+   *
+   * Example Submission:
+   * - Submitted Value: "0.05"
+   * - Order Quantity: 100 shares
+   * - Result: $5.00 total commission (100 * 0.05).
+   */
   QTY = 2,
-  /** BPS - Commission expressed in basis points (percent), converted to notional amount for purposes of calculating commission(max two decimal places) */
+  /**
+   * BPS - Charge commission in basis points (BPS).
+   * The commission is calculated as a percentage of the total notional value
+   * of the order. 1 basis point equals 0.01% (or 0.0001).
+   * The system automatically converts the order to a notional amount to
+   * calculate the final fee. The submitted BPS value can have up to two decimal places.
+   *
+   * Example Submission:
+   * - Submitted Value: "12.50" (representing 12.50 bps or 0.125%)
+   * - Order Notional Value: $10,000
+   * - Result: $12.50 total commission ($10,000 * 0.125%).
+   */
   BPS = 3,
   UNRECOGNIZED = -1,
 }
@@ -60,16 +97,12 @@ export function commissionTypeToJSON(object: CommissionType): string {
 
 /** Broker API specific commission fields for user level (overrrides organization level) */
 export interface CommissionSettings {
-  /** Commission charged for the order */
-  Commission?:
-    | Decimal
-    | undefined;
-  /** How commission field value is calculated */
-  CommissionType?: CommissionType | undefined;
+  Commission: Decimal | undefined;
+  CommissionType: CommissionType;
 }
 
 function createBaseCommissionSettings(): CommissionSettings {
-  return { Commission: undefined, CommissionType: undefined };
+  return { Commission: undefined, CommissionType: 0 };
 }
 
 export const CommissionSettings = {
@@ -77,7 +110,7 @@ export const CommissionSettings = {
     if (message.Commission !== undefined) {
       Decimal.encode(message.Commission, writer.uint32(202).fork()).ldelim();
     }
-    if (message.CommissionType !== undefined) {
+    if (message.CommissionType !== 0) {
       writer.uint32(208).int32(message.CommissionType);
     }
     return writer;
@@ -116,7 +149,7 @@ export const CommissionSettings = {
   fromJSON(object: any): CommissionSettings {
     return {
       Commission: isSet(object.Commission) ? Decimal.fromJSON(object.Commission) : undefined,
-      CommissionType: isSet(object.CommissionType) ? commissionTypeFromJSON(object.CommissionType) : undefined,
+      CommissionType: isSet(object.CommissionType) ? commissionTypeFromJSON(object.CommissionType) : 0,
     };
   },
 
@@ -125,7 +158,7 @@ export const CommissionSettings = {
     if (message.Commission !== undefined) {
       obj.Commission = Decimal.toJSON(message.Commission);
     }
-    if (message.CommissionType !== undefined) {
+    if (message.CommissionType !== 0) {
       obj.CommissionType = commissionTypeToJSON(message.CommissionType);
     }
     return obj;
@@ -139,7 +172,7 @@ export const CommissionSettings = {
     message.Commission = (object.Commission !== undefined && object.Commission !== null)
       ? Decimal.fromPartial(object.Commission)
       : undefined;
-    message.CommissionType = object.CommissionType ?? undefined;
+    message.CommissionType = object.CommissionType ?? 0;
     return message;
   },
 };

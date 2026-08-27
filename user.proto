@@ -20,121 +20,123 @@ import "buf/validate/validate.proto";
 message UserDetails {
     // Firebase User ID
     string UserID = 1 [
-      (buf.validate.field).string = {
-        min_len: 28,
-        max_len: 128,
-        pattern: "^[a-zA-Z0-9]+$"
-      }
+        (buf.validate.field).string = {
+            min_len: 28,
+            max_len: 128,
+            pattern: "^[a-zA-Z0-9]+$"
+        }
     ];
 
     string FirstName = 2 [
-      (buf.validate.field).string = {
-        min_len: 2,
-        max_len: 64,
-        // 1. ^[\\p{L}] – First character must be alpha
-        // 2. [\\p{L}\\s\\-']* – Allow alpha, dash (O'Connor), space (Anna Maria), dash (Jean-Baptiste)
-        // 3. [\\p{L}]$ – Last character must be alpha
-        pattern: "^[\\p{L}][\\p{L}\\s\\-']*[\\p{L}]$"
-      }
+        (buf.validate.field).string = {
+            min_len: 2,
+            max_len: 64,
+            // 1. ^[\\p{L}] – First character must be alpha
+            // 2. [\\p{L}\\s\\-']* – Allow alpha, dash (O'Connor), space (Anna Maria), dash (Jean-Baptiste)
+            // 3. [\\p{L}]$ – Last character must be alpha
+            pattern: "^[\\p{L}][\\p{L}\\s\\-']*[\\p{L}]$"
+        }
     ];
 
     string LastName = 3 [
-      // Same logic as for first name
-      (buf.validate.field).string = {
-        min_len: 2,
-        max_len: 64,
-        pattern: "^[\\p{L}][\\p{L}\\s\\-']*[\\p{L}]$"
-      }
+        // Same logic as for first name
+        (buf.validate.field).string = {
+            min_len: 2,
+            max_len: 64,
+            pattern: "^[\\p{L}][\\p{L}\\s\\-']*[\\p{L}]$"
+        }
     ];
 
     string Address = 4 [
-      (buf.validate.field).string = {
-        max_len: 128
-      }
+        (buf.validate.field).string = {
+            max_len: 128
+        }
     ];
 
     string Avatar = 5 [
-      (buf.validate.field).ignore = IGNORE_IF_ZERO_VALUE,
-      (buf.validate.field).string = {
-        uri: true,
-        max_len: 256
-      }
+        (buf.validate.field).ignore = IGNORE_IF_ZERO_VALUE,
+        (buf.validate.field).string = {
+            uri: true,
+            max_len: 256
+        }
     ];
 
     // Nickname
     string Alias = 6 [
-      (buf.validate.field).string = {
-        min_len: 5,
-        max_len: 32,
-        pattern: "^[a-zA-Z][a-zA-Z0-9_]*[a-zA-Z0-9]$"
-      }
+        (buf.validate.field).string = {
+            min_len: 5,
+            max_len: 32,
+            pattern: "^[a-zA-Z][a-zA-Z0-9_]*[a-zA-Z0-9]$"
+        }
     ];
 
     string Description = 7 [
-      (buf.validate.field).string = {
-        max_len: 512
-      }
+        (buf.validate.field).string = {
+            max_len: 512
+        }
     ];
 
     UserStatus Status = 8 [
-      (buf.validate.field).enum.defined_only = true
+        (buf.validate.field).enum.defined_only = true
     ];
 
     repeated Wallet Wallets = 9 [
-      (buf.validate.field).repeated = {
-        max_items: 10,
-      }
+        (buf.validate.field).repeated = {
+            max_items: 10,
+        }
     ];
 
     repeated Social Socials = 10 [
-      (buf.validate.field).repeated = {
-        max_items: 10,
-      }
+        (buf.validate.field).repeated = {
+            max_items: 10,
+        }
     ];
 
     language.Lang Language = 11 [
-      (buf.validate.field).enum.defined_only = true
+        (buf.validate.field).enum.defined_only = true
     ];
 
     // UUID for the external user identifier for example to be used in communication with the KYC provider, or other places where an anonymous ID is required
     string ExternalUserID = 12 [
-      (buf.validate.field).string = {
-        uuid: true
-      }
+        (buf.validate.field).string = {
+            uuid: true
+        }
     ];
 
     // UUID of the current organization the user belongs to
     string OrganizationID = 13 [
-      (buf.validate.field).string = {
-        uuid: true
-      }
+        (buf.validate.field).string = {
+            uuid: true
+        }
     ];
 
     // A retail user will always have a role of "NORMAL_USER"
     role.Role Role = 15 [
-      (buf.validate.field).enum = {
-        defined_only: true
-        in: [1]
-      }
+        (buf.validate.field).enum = {
+            defined_only: true
+            in: [1]
+        }
     ];
 
     tradeprofile.TradeProfileDetails TradeProfile = 16 [
-      (buf.validate.field).required = true
+        (buf.validate.field).required = true
     ];
 
     // Array of Persona Inquiry IDs
+    // We no longer update this field
     repeated string KYCInquiries = 17 [
-      (buf.validate.field).repeated = {
-        max_items: 10,
-        unique: true,
-        items: {
-          string: {
-            pattern: "^inq_[a-zA-Z0-9]+$",
-            min_len: 32,
-            max_len: 64
-          }
+        deprecated = true,
+        (buf.validate.field).repeated = {
+            max_items: 10,
+            unique: true,
+            items: {
+                string: {
+                    pattern: "^inq_[a-zA-Z0-9]+$",
+                    min_len: 32,
+                    max_len: 64
+                }
+            }
         }
-      }
     ];
 
     UserKYCDetails KYCDetails = 18;
@@ -142,13 +144,15 @@ message UserDetails {
 
     // Status of KYC verification, e.g., PENDING, APPROVED, REJECTED
     KYCStatus KYCStatus = 20 [
-      (buf.validate.field).enum.defined_only = true
+        (buf.validate.field).enum.defined_only = true
     ];
 
     google.protobuf.Timestamp KYCStatusUpdatedAt = 41;
 
+    google.protobuf.Timestamp KYCUpdatedAt = 46;
+
     tradeprofile.UserTradeProfile UserTradeProfile = 21 [
-      (buf.validate.field).required = true
+        (buf.validate.field).required = true
     ];
 
     repeated BrokerAccount BrokerAccounts = 23;
@@ -158,106 +162,106 @@ message UserDetails {
 
     // ISO 3166-1 alpha-3 code e.g. "USA", "CAN"
     repeated string AllowedJurisdictions = 28 [
-      (buf.validate.field).repeated = {
-        max_items: 256,
-        unique: true,
-        items: {
-          string: {
-            len: 3,
-            pattern: "^[A-Z]{3}$"
-          }
+        (buf.validate.field).repeated = {
+            max_items: 256,
+            unique: true,
+            items: {
+                string: {
+                    len: 3,
+                    pattern: "^[A-Z]{3}$"
+                }
+            }
         }
-      }
     ];
 
     // Email address for the user, often retrieved from the authentication provider
     string EmailAddress = 29 [
-      (buf.validate.field).string = {
-        email: true,
-        max_len: 254
-      },
-      (buf.validate.field).ignore = IGNORE_IF_ZERO_VALUE
+        (buf.validate.field).string = {
+            email: true,
+            max_len: 254
+        },
+        (buf.validate.field).ignore = IGNORE_IF_ZERO_VALUE
     ];
 
     // Compliance answers for the user
     repeated compliance.ComplianceFormAnswer ComplianceFormAnswers = 30 [
-      (buf.validate.field).repeated = {
-        max_items: 32,
-      }
+        (buf.validate.field).repeated = {
+            max_items: 32,
+        }
     ];
 
     // User ID of the referrer who referred this user during signup or partner code
     optional string ReferredBy = 31 [
-      (buf.validate.field).ignore = IGNORE_IF_ZERO_VALUE,
-      (buf.validate.field).string = {
-        min_len: 3,
-        max_len: 128,
-        pattern: "^[a-zA-Z0-9_\\-]+$"
-      }
+        (buf.validate.field).ignore = IGNORE_IF_ZERO_VALUE,
+        (buf.validate.field).string = {
+            min_len: 3,
+            max_len: 128,
+            pattern: "^[a-zA-Z0-9_\\-]+$"
+        }
     ];
 
     // Number of referrals made by this user
     optional int32 ReferralCount = 32 [
-      (buf.validate.field).int32 = {
-        gte: 0
-      }
+        (buf.validate.field).int32 = {
+            gte: 0
+        }
     ];
 
     // Maximum number of referrals this user can receive (admin override only)
     optional int32 ReferralLimit = 33 [
-      (buf.validate.field).int32 = {
-        gte: 0
-      }
+        (buf.validate.field).int32 = {
+            gte: 0
+        }
     ];
 
     // Amount of TX the referring user received from referrals (non-mutable by user)
     optional int64 ReferralAmountReceived = 34 [
-      (buf.validate.field).int64 = {
-        gte: 0
-      }
+        (buf.validate.field).int64 = {
+            gte: 0
+        }
     ];
 
     // Amount of TX associated with this user to be distributed to new users (admin override only)
     optional int64 ReferralAmount = 35 [
-      (buf.validate.field).int64 = {
-        gte: 0
-      }
+        (buf.validate.field).int64 = {
+            gte: 0
+        }
     ];
 
     optional google.protobuf.Timestamp ReferralPaidAt = 36; // Timestamp when the referral reward was paid
 
     // x.com handle (must start with @)
     optional string XHandle = 37 [
-      (buf.validate.field).string = {
-        pattern: "^@[A-Za-z0-9_]{1,15}$"
-      },
-      (buf.validate.field).ignore = IGNORE_IF_ZERO_VALUE
+        (buf.validate.field).string = {
+            pattern: "^@[A-Za-z0-9_]{1,15}$"
+        },
+        (buf.validate.field).ignore = IGNORE_IF_ZERO_VALUE
     ];
 
     EliteClubMembershipStatus EliteClubMembershipStatus = 38 [
-      (buf.validate.field).enum.defined_only = true
+        (buf.validate.field).enum.defined_only = true
     ];
 
     // Firebase Cloud Messaging (FCM) push tokens for iOS/Android devices
     repeated string FCMPushTokens = 39 [
-      (buf.validate.field).repeated = {
-        max_items: 5,
-        unique: true
-      },
-      (buf.validate.field).repeated.items.string = {
-        min_len: 64,
-        max_len: 512,
-        pattern: "^[a-zA-Z0-9_:-]+$"
-      }
+        (buf.validate.field).repeated = {
+            max_items: 5,
+            unique: true
+        },
+        (buf.validate.field).repeated.items.string = {
+            min_len: 64,
+            max_len: 512,
+            pattern: "^[a-zA-Z0-9_:-]+$"
+        }
     ];
 
     // Referral program reward multiplier represented in hundredths (basis points)
     // Example: 15 = 0.15x, 100 = 1.0x (default), 250 = 2.5x, 999 = 9.99x (maximum)
     int32 ReferralProgramRewardMultiplier = 40 [
-      (buf.validate.field).int32 = {
-        gt: 0,
-        lt: 1000
-      }
+        (buf.validate.field).int32 = {
+            gt: 0,
+            lt: 1000
+        }
     ];
 
     // Cryptographic keychain for encryption/decrypting/verifying Alpaca order envelope
@@ -276,15 +280,15 @@ message UserDetails {
     // Firebase Installation IDs (FIDs) used to target FCM push delivery
     // (Admin SDK MulticastMessage.Fids). Typically 22 chars; legacy Instance IDs ~11.
     repeated string FCMPushFIDs = 45 [
-      (buf.validate.field).repeated = {
-        max_items: 5,
-        unique: true
-      },
-      (buf.validate.field).repeated.items.string = {
-        min_len: 11,
-        max_len: 64,
-        pattern: "^[a-zA-Z0-9_:-]+$"
-      }
+        (buf.validate.field).repeated = {
+            max_items: 5,
+            unique: true
+        },
+        (buf.validate.field).repeated.items.string = {
+            min_len: 11,
+            max_len: 64,
+            pattern: "^[a-zA-Z0-9_:-]+$"
+        }
     ];
 }
 
@@ -295,29 +299,29 @@ message User {
 
     // If root user: list of organization IDs to which user was cloned. If child user: nil or empty.
     repeated string OrganizationIDs = 4 [
-      (buf.validate.field).repeated = {
-        max_items: 256,
-        unique: true,
-        items: {
-          string: {
-            uuid: true
-          }
+        (buf.validate.field).repeated = {
+            max_items: 256,
+            unique: true,
+            items: {
+                string: {
+                    uuid: true
+                }
+            }
         }
-      }
     ];
 }
 
 message Social {
-  string URL = 1 [
-    (buf.validate.field).ignore = IGNORE_IF_ZERO_VALUE,
-    (buf.validate.field).string = {
-      uri: true,
-      max_len: 256
-    }
-  ];
-  SocialType Type = 2 [
-    (buf.validate.field).enum.defined_only = true
-  ];
+    string URL = 1 [
+        (buf.validate.field).ignore = IGNORE_IF_ZERO_VALUE,
+        (buf.validate.field).string = {
+            uri: true,
+            max_len: 256
+        }
+    ];
+    SocialType Type = 2 [
+        (buf.validate.field).enum.defined_only = true
+    ];
 }
 
 message UserList {
@@ -329,7 +333,7 @@ message StatusMessage {
     string UserID = 1;
     string OrganizationID = 2;
     UserStatus Status = 3 [
-      (buf.validate.field).enum.defined_only = true
+        (buf.validate.field).enum.defined_only = true
     ];
     optional metadata.Network Network = 4;
     audit.Audit Audit = 5;
@@ -342,21 +346,21 @@ enum UserStatus {
 }
 
 enum SocialType {
-  NOT_USED_SOCIALTYPE = 0;
-  WEBSITE = 1;
-  GITHUB = 2;
-  REDDIT = 3;
-  DISCORD = 4;
-  TWITTER = 5;
-  FACEBOOK = 6;
-  TELEGRAM = 7;
-  INSTAGRAM = 8;
-  LINKEDIN = 9;
+    NOT_USED_SOCIALTYPE = 0;
+    WEBSITE = 1;
+    GITHUB = 2;
+    REDDIT = 3;
+    DISCORD = 4;
+    TWITTER = 5;
+    FACEBOOK = 6;
+    TELEGRAM = 7;
+    INSTAGRAM = 8;
+    LINKEDIN = 9;
 }
 
 message UISettings {
     Theme Theme = 1 [
-      (buf.validate.field).enum.defined_only = true
+        (buf.validate.field).enum.defined_only = true
     ];
 }
 
@@ -375,15 +379,15 @@ message DxFeed {
 }
 
 enum EliteClubMembershipStatus {
-  ELITE_CLUB_MEMBERSHIP_STATUS_NONE = 0; // No request to add to the club submitted
-  ELITE_CLUB_MEMBERSHIP_STATUS_PENDING = 1; // Request to add to the club submitted, pending administrator decision
-  ELITE_CLUB_MEMBERSHIP_STATUS_ACTIVE = 2; // Request has been approved by administrator, it is not allowed to resubmit application
-  ELITE_CLUB_MEMBERSHIP_STATUS_REJECTED = 3; // Request has been rejected by administrator, it is allowed to resubmit application
+    ELITE_CLUB_MEMBERSHIP_STATUS_NONE = 0; // No request to add to the club submitted
+    ELITE_CLUB_MEMBERSHIP_STATUS_PENDING = 1; // Request to add to the club submitted, pending administrator decision
+    ELITE_CLUB_MEMBERSHIP_STATUS_ACTIVE = 2; // Request has been approved by administrator, it is not allowed to resubmit application
+    ELITE_CLUB_MEMBERSHIP_STATUS_REJECTED = 3; // Request has been rejected by administrator, it is allowed to resubmit application
 }
 
 message AlpacaCryptoKeychain {
     int32 ID = 1 [
-        (buf.validate.field).int32 = { gt: 0 }
+        (buf.validate.field).int32 = {gt: 0}
     ];
 
     // Ed25519 key for server signature check
