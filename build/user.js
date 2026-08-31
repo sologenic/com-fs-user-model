@@ -240,6 +240,7 @@ function createBaseUserDetails() {
         UserDocumentCompliance: undefined,
         KYCStatus: 0,
         KYCStatusUpdatedAt: undefined,
+        KYCUpdatedAt: undefined,
         UserTradeProfile: undefined,
         BrokerAccounts: [],
         UISettings: undefined,
@@ -325,6 +326,9 @@ export const UserDetails = {
         }
         if (message.KYCStatusUpdatedAt !== undefined) {
             Timestamp.encode(toTimestamp(message.KYCStatusUpdatedAt), writer.uint32(330).fork()).ldelim();
+        }
+        if (message.KYCUpdatedAt !== undefined) {
+            Timestamp.encode(toTimestamp(message.KYCUpdatedAt), writer.uint32(370).fork()).ldelim();
         }
         if (message.UserTradeProfile !== undefined) {
             UserTradeProfile.encode(message.UserTradeProfile, writer.uint32(170).fork()).ldelim();
@@ -521,6 +525,12 @@ export const UserDetails = {
                     }
                     message.KYCStatusUpdatedAt = fromTimestamp(Timestamp.decode(reader, reader.uint32()));
                     continue;
+                case 46:
+                    if (tag !== 370) {
+                        break;
+                    }
+                    message.KYCUpdatedAt = fromTimestamp(Timestamp.decode(reader, reader.uint32()));
+                    continue;
                 case 21:
                     if (tag !== 170) {
                         break;
@@ -687,6 +697,7 @@ export const UserDetails = {
                 : undefined,
             KYCStatus: isSet(object.KYCStatus) ? kYCStatusFromJSON(object.KYCStatus) : 0,
             KYCStatusUpdatedAt: isSet(object.KYCStatusUpdatedAt) ? fromJsonTimestamp(object.KYCStatusUpdatedAt) : undefined,
+            KYCUpdatedAt: isSet(object.KYCUpdatedAt) ? fromJsonTimestamp(object.KYCUpdatedAt) : undefined,
             UserTradeProfile: isSet(object.UserTradeProfile) ? UserTradeProfile.fromJSON(object.UserTradeProfile) : undefined,
             BrokerAccounts: globalThis.Array.isArray(object === null || object === void 0 ? void 0 : object.BrokerAccounts)
                 ? object.BrokerAccounts.map((e) => BrokerAccount.fromJSON(e))
@@ -798,6 +809,9 @@ export const UserDetails = {
         if (message.KYCStatusUpdatedAt !== undefined) {
             obj.KYCStatusUpdatedAt = message.KYCStatusUpdatedAt.toISOString();
         }
+        if (message.KYCUpdatedAt !== undefined) {
+            obj.KYCUpdatedAt = message.KYCUpdatedAt.toISOString();
+        }
         if (message.UserTradeProfile !== undefined) {
             obj.UserTradeProfile = UserTradeProfile.toJSON(message.UserTradeProfile);
         }
@@ -870,7 +884,7 @@ export const UserDetails = {
         return UserDetails.fromPartial(base !== null && base !== void 0 ? base : {});
     },
     fromPartial(object) {
-        var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q, _r, _s, _t, _u, _v, _w, _x, _y, _z, _0, _1, _2, _3, _4, _5, _6, _7, _8, _9, _10;
+        var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q, _r, _s, _t, _u, _v, _w, _x, _y, _z, _0, _1, _2, _3, _4, _5, _6, _7, _8, _9, _10, _11;
         const message = createBaseUserDetails();
         message.UserID = (_a = object.UserID) !== null && _a !== void 0 ? _a : "";
         message.FirstName = (_b = object.FirstName) !== null && _b !== void 0 ? _b : "";
@@ -899,10 +913,11 @@ export const UserDetails = {
                 : undefined;
         message.KYCStatus = (_r = object.KYCStatus) !== null && _r !== void 0 ? _r : 0;
         message.KYCStatusUpdatedAt = (_s = object.KYCStatusUpdatedAt) !== null && _s !== void 0 ? _s : undefined;
+        message.KYCUpdatedAt = (_t = object.KYCUpdatedAt) !== null && _t !== void 0 ? _t : undefined;
         message.UserTradeProfile = (object.UserTradeProfile !== undefined && object.UserTradeProfile !== null)
             ? UserTradeProfile.fromPartial(object.UserTradeProfile)
             : undefined;
-        message.BrokerAccounts = ((_t = object.BrokerAccounts) === null || _t === void 0 ? void 0 : _t.map((e) => BrokerAccount.fromPartial(e))) || [];
+        message.BrokerAccounts = ((_u = object.BrokerAccounts) === null || _u === void 0 ? void 0 : _u.map((e) => BrokerAccount.fromPartial(e))) || [];
         message.UISettings = (object.UISettings !== undefined && object.UISettings !== null)
             ? UISettings.fromPartial(object.UISettings)
             : undefined;
@@ -912,23 +927,23 @@ export const UserDetails = {
         message.DataFeedAccounts = (object.DataFeedAccounts !== undefined && object.DataFeedAccounts !== null)
             ? DataFeedAccounts.fromPartial(object.DataFeedAccounts)
             : undefined;
-        message.AllowedJurisdictions = ((_u = object.AllowedJurisdictions) === null || _u === void 0 ? void 0 : _u.map((e) => e)) || [];
-        message.EmailAddress = (_v = object.EmailAddress) !== null && _v !== void 0 ? _v : "";
-        message.ComplianceFormAnswers = ((_w = object.ComplianceFormAnswers) === null || _w === void 0 ? void 0 : _w.map((e) => ComplianceFormAnswer.fromPartial(e))) || [];
-        message.ReferredBy = (_x = object.ReferredBy) !== null && _x !== void 0 ? _x : undefined;
-        message.ReferralCount = (_y = object.ReferralCount) !== null && _y !== void 0 ? _y : undefined;
-        message.ReferralLimit = (_z = object.ReferralLimit) !== null && _z !== void 0 ? _z : undefined;
-        message.ReferralAmountReceived = (_0 = object.ReferralAmountReceived) !== null && _0 !== void 0 ? _0 : undefined;
-        message.ReferralAmount = (_1 = object.ReferralAmount) !== null && _1 !== void 0 ? _1 : undefined;
-        message.ReferralPaidAt = (_2 = object.ReferralPaidAt) !== null && _2 !== void 0 ? _2 : undefined;
-        message.XHandle = (_3 = object.XHandle) !== null && _3 !== void 0 ? _3 : undefined;
-        message.EliteClubMembershipStatus = (_4 = object.EliteClubMembershipStatus) !== null && _4 !== void 0 ? _4 : 0;
-        message.FCMPushTokens = ((_5 = object.FCMPushTokens) === null || _5 === void 0 ? void 0 : _5.map((e) => e)) || [];
-        message.ReferralProgramRewardMultiplier = (_6 = object.ReferralProgramRewardMultiplier) !== null && _6 !== void 0 ? _6 : 0;
-        message.AlpacaCryptoKeychains = ((_7 = object.AlpacaCryptoKeychains) === null || _7 === void 0 ? void 0 : _7.map((e) => AlpacaCryptoKeychain.fromPartial(e))) || [];
-        message.BanxaSetupRequestedAt = (_8 = object.BanxaSetupRequestedAt) !== null && _8 !== void 0 ? _8 : undefined;
-        message.BanxaSetupCompletedAt = (_9 = object.BanxaSetupCompletedAt) !== null && _9 !== void 0 ? _9 : undefined;
-        message.FCMPushFIDs = ((_10 = object.FCMPushFIDs) === null || _10 === void 0 ? void 0 : _10.map((e) => e)) || [];
+        message.AllowedJurisdictions = ((_v = object.AllowedJurisdictions) === null || _v === void 0 ? void 0 : _v.map((e) => e)) || [];
+        message.EmailAddress = (_w = object.EmailAddress) !== null && _w !== void 0 ? _w : "";
+        message.ComplianceFormAnswers = ((_x = object.ComplianceFormAnswers) === null || _x === void 0 ? void 0 : _x.map((e) => ComplianceFormAnswer.fromPartial(e))) || [];
+        message.ReferredBy = (_y = object.ReferredBy) !== null && _y !== void 0 ? _y : undefined;
+        message.ReferralCount = (_z = object.ReferralCount) !== null && _z !== void 0 ? _z : undefined;
+        message.ReferralLimit = (_0 = object.ReferralLimit) !== null && _0 !== void 0 ? _0 : undefined;
+        message.ReferralAmountReceived = (_1 = object.ReferralAmountReceived) !== null && _1 !== void 0 ? _1 : undefined;
+        message.ReferralAmount = (_2 = object.ReferralAmount) !== null && _2 !== void 0 ? _2 : undefined;
+        message.ReferralPaidAt = (_3 = object.ReferralPaidAt) !== null && _3 !== void 0 ? _3 : undefined;
+        message.XHandle = (_4 = object.XHandle) !== null && _4 !== void 0 ? _4 : undefined;
+        message.EliteClubMembershipStatus = (_5 = object.EliteClubMembershipStatus) !== null && _5 !== void 0 ? _5 : 0;
+        message.FCMPushTokens = ((_6 = object.FCMPushTokens) === null || _6 === void 0 ? void 0 : _6.map((e) => e)) || [];
+        message.ReferralProgramRewardMultiplier = (_7 = object.ReferralProgramRewardMultiplier) !== null && _7 !== void 0 ? _7 : 0;
+        message.AlpacaCryptoKeychains = ((_8 = object.AlpacaCryptoKeychains) === null || _8 === void 0 ? void 0 : _8.map((e) => AlpacaCryptoKeychain.fromPartial(e))) || [];
+        message.BanxaSetupRequestedAt = (_9 = object.BanxaSetupRequestedAt) !== null && _9 !== void 0 ? _9 : undefined;
+        message.BanxaSetupCompletedAt = (_10 = object.BanxaSetupCompletedAt) !== null && _10 !== void 0 ? _10 : undefined;
+        message.FCMPushFIDs = ((_11 = object.FCMPushFIDs) === null || _11 === void 0 ? void 0 : _11.map((e) => e)) || [];
         return message;
     },
 };

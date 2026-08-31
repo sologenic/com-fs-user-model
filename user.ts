@@ -257,7 +257,12 @@ export interface UserDetails {
   TradeProfile:
     | TradeProfileDetails
     | undefined;
-  /** Array of Persona Inquiry IDs */
+  /**
+   * Array of Persona Inquiry IDs
+   * We no longer update this field
+   *
+   * @deprecated
+   */
   KYCInquiries: string[];
   KYCDetails: UserKYCDetails | undefined;
   UserDocumentCompliance:
@@ -266,6 +271,7 @@ export interface UserDetails {
   /** Status of KYC verification, e.g., PENDING, APPROVED, REJECTED */
   KYCStatus: KYCStatus;
   KYCStatusUpdatedAt: Date | undefined;
+  KYCUpdatedAt: Date | undefined;
   UserTradeProfile: UserTradeProfile | undefined;
   BrokerAccounts: BrokerAccount[];
   UISettings:
@@ -405,6 +411,7 @@ function createBaseUserDetails(): UserDetails {
     UserDocumentCompliance: undefined,
     KYCStatus: 0,
     KYCStatusUpdatedAt: undefined,
+    KYCUpdatedAt: undefined,
     UserTradeProfile: undefined,
     BrokerAccounts: [],
     UISettings: undefined,
@@ -491,6 +498,9 @@ export const UserDetails = {
     }
     if (message.KYCStatusUpdatedAt !== undefined) {
       Timestamp.encode(toTimestamp(message.KYCStatusUpdatedAt), writer.uint32(330).fork()).ldelim();
+    }
+    if (message.KYCUpdatedAt !== undefined) {
+      Timestamp.encode(toTimestamp(message.KYCUpdatedAt), writer.uint32(370).fork()).ldelim();
     }
     if (message.UserTradeProfile !== undefined) {
       UserTradeProfile.encode(message.UserTradeProfile, writer.uint32(170).fork()).ldelim();
@@ -708,6 +718,13 @@ export const UserDetails = {
 
           message.KYCStatusUpdatedAt = fromTimestamp(Timestamp.decode(reader, reader.uint32()));
           continue;
+        case 46:
+          if (tag !== 370) {
+            break;
+          }
+
+          message.KYCUpdatedAt = fromTimestamp(Timestamp.decode(reader, reader.uint32()));
+          continue;
         case 21:
           if (tag !== 170) {
             break;
@@ -897,6 +914,7 @@ export const UserDetails = {
         : undefined,
       KYCStatus: isSet(object.KYCStatus) ? kYCStatusFromJSON(object.KYCStatus) : 0,
       KYCStatusUpdatedAt: isSet(object.KYCStatusUpdatedAt) ? fromJsonTimestamp(object.KYCStatusUpdatedAt) : undefined,
+      KYCUpdatedAt: isSet(object.KYCUpdatedAt) ? fromJsonTimestamp(object.KYCUpdatedAt) : undefined,
       UserTradeProfile: isSet(object.UserTradeProfile) ? UserTradeProfile.fromJSON(object.UserTradeProfile) : undefined,
       BrokerAccounts: globalThis.Array.isArray(object?.BrokerAccounts)
         ? object.BrokerAccounts.map((e: any) => BrokerAccount.fromJSON(e))
@@ -1008,6 +1026,9 @@ export const UserDetails = {
     if (message.KYCStatusUpdatedAt !== undefined) {
       obj.KYCStatusUpdatedAt = message.KYCStatusUpdatedAt.toISOString();
     }
+    if (message.KYCUpdatedAt !== undefined) {
+      obj.KYCUpdatedAt = message.KYCUpdatedAt.toISOString();
+    }
     if (message.UserTradeProfile !== undefined) {
       obj.UserTradeProfile = UserTradeProfile.toJSON(message.UserTradeProfile);
     }
@@ -1109,6 +1130,7 @@ export const UserDetails = {
         : undefined;
     message.KYCStatus = object.KYCStatus ?? 0;
     message.KYCStatusUpdatedAt = object.KYCStatusUpdatedAt ?? undefined;
+    message.KYCUpdatedAt = object.KYCUpdatedAt ?? undefined;
     message.UserTradeProfile = (object.UserTradeProfile !== undefined && object.UserTradeProfile !== null)
       ? UserTradeProfile.fromPartial(object.UserTradeProfile)
       : undefined;
