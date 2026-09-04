@@ -235,25 +235,55 @@ export function eliteClubMembershipStatusToJSON(object: EliteClubMembershipStatu
 }
 
 export interface UserDetails {
-  /** Firebase User ID */
+  /**
+   * Firebase User ID
+   * Root & child users policy: always the same value
+   * Immutable once set
+   */
   UserID: string;
+  /** Root & child users policy: each user has its own value */
   FirstName: string;
+  /** Root & child users policy: each user has its own value */
   LastName: string;
+  /** Root & child users policy: each user has its own value */
   Address: string;
+  /** Root & child users policy: each user has its own value */
   Avatar: string;
-  /** Nickname */
+  /**
+   * Nickname
+   * Root & child users policy: always the same value
+   * Immutable once set
+   */
   Alias: string;
+  /** Root & child users policy: each user has its own value */
   Description: string;
+  /** Root & child users policy: always the same value */
   Status: UserStatus;
+  /** Root & child users policy: always the same value */
   Wallets: Wallet[];
+  /** Root & child users policy: each user has its own value */
   Socials: Social[];
+  /** Root & child users policy: each user has its own value */
   Language: Lang;
-  /** UUID for the external user identifier for example to be used in communication with the KYC provider, or other places where an anonymous ID is required */
+  /**
+   * External user UUID to be used in communication with the third-party services, or other places where an anonymous ID is required
+   * Root & child users policy: always the same value
+   * Immutable once set
+   */
   ExternalUserID: string;
-  /** UUID of the current organization the user belongs to */
+  /**
+   * UUID of the current organization the user belongs to
+   * Root & child users policy: each user has its own value
+   * Immutable once set
+   */
   OrganizationID: string;
-  /** A retail user will always have a role of "NORMAL_USER" */
+  /**
+   * A retail user will always have a role of "NORMAL_USER"
+   * Root & child users policy: always the same value
+   * Immutable once set
+   */
   Role: Role;
+  /** Root & child users policy: each user has its own value */
   TradeProfile:
     | TradeProfileDetails
     | undefined;
@@ -264,89 +294,167 @@ export interface UserDetails {
    * @deprecated
    */
   KYCInquiries: string[];
-  KYCDetails: UserKYCDetails | undefined;
+  /** Root & child users policy: child users should inherit KYCDetails if KYCAccountID is blank, otherwise each child has its own value */
+  KYCDetails:
+    | UserKYCDetails
+    | undefined;
+  /** Root & child users policy: each user has its own value */
   UserDocumentCompliance:
     | UserDocumentCompliance
     | undefined;
-  /** Status of KYC verification, e.g., PENDING, APPROVED, REJECTED */
+  /**
+   * Status of KYC verification, e.g., PENDING, APPROVED, REJECTED
+   * Root & child users policy: child users should inherit KYCStatus if KYCAccountID is blank, otherwise each child has its own value
+   */
   KYCStatus: KYCStatus;
-  KYCStatusUpdatedAt: Date | undefined;
+  /** Root & child users policy: child users should inherit KYCStatusUpdatedAt if KYCAccountID is blank, otherwise each child has its own value */
+  KYCStatusUpdatedAt:
+    | Date
+    | undefined;
+  /** Root & child users policy: child users should inherit KYCUpdatedAt if KYCAccountID is blank, otherwise each child has its own value */
   KYCUpdatedAt:
     | Date
     | undefined;
   /**
    * Represents Persona account ID
+   * Root & child users policy: each user has its own value
    * Immutable once set
    */
   KYCAccountID: string;
   /**
    * If not nil, it means KYC information has been shared with another Persona account via Persona Connect
+   * Root & child users policy: each user has its own value
    * Immutable once set
    */
-  KYCSharedAt: Date | undefined;
-  UserTradeProfile: UserTradeProfile | undefined;
+  KYCSharedAt:
+    | Date
+    | undefined;
+  /** Root & child users policy: each user has its own value */
+  UserTradeProfile:
+    | UserTradeProfile
+    | undefined;
+  /** Root & child users policy: each user has its own value */
   BrokerAccounts: BrokerAccount[];
+  /** Root & child users policy: each user has its own value */
   UISettings:
     | UISettings
     | undefined;
-  /** Broker API specific commission fields for user level (overrrides organization level) */
-  CommissionSettings?: CommissionSettings | undefined;
+  /**
+   * User level commission settings (overrides organization level)
+   * Root & child users policy: each user has its own value
+   */
+  CommissionSettings?:
+    | CommissionSettings
+    | undefined;
+  /** Root & child users policy: each user has its own value */
   DataFeedAccounts?:
     | DataFeedAccounts
     | undefined;
-  /** ISO 3166-1 alpha-3 code e.g. "USA", "CAN" */
+  /**
+   * ISO 3166-1 alpha-3 code e.g. "USA", "CAN"
+   * Root & child users policy: each user has its own value
+   */
   AllowedJurisdictions: string[];
-  /** Email address for the user, often retrieved from the authentication provider */
+  /**
+   * Email address for the user, often retrieved from the authentication provider
+   * Root & child users policy: always the same value
+   * Immutable once set
+   */
   EmailAddress: string;
-  /** Compliance answers for the user */
+  /**
+   * Compliance form result
+   * Root & child users policy: each user has its own value
+   */
   ComplianceFormAnswers: ComplianceFormAnswer[];
-  /** User ID of the referrer who referred this user during signup or partner code */
+  /**
+   * User ID of the referrer who referred this user during signup or partner code
+   * Root & child users policy: only the root user has a value, child users always have nil
+   * Immutable once set
+   */
   ReferredBy?:
     | string
     | undefined;
-  /** Number of referrals made by this user */
+  /**
+   * Number of referrals made by this user
+   * Root & child users policy: only the root user has a value, child users always have nil
+   */
   ReferralCount?:
     | number
     | undefined;
-  /** Maximum number of referrals this user can receive (admin override only) */
+  /**
+   * Maximum number of referrals this user can receive (admin override only)
+   * Root & child users policy: only the root user has a value, child users always have nil
+   */
   ReferralLimit?:
     | number
     | undefined;
-  /** Amount of TX the referring user received from referrals (non-mutable by user) */
+  /**
+   * Amount of TX the referring user received from referrals (non-mutable by user)
+   * Root & child users policy: only the root user has a value, child users always have nil
+   */
   ReferralAmountReceived?:
     | number
     | undefined;
-  /** Amount of TX associated with this user to be distributed to new users (admin override only) */
+  /**
+   * Amount of TX associated with this user to be distributed to new users (admin override only)
+   * Root & child users policy: only the root user has a value, child users always have nil
+   */
   ReferralAmount?:
     | number
     | undefined;
-  /** Timestamp when the referral reward was paid */
-  ReferralPaidAt?:
+  /**
+   * Timestamp when the referral reward was paid
+   * Root & child users policy: only the root user has a value, child users always have nil
+   * Immutable once set
+   */
+  ReferralPaidAt:
     | Date
     | undefined;
-  /** x.com handle (must start with @) */
-  XHandle?: string | undefined;
+  /**
+   * x.com handle (must start with @)
+   * Root & child users policy: only the root user has a value, child users always have nil
+   */
+  XHandle?:
+    | string
+    | undefined;
+  /** Root & child users policy: only the root user has a value, child users always have a zero value */
   EliteClubMembershipStatus: EliteClubMembershipStatus;
-  /** Firebase Cloud Messaging (FCM) push tokens for iOS/Android devices */
+  /**
+   * Firebase Cloud Messaging (FCM) push tokens for iOS/Android devices
+   * Root & child users policy: only the root user has a value, child users always have nil
+   */
   FCMPushTokens: string[];
   /**
    * Referral program reward multiplier represented in hundredths (basis points)
    * Example: 15 = 0.15x, 100 = 1.0x (default), 250 = 2.5x, 999 = 9.99x (maximum)
+   * Root & child users policy: only the root user has a value, child users always have 100 (1.0x)
    */
   ReferralProgramRewardMultiplier: number;
-  /** Cryptographic keychain for encryption/decrypting/verifying Alpaca order envelope */
+  /**
+   * Cryptographic keychain for encryption/decrypting/verifying Alpaca order envelope
+   * Root & child users policy: each user has its own value
+   */
   AlpacaCryptoKeychains: AlpacaCryptoKeychain[];
-  /** Indicates user has requested a KYC sharing to Banxa if not nil */
-  BanxaSetupRequestedAt?:
-    | Date
-    | undefined;
-  /** Indicates KYC has been shared to Banxa at least once if not nil */
-  BanxaSetupCompletedAt?:
+  /**
+   * Indicates user has requested a KYC sharing to Banxa if not nil
+   * Root & child users policy: only the root user has a value, child users always have nil
+   * Immutable once set
+   */
+  BanxaSetupRequestedAt:
     | Date
     | undefined;
   /**
-   * Firebase Installation IDs (FIDs) used to target FCM push delivery
-   * (Admin SDK MulticastMessage.Fids). Typically 22 chars; legacy Instance IDs ~11.
+   * Indicates KYC has been shared to Banxa at least once if not nil
+   * Root & child users policy: only the root user has a value, child users always have nil
+   * Immutable once set
+   */
+  BanxaSetupCompletedAt:
+    | Date
+    | undefined;
+  /**
+   * Firebase Installation IDs (FIDs) used to target FCM push delivery (Admin SDK MulticastMessage.Fids).
+   * Typically 22 chars, legacy Instance IDs – ~11.
+   * Root & child users policy: only the root user has a value, child users always have nil
    */
   FCMPushFIDs: string[];
 }
@@ -357,7 +465,10 @@ export interface User {
   Audit:
     | Audit
     | undefined;
-  /** If root user: list of organization IDs to which user was cloned. If child user: nil or empty. */
+  /**
+   * If root user: list of organization IDs to which user was cloned. If child user: nil or empty.
+   * Important: never includes root organization ID.
+   */
   OrganizationIDs: string[];
 }
 
@@ -375,6 +486,7 @@ export interface StatusMessage {
   UserID: string;
   OrganizationID: string;
   Status: UserStatus;
+  /** @deprecated */
   Network?: Network | undefined;
   Audit: Audit | undefined;
 }

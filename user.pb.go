@@ -254,80 +254,136 @@ func (EliteClubMembershipStatus) EnumDescriptor() ([]byte, []int) {
 type UserDetails struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Firebase User ID
-	UserID    string `protobuf:"bytes,1,opt,name=UserID,proto3" json:"UserID,omitempty"`
+	// Root & child users policy: always the same value
+	// Immutable once set
+	UserID string `protobuf:"bytes,1,opt,name=UserID,proto3" json:"UserID,omitempty"`
+	// Root & child users policy: each user has its own value
 	FirstName string `protobuf:"bytes,2,opt,name=FirstName,proto3" json:"FirstName,omitempty"`
-	LastName  string `protobuf:"bytes,3,opt,name=LastName,proto3" json:"LastName,omitempty"`
-	Address   string `protobuf:"bytes,4,opt,name=Address,proto3" json:"Address,omitempty"`
-	Avatar    string `protobuf:"bytes,5,opt,name=Avatar,proto3" json:"Avatar,omitempty"`
+	// Root & child users policy: each user has its own value
+	LastName string `protobuf:"bytes,3,opt,name=LastName,proto3" json:"LastName,omitempty"`
+	// Root & child users policy: each user has its own value
+	Address string `protobuf:"bytes,4,opt,name=Address,proto3" json:"Address,omitempty"`
+	// Root & child users policy: each user has its own value
+	Avatar string `protobuf:"bytes,5,opt,name=Avatar,proto3" json:"Avatar,omitempty"`
 	// Nickname
-	Alias       string        `protobuf:"bytes,6,opt,name=Alias,proto3" json:"Alias,omitempty"`
-	Description string        `protobuf:"bytes,7,opt,name=Description,proto3" json:"Description,omitempty"`
-	Status      UserStatus    `protobuf:"varint,8,opt,name=Status,proto3,enum=user.UserStatus" json:"Status,omitempty"`
-	Wallets     []*Wallet     `protobuf:"bytes,9,rep,name=Wallets,proto3" json:"Wallets,omitempty"`
-	Socials     []*Social     `protobuf:"bytes,10,rep,name=Socials,proto3" json:"Socials,omitempty"`
-	Language    language.Lang `protobuf:"varint,11,opt,name=Language,proto3,enum=language.Lang" json:"Language,omitempty"`
-	// UUID for the external user identifier for example to be used in communication with the KYC provider, or other places where an anonymous ID is required
+	// Root & child users policy: always the same value
+	// Immutable once set
+	Alias string `protobuf:"bytes,6,opt,name=Alias,proto3" json:"Alias,omitempty"`
+	// Root & child users policy: each user has its own value
+	Description string `protobuf:"bytes,7,opt,name=Description,proto3" json:"Description,omitempty"`
+	// Root & child users policy: always the same value
+	Status UserStatus `protobuf:"varint,8,opt,name=Status,proto3,enum=user.UserStatus" json:"Status,omitempty"`
+	// Root & child users policy: always the same value
+	Wallets []*Wallet `protobuf:"bytes,9,rep,name=Wallets,proto3" json:"Wallets,omitempty"`
+	// Root & child users policy: each user has its own value
+	Socials []*Social `protobuf:"bytes,10,rep,name=Socials,proto3" json:"Socials,omitempty"`
+	// Root & child users policy: each user has its own value
+	Language language.Lang `protobuf:"varint,11,opt,name=Language,proto3,enum=language.Lang" json:"Language,omitempty"`
+	// External user UUID to be used in communication with the third-party services, or other places where an anonymous ID is required
+	// Root & child users policy: always the same value
+	// Immutable once set
 	ExternalUserID string `protobuf:"bytes,12,opt,name=ExternalUserID,proto3" json:"ExternalUserID,omitempty"`
 	// UUID of the current organization the user belongs to
+	// Root & child users policy: each user has its own value
+	// Immutable once set
 	OrganizationID string `protobuf:"bytes,13,opt,name=OrganizationID,proto3" json:"OrganizationID,omitempty"`
 	// A retail user will always have a role of "NORMAL_USER"
-	Role         role.Role                                       `protobuf:"varint,15,opt,name=Role,proto3,enum=role.Role" json:"Role,omitempty"`
+	// Root & child users policy: always the same value
+	// Immutable once set
+	Role role.Role `protobuf:"varint,15,opt,name=Role,proto3,enum=role.Role" json:"Role,omitempty"`
+	// Root & child users policy: each user has its own value
 	TradeProfile *com_fs_trade_profile_model.TradeProfileDetails `protobuf:"bytes,16,opt,name=TradeProfile,proto3" json:"TradeProfile,omitempty"`
 	// Array of Persona Inquiry IDs
 	// We no longer update this field
 	//
 	// Deprecated: Marked as deprecated in user.proto.
-	KYCInquiries           []string                                      `protobuf:"bytes,17,rep,name=KYCInquiries,proto3" json:"KYCInquiries,omitempty"`
-	KYCDetails             *UserKYCDetails                               `protobuf:"bytes,18,opt,name=KYCDetails,proto3" json:"KYCDetails,omitempty"`
+	KYCInquiries []string `protobuf:"bytes,17,rep,name=KYCInquiries,proto3" json:"KYCInquiries,omitempty"`
+	// Root & child users policy: child users should inherit KYCDetails if KYCAccountID is blank, otherwise each child has its own value
+	KYCDetails *UserKYCDetails `protobuf:"bytes,18,opt,name=KYCDetails,proto3" json:"KYCDetails,omitempty"`
+	// Root & child users policy: each user has its own value
 	UserDocumentCompliance *com_fs_document_model.UserDocumentCompliance `protobuf:"bytes,19,opt,name=UserDocumentCompliance,proto3" json:"UserDocumentCompliance,omitempty"`
 	// Status of KYC verification, e.g., PENDING, APPROVED, REJECTED
-	KYCStatus          KYCStatus              `protobuf:"varint,20,opt,name=KYCStatus,proto3,enum=user.KYCStatus" json:"KYCStatus,omitempty"`
+	// Root & child users policy: child users should inherit KYCStatus if KYCAccountID is blank, otherwise each child has its own value
+	KYCStatus KYCStatus `protobuf:"varint,20,opt,name=KYCStatus,proto3,enum=user.KYCStatus" json:"KYCStatus,omitempty"`
+	// Root & child users policy: child users should inherit KYCStatusUpdatedAt if KYCAccountID is blank, otherwise each child has its own value
 	KYCStatusUpdatedAt *timestamppb.Timestamp `protobuf:"bytes,41,opt,name=KYCStatusUpdatedAt,proto3" json:"KYCStatusUpdatedAt,omitempty"`
-	KYCUpdatedAt       *timestamppb.Timestamp `protobuf:"bytes,46,opt,name=KYCUpdatedAt,proto3" json:"KYCUpdatedAt,omitempty"`
+	// Root & child users policy: child users should inherit KYCUpdatedAt if KYCAccountID is blank, otherwise each child has its own value
+	KYCUpdatedAt *timestamppb.Timestamp `protobuf:"bytes,46,opt,name=KYCUpdatedAt,proto3" json:"KYCUpdatedAt,omitempty"`
 	// Represents Persona account ID
+	// Root & child users policy: each user has its own value
 	// Immutable once set
 	KYCAccountID string `protobuf:"bytes,47,opt,name=KYCAccountID,proto3" json:"KYCAccountID,omitempty"`
 	// If not nil, it means KYC information has been shared with another Persona account via Persona Connect
+	// Root & child users policy: each user has its own value
 	// Immutable once set
-	KYCSharedAt        *timestamppb.Timestamp                       `protobuf:"bytes,48,opt,name=KYCSharedAt,proto3" json:"KYCSharedAt,omitempty"`
-	UserTradeProfile   *com_fs_trade_profile_model.UserTradeProfile `protobuf:"bytes,21,opt,name=UserTradeProfile,proto3" json:"UserTradeProfile,omitempty"`
-	BrokerAccounts     []*BrokerAccount                             `protobuf:"bytes,23,rep,name=BrokerAccounts,proto3" json:"BrokerAccounts,omitempty"`
-	UISettings         *UISettings                                  `protobuf:"bytes,25,opt,name=UISettings,proto3" json:"UISettings,omitempty"`
-	CommissionSettings *commission.CommissionSettings               `protobuf:"bytes,26,opt,name=CommissionSettings,proto3,oneof" json:"CommissionSettings,omitempty"` // Broker API specific commission fields for user level (overrrides organization level)
-	DataFeedAccounts   *DataFeedAccounts                            `protobuf:"bytes,27,opt,name=DataFeedAccounts,proto3,oneof" json:"DataFeedAccounts,omitempty"`
+	KYCSharedAt *timestamppb.Timestamp `protobuf:"bytes,48,opt,name=KYCSharedAt,proto3" json:"KYCSharedAt,omitempty"`
+	// Root & child users policy: each user has its own value
+	UserTradeProfile *com_fs_trade_profile_model.UserTradeProfile `protobuf:"bytes,21,opt,name=UserTradeProfile,proto3" json:"UserTradeProfile,omitempty"`
+	// Root & child users policy: each user has its own value
+	BrokerAccounts []*BrokerAccount `protobuf:"bytes,23,rep,name=BrokerAccounts,proto3" json:"BrokerAccounts,omitempty"`
+	// Root & child users policy: each user has its own value
+	UISettings *UISettings `protobuf:"bytes,25,opt,name=UISettings,proto3" json:"UISettings,omitempty"`
+	// User level commission settings (overrides organization level)
+	// Root & child users policy: each user has its own value
+	CommissionSettings *commission.CommissionSettings `protobuf:"bytes,26,opt,name=CommissionSettings,proto3,oneof" json:"CommissionSettings,omitempty"`
+	// Root & child users policy: each user has its own value
+	DataFeedAccounts *DataFeedAccounts `protobuf:"bytes,27,opt,name=DataFeedAccounts,proto3,oneof" json:"DataFeedAccounts,omitempty"`
 	// ISO 3166-1 alpha-3 code e.g. "USA", "CAN"
+	// Root & child users policy: each user has its own value
 	AllowedJurisdictions []string `protobuf:"bytes,28,rep,name=AllowedJurisdictions,proto3" json:"AllowedJurisdictions,omitempty"`
 	// Email address for the user, often retrieved from the authentication provider
+	// Root & child users policy: always the same value
+	// Immutable once set
 	EmailAddress string `protobuf:"bytes,29,opt,name=EmailAddress,proto3" json:"EmailAddress,omitempty"`
-	// Compliance answers for the user
+	// Compliance form result
+	// Root & child users policy: each user has its own value
 	ComplianceFormAnswers []*com_fs_compliance_model.ComplianceFormAnswer `protobuf:"bytes,30,rep,name=ComplianceFormAnswers,proto3" json:"ComplianceFormAnswers,omitempty"`
 	// User ID of the referrer who referred this user during signup or partner code
+	// Root & child users policy: only the root user has a value, child users always have nil
+	// Immutable once set
 	ReferredBy *string `protobuf:"bytes,31,opt,name=ReferredBy,proto3,oneof" json:"ReferredBy,omitempty"`
 	// Number of referrals made by this user
+	// Root & child users policy: only the root user has a value, child users always have nil
 	ReferralCount *int32 `protobuf:"varint,32,opt,name=ReferralCount,proto3,oneof" json:"ReferralCount,omitempty"`
 	// Maximum number of referrals this user can receive (admin override only)
+	// Root & child users policy: only the root user has a value, child users always have nil
 	ReferralLimit *int32 `protobuf:"varint,33,opt,name=ReferralLimit,proto3,oneof" json:"ReferralLimit,omitempty"`
 	// Amount of TX the referring user received from referrals (non-mutable by user)
+	// Root & child users policy: only the root user has a value, child users always have nil
 	ReferralAmountReceived *int64 `protobuf:"varint,34,opt,name=ReferralAmountReceived,proto3,oneof" json:"ReferralAmountReceived,omitempty"`
 	// Amount of TX associated with this user to be distributed to new users (admin override only)
-	ReferralAmount *int64                 `protobuf:"varint,35,opt,name=ReferralAmount,proto3,oneof" json:"ReferralAmount,omitempty"`
-	ReferralPaidAt *timestamppb.Timestamp `protobuf:"bytes,36,opt,name=ReferralPaidAt,proto3,oneof" json:"ReferralPaidAt,omitempty"` // Timestamp when the referral reward was paid
+	// Root & child users policy: only the root user has a value, child users always have nil
+	ReferralAmount *int64 `protobuf:"varint,35,opt,name=ReferralAmount,proto3,oneof" json:"ReferralAmount,omitempty"`
+	// Timestamp when the referral reward was paid
+	// Root & child users policy: only the root user has a value, child users always have nil
+	// Immutable once set
+	ReferralPaidAt *timestamppb.Timestamp `protobuf:"bytes,36,opt,name=ReferralPaidAt,proto3" json:"ReferralPaidAt,omitempty"`
 	// x.com handle (must start with @)
-	XHandle                   *string                   `protobuf:"bytes,37,opt,name=XHandle,proto3,oneof" json:"XHandle,omitempty"`
+	// Root & child users policy: only the root user has a value, child users always have nil
+	XHandle *string `protobuf:"bytes,37,opt,name=XHandle,proto3,oneof" json:"XHandle,omitempty"`
+	// Root & child users policy: only the root user has a value, child users always have a zero value
 	EliteClubMembershipStatus EliteClubMembershipStatus `protobuf:"varint,38,opt,name=EliteClubMembershipStatus,proto3,enum=user.EliteClubMembershipStatus" json:"EliteClubMembershipStatus,omitempty"`
 	// Firebase Cloud Messaging (FCM) push tokens for iOS/Android devices
+	// Root & child users policy: only the root user has a value, child users always have nil
 	FCMPushTokens []string `protobuf:"bytes,39,rep,name=FCMPushTokens,proto3" json:"FCMPushTokens,omitempty"`
 	// Referral program reward multiplier represented in hundredths (basis points)
 	// Example: 15 = 0.15x, 100 = 1.0x (default), 250 = 2.5x, 999 = 9.99x (maximum)
+	// Root & child users policy: only the root user has a value, child users always have 100 (1.0x)
 	ReferralProgramRewardMultiplier int32 `protobuf:"varint,40,opt,name=ReferralProgramRewardMultiplier,proto3" json:"ReferralProgramRewardMultiplier,omitempty"`
 	// Cryptographic keychain for encryption/decrypting/verifying Alpaca order envelope
+	// Root & child users policy: each user has its own value
 	AlpacaCryptoKeychains []*AlpacaCryptoKeychain `protobuf:"bytes,42,rep,name=AlpacaCryptoKeychains,proto3" json:"AlpacaCryptoKeychains,omitempty"`
 	// Indicates user has requested a KYC sharing to Banxa if not nil
-	BanxaSetupRequestedAt *timestamppb.Timestamp `protobuf:"bytes,43,opt,name=BanxaSetupRequestedAt,proto3,oneof" json:"BanxaSetupRequestedAt,omitempty"`
+	// Root & child users policy: only the root user has a value, child users always have nil
+	// Immutable once set
+	BanxaSetupRequestedAt *timestamppb.Timestamp `protobuf:"bytes,43,opt,name=BanxaSetupRequestedAt,proto3" json:"BanxaSetupRequestedAt,omitempty"`
 	// Indicates KYC has been shared to Banxa at least once if not nil
-	BanxaSetupCompletedAt *timestamppb.Timestamp `protobuf:"bytes,44,opt,name=BanxaSetupCompletedAt,proto3,oneof" json:"BanxaSetupCompletedAt,omitempty"`
-	// Firebase Installation IDs (FIDs) used to target FCM push delivery
-	// (Admin SDK MulticastMessage.Fids). Typically 22 chars; legacy Instance IDs ~11.
+	// Root & child users policy: only the root user has a value, child users always have nil
+	// Immutable once set
+	BanxaSetupCompletedAt *timestamppb.Timestamp `protobuf:"bytes,44,opt,name=BanxaSetupCompletedAt,proto3" json:"BanxaSetupCompletedAt,omitempty"`
+	// Firebase Installation IDs (FIDs) used to target FCM push delivery (Admin SDK MulticastMessage.Fids).
+	// Typically 22 chars, legacy Instance IDs – ~11.
+	// Root & child users policy: only the root user has a value, child users always have nil
 	FCMPushFIDs   []string `protobuf:"bytes,45,rep,name=FCMPushFIDs,proto3" json:"FCMPushFIDs,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -685,6 +741,7 @@ type User struct {
 	MetaData *metadata.MetaData     `protobuf:"bytes,2,opt,name=MetaData,proto3" json:"MetaData,omitempty"`
 	Audit    *audit.Audit           `protobuf:"bytes,3,opt,name=Audit,proto3" json:"Audit,omitempty"`
 	// If root user: list of organization IDs to which user was cloned. If child user: nil or empty.
+	// Important: never includes root organization ID.
 	OrganizationIDs []string `protobuf:"bytes,4,rep,name=OrganizationIDs,proto3" json:"OrganizationIDs,omitempty"`
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
@@ -857,10 +914,11 @@ type StatusMessage struct {
 	UserID         string                 `protobuf:"bytes,1,opt,name=UserID,proto3" json:"UserID,omitempty"`
 	OrganizationID string                 `protobuf:"bytes,2,opt,name=OrganizationID,proto3" json:"OrganizationID,omitempty"`
 	Status         UserStatus             `protobuf:"varint,3,opt,name=Status,proto3,enum=user.UserStatus" json:"Status,omitempty"`
-	Network        *metadata.Network      `protobuf:"varint,4,opt,name=Network,proto3,enum=metadata.Network,oneof" json:"Network,omitempty"`
-	Audit          *audit.Audit           `protobuf:"bytes,5,opt,name=Audit,proto3" json:"Audit,omitempty"`
-	unknownFields  protoimpl.UnknownFields
-	sizeCache      protoimpl.SizeCache
+	// Deprecated: Marked as deprecated in user.proto.
+	Network       *metadata.Network `protobuf:"varint,4,opt,name=Network,proto3,enum=metadata.Network,oneof" json:"Network,omitempty"`
+	Audit         *audit.Audit      `protobuf:"bytes,5,opt,name=Audit,proto3" json:"Audit,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *StatusMessage) Reset() {
@@ -914,6 +972,7 @@ func (x *StatusMessage) GetStatus() UserStatus {
 	return UserStatus_NOT_USED_USERSTATUS
 }
 
+// Deprecated: Marked as deprecated in user.proto.
 func (x *StatusMessage) GetNetwork() metadata.Network {
 	if x != nil && x.Network != nil {
 		return *x.Network
@@ -1136,7 +1195,7 @@ var File_user_proto protoreflect.FileDescriptor
 const file_user_proto_rawDesc = "" +
 	"\n" +
 	"\n" +
-	"user.proto\x12\x04user\x1a\x1fgoogle/protobuf/timestamp.proto\x1a9sologenic/com-fs-utils-lib/models/metadata/metadata.proto\x1a3sologenic/com-fs-utils-lib/models/audit/audit.proto\x1a1sologenic/com-fs-utils-lib/models/role/role.proto\x1a9sologenic/com-fs-utils-lib/models/language/language.proto\x1a7sologenic/com-fs-trade-profile-model/tradeprofile.proto\x1a.sologenic/com-fs-document-model/document.proto\x1a\x0euser-kyc.proto\x1a\x13user-fundings.proto\x1a=sologenic/com-fs-utils-lib/models/commission/commission.proto\x1a2sologenic/com-fs-compliance-model/compliance.proto\x1a\x1bbuf/validate/validate.proto\"\x89\x19\n" +
+	"user.proto\x12\x04user\x1a\x1fgoogle/protobuf/timestamp.proto\x1a9sologenic/com-fs-utils-lib/models/metadata/metadata.proto\x1a3sologenic/com-fs-utils-lib/models/audit/audit.proto\x1a1sologenic/com-fs-utils-lib/models/role/role.proto\x1a9sologenic/com-fs-utils-lib/models/language/language.proto\x1a7sologenic/com-fs-trade-profile-model/tradeprofile.proto\x1a.sologenic/com-fs-document-model/document.proto\x1a\x0euser-kyc.proto\x1a\x13user-fundings.proto\x1a=sologenic/com-fs-utils-lib/models/commission/commission.proto\x1a2sologenic/com-fs-compliance-model/compliance.proto\x1a\x1bbuf/validate/validate.proto\"\xb3\x18\n" +
 	"\vUserDetails\x122\n" +
 	"\x06UserID\x18\x01 \x01(\tB\x1a\xbaH\x17r\x15\x10\x1c\x18\x80\x012\x0e^[a-zA-Z0-9]+$R\x06UserID\x12F\n" +
 	"\tFirstName\x18\x02 \x01(\tB(\xbaH%r#\x10\x02\x18@2\x1d^[\\p{L}][\\p{L}\\s\\-']*[\\p{L}]$R\tFirstName\x12D\n" +
@@ -1187,17 +1246,16 @@ const file_user_proto_rawDesc = "" +
 	"\rReferralCount\x18  \x01(\x05B\a\xbaH\x04\x1a\x02(\x00H\x03R\rReferralCount\x88\x01\x01\x122\n" +
 	"\rReferralLimit\x18! \x01(\x05B\a\xbaH\x04\x1a\x02(\x00H\x04R\rReferralLimit\x88\x01\x01\x12D\n" +
 	"\x16ReferralAmountReceived\x18\" \x01(\x03B\a\xbaH\x04\"\x02(\x00H\x05R\x16ReferralAmountReceived\x88\x01\x01\x124\n" +
-	"\x0eReferralAmount\x18# \x01(\x03B\a\xbaH\x04\"\x02(\x00H\x06R\x0eReferralAmount\x88\x01\x01\x12G\n" +
-	"\x0eReferralPaidAt\x18$ \x01(\v2\x1a.google.protobuf.TimestampH\aR\x0eReferralPaidAt\x88\x01\x01\x12>\n" +
-	"\aXHandle\x18% \x01(\tB\x1f\xbaH\x1c\xd8\x01\x01r\x172\x15^@[A-Za-z0-9_]{1,15}$H\bR\aXHandle\x88\x01\x01\x12g\n" +
+	"\x0eReferralAmount\x18# \x01(\x03B\a\xbaH\x04\"\x02(\x00H\x06R\x0eReferralAmount\x88\x01\x01\x12B\n" +
+	"\x0eReferralPaidAt\x18$ \x01(\v2\x1a.google.protobuf.TimestampR\x0eReferralPaidAt\x12>\n" +
+	"\aXHandle\x18% \x01(\tB\x1f\xbaH\x1c\xd8\x01\x01r\x172\x15^@[A-Za-z0-9_]{1,15}$H\aR\aXHandle\x88\x01\x01\x12g\n" +
 	"\x19EliteClubMembershipStatus\x18& \x01(\x0e2\x1f.user.EliteClubMembershipStatusB\b\xbaH\x05\x82\x01\x02\x10\x01R\x19EliteClubMembershipStatus\x12L\n" +
 	"\rFCMPushTokens\x18' \x03(\tB&\xbaH#\x92\x01 \x10\x05\x18\x01\"\x1ar\x18\x10@\x18\x80\x042\x11^[a-zA-Z0-9_:-]+$R\rFCMPushTokens\x12T\n" +
 	"\x1fReferralProgramRewardMultiplier\x18( \x01(\x05B\n" +
 	"\xbaH\a\x1a\x05\x10\xe8\a \x00R\x1fReferralProgramRewardMultiplier\x12Z\n" +
-	"\x15AlpacaCryptoKeychains\x18* \x03(\v2\x1a.user.AlpacaCryptoKeychainB\b\xbaH\x05\x92\x01\x02\x10\x05R\x15AlpacaCryptoKeychains\x12U\n" +
-	"\x15BanxaSetupRequestedAt\x18+ \x01(\v2\x1a.google.protobuf.TimestampH\tR\x15BanxaSetupRequestedAt\x88\x01\x01\x12U\n" +
-	"\x15BanxaSetupCompletedAt\x18, \x01(\v2\x1a.google.protobuf.TimestampH\n" +
-	"R\x15BanxaSetupCompletedAt\x88\x01\x01\x12G\n" +
+	"\x15AlpacaCryptoKeychains\x18* \x03(\v2\x1a.user.AlpacaCryptoKeychainB\b\xbaH\x05\x92\x01\x02\x10\x05R\x15AlpacaCryptoKeychains\x12P\n" +
+	"\x15BanxaSetupRequestedAt\x18+ \x01(\v2\x1a.google.protobuf.TimestampR\x15BanxaSetupRequestedAt\x12P\n" +
+	"\x15BanxaSetupCompletedAt\x18, \x01(\v2\x1a.google.protobuf.TimestampR\x15BanxaSetupCompletedAt\x12G\n" +
 	"\vFCMPushFIDs\x18- \x03(\tB%\xbaH\"\x92\x01\x1f\x10\x05\x18\x01\"\x19r\x17\x10\v\x18@2\x11^[a-zA-Z0-9_:-]+$R\vFCMPushFIDsB\x15\n" +
 	"\x13_CommissionSettingsB\x13\n" +
 	"\x11_DataFeedAccountsB\r\n" +
@@ -1205,12 +1263,9 @@ const file_user_proto_rawDesc = "" +
 	"\x0e_ReferralCountB\x10\n" +
 	"\x0e_ReferralLimitB\x19\n" +
 	"\x17_ReferralAmountReceivedB\x11\n" +
-	"\x0f_ReferralAmountB\x11\n" +
-	"\x0f_ReferralPaidAtB\n" +
+	"\x0f_ReferralAmountB\n" +
 	"\n" +
-	"\b_XHandleB\x18\n" +
-	"\x16_BanxaSetupRequestedAtB\x18\n" +
-	"\x16_BanxaSetupCompletedAt\"\xbf\x01\n" +
+	"\b_XHandle\"\xbf\x01\n" +
 	"\x04User\x12%\n" +
 	"\x04User\x18\x01 \x01(\v2\x11.user.UserDetailsR\x04User\x12.\n" +
 	"\bMetaData\x18\x02 \x01(\v2\x12.metadata.MetaDataR\bMetaData\x12\"\n" +
@@ -1223,12 +1278,12 @@ const file_user_proto_rawDesc = "" +
 	"\x05Users\x18\x01 \x03(\v2\n" +
 	".user.UserR\x05Users\x12\x1b\n" +
 	"\x06Offset\x18\x02 \x01(\x05H\x00R\x06Offset\x88\x01\x01B\t\n" +
-	"\a_Offset\"\xe5\x01\n" +
+	"\a_Offset\"\xe9\x01\n" +
 	"\rStatusMessage\x12\x16\n" +
 	"\x06UserID\x18\x01 \x01(\tR\x06UserID\x12&\n" +
 	"\x0eOrganizationID\x18\x02 \x01(\tR\x0eOrganizationID\x122\n" +
-	"\x06Status\x18\x03 \x01(\x0e2\x10.user.UserStatusB\b\xbaH\x05\x82\x01\x02\x10\x01R\x06Status\x120\n" +
-	"\aNetwork\x18\x04 \x01(\x0e2\x11.metadata.NetworkH\x00R\aNetwork\x88\x01\x01\x12\"\n" +
+	"\x06Status\x18\x03 \x01(\x0e2\x10.user.UserStatusB\b\xbaH\x05\x82\x01\x02\x10\x01R\x06Status\x124\n" +
+	"\aNetwork\x18\x04 \x01(\x0e2\x11.metadata.NetworkB\x02\x18\x01H\x00R\aNetwork\x88\x01\x01\x12\"\n" +
 	"\x05Audit\x18\x05 \x01(\v2\f.audit.AuditR\x05AuditB\n" +
 	"\n" +
 	"\b_Network\"9\n" +
