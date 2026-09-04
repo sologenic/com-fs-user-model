@@ -96,7 +96,6 @@ protoc "${PROTO_PATH_ARGS[@]}" "adminuser-grpc.proto" \
   "--go-grpc_out=." --go-grpc_opt=paths=source_relative
 
 # if there's TS project in the package, generate a protobuf file for TS
-rm -rf node_modules
 npm i
 
 protoc --plugin=./node_modules/.bin/protoc-gen-ts_proto \

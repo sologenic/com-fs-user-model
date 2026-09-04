@@ -241,6 +241,8 @@ function createBaseUserDetails() {
         KYCStatus: 0,
         KYCStatusUpdatedAt: undefined,
         KYCUpdatedAt: undefined,
+        KYCAccountID: "",
+        KYCSharedAt: undefined,
         UserTradeProfile: undefined,
         BrokerAccounts: [],
         UISettings: undefined,
@@ -329,6 +331,12 @@ export const UserDetails = {
         }
         if (message.KYCUpdatedAt !== undefined) {
             Timestamp.encode(toTimestamp(message.KYCUpdatedAt), writer.uint32(370).fork()).ldelim();
+        }
+        if (message.KYCAccountID !== "") {
+            writer.uint32(378).string(message.KYCAccountID);
+        }
+        if (message.KYCSharedAt !== undefined) {
+            Timestamp.encode(toTimestamp(message.KYCSharedAt), writer.uint32(386).fork()).ldelim();
         }
         if (message.UserTradeProfile !== undefined) {
             UserTradeProfile.encode(message.UserTradeProfile, writer.uint32(170).fork()).ldelim();
@@ -531,6 +539,18 @@ export const UserDetails = {
                     }
                     message.KYCUpdatedAt = fromTimestamp(Timestamp.decode(reader, reader.uint32()));
                     continue;
+                case 47:
+                    if (tag !== 378) {
+                        break;
+                    }
+                    message.KYCAccountID = reader.string();
+                    continue;
+                case 48:
+                    if (tag !== 386) {
+                        break;
+                    }
+                    message.KYCSharedAt = fromTimestamp(Timestamp.decode(reader, reader.uint32()));
+                    continue;
                 case 21:
                     if (tag !== 170) {
                         break;
@@ -698,6 +718,8 @@ export const UserDetails = {
             KYCStatus: isSet(object.KYCStatus) ? kYCStatusFromJSON(object.KYCStatus) : 0,
             KYCStatusUpdatedAt: isSet(object.KYCStatusUpdatedAt) ? fromJsonTimestamp(object.KYCStatusUpdatedAt) : undefined,
             KYCUpdatedAt: isSet(object.KYCUpdatedAt) ? fromJsonTimestamp(object.KYCUpdatedAt) : undefined,
+            KYCAccountID: isSet(object.KYCAccountID) ? globalThis.String(object.KYCAccountID) : "",
+            KYCSharedAt: isSet(object.KYCSharedAt) ? fromJsonTimestamp(object.KYCSharedAt) : undefined,
             UserTradeProfile: isSet(object.UserTradeProfile) ? UserTradeProfile.fromJSON(object.UserTradeProfile) : undefined,
             BrokerAccounts: globalThis.Array.isArray(object === null || object === void 0 ? void 0 : object.BrokerAccounts)
                 ? object.BrokerAccounts.map((e) => BrokerAccount.fromJSON(e))
@@ -812,6 +834,12 @@ export const UserDetails = {
         if (message.KYCUpdatedAt !== undefined) {
             obj.KYCUpdatedAt = message.KYCUpdatedAt.toISOString();
         }
+        if (message.KYCAccountID !== "") {
+            obj.KYCAccountID = message.KYCAccountID;
+        }
+        if (message.KYCSharedAt !== undefined) {
+            obj.KYCSharedAt = message.KYCSharedAt.toISOString();
+        }
         if (message.UserTradeProfile !== undefined) {
             obj.UserTradeProfile = UserTradeProfile.toJSON(message.UserTradeProfile);
         }
@@ -884,7 +912,7 @@ export const UserDetails = {
         return UserDetails.fromPartial(base !== null && base !== void 0 ? base : {});
     },
     fromPartial(object) {
-        var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q, _r, _s, _t, _u, _v, _w, _x, _y, _z, _0, _1, _2, _3, _4, _5, _6, _7, _8, _9, _10, _11;
+        var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q, _r, _s, _t, _u, _v, _w, _x, _y, _z, _0, _1, _2, _3, _4, _5, _6, _7, _8, _9, _10, _11, _12, _13;
         const message = createBaseUserDetails();
         message.UserID = (_a = object.UserID) !== null && _a !== void 0 ? _a : "";
         message.FirstName = (_b = object.FirstName) !== null && _b !== void 0 ? _b : "";
@@ -914,10 +942,12 @@ export const UserDetails = {
         message.KYCStatus = (_r = object.KYCStatus) !== null && _r !== void 0 ? _r : 0;
         message.KYCStatusUpdatedAt = (_s = object.KYCStatusUpdatedAt) !== null && _s !== void 0 ? _s : undefined;
         message.KYCUpdatedAt = (_t = object.KYCUpdatedAt) !== null && _t !== void 0 ? _t : undefined;
+        message.KYCAccountID = (_u = object.KYCAccountID) !== null && _u !== void 0 ? _u : "";
+        message.KYCSharedAt = (_v = object.KYCSharedAt) !== null && _v !== void 0 ? _v : undefined;
         message.UserTradeProfile = (object.UserTradeProfile !== undefined && object.UserTradeProfile !== null)
             ? UserTradeProfile.fromPartial(object.UserTradeProfile)
             : undefined;
-        message.BrokerAccounts = ((_u = object.BrokerAccounts) === null || _u === void 0 ? void 0 : _u.map((e) => BrokerAccount.fromPartial(e))) || [];
+        message.BrokerAccounts = ((_w = object.BrokerAccounts) === null || _w === void 0 ? void 0 : _w.map((e) => BrokerAccount.fromPartial(e))) || [];
         message.UISettings = (object.UISettings !== undefined && object.UISettings !== null)
             ? UISettings.fromPartial(object.UISettings)
             : undefined;
@@ -927,23 +957,23 @@ export const UserDetails = {
         message.DataFeedAccounts = (object.DataFeedAccounts !== undefined && object.DataFeedAccounts !== null)
             ? DataFeedAccounts.fromPartial(object.DataFeedAccounts)
             : undefined;
-        message.AllowedJurisdictions = ((_v = object.AllowedJurisdictions) === null || _v === void 0 ? void 0 : _v.map((e) => e)) || [];
-        message.EmailAddress = (_w = object.EmailAddress) !== null && _w !== void 0 ? _w : "";
-        message.ComplianceFormAnswers = ((_x = object.ComplianceFormAnswers) === null || _x === void 0 ? void 0 : _x.map((e) => ComplianceFormAnswer.fromPartial(e))) || [];
-        message.ReferredBy = (_y = object.ReferredBy) !== null && _y !== void 0 ? _y : undefined;
-        message.ReferralCount = (_z = object.ReferralCount) !== null && _z !== void 0 ? _z : undefined;
-        message.ReferralLimit = (_0 = object.ReferralLimit) !== null && _0 !== void 0 ? _0 : undefined;
-        message.ReferralAmountReceived = (_1 = object.ReferralAmountReceived) !== null && _1 !== void 0 ? _1 : undefined;
-        message.ReferralAmount = (_2 = object.ReferralAmount) !== null && _2 !== void 0 ? _2 : undefined;
-        message.ReferralPaidAt = (_3 = object.ReferralPaidAt) !== null && _3 !== void 0 ? _3 : undefined;
-        message.XHandle = (_4 = object.XHandle) !== null && _4 !== void 0 ? _4 : undefined;
-        message.EliteClubMembershipStatus = (_5 = object.EliteClubMembershipStatus) !== null && _5 !== void 0 ? _5 : 0;
-        message.FCMPushTokens = ((_6 = object.FCMPushTokens) === null || _6 === void 0 ? void 0 : _6.map((e) => e)) || [];
-        message.ReferralProgramRewardMultiplier = (_7 = object.ReferralProgramRewardMultiplier) !== null && _7 !== void 0 ? _7 : 0;
-        message.AlpacaCryptoKeychains = ((_8 = object.AlpacaCryptoKeychains) === null || _8 === void 0 ? void 0 : _8.map((e) => AlpacaCryptoKeychain.fromPartial(e))) || [];
-        message.BanxaSetupRequestedAt = (_9 = object.BanxaSetupRequestedAt) !== null && _9 !== void 0 ? _9 : undefined;
-        message.BanxaSetupCompletedAt = (_10 = object.BanxaSetupCompletedAt) !== null && _10 !== void 0 ? _10 : undefined;
-        message.FCMPushFIDs = ((_11 = object.FCMPushFIDs) === null || _11 === void 0 ? void 0 : _11.map((e) => e)) || [];
+        message.AllowedJurisdictions = ((_x = object.AllowedJurisdictions) === null || _x === void 0 ? void 0 : _x.map((e) => e)) || [];
+        message.EmailAddress = (_y = object.EmailAddress) !== null && _y !== void 0 ? _y : "";
+        message.ComplianceFormAnswers = ((_z = object.ComplianceFormAnswers) === null || _z === void 0 ? void 0 : _z.map((e) => ComplianceFormAnswer.fromPartial(e))) || [];
+        message.ReferredBy = (_0 = object.ReferredBy) !== null && _0 !== void 0 ? _0 : undefined;
+        message.ReferralCount = (_1 = object.ReferralCount) !== null && _1 !== void 0 ? _1 : undefined;
+        message.ReferralLimit = (_2 = object.ReferralLimit) !== null && _2 !== void 0 ? _2 : undefined;
+        message.ReferralAmountReceived = (_3 = object.ReferralAmountReceived) !== null && _3 !== void 0 ? _3 : undefined;
+        message.ReferralAmount = (_4 = object.ReferralAmount) !== null && _4 !== void 0 ? _4 : undefined;
+        message.ReferralPaidAt = (_5 = object.ReferralPaidAt) !== null && _5 !== void 0 ? _5 : undefined;
+        message.XHandle = (_6 = object.XHandle) !== null && _6 !== void 0 ? _6 : undefined;
+        message.EliteClubMembershipStatus = (_7 = object.EliteClubMembershipStatus) !== null && _7 !== void 0 ? _7 : 0;
+        message.FCMPushTokens = ((_8 = object.FCMPushTokens) === null || _8 === void 0 ? void 0 : _8.map((e) => e)) || [];
+        message.ReferralProgramRewardMultiplier = (_9 = object.ReferralProgramRewardMultiplier) !== null && _9 !== void 0 ? _9 : 0;
+        message.AlpacaCryptoKeychains = ((_10 = object.AlpacaCryptoKeychains) === null || _10 === void 0 ? void 0 : _10.map((e) => AlpacaCryptoKeychain.fromPartial(e))) || [];
+        message.BanxaSetupRequestedAt = (_11 = object.BanxaSetupRequestedAt) !== null && _11 !== void 0 ? _11 : undefined;
+        message.BanxaSetupCompletedAt = (_12 = object.BanxaSetupCompletedAt) !== null && _12 !== void 0 ? _12 : undefined;
+        message.FCMPushFIDs = ((_13 = object.FCMPushFIDs) === null || _13 === void 0 ? void 0 : _13.map((e) => e)) || [];
         return message;
     },
 };

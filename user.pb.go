@@ -281,9 +281,15 @@ type UserDetails struct {
 	KYCDetails             *UserKYCDetails                               `protobuf:"bytes,18,opt,name=KYCDetails,proto3" json:"KYCDetails,omitempty"`
 	UserDocumentCompliance *com_fs_document_model.UserDocumentCompliance `protobuf:"bytes,19,opt,name=UserDocumentCompliance,proto3" json:"UserDocumentCompliance,omitempty"`
 	// Status of KYC verification, e.g., PENDING, APPROVED, REJECTED
-	KYCStatus          KYCStatus                                    `protobuf:"varint,20,opt,name=KYCStatus,proto3,enum=user.KYCStatus" json:"KYCStatus,omitempty"`
-	KYCStatusUpdatedAt *timestamppb.Timestamp                       `protobuf:"bytes,41,opt,name=KYCStatusUpdatedAt,proto3" json:"KYCStatusUpdatedAt,omitempty"`
-	KYCUpdatedAt       *timestamppb.Timestamp                       `protobuf:"bytes,46,opt,name=KYCUpdatedAt,proto3" json:"KYCUpdatedAt,omitempty"`
+	KYCStatus          KYCStatus              `protobuf:"varint,20,opt,name=KYCStatus,proto3,enum=user.KYCStatus" json:"KYCStatus,omitempty"`
+	KYCStatusUpdatedAt *timestamppb.Timestamp `protobuf:"bytes,41,opt,name=KYCStatusUpdatedAt,proto3" json:"KYCStatusUpdatedAt,omitempty"`
+	KYCUpdatedAt       *timestamppb.Timestamp `protobuf:"bytes,46,opt,name=KYCUpdatedAt,proto3" json:"KYCUpdatedAt,omitempty"`
+	// Represents Persona account ID
+	// Immutable once set
+	KYCAccountID string `protobuf:"bytes,47,opt,name=KYCAccountID,proto3" json:"KYCAccountID,omitempty"`
+	// If not nil, it means KYC information has been shared with another Persona account via Persona Connect
+	// Immutable once set
+	KYCSharedAt        *timestamppb.Timestamp                       `protobuf:"bytes,48,opt,name=KYCSharedAt,proto3" json:"KYCSharedAt,omitempty"`
 	UserTradeProfile   *com_fs_trade_profile_model.UserTradeProfile `protobuf:"bytes,21,opt,name=UserTradeProfile,proto3" json:"UserTradeProfile,omitempty"`
 	BrokerAccounts     []*BrokerAccount                             `protobuf:"bytes,23,rep,name=BrokerAccounts,proto3" json:"BrokerAccounts,omitempty"`
 	UISettings         *UISettings                                  `protobuf:"bytes,25,opt,name=UISettings,proto3" json:"UISettings,omitempty"`
@@ -501,6 +507,20 @@ func (x *UserDetails) GetKYCStatusUpdatedAt() *timestamppb.Timestamp {
 func (x *UserDetails) GetKYCUpdatedAt() *timestamppb.Timestamp {
 	if x != nil {
 		return x.KYCUpdatedAt
+	}
+	return nil
+}
+
+func (x *UserDetails) GetKYCAccountID() string {
+	if x != nil {
+		return x.KYCAccountID
+	}
+	return ""
+}
+
+func (x *UserDetails) GetKYCSharedAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.KYCSharedAt
 	}
 	return nil
 }
@@ -1116,7 +1136,7 @@ var File_user_proto protoreflect.FileDescriptor
 const file_user_proto_rawDesc = "" +
 	"\n" +
 	"\n" +
-	"user.proto\x12\x04user\x1a\x1fgoogle/protobuf/timestamp.proto\x1a9sologenic/com-fs-utils-lib/models/metadata/metadata.proto\x1a3sologenic/com-fs-utils-lib/models/audit/audit.proto\x1a1sologenic/com-fs-utils-lib/models/role/role.proto\x1a9sologenic/com-fs-utils-lib/models/language/language.proto\x1a7sologenic/com-fs-trade-profile-model/tradeprofile.proto\x1a.sologenic/com-fs-document-model/document.proto\x1a\x0euser-kyc.proto\x1a\x13user-fundings.proto\x1a=sologenic/com-fs-utils-lib/models/commission/commission.proto\x1a2sologenic/com-fs-compliance-model/compliance.proto\x1a\x1bbuf/validate/validate.proto\"\x9a\x18\n" +
+	"user.proto\x12\x04user\x1a\x1fgoogle/protobuf/timestamp.proto\x1a9sologenic/com-fs-utils-lib/models/metadata/metadata.proto\x1a3sologenic/com-fs-utils-lib/models/audit/audit.proto\x1a1sologenic/com-fs-utils-lib/models/role/role.proto\x1a9sologenic/com-fs-utils-lib/models/language/language.proto\x1a7sologenic/com-fs-trade-profile-model/tradeprofile.proto\x1a.sologenic/com-fs-document-model/document.proto\x1a\x0euser-kyc.proto\x1a\x13user-fundings.proto\x1a=sologenic/com-fs-utils-lib/models/commission/commission.proto\x1a2sologenic/com-fs-compliance-model/compliance.proto\x1a\x1bbuf/validate/validate.proto\"\x89\x19\n" +
 	"\vUserDetails\x122\n" +
 	"\x06UserID\x18\x01 \x01(\tB\x1a\xbaH\x17r\x15\x10\x1c\x18\x80\x012\x0e^[a-zA-Z0-9]+$R\x06UserID\x12F\n" +
 	"\tFirstName\x18\x02 \x01(\tB(\xbaH%r#\x10\x02\x18@2\x1d^[\\p{L}][\\p{L}\\s\\-']*[\\p{L}]$R\tFirstName\x12D\n" +
@@ -1146,7 +1166,9 @@ const file_user_proto_rawDesc = "" +
 	"\x16UserDocumentCompliance\x18\x13 \x01(\v2 .document.UserDocumentComplianceR\x16UserDocumentCompliance\x127\n" +
 	"\tKYCStatus\x18\x14 \x01(\x0e2\x0f.user.KYCStatusB\b\xbaH\x05\x82\x01\x02\x10\x01R\tKYCStatus\x12J\n" +
 	"\x12KYCStatusUpdatedAt\x18) \x01(\v2\x1a.google.protobuf.TimestampR\x12KYCStatusUpdatedAt\x12>\n" +
-	"\fKYCUpdatedAt\x18. \x01(\v2\x1a.google.protobuf.TimestampR\fKYCUpdatedAt\x12R\n" +
+	"\fKYCUpdatedAt\x18. \x01(\v2\x1a.google.protobuf.TimestampR\fKYCUpdatedAt\x12/\n" +
+	"\fKYCAccountID\x18/ \x01(\tB\v\xbaH\b\xd8\x01\x01r\x03\x18\x80\x01R\fKYCAccountID\x12<\n" +
+	"\vKYCSharedAt\x180 \x01(\v2\x1a.google.protobuf.TimestampR\vKYCSharedAt\x12R\n" +
 	"\x10UserTradeProfile\x18\x15 \x01(\v2\x1e.tradeprofile.UserTradeProfileB\x06\xbaH\x03\xc8\x01\x01R\x10UserTradeProfile\x12;\n" +
 	"\x0eBrokerAccounts\x18\x17 \x03(\v2\x13.user.BrokerAccountR\x0eBrokerAccounts\x120\n" +
 	"\n" +
@@ -1309,32 +1331,33 @@ var file_user_proto_depIdxs = []int32{
 	19, // 8: user.UserDetails.KYCStatus:type_name -> user.KYCStatus
 	20, // 9: user.UserDetails.KYCStatusUpdatedAt:type_name -> google.protobuf.Timestamp
 	20, // 10: user.UserDetails.KYCUpdatedAt:type_name -> google.protobuf.Timestamp
-	21, // 11: user.UserDetails.UserTradeProfile:type_name -> tradeprofile.UserTradeProfile
-	22, // 12: user.UserDetails.BrokerAccounts:type_name -> user.BrokerAccount
-	9,  // 13: user.UserDetails.UISettings:type_name -> user.UISettings
-	23, // 14: user.UserDetails.CommissionSettings:type_name -> commission.CommissionSettings
-	10, // 15: user.UserDetails.DataFeedAccounts:type_name -> user.DataFeedAccounts
-	24, // 16: user.UserDetails.ComplianceFormAnswers:type_name -> compliance.ComplianceFormAnswer
-	20, // 17: user.UserDetails.ReferralPaidAt:type_name -> google.protobuf.Timestamp
-	3,  // 18: user.UserDetails.EliteClubMembershipStatus:type_name -> user.EliteClubMembershipStatus
-	12, // 19: user.UserDetails.AlpacaCryptoKeychains:type_name -> user.AlpacaCryptoKeychain
-	20, // 20: user.UserDetails.BanxaSetupRequestedAt:type_name -> google.protobuf.Timestamp
-	20, // 21: user.UserDetails.BanxaSetupCompletedAt:type_name -> google.protobuf.Timestamp
-	4,  // 22: user.User.User:type_name -> user.UserDetails
-	25, // 23: user.User.MetaData:type_name -> metadata.MetaData
-	26, // 24: user.User.Audit:type_name -> audit.Audit
-	1,  // 25: user.Social.Type:type_name -> user.SocialType
-	5,  // 26: user.UserList.Users:type_name -> user.User
-	0,  // 27: user.StatusMessage.Status:type_name -> user.UserStatus
-	27, // 28: user.StatusMessage.Network:type_name -> metadata.Network
-	26, // 29: user.StatusMessage.Audit:type_name -> audit.Audit
-	2,  // 30: user.UISettings.Theme:type_name -> user.Theme
-	11, // 31: user.DataFeedAccounts.DxFeed:type_name -> user.DxFeed
-	32, // [32:32] is the sub-list for method output_type
-	32, // [32:32] is the sub-list for method input_type
-	32, // [32:32] is the sub-list for extension type_name
-	32, // [32:32] is the sub-list for extension extendee
-	0,  // [0:32] is the sub-list for field type_name
+	20, // 11: user.UserDetails.KYCSharedAt:type_name -> google.protobuf.Timestamp
+	21, // 12: user.UserDetails.UserTradeProfile:type_name -> tradeprofile.UserTradeProfile
+	22, // 13: user.UserDetails.BrokerAccounts:type_name -> user.BrokerAccount
+	9,  // 14: user.UserDetails.UISettings:type_name -> user.UISettings
+	23, // 15: user.UserDetails.CommissionSettings:type_name -> commission.CommissionSettings
+	10, // 16: user.UserDetails.DataFeedAccounts:type_name -> user.DataFeedAccounts
+	24, // 17: user.UserDetails.ComplianceFormAnswers:type_name -> compliance.ComplianceFormAnswer
+	20, // 18: user.UserDetails.ReferralPaidAt:type_name -> google.protobuf.Timestamp
+	3,  // 19: user.UserDetails.EliteClubMembershipStatus:type_name -> user.EliteClubMembershipStatus
+	12, // 20: user.UserDetails.AlpacaCryptoKeychains:type_name -> user.AlpacaCryptoKeychain
+	20, // 21: user.UserDetails.BanxaSetupRequestedAt:type_name -> google.protobuf.Timestamp
+	20, // 22: user.UserDetails.BanxaSetupCompletedAt:type_name -> google.protobuf.Timestamp
+	4,  // 23: user.User.User:type_name -> user.UserDetails
+	25, // 24: user.User.MetaData:type_name -> metadata.MetaData
+	26, // 25: user.User.Audit:type_name -> audit.Audit
+	1,  // 26: user.Social.Type:type_name -> user.SocialType
+	5,  // 27: user.UserList.Users:type_name -> user.User
+	0,  // 28: user.StatusMessage.Status:type_name -> user.UserStatus
+	27, // 29: user.StatusMessage.Network:type_name -> metadata.Network
+	26, // 30: user.StatusMessage.Audit:type_name -> audit.Audit
+	2,  // 31: user.UISettings.Theme:type_name -> user.Theme
+	11, // 32: user.DataFeedAccounts.DxFeed:type_name -> user.DxFeed
+	33, // [33:33] is the sub-list for method output_type
+	33, // [33:33] is the sub-list for method input_type
+	33, // [33:33] is the sub-list for extension type_name
+	33, // [33:33] is the sub-list for extension extendee
+	0,  // [0:33] is the sub-list for field type_name
 }
 
 func init() { file_user_proto_init() }

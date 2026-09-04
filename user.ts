@@ -271,7 +271,19 @@ export interface UserDetails {
   /** Status of KYC verification, e.g., PENDING, APPROVED, REJECTED */
   KYCStatus: KYCStatus;
   KYCStatusUpdatedAt: Date | undefined;
-  KYCUpdatedAt: Date | undefined;
+  KYCUpdatedAt:
+    | Date
+    | undefined;
+  /**
+   * Represents Persona account ID
+   * Immutable once set
+   */
+  KYCAccountID: string;
+  /**
+   * If not nil, it means KYC information has been shared with another Persona account via Persona Connect
+   * Immutable once set
+   */
+  KYCSharedAt: Date | undefined;
   UserTradeProfile: UserTradeProfile | undefined;
   BrokerAccounts: BrokerAccount[];
   UISettings:
@@ -412,6 +424,8 @@ function createBaseUserDetails(): UserDetails {
     KYCStatus: 0,
     KYCStatusUpdatedAt: undefined,
     KYCUpdatedAt: undefined,
+    KYCAccountID: "",
+    KYCSharedAt: undefined,
     UserTradeProfile: undefined,
     BrokerAccounts: [],
     UISettings: undefined,
@@ -501,6 +515,12 @@ export const UserDetails = {
     }
     if (message.KYCUpdatedAt !== undefined) {
       Timestamp.encode(toTimestamp(message.KYCUpdatedAt), writer.uint32(370).fork()).ldelim();
+    }
+    if (message.KYCAccountID !== "") {
+      writer.uint32(378).string(message.KYCAccountID);
+    }
+    if (message.KYCSharedAt !== undefined) {
+      Timestamp.encode(toTimestamp(message.KYCSharedAt), writer.uint32(386).fork()).ldelim();
     }
     if (message.UserTradeProfile !== undefined) {
       UserTradeProfile.encode(message.UserTradeProfile, writer.uint32(170).fork()).ldelim();
@@ -725,6 +745,20 @@ export const UserDetails = {
 
           message.KYCUpdatedAt = fromTimestamp(Timestamp.decode(reader, reader.uint32()));
           continue;
+        case 47:
+          if (tag !== 378) {
+            break;
+          }
+
+          message.KYCAccountID = reader.string();
+          continue;
+        case 48:
+          if (tag !== 386) {
+            break;
+          }
+
+          message.KYCSharedAt = fromTimestamp(Timestamp.decode(reader, reader.uint32()));
+          continue;
         case 21:
           if (tag !== 170) {
             break;
@@ -915,6 +949,8 @@ export const UserDetails = {
       KYCStatus: isSet(object.KYCStatus) ? kYCStatusFromJSON(object.KYCStatus) : 0,
       KYCStatusUpdatedAt: isSet(object.KYCStatusUpdatedAt) ? fromJsonTimestamp(object.KYCStatusUpdatedAt) : undefined,
       KYCUpdatedAt: isSet(object.KYCUpdatedAt) ? fromJsonTimestamp(object.KYCUpdatedAt) : undefined,
+      KYCAccountID: isSet(object.KYCAccountID) ? globalThis.String(object.KYCAccountID) : "",
+      KYCSharedAt: isSet(object.KYCSharedAt) ? fromJsonTimestamp(object.KYCSharedAt) : undefined,
       UserTradeProfile: isSet(object.UserTradeProfile) ? UserTradeProfile.fromJSON(object.UserTradeProfile) : undefined,
       BrokerAccounts: globalThis.Array.isArray(object?.BrokerAccounts)
         ? object.BrokerAccounts.map((e: any) => BrokerAccount.fromJSON(e))
@@ -1029,6 +1065,12 @@ export const UserDetails = {
     if (message.KYCUpdatedAt !== undefined) {
       obj.KYCUpdatedAt = message.KYCUpdatedAt.toISOString();
     }
+    if (message.KYCAccountID !== "") {
+      obj.KYCAccountID = message.KYCAccountID;
+    }
+    if (message.KYCSharedAt !== undefined) {
+      obj.KYCSharedAt = message.KYCSharedAt.toISOString();
+    }
     if (message.UserTradeProfile !== undefined) {
       obj.UserTradeProfile = UserTradeProfile.toJSON(message.UserTradeProfile);
     }
@@ -1131,6 +1173,8 @@ export const UserDetails = {
     message.KYCStatus = object.KYCStatus ?? 0;
     message.KYCStatusUpdatedAt = object.KYCStatusUpdatedAt ?? undefined;
     message.KYCUpdatedAt = object.KYCUpdatedAt ?? undefined;
+    message.KYCAccountID = object.KYCAccountID ?? "";
+    message.KYCSharedAt = object.KYCSharedAt ?? undefined;
     message.UserTradeProfile = (object.UserTradeProfile !== undefined && object.UserTradeProfile !== null)
       ? UserTradeProfile.fromPartial(object.UserTradeProfile)
       : undefined;
