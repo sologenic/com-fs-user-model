@@ -19,6 +19,8 @@ import "buf/validate/validate.proto";
 
 message UserDetails {
     // Firebase User ID
+    // Root & child users policy: always the same value
+    // Immutable once set
     string UserID = 1 [
         (buf.validate.field).string = {
             min_len: 28,
@@ -27,6 +29,7 @@ message UserDetails {
         }
     ];
 
+    // Root & child users policy: each user has its own value
     string FirstName = 2 [
         (buf.validate.field).string = {
             min_len: 2,
@@ -38,6 +41,7 @@ message UserDetails {
         }
     ];
 
+    // Root & child users policy: each user has its own value
     string LastName = 3 [
         // Same logic as for first name
         (buf.validate.field).string = {
@@ -47,12 +51,14 @@ message UserDetails {
         }
     ];
 
+    // Root & child users policy: each user has its own value
     string Address = 4 [
         (buf.validate.field).string = {
             max_len: 128
         }
     ];
 
+    // Root & child users policy: each user has its own value
     string Avatar = 5 [
         (buf.validate.field).ignore = IGNORE_IF_ZERO_VALUE,
         (buf.validate.field).string = {
@@ -62,6 +68,8 @@ message UserDetails {
     ];
 
     // Nickname
+    // Root & child users policy: always the same value
+    // Immutable once set
     string Alias = 6 [
         (buf.validate.field).string = {
             min_len: 5,
@@ -70,33 +78,40 @@ message UserDetails {
         }
     ];
 
+    // Root & child users policy: each user has its own value
     string Description = 7 [
         (buf.validate.field).string = {
             max_len: 512
         }
     ];
 
+    // Root & child users policy: always the same value
     UserStatus Status = 8 [
         (buf.validate.field).enum.defined_only = true
     ];
 
+    // Root & child users policy: always the same value
     repeated Wallet Wallets = 9 [
         (buf.validate.field).repeated = {
             max_items: 10,
         }
     ];
 
+    // Root & child users policy: each user has its own value
     repeated Social Socials = 10 [
         (buf.validate.field).repeated = {
             max_items: 10,
         }
     ];
 
+    // Root & child users policy: each user has its own value
     language.Lang Language = 11 [
         (buf.validate.field).enum.defined_only = true
     ];
 
-    // UUID for the external user identifier for example to be used in communication with the KYC provider, or other places where an anonymous ID is required
+    // External user UUID to be used in communication with the third-party services, or other places where an anonymous ID is required
+    // Root & child users policy: always the same value
+    // Immutable once set
     string ExternalUserID = 12 [
         (buf.validate.field).string = {
             uuid: true
@@ -104,6 +119,8 @@ message UserDetails {
     ];
 
     // UUID of the current organization the user belongs to
+    // Root & child users policy: each user has its own value
+    // Immutable once set
     string OrganizationID = 13 [
         (buf.validate.field).string = {
             uuid: true
@@ -111,6 +128,8 @@ message UserDetails {
     ];
 
     // A retail user will always have a role of "NORMAL_USER"
+    // Root & child users policy: always the same value
+    // Immutable once set
     role.Role Role = 15 [
         (buf.validate.field).enum = {
             defined_only: true
@@ -118,6 +137,7 @@ message UserDetails {
         }
     ];
 
+    // Root & child users policy: each user has its own value
     tradeprofile.TradeProfileDetails TradeProfile = 16 [
         (buf.validate.field).required = true
     ];
@@ -139,19 +159,26 @@ message UserDetails {
         }
     ];
 
+    // Root & child users policy: child users should inherit KYCDetails if KYCAccountID is blank, otherwise each child has its own value
     UserKYCDetails KYCDetails = 18;
+
+    // Root & child users policy: each user has its own value
     document.UserDocumentCompliance UserDocumentCompliance = 19;
 
     // Status of KYC verification, e.g., PENDING, APPROVED, REJECTED
+    // Root & child users policy: child users should inherit KYCStatus if KYCAccountID is blank, otherwise each child has its own value
     KYCStatus KYCStatus = 20 [
         (buf.validate.field).enum.defined_only = true
     ];
 
+    // Root & child users policy: child users should inherit KYCStatusUpdatedAt if KYCAccountID is blank, otherwise each child has its own value
     google.protobuf.Timestamp KYCStatusUpdatedAt = 41;
 
+    // Root & child users policy: child users should inherit KYCUpdatedAt if KYCAccountID is blank, otherwise each child has its own value
     google.protobuf.Timestamp KYCUpdatedAt = 46;
 
     // Represents Persona account ID
+    // Root & child users policy: each user has its own value
     // Immutable once set
     string KYCAccountID = 47 [
         (buf.validate.field).ignore = IGNORE_IF_ZERO_VALUE,
@@ -161,19 +188,30 @@ message UserDetails {
     ];
 
     // If not nil, it means KYC information has been shared with another Persona account via Persona Connect
+    // Root & child users policy: each user has its own value
     // Immutable once set
     google.protobuf.Timestamp KYCSharedAt = 48;
 
+    // Root & child users policy: each user has its own value
     tradeprofile.UserTradeProfile UserTradeProfile = 21 [
         (buf.validate.field).required = true
     ];
 
+    // Root & child users policy: each user has its own value
     repeated BrokerAccount BrokerAccounts = 23;
+
+    // Root & child users policy: each user has its own value
     UISettings UISettings = 25;
-    optional commission.CommissionSettings CommissionSettings = 26; // Broker API specific commission fields for user level (overrrides organization level)
+
+    // User level commission settings (overrides organization level)
+    // Root & child users policy: each user has its own value
+    optional commission.CommissionSettings CommissionSettings = 26;
+
+    // Root & child users policy: each user has its own value
     optional DataFeedAccounts DataFeedAccounts = 27;
 
     // ISO 3166-1 alpha-3 code e.g. "USA", "CAN"
+    // Root & child users policy: each user has its own value
     repeated string AllowedJurisdictions = 28 [
         (buf.validate.field).repeated = {
             max_items: 256,
@@ -188,6 +226,8 @@ message UserDetails {
     ];
 
     // Email address for the user, often retrieved from the authentication provider
+    // Root & child users policy: always the same value
+    // Immutable once set
     string EmailAddress = 29 [
         (buf.validate.field).string = {
             email: true,
@@ -196,7 +236,8 @@ message UserDetails {
         (buf.validate.field).ignore = IGNORE_IF_ZERO_VALUE
     ];
 
-    // Compliance answers for the user
+    // Compliance form result
+    // Root & child users policy: each user has its own value
     repeated compliance.ComplianceFormAnswer ComplianceFormAnswers = 30 [
         (buf.validate.field).repeated = {
             max_items: 32,
@@ -204,6 +245,8 @@ message UserDetails {
     ];
 
     // User ID of the referrer who referred this user during signup or partner code
+    // Root & child users policy: only the root user has a value, child users always have nil
+    // Immutable once set
     optional string ReferredBy = 31 [
         (buf.validate.field).ignore = IGNORE_IF_ZERO_VALUE,
         (buf.validate.field).string = {
@@ -214,6 +257,7 @@ message UserDetails {
     ];
 
     // Number of referrals made by this user
+    // Root & child users policy: only the root user has a value, child users always have nil
     optional int32 ReferralCount = 32 [
         (buf.validate.field).int32 = {
             gte: 0
@@ -221,6 +265,7 @@ message UserDetails {
     ];
 
     // Maximum number of referrals this user can receive (admin override only)
+    // Root & child users policy: only the root user has a value, child users always have nil
     optional int32 ReferralLimit = 33 [
         (buf.validate.field).int32 = {
             gte: 0
@@ -228,6 +273,7 @@ message UserDetails {
     ];
 
     // Amount of TX the referring user received from referrals (non-mutable by user)
+    // Root & child users policy: only the root user has a value, child users always have nil
     optional int64 ReferralAmountReceived = 34 [
         (buf.validate.field).int64 = {
             gte: 0
@@ -235,15 +281,20 @@ message UserDetails {
     ];
 
     // Amount of TX associated with this user to be distributed to new users (admin override only)
+    // Root & child users policy: only the root user has a value, child users always have nil
     optional int64 ReferralAmount = 35 [
         (buf.validate.field).int64 = {
             gte: 0
         }
     ];
 
-    optional google.protobuf.Timestamp ReferralPaidAt = 36; // Timestamp when the referral reward was paid
+    // Timestamp when the referral reward was paid
+    // Root & child users policy: only the root user has a value, child users always have nil
+    // Immutable once set
+    google.protobuf.Timestamp ReferralPaidAt = 36;
 
     // x.com handle (must start with @)
+    // Root & child users policy: only the root user has a value, child users always have nil
     optional string XHandle = 37 [
         (buf.validate.field).string = {
             pattern: "^@[A-Za-z0-9_]{1,15}$"
@@ -251,11 +302,13 @@ message UserDetails {
         (buf.validate.field).ignore = IGNORE_IF_ZERO_VALUE
     ];
 
+    // Root & child users policy: only the root user has a value, child users always have a zero value
     EliteClubMembershipStatus EliteClubMembershipStatus = 38 [
         (buf.validate.field).enum.defined_only = true
     ];
 
     // Firebase Cloud Messaging (FCM) push tokens for iOS/Android devices
+    // Root & child users policy: only the root user has a value, child users always have nil
     repeated string FCMPushTokens = 39 [
         (buf.validate.field).repeated = {
             max_items: 5,
@@ -270,6 +323,7 @@ message UserDetails {
 
     // Referral program reward multiplier represented in hundredths (basis points)
     // Example: 15 = 0.15x, 100 = 1.0x (default), 250 = 2.5x, 999 = 9.99x (maximum)
+    // Root & child users policy: only the root user has a value, child users always have 100 (1.0x)
     int32 ReferralProgramRewardMultiplier = 40 [
         (buf.validate.field).int32 = {
             gt: 0,
@@ -278,6 +332,7 @@ message UserDetails {
     ];
 
     // Cryptographic keychain for encryption/decrypting/verifying Alpaca order envelope
+    // Root & child users policy: each user has its own value
     repeated AlpacaCryptoKeychain AlpacaCryptoKeychains = 42 [
         (buf.validate.field).repeated = {
             max_items: 5,
@@ -285,13 +340,18 @@ message UserDetails {
     ];
 
     // Indicates user has requested a KYC sharing to Banxa if not nil
-    optional google.protobuf.Timestamp BanxaSetupRequestedAt = 43;
+    // Root & child users policy: only the root user has a value, child users always have nil
+    // Immutable once set
+    google.protobuf.Timestamp BanxaSetupRequestedAt = 43;
 
     // Indicates KYC has been shared to Banxa at least once if not nil
-    optional google.protobuf.Timestamp BanxaSetupCompletedAt = 44;
+    // Root & child users policy: only the root user has a value, child users always have nil
+    // Immutable once set
+    google.protobuf.Timestamp BanxaSetupCompletedAt = 44;
 
-    // Firebase Installation IDs (FIDs) used to target FCM push delivery
-    // (Admin SDK MulticastMessage.Fids). Typically 22 chars; legacy Instance IDs ~11.
+    // Firebase Installation IDs (FIDs) used to target FCM push delivery (Admin SDK MulticastMessage.Fids).
+    // Typically 22 chars, legacy Instance IDs – ~11.
+    // Root & child users policy: only the root user has a value, child users always have nil
     repeated string FCMPushFIDs = 45 [
         (buf.validate.field).repeated = {
             max_items: 5,
@@ -311,6 +371,7 @@ message User {
     audit.Audit Audit = 3;
 
     // If root user: list of organization IDs to which user was cloned. If child user: nil or empty.
+    // Important: never includes root organization ID.
     repeated string OrganizationIDs = 4 [
         (buf.validate.field).repeated = {
             max_items: 256,
@@ -348,7 +409,9 @@ message StatusMessage {
     UserStatus Status = 3 [
         (buf.validate.field).enum.defined_only = true
     ];
-    optional metadata.Network Network = 4;
+    optional metadata.Network Network = 4 [
+        deprecated = true
+    ];
     audit.Audit Audit = 5;
 }
 
