@@ -310,7 +310,7 @@ type UserDetails struct {
 	// Root & child users policy: child users should inherit KYCUpdatedAt if KYCIsFederated is false, otherwise each child has its own value
 	KYCUpdatedAt *timestamppb.Timestamp `protobuf:"bytes,46,opt,name=KYCUpdatedAt,proto3" json:"KYCUpdatedAt,omitempty"`
 	// Represents Persona account ID
-	// Root & child users policy: each user has its own value
+	// Root & child users policy: child users should inherit KYCUpdatedAt if KYCIsFederated is false, otherwise each child has its own value
 	// Immutable once set
 	KYCAccountID string `protobuf:"bytes,47,opt,name=KYCAccountID,proto3" json:"KYCAccountID,omitempty"`
 	// If not nil, it means KYC information has been shared with another Persona account via Persona Connect

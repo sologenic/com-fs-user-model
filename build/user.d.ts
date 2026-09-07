@@ -127,7 +127,7 @@ export interface UserDetails {
     KYCUpdatedAt: Date | undefined;
     /**
      * Represents Persona account ID
-     * Root & child users policy: each user has its own value
+     * Root & child users policy: child users should inherit KYCUpdatedAt if KYCIsFederated is false, otherwise each child has its own value
      * Immutable once set
      */
     KYCAccountID: string;
