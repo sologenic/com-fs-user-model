@@ -159,22 +159,22 @@ message UserDetails {
         }
     ];
 
-    // Root & child users policy: child users should inherit KYCDetails if KYCAccountID is blank, otherwise each child has its own value
+    // Root & child users policy: child users should inherit KYCDetails if KYCIsFederated is false, otherwise each child has its own value
     UserKYCDetails KYCDetails = 18;
 
     // Root & child users policy: each user has its own value
     document.UserDocumentCompliance UserDocumentCompliance = 19;
 
     // Status of KYC verification, e.g., PENDING, APPROVED, REJECTED
-    // Root & child users policy: child users should inherit KYCStatus if KYCAccountID is blank, otherwise each child has its own value
+    // Root & child users policy: child users should inherit KYCStatus if KYCIsFederated is false, otherwise each child has its own value
     KYCStatus KYCStatus = 20 [
         (buf.validate.field).enum.defined_only = true
     ];
 
-    // Root & child users policy: child users should inherit KYCStatusUpdatedAt if KYCAccountID is blank, otherwise each child has its own value
+    // Root & child users policy: child users should inherit KYCStatusUpdatedAt if KYCIsFederated is false, otherwise each child has its own value
     google.protobuf.Timestamp KYCStatusUpdatedAt = 41;
 
-    // Root & child users policy: child users should inherit KYCUpdatedAt if KYCAccountID is blank, otherwise each child has its own value
+    // Root & child users policy: child users should inherit KYCUpdatedAt if KYCIsFederated is false, otherwise each child has its own value
     google.protobuf.Timestamp KYCUpdatedAt = 46;
 
     // Represents Persona account ID
@@ -191,6 +191,18 @@ message UserDetails {
     // Root & child users policy: each user has its own value
     // Immutable once set
     google.protobuf.Timestamp KYCSharedAt = 48;
+
+    // Indicates if the organization uses a federated KYC model (e.g., Persona Connect).
+    // In a federated model, the child organization fully manages the user's KYC verification
+    // within its own Persona account. However, the root (TX) organization retains an absolute
+    // veto right and can revoke access at any time.
+    // Full trading functionality requires dual approval: the user must be KYC-approved by BOTH
+    // the root (TX) and the child organization. If either approval is missing or denied,
+    // the user will not be able to trade.
+    // If true, KYC status is not automatically inherited – it requires explicit data sharing.
+    // Root & child users policy: each user has its own value (KYCIsFederated is automatically set when user is being cloned).
+    // Immutable once set.
+    bool KYCIsFederated = 49;
 
     // Root & child users policy: each user has its own value
     tradeprofile.UserTradeProfile UserTradeProfile = 21 [
