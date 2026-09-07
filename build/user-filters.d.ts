@@ -233,6 +233,7 @@ export declare const AddressUserPair: {
                 KYCUpdatedAt?: Date | undefined;
                 KYCAccountID?: string | undefined;
                 KYCSharedAt?: Date | undefined;
+                KYCIsFederated?: boolean | undefined;
                 UserTradeProfile?: {
                     IsMarginTradingEnabled?: boolean | undefined;
                     IsShortSellingEnabled?: boolean | undefined;
@@ -400,6 +401,7 @@ export declare const AddressUserPair: {
                 KYCUpdatedAt?: Date | undefined;
                 KYCAccountID?: string | undefined;
                 KYCSharedAt?: Date | undefined;
+                KYCIsFederated?: boolean | undefined;
                 UserTradeProfile?: {
                     IsMarginTradingEnabled?: boolean | undefined;
                     IsShortSellingEnabled?: boolean | undefined;
@@ -564,6 +566,7 @@ export declare const AddressUserPair: {
                 KYCUpdatedAt?: Date | undefined;
                 KYCAccountID?: string | undefined;
                 KYCSharedAt?: Date | undefined;
+                KYCIsFederated?: boolean | undefined;
                 UserTradeProfile?: {
                     IsMarginTradingEnabled?: boolean | undefined;
                     IsShortSellingEnabled?: boolean | undefined;
@@ -826,6 +829,7 @@ export declare const AddressUserPair: {
                 KYCUpdatedAt?: Date | undefined;
                 KYCAccountID?: string | undefined;
                 KYCSharedAt?: Date | undefined;
+                KYCIsFederated?: boolean | undefined;
                 UserTradeProfile?: ({
                     IsMarginTradingEnabled?: boolean | undefined;
                     IsShortSellingEnabled?: boolean | undefined;
@@ -1130,6 +1134,7 @@ export declare const AddressUserPair: {
                 KYCUpdatedAt?: Date | undefined;
                 KYCAccountID?: string | undefined;
                 KYCSharedAt?: Date | undefined;
+                KYCIsFederated?: boolean | undefined;
                 UserTradeProfile?: {
                     IsMarginTradingEnabled?: boolean | undefined;
                     IsShortSellingEnabled?: boolean | undefined;
@@ -1297,6 +1302,7 @@ export declare const AddressUserPair: {
                 KYCUpdatedAt?: Date | undefined;
                 KYCAccountID?: string | undefined;
                 KYCSharedAt?: Date | undefined;
+                KYCIsFederated?: boolean | undefined;
                 UserTradeProfile?: {
                     IsMarginTradingEnabled?: boolean | undefined;
                     IsShortSellingEnabled?: boolean | undefined;
@@ -1461,6 +1467,7 @@ export declare const AddressUserPair: {
                 KYCUpdatedAt?: Date | undefined;
                 KYCAccountID?: string | undefined;
                 KYCSharedAt?: Date | undefined;
+                KYCIsFederated?: boolean | undefined;
                 UserTradeProfile?: {
                     IsMarginTradingEnabled?: boolean | undefined;
                     IsShortSellingEnabled?: boolean | undefined;
@@ -1723,6 +1730,7 @@ export declare const AddressUserPair: {
                 KYCUpdatedAt?: Date | undefined;
                 KYCAccountID?: string | undefined;
                 KYCSharedAt?: Date | undefined;
+                KYCIsFederated?: boolean | undefined;
                 UserTradeProfile?: ({
                     IsMarginTradingEnabled?: boolean | undefined;
                     IsShortSellingEnabled?: boolean | undefined;
@@ -2034,6 +2042,7 @@ export declare const GetByAddressesResponse: {
                     KYCUpdatedAt?: Date | undefined;
                     KYCAccountID?: string | undefined;
                     KYCSharedAt?: Date | undefined;
+                    KYCIsFederated?: boolean | undefined;
                     UserTradeProfile?: {
                         IsMarginTradingEnabled?: boolean | undefined;
                         IsShortSellingEnabled?: boolean | undefined;
@@ -2203,6 +2212,7 @@ export declare const GetByAddressesResponse: {
                     KYCUpdatedAt?: Date | undefined;
                     KYCAccountID?: string | undefined;
                     KYCSharedAt?: Date | undefined;
+                    KYCIsFederated?: boolean | undefined;
                     UserTradeProfile?: {
                         IsMarginTradingEnabled?: boolean | undefined;
                         IsShortSellingEnabled?: boolean | undefined;
@@ -2370,6 +2380,7 @@ export declare const GetByAddressesResponse: {
                     KYCUpdatedAt?: Date | undefined;
                     KYCAccountID?: string | undefined;
                     KYCSharedAt?: Date | undefined;
+                    KYCIsFederated?: boolean | undefined;
                     UserTradeProfile?: {
                         IsMarginTradingEnabled?: boolean | undefined;
                         IsShortSellingEnabled?: boolean | undefined;
@@ -2537,6 +2548,7 @@ export declare const GetByAddressesResponse: {
                     KYCUpdatedAt?: Date | undefined;
                     KYCAccountID?: string | undefined;
                     KYCSharedAt?: Date | undefined;
+                    KYCIsFederated?: boolean | undefined;
                     UserTradeProfile?: {
                         IsMarginTradingEnabled?: boolean | undefined;
                         IsShortSellingEnabled?: boolean | undefined;
@@ -2701,6 +2713,7 @@ export declare const GetByAddressesResponse: {
                     KYCUpdatedAt?: Date | undefined;
                     KYCAccountID?: string | undefined;
                     KYCSharedAt?: Date | undefined;
+                    KYCIsFederated?: boolean | undefined;
                     UserTradeProfile?: {
                         IsMarginTradingEnabled?: boolean | undefined;
                         IsShortSellingEnabled?: boolean | undefined;
@@ -2963,6 +2976,7 @@ export declare const GetByAddressesResponse: {
                     KYCUpdatedAt?: Date | undefined;
                     KYCAccountID?: string | undefined;
                     KYCSharedAt?: Date | undefined;
+                    KYCIsFederated?: boolean | undefined;
                     UserTradeProfile?: ({
                         IsMarginTradingEnabled?: boolean | undefined;
                         IsShortSellingEnabled?: boolean | undefined;
@@ -3266,6 +3280,7 @@ export declare const GetByAddressesResponse: {
                     KYCUpdatedAt?: Date | undefined;
                     KYCAccountID?: string | undefined;
                     KYCSharedAt?: Date | undefined;
+                    KYCIsFederated?: boolean | undefined;
                     UserTradeProfile?: {
                         IsMarginTradingEnabled?: boolean | undefined;
                         IsShortSellingEnabled?: boolean | undefined;
@@ -3436,6 +3451,7 @@ export declare const GetByAddressesResponse: {
                     KYCUpdatedAt?: Date | undefined;
                     KYCAccountID?: string | undefined;
                     KYCSharedAt?: Date | undefined;
+                    KYCIsFederated?: boolean | undefined;
                     UserTradeProfile?: {
                         IsMarginTradingEnabled?: boolean | undefined;
                         IsShortSellingEnabled?: boolean | undefined;
@@ -3605,6 +3621,7 @@ export declare const GetByAddressesResponse: {
                     KYCUpdatedAt?: Date | undefined;
                     KYCAccountID?: string | undefined;
                     KYCSharedAt?: Date | undefined;
+                    KYCIsFederated?: boolean | undefined;
                     UserTradeProfile?: {
                         IsMarginTradingEnabled?: boolean | undefined;
                         IsShortSellingEnabled?: boolean | undefined;
@@ -3772,6 +3789,7 @@ export declare const GetByAddressesResponse: {
                     KYCUpdatedAt?: Date | undefined;
                     KYCAccountID?: string | undefined;
                     KYCSharedAt?: Date | undefined;
+                    KYCIsFederated?: boolean | undefined;
                     UserTradeProfile?: {
                         IsMarginTradingEnabled?: boolean | undefined;
                         IsShortSellingEnabled?: boolean | undefined;
@@ -3939,6 +3957,7 @@ export declare const GetByAddressesResponse: {
                     KYCUpdatedAt?: Date | undefined;
                     KYCAccountID?: string | undefined;
                     KYCSharedAt?: Date | undefined;
+                    KYCIsFederated?: boolean | undefined;
                     UserTradeProfile?: {
                         IsMarginTradingEnabled?: boolean | undefined;
                         IsShortSellingEnabled?: boolean | undefined;
@@ -4103,6 +4122,7 @@ export declare const GetByAddressesResponse: {
                     KYCUpdatedAt?: Date | undefined;
                     KYCAccountID?: string | undefined;
                     KYCSharedAt?: Date | undefined;
+                    KYCIsFederated?: boolean | undefined;
                     UserTradeProfile?: {
                         IsMarginTradingEnabled?: boolean | undefined;
                         IsShortSellingEnabled?: boolean | undefined;
@@ -4365,6 +4385,7 @@ export declare const GetByAddressesResponse: {
                     KYCUpdatedAt?: Date | undefined;
                     KYCAccountID?: string | undefined;
                     KYCSharedAt?: Date | undefined;
+                    KYCIsFederated?: boolean | undefined;
                     UserTradeProfile?: ({
                         IsMarginTradingEnabled?: boolean | undefined;
                         IsShortSellingEnabled?: boolean | undefined;
@@ -4668,6 +4689,7 @@ export declare const GetByAddressesResponse: {
                     KYCUpdatedAt?: Date | undefined;
                     KYCAccountID?: string | undefined;
                     KYCSharedAt?: Date | undefined;
+                    KYCIsFederated?: boolean | undefined;
                     UserTradeProfile?: {
                         IsMarginTradingEnabled?: boolean | undefined;
                         IsShortSellingEnabled?: boolean | undefined;

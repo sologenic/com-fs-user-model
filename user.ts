@@ -294,7 +294,7 @@ export interface UserDetails {
    * @deprecated
    */
   KYCInquiries: string[];
-  /** Root & child users policy: child users should inherit KYCDetails if KYCAccountID is blank, otherwise each child has its own value */
+  /** Root & child users policy: child users should inherit KYCDetails if KYCIsFederated is false, otherwise each child has its own value */
   KYCDetails:
     | UserKYCDetails
     | undefined;
@@ -304,14 +304,14 @@ export interface UserDetails {
     | undefined;
   /**
    * Status of KYC verification, e.g., PENDING, APPROVED, REJECTED
-   * Root & child users policy: child users should inherit KYCStatus if KYCAccountID is blank, otherwise each child has its own value
+   * Root & child users policy: child users should inherit KYCStatus if KYCIsFederated is false, otherwise each child has its own value
    */
   KYCStatus: KYCStatus;
-  /** Root & child users policy: child users should inherit KYCStatusUpdatedAt if KYCAccountID is blank, otherwise each child has its own value */
+  /** Root & child users policy: child users should inherit KYCStatusUpdatedAt if KYCIsFederated is false, otherwise each child has its own value */
   KYCStatusUpdatedAt:
     | Date
     | undefined;
-  /** Root & child users policy: child users should inherit KYCUpdatedAt if KYCAccountID is blank, otherwise each child has its own value */
+  /** Root & child users policy: child users should inherit KYCUpdatedAt if KYCIsFederated is false, otherwise each child has its own value */
   KYCUpdatedAt:
     | Date
     | undefined;
@@ -329,6 +329,19 @@ export interface UserDetails {
   KYCSharedAt:
     | Date
     | undefined;
+  /**
+   * Indicates if the organization uses a federated KYC model (e.g., Persona Connect).
+   * In a federated model, the child organization fully manages the user's KYC verification
+   * within its own Persona account. However, the root (TX) organization retains an absolute
+   * veto right and can revoke access at any time.
+   * Full trading functionality requires dual approval: the user must be KYC-approved by BOTH
+   * the root (TX) and the child organization. If either approval is missing or denied,
+   * the user will not be able to trade.
+   * If true, KYC status is not automatically inherited – it requires explicit data sharing.
+   * Root & child users policy: each user has its own value (KYCIsFederated is automatically set when user is being cloned).
+   * Immutable once set.
+   */
+  KYCIsFederated: boolean;
   /** Root & child users policy: each user has its own value */
   UserTradeProfile:
     | UserTradeProfile
@@ -538,6 +551,7 @@ function createBaseUserDetails(): UserDetails {
     KYCUpdatedAt: undefined,
     KYCAccountID: "",
     KYCSharedAt: undefined,
+    KYCIsFederated: false,
     UserTradeProfile: undefined,
     BrokerAccounts: [],
     UISettings: undefined,
@@ -633,6 +647,9 @@ export const UserDetails = {
     }
     if (message.KYCSharedAt !== undefined) {
       Timestamp.encode(toTimestamp(message.KYCSharedAt), writer.uint32(386).fork()).ldelim();
+    }
+    if (message.KYCIsFederated !== false) {
+      writer.uint32(392).bool(message.KYCIsFederated);
     }
     if (message.UserTradeProfile !== undefined) {
       UserTradeProfile.encode(message.UserTradeProfile, writer.uint32(170).fork()).ldelim();
@@ -871,6 +888,13 @@ export const UserDetails = {
 
           message.KYCSharedAt = fromTimestamp(Timestamp.decode(reader, reader.uint32()));
           continue;
+        case 49:
+          if (tag !== 392) {
+            break;
+          }
+
+          message.KYCIsFederated = reader.bool();
+          continue;
         case 21:
           if (tag !== 170) {
             break;
@@ -1063,6 +1087,7 @@ export const UserDetails = {
       KYCUpdatedAt: isSet(object.KYCUpdatedAt) ? fromJsonTimestamp(object.KYCUpdatedAt) : undefined,
       KYCAccountID: isSet(object.KYCAccountID) ? globalThis.String(object.KYCAccountID) : "",
       KYCSharedAt: isSet(object.KYCSharedAt) ? fromJsonTimestamp(object.KYCSharedAt) : undefined,
+      KYCIsFederated: isSet(object.KYCIsFederated) ? globalThis.Boolean(object.KYCIsFederated) : false,
       UserTradeProfile: isSet(object.UserTradeProfile) ? UserTradeProfile.fromJSON(object.UserTradeProfile) : undefined,
       BrokerAccounts: globalThis.Array.isArray(object?.BrokerAccounts)
         ? object.BrokerAccounts.map((e: any) => BrokerAccount.fromJSON(e))
@@ -1183,6 +1208,9 @@ export const UserDetails = {
     if (message.KYCSharedAt !== undefined) {
       obj.KYCSharedAt = message.KYCSharedAt.toISOString();
     }
+    if (message.KYCIsFederated !== false) {
+      obj.KYCIsFederated = message.KYCIsFederated;
+    }
     if (message.UserTradeProfile !== undefined) {
       obj.UserTradeProfile = UserTradeProfile.toJSON(message.UserTradeProfile);
     }
@@ -1287,6 +1315,7 @@ export const UserDetails = {
     message.KYCUpdatedAt = object.KYCUpdatedAt ?? undefined;
     message.KYCAccountID = object.KYCAccountID ?? "";
     message.KYCSharedAt = object.KYCSharedAt ?? undefined;
+    message.KYCIsFederated = object.KYCIsFederated ?? false;
     message.UserTradeProfile = (object.UserTradeProfile !== undefined && object.UserTradeProfile !== null)
       ? UserTradeProfile.fromPartial(object.UserTradeProfile)
       : undefined;

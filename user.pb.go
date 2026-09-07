@@ -298,16 +298,16 @@ type UserDetails struct {
 	//
 	// Deprecated: Marked as deprecated in user.proto.
 	KYCInquiries []string `protobuf:"bytes,17,rep,name=KYCInquiries,proto3" json:"KYCInquiries,omitempty"`
-	// Root & child users policy: child users should inherit KYCDetails if KYCAccountID is blank, otherwise each child has its own value
+	// Root & child users policy: child users should inherit KYCDetails if KYCIsFederated is false, otherwise each child has its own value
 	KYCDetails *UserKYCDetails `protobuf:"bytes,18,opt,name=KYCDetails,proto3" json:"KYCDetails,omitempty"`
 	// Root & child users policy: each user has its own value
 	UserDocumentCompliance *com_fs_document_model.UserDocumentCompliance `protobuf:"bytes,19,opt,name=UserDocumentCompliance,proto3" json:"UserDocumentCompliance,omitempty"`
 	// Status of KYC verification, e.g., PENDING, APPROVED, REJECTED
-	// Root & child users policy: child users should inherit KYCStatus if KYCAccountID is blank, otherwise each child has its own value
+	// Root & child users policy: child users should inherit KYCStatus if KYCIsFederated is false, otherwise each child has its own value
 	KYCStatus KYCStatus `protobuf:"varint,20,opt,name=KYCStatus,proto3,enum=user.KYCStatus" json:"KYCStatus,omitempty"`
-	// Root & child users policy: child users should inherit KYCStatusUpdatedAt if KYCAccountID is blank, otherwise each child has its own value
+	// Root & child users policy: child users should inherit KYCStatusUpdatedAt if KYCIsFederated is false, otherwise each child has its own value
 	KYCStatusUpdatedAt *timestamppb.Timestamp `protobuf:"bytes,41,opt,name=KYCStatusUpdatedAt,proto3" json:"KYCStatusUpdatedAt,omitempty"`
-	// Root & child users policy: child users should inherit KYCUpdatedAt if KYCAccountID is blank, otherwise each child has its own value
+	// Root & child users policy: child users should inherit KYCUpdatedAt if KYCIsFederated is false, otherwise each child has its own value
 	KYCUpdatedAt *timestamppb.Timestamp `protobuf:"bytes,46,opt,name=KYCUpdatedAt,proto3" json:"KYCUpdatedAt,omitempty"`
 	// Represents Persona account ID
 	// Root & child users policy: each user has its own value
@@ -317,6 +317,17 @@ type UserDetails struct {
 	// Root & child users policy: each user has its own value
 	// Immutable once set
 	KYCSharedAt *timestamppb.Timestamp `protobuf:"bytes,48,opt,name=KYCSharedAt,proto3" json:"KYCSharedAt,omitempty"`
+	// Indicates if the organization uses a federated KYC model (e.g., Persona Connect).
+	// In a federated model, the child organization fully manages the user's KYC verification
+	// within its own Persona account. However, the root (TX) organization retains an absolute
+	// veto right and can revoke access at any time.
+	// Full trading functionality requires dual approval: the user must be KYC-approved by BOTH
+	// the root (TX) and the child organization. If either approval is missing or denied,
+	// the user will not be able to trade.
+	// If true, KYC status is not automatically inherited – it requires explicit data sharing.
+	// Root & child users policy: each user has its own value (KYCIsFederated is automatically set when user is being cloned).
+	// Immutable once set.
+	KYCIsFederated bool `protobuf:"varint,49,opt,name=KYCIsFederated,proto3" json:"KYCIsFederated,omitempty"`
 	// Root & child users policy: each user has its own value
 	UserTradeProfile *com_fs_trade_profile_model.UserTradeProfile `protobuf:"bytes,21,opt,name=UserTradeProfile,proto3" json:"UserTradeProfile,omitempty"`
 	// Root & child users policy: each user has its own value
@@ -579,6 +590,13 @@ func (x *UserDetails) GetKYCSharedAt() *timestamppb.Timestamp {
 		return x.KYCSharedAt
 	}
 	return nil
+}
+
+func (x *UserDetails) GetKYCIsFederated() bool {
+	if x != nil {
+		return x.KYCIsFederated
+	}
+	return false
 }
 
 func (x *UserDetails) GetUserTradeProfile() *com_fs_trade_profile_model.UserTradeProfile {
@@ -1195,7 +1213,7 @@ var File_user_proto protoreflect.FileDescriptor
 const file_user_proto_rawDesc = "" +
 	"\n" +
 	"\n" +
-	"user.proto\x12\x04user\x1a\x1fgoogle/protobuf/timestamp.proto\x1a9sologenic/com-fs-utils-lib/models/metadata/metadata.proto\x1a3sologenic/com-fs-utils-lib/models/audit/audit.proto\x1a1sologenic/com-fs-utils-lib/models/role/role.proto\x1a9sologenic/com-fs-utils-lib/models/language/language.proto\x1a7sologenic/com-fs-trade-profile-model/tradeprofile.proto\x1a.sologenic/com-fs-document-model/document.proto\x1a\x0euser-kyc.proto\x1a\x13user-fundings.proto\x1a=sologenic/com-fs-utils-lib/models/commission/commission.proto\x1a2sologenic/com-fs-compliance-model/compliance.proto\x1a\x1bbuf/validate/validate.proto\"\xb3\x18\n" +
+	"user.proto\x12\x04user\x1a\x1fgoogle/protobuf/timestamp.proto\x1a9sologenic/com-fs-utils-lib/models/metadata/metadata.proto\x1a3sologenic/com-fs-utils-lib/models/audit/audit.proto\x1a1sologenic/com-fs-utils-lib/models/role/role.proto\x1a9sologenic/com-fs-utils-lib/models/language/language.proto\x1a7sologenic/com-fs-trade-profile-model/tradeprofile.proto\x1a.sologenic/com-fs-document-model/document.proto\x1a\x0euser-kyc.proto\x1a\x13user-fundings.proto\x1a=sologenic/com-fs-utils-lib/models/commission/commission.proto\x1a2sologenic/com-fs-compliance-model/compliance.proto\x1a\x1bbuf/validate/validate.proto\"\xdb\x18\n" +
 	"\vUserDetails\x122\n" +
 	"\x06UserID\x18\x01 \x01(\tB\x1a\xbaH\x17r\x15\x10\x1c\x18\x80\x012\x0e^[a-zA-Z0-9]+$R\x06UserID\x12F\n" +
 	"\tFirstName\x18\x02 \x01(\tB(\xbaH%r#\x10\x02\x18@2\x1d^[\\p{L}][\\p{L}\\s\\-']*[\\p{L}]$R\tFirstName\x12D\n" +
@@ -1227,7 +1245,8 @@ const file_user_proto_rawDesc = "" +
 	"\x12KYCStatusUpdatedAt\x18) \x01(\v2\x1a.google.protobuf.TimestampR\x12KYCStatusUpdatedAt\x12>\n" +
 	"\fKYCUpdatedAt\x18. \x01(\v2\x1a.google.protobuf.TimestampR\fKYCUpdatedAt\x12/\n" +
 	"\fKYCAccountID\x18/ \x01(\tB\v\xbaH\b\xd8\x01\x01r\x03\x18\x80\x01R\fKYCAccountID\x12<\n" +
-	"\vKYCSharedAt\x180 \x01(\v2\x1a.google.protobuf.TimestampR\vKYCSharedAt\x12R\n" +
+	"\vKYCSharedAt\x180 \x01(\v2\x1a.google.protobuf.TimestampR\vKYCSharedAt\x12&\n" +
+	"\x0eKYCIsFederated\x181 \x01(\bR\x0eKYCIsFederated\x12R\n" +
 	"\x10UserTradeProfile\x18\x15 \x01(\v2\x1e.tradeprofile.UserTradeProfileB\x06\xbaH\x03\xc8\x01\x01R\x10UserTradeProfile\x12;\n" +
 	"\x0eBrokerAccounts\x18\x17 \x03(\v2\x13.user.BrokerAccountR\x0eBrokerAccounts\x120\n" +
 	"\n" +
