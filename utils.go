@@ -85,16 +85,33 @@ func IsValidUSSocialSecurityNumber(ssn string) bool {
 		return false
 	}
 
-	invalid := true
-	first := ssn[0]
-	for i := 1; i < len(ssn); i++ {
-		if ssn[i] != '-' && ssn[i] != first {
-			invalid = false
+	cleanSSN := area + group + serial
+
+	// Check for all same digits (e.g., 111-11-1111)
+	allSame := true
+	for i := 1; i < len(cleanSSN); i++ {
+		if cleanSSN[i] != cleanSSN[0] {
+			allSame = false
 			break
 		}
 	}
+	if allSame {
+		return false
+	}
 
-	if invalid {
+	// Check for sequential digits (increasing or decreasing, e.g., 123456789 or 987654321)
+	increasing := true
+	decreasing := true
+	for i := 1; i < len(cleanSSN); i++ {
+		if cleanSSN[i] != cleanSSN[i-1]+1 {
+			increasing = false
+		}
+		if cleanSSN[i] != cleanSSN[i-1]-1 {
+			decreasing = false
+		}
+	}
+
+	if increasing || decreasing {
 		return false
 	}
 
