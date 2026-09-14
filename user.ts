@@ -234,6 +234,84 @@ export function eliteClubMembershipStatusToJSON(object: EliteClubMembershipStatu
   }
 }
 
+export enum FCMPushRouteType {
+  FCM_PUSH_ROUTE_TYPE_UNSPECIFIED = 0,
+  FCM_PUSH_ROUTE_TYPE_TOKEN = 1,
+  FCM_PUSH_ROUTE_TYPE_FID = 2,
+  UNRECOGNIZED = -1,
+}
+
+export function fCMPushRouteTypeFromJSON(object: any): FCMPushRouteType {
+  switch (object) {
+    case 0:
+    case "FCM_PUSH_ROUTE_TYPE_UNSPECIFIED":
+      return FCMPushRouteType.FCM_PUSH_ROUTE_TYPE_UNSPECIFIED;
+    case 1:
+    case "FCM_PUSH_ROUTE_TYPE_TOKEN":
+      return FCMPushRouteType.FCM_PUSH_ROUTE_TYPE_TOKEN;
+    case 2:
+    case "FCM_PUSH_ROUTE_TYPE_FID":
+      return FCMPushRouteType.FCM_PUSH_ROUTE_TYPE_FID;
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return FCMPushRouteType.UNRECOGNIZED;
+  }
+}
+
+export function fCMPushRouteTypeToJSON(object: FCMPushRouteType): string {
+  switch (object) {
+    case FCMPushRouteType.FCM_PUSH_ROUTE_TYPE_UNSPECIFIED:
+      return "FCM_PUSH_ROUTE_TYPE_UNSPECIFIED";
+    case FCMPushRouteType.FCM_PUSH_ROUTE_TYPE_TOKEN:
+      return "FCM_PUSH_ROUTE_TYPE_TOKEN";
+    case FCMPushRouteType.FCM_PUSH_ROUTE_TYPE_FID:
+      return "FCM_PUSH_ROUTE_TYPE_FID";
+    case FCMPushRouteType.UNRECOGNIZED:
+    default:
+      return "UNRECOGNIZED";
+  }
+}
+
+export enum FCMPushRouteScope {
+  FCM_PUSH_ROUTE_SCOPE_UNSPECIFIED = 0,
+  FCM_PUSH_ROUTE_SCOPE_WEB = 1,
+  FCM_PUSH_ROUTE_SCOPE_MOBILE = 2,
+  UNRECOGNIZED = -1,
+}
+
+export function fCMPushRouteScopeFromJSON(object: any): FCMPushRouteScope {
+  switch (object) {
+    case 0:
+    case "FCM_PUSH_ROUTE_SCOPE_UNSPECIFIED":
+      return FCMPushRouteScope.FCM_PUSH_ROUTE_SCOPE_UNSPECIFIED;
+    case 1:
+    case "FCM_PUSH_ROUTE_SCOPE_WEB":
+      return FCMPushRouteScope.FCM_PUSH_ROUTE_SCOPE_WEB;
+    case 2:
+    case "FCM_PUSH_ROUTE_SCOPE_MOBILE":
+      return FCMPushRouteScope.FCM_PUSH_ROUTE_SCOPE_MOBILE;
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return FCMPushRouteScope.UNRECOGNIZED;
+  }
+}
+
+export function fCMPushRouteScopeToJSON(object: FCMPushRouteScope): string {
+  switch (object) {
+    case FCMPushRouteScope.FCM_PUSH_ROUTE_SCOPE_UNSPECIFIED:
+      return "FCM_PUSH_ROUTE_SCOPE_UNSPECIFIED";
+    case FCMPushRouteScope.FCM_PUSH_ROUTE_SCOPE_WEB:
+      return "FCM_PUSH_ROUTE_SCOPE_WEB";
+    case FCMPushRouteScope.FCM_PUSH_ROUTE_SCOPE_MOBILE:
+      return "FCM_PUSH_ROUTE_SCOPE_MOBILE";
+    case FCMPushRouteScope.UNRECOGNIZED:
+    default:
+      return "UNRECOGNIZED";
+  }
+}
+
 export interface UserDetails {
   /**
    * Firebase User ID
@@ -434,7 +512,10 @@ export interface UserDetails {
   EliteClubMembershipStatus: EliteClubMembershipStatus;
   /**
    * Firebase Cloud Messaging (FCM) push tokens for iOS/Android devices
+   * Deprecated: use FCMPushRoutes instead.
    * Root & child users policy: only the root user has a value, child users always have nil
+   *
+   * @deprecated
    */
   FCMPushTokens: string[];
   /**
@@ -467,9 +548,17 @@ export interface UserDetails {
   /**
    * Firebase Installation IDs (FIDs) used to target FCM push delivery (Admin SDK MulticastMessage.Fids).
    * Typically 22 chars, legacy Instance IDs – ~11.
+   * Deprecated: use FCMPushRoutes instead.
    * Root & child users policy: only the root user has a value, child users always have nil
+   *
+   * @deprecated
    */
   FCMPushFIDs: string[];
+  /**
+   * Unified FCM push destinations (token or FID) with an explicit delivery scope.
+   * Root & child users policy: only the root user has a value, child users always have empty lists.
+   */
+  FCMPushRoutes: FCMPushRoute[];
 }
 
 export interface User {
@@ -526,6 +615,12 @@ export interface AlpacaCryptoKeychain {
   SymmetricKeyHex: string;
 }
 
+export interface FCMPushRoute {
+  ID: string;
+  Type: FCMPushRouteType;
+  Scope: FCMPushRouteScope;
+}
+
 function createBaseUserDetails(): UserDetails {
   return {
     UserID: "",
@@ -574,6 +669,7 @@ function createBaseUserDetails(): UserDetails {
     BanxaSetupRequestedAt: undefined,
     BanxaSetupCompletedAt: undefined,
     FCMPushFIDs: [],
+    FCMPushRoutes: [],
   };
 }
 
@@ -716,6 +812,9 @@ export const UserDetails = {
     }
     for (const v of message.FCMPushFIDs) {
       writer.uint32(362).string(v!);
+    }
+    for (const v of message.FCMPushRoutes) {
+      FCMPushRoute.encode(v!, writer.uint32(402).fork()).ldelim();
     }
     return writer;
   },
@@ -1049,6 +1148,13 @@ export const UserDetails = {
 
           message.FCMPushFIDs.push(reader.string());
           continue;
+        case 50:
+          if (tag !== 402) {
+            break;
+          }
+
+          message.FCMPushRoutes.push(FCMPushRoute.decode(reader, reader.uint32()));
+          continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -1133,6 +1239,9 @@ export const UserDetails = {
         : undefined,
       FCMPushFIDs: globalThis.Array.isArray(object?.FCMPushFIDs)
         ? object.FCMPushFIDs.map((e: any) => globalThis.String(e))
+        : [],
+      FCMPushRoutes: globalThis.Array.isArray(object?.FCMPushRoutes)
+        ? object.FCMPushRoutes.map((e: any) => FCMPushRoute.fromJSON(e))
         : [],
     };
   },
@@ -1277,6 +1386,9 @@ export const UserDetails = {
     if (message.FCMPushFIDs?.length) {
       obj.FCMPushFIDs = message.FCMPushFIDs;
     }
+    if (message.FCMPushRoutes?.length) {
+      obj.FCMPushRoutes = message.FCMPushRoutes.map((e) => FCMPushRoute.toJSON(e));
+    }
     return obj;
   },
 
@@ -1346,6 +1458,7 @@ export const UserDetails = {
     message.BanxaSetupRequestedAt = object.BanxaSetupRequestedAt ?? undefined;
     message.BanxaSetupCompletedAt = object.BanxaSetupCompletedAt ?? undefined;
     message.FCMPushFIDs = object.FCMPushFIDs?.map((e) => e) || [];
+    message.FCMPushRoutes = object.FCMPushRoutes?.map((e) => FCMPushRoute.fromPartial(e)) || [];
     return message;
   },
 };
@@ -2000,6 +2113,95 @@ export const AlpacaCryptoKeychain = {
     message.PublicKeyHex = object.PublicKeyHex ?? "";
     message.PrivateKeyHex = object.PrivateKeyHex ?? "";
     message.SymmetricKeyHex = object.SymmetricKeyHex ?? "";
+    return message;
+  },
+};
+
+function createBaseFCMPushRoute(): FCMPushRoute {
+  return { ID: "", Type: 0, Scope: 0 };
+}
+
+export const FCMPushRoute = {
+  encode(message: FCMPushRoute, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.ID !== "") {
+      writer.uint32(10).string(message.ID);
+    }
+    if (message.Type !== 0) {
+      writer.uint32(16).int32(message.Type);
+    }
+    if (message.Scope !== 0) {
+      writer.uint32(24).int32(message.Scope);
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): FCMPushRoute {
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseFCMPushRoute();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          if (tag !== 10) {
+            break;
+          }
+
+          message.ID = reader.string();
+          continue;
+        case 2:
+          if (tag !== 16) {
+            break;
+          }
+
+          message.Type = reader.int32() as any;
+          continue;
+        case 3:
+          if (tag !== 24) {
+            break;
+          }
+
+          message.Scope = reader.int32() as any;
+          continue;
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): FCMPushRoute {
+    return {
+      ID: isSet(object.ID) ? globalThis.String(object.ID) : "",
+      Type: isSet(object.Type) ? fCMPushRouteTypeFromJSON(object.Type) : 0,
+      Scope: isSet(object.Scope) ? fCMPushRouteScopeFromJSON(object.Scope) : 0,
+    };
+  },
+
+  toJSON(message: FCMPushRoute): unknown {
+    const obj: any = {};
+    if (message.ID !== "") {
+      obj.ID = message.ID;
+    }
+    if (message.Type !== 0) {
+      obj.Type = fCMPushRouteTypeToJSON(message.Type);
+    }
+    if (message.Scope !== 0) {
+      obj.Scope = fCMPushRouteScopeToJSON(message.Scope);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<FCMPushRoute>, I>>(base?: I): FCMPushRoute {
+    return FCMPushRoute.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<FCMPushRoute>, I>>(object: I): FCMPushRoute {
+    const message = createBaseFCMPushRoute();
+    message.ID = object.ID ?? "";
+    message.Type = object.Type ?? 0;
+    message.Scope = object.Scope ?? 0;
     return message;
   },
 };

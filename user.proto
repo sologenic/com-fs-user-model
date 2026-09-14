@@ -320,8 +320,10 @@ message UserDetails {
     ];
 
     // Firebase Cloud Messaging (FCM) push tokens for iOS/Android devices
+    // Deprecated: use FCMPushRoutes instead.
     // Root & child users policy: only the root user has a value, child users always have nil
     repeated string FCMPushTokens = 39 [
+        deprecated = true,
         (buf.validate.field).repeated = {
             max_items: 5,
             unique: true
@@ -363,8 +365,10 @@ message UserDetails {
 
     // Firebase Installation IDs (FIDs) used to target FCM push delivery (Admin SDK MulticastMessage.Fids).
     // Typically 22 chars, legacy Instance IDs – ~11.
+    // Deprecated: use FCMPushRoutes instead.
     // Root & child users policy: only the root user has a value, child users always have nil
     repeated string FCMPushFIDs = 45 [
+        deprecated = true,
         (buf.validate.field).repeated = {
             max_items: 5,
             unique: true
@@ -373,6 +377,17 @@ message UserDetails {
             min_len: 11,
             max_len: 64,
             pattern: "^[a-zA-Z0-9_:-]+$"
+        }
+    ];
+
+    // Unified FCM push destinations (token or FID) with an explicit delivery scope.
+    // Root & child users policy: only the root user has a value, child users always have empty lists.
+    repeated FCMPushRoute FCMPushRoutes = 50 [
+        (buf.validate.field).repeated = { max_items: 10 },
+        (buf.validate.field).cel = {
+            id: "unique_route_ids",
+            message: "Push route IDs must be unique",
+            expression: "this.map(r, r.ID).unique()"
         }
     ];
 }
@@ -501,4 +516,28 @@ message AlpacaCryptoKeychain {
             pattern: "^[0-9a-fA-F]{64}$"
         }
     ];
+}
+
+enum FCMPushRouteType {
+    FCM_PUSH_ROUTE_TYPE_UNSPECIFIED = 0;
+    FCM_PUSH_ROUTE_TYPE_TOKEN = 1;
+    FCM_PUSH_ROUTE_TYPE_FID = 2;
+}
+
+enum FCMPushRouteScope {
+    FCM_PUSH_ROUTE_SCOPE_UNSPECIFIED = 0;
+    FCM_PUSH_ROUTE_SCOPE_WEB = 1;
+    FCM_PUSH_ROUTE_SCOPE_MOBILE = 2;
+}
+
+message FCMPushRoute {
+    string ID = 1 [(buf.validate.field).string = {
+        min_len: 11, max_len: 512, pattern: "^[a-zA-Z0-9_:-]+$"
+    }];
+    FCMPushRouteType Type = 2 [(buf.validate.field).enum = {
+        defined_only: true, not_in: [0]
+    }];
+    FCMPushRouteScope Scope = 3 [(buf.validate.field).enum = {
+        defined_only: true, not_in: [0]
+    }];
 }

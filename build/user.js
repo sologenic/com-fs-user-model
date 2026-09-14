@@ -218,6 +218,80 @@ export function eliteClubMembershipStatusToJSON(object) {
             return "UNRECOGNIZED";
     }
 }
+export var FCMPushRouteType;
+(function (FCMPushRouteType) {
+    FCMPushRouteType[FCMPushRouteType["FCM_PUSH_ROUTE_TYPE_UNSPECIFIED"] = 0] = "FCM_PUSH_ROUTE_TYPE_UNSPECIFIED";
+    FCMPushRouteType[FCMPushRouteType["FCM_PUSH_ROUTE_TYPE_TOKEN"] = 1] = "FCM_PUSH_ROUTE_TYPE_TOKEN";
+    FCMPushRouteType[FCMPushRouteType["FCM_PUSH_ROUTE_TYPE_FID"] = 2] = "FCM_PUSH_ROUTE_TYPE_FID";
+    FCMPushRouteType[FCMPushRouteType["UNRECOGNIZED"] = -1] = "UNRECOGNIZED";
+})(FCMPushRouteType || (FCMPushRouteType = {}));
+export function fCMPushRouteTypeFromJSON(object) {
+    switch (object) {
+        case 0:
+        case "FCM_PUSH_ROUTE_TYPE_UNSPECIFIED":
+            return FCMPushRouteType.FCM_PUSH_ROUTE_TYPE_UNSPECIFIED;
+        case 1:
+        case "FCM_PUSH_ROUTE_TYPE_TOKEN":
+            return FCMPushRouteType.FCM_PUSH_ROUTE_TYPE_TOKEN;
+        case 2:
+        case "FCM_PUSH_ROUTE_TYPE_FID":
+            return FCMPushRouteType.FCM_PUSH_ROUTE_TYPE_FID;
+        case -1:
+        case "UNRECOGNIZED":
+        default:
+            return FCMPushRouteType.UNRECOGNIZED;
+    }
+}
+export function fCMPushRouteTypeToJSON(object) {
+    switch (object) {
+        case FCMPushRouteType.FCM_PUSH_ROUTE_TYPE_UNSPECIFIED:
+            return "FCM_PUSH_ROUTE_TYPE_UNSPECIFIED";
+        case FCMPushRouteType.FCM_PUSH_ROUTE_TYPE_TOKEN:
+            return "FCM_PUSH_ROUTE_TYPE_TOKEN";
+        case FCMPushRouteType.FCM_PUSH_ROUTE_TYPE_FID:
+            return "FCM_PUSH_ROUTE_TYPE_FID";
+        case FCMPushRouteType.UNRECOGNIZED:
+        default:
+            return "UNRECOGNIZED";
+    }
+}
+export var FCMPushRouteScope;
+(function (FCMPushRouteScope) {
+    FCMPushRouteScope[FCMPushRouteScope["FCM_PUSH_ROUTE_SCOPE_UNSPECIFIED"] = 0] = "FCM_PUSH_ROUTE_SCOPE_UNSPECIFIED";
+    FCMPushRouteScope[FCMPushRouteScope["FCM_PUSH_ROUTE_SCOPE_WEB"] = 1] = "FCM_PUSH_ROUTE_SCOPE_WEB";
+    FCMPushRouteScope[FCMPushRouteScope["FCM_PUSH_ROUTE_SCOPE_MOBILE"] = 2] = "FCM_PUSH_ROUTE_SCOPE_MOBILE";
+    FCMPushRouteScope[FCMPushRouteScope["UNRECOGNIZED"] = -1] = "UNRECOGNIZED";
+})(FCMPushRouteScope || (FCMPushRouteScope = {}));
+export function fCMPushRouteScopeFromJSON(object) {
+    switch (object) {
+        case 0:
+        case "FCM_PUSH_ROUTE_SCOPE_UNSPECIFIED":
+            return FCMPushRouteScope.FCM_PUSH_ROUTE_SCOPE_UNSPECIFIED;
+        case 1:
+        case "FCM_PUSH_ROUTE_SCOPE_WEB":
+            return FCMPushRouteScope.FCM_PUSH_ROUTE_SCOPE_WEB;
+        case 2:
+        case "FCM_PUSH_ROUTE_SCOPE_MOBILE":
+            return FCMPushRouteScope.FCM_PUSH_ROUTE_SCOPE_MOBILE;
+        case -1:
+        case "UNRECOGNIZED":
+        default:
+            return FCMPushRouteScope.UNRECOGNIZED;
+    }
+}
+export function fCMPushRouteScopeToJSON(object) {
+    switch (object) {
+        case FCMPushRouteScope.FCM_PUSH_ROUTE_SCOPE_UNSPECIFIED:
+            return "FCM_PUSH_ROUTE_SCOPE_UNSPECIFIED";
+        case FCMPushRouteScope.FCM_PUSH_ROUTE_SCOPE_WEB:
+            return "FCM_PUSH_ROUTE_SCOPE_WEB";
+        case FCMPushRouteScope.FCM_PUSH_ROUTE_SCOPE_MOBILE:
+            return "FCM_PUSH_ROUTE_SCOPE_MOBILE";
+        case FCMPushRouteScope.UNRECOGNIZED:
+        default:
+            return "UNRECOGNIZED";
+    }
+}
 function createBaseUserDetails() {
     return {
         UserID: "",
@@ -266,6 +340,7 @@ function createBaseUserDetails() {
         BanxaSetupRequestedAt: undefined,
         BanxaSetupCompletedAt: undefined,
         FCMPushFIDs: [],
+        FCMPushRoutes: [],
     };
 }
 export const UserDetails = {
@@ -407,6 +482,9 @@ export const UserDetails = {
         }
         for (const v of message.FCMPushFIDs) {
             writer.uint32(362).string(v);
+        }
+        for (const v of message.FCMPushRoutes) {
+            FCMPushRoute.encode(v, writer.uint32(402).fork()).ldelim();
         }
         return writer;
     },
@@ -693,6 +771,12 @@ export const UserDetails = {
                     }
                     message.FCMPushFIDs.push(reader.string());
                     continue;
+                case 50:
+                    if (tag !== 402) {
+                        break;
+                    }
+                    message.FCMPushRoutes.push(FCMPushRoute.decode(reader, reader.uint32()));
+                    continue;
             }
             if ((tag & 7) === 4 || tag === 0) {
                 break;
@@ -777,10 +861,13 @@ export const UserDetails = {
             FCMPushFIDs: globalThis.Array.isArray(object === null || object === void 0 ? void 0 : object.FCMPushFIDs)
                 ? object.FCMPushFIDs.map((e) => globalThis.String(e))
                 : [],
+            FCMPushRoutes: globalThis.Array.isArray(object === null || object === void 0 ? void 0 : object.FCMPushRoutes)
+                ? object.FCMPushRoutes.map((e) => FCMPushRoute.fromJSON(e))
+                : [],
         };
     },
     toJSON(message) {
-        var _a, _b, _c, _d, _e, _f, _g, _h, _j;
+        var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k;
         const obj = {};
         if (message.UserID !== "") {
             obj.UserID = message.UserID;
@@ -920,13 +1007,16 @@ export const UserDetails = {
         if ((_j = message.FCMPushFIDs) === null || _j === void 0 ? void 0 : _j.length) {
             obj.FCMPushFIDs = message.FCMPushFIDs;
         }
+        if ((_k = message.FCMPushRoutes) === null || _k === void 0 ? void 0 : _k.length) {
+            obj.FCMPushRoutes = message.FCMPushRoutes.map((e) => FCMPushRoute.toJSON(e));
+        }
         return obj;
     },
     create(base) {
         return UserDetails.fromPartial(base !== null && base !== void 0 ? base : {});
     },
     fromPartial(object) {
-        var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q, _r, _s, _t, _u, _v, _w, _x, _y, _z, _0, _1, _2, _3, _4, _5, _6, _7, _8, _9, _10, _11, _12, _13, _14;
+        var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q, _r, _s, _t, _u, _v, _w, _x, _y, _z, _0, _1, _2, _3, _4, _5, _6, _7, _8, _9, _10, _11, _12, _13, _14, _15;
         const message = createBaseUserDetails();
         message.UserID = (_a = object.UserID) !== null && _a !== void 0 ? _a : "";
         message.FirstName = (_b = object.FirstName) !== null && _b !== void 0 ? _b : "";
@@ -989,6 +1079,7 @@ export const UserDetails = {
         message.BanxaSetupRequestedAt = (_12 = object.BanxaSetupRequestedAt) !== null && _12 !== void 0 ? _12 : undefined;
         message.BanxaSetupCompletedAt = (_13 = object.BanxaSetupCompletedAt) !== null && _13 !== void 0 ? _13 : undefined;
         message.FCMPushFIDs = ((_14 = object.FCMPushFIDs) === null || _14 === void 0 ? void 0 : _14.map((e) => e)) || [];
+        message.FCMPushRoutes = ((_15 = object.FCMPushRoutes) === null || _15 === void 0 ? void 0 : _15.map((e) => FCMPushRoute.fromPartial(e))) || [];
         return message;
     },
 };
@@ -1584,6 +1675,87 @@ export const AlpacaCryptoKeychain = {
         message.PublicKeyHex = (_b = object.PublicKeyHex) !== null && _b !== void 0 ? _b : "";
         message.PrivateKeyHex = (_c = object.PrivateKeyHex) !== null && _c !== void 0 ? _c : "";
         message.SymmetricKeyHex = (_d = object.SymmetricKeyHex) !== null && _d !== void 0 ? _d : "";
+        return message;
+    },
+};
+function createBaseFCMPushRoute() {
+    return { ID: "", Type: 0, Scope: 0 };
+}
+export const FCMPushRoute = {
+    encode(message, writer = _m0.Writer.create()) {
+        if (message.ID !== "") {
+            writer.uint32(10).string(message.ID);
+        }
+        if (message.Type !== 0) {
+            writer.uint32(16).int32(message.Type);
+        }
+        if (message.Scope !== 0) {
+            writer.uint32(24).int32(message.Scope);
+        }
+        return writer;
+    },
+    decode(input, length) {
+        const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+        let end = length === undefined ? reader.len : reader.pos + length;
+        const message = createBaseFCMPushRoute();
+        while (reader.pos < end) {
+            const tag = reader.uint32();
+            switch (tag >>> 3) {
+                case 1:
+                    if (tag !== 10) {
+                        break;
+                    }
+                    message.ID = reader.string();
+                    continue;
+                case 2:
+                    if (tag !== 16) {
+                        break;
+                    }
+                    message.Type = reader.int32();
+                    continue;
+                case 3:
+                    if (tag !== 24) {
+                        break;
+                    }
+                    message.Scope = reader.int32();
+                    continue;
+            }
+            if ((tag & 7) === 4 || tag === 0) {
+                break;
+            }
+            reader.skipType(tag & 7);
+        }
+        return message;
+    },
+    fromJSON(object) {
+        return {
+            ID: isSet(object.ID) ? globalThis.String(object.ID) : "",
+            Type: isSet(object.Type) ? fCMPushRouteTypeFromJSON(object.Type) : 0,
+            Scope: isSet(object.Scope) ? fCMPushRouteScopeFromJSON(object.Scope) : 0,
+        };
+    },
+    toJSON(message) {
+        const obj = {};
+        if (message.ID !== "") {
+            obj.ID = message.ID;
+        }
+        if (message.Type !== 0) {
+            obj.Type = fCMPushRouteTypeToJSON(message.Type);
+        }
+        if (message.Scope !== 0) {
+            obj.Scope = fCMPushRouteScopeToJSON(message.Scope);
+        }
+        return obj;
+    },
+    create(base) {
+        return FCMPushRoute.fromPartial(base !== null && base !== void 0 ? base : {});
+    },
+    fromPartial(object) {
+        var _a, _b, _c;
+        const message = createBaseFCMPushRoute();
+        message.ID = (_a = object.ID) !== null && _a !== void 0 ? _a : "";
+        message.Type = (_b = object.Type) !== null && _b !== void 0 ? _b : 0;
+        message.Scope = (_c = object.Scope) !== null && _c !== void 0 ? _c : 0;
         return message;
     },
 };
