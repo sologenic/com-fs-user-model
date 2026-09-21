@@ -186,7 +186,7 @@ type Wallet struct {
 	// Deprecated: we don't know what it is for and if we are going to use this in the future. Might be removed soon
 	SignerType SignerType `protobuf:"varint,4,opt,name=SignerType,proto3,enum=user.SignerType" json:"SignerType,omitempty"`
 	// List of organizations linked to this wallet address
-	// TODO: Rename to OrganizationIDs
+	// Deprecated: doesn't fit into current user model, to be removed
 	Organizations []string `protobuf:"bytes,5,rep,name=Organizations,proto3" json:"Organizations,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache

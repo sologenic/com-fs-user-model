@@ -149,7 +149,7 @@ export interface Wallet {
   SignerType: SignerType;
   /**
    * List of organizations linked to this wallet address
-   * TODO: Rename to OrganizationIDs
+   * Deprecated: doesn't fit into current user model, to be removed
    */
   Organizations: string[];
 }

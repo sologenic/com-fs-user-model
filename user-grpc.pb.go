@@ -25,13 +25,14 @@ const (
 )
 
 type ReferralStatsUpdate struct {
-	state                  protoimpl.MessageState `protogen:"open.v1"`
-	UserID                 string                 `protobuf:"bytes,1,opt,name=UserID,proto3" json:"UserID,omitempty"`
-	OrganizationID         string                 `protobuf:"bytes,2,opt,name=OrganizationID,proto3" json:"OrganizationID,omitempty"`
+	state          protoimpl.MessageState `protogen:"open.v1"`
+	UserID         string                 `protobuf:"bytes,1,opt,name=UserID,proto3" json:"UserID,omitempty"`
+	OrganizationID string                 `protobuf:"bytes,2,opt,name=OrganizationID,proto3" json:"OrganizationID,omitempty"`
+	// Deprecated: Marked as deprecated in user-grpc.proto.
 	Network                metadata.Network       `protobuf:"varint,3,opt,name=Network,proto3,enum=metadata.Network" json:"Network,omitempty"`
 	ReferralCount          *int32                 `protobuf:"varint,4,opt,name=ReferralCount,proto3,oneof" json:"ReferralCount,omitempty"`
 	ReferralAmountReceived *int64                 `protobuf:"varint,5,opt,name=ReferralAmountReceived,proto3,oneof" json:"ReferralAmountReceived,omitempty"`
-	ReferralPaidAt         *timestamppb.Timestamp `protobuf:"bytes,6,opt,name=ReferralPaidAt,proto3,oneof" json:"ReferralPaidAt,omitempty"`
+	ReferralPaidAt         *timestamppb.Timestamp `protobuf:"bytes,6,opt,name=ReferralPaidAt,proto3" json:"ReferralPaidAt,omitempty"`
 	ReferredBy             *string                `protobuf:"bytes,7,opt,name=ReferredBy,proto3,oneof" json:"ReferredBy,omitempty"`
 	unknownFields          protoimpl.UnknownFields
 	sizeCache              protoimpl.SizeCache
@@ -81,6 +82,7 @@ func (x *ReferralStatsUpdate) GetOrganizationID() string {
 	return ""
 }
 
+// Deprecated: Marked as deprecated in user-grpc.proto.
 func (x *ReferralStatsUpdate) GetNetwork() metadata.Network {
 	if x != nil {
 		return x.Network
@@ -121,20 +123,19 @@ var File_user_grpc_proto protoreflect.FileDescriptor
 const file_user_grpc_proto_rawDesc = "" +
 	"\n" +
 	"\x0fuser-grpc.proto\x12\x04user\x1a\x1bgoogle/protobuf/empty.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a9sologenic/com-fs-utils-lib/models/metadata/metadata.proto\x1a\n" +
-	"user.proto\x1a\x12user-filters.proto\"\xa7\x03\n" +
+	"user.proto\x1a\x12user-filters.proto\"\x93\x03\n" +
 	"\x13ReferralStatsUpdate\x12\x16\n" +
 	"\x06UserID\x18\x01 \x01(\tR\x06UserID\x12&\n" +
-	"\x0eOrganizationID\x18\x02 \x01(\tR\x0eOrganizationID\x12+\n" +
-	"\aNetwork\x18\x03 \x01(\x0e2\x11.metadata.NetworkR\aNetwork\x12)\n" +
+	"\x0eOrganizationID\x18\x02 \x01(\tR\x0eOrganizationID\x12/\n" +
+	"\aNetwork\x18\x03 \x01(\x0e2\x11.metadata.NetworkB\x02\x18\x01R\aNetwork\x12)\n" +
 	"\rReferralCount\x18\x04 \x01(\x05H\x00R\rReferralCount\x88\x01\x01\x12;\n" +
-	"\x16ReferralAmountReceived\x18\x05 \x01(\x03H\x01R\x16ReferralAmountReceived\x88\x01\x01\x12G\n" +
-	"\x0eReferralPaidAt\x18\x06 \x01(\v2\x1a.google.protobuf.TimestampH\x02R\x0eReferralPaidAt\x88\x01\x01\x12#\n" +
+	"\x16ReferralAmountReceived\x18\x05 \x01(\x03H\x01R\x16ReferralAmountReceived\x88\x01\x01\x12B\n" +
+	"\x0eReferralPaidAt\x18\x06 \x01(\v2\x1a.google.protobuf.TimestampR\x0eReferralPaidAt\x12#\n" +
 	"\n" +
-	"ReferredBy\x18\a \x01(\tH\x03R\n" +
+	"ReferredBy\x18\a \x01(\tH\x02R\n" +
 	"ReferredBy\x88\x01\x01B\x10\n" +
 	"\x0e_ReferralCountB\x19\n" +
-	"\x17_ReferralAmountReceivedB\x11\n" +
-	"\x0f_ReferralPaidAtB\r\n" +
+	"\x17_ReferralAmountReceivedB\r\n" +
 	"\v_ReferredBy2\x86\x02\n" +
 	"\vUserService\x12!\n" +
 	"\x03Get\x12\f.user.UserID\x1a\n" +
