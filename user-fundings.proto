@@ -4,49 +4,61 @@ package user;
 
 option go_package = "github.com/sologenic/com-fs-user-model;user";
 
-import "sologenic/com-fs-utils-lib/models/order-properties/order-properties.proto";
 import "buf/validate/validate.proto";
 
 message Wallet {
     string Address = 1 [
-      (buf.validate.field).string.pattern = "^(?:test)?core1[02-9ac-hj-np-z]{38}$"
+        (buf.validate.field).string.pattern = "^(?:test)?core1[02-9ac-hj-np-z]{38}$"
     ];
 
     string Alias = 2 [
-      (buf.validate.field).string = {
-        min_len: 5,
-        max_len: 32,
-        pattern: "^[a-zA-Z][a-zA-Z0-9_]*[a-zA-Z0-9]$"
-      }
+        (buf.validate.field).string = {
+            min_len: 5,
+            max_len: 32,
+            pattern: "^[a-zA-Z][a-zA-Z0-9_]*[a-zA-Z0-9]$"
+        }
     ];
 
+    // Deprecated: we don't know what it is for and if we are going to use this in the future. Might be removed soon
     WalletType Type = 3;
+
+    // Deprecated: we don't know what it is for and if we are going to use this in the future. Might be removed soon
     SignerType SignerType = 4;
 
     // List of organizations linked to this wallet address
+    // TODO: Rename to OrganizationIDs
     repeated string Organizations = 5 [
-      (buf.validate.field).repeated = {
-        max_items: 256,
-        items: {
-          string: {
-            uuid: true
-          }
+        (buf.validate.field).repeated = {
+            max_items: 256,
+            items: {
+                string: {
+                    uuid: true
+                }
+            }
         }
-      }
     ];
 }
 
 message BrokerAccount {
-  string AccountID = 1; // user's identifier in the broker account
-  orderproperties.ClearingBroker Broker = 2; // "RQD", etc.
-  string OrganizationID = 3 [
-    (buf.validate.field).string = {
-      uuid: true
-    }
-  ]; // broker identifier
-  repeated string Profiles = 4; // bank account profiles for the broker account
+    string ID = 1 [
+        (buf.validate.field).string = {
+            min_len: 2,
+            max_len: 128,
+            pattern: "^[a-zA-Z0-9_-]+$"
+        }
+    ];
+
+    BrokerType BrokerType = 2;
+
+    reserved 3;
 }
 
+enum BrokerType {
+    BROKER_TYPE_UNSPECIFIED = 0;
+    BROKER_TYPE_ALPACA = 1;
+}
+
+// Deprecated: we don't know what it is for and if we are going to use this in the future. Might be removed soon
 enum SignerType {
     NOT_USER_SIGNETTYPE = 0;
     MOBILE_APP = 1;
@@ -55,6 +67,7 @@ enum SignerType {
     BROWSER_KEPLR = 4;
 }
 
+// Deprecated: we don't know what it is for and if we are going to use this in the future. Might be removed soon
 enum WalletType {
     NOT_USED_WALLETTYPE = 0;
     TFSA = 1;

@@ -6,7 +6,6 @@ import (
 	"strings"
 
 	"github.com/flaticols/countrycodes"
-	orderproperties "github.com/sologenic/com-fs-utils-lib/models/order-properties"
 )
 
 // GetCountryAlpha2 returns the user's KYC country as ISO alpha-2, or "" if unset/invalid
@@ -123,11 +122,11 @@ func GetAlpacaAccountID(user *User) (id string) {
 		return id
 	}
 	for _, item := range user.User.BrokerAccounts {
-		if item.Broker == orderproperties.ClearingBroker_ALPACA {
+		if item.BrokerType == BrokerType_BROKER_TYPE_ALPACA {
 			if id != "" {
 				panic(fmt.Sprintf("User %s has too many Alpaca accounts", user.User.UserID))
 			}
-			id = item.AccountID // UUID
+			id = item.ID // UUID
 		}
 	}
 	return id
