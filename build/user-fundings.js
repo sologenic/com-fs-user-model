@@ -5,8 +5,39 @@
 // source: user-fundings.proto
 /* eslint-disable */
 import _m0 from "protobufjs/minimal";
-import { clearingBrokerFromJSON, clearingBrokerToJSON, } from "./sologenic/com-fs-utils-lib/models/order-properties/order-properties";
 export const protobufPackage = "user";
+export var BrokerType;
+(function (BrokerType) {
+    BrokerType[BrokerType["BROKER_TYPE_UNSPECIFIED"] = 0] = "BROKER_TYPE_UNSPECIFIED";
+    BrokerType[BrokerType["BROKER_TYPE_ALPACA"] = 1] = "BROKER_TYPE_ALPACA";
+    BrokerType[BrokerType["UNRECOGNIZED"] = -1] = "UNRECOGNIZED";
+})(BrokerType || (BrokerType = {}));
+export function brokerTypeFromJSON(object) {
+    switch (object) {
+        case 0:
+        case "BROKER_TYPE_UNSPECIFIED":
+            return BrokerType.BROKER_TYPE_UNSPECIFIED;
+        case 1:
+        case "BROKER_TYPE_ALPACA":
+            return BrokerType.BROKER_TYPE_ALPACA;
+        case -1:
+        case "UNRECOGNIZED":
+        default:
+            return BrokerType.UNRECOGNIZED;
+    }
+}
+export function brokerTypeToJSON(object) {
+    switch (object) {
+        case BrokerType.BROKER_TYPE_UNSPECIFIED:
+            return "BROKER_TYPE_UNSPECIFIED";
+        case BrokerType.BROKER_TYPE_ALPACA:
+            return "BROKER_TYPE_ALPACA";
+        case BrokerType.UNRECOGNIZED:
+        default:
+            return "UNRECOGNIZED";
+    }
+}
+/** Deprecated: we don't know what it is for and if we are going to use this in the future. Might be removed soon */
 export var SignerType;
 (function (SignerType) {
     SignerType[SignerType["NOT_USER_SIGNETTYPE"] = 0] = "NOT_USER_SIGNETTYPE";
@@ -56,6 +87,7 @@ export function signerTypeToJSON(object) {
             return "UNRECOGNIZED";
     }
 }
+/** Deprecated: we don't know what it is for and if we are going to use this in the future. Might be removed soon */
 export var WalletType;
 (function (WalletType) {
     WalletType[WalletType["NOT_USED_WALLETTYPE"] = 0] = "NOT_USED_WALLETTYPE";
@@ -212,21 +244,15 @@ export const Wallet = {
     },
 };
 function createBaseBrokerAccount() {
-    return { AccountID: "", Broker: 0, OrganizationID: "", Profiles: [] };
+    return { ID: "", BrokerType: 0 };
 }
 export const BrokerAccount = {
     encode(message, writer = _m0.Writer.create()) {
-        if (message.AccountID !== "") {
-            writer.uint32(10).string(message.AccountID);
+        if (message.ID !== "") {
+            writer.uint32(10).string(message.ID);
         }
-        if (message.Broker !== 0) {
-            writer.uint32(16).int32(message.Broker);
-        }
-        if (message.OrganizationID !== "") {
-            writer.uint32(26).string(message.OrganizationID);
-        }
-        for (const v of message.Profiles) {
-            writer.uint32(34).string(v);
+        if (message.BrokerType !== 0) {
+            writer.uint32(16).int32(message.BrokerType);
         }
         return writer;
     },
@@ -241,25 +267,13 @@ export const BrokerAccount = {
                     if (tag !== 10) {
                         break;
                     }
-                    message.AccountID = reader.string();
+                    message.ID = reader.string();
                     continue;
                 case 2:
                     if (tag !== 16) {
                         break;
                     }
-                    message.Broker = reader.int32();
-                    continue;
-                case 3:
-                    if (tag !== 26) {
-                        break;
-                    }
-                    message.OrganizationID = reader.string();
-                    continue;
-                case 4:
-                    if (tag !== 34) {
-                        break;
-                    }
-                    message.Profiles.push(reader.string());
+                    message.BrokerType = reader.int32();
                     continue;
             }
             if ((tag & 7) === 4 || tag === 0) {
@@ -271,26 +285,17 @@ export const BrokerAccount = {
     },
     fromJSON(object) {
         return {
-            AccountID: isSet(object.AccountID) ? globalThis.String(object.AccountID) : "",
-            Broker: isSet(object.Broker) ? clearingBrokerFromJSON(object.Broker) : 0,
-            OrganizationID: isSet(object.OrganizationID) ? globalThis.String(object.OrganizationID) : "",
-            Profiles: globalThis.Array.isArray(object === null || object === void 0 ? void 0 : object.Profiles) ? object.Profiles.map((e) => globalThis.String(e)) : [],
+            ID: isSet(object.ID) ? globalThis.String(object.ID) : "",
+            BrokerType: isSet(object.BrokerType) ? brokerTypeFromJSON(object.BrokerType) : 0,
         };
     },
     toJSON(message) {
-        var _a;
         const obj = {};
-        if (message.AccountID !== "") {
-            obj.AccountID = message.AccountID;
+        if (message.ID !== "") {
+            obj.ID = message.ID;
         }
-        if (message.Broker !== 0) {
-            obj.Broker = clearingBrokerToJSON(message.Broker);
-        }
-        if (message.OrganizationID !== "") {
-            obj.OrganizationID = message.OrganizationID;
-        }
-        if ((_a = message.Profiles) === null || _a === void 0 ? void 0 : _a.length) {
-            obj.Profiles = message.Profiles;
+        if (message.BrokerType !== 0) {
+            obj.BrokerType = brokerTypeToJSON(message.BrokerType);
         }
         return obj;
     },
@@ -298,12 +303,10 @@ export const BrokerAccount = {
         return BrokerAccount.fromPartial(base !== null && base !== void 0 ? base : {});
     },
     fromPartial(object) {
-        var _a, _b, _c, _d;
+        var _a, _b;
         const message = createBaseBrokerAccount();
-        message.AccountID = (_a = object.AccountID) !== null && _a !== void 0 ? _a : "";
-        message.Broker = (_b = object.Broker) !== null && _b !== void 0 ? _b : 0;
-        message.OrganizationID = (_c = object.OrganizationID) !== null && _c !== void 0 ? _c : "";
-        message.Profiles = ((_d = object.Profiles) === null || _d === void 0 ? void 0 : _d.map((e) => e)) || [];
+        message.ID = (_a = object.ID) !== null && _a !== void 0 ? _a : "";
+        message.BrokerType = (_b = object.BrokerType) !== null && _b !== void 0 ? _b : 0;
         return message;
     },
 };

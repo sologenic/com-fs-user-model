@@ -6,14 +6,43 @@
 
 /* eslint-disable */
 import _m0 from "protobufjs/minimal";
-import {
-  ClearingBroker,
-  clearingBrokerFromJSON,
-  clearingBrokerToJSON,
-} from "./sologenic/com-fs-utils-lib/models/order-properties/order-properties";
 
 export const protobufPackage = "user";
 
+export enum BrokerType {
+  BROKER_TYPE_UNSPECIFIED = 0,
+  BROKER_TYPE_ALPACA = 1,
+  UNRECOGNIZED = -1,
+}
+
+export function brokerTypeFromJSON(object: any): BrokerType {
+  switch (object) {
+    case 0:
+    case "BROKER_TYPE_UNSPECIFIED":
+      return BrokerType.BROKER_TYPE_UNSPECIFIED;
+    case 1:
+    case "BROKER_TYPE_ALPACA":
+      return BrokerType.BROKER_TYPE_ALPACA;
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return BrokerType.UNRECOGNIZED;
+  }
+}
+
+export function brokerTypeToJSON(object: BrokerType): string {
+  switch (object) {
+    case BrokerType.BROKER_TYPE_UNSPECIFIED:
+      return "BROKER_TYPE_UNSPECIFIED";
+    case BrokerType.BROKER_TYPE_ALPACA:
+      return "BROKER_TYPE_ALPACA";
+    case BrokerType.UNRECOGNIZED:
+    default:
+      return "UNRECOGNIZED";
+  }
+}
+
+/** Deprecated: we don't know what it is for and if we are going to use this in the future. Might be removed soon */
 export enum SignerType {
   NOT_USER_SIGNETTYPE = 0,
   MOBILE_APP = 1,
@@ -65,6 +94,7 @@ export function signerTypeToJSON(object: SignerType): string {
   }
 }
 
+/** Deprecated: we don't know what it is for and if we are going to use this in the future. Might be removed soon */
 export enum WalletType {
   NOT_USED_WALLETTYPE = 0,
   TFSA = 1,
@@ -113,21 +143,20 @@ export function walletTypeToJSON(object: WalletType): string {
 export interface Wallet {
   Address: string;
   Alias: string;
+  /** Deprecated: we don't know what it is for and if we are going to use this in the future. Might be removed soon */
   Type: WalletType;
+  /** Deprecated: we don't know what it is for and if we are going to use this in the future. Might be removed soon */
   SignerType: SignerType;
-  /** List of organizations linked to this wallet address */
+  /**
+   * List of organizations linked to this wallet address
+   * TODO: Rename to OrganizationIDs
+   */
   Organizations: string[];
 }
 
 export interface BrokerAccount {
-  /** user's identifier in the broker account */
-  AccountID: string;
-  /** "RQD", etc. */
-  Broker: ClearingBroker;
-  /** broker identifier */
-  OrganizationID: string;
-  /** bank account profiles for the broker account */
-  Profiles: string[];
+  ID: string;
+  BrokerType: BrokerType;
 }
 
 function createBaseWallet(): Wallet {
@@ -252,22 +281,16 @@ export const Wallet = {
 };
 
 function createBaseBrokerAccount(): BrokerAccount {
-  return { AccountID: "", Broker: 0, OrganizationID: "", Profiles: [] };
+  return { ID: "", BrokerType: 0 };
 }
 
 export const BrokerAccount = {
   encode(message: BrokerAccount, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.AccountID !== "") {
-      writer.uint32(10).string(message.AccountID);
+    if (message.ID !== "") {
+      writer.uint32(10).string(message.ID);
     }
-    if (message.Broker !== 0) {
-      writer.uint32(16).int32(message.Broker);
-    }
-    if (message.OrganizationID !== "") {
-      writer.uint32(26).string(message.OrganizationID);
-    }
-    for (const v of message.Profiles) {
-      writer.uint32(34).string(v!);
+    if (message.BrokerType !== 0) {
+      writer.uint32(16).int32(message.BrokerType);
     }
     return writer;
   },
@@ -284,28 +307,14 @@ export const BrokerAccount = {
             break;
           }
 
-          message.AccountID = reader.string();
+          message.ID = reader.string();
           continue;
         case 2:
           if (tag !== 16) {
             break;
           }
 
-          message.Broker = reader.int32() as any;
-          continue;
-        case 3:
-          if (tag !== 26) {
-            break;
-          }
-
-          message.OrganizationID = reader.string();
-          continue;
-        case 4:
-          if (tag !== 34) {
-            break;
-          }
-
-          message.Profiles.push(reader.string());
+          message.BrokerType = reader.int32() as any;
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -318,26 +327,18 @@ export const BrokerAccount = {
 
   fromJSON(object: any): BrokerAccount {
     return {
-      AccountID: isSet(object.AccountID) ? globalThis.String(object.AccountID) : "",
-      Broker: isSet(object.Broker) ? clearingBrokerFromJSON(object.Broker) : 0,
-      OrganizationID: isSet(object.OrganizationID) ? globalThis.String(object.OrganizationID) : "",
-      Profiles: globalThis.Array.isArray(object?.Profiles) ? object.Profiles.map((e: any) => globalThis.String(e)) : [],
+      ID: isSet(object.ID) ? globalThis.String(object.ID) : "",
+      BrokerType: isSet(object.BrokerType) ? brokerTypeFromJSON(object.BrokerType) : 0,
     };
   },
 
   toJSON(message: BrokerAccount): unknown {
     const obj: any = {};
-    if (message.AccountID !== "") {
-      obj.AccountID = message.AccountID;
+    if (message.ID !== "") {
+      obj.ID = message.ID;
     }
-    if (message.Broker !== 0) {
-      obj.Broker = clearingBrokerToJSON(message.Broker);
-    }
-    if (message.OrganizationID !== "") {
-      obj.OrganizationID = message.OrganizationID;
-    }
-    if (message.Profiles?.length) {
-      obj.Profiles = message.Profiles;
+    if (message.BrokerType !== 0) {
+      obj.BrokerType = brokerTypeToJSON(message.BrokerType);
     }
     return obj;
   },
@@ -347,10 +348,8 @@ export const BrokerAccount = {
   },
   fromPartial<I extends Exact<DeepPartial<BrokerAccount>, I>>(object: I): BrokerAccount {
     const message = createBaseBrokerAccount();
-    message.AccountID = object.AccountID ?? "";
-    message.Broker = object.Broker ?? 0;
-    message.OrganizationID = object.OrganizationID ?? "";
-    message.Profiles = object.Profiles?.map((e) => e) || [];
+    message.ID = object.ID ?? "";
+    message.BrokerType = object.BrokerType ?? 0;
     return message;
   },
 };

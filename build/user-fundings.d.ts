@@ -1,6 +1,13 @@
 import _m0 from "protobufjs/minimal";
-import { ClearingBroker } from "./sologenic/com-fs-utils-lib/models/order-properties/order-properties";
 export declare const protobufPackage = "user";
+export declare enum BrokerType {
+    BROKER_TYPE_UNSPECIFIED = 0,
+    BROKER_TYPE_ALPACA = 1,
+    UNRECOGNIZED = -1
+}
+export declare function brokerTypeFromJSON(object: any): BrokerType;
+export declare function brokerTypeToJSON(object: BrokerType): string;
+/** Deprecated: we don't know what it is for and if we are going to use this in the future. Might be removed soon */
 export declare enum SignerType {
     NOT_USER_SIGNETTYPE = 0,
     MOBILE_APP = 1,
@@ -11,6 +18,7 @@ export declare enum SignerType {
 }
 export declare function signerTypeFromJSON(object: any): SignerType;
 export declare function signerTypeToJSON(object: SignerType): string;
+/** Deprecated: we don't know what it is for and if we are going to use this in the future. Might be removed soon */
 export declare enum WalletType {
     NOT_USED_WALLETTYPE = 0,
     TFSA = 1,
@@ -23,20 +31,19 @@ export declare function walletTypeToJSON(object: WalletType): string;
 export interface Wallet {
     Address: string;
     Alias: string;
+    /** Deprecated: we don't know what it is for and if we are going to use this in the future. Might be removed soon */
     Type: WalletType;
+    /** Deprecated: we don't know what it is for and if we are going to use this in the future. Might be removed soon */
     SignerType: SignerType;
-    /** List of organizations linked to this wallet address */
+    /**
+     * List of organizations linked to this wallet address
+     * TODO: Rename to OrganizationIDs
+     */
     Organizations: string[];
 }
 export interface BrokerAccount {
-    /** user's identifier in the broker account */
-    AccountID: string;
-    /** "RQD", etc. */
-    Broker: ClearingBroker;
-    /** broker identifier */
-    OrganizationID: string;
-    /** bank account profiles for the broker account */
-    Profiles: string[];
+    ID: string;
+    BrokerType: BrokerType;
 }
 export declare const Wallet: {
     encode(message: Wallet, writer?: _m0.Writer): _m0.Writer;
@@ -76,27 +83,19 @@ export declare const BrokerAccount: {
     fromJSON(object: any): BrokerAccount;
     toJSON(message: BrokerAccount): unknown;
     create<I extends {
-        AccountID?: string | undefined;
-        Broker?: ClearingBroker | undefined;
-        OrganizationID?: string | undefined;
-        Profiles?: string[] | undefined;
+        ID?: string | undefined;
+        BrokerType?: BrokerType | undefined;
     } & {
-        AccountID?: string | undefined;
-        Broker?: ClearingBroker | undefined;
-        OrganizationID?: string | undefined;
-        Profiles?: (string[] & string[] & { [K in Exclude<keyof I["Profiles"], keyof string[]>]: never; }) | undefined;
-    } & { [K_1 in Exclude<keyof I, keyof BrokerAccount>]: never; }>(base?: I | undefined): BrokerAccount;
+        ID?: string | undefined;
+        BrokerType?: BrokerType | undefined;
+    } & { [K in Exclude<keyof I, keyof BrokerAccount>]: never; }>(base?: I | undefined): BrokerAccount;
     fromPartial<I_1 extends {
-        AccountID?: string | undefined;
-        Broker?: ClearingBroker | undefined;
-        OrganizationID?: string | undefined;
-        Profiles?: string[] | undefined;
+        ID?: string | undefined;
+        BrokerType?: BrokerType | undefined;
     } & {
-        AccountID?: string | undefined;
-        Broker?: ClearingBroker | undefined;
-        OrganizationID?: string | undefined;
-        Profiles?: (string[] & string[] & { [K_2 in Exclude<keyof I_1["Profiles"], keyof string[]>]: never; }) | undefined;
-    } & { [K_3 in Exclude<keyof I_1, keyof BrokerAccount>]: never; }>(object: I_1): BrokerAccount;
+        ID?: string | undefined;
+        BrokerType?: BrokerType | undefined;
+    } & { [K_1 in Exclude<keyof I_1, keyof BrokerAccount>]: never; }>(object: I_1): BrokerAccount;
 };
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 export type DeepPartial<T> = T extends Builtin ? T : T extends globalThis.Array<infer U> ? globalThis.Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? {

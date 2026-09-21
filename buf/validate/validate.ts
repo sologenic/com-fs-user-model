@@ -192,7 +192,7 @@ export function knownRegexToJSON(object: KnownRegex): string {
  * `Rule` represents a validation rule written in the Common Expression
  * Language (CEL) syntax. Each Rule includes a unique identifier, an
  * optional error message, and the CEL expression to evaluate. For more
- * information, [see our documentation](https://buf.build/docs/protovalidate/schemas/custom-rules/).
+ * information, [see our documentation](https://protovalidate.com/schemas/custom-rules/).
  *
  * ```proto
  * message Foo {
@@ -244,7 +244,7 @@ export interface MessageRules {
    * simpler syntax when defining CEL Rules where `id` and `message` derived from the `expression`. `id` will
    * be same as the `expression`.
    *
-   * For more information, [see our documentation](https://buf.build/docs/protovalidate/schemas/custom-rules/).
+   * For more information, [see our documentation](https://protovalidate.com/schemas/custom-rules/).
    *
    * ```proto
    * message MyMessage {
@@ -260,7 +260,7 @@ export interface MessageRules {
   /**
    * `cel` is a repeated field of type Rule. Each Rule specifies a validation rule to be applied to this message.
    * These rules are written in Common Expression Language (CEL) syntax. For more information,
-   * [see our documentation](https://buf.build/docs/protovalidate/schemas/custom-rules/).
+   * [see our documentation](https://protovalidate.com/schemas/custom-rules/).
    *
    * ```proto
    * message MyMessage {
@@ -364,7 +364,7 @@ export interface FieldRules {
    * simpler syntax when defining CEL Rules where `id` and `message` derived from the `expression`. `id` will
    * be same as the `expression`.
    *
-   * For more information, [see our documentation](https://buf.build/docs/protovalidate/schemas/custom-rules/).
+   * For more information, [see our documentation](https://protovalidate.com/schemas/custom-rules/).
    *
    * ```proto
    * message MyMessage {
@@ -377,7 +377,7 @@ export interface FieldRules {
   /**
    * `cel` is a repeated field used to represent a textual expression
    * in the Common Expression Language (CEL) syntax. For more information,
-   * [see our documentation](https://buf.build/docs/protovalidate/schemas/custom-rules/).
+   * [see our documentation](https://protovalidate.com/schemas/custom-rules/).
    *
    * ```proto
    * message MyMessage {
@@ -508,7 +508,7 @@ export interface PredefinedRules {
   /**
    * `cel` is a repeated field used to represent a textual expression
    * in the Common Expression Language (CEL) syntax. For more information,
-   * [see our documentation](https://buf.build/docs/protovalidate/schemas/predefined-rules/).
+   * [see our documentation](https://protovalidate.com/schemas/predefined-rules/).
    *
    * ```proto
    * message MyMessage {
