@@ -21,9 +21,9 @@ service UserService {
 message ReferralStatsUpdate {
     string UserID = 1;
     string OrganizationID = 2;
-    metadata.Network Network = 3;
+    metadata.Network Network = 3 [deprecated = true];
     optional int32 ReferralCount = 4;
     optional int64 ReferralAmountReceived = 5;
-    optional google.protobuf.Timestamp ReferralPaidAt = 6;
+    google.protobuf.Timestamp ReferralPaidAt = 6;
     optional string ReferredBy = 7;
 }

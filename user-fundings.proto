@@ -26,7 +26,7 @@ message Wallet {
     SignerType SignerType = 4;
 
     // List of organizations linked to this wallet address
-    // TODO: Rename to OrganizationIDs
+    // Deprecated: doesn't fit into current user model, to be removed
     repeated string Organizations = 5 [
         (buf.validate.field).repeated = {
             max_items: 256,
