@@ -513,7 +513,7 @@ export interface UserDetails {
   /**
    * Firebase Cloud Messaging (FCM) push tokens for iOS/Android devices
    * Deprecated: use FCMPushRoutes instead.
-   * Root & child users policy: only the root user has a value, child users always have nil
+   * Root & child users policy: each user has its own value
    *
    * @deprecated
    */
@@ -549,14 +549,14 @@ export interface UserDetails {
    * Firebase Installation IDs (FIDs) used to target FCM push delivery (Admin SDK MulticastMessage.Fids).
    * Typically 22 chars, legacy Instance IDs – ~11.
    * Deprecated: use FCMPushRoutes instead.
-   * Root & child users policy: only the root user has a value, child users always have nil
+   * Root & child users policy: each user has its own value
    *
    * @deprecated
    */
   FCMPushFIDs: string[];
   /**
    * Unified FCM push destinations (token or FID) with an explicit delivery scope.
-   * Root & child users policy: only the root user has a value, child users always have empty lists.
+   * Root & child users policy: each user has its own value
    */
   FCMPushRoutes: FCMPushRoute[];
 }

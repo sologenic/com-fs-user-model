@@ -474,7 +474,7 @@ type UserDetails struct {
 	EliteClubMembershipStatus EliteClubMembershipStatus `protobuf:"varint,38,opt,name=EliteClubMembershipStatus,proto3,enum=user.EliteClubMembershipStatus" json:"EliteClubMembershipStatus,omitempty"`
 	// Firebase Cloud Messaging (FCM) push tokens for iOS/Android devices
 	// Deprecated: use FCMPushRoutes instead.
-	// Root & child users policy: only the root user has a value, child users always have nil
+	// Root & child users policy: each user has its own value
 	//
 	// Deprecated: Marked as deprecated in user.proto.
 	FCMPushTokens []string `protobuf:"bytes,39,rep,name=FCMPushTokens,proto3" json:"FCMPushTokens,omitempty"`
@@ -496,12 +496,12 @@ type UserDetails struct {
 	// Firebase Installation IDs (FIDs) used to target FCM push delivery (Admin SDK MulticastMessage.Fids).
 	// Typically 22 chars, legacy Instance IDs – ~11.
 	// Deprecated: use FCMPushRoutes instead.
-	// Root & child users policy: only the root user has a value, child users always have nil
+	// Root & child users policy: each user has its own value
 	//
 	// Deprecated: Marked as deprecated in user.proto.
 	FCMPushFIDs []string `protobuf:"bytes,45,rep,name=FCMPushFIDs,proto3" json:"FCMPushFIDs,omitempty"`
 	// Unified FCM push destinations (token or FID) with an explicit delivery scope.
-	// Root & child users policy: only the root user has a value, child users always have empty lists.
+	// Root & child users policy: each user has its own value
 	FCMPushRoutes []*FCMPushRoute `protobuf:"bytes,50,rep,name=FCMPushRoutes,proto3" json:"FCMPushRoutes,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
