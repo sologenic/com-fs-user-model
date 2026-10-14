@@ -5,16 +5,16 @@ go 1.27.1
 require (
 	buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go v1.36.11-20260709200747-435963d16310.1
 	github.com/flaticols/countrycodes v0.0.2
-	github.com/sologenic/com-fs-compliance-model v0.0.0-20260617204504-6cf1e5eddd88
-	github.com/sologenic/com-fs-document-model v0.0.0-20260715111037-dd4033c14c04
+	github.com/sologenic/com-fs-compliance-model v0.0.0-20261014192331-c881f5d1d360
+	github.com/sologenic/com-fs-document-model v0.0.0-20261001160731-c19bb3169c88
 	github.com/sologenic/com-fs-trade-profile-model v0.0.0-20260717081219-0109f4d46650
-	github.com/sologenic/com-fs-utils-internal-lib/go/grpc-client v0.0.0-20260921085849-a2e0da3aeb25
+	github.com/sologenic/com-fs-utils-internal-lib/go/grpc-client v0.0.0-20261014184121-6933fe0a39b9
 	github.com/sologenic/com-fs-utils-lib/models/audit v0.0.0-20260921113010-b0e6f3617f70
 	github.com/sologenic/com-fs-utils-lib/models/commission v0.0.0-20260921113010-b0e6f3617f70
 	github.com/sologenic/com-fs-utils-lib/models/language v0.0.0-20260921113010-b0e6f3617f70
 	github.com/sologenic/com-fs-utils-lib/models/metadata v0.0.0-20260921113010-b0e6f3617f70
 	github.com/sologenic/com-fs-utils-lib/models/role v0.0.0-20260921113010-b0e6f3617f70
-	google.golang.org/grpc v1.83.0
+	google.golang.org/grpc v1.83.2
 	google.golang.org/protobuf v1.36.11
 )
 
@@ -33,18 +33,18 @@ require (
 	github.com/mattn/go-isatty v0.0.23 // indirect
 	github.com/rs/zerolog v1.35.1 // indirect
 	github.com/shopspring/decimal v1.4.0 // indirect
-	github.com/sologenic/com-fs-utils-internal-lib/go/logger v0.0.0-20260921085849-a2e0da3aeb25 // indirect
+	github.com/sologenic/com-fs-utils-internal-lib/go/logger v0.0.0-20261014184121-6933fe0a39b9 // indirect
 	github.com/sologenic/com-fs-utils-lib/models/decimal v0.0.0-20260921113010-b0e6f3617f70 // indirect
 	go.opentelemetry.io/auto/sdk v1.2.1 // indirect
 	go.opentelemetry.io/contrib/instrumentation/net/http/otelhttp v0.69.0 // indirect
 	go.opentelemetry.io/otel v1.44.0 // indirect
 	go.opentelemetry.io/otel/metric v1.44.0 // indirect
 	go.opentelemetry.io/otel/trace v1.44.0 // indirect
-	golang.org/x/crypto v0.54.0 // indirect
-	golang.org/x/net v0.57.0 // indirect
+	golang.org/x/crypto v0.55.0 // indirect
+	golang.org/x/net v0.58.0 // indirect
 	golang.org/x/oauth2 v0.36.0 // indirect
 	golang.org/x/sys v0.47.0 // indirect
-	golang.org/x/text v0.40.0 // indirect
+	golang.org/x/text v0.41.0 // indirect
 	google.golang.org/api v0.293.0 // indirect
 	google.golang.org/genproto/googleapis/rpc v0.0.0-20260807164820-c8921c73eeea // indirect
 )
