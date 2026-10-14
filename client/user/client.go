@@ -13,6 +13,7 @@ package user
 
 import (
 	"context"
+	"sync"
 
 	grpcdef "github.com/sologenic/com-fs-user-model"
 	grpcclient "github.com/sologenic/com-fs-utils-internal-lib/go/grpc-client"
@@ -25,6 +26,7 @@ const (
 var (
 	client     grpcdef.UserServiceClient
 	grpcClient *grpcclient.GRPCClient
+	once       sync.Once
 )
 
 /*
@@ -39,15 +41,11 @@ func initClient() {
 }
 
 func Client() grpcdef.UserServiceClient {
-	if client == nil {
-		initClient()
-	}
+	once.Do(initClient)
 	return client
 }
 
 func AuthCtx(ctx context.Context) context.Context {
-	if grpcClient == nil {
-		initClient()
-	}
+	once.Do(initClient)
 	return grpcClient.AuthCtx(ctx)
 }
