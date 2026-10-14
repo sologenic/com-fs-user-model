@@ -63,7 +63,8 @@ message UserDetails {
         (buf.validate.field).ignore = IGNORE_IF_ZERO_VALUE,
         (buf.validate.field).string = {
             uri: true,
-            max_len: 256
+            max_len: 256,
+            prefix: "gs://"
         }
     ];
 
@@ -244,8 +245,7 @@ message UserDetails {
         (buf.validate.field).string = {
             email: true,
             max_len: 254
-        },
-        (buf.validate.field).ignore = IGNORE_IF_ZERO_VALUE
+        }
     ];
 
     // Compliance form result
