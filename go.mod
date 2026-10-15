@@ -3,19 +3,19 @@ module github.com/sologenic/com-fs-user-model
 go 1.27.1
 
 require (
-	buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go v1.36.11-20260709200747-435963d16310.1
+	buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go v1.36.12-20260825204119-511051f7f437.2
 	github.com/flaticols/countrycodes v0.0.2
-	github.com/sologenic/com-fs-compliance-model v0.0.0-20261014192331-c881f5d1d360
-	github.com/sologenic/com-fs-document-model v0.0.0-20261001160731-c19bb3169c88
-	github.com/sologenic/com-fs-trade-profile-model v0.0.0-20260717081219-0109f4d46650
-	github.com/sologenic/com-fs-utils-internal-lib/go/grpc-client v0.0.0-20261014184121-6933fe0a39b9
-	github.com/sologenic/com-fs-utils-lib/models/audit v0.0.0-20260921113010-b0e6f3617f70
-	github.com/sologenic/com-fs-utils-lib/models/commission v0.0.0-20260921113010-b0e6f3617f70
-	github.com/sologenic/com-fs-utils-lib/models/language v0.0.0-20260921113010-b0e6f3617f70
-	github.com/sologenic/com-fs-utils-lib/models/metadata v0.0.0-20260921113010-b0e6f3617f70
-	github.com/sologenic/com-fs-utils-lib/models/role v0.0.0-20260921113010-b0e6f3617f70
+	github.com/sologenic/com-fs-compliance-model v0.0.0-20261015114537-6b051cb73ec9
+	github.com/sologenic/com-fs-document-model v0.0.0-20261015114537-b171d1aeccbc
+	github.com/sologenic/com-fs-trade-profile-model v0.0.0-20261015094536-6d87daadb780
+	github.com/sologenic/com-fs-utils-internal-lib/go/grpc-client v0.0.0-20261015114510-759dd7e97daf
+	github.com/sologenic/com-fs-utils-lib/models/audit v0.0.0-20261015114509-385fbabbb477
+	github.com/sologenic/com-fs-utils-lib/models/commission v0.0.0-20261015114509-385fbabbb477
+	github.com/sologenic/com-fs-utils-lib/models/language v0.0.0-20261015114509-385fbabbb477
+	github.com/sologenic/com-fs-utils-lib/models/metadata v0.0.0-20261015114509-385fbabbb477
+	github.com/sologenic/com-fs-utils-lib/models/role v0.0.0-20261015114509-385fbabbb477
 	google.golang.org/grpc v1.83.2
-	google.golang.org/protobuf v1.36.11
+	google.golang.org/protobuf v1.36.12
 )
 
 require (
@@ -33,8 +33,8 @@ require (
 	github.com/mattn/go-isatty v0.0.23 // indirect
 	github.com/rs/zerolog v1.35.1 // indirect
 	github.com/shopspring/decimal v1.4.0 // indirect
-	github.com/sologenic/com-fs-utils-internal-lib/go/logger v0.0.0-20261014184121-6933fe0a39b9 // indirect
-	github.com/sologenic/com-fs-utils-lib/models/decimal v0.0.0-20260921113010-b0e6f3617f70 // indirect
+	github.com/sologenic/com-fs-utils-internal-lib/go/logger v0.0.0-20261015114510-759dd7e97daf // indirect
+	github.com/sologenic/com-fs-utils-lib/models/decimal v0.0.0-20261015114509-385fbabbb477 // indirect
 	go.opentelemetry.io/auto/sdk v1.2.1 // indirect
 	go.opentelemetry.io/contrib/instrumentation/net/http/otelhttp v0.69.0 // indirect
 	go.opentelemetry.io/otel v1.44.0 // indirect
