@@ -6,14 +6,12 @@
 
 /* eslint-disable */
 import _m0 from "protobufjs/minimal";
-import { Network, networkFromJSON, networkToJSON } from "./sologenic/com-fs-utils-lib/models/metadata/metadata";
 import { User, UserStatus, userStatusFromJSON, userStatusToJSON } from "./user";
 
 export const protobufPackage = "user";
 
 export interface Filter {
   UserIDs: string[];
-  Network?: Network | undefined;
   OrganizationID: string;
   Offset?: number | undefined;
   Limit?: number | undefined;
@@ -28,13 +26,11 @@ export interface Filter {
 export interface UserID {
   UserID: string;
   OrganizationID: string;
-  Network?: Network | undefined;
 }
 
 export interface GetByAddressesRequest {
   Addresses: string[];
   OrganizationID: string;
-  Network?: Network | undefined;
 }
 
 export interface AddressUserPair {
@@ -50,7 +46,6 @@ export interface GetByAddressesResponse {
 function createBaseFilter(): Filter {
   return {
     UserIDs: [],
-    Network: undefined,
     OrganizationID: "",
     Offset: undefined,
     Limit: undefined,
@@ -67,9 +62,6 @@ export const Filter = {
   encode(message: Filter, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.UserIDs) {
       writer.uint32(10).string(v!);
-    }
-    if (message.Network !== undefined) {
-      writer.uint32(16).int32(message.Network);
     }
     if (message.OrganizationID !== "") {
       writer.uint32(26).string(message.OrganizationID);
@@ -114,13 +106,6 @@ export const Filter = {
           }
 
           message.UserIDs.push(reader.string());
-          continue;
-        case 2:
-          if (tag !== 16) {
-            break;
-          }
-
-          message.Network = reader.int32() as any;
           continue;
         case 3:
           if (tag !== 26) {
@@ -197,7 +182,6 @@ export const Filter = {
   fromJSON(object: any): Filter {
     return {
       UserIDs: globalThis.Array.isArray(object?.UserIDs) ? object.UserIDs.map((e: any) => globalThis.String(e)) : [],
-      Network: isSet(object.Network) ? networkFromJSON(object.Network) : undefined,
       OrganizationID: isSet(object.OrganizationID) ? globalThis.String(object.OrganizationID) : "",
       Offset: isSet(object.Offset) ? globalThis.Number(object.Offset) : undefined,
       Limit: isSet(object.Limit) ? globalThis.Number(object.Limit) : undefined,
@@ -216,9 +200,6 @@ export const Filter = {
     const obj: any = {};
     if (message.UserIDs?.length) {
       obj.UserIDs = message.UserIDs;
-    }
-    if (message.Network !== undefined) {
-      obj.Network = networkToJSON(message.Network);
     }
     if (message.OrganizationID !== "") {
       obj.OrganizationID = message.OrganizationID;
@@ -256,7 +237,6 @@ export const Filter = {
   fromPartial<I extends Exact<DeepPartial<Filter>, I>>(object: I): Filter {
     const message = createBaseFilter();
     message.UserIDs = object.UserIDs?.map((e) => e) || [];
-    message.Network = object.Network ?? undefined;
     message.OrganizationID = object.OrganizationID ?? "";
     message.Offset = object.Offset ?? undefined;
     message.Limit = object.Limit ?? undefined;
@@ -271,7 +251,7 @@ export const Filter = {
 };
 
 function createBaseUserID(): UserID {
-  return { UserID: "", OrganizationID: "", Network: undefined };
+  return { UserID: "", OrganizationID: "" };
 }
 
 export const UserID = {
@@ -281,9 +261,6 @@ export const UserID = {
     }
     if (message.OrganizationID !== "") {
       writer.uint32(18).string(message.OrganizationID);
-    }
-    if (message.Network !== undefined) {
-      writer.uint32(24).int32(message.Network);
     }
     return writer;
   },
@@ -309,13 +286,6 @@ export const UserID = {
 
           message.OrganizationID = reader.string();
           continue;
-        case 3:
-          if (tag !== 24) {
-            break;
-          }
-
-          message.Network = reader.int32() as any;
-          continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -329,7 +299,6 @@ export const UserID = {
     return {
       UserID: isSet(object.UserID) ? globalThis.String(object.UserID) : "",
       OrganizationID: isSet(object.OrganizationID) ? globalThis.String(object.OrganizationID) : "",
-      Network: isSet(object.Network) ? networkFromJSON(object.Network) : undefined,
     };
   },
 
@@ -341,9 +310,6 @@ export const UserID = {
     if (message.OrganizationID !== "") {
       obj.OrganizationID = message.OrganizationID;
     }
-    if (message.Network !== undefined) {
-      obj.Network = networkToJSON(message.Network);
-    }
     return obj;
   },
 
@@ -354,13 +320,12 @@ export const UserID = {
     const message = createBaseUserID();
     message.UserID = object.UserID ?? "";
     message.OrganizationID = object.OrganizationID ?? "";
-    message.Network = object.Network ?? undefined;
     return message;
   },
 };
 
 function createBaseGetByAddressesRequest(): GetByAddressesRequest {
-  return { Addresses: [], OrganizationID: "", Network: undefined };
+  return { Addresses: [], OrganizationID: "" };
 }
 
 export const GetByAddressesRequest = {
@@ -370,9 +335,6 @@ export const GetByAddressesRequest = {
     }
     if (message.OrganizationID !== "") {
       writer.uint32(18).string(message.OrganizationID);
-    }
-    if (message.Network !== undefined) {
-      writer.uint32(24).int32(message.Network);
     }
     return writer;
   },
@@ -398,13 +360,6 @@ export const GetByAddressesRequest = {
 
           message.OrganizationID = reader.string();
           continue;
-        case 3:
-          if (tag !== 24) {
-            break;
-          }
-
-          message.Network = reader.int32() as any;
-          continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -420,7 +375,6 @@ export const GetByAddressesRequest = {
         ? object.Addresses.map((e: any) => globalThis.String(e))
         : [],
       OrganizationID: isSet(object.OrganizationID) ? globalThis.String(object.OrganizationID) : "",
-      Network: isSet(object.Network) ? networkFromJSON(object.Network) : undefined,
     };
   },
 
@@ -432,9 +386,6 @@ export const GetByAddressesRequest = {
     if (message.OrganizationID !== "") {
       obj.OrganizationID = message.OrganizationID;
     }
-    if (message.Network !== undefined) {
-      obj.Network = networkToJSON(message.Network);
-    }
     return obj;
   },
 
@@ -445,7 +396,6 @@ export const GetByAddressesRequest = {
     const message = createBaseGetByAddressesRequest();
     message.Addresses = object.Addresses?.map((e) => e) || [];
     message.OrganizationID = object.OrganizationID ?? "";
-    message.Network = object.Network ?? undefined;
     return message;
   },
 };

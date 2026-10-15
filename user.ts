@@ -14,12 +14,7 @@ import { TradeProfileDetails, UserTradeProfile } from "./sologenic/com-fs-trade-
 import { Audit } from "./sologenic/com-fs-utils-lib/models/audit/audit";
 import { CommissionSettings } from "./sologenic/com-fs-utils-lib/models/commission/commission";
 import { Lang, langFromJSON, langToJSON } from "./sologenic/com-fs-utils-lib/models/language/language";
-import {
-  MetaData,
-  Network,
-  networkFromJSON,
-  networkToJSON,
-} from "./sologenic/com-fs-utils-lib/models/metadata/metadata";
+import { MetaData } from "./sologenic/com-fs-utils-lib/models/metadata/metadata";
 import { Role, roleFromJSON, roleToJSON } from "./sologenic/com-fs-utils-lib/models/role/role";
 import { BrokerAccount, Wallet } from "./user-fundings";
 import { KYCStatus, kYCStatusFromJSON, kYCStatusToJSON, UserKYCDetails } from "./user-kyc";
@@ -588,8 +583,6 @@ export interface StatusMessage {
   UserID: string;
   OrganizationID: string;
   Status: UserStatus;
-  /** @deprecated */
-  Network?: Network | undefined;
   Audit: Audit | undefined;
 }
 
@@ -1722,7 +1715,7 @@ export const UserList = {
 };
 
 function createBaseStatusMessage(): StatusMessage {
-  return { UserID: "", OrganizationID: "", Status: 0, Network: undefined, Audit: undefined };
+  return { UserID: "", OrganizationID: "", Status: 0, Audit: undefined };
 }
 
 export const StatusMessage = {
@@ -1735,9 +1728,6 @@ export const StatusMessage = {
     }
     if (message.Status !== 0) {
       writer.uint32(24).int32(message.Status);
-    }
-    if (message.Network !== undefined) {
-      writer.uint32(32).int32(message.Network);
     }
     if (message.Audit !== undefined) {
       Audit.encode(message.Audit, writer.uint32(42).fork()).ldelim();
@@ -1773,13 +1763,6 @@ export const StatusMessage = {
 
           message.Status = reader.int32() as any;
           continue;
-        case 4:
-          if (tag !== 32) {
-            break;
-          }
-
-          message.Network = reader.int32() as any;
-          continue;
         case 5:
           if (tag !== 42) {
             break;
@@ -1801,7 +1784,6 @@ export const StatusMessage = {
       UserID: isSet(object.UserID) ? globalThis.String(object.UserID) : "",
       OrganizationID: isSet(object.OrganizationID) ? globalThis.String(object.OrganizationID) : "",
       Status: isSet(object.Status) ? userStatusFromJSON(object.Status) : 0,
-      Network: isSet(object.Network) ? networkFromJSON(object.Network) : undefined,
       Audit: isSet(object.Audit) ? Audit.fromJSON(object.Audit) : undefined,
     };
   },
@@ -1817,9 +1799,6 @@ export const StatusMessage = {
     if (message.Status !== 0) {
       obj.Status = userStatusToJSON(message.Status);
     }
-    if (message.Network !== undefined) {
-      obj.Network = networkToJSON(message.Network);
-    }
     if (message.Audit !== undefined) {
       obj.Audit = Audit.toJSON(message.Audit);
     }
@@ -1834,7 +1813,6 @@ export const StatusMessage = {
     message.UserID = object.UserID ?? "";
     message.OrganizationID = object.OrganizationID ?? "";
     message.Status = object.Status ?? 0;
-    message.Network = object.Network ?? undefined;
     message.Audit = (object.Audit !== undefined && object.Audit !== null) ? Audit.fromPartial(object.Audit) : undefined;
     return message;
   },

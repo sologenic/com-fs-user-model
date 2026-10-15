@@ -436,9 +436,8 @@ message StatusMessage {
     UserStatus Status = 3 [
         (buf.validate.field).enum.defined_only = true
     ];
-    optional metadata.Network Network = 4 [
-        deprecated = true
-    ];
+    reserved 4;
+    reserved "Network";
     audit.Audit Audit = 5;
 }
 

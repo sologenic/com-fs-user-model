@@ -13,7 +13,7 @@ import { TradeProfileDetails, UserTradeProfile } from "./sologenic/com-fs-trade-
 import { Audit } from "./sologenic/com-fs-utils-lib/models/audit/audit";
 import { CommissionSettings } from "./sologenic/com-fs-utils-lib/models/commission/commission";
 import { langFromJSON, langToJSON } from "./sologenic/com-fs-utils-lib/models/language/language";
-import { MetaData, networkFromJSON, networkToJSON, } from "./sologenic/com-fs-utils-lib/models/metadata/metadata";
+import { MetaData } from "./sologenic/com-fs-utils-lib/models/metadata/metadata";
 import { roleFromJSON, roleToJSON } from "./sologenic/com-fs-utils-lib/models/role/role";
 import { BrokerAccount, Wallet } from "./user-fundings";
 import { kYCStatusFromJSON, kYCStatusToJSON, UserKYCDetails } from "./user-kyc";
@@ -1321,7 +1321,7 @@ export const UserList = {
     },
 };
 function createBaseStatusMessage() {
-    return { UserID: "", OrganizationID: "", Status: 0, Network: undefined, Audit: undefined };
+    return { UserID: "", OrganizationID: "", Status: 0, Audit: undefined };
 }
 export const StatusMessage = {
     encode(message, writer = _m0.Writer.create()) {
@@ -1333,9 +1333,6 @@ export const StatusMessage = {
         }
         if (message.Status !== 0) {
             writer.uint32(24).int32(message.Status);
-        }
-        if (message.Network !== undefined) {
-            writer.uint32(32).int32(message.Network);
         }
         if (message.Audit !== undefined) {
             Audit.encode(message.Audit, writer.uint32(42).fork()).ldelim();
@@ -1367,12 +1364,6 @@ export const StatusMessage = {
                     }
                     message.Status = reader.int32();
                     continue;
-                case 4:
-                    if (tag !== 32) {
-                        break;
-                    }
-                    message.Network = reader.int32();
-                    continue;
                 case 5:
                     if (tag !== 42) {
                         break;
@@ -1392,7 +1383,6 @@ export const StatusMessage = {
             UserID: isSet(object.UserID) ? globalThis.String(object.UserID) : "",
             OrganizationID: isSet(object.OrganizationID) ? globalThis.String(object.OrganizationID) : "",
             Status: isSet(object.Status) ? userStatusFromJSON(object.Status) : 0,
-            Network: isSet(object.Network) ? networkFromJSON(object.Network) : undefined,
             Audit: isSet(object.Audit) ? Audit.fromJSON(object.Audit) : undefined,
         };
     },
@@ -1407,9 +1397,6 @@ export const StatusMessage = {
         if (message.Status !== 0) {
             obj.Status = userStatusToJSON(message.Status);
         }
-        if (message.Network !== undefined) {
-            obj.Network = networkToJSON(message.Network);
-        }
         if (message.Audit !== undefined) {
             obj.Audit = Audit.toJSON(message.Audit);
         }
@@ -1419,12 +1406,11 @@ export const StatusMessage = {
         return StatusMessage.fromPartial(base !== null && base !== void 0 ? base : {});
     },
     fromPartial(object) {
-        var _a, _b, _c, _d;
+        var _a, _b, _c;
         const message = createBaseStatusMessage();
         message.UserID = (_a = object.UserID) !== null && _a !== void 0 ? _a : "";
         message.OrganizationID = (_b = object.OrganizationID) !== null && _b !== void 0 ? _b : "";
         message.Status = (_c = object.Status) !== null && _c !== void 0 ? _c : 0;
-        message.Network = (_d = object.Network) !== null && _d !== void 0 ? _d : undefined;
         message.Audit = (object.Audit !== undefined && object.Audit !== null) ? Audit.fromPartial(object.Audit) : undefined;
         return message;
     },

@@ -4,12 +4,12 @@ package user;
 
 option go_package = "github.com/sologenic/com-fs-user-model;user";
 
-import "sologenic/com-fs-utils-lib/models/metadata/metadata.proto";
 import "user.proto";
 
 message Filter {
     repeated string UserIDs = 1;
-    optional metadata.Network Network = 2; 
+    reserved 2;
+    reserved "Network";
     string OrganizationID = 3;
     optional int32 Offset = 4;
     optional int32 Limit = 5;
@@ -24,13 +24,15 @@ message Filter {
 message UserID {
     string UserID = 1;
     string OrganizationID = 2;
-    optional metadata.Network Network = 3; 
+    reserved 3;
+    reserved "Network";
 }
 
 message GetByAddressesRequest {
     repeated string Addresses = 1;
     string OrganizationID = 2;
-    optional metadata.Network Network = 3;
+    reserved 3;
+    reserved "Network";
 }
 
 message AddressUserPair {
