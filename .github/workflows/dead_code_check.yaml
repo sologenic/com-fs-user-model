@@ -13,11 +13,13 @@ jobs:
     name: Go Dead Code Check
     runs-on: ubuntu-latest
     steps:
+      # https://github.com/actions/checkout
       - name: Checkout code
-        uses: actions/checkout@v5
+        uses: actions/checkout@v7
 
+      # https://github.com/actions/setup-go
       - name: Setup Go
-        uses: actions/setup-go@v6
+        uses: actions/setup-go@v7
         with:
           go-version-file: "go.mod"
           cache: true
