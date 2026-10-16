@@ -7,7 +7,7 @@ require (
 	github.com/flaticols/countrycodes v0.0.2
 	github.com/sologenic/com-fs-compliance-model v0.0.0-20261015130546-0352ef0bf18b
 	github.com/sologenic/com-fs-document-model v0.0.0-20261015130546-12efb83d9fa7
-	github.com/sologenic/com-fs-trade-profile-model v0.0.0-20261015125803-21b9d649354c
+	github.com/sologenic/com-fs-trade-profile-model v0.0.0-20261016103728-f25ad67677fc
 	github.com/sologenic/com-fs-utils-internal-lib/go/grpc-client v0.0.0-20261015130520-f7a6a5e49aa5
 	github.com/sologenic/com-fs-utils-lib/models/audit v0.0.0-20261015130520-de4f93512d97
 	github.com/sologenic/com-fs-utils-lib/models/commission v0.0.0-20261015130520-de4f93512d97
