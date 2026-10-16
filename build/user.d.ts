@@ -5,7 +5,7 @@ import { TradeProfileDetails, UserTradeProfile } from "./sologenic/com-fs-trade-
 import { Audit } from "./sologenic/com-fs-utils-lib/models/audit/audit";
 import { CommissionSettings } from "./sologenic/com-fs-utils-lib/models/commission/commission";
 import { Lang } from "./sologenic/com-fs-utils-lib/models/language/language";
-import { MetaData, Network } from "./sologenic/com-fs-utils-lib/models/metadata/metadata";
+import { MetaData } from "./sologenic/com-fs-utils-lib/models/metadata/metadata";
 import { Role } from "./sologenic/com-fs-utils-lib/models/role/role";
 import { BrokerAccount, Wallet } from "./user-fundings";
 import { KYCStatus, UserKYCDetails } from "./user-kyc";
@@ -302,8 +302,6 @@ export interface StatusMessage {
     UserID: string;
     OrganizationID: string;
     Status: UserStatus;
-    /** @deprecated */
-    Network?: Network | undefined;
     Audit: Audit | undefined;
 }
 export interface UISettings {
@@ -1605,7 +1603,7 @@ export declare const User: {
             }[] | undefined;
         } | undefined;
         MetaData?: {
-            Network?: Network | undefined;
+            Network?: import("./sologenic/com-fs-utils-lib/models/metadata/metadata").Network | undefined;
             UpdatedAt?: Date | undefined;
             CreatedAt?: Date | undefined;
             UpdatedByAccount?: string | undefined;
@@ -2172,12 +2170,12 @@ export declare const User: {
             }[]>]: never; }) | undefined;
         } & { [K_36 in Exclude<keyof I["User"], keyof UserDetails>]: never; }) | undefined;
         MetaData?: ({
-            Network?: Network | undefined;
+            Network?: import("./sologenic/com-fs-utils-lib/models/metadata/metadata").Network | undefined;
             UpdatedAt?: Date | undefined;
             CreatedAt?: Date | undefined;
             UpdatedByAccount?: string | undefined;
         } & {
-            Network?: Network | undefined;
+            Network?: import("./sologenic/com-fs-utils-lib/models/metadata/metadata").Network | undefined;
             UpdatedAt?: Date | undefined;
             CreatedAt?: Date | undefined;
             UpdatedByAccount?: string | undefined;
@@ -2350,7 +2348,7 @@ export declare const User: {
             }[] | undefined;
         } | undefined;
         MetaData?: {
-            Network?: Network | undefined;
+            Network?: import("./sologenic/com-fs-utils-lib/models/metadata/metadata").Network | undefined;
             UpdatedAt?: Date | undefined;
             CreatedAt?: Date | undefined;
             UpdatedByAccount?: string | undefined;
@@ -2917,12 +2915,12 @@ export declare const User: {
             }[]>]: never; }) | undefined;
         } & { [K_77 in Exclude<keyof I_1["User"], keyof UserDetails>]: never; }) | undefined;
         MetaData?: ({
-            Network?: Network | undefined;
+            Network?: import("./sologenic/com-fs-utils-lib/models/metadata/metadata").Network | undefined;
             UpdatedAt?: Date | undefined;
             CreatedAt?: Date | undefined;
             UpdatedByAccount?: string | undefined;
         } & {
-            Network?: Network | undefined;
+            Network?: import("./sologenic/com-fs-utils-lib/models/metadata/metadata").Network | undefined;
             UpdatedAt?: Date | undefined;
             CreatedAt?: Date | undefined;
             UpdatedByAccount?: string | undefined;
@@ -3122,7 +3120,7 @@ export declare const UserList: {
                 }[] | undefined;
             } | undefined;
             MetaData?: {
-                Network?: Network | undefined;
+                Network?: import("./sologenic/com-fs-utils-lib/models/metadata/metadata").Network | undefined;
                 UpdatedAt?: Date | undefined;
                 CreatedAt?: Date | undefined;
                 UpdatedByAccount?: string | undefined;
@@ -3293,7 +3291,7 @@ export declare const UserList: {
                 }[] | undefined;
             } | undefined;
             MetaData?: {
-                Network?: Network | undefined;
+                Network?: import("./sologenic/com-fs-utils-lib/models/metadata/metadata").Network | undefined;
                 UpdatedAt?: Date | undefined;
                 CreatedAt?: Date | undefined;
                 UpdatedByAccount?: string | undefined;
@@ -3461,7 +3459,7 @@ export declare const UserList: {
                 }[] | undefined;
             } | undefined;
             MetaData?: {
-                Network?: Network | undefined;
+                Network?: import("./sologenic/com-fs-utils-lib/models/metadata/metadata").Network | undefined;
                 UpdatedAt?: Date | undefined;
                 CreatedAt?: Date | undefined;
                 UpdatedByAccount?: string | undefined;
@@ -4028,12 +4026,12 @@ export declare const UserList: {
                 }[]>]: never; }) | undefined;
             } & { [K_36 in Exclude<keyof I["Users"][number]["User"], keyof UserDetails>]: never; }) | undefined;
             MetaData?: ({
-                Network?: Network | undefined;
+                Network?: import("./sologenic/com-fs-utils-lib/models/metadata/metadata").Network | undefined;
                 UpdatedAt?: Date | undefined;
                 CreatedAt?: Date | undefined;
                 UpdatedByAccount?: string | undefined;
             } & {
-                Network?: Network | undefined;
+                Network?: import("./sologenic/com-fs-utils-lib/models/metadata/metadata").Network | undefined;
                 UpdatedAt?: Date | undefined;
                 CreatedAt?: Date | undefined;
                 UpdatedByAccount?: string | undefined;
@@ -4205,7 +4203,7 @@ export declare const UserList: {
                 }[] | undefined;
             } | undefined;
             MetaData?: {
-                Network?: Network | undefined;
+                Network?: import("./sologenic/com-fs-utils-lib/models/metadata/metadata").Network | undefined;
                 UpdatedAt?: Date | undefined;
                 CreatedAt?: Date | undefined;
                 UpdatedByAccount?: string | undefined;
@@ -4377,7 +4375,7 @@ export declare const UserList: {
                 }[] | undefined;
             } | undefined;
             MetaData?: {
-                Network?: Network | undefined;
+                Network?: import("./sologenic/com-fs-utils-lib/models/metadata/metadata").Network | undefined;
                 UpdatedAt?: Date | undefined;
                 CreatedAt?: Date | undefined;
                 UpdatedByAccount?: string | undefined;
@@ -4548,7 +4546,7 @@ export declare const UserList: {
                 }[] | undefined;
             } | undefined;
             MetaData?: {
-                Network?: Network | undefined;
+                Network?: import("./sologenic/com-fs-utils-lib/models/metadata/metadata").Network | undefined;
                 UpdatedAt?: Date | undefined;
                 CreatedAt?: Date | undefined;
                 UpdatedByAccount?: string | undefined;
@@ -4716,7 +4714,7 @@ export declare const UserList: {
                 }[] | undefined;
             } | undefined;
             MetaData?: {
-                Network?: Network | undefined;
+                Network?: import("./sologenic/com-fs-utils-lib/models/metadata/metadata").Network | undefined;
                 UpdatedAt?: Date | undefined;
                 CreatedAt?: Date | undefined;
                 UpdatedByAccount?: string | undefined;
@@ -5283,12 +5281,12 @@ export declare const UserList: {
                 }[]>]: never; }) | undefined;
             } & { [K_79 in Exclude<keyof I_1["Users"][number]["User"], keyof UserDetails>]: never; }) | undefined;
             MetaData?: ({
-                Network?: Network | undefined;
+                Network?: import("./sologenic/com-fs-utils-lib/models/metadata/metadata").Network | undefined;
                 UpdatedAt?: Date | undefined;
                 CreatedAt?: Date | undefined;
                 UpdatedByAccount?: string | undefined;
             } & {
-                Network?: Network | undefined;
+                Network?: import("./sologenic/com-fs-utils-lib/models/metadata/metadata").Network | undefined;
                 UpdatedAt?: Date | undefined;
                 CreatedAt?: Date | undefined;
                 UpdatedByAccount?: string | undefined;
@@ -5460,7 +5458,7 @@ export declare const UserList: {
                 }[] | undefined;
             } | undefined;
             MetaData?: {
-                Network?: Network | undefined;
+                Network?: import("./sologenic/com-fs-utils-lib/models/metadata/metadata").Network | undefined;
                 UpdatedAt?: Date | undefined;
                 CreatedAt?: Date | undefined;
                 UpdatedByAccount?: string | undefined;
@@ -5484,7 +5482,6 @@ export declare const StatusMessage: {
         UserID?: string | undefined;
         OrganizationID?: string | undefined;
         Status?: UserStatus | undefined;
-        Network?: Network | undefined;
         Audit?: {
             ChangedBy?: string | undefined;
             ChangedAt?: Date | undefined;
@@ -5494,7 +5491,6 @@ export declare const StatusMessage: {
         UserID?: string | undefined;
         OrganizationID?: string | undefined;
         Status?: UserStatus | undefined;
-        Network?: Network | undefined;
         Audit?: ({
             ChangedBy?: string | undefined;
             ChangedAt?: Date | undefined;
@@ -5509,7 +5505,6 @@ export declare const StatusMessage: {
         UserID?: string | undefined;
         OrganizationID?: string | undefined;
         Status?: UserStatus | undefined;
-        Network?: Network | undefined;
         Audit?: {
             ChangedBy?: string | undefined;
             ChangedAt?: Date | undefined;
@@ -5519,7 +5514,6 @@ export declare const StatusMessage: {
         UserID?: string | undefined;
         OrganizationID?: string | undefined;
         Status?: UserStatus | undefined;
-        Network?: Network | undefined;
         Audit?: ({
             ChangedBy?: string | undefined;
             ChangedAt?: Date | undefined;

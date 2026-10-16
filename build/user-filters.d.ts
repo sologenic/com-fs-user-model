@@ -1,10 +1,8 @@
 import _m0 from "protobufjs/minimal";
-import { Network } from "./sologenic/com-fs-utils-lib/models/metadata/metadata";
 import { User, UserStatus } from "./user";
 export declare const protobufPackage = "user";
 export interface Filter {
     UserIDs: string[];
-    Network?: Network | undefined;
     OrganizationID: string;
     Offset?: number | undefined;
     Limit?: number | undefined;
@@ -18,12 +16,10 @@ export interface Filter {
 export interface UserID {
     UserID: string;
     OrganizationID: string;
-    Network?: Network | undefined;
 }
 export interface GetByAddressesRequest {
     Addresses: string[];
     OrganizationID: string;
-    Network?: Network | undefined;
 }
 export interface AddressUserPair {
     Address: string;
@@ -40,7 +36,6 @@ export declare const Filter: {
     toJSON(message: Filter): unknown;
     create<I extends {
         UserIDs?: string[] | undefined;
-        Network?: Network | undefined;
         OrganizationID?: string | undefined;
         Offset?: number | undefined;
         Limit?: number | undefined;
@@ -52,7 +47,6 @@ export declare const Filter: {
         Alias?: string | undefined;
     } & {
         UserIDs?: (string[] & string[] & { [K in Exclude<keyof I["UserIDs"], keyof string[]>]: never; }) | undefined;
-        Network?: Network | undefined;
         OrganizationID?: string | undefined;
         Offset?: number | undefined;
         Limit?: number | undefined;
@@ -65,7 +59,6 @@ export declare const Filter: {
     } & { [K_2 in Exclude<keyof I, keyof Filter>]: never; }>(base?: I | undefined): Filter;
     fromPartial<I_1 extends {
         UserIDs?: string[] | undefined;
-        Network?: Network | undefined;
         OrganizationID?: string | undefined;
         Offset?: number | undefined;
         Limit?: number | undefined;
@@ -77,7 +70,6 @@ export declare const Filter: {
         Alias?: string | undefined;
     } & {
         UserIDs?: (string[] & string[] & { [K_3 in Exclude<keyof I_1["UserIDs"], keyof string[]>]: never; }) | undefined;
-        Network?: Network | undefined;
         OrganizationID?: string | undefined;
         Offset?: number | undefined;
         Limit?: number | undefined;
@@ -97,20 +89,16 @@ export declare const UserID: {
     create<I extends {
         UserID?: string | undefined;
         OrganizationID?: string | undefined;
-        Network?: Network | undefined;
     } & {
         UserID?: string | undefined;
         OrganizationID?: string | undefined;
-        Network?: Network | undefined;
     } & { [K in Exclude<keyof I, keyof UserID>]: never; }>(base?: I | undefined): UserID;
     fromPartial<I_1 extends {
         UserID?: string | undefined;
         OrganizationID?: string | undefined;
-        Network?: Network | undefined;
     } & {
         UserID?: string | undefined;
         OrganizationID?: string | undefined;
-        Network?: Network | undefined;
     } & { [K_1 in Exclude<keyof I_1, keyof UserID>]: never; }>(object: I_1): UserID;
 };
 export declare const GetByAddressesRequest: {
@@ -121,20 +109,16 @@ export declare const GetByAddressesRequest: {
     create<I extends {
         Addresses?: string[] | undefined;
         OrganizationID?: string | undefined;
-        Network?: Network | undefined;
     } & {
         Addresses?: (string[] & string[] & { [K in Exclude<keyof I["Addresses"], keyof string[]>]: never; }) | undefined;
         OrganizationID?: string | undefined;
-        Network?: Network | undefined;
     } & { [K_1 in Exclude<keyof I, keyof GetByAddressesRequest>]: never; }>(base?: I | undefined): GetByAddressesRequest;
     fromPartial<I_1 extends {
         Addresses?: string[] | undefined;
         OrganizationID?: string | undefined;
-        Network?: Network | undefined;
     } & {
         Addresses?: (string[] & string[] & { [K_2 in Exclude<keyof I_1["Addresses"], keyof string[]>]: never; }) | undefined;
         OrganizationID?: string | undefined;
-        Network?: Network | undefined;
     } & { [K_3 in Exclude<keyof I_1, keyof GetByAddressesRequest>]: never; }>(object: I_1): GetByAddressesRequest;
 };
 export declare const AddressUserPair: {
@@ -301,7 +285,7 @@ export declare const AddressUserPair: {
                 }[] | undefined;
             } | undefined;
             MetaData?: {
-                Network?: Network | undefined;
+                Network?: import("./sologenic/com-fs-utils-lib/models/metadata/metadata").Network | undefined;
                 UpdatedAt?: Date | undefined;
                 CreatedAt?: Date | undefined;
                 UpdatedByAccount?: string | undefined;
@@ -472,7 +456,7 @@ export declare const AddressUserPair: {
                 }[] | undefined;
             } | undefined;
             MetaData?: {
-                Network?: Network | undefined;
+                Network?: import("./sologenic/com-fs-utils-lib/models/metadata/metadata").Network | undefined;
                 UpdatedAt?: Date | undefined;
                 CreatedAt?: Date | undefined;
                 UpdatedByAccount?: string | undefined;
@@ -1039,12 +1023,12 @@ export declare const AddressUserPair: {
                 }[]>]: never; }) | undefined;
             } & { [K_36 in Exclude<keyof I["User"]["User"], keyof import("./user").UserDetails>]: never; }) | undefined;
             MetaData?: ({
-                Network?: Network | undefined;
+                Network?: import("./sologenic/com-fs-utils-lib/models/metadata/metadata").Network | undefined;
                 UpdatedAt?: Date | undefined;
                 CreatedAt?: Date | undefined;
                 UpdatedByAccount?: string | undefined;
             } & {
-                Network?: Network | undefined;
+                Network?: import("./sologenic/com-fs-utils-lib/models/metadata/metadata").Network | undefined;
                 UpdatedAt?: Date | undefined;
                 CreatedAt?: Date | undefined;
                 UpdatedByAccount?: string | undefined;
@@ -1220,7 +1204,7 @@ export declare const AddressUserPair: {
                 }[] | undefined;
             } | undefined;
             MetaData?: {
-                Network?: Network | undefined;
+                Network?: import("./sologenic/com-fs-utils-lib/models/metadata/metadata").Network | undefined;
                 UpdatedAt?: Date | undefined;
                 CreatedAt?: Date | undefined;
                 UpdatedByAccount?: string | undefined;
@@ -1391,7 +1375,7 @@ export declare const AddressUserPair: {
                 }[] | undefined;
             } | undefined;
             MetaData?: {
-                Network?: Network | undefined;
+                Network?: import("./sologenic/com-fs-utils-lib/models/metadata/metadata").Network | undefined;
                 UpdatedAt?: Date | undefined;
                 CreatedAt?: Date | undefined;
                 UpdatedByAccount?: string | undefined;
@@ -1958,12 +1942,12 @@ export declare const AddressUserPair: {
                 }[]>]: never; }) | undefined;
             } & { [K_78 in Exclude<keyof I_1["User"]["User"], keyof import("./user").UserDetails>]: never; }) | undefined;
             MetaData?: ({
-                Network?: Network | undefined;
+                Network?: import("./sologenic/com-fs-utils-lib/models/metadata/metadata").Network | undefined;
                 UpdatedAt?: Date | undefined;
                 CreatedAt?: Date | undefined;
                 UpdatedByAccount?: string | undefined;
             } & {
-                Network?: Network | undefined;
+                Network?: import("./sologenic/com-fs-utils-lib/models/metadata/metadata").Network | undefined;
                 UpdatedAt?: Date | undefined;
                 CreatedAt?: Date | undefined;
                 UpdatedByAccount?: string | undefined;
@@ -2146,7 +2130,7 @@ export declare const GetByAddressesResponse: {
                     }[] | undefined;
                 } | undefined;
                 MetaData?: {
-                    Network?: Network | undefined;
+                    Network?: import("./sologenic/com-fs-utils-lib/models/metadata/metadata").Network | undefined;
                     UpdatedAt?: Date | undefined;
                     CreatedAt?: Date | undefined;
                     UpdatedByAccount?: string | undefined;
@@ -2319,7 +2303,7 @@ export declare const GetByAddressesResponse: {
                     }[] | undefined;
                 } | undefined;
                 MetaData?: {
-                    Network?: Network | undefined;
+                    Network?: import("./sologenic/com-fs-utils-lib/models/metadata/metadata").Network | undefined;
                     UpdatedAt?: Date | undefined;
                     CreatedAt?: Date | undefined;
                     UpdatedByAccount?: string | undefined;
@@ -2490,7 +2474,7 @@ export declare const GetByAddressesResponse: {
                     }[] | undefined;
                 } | undefined;
                 MetaData?: {
-                    Network?: Network | undefined;
+                    Network?: import("./sologenic/com-fs-utils-lib/models/metadata/metadata").Network | undefined;
                     UpdatedAt?: Date | undefined;
                     CreatedAt?: Date | undefined;
                     UpdatedByAccount?: string | undefined;
@@ -2661,7 +2645,7 @@ export declare const GetByAddressesResponse: {
                     }[] | undefined;
                 } | undefined;
                 MetaData?: {
-                    Network?: Network | undefined;
+                    Network?: import("./sologenic/com-fs-utils-lib/models/metadata/metadata").Network | undefined;
                     UpdatedAt?: Date | undefined;
                     CreatedAt?: Date | undefined;
                     UpdatedByAccount?: string | undefined;
@@ -3228,12 +3212,12 @@ export declare const GetByAddressesResponse: {
                     }[]>]: never; }) | undefined;
                 } & { [K_36 in Exclude<keyof I["Results"][number]["User"]["User"], keyof import("./user").UserDetails>]: never; }) | undefined;
                 MetaData?: ({
-                    Network?: Network | undefined;
+                    Network?: import("./sologenic/com-fs-utils-lib/models/metadata/metadata").Network | undefined;
                     UpdatedAt?: Date | undefined;
                     CreatedAt?: Date | undefined;
                     UpdatedByAccount?: string | undefined;
                 } & {
-                    Network?: Network | undefined;
+                    Network?: import("./sologenic/com-fs-utils-lib/models/metadata/metadata").Network | undefined;
                     UpdatedAt?: Date | undefined;
                     CreatedAt?: Date | undefined;
                     UpdatedByAccount?: string | undefined;
@@ -3408,7 +3392,7 @@ export declare const GetByAddressesResponse: {
                     }[] | undefined;
                 } | undefined;
                 MetaData?: {
-                    Network?: Network | undefined;
+                    Network?: import("./sologenic/com-fs-utils-lib/models/metadata/metadata").Network | undefined;
                     UpdatedAt?: Date | undefined;
                     CreatedAt?: Date | undefined;
                     UpdatedByAccount?: string | undefined;
@@ -3582,7 +3566,7 @@ export declare const GetByAddressesResponse: {
                     }[] | undefined;
                 } | undefined;
                 MetaData?: {
-                    Network?: Network | undefined;
+                    Network?: import("./sologenic/com-fs-utils-lib/models/metadata/metadata").Network | undefined;
                     UpdatedAt?: Date | undefined;
                     CreatedAt?: Date | undefined;
                     UpdatedByAccount?: string | undefined;
@@ -3755,7 +3739,7 @@ export declare const GetByAddressesResponse: {
                     }[] | undefined;
                 } | undefined;
                 MetaData?: {
-                    Network?: Network | undefined;
+                    Network?: import("./sologenic/com-fs-utils-lib/models/metadata/metadata").Network | undefined;
                     UpdatedAt?: Date | undefined;
                     CreatedAt?: Date | undefined;
                     UpdatedByAccount?: string | undefined;
@@ -3926,7 +3910,7 @@ export declare const GetByAddressesResponse: {
                     }[] | undefined;
                 } | undefined;
                 MetaData?: {
-                    Network?: Network | undefined;
+                    Network?: import("./sologenic/com-fs-utils-lib/models/metadata/metadata").Network | undefined;
                     UpdatedAt?: Date | undefined;
                     CreatedAt?: Date | undefined;
                     UpdatedByAccount?: string | undefined;
@@ -4097,7 +4081,7 @@ export declare const GetByAddressesResponse: {
                     }[] | undefined;
                 } | undefined;
                 MetaData?: {
-                    Network?: Network | undefined;
+                    Network?: import("./sologenic/com-fs-utils-lib/models/metadata/metadata").Network | undefined;
                     UpdatedAt?: Date | undefined;
                     CreatedAt?: Date | undefined;
                     UpdatedByAccount?: string | undefined;
@@ -4664,12 +4648,12 @@ export declare const GetByAddressesResponse: {
                     }[]>]: never; }) | undefined;
                 } & { [K_80 in Exclude<keyof I_1["Results"][number]["User"]["User"], keyof import("./user").UserDetails>]: never; }) | undefined;
                 MetaData?: ({
-                    Network?: Network | undefined;
+                    Network?: import("./sologenic/com-fs-utils-lib/models/metadata/metadata").Network | undefined;
                     UpdatedAt?: Date | undefined;
                     CreatedAt?: Date | undefined;
                     UpdatedByAccount?: string | undefined;
                 } & {
-                    Network?: Network | undefined;
+                    Network?: import("./sologenic/com-fs-utils-lib/models/metadata/metadata").Network | undefined;
                     UpdatedAt?: Date | undefined;
                     CreatedAt?: Date | undefined;
                     UpdatedByAccount?: string | undefined;
@@ -4844,7 +4828,7 @@ export declare const GetByAddressesResponse: {
                     }[] | undefined;
                 } | undefined;
                 MetaData?: {
-                    Network?: Network | undefined;
+                    Network?: import("./sologenic/com-fs-utils-lib/models/metadata/metadata").Network | undefined;
                     UpdatedAt?: Date | undefined;
                     CreatedAt?: Date | undefined;
                     UpdatedByAccount?: string | undefined;

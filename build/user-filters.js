@@ -5,13 +5,11 @@
 // source: user-filters.proto
 /* eslint-disable */
 import _m0 from "protobufjs/minimal";
-import { networkFromJSON, networkToJSON } from "./sologenic/com-fs-utils-lib/models/metadata/metadata";
 import { User, userStatusFromJSON, userStatusToJSON } from "./user";
 export const protobufPackage = "user";
 function createBaseFilter() {
     return {
         UserIDs: [],
-        Network: undefined,
         OrganizationID: "",
         Offset: undefined,
         Limit: undefined,
@@ -27,9 +25,6 @@ export const Filter = {
     encode(message, writer = _m0.Writer.create()) {
         for (const v of message.UserIDs) {
             writer.uint32(10).string(v);
-        }
-        if (message.Network !== undefined) {
-            writer.uint32(16).int32(message.Network);
         }
         if (message.OrganizationID !== "") {
             writer.uint32(26).string(message.OrganizationID);
@@ -72,12 +67,6 @@ export const Filter = {
                         break;
                     }
                     message.UserIDs.push(reader.string());
-                    continue;
-                case 2:
-                    if (tag !== 16) {
-                        break;
-                    }
-                    message.Network = reader.int32();
                     continue;
                 case 3:
                     if (tag !== 26) {
@@ -144,7 +133,6 @@ export const Filter = {
     fromJSON(object) {
         return {
             UserIDs: globalThis.Array.isArray(object === null || object === void 0 ? void 0 : object.UserIDs) ? object.UserIDs.map((e) => globalThis.String(e)) : [],
-            Network: isSet(object.Network) ? networkFromJSON(object.Network) : undefined,
             OrganizationID: isSet(object.OrganizationID) ? globalThis.String(object.OrganizationID) : "",
             Offset: isSet(object.Offset) ? globalThis.Number(object.Offset) : undefined,
             Limit: isSet(object.Limit) ? globalThis.Number(object.Limit) : undefined,
@@ -163,9 +151,6 @@ export const Filter = {
         const obj = {};
         if ((_a = message.UserIDs) === null || _a === void 0 ? void 0 : _a.length) {
             obj.UserIDs = message.UserIDs;
-        }
-        if (message.Network !== undefined) {
-            obj.Network = networkToJSON(message.Network);
         }
         if (message.OrganizationID !== "") {
             obj.OrganizationID = message.OrganizationID;
@@ -200,24 +185,23 @@ export const Filter = {
         return Filter.fromPartial(base !== null && base !== void 0 ? base : {});
     },
     fromPartial(object) {
-        var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l;
+        var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k;
         const message = createBaseFilter();
         message.UserIDs = ((_a = object.UserIDs) === null || _a === void 0 ? void 0 : _a.map((e) => e)) || [];
-        message.Network = (_b = object.Network) !== null && _b !== void 0 ? _b : undefined;
-        message.OrganizationID = (_c = object.OrganizationID) !== null && _c !== void 0 ? _c : "";
-        message.Offset = (_d = object.Offset) !== null && _d !== void 0 ? _d : undefined;
-        message.Limit = (_e = object.Limit) !== null && _e !== void 0 ? _e : undefined;
-        message.InquiryID = (_f = object.InquiryID) !== null && _f !== void 0 ? _f : undefined;
-        message.Status = (_g = object.Status) !== null && _g !== void 0 ? _g : undefined;
-        message.ExternalUserIDs = ((_h = object.ExternalUserIDs) === null || _h === void 0 ? void 0 : _h.map((e) => e)) || [];
-        message.WalletAddress = (_j = object.WalletAddress) !== null && _j !== void 0 ? _j : undefined;
-        message.BrokerAccountID = (_k = object.BrokerAccountID) !== null && _k !== void 0 ? _k : undefined;
-        message.Alias = (_l = object.Alias) !== null && _l !== void 0 ? _l : undefined;
+        message.OrganizationID = (_b = object.OrganizationID) !== null && _b !== void 0 ? _b : "";
+        message.Offset = (_c = object.Offset) !== null && _c !== void 0 ? _c : undefined;
+        message.Limit = (_d = object.Limit) !== null && _d !== void 0 ? _d : undefined;
+        message.InquiryID = (_e = object.InquiryID) !== null && _e !== void 0 ? _e : undefined;
+        message.Status = (_f = object.Status) !== null && _f !== void 0 ? _f : undefined;
+        message.ExternalUserIDs = ((_g = object.ExternalUserIDs) === null || _g === void 0 ? void 0 : _g.map((e) => e)) || [];
+        message.WalletAddress = (_h = object.WalletAddress) !== null && _h !== void 0 ? _h : undefined;
+        message.BrokerAccountID = (_j = object.BrokerAccountID) !== null && _j !== void 0 ? _j : undefined;
+        message.Alias = (_k = object.Alias) !== null && _k !== void 0 ? _k : undefined;
         return message;
     },
 };
 function createBaseUserID() {
-    return { UserID: "", OrganizationID: "", Network: undefined };
+    return { UserID: "", OrganizationID: "" };
 }
 export const UserID = {
     encode(message, writer = _m0.Writer.create()) {
@@ -226,9 +210,6 @@ export const UserID = {
         }
         if (message.OrganizationID !== "") {
             writer.uint32(18).string(message.OrganizationID);
-        }
-        if (message.Network !== undefined) {
-            writer.uint32(24).int32(message.Network);
         }
         return writer;
     },
@@ -251,12 +232,6 @@ export const UserID = {
                     }
                     message.OrganizationID = reader.string();
                     continue;
-                case 3:
-                    if (tag !== 24) {
-                        break;
-                    }
-                    message.Network = reader.int32();
-                    continue;
             }
             if ((tag & 7) === 4 || tag === 0) {
                 break;
@@ -269,7 +244,6 @@ export const UserID = {
         return {
             UserID: isSet(object.UserID) ? globalThis.String(object.UserID) : "",
             OrganizationID: isSet(object.OrganizationID) ? globalThis.String(object.OrganizationID) : "",
-            Network: isSet(object.Network) ? networkFromJSON(object.Network) : undefined,
         };
     },
     toJSON(message) {
@@ -280,25 +254,21 @@ export const UserID = {
         if (message.OrganizationID !== "") {
             obj.OrganizationID = message.OrganizationID;
         }
-        if (message.Network !== undefined) {
-            obj.Network = networkToJSON(message.Network);
-        }
         return obj;
     },
     create(base) {
         return UserID.fromPartial(base !== null && base !== void 0 ? base : {});
     },
     fromPartial(object) {
-        var _a, _b, _c;
+        var _a, _b;
         const message = createBaseUserID();
         message.UserID = (_a = object.UserID) !== null && _a !== void 0 ? _a : "";
         message.OrganizationID = (_b = object.OrganizationID) !== null && _b !== void 0 ? _b : "";
-        message.Network = (_c = object.Network) !== null && _c !== void 0 ? _c : undefined;
         return message;
     },
 };
 function createBaseGetByAddressesRequest() {
-    return { Addresses: [], OrganizationID: "", Network: undefined };
+    return { Addresses: [], OrganizationID: "" };
 }
 export const GetByAddressesRequest = {
     encode(message, writer = _m0.Writer.create()) {
@@ -307,9 +277,6 @@ export const GetByAddressesRequest = {
         }
         if (message.OrganizationID !== "") {
             writer.uint32(18).string(message.OrganizationID);
-        }
-        if (message.Network !== undefined) {
-            writer.uint32(24).int32(message.Network);
         }
         return writer;
     },
@@ -332,12 +299,6 @@ export const GetByAddressesRequest = {
                     }
                     message.OrganizationID = reader.string();
                     continue;
-                case 3:
-                    if (tag !== 24) {
-                        break;
-                    }
-                    message.Network = reader.int32();
-                    continue;
             }
             if ((tag & 7) === 4 || tag === 0) {
                 break;
@@ -352,7 +313,6 @@ export const GetByAddressesRequest = {
                 ? object.Addresses.map((e) => globalThis.String(e))
                 : [],
             OrganizationID: isSet(object.OrganizationID) ? globalThis.String(object.OrganizationID) : "",
-            Network: isSet(object.Network) ? networkFromJSON(object.Network) : undefined,
         };
     },
     toJSON(message) {
@@ -364,20 +324,16 @@ export const GetByAddressesRequest = {
         if (message.OrganizationID !== "") {
             obj.OrganizationID = message.OrganizationID;
         }
-        if (message.Network !== undefined) {
-            obj.Network = networkToJSON(message.Network);
-        }
         return obj;
     },
     create(base) {
         return GetByAddressesRequest.fromPartial(base !== null && base !== void 0 ? base : {});
     },
     fromPartial(object) {
-        var _a, _b, _c;
+        var _a, _b;
         const message = createBaseGetByAddressesRequest();
         message.Addresses = ((_a = object.Addresses) === null || _a === void 0 ? void 0 : _a.map((e) => e)) || [];
         message.OrganizationID = (_b = object.OrganizationID) !== null && _b !== void 0 ? _b : "";
-        message.Network = (_c = object.Network) !== null && _c !== void 0 ? _c : undefined;
         return message;
     },
 };

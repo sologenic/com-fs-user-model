@@ -5,7 +5,6 @@ package user;
 option go_package = "github.com/sologenic/com-fs-user-model;user";
 
 import "google/protobuf/empty.proto";
-import "sologenic/com-fs-utils-lib/models/metadata/metadata.proto";
 import "user.proto";
 import "user-filters.proto";
 
@@ -21,7 +20,8 @@ service AdminUserService {
 message AuditFilter {
     optional string UserID = 1; 
     optional string ChangedBy = 2;
-    optional metadata.Network Network = 3; 
+    reserved 3;
+    reserved "Network";
     optional string OrganizationID = 4;
     optional int32 Limit = 5;
     optional int32 Offset = 6;
