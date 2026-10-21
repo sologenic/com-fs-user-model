@@ -9,11 +9,11 @@ require (
 	github.com/sologenic/com-fs-document-model v0.0.0-20261021183712-bf299337cff7
 	github.com/sologenic/com-fs-trade-profile-model v0.0.0-20261021183713-1e0d34bc0977
 	github.com/sologenic/com-fs-utils-internal-lib/go/grpc-client v0.0.0-20261021183710-f6704ff9e739
-	github.com/sologenic/com-fs-utils-lib/models/audit v0.0.0-20261021185007-579b510b80ae
-	github.com/sologenic/com-fs-utils-lib/models/commission v0.0.0-20261021185007-579b510b80ae
-	github.com/sologenic/com-fs-utils-lib/models/language v0.0.0-20261021185007-579b510b80ae
-	github.com/sologenic/com-fs-utils-lib/models/metadata v0.0.0-20261021185007-579b510b80ae
-	github.com/sologenic/com-fs-utils-lib/models/role v0.0.0-20261021185007-579b510b80ae
+	github.com/sologenic/com-fs-utils-lib/models/audit v0.0.0-20261021190553-65358ff11597
+	github.com/sologenic/com-fs-utils-lib/models/commission v0.0.0-20261021190553-65358ff11597
+	github.com/sologenic/com-fs-utils-lib/models/language v0.0.0-20261021190553-65358ff11597
+	github.com/sologenic/com-fs-utils-lib/models/metadata v0.0.0-20261021190553-65358ff11597
+	github.com/sologenic/com-fs-utils-lib/models/role v0.0.0-20261021190553-65358ff11597
 	google.golang.org/grpc v1.83.2
 	google.golang.org/protobuf v1.36.12
 )
