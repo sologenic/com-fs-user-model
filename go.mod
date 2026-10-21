@@ -5,15 +5,15 @@ go 1.27.1
 require (
 	buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go v1.36.12-20260825204119-511051f7f437.2
 	github.com/flaticols/countrycodes v0.0.2
-	github.com/sologenic/com-fs-compliance-model v0.0.0-20261017194757-7f846ef79fd7
-	github.com/sologenic/com-fs-document-model v0.0.0-20261017194757-dd20dd263522
-	github.com/sologenic/com-fs-trade-profile-model v0.0.0-20261016103728-f25ad67677fc
-	github.com/sologenic/com-fs-utils-internal-lib/go/grpc-client v0.0.0-20261017194335-c015f8344527
-	github.com/sologenic/com-fs-utils-lib/models/audit v0.0.0-20261017194335-58b9490f29d1
-	github.com/sologenic/com-fs-utils-lib/models/commission v0.0.0-20261017194335-58b9490f29d1
-	github.com/sologenic/com-fs-utils-lib/models/language v0.0.0-20261017194335-58b9490f29d1
-	github.com/sologenic/com-fs-utils-lib/models/metadata v0.0.0-20261017194335-58b9490f29d1
-	github.com/sologenic/com-fs-utils-lib/models/role v0.0.0-20261017194335-58b9490f29d1
+	github.com/sologenic/com-fs-compliance-model v0.0.0-20261021183712-c5f9bc461b00
+	github.com/sologenic/com-fs-document-model v0.0.0-20261021183712-bf299337cff7
+	github.com/sologenic/com-fs-trade-profile-model v0.0.0-20261021183713-1e0d34bc0977
+	github.com/sologenic/com-fs-utils-internal-lib/go/grpc-client v0.0.0-20261021183710-f6704ff9e739
+	github.com/sologenic/com-fs-utils-lib/models/audit v0.0.0-20261021185007-579b510b80ae
+	github.com/sologenic/com-fs-utils-lib/models/commission v0.0.0-20261021185007-579b510b80ae
+	github.com/sologenic/com-fs-utils-lib/models/language v0.0.0-20261021185007-579b510b80ae
+	github.com/sologenic/com-fs-utils-lib/models/metadata v0.0.0-20261021185007-579b510b80ae
+	github.com/sologenic/com-fs-utils-lib/models/role v0.0.0-20261021185007-579b510b80ae
 	google.golang.org/grpc v1.83.2
 	google.golang.org/protobuf v1.36.12
 )
@@ -32,9 +32,7 @@ require (
 	github.com/mattn/go-colorable v0.1.15 // indirect
 	github.com/mattn/go-isatty v0.0.23 // indirect
 	github.com/rs/zerolog v1.35.1 // indirect
-	github.com/shopspring/decimal v1.4.0 // indirect
-	github.com/sologenic/com-fs-utils-internal-lib/go/logger v0.0.0-20261017194335-c015f8344527 // indirect
-	github.com/sologenic/com-fs-utils-lib/models/decimal v0.0.0-20261017194335-58b9490f29d1 // indirect
+	github.com/sologenic/com-fs-utils-internal-lib/go/logger v0.0.0-20261021183710-f6704ff9e739 // indirect
 	go.opentelemetry.io/auto/sdk v1.2.1 // indirect
 	go.opentelemetry.io/contrib/instrumentation/net/http/otelhttp v0.69.0 // indirect
 	go.opentelemetry.io/otel v1.44.0 // indirect
@@ -46,5 +44,6 @@ require (
 	golang.org/x/sys v0.47.0 // indirect
 	golang.org/x/text v0.41.0 // indirect
 	google.golang.org/api v0.293.0 // indirect
-	google.golang.org/genproto/googleapis/rpc v0.0.0-20260807164820-c8921c73eeea // indirect
+	google.golang.org/genproto v0.0.0-20260911204522-f61a6ca850bd // indirect
+	google.golang.org/genproto/googleapis/rpc v0.0.0-20260904194346-d0f1323225a4 // indirect
 )
