@@ -62,7 +62,7 @@ function createBaseDefaultTradeProfile() {
     return {
         DefaultValues: undefined,
         ControlMetadata: undefined,
-        OrganizationID: undefined,
+        OrganizationID: "",
         MetaData: undefined,
         Audit: undefined,
     };
@@ -75,7 +75,7 @@ export const DefaultTradeProfile = {
         if (message.ControlMetadata !== undefined) {
             TradeProfileControlMetadata.encode(message.ControlMetadata, writer.uint32(18).fork()).ldelim();
         }
-        if (message.OrganizationID !== undefined) {
+        if (message.OrganizationID !== "") {
             writer.uint32(26).string(message.OrganizationID);
         }
         if (message.MetaData !== undefined) {
@@ -137,7 +137,7 @@ export const DefaultTradeProfile = {
             ControlMetadata: isSet(object.ControlMetadata)
                 ? TradeProfileControlMetadata.fromJSON(object.ControlMetadata)
                 : undefined,
-            OrganizationID: isSet(object.OrganizationID) ? globalThis.String(object.OrganizationID) : undefined,
+            OrganizationID: isSet(object.OrganizationID) ? globalThis.String(object.OrganizationID) : "",
             MetaData: isSet(object.MetaData) ? MetaData.fromJSON(object.MetaData) : undefined,
             Audit: isSet(object.Audit) ? Audit.fromJSON(object.Audit) : undefined,
         };
@@ -150,7 +150,7 @@ export const DefaultTradeProfile = {
         if (message.ControlMetadata !== undefined) {
             obj.ControlMetadata = TradeProfileControlMetadata.toJSON(message.ControlMetadata);
         }
-        if (message.OrganizationID !== undefined) {
+        if (message.OrganizationID !== "") {
             obj.OrganizationID = message.OrganizationID;
         }
         if (message.MetaData !== undefined) {
@@ -173,7 +173,7 @@ export const DefaultTradeProfile = {
         message.ControlMetadata = (object.ControlMetadata !== undefined && object.ControlMetadata !== null)
             ? TradeProfileControlMetadata.fromPartial(object.ControlMetadata)
             : undefined;
-        message.OrganizationID = (_a = object.OrganizationID) !== null && _a !== void 0 ? _a : undefined;
+        message.OrganizationID = (_a = object.OrganizationID) !== null && _a !== void 0 ? _a : "";
         message.MetaData = (object.MetaData !== undefined && object.MetaData !== null)
             ? MetaData.fromPartial(object.MetaData)
             : undefined;

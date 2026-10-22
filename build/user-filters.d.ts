@@ -233,8 +233,7 @@ export declare const AddressUserPair: {
                 } | undefined;
                 CommissionSettings?: {
                     Commission?: {
-                        Value?: number | undefined;
-                        Exp?: number | undefined;
+                        value?: string | undefined;
                     } | undefined;
                     CommissionType?: import("./sologenic/com-fs-utils-lib/models/commission/commission").CommissionType | undefined;
                 } | undefined;
@@ -404,8 +403,7 @@ export declare const AddressUserPair: {
                 } | undefined;
                 CommissionSettings?: {
                     Commission?: {
-                        Value?: number | undefined;
-                        Exp?: number | undefined;
+                        value?: string | undefined;
                     } | undefined;
                     CommissionType?: import("./sologenic/com-fs-utils-lib/models/commission/commission").CommissionType | undefined;
                 } | undefined;
@@ -572,8 +570,7 @@ export declare const AddressUserPair: {
                 } | undefined;
                 CommissionSettings?: {
                     Commission?: {
-                        Value?: number | undefined;
-                        Exp?: number | undefined;
+                        value?: string | undefined;
                     } | undefined;
                     CommissionType?: import("./sologenic/com-fs-utils-lib/models/commission/commission").CommissionType | undefined;
                 } | undefined;
@@ -854,18 +851,15 @@ export declare const AddressUserPair: {
                 } & { [K_17 in Exclude<keyof I["User"]["User"]["UISettings"], "Theme">]: never; }) | undefined;
                 CommissionSettings?: ({
                     Commission?: {
-                        Value?: number | undefined;
-                        Exp?: number | undefined;
+                        value?: string | undefined;
                     } | undefined;
                     CommissionType?: import("./sologenic/com-fs-utils-lib/models/commission/commission").CommissionType | undefined;
                 } & {
                     Commission?: ({
-                        Value?: number | undefined;
-                        Exp?: number | undefined;
+                        value?: string | undefined;
                     } & {
-                        Value?: number | undefined;
-                        Exp?: number | undefined;
-                    } & { [K_18 in Exclude<keyof I["User"]["User"]["CommissionSettings"]["Commission"], keyof import("./sologenic/com-fs-utils-lib/models/decimal/decimal").Decimal>]: never; }) | undefined;
+                        value?: string | undefined;
+                    } & { [K_18 in Exclude<keyof I["User"]["User"]["CommissionSettings"]["Commission"], "value">]: never; }) | undefined;
                     CommissionType?: import("./sologenic/com-fs-utils-lib/models/commission/commission").CommissionType | undefined;
                 } & { [K_19 in Exclude<keyof I["User"]["User"]["CommissionSettings"], keyof import("./sologenic/com-fs-utils-lib/models/commission/commission").CommissionSettings>]: never; }) | undefined;
                 DataFeedAccounts?: ({
@@ -1152,8 +1146,7 @@ export declare const AddressUserPair: {
                 } | undefined;
                 CommissionSettings?: {
                     Commission?: {
-                        Value?: number | undefined;
-                        Exp?: number | undefined;
+                        value?: string | undefined;
                     } | undefined;
                     CommissionType?: import("./sologenic/com-fs-utils-lib/models/commission/commission").CommissionType | undefined;
                 } | undefined;
@@ -1323,8 +1316,7 @@ export declare const AddressUserPair: {
                 } | undefined;
                 CommissionSettings?: {
                     Commission?: {
-                        Value?: number | undefined;
-                        Exp?: number | undefined;
+                        value?: string | undefined;
                     } | undefined;
                     CommissionType?: import("./sologenic/com-fs-utils-lib/models/commission/commission").CommissionType | undefined;
                 } | undefined;
@@ -1491,8 +1483,7 @@ export declare const AddressUserPair: {
                 } | undefined;
                 CommissionSettings?: {
                     Commission?: {
-                        Value?: number | undefined;
-                        Exp?: number | undefined;
+                        value?: string | undefined;
                     } | undefined;
                     CommissionType?: import("./sologenic/com-fs-utils-lib/models/commission/commission").CommissionType | undefined;
                 } | undefined;
@@ -1773,18 +1764,15 @@ export declare const AddressUserPair: {
                 } & { [K_59 in Exclude<keyof I_1["User"]["User"]["UISettings"], "Theme">]: never; }) | undefined;
                 CommissionSettings?: ({
                     Commission?: {
-                        Value?: number | undefined;
-                        Exp?: number | undefined;
+                        value?: string | undefined;
                     } | undefined;
                     CommissionType?: import("./sologenic/com-fs-utils-lib/models/commission/commission").CommissionType | undefined;
                 } & {
                     Commission?: ({
-                        Value?: number | undefined;
-                        Exp?: number | undefined;
+                        value?: string | undefined;
                     } & {
-                        Value?: number | undefined;
-                        Exp?: number | undefined;
-                    } & { [K_60 in Exclude<keyof I_1["User"]["User"]["CommissionSettings"]["Commission"], keyof import("./sologenic/com-fs-utils-lib/models/decimal/decimal").Decimal>]: never; }) | undefined;
+                        value?: string | undefined;
+                    } & { [K_60 in Exclude<keyof I_1["User"]["User"]["CommissionSettings"]["Commission"], "value">]: never; }) | undefined;
                     CommissionType?: import("./sologenic/com-fs-utils-lib/models/commission/commission").CommissionType | undefined;
                 } & { [K_61 in Exclude<keyof I_1["User"]["User"]["CommissionSettings"], keyof import("./sologenic/com-fs-utils-lib/models/commission/commission").CommissionSettings>]: never; }) | undefined;
                 DataFeedAccounts?: ({
@@ -2078,8 +2066,7 @@ export declare const GetByAddressesResponse: {
                     } | undefined;
                     CommissionSettings?: {
                         Commission?: {
-                            Value?: number | undefined;
-                            Exp?: number | undefined;
+                            value?: string | undefined;
                         } | undefined;
                         CommissionType?: import("./sologenic/com-fs-utils-lib/models/commission/commission").CommissionType | undefined;
                     } | undefined;
@@ -2251,8 +2238,7 @@ export declare const GetByAddressesResponse: {
                     } | undefined;
                     CommissionSettings?: {
                         Commission?: {
-                            Value?: number | undefined;
-                            Exp?: number | undefined;
+                            value?: string | undefined;
                         } | undefined;
                         CommissionType?: import("./sologenic/com-fs-utils-lib/models/commission/commission").CommissionType | undefined;
                     } | undefined;
@@ -2422,8 +2408,7 @@ export declare const GetByAddressesResponse: {
                     } | undefined;
                     CommissionSettings?: {
                         Commission?: {
-                            Value?: number | undefined;
-                            Exp?: number | undefined;
+                            value?: string | undefined;
                         } | undefined;
                         CommissionType?: import("./sologenic/com-fs-utils-lib/models/commission/commission").CommissionType | undefined;
                     } | undefined;
@@ -2593,8 +2578,7 @@ export declare const GetByAddressesResponse: {
                     } | undefined;
                     CommissionSettings?: {
                         Commission?: {
-                            Value?: number | undefined;
-                            Exp?: number | undefined;
+                            value?: string | undefined;
                         } | undefined;
                         CommissionType?: import("./sologenic/com-fs-utils-lib/models/commission/commission").CommissionType | undefined;
                     } | undefined;
@@ -2761,8 +2745,7 @@ export declare const GetByAddressesResponse: {
                     } | undefined;
                     CommissionSettings?: {
                         Commission?: {
-                            Value?: number | undefined;
-                            Exp?: number | undefined;
+                            value?: string | undefined;
                         } | undefined;
                         CommissionType?: import("./sologenic/com-fs-utils-lib/models/commission/commission").CommissionType | undefined;
                     } | undefined;
@@ -3043,18 +3026,15 @@ export declare const GetByAddressesResponse: {
                     } & { [K_17 in Exclude<keyof I["Results"][number]["User"]["User"]["UISettings"], "Theme">]: never; }) | undefined;
                     CommissionSettings?: ({
                         Commission?: {
-                            Value?: number | undefined;
-                            Exp?: number | undefined;
+                            value?: string | undefined;
                         } | undefined;
                         CommissionType?: import("./sologenic/com-fs-utils-lib/models/commission/commission").CommissionType | undefined;
                     } & {
                         Commission?: ({
-                            Value?: number | undefined;
-                            Exp?: number | undefined;
+                            value?: string | undefined;
                         } & {
-                            Value?: number | undefined;
-                            Exp?: number | undefined;
-                        } & { [K_18 in Exclude<keyof I["Results"][number]["User"]["User"]["CommissionSettings"]["Commission"], keyof import("./sologenic/com-fs-utils-lib/models/decimal/decimal").Decimal>]: never; }) | undefined;
+                            value?: string | undefined;
+                        } & { [K_18 in Exclude<keyof I["Results"][number]["User"]["User"]["CommissionSettings"]["Commission"], "value">]: never; }) | undefined;
                         CommissionType?: import("./sologenic/com-fs-utils-lib/models/commission/commission").CommissionType | undefined;
                     } & { [K_19 in Exclude<keyof I["Results"][number]["User"]["User"]["CommissionSettings"], keyof import("./sologenic/com-fs-utils-lib/models/commission/commission").CommissionSettings>]: never; }) | undefined;
                     DataFeedAccounts?: ({
@@ -3340,8 +3320,7 @@ export declare const GetByAddressesResponse: {
                     } | undefined;
                     CommissionSettings?: {
                         Commission?: {
-                            Value?: number | undefined;
-                            Exp?: number | undefined;
+                            value?: string | undefined;
                         } | undefined;
                         CommissionType?: import("./sologenic/com-fs-utils-lib/models/commission/commission").CommissionType | undefined;
                     } | undefined;
@@ -3514,8 +3493,7 @@ export declare const GetByAddressesResponse: {
                     } | undefined;
                     CommissionSettings?: {
                         Commission?: {
-                            Value?: number | undefined;
-                            Exp?: number | undefined;
+                            value?: string | undefined;
                         } | undefined;
                         CommissionType?: import("./sologenic/com-fs-utils-lib/models/commission/commission").CommissionType | undefined;
                     } | undefined;
@@ -3687,8 +3665,7 @@ export declare const GetByAddressesResponse: {
                     } | undefined;
                     CommissionSettings?: {
                         Commission?: {
-                            Value?: number | undefined;
-                            Exp?: number | undefined;
+                            value?: string | undefined;
                         } | undefined;
                         CommissionType?: import("./sologenic/com-fs-utils-lib/models/commission/commission").CommissionType | undefined;
                     } | undefined;
@@ -3858,8 +3835,7 @@ export declare const GetByAddressesResponse: {
                     } | undefined;
                     CommissionSettings?: {
                         Commission?: {
-                            Value?: number | undefined;
-                            Exp?: number | undefined;
+                            value?: string | undefined;
                         } | undefined;
                         CommissionType?: import("./sologenic/com-fs-utils-lib/models/commission/commission").CommissionType | undefined;
                     } | undefined;
@@ -4029,8 +4005,7 @@ export declare const GetByAddressesResponse: {
                     } | undefined;
                     CommissionSettings?: {
                         Commission?: {
-                            Value?: number | undefined;
-                            Exp?: number | undefined;
+                            value?: string | undefined;
                         } | undefined;
                         CommissionType?: import("./sologenic/com-fs-utils-lib/models/commission/commission").CommissionType | undefined;
                     } | undefined;
@@ -4197,8 +4172,7 @@ export declare const GetByAddressesResponse: {
                     } | undefined;
                     CommissionSettings?: {
                         Commission?: {
-                            Value?: number | undefined;
-                            Exp?: number | undefined;
+                            value?: string | undefined;
                         } | undefined;
                         CommissionType?: import("./sologenic/com-fs-utils-lib/models/commission/commission").CommissionType | undefined;
                     } | undefined;
@@ -4479,18 +4453,15 @@ export declare const GetByAddressesResponse: {
                     } & { [K_61 in Exclude<keyof I_1["Results"][number]["User"]["User"]["UISettings"], "Theme">]: never; }) | undefined;
                     CommissionSettings?: ({
                         Commission?: {
-                            Value?: number | undefined;
-                            Exp?: number | undefined;
+                            value?: string | undefined;
                         } | undefined;
                         CommissionType?: import("./sologenic/com-fs-utils-lib/models/commission/commission").CommissionType | undefined;
                     } & {
                         Commission?: ({
-                            Value?: number | undefined;
-                            Exp?: number | undefined;
+                            value?: string | undefined;
                         } & {
-                            Value?: number | undefined;
-                            Exp?: number | undefined;
-                        } & { [K_62 in Exclude<keyof I_1["Results"][number]["User"]["User"]["CommissionSettings"]["Commission"], keyof import("./sologenic/com-fs-utils-lib/models/decimal/decimal").Decimal>]: never; }) | undefined;
+                            value?: string | undefined;
+                        } & { [K_62 in Exclude<keyof I_1["Results"][number]["User"]["User"]["CommissionSettings"]["Commission"], "value">]: never; }) | undefined;
                         CommissionType?: import("./sologenic/com-fs-utils-lib/models/commission/commission").CommissionType | undefined;
                     } & { [K_63 in Exclude<keyof I_1["Results"][number]["User"]["User"]["CommissionSettings"], keyof import("./sologenic/com-fs-utils-lib/models/commission/commission").CommissionSettings>]: never; }) | undefined;
                     DataFeedAccounts?: ({
@@ -4776,8 +4747,7 @@ export declare const GetByAddressesResponse: {
                     } | undefined;
                     CommissionSettings?: {
                         Commission?: {
-                            Value?: number | undefined;
-                            Exp?: number | undefined;
+                            value?: string | undefined;
                         } | undefined;
                         CommissionType?: import("./sologenic/com-fs-utils-lib/models/commission/commission").CommissionType | undefined;
                     } | undefined;

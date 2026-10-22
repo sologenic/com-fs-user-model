@@ -13,11 +13,11 @@ export declare enum LockableField {
 }
 export declare function lockableFieldFromJSON(object: any): LockableField;
 export declare function lockableFieldToJSON(object: LockableField): string;
-/** Key: OrganizationID-Network */
+/** Key: OrganizationID */
 export interface DefaultTradeProfile {
     DefaultValues: TradeProfileDetails | undefined;
     ControlMetadata: TradeProfileControlMetadata | undefined;
-    OrganizationID?: string | undefined;
+    OrganizationID: string;
     MetaData: MetaData | undefined;
     Audit: Audit | undefined;
 }
