@@ -1,0 +1,91 @@
+syntax = "proto3";
+
+package user;
+
+option go_package = "github.com/sologenic/com-fs-user-model;user";
+
+import "google/protobuf/empty.proto";
+import "user.proto";
+import "buf/validate/validate.proto";
+
+message FCMPushRouteToWalletBinding {
+    string WalletAddress = 1 [
+        (buf.validate.field).string.pattern = "^(?:test)?core1[02-9ac-hj-np-z]{38}$"
+    ];
+
+    FCMPushRoute FCMPushRoute = 2 [
+        (buf.validate.field).required = true
+    ];
+}
+
+service FCMPushRouteToWalletBindingService {
+    rpc List (ListFCMPushRouteToWalletBindingsRequest) returns (ListFCMPushRouteToWalletBindingsResponse) {}
+    rpc Add (AddFCMPushRouteToWalletBindingRequest) returns (google.protobuf.Empty) {}
+    rpc Remove (RemoveFCMPushRouteToWalletBindingRequest) returns (google.protobuf.Empty) {}
+    rpc Clear (ClearFCMPushRouteToWalletBindingsRequest) returns (google.protobuf.Empty) {}
+}
+
+message ListFCMPushRouteToWalletBindingsRequest {
+    option (buf.validate.message).cel = {
+        id: "list_requires_exact_filter"
+        message: "Must provide exactly one of WalletAddress or FCMPushRouteID"
+        expression: "(this.WalletAddress != '') != (this.FCMPushRouteID != '')"
+    };
+
+    string WalletAddress = 1 [
+        (buf.validate.field).ignore = IGNORE_IF_ZERO_VALUE,
+        (buf.validate.field).string.pattern = "^(?:test)?core1[02-9ac-hj-np-z]{38}$"
+    ];
+    string FCMPushRouteID = 2 [
+        (buf.validate.field).ignore = IGNORE_IF_ZERO_VALUE,
+        (buf.validate.field).string = {
+            min_len: 11,
+            max_len: 512,
+            pattern: "^[a-zA-Z0-9_:-]+$"
+        }
+    ];
+}
+
+message ListFCMPushRouteToWalletBindingsResponse {
+    repeated FCMPushRouteToWalletBinding Records = 1;
+}
+
+message AddFCMPushRouteToWalletBindingRequest {
+    FCMPushRouteToWalletBinding Record = 1 [
+        (buf.validate.field).required = true
+    ];
+}
+
+message RemoveFCMPushRouteToWalletBindingRequest {
+    string WalletAddress = 1 [
+        (buf.validate.field).string.pattern = "^(?:test)?core1[02-9ac-hj-np-z]{38}$"
+    ];
+    string FCMPushRouteID = 2 [
+        (buf.validate.field).string = {
+            min_len: 11,
+            max_len: 512,
+            pattern: "^[a-zA-Z0-9_:-]+$"
+        }
+    ];
+}
+
+message ClearFCMPushRouteToWalletBindingsRequest {
+    option (buf.validate.message).cel = {
+        id: "clear_requires_exact_filter"
+        message: "Must provide exactly one of WalletAddress or FCMPushRouteID"
+        expression: "(this.WalletAddress != '') != (this.FCMPushRouteID != '')"
+    };
+
+    string WalletAddress = 1 [
+        (buf.validate.field).ignore = IGNORE_IF_ZERO_VALUE,
+        (buf.validate.field).string.pattern = "^(?:test)?core1[02-9ac-hj-np-z]{38}$"
+    ];
+    string FCMPushRouteID = 2 [
+        (buf.validate.field).ignore = IGNORE_IF_ZERO_VALUE,
+        (buf.validate.field).string = {
+            min_len: 11,
+            max_len: 512,
+            pattern: "^[a-zA-Z0-9_:-]+$"
+        }
+    ];
+}
