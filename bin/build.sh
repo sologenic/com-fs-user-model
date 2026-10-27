@@ -98,6 +98,11 @@ protoc "${PROTO_PATH_ARGS[@]}" "adminuser-grpc.proto" \
   "--go_out=." --go_opt=paths=source_relative \
   "--go-grpc_out=." --go-grpc_opt=paths=source_relative
 
+protoc "${PROTO_PATH_ARGS[@]}" "fcm-push-route-to-wallet-binding.proto" \
+  --go-grpc_opt=require_unimplemented_servers=false \
+  "--go_out=." --go_opt=paths=source_relative \
+  "--go-grpc_out=." --go-grpc_opt=paths=source_relative
+
 # if there's TS project in the package, generate a protobuf file for TS
 npm i
 
