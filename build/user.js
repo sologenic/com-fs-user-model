@@ -1715,21 +1715,21 @@ export const FCMPushRoute = {
     },
     fromJSON(object) {
         return {
-            ID: isSet(object.ID) ? globalThis.String(object.ID) : "",
-            Type: isSet(object.Type) ? fCMPushRouteTypeFromJSON(object.Type) : 0,
-            Scope: isSet(object.Scope) ? fCMPushRouteScopeFromJSON(object.Scope) : 0,
+            ID: isSet(object.id) ? globalThis.String(object.id) : "",
+            Type: isSet(object.type) ? fCMPushRouteTypeFromJSON(object.type) : 0,
+            Scope: isSet(object.scope) ? fCMPushRouteScopeFromJSON(object.scope) : 0,
         };
     },
     toJSON(message) {
         const obj = {};
         if (message.ID !== "") {
-            obj.ID = message.ID;
+            obj.id = message.ID;
         }
         if (message.Type !== 0) {
-            obj.Type = fCMPushRouteTypeToJSON(message.Type);
+            obj.type = fCMPushRouteTypeToJSON(message.Type);
         }
         if (message.Scope !== 0) {
-            obj.Scope = fCMPushRouteScopeToJSON(message.Scope);
+            obj.scope = fCMPushRouteScopeToJSON(message.Scope);
         }
         return obj;
     },

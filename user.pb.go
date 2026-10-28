@@ -1316,9 +1316,9 @@ func (x *AlpacaCryptoKeychain) GetSymmetricKeyHex() string {
 
 type FCMPushRoute struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	ID            string                 `protobuf:"bytes,1,opt,name=ID,proto3" json:"ID,omitempty"`
-	Type          FCMPushRouteType       `protobuf:"varint,2,opt,name=Type,proto3,enum=user.FCMPushRouteType" json:"Type,omitempty"`
-	Scope         FCMPushRouteScope      `protobuf:"varint,3,opt,name=Scope,proto3,enum=user.FCMPushRouteScope" json:"Scope,omitempty"`
+	ID            string                 `protobuf:"bytes,1,opt,name=ID,json=id,proto3" json:"ID,omitempty"`
+	Type          FCMPushRouteType       `protobuf:"varint,2,opt,name=Type,json=type,proto3,enum=user.FCMPushRouteType" json:"Type,omitempty"`
+	Scope         FCMPushRouteScope      `protobuf:"varint,3,opt,name=Scope,json=scope,proto3,enum=user.FCMPushRouteScope" json:"Scope,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1486,11 +1486,11 @@ const file_user_proto_rawDesc = "" +
 	"\rPrivateKeyHex\x18\x03 \x01(\tB\x1d\xbaH\x1ar\x182\x12^[0-9a-fA-F]{128}$\x98\x01\x80\x01R\rPrivateKeyHex\x12E\n" +
 	"\x0fSymmetricKeyHex\x18\x04 \x01(\tB\x1b\xbaH\x18r\x162\x11^[0-9a-fA-F]{64}$\x98\x01@R\x0fSymmetricKeyHex\"\xb0\x01\n" +
 	"\fFCMPushRoute\x12-\n" +
-	"\x02ID\x18\x01 \x01(\tB\x1d\xbaH\x1ar\x18\x10\v\x18\x80\x042\x11^[a-zA-Z0-9_:-]+$R\x02ID\x126\n" +
+	"\x02ID\x18\x01 \x01(\tB\x1d\xbaH\x1ar\x18\x10\v\x18\x80\x042\x11^[a-zA-Z0-9_:-]+$R\x02id\x126\n" +
 	"\x04Type\x18\x02 \x01(\x0e2\x16.user.FCMPushRouteTypeB\n" +
-	"\xbaH\a\x82\x01\x04\x10\x01 \x00R\x04Type\x129\n" +
+	"\xbaH\a\x82\x01\x04\x10\x01 \x00R\x04type\x129\n" +
 	"\x05Scope\x18\x03 \x01(\x0e2\x17.user.FCMPushRouteScopeB\n" +
-	"\xbaH\a\x82\x01\x04\x10\x01 \x00R\x05Scope*B\n" +
+	"\xbaH\a\x82\x01\x04\x10\x01 \x00R\x05scope*B\n" +
 	"\n" +
 	"UserStatus\x12\x17\n" +
 	"\x13NOT_USED_USERSTATUS\x10\x00\x12\n" +

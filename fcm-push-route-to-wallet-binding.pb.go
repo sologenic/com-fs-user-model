@@ -25,8 +25,8 @@ const (
 
 type FCMPushRouteToWalletBinding struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	WalletAddress string                 `protobuf:"bytes,1,opt,name=WalletAddress,proto3" json:"WalletAddress,omitempty"`
-	FCMPushRoute  *FCMPushRoute          `protobuf:"bytes,2,opt,name=FCMPushRoute,proto3" json:"FCMPushRoute,omitempty"`
+	WalletAddress string                 `protobuf:"bytes,1,opt,name=WalletAddress,json=wallet_address,proto3" json:"WalletAddress,omitempty"`
+	FCMPushRoute  *FCMPushRoute          `protobuf:"bytes,2,opt,name=FCMPushRoute,json=fcm_push_route,proto3" json:"FCMPushRoute,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -77,8 +77,8 @@ func (x *FCMPushRouteToWalletBinding) GetFCMPushRoute() *FCMPushRoute {
 
 type ListFCMPushRouteToWalletBindingsRequest struct {
 	state          protoimpl.MessageState `protogen:"open.v1"`
-	WalletAddress  string                 `protobuf:"bytes,1,opt,name=WalletAddress,proto3" json:"WalletAddress,omitempty"`
-	FCMPushRouteID string                 `protobuf:"bytes,2,opt,name=FCMPushRouteID,proto3" json:"FCMPushRouteID,omitempty"`
+	WalletAddress  string                 `protobuf:"bytes,1,opt,name=WalletAddress,json=wallet_address,proto3" json:"WalletAddress,omitempty"`
+	FCMPushRouteID string                 `protobuf:"bytes,2,opt,name=FCMPushRouteID,json=fcm_push_route_id,proto3" json:"FCMPushRouteID,omitempty"`
 	unknownFields  protoimpl.UnknownFields
 	sizeCache      protoimpl.SizeCache
 }
@@ -129,7 +129,7 @@ func (x *ListFCMPushRouteToWalletBindingsRequest) GetFCMPushRouteID() string {
 
 type ListFCMPushRouteToWalletBindingsResponse struct {
 	state         protoimpl.MessageState         `protogen:"open.v1"`
-	Records       []*FCMPushRouteToWalletBinding `protobuf:"bytes,1,rep,name=Records,proto3" json:"Records,omitempty"`
+	Records       []*FCMPushRouteToWalletBinding `protobuf:"bytes,1,rep,name=Records,json=records,proto3" json:"Records,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -173,7 +173,7 @@ func (x *ListFCMPushRouteToWalletBindingsResponse) GetRecords() []*FCMPushRouteT
 
 type AddFCMPushRouteToWalletBindingRequest struct {
 	state         protoimpl.MessageState       `protogen:"open.v1"`
-	Record        *FCMPushRouteToWalletBinding `protobuf:"bytes,1,opt,name=Record,proto3" json:"Record,omitempty"`
+	Record        *FCMPushRouteToWalletBinding `protobuf:"bytes,1,opt,name=Record,json=record,proto3" json:"Record,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -217,8 +217,8 @@ func (x *AddFCMPushRouteToWalletBindingRequest) GetRecord() *FCMPushRouteToWalle
 
 type RemoveFCMPushRouteToWalletBindingRequest struct {
 	state          protoimpl.MessageState `protogen:"open.v1"`
-	WalletAddress  string                 `protobuf:"bytes,1,opt,name=WalletAddress,proto3" json:"WalletAddress,omitempty"`
-	FCMPushRouteID string                 `protobuf:"bytes,2,opt,name=FCMPushRouteID,proto3" json:"FCMPushRouteID,omitempty"`
+	WalletAddress  string                 `protobuf:"bytes,1,opt,name=WalletAddress,json=wallet_address,proto3" json:"WalletAddress,omitempty"`
+	FCMPushRouteID string                 `protobuf:"bytes,2,opt,name=FCMPushRouteID,json=fcm_push_route_id,proto3" json:"FCMPushRouteID,omitempty"`
 	unknownFields  protoimpl.UnknownFields
 	sizeCache      protoimpl.SizeCache
 }
@@ -269,8 +269,8 @@ func (x *RemoveFCMPushRouteToWalletBindingRequest) GetFCMPushRouteID() string {
 
 type ClearFCMPushRouteToWalletBindingsRequest struct {
 	state          protoimpl.MessageState `protogen:"open.v1"`
-	WalletAddress  string                 `protobuf:"bytes,1,opt,name=WalletAddress,proto3" json:"WalletAddress,omitempty"`
-	FCMPushRouteID string                 `protobuf:"bytes,2,opt,name=FCMPushRouteID,proto3" json:"FCMPushRouteID,omitempty"`
+	WalletAddress  string                 `protobuf:"bytes,1,opt,name=WalletAddress,json=wallet_address,proto3" json:"WalletAddress,omitempty"`
+	FCMPushRouteID string                 `protobuf:"bytes,2,opt,name=FCMPushRouteID,json=fcm_push_route_id,proto3" json:"FCMPushRouteID,omitempty"`
 	unknownFields  protoimpl.UnknownFields
 	sizeCache      protoimpl.SizeCache
 }
@@ -324,24 +324,24 @@ var File_fcm_push_route_to_wallet_binding_proto protoreflect.FileDescriptor
 const file_fcm_push_route_to_wallet_binding_proto_rawDesc = "" +
 	"\n" +
 	"&fcm-push-route-to-wallet-binding.proto\x12\x04user\x1a\x1bgoogle/protobuf/empty.proto\x1a\n" +
-	"user.proto\x1a\x1bbuf/validate/validate.proto\"\xb0\x01\n" +
-	"\x1bFCMPushRouteToWalletBinding\x12Q\n" +
-	"\rWalletAddress\x18\x01 \x01(\tB+\xbaH(r&2$^(?:test)?core1[02-9ac-hj-np-z]{38}$R\rWalletAddress\x12>\n" +
-	"\fFCMPushRoute\x18\x02 \x01(\v2\x12.user.FCMPushRouteB\x06\xbaH\x03\xc8\x01\x01R\fFCMPushRoute\"\xe7\x02\n" +
-	"'ListFCMPushRouteToWalletBindingsRequest\x12T\n" +
-	"\rWalletAddress\x18\x01 \x01(\tB.\xbaH+\xd8\x01\x01r&2$^(?:test)?core1[02-9ac-hj-np-z]{38}$R\rWalletAddress\x12H\n" +
-	"\x0eFCMPushRouteID\x18\x02 \x01(\tB \xbaH\x1d\xd8\x01\x01r\x18\x10\v\x18\x80\x042\x11^[a-zA-Z0-9_:-]+$R\x0eFCMPushRouteID:\x9b\x01\xbaH\x97\x01\x1a\x94\x01\n" +
+	"user.proto\x1a\x1bbuf/validate/validate.proto\"\xb3\x01\n" +
+	"\x1bFCMPushRouteToWalletBinding\x12R\n" +
+	"\rWalletAddress\x18\x01 \x01(\tB+\xbaH(r&2$^(?:test)?core1[02-9ac-hj-np-z]{38}$R\x0ewallet_address\x12@\n" +
+	"\fFCMPushRoute\x18\x02 \x01(\v2\x12.user.FCMPushRouteB\x06\xbaH\x03\xc8\x01\x01R\x0efcm_push_route\"\xeb\x02\n" +
+	"'ListFCMPushRouteToWalletBindingsRequest\x12U\n" +
+	"\rWalletAddress\x18\x01 \x01(\tB.\xbaH+\xd8\x01\x01r&2$^(?:test)?core1[02-9ac-hj-np-z]{38}$R\x0ewallet_address\x12K\n" +
+	"\x0eFCMPushRouteID\x18\x02 \x01(\tB \xbaH\x1d\xd8\x01\x01r\x18\x10\v\x18\x80\x042\x11^[a-zA-Z0-9_:-]+$R\x11fcm_push_route_id:\x9b\x01\xbaH\x97\x01\x1a\x94\x01\n" +
 	"\x1alist_requires_exact_filter\x12;Must provide exactly one of WalletAddress or FCMPushRouteID\x1a9(this.WalletAddress != '') != (this.FCMPushRouteID != '')\"g\n" +
 	"(ListFCMPushRouteToWalletBindingsResponse\x12;\n" +
-	"\aRecords\x18\x01 \x03(\v2!.user.FCMPushRouteToWalletBindingR\aRecords\"j\n" +
+	"\aRecords\x18\x01 \x03(\v2!.user.FCMPushRouteToWalletBindingR\arecords\"j\n" +
 	"%AddFCMPushRouteToWalletBindingRequest\x12A\n" +
-	"\x06Record\x18\x01 \x01(\v2!.user.FCMPushRouteToWalletBindingB\x06\xbaH\x03\xc8\x01\x01R\x06Record\"\xc4\x01\n" +
-	"(RemoveFCMPushRouteToWalletBindingRequest\x12Q\n" +
-	"\rWalletAddress\x18\x01 \x01(\tB+\xbaH(r&2$^(?:test)?core1[02-9ac-hj-np-z]{38}$R\rWalletAddress\x12E\n" +
-	"\x0eFCMPushRouteID\x18\x02 \x01(\tB\x1d\xbaH\x1ar\x18\x10\v\x18\x80\x042\x11^[a-zA-Z0-9_:-]+$R\x0eFCMPushRouteID\"\xe9\x02\n" +
-	"(ClearFCMPushRouteToWalletBindingsRequest\x12T\n" +
-	"\rWalletAddress\x18\x01 \x01(\tB.\xbaH+\xd8\x01\x01r&2$^(?:test)?core1[02-9ac-hj-np-z]{38}$R\rWalletAddress\x12H\n" +
-	"\x0eFCMPushRouteID\x18\x02 \x01(\tB \xbaH\x1d\xd8\x01\x01r\x18\x10\v\x18\x80\x042\x11^[a-zA-Z0-9_:-]+$R\x0eFCMPushRouteID:\x9c\x01\xbaH\x98\x01\x1a\x95\x01\n" +
+	"\x06Record\x18\x01 \x01(\v2!.user.FCMPushRouteToWalletBindingB\x06\xbaH\x03\xc8\x01\x01R\x06record\"\xc8\x01\n" +
+	"(RemoveFCMPushRouteToWalletBindingRequest\x12R\n" +
+	"\rWalletAddress\x18\x01 \x01(\tB+\xbaH(r&2$^(?:test)?core1[02-9ac-hj-np-z]{38}$R\x0ewallet_address\x12H\n" +
+	"\x0eFCMPushRouteID\x18\x02 \x01(\tB\x1d\xbaH\x1ar\x18\x10\v\x18\x80\x042\x11^[a-zA-Z0-9_:-]+$R\x11fcm_push_route_id\"\xed\x02\n" +
+	"(ClearFCMPushRouteToWalletBindingsRequest\x12U\n" +
+	"\rWalletAddress\x18\x01 \x01(\tB.\xbaH+\xd8\x01\x01r&2$^(?:test)?core1[02-9ac-hj-np-z]{38}$R\x0ewallet_address\x12K\n" +
+	"\x0eFCMPushRouteID\x18\x02 \x01(\tB \xbaH\x1d\xd8\x01\x01r\x18\x10\v\x18\x80\x042\x11^[a-zA-Z0-9_:-]+$R\x11fcm_push_route_id:\x9c\x01\xbaH\x98\x01\x1a\x95\x01\n" +
 	"\x1bclear_requires_exact_filter\x12;Must provide exactly one of WalletAddress or FCMPushRouteID\x1a9(this.WalletAddress != '') != (this.FCMPushRouteID != '')2\x82\x03\n" +
 	"\"FCMPushRouteToWalletBindingService\x12g\n" +
 	"\x04List\x12-.user.ListFCMPushRouteToWalletBindingsRequest\x1a..user.ListFCMPushRouteToWalletBindingsResponse\"\x00\x12L\n" +
