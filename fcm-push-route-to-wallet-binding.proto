@@ -10,11 +10,13 @@ import "buf/validate/validate.proto";
 
 message FCMPushRouteToWalletBinding {
     string WalletAddress = 1 [
-        (buf.validate.field).string.pattern = "^(?:test)?core1[02-9ac-hj-np-z]{38}$"
+        (buf.validate.field).string.pattern = "^(?:test)?core1[02-9ac-hj-np-z]{38}$",
+        json_name = "wallet_address"
     ];
 
     FCMPushRoute FCMPushRoute = 2 [
-        (buf.validate.field).required = true
+        (buf.validate.field).required = true,
+        json_name = "fcm_push_route"
     ];
 }
 
@@ -34,7 +36,8 @@ message ListFCMPushRouteToWalletBindingsRequest {
 
     string WalletAddress = 1 [
         (buf.validate.field).ignore = IGNORE_IF_ZERO_VALUE,
-        (buf.validate.field).string.pattern = "^(?:test)?core1[02-9ac-hj-np-z]{38}$"
+        (buf.validate.field).string.pattern = "^(?:test)?core1[02-9ac-hj-np-z]{38}$",
+        json_name = "wallet_address"
     ];
     string FCMPushRouteID = 2 [
         (buf.validate.field).ignore = IGNORE_IF_ZERO_VALUE,
@@ -42,30 +45,36 @@ message ListFCMPushRouteToWalletBindingsRequest {
             min_len: 11,
             max_len: 512,
             pattern: "^[a-zA-Z0-9_:-]+$"
-        }
+        },
+        json_name = "fcm_push_route_id"
     ];
 }
 
 message ListFCMPushRouteToWalletBindingsResponse {
-    repeated FCMPushRouteToWalletBinding Records = 1;
+    repeated FCMPushRouteToWalletBinding Records = 1 [
+        json_name = "records"
+    ];
 }
 
 message AddFCMPushRouteToWalletBindingRequest {
     FCMPushRouteToWalletBinding Record = 1 [
-        (buf.validate.field).required = true
+        (buf.validate.field).required = true,
+        json_name = "record"
     ];
 }
 
 message RemoveFCMPushRouteToWalletBindingRequest {
     string WalletAddress = 1 [
-        (buf.validate.field).string.pattern = "^(?:test)?core1[02-9ac-hj-np-z]{38}$"
+        (buf.validate.field).string.pattern = "^(?:test)?core1[02-9ac-hj-np-z]{38}$",
+        json_name = "wallet_address"
     ];
     string FCMPushRouteID = 2 [
         (buf.validate.field).string = {
             min_len: 11,
             max_len: 512,
             pattern: "^[a-zA-Z0-9_:-]+$"
-        }
+        },
+        json_name = "fcm_push_route_id"
     ];
 }
 
@@ -78,7 +87,8 @@ message ClearFCMPushRouteToWalletBindingsRequest {
 
     string WalletAddress = 1 [
         (buf.validate.field).ignore = IGNORE_IF_ZERO_VALUE,
-        (buf.validate.field).string.pattern = "^(?:test)?core1[02-9ac-hj-np-z]{38}$"
+        (buf.validate.field).string.pattern = "^(?:test)?core1[02-9ac-hj-np-z]{38}$",
+        json_name = "wallet_address"
     ];
     string FCMPushRouteID = 2 [
         (buf.validate.field).ignore = IGNORE_IF_ZERO_VALUE,
@@ -86,6 +96,7 @@ message ClearFCMPushRouteToWalletBindingsRequest {
             min_len: 11,
             max_len: 512,
             pattern: "^[a-zA-Z0-9_:-]+$"
-        }
+        },
+        json_name = "fcm_push_route_id"
     ];
 }

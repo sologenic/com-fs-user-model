@@ -383,7 +383,7 @@ message UserDetails {
     // Unified FCM push destinations (token or FID) with an explicit delivery scope.
     // Root & child users policy: each user has its own value
     repeated FCMPushRoute FCMPushRoutes = 50 [
-        (buf.validate.field).repeated = { max_items: 10 },
+        (buf.validate.field).repeated = {max_items: 10},
         (buf.validate.field).cel = {
             id: "unique_route_ids",
             message: "Push route IDs must be unique",
@@ -530,13 +530,26 @@ enum FCMPushRouteScope {
 }
 
 message FCMPushRoute {
-    string ID = 1 [(buf.validate.field).string = {
-        min_len: 11, max_len: 512, pattern: "^[a-zA-Z0-9_:-]+$"
-    }];
-    FCMPushRouteType Type = 2 [(buf.validate.field).enum = {
-        defined_only: true, not_in: [0]
-    }];
-    FCMPushRouteScope Scope = 3 [(buf.validate.field).enum = {
-        defined_only: true, not_in: [0]
-    }];
+    string ID = 1 [
+        (buf.validate.field).string = {
+            min_len: 11,
+            max_len: 512,
+            pattern: "^[a-zA-Z0-9_:-]+$"
+        },
+        json_name = "id"
+    ];
+    FCMPushRouteType Type = 2 [
+        (buf.validate.field).enum = {
+            defined_only: true,
+            not_in: [0]
+        },
+        json_name = "type"
+    ];
+    FCMPushRouteScope Scope = 3 [
+        (buf.validate.field).enum = {
+            defined_only: true,
+            not_in: [0]
+        },
+        json_name = "scope"
+    ];
 }
