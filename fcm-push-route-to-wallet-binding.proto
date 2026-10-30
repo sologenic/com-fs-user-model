@@ -10,7 +10,7 @@ import "buf/validate/validate.proto";
 
 message FCMPushRouteToWalletBinding {
     string WalletAddress = 1 [
-        (buf.validate.field).string.pattern = "^(?:test)?core1[02-9ac-hj-np-z]{38}$",
+        (buf.validate.field).string.pattern = "^(?:test)?core1[02-9ac-hj-np-z]{38}$", // Only regular wallet is allowed
         json_name = "wallet_address"
     ];
 
@@ -36,7 +36,7 @@ message ListFCMPushRouteToWalletBindingsRequest {
 
     string WalletAddress = 1 [
         (buf.validate.field).ignore = IGNORE_IF_ZERO_VALUE,
-        (buf.validate.field).string.pattern = "^(?:test)?core1[02-9ac-hj-np-z]{38}$",
+        (buf.validate.field).string.pattern = "^(?:test)?core1[02-9ac-hj-np-z]{38,58}$", // Allow both regular and smart wallets for query
         json_name = "wallet_address"
     ];
     string FCMPushRouteID = 2 [
@@ -65,7 +65,7 @@ message AddFCMPushRouteToWalletBindingRequest {
 
 message RemoveFCMPushRouteToWalletBindingRequest {
     string WalletAddress = 1 [
-        (buf.validate.field).string.pattern = "^(?:test)?core1[02-9ac-hj-np-z]{38}$",
+        (buf.validate.field).string.pattern = "^(?:test)?core1[02-9ac-hj-np-z]{38,58}$", // Allow both regular and smart wallets for query
         json_name = "wallet_address"
     ];
     string FCMPushRouteID = 2 [
@@ -87,7 +87,7 @@ message ClearFCMPushRouteToWalletBindingsRequest {
 
     string WalletAddress = 1 [
         (buf.validate.field).ignore = IGNORE_IF_ZERO_VALUE,
-        (buf.validate.field).string.pattern = "^(?:test)?core1[02-9ac-hj-np-z]{38}$",
+        (buf.validate.field).string.pattern = "^(?:test)?core1[02-9ac-hj-np-z]{38,58}$", // Allow both regular and smart wallets for query
         json_name = "wallet_address"
     ];
     string FCMPushRouteID = 2 [
