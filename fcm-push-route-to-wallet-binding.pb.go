@@ -327,20 +327,20 @@ const file_fcm_push_route_to_wallet_binding_proto_rawDesc = "" +
 	"user.proto\x1a\x1bbuf/validate/validate.proto\"\xb3\x01\n" +
 	"\x1bFCMPushRouteToWalletBinding\x12R\n" +
 	"\rWalletAddress\x18\x01 \x01(\tB+\xbaH(r&2$^(?:test)?core1[02-9ac-hj-np-z]{38}$R\x0ewallet_address\x12@\n" +
-	"\fFCMPushRoute\x18\x02 \x01(\v2\x12.user.FCMPushRouteB\x06\xbaH\x03\xc8\x01\x01R\x0efcm_push_route\"\xeb\x02\n" +
-	"'ListFCMPushRouteToWalletBindingsRequest\x12U\n" +
-	"\rWalletAddress\x18\x01 \x01(\tB.\xbaH+\xd8\x01\x01r&2$^(?:test)?core1[02-9ac-hj-np-z]{38}$R\x0ewallet_address\x12K\n" +
+	"\fFCMPushRoute\x18\x02 \x01(\v2\x12.user.FCMPushRouteB\x06\xbaH\x03\xc8\x01\x01R\x0efcm_push_route\"\xee\x02\n" +
+	"'ListFCMPushRouteToWalletBindingsRequest\x12X\n" +
+	"\rWalletAddress\x18\x01 \x01(\tB1\xbaH.\xd8\x01\x01r)2'^(?:test)?core1[02-9ac-hj-np-z]{38,58}$R\x0ewallet_address\x12K\n" +
 	"\x0eFCMPushRouteID\x18\x02 \x01(\tB \xbaH\x1d\xd8\x01\x01r\x18\x10\v\x18\x80\x042\x11^[a-zA-Z0-9_:-]+$R\x11fcm_push_route_id:\x9b\x01\xbaH\x97\x01\x1a\x94\x01\n" +
 	"\x1alist_requires_exact_filter\x12;Must provide exactly one of WalletAddress or FCMPushRouteID\x1a9(this.WalletAddress != '') != (this.FCMPushRouteID != '')\"g\n" +
 	"(ListFCMPushRouteToWalletBindingsResponse\x12;\n" +
 	"\aRecords\x18\x01 \x03(\v2!.user.FCMPushRouteToWalletBindingR\arecords\"j\n" +
 	"%AddFCMPushRouteToWalletBindingRequest\x12A\n" +
-	"\x06Record\x18\x01 \x01(\v2!.user.FCMPushRouteToWalletBindingB\x06\xbaH\x03\xc8\x01\x01R\x06record\"\xc8\x01\n" +
-	"(RemoveFCMPushRouteToWalletBindingRequest\x12R\n" +
-	"\rWalletAddress\x18\x01 \x01(\tB+\xbaH(r&2$^(?:test)?core1[02-9ac-hj-np-z]{38}$R\x0ewallet_address\x12H\n" +
-	"\x0eFCMPushRouteID\x18\x02 \x01(\tB\x1d\xbaH\x1ar\x18\x10\v\x18\x80\x042\x11^[a-zA-Z0-9_:-]+$R\x11fcm_push_route_id\"\xed\x02\n" +
-	"(ClearFCMPushRouteToWalletBindingsRequest\x12U\n" +
-	"\rWalletAddress\x18\x01 \x01(\tB.\xbaH+\xd8\x01\x01r&2$^(?:test)?core1[02-9ac-hj-np-z]{38}$R\x0ewallet_address\x12K\n" +
+	"\x06Record\x18\x01 \x01(\v2!.user.FCMPushRouteToWalletBindingB\x06\xbaH\x03\xc8\x01\x01R\x06record\"\xcb\x01\n" +
+	"(RemoveFCMPushRouteToWalletBindingRequest\x12U\n" +
+	"\rWalletAddress\x18\x01 \x01(\tB.\xbaH+r)2'^(?:test)?core1[02-9ac-hj-np-z]{38,58}$R\x0ewallet_address\x12H\n" +
+	"\x0eFCMPushRouteID\x18\x02 \x01(\tB\x1d\xbaH\x1ar\x18\x10\v\x18\x80\x042\x11^[a-zA-Z0-9_:-]+$R\x11fcm_push_route_id\"\xf0\x02\n" +
+	"(ClearFCMPushRouteToWalletBindingsRequest\x12X\n" +
+	"\rWalletAddress\x18\x01 \x01(\tB1\xbaH.\xd8\x01\x01r)2'^(?:test)?core1[02-9ac-hj-np-z]{38,58}$R\x0ewallet_address\x12K\n" +
 	"\x0eFCMPushRouteID\x18\x02 \x01(\tB \xbaH\x1d\xd8\x01\x01r\x18\x10\v\x18\x80\x042\x11^[a-zA-Z0-9_:-]+$R\x11fcm_push_route_id:\x9c\x01\xbaH\x98\x01\x1a\x95\x01\n" +
 	"\x1bclear_requires_exact_filter\x12;Must provide exactly one of WalletAddress or FCMPushRouteID\x1a9(this.WalletAddress != '') != (this.FCMPushRouteID != '')2\x82\x03\n" +
 	"\"FCMPushRouteToWalletBindingService\x12g\n" +
