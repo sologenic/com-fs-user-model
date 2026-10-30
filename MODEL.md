@@ -156,7 +156,7 @@ The `User` message wraps `UserDetails` with metadata and audit information, prov
 | Field Name | Type | Required/Optional | Description |
 |------------|------|-------------------|-------------|
 | User | `UserDetails` | Required | Complete user details |
-| MetaData | `metadata.MetaData` | Required | Metadata information including network and version details |
+| MetaData | `metadata.MetaData` | Required | Metadata information including version details |
 | Audit | `audit.Audit` | Required | Audit trail information for tracking changes and access |
 | OrganizationIDs | `repeated string` | Optional | List of organizations where the user is part of (cloned into) |
 
@@ -165,7 +165,7 @@ The `User` message wraps `UserDetails` with metadata and audit information, prov
 - Storing complete user records in databases
 - Retrieving user information with audit trails
 - Tracking which organizations a user belongs to
-- Maintaining version and network information for user records
+- Maintaining version information for user records
 
 **Important Notes:**
 
@@ -208,7 +208,6 @@ The `StatusMessage` message is used to update or communicate user status changes
 | UserID | `string` | Required | Unique identifier for the user |
 | OrganizationID | `string` | Required | UUID of the organization this status applies to |
 | Status | `UserStatus` | Required | New status value for the user (see UserStatus enum) |
-| Network | `metadata.Network` | Optional | Metadata information including network and version details |
 | Audit | `audit.Audit` | Required | Audit trail information for tracking the status change |
 
 **Use Cases:**
@@ -469,7 +468,7 @@ The `WalletType` enum defines the types of wallet accounts, particularly for tax
 
 ### Overview
 
-The `user-filters.proto` file defines filtering and query messages for user management operations. It provides message types for searching, filtering, and retrieving users based on various criteria including user IDs, status, organization, wallet addresses, and broker accounts. The file integrates with external utility libraries including metadata for network information.
+The `user-filters.proto` file defines filtering and query messages for user management operations. It provides message types for searching, filtering, and retrieving users based on various criteria including user IDs, status, organization, wallet addresses, and broker accounts. The file integrates with external utility libraries including metadata for filtering.
 
 ### Messages
 
@@ -482,7 +481,6 @@ The `Filter` message provides comprehensive filtering capabilities for querying 
 | Field Name | Type | Required/Optional | Description |
 |------------|------|-------------------|-------------|
 | UserIDs | `repeated string` | Optional | List of specific user IDs to filter by |
-| Network | `metadata.Network` | Optional | Network metadata for filtering by network/version |
 | OrganizationID | `string` | Required | UUID of the organization to filter users by |
 | Offset | `int32` | Optional | Offset value for pagination (starting position) |
 | Limit | `int32` | Optional | Maximum number of results to return |
@@ -522,19 +520,17 @@ The `UserID` message provides a simple identifier structure for user lookup oper
 |------------|------|-------------------|-------------|
 | UserID | `string` | Required | Unique identifier for the user |
 | OrganizationID | `string` | Required | UUID of the organization this user belongs to |
-| Network | `metadata.Network` | Optional | Network metadata information including network and version details |
 
 **Use Cases:**
 
 - Simple user lookup by ID and organization
 - Passing user identifiers between services
-- Specifying user context with organization and network information
+- Specifying user context with organization information
 
 **Important Notes:**
 
 - The `UserID` field must match a valid user identifier format
 - The `OrganizationID` must be a valid UUID format
-- The `Network` field is optional but can be used for network-specific queries
 
 ## user-kyc.proto
 
